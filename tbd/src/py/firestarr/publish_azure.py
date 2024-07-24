@@ -158,10 +158,14 @@ def upload_dir(dir_run=None):
         # remove from list of files to delete if overwritten
         delete_after = [x for x in delete_after if x.name != name]
 
+    # put this as current for whatever time of day this run started
+    is_am_pm = "am" if as_datetime.hour < 12 else "pm"
+
     # get old blobs for delete after
     logging.info("Finding current blobs")
     add_delete(f"{dir_shp}/{file_root}")
     add_delete("current/firestarr")
+    add_delete(f"{is_am_pm}/firestarr")
 
     for f in files_group:
         upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
@@ -178,6 +182,7 @@ def upload_dir(dir_run=None):
         # FIX: copy from container link instead of uploading multiple times
         # archive in folder with timestamp so we know when things get pushed
         upload(path, f"archive/{push_datetime.strftime(FMT_FILE_SECOND)}/{f}")
+        upload(path, f"{is_am_pm}/{f}")
 
     # delete old blobs that weren't overwritten
     for f in delete_after:

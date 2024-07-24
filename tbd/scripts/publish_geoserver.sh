@@ -11,11 +11,12 @@ if [ -z "${GEOSERVER_LAYER}" ] \
     ; then
     echo Missing required configuration so not publishing
 else
-    GEOSERVER_EXTENSION=imagemosaic
-    GEOSERVER_WORKSPACE=${GEOSERVER_SERVER}/workspaces/${GEOSERVER_WORKSPACE_NAME}
-    GEOSERVER_STORE=${GEOSERVER_WORKSPACE}/coveragestores/${GEOSERVER_LAYER}
-    TMP_COVERAGE=/tmp/${GEOSERVER_COVERAGE}.xml
-    TAG=abstract
+    TMP_COVERAGE="/tmp/${GEOSERVER_COVERAGE}.xml"
+    # change based on am/pm utc
+    GEOSERVER_EXTENSION="imagemosaic"
+    GEOSERVER_WORKSPACE="${GEOSERVER_SERVER}/workspaces/${GEOSERVER_WORKSPACE_NAME}"
+    GEOSERVER_STORE="${GEOSERVER_WORKSPACE}/coveragestores/${GEOSERVER_LAYER}"
+    TAG="abstract"
     echo "Publishing to ${GEOSERVER_STORE}"
 
     # get rid of old granules
@@ -31,10 +32,40 @@ else
     TAG_UPDATED="<${TAG}>${ABSTRACT}<\/${TAG}>"
     # if no tag then insert it after title
     (grep "<${TAG}>" ${TMP_COVERAGE} > /dev/null && sed -i "s/<${TAG}>[^<]*<\/${TAG}>/${TAG_UPDATED}/g" ${TMP_COVERAGE}) || sed -i "s/\( *\)\(<title>.*\)/\1\2\n\1${TAG_UPDATED}/g" ${TMP_COVERAGE}
+    # update .tif band description
+    sed -i "s/GRAY_INDEX/probability/g" ${TMP_COVERAGE}
     # upload with updated tag
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_COVERAGE} "${GEOSERVER_STORE}/coverages/${GEOSERVER_COVERAGE}"?calculate=nativebbox,latlonbbox,dimensions
-    # not sure why this isn't picking up .tif band description
-    sed -i "s/GRAY_INDEX/probability/g" ${TMP_COVERAGE}
+    # # not sure why this isn't picking up .tif band description
+    # sed -i "s/GRAY_INDEX/probability/g" ${TMP_COVERAGE}
     # HACK: calculate sets band name to GRAY_INDEX so set again without calculate
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_COVERAGE} "${GEOSERVER_STORE}/coverages/${GEOSERVER_COVERAGE}"
+
+    # ***************** repeat for AM/PM *****************
+    FOR_AM_PM_UPPER=`date -u +"%p"`
+    FOR_AM_PM=`echo ${FOR_AM_PM_UPPER} | tr '[:upper:]' '[:lower:]'`
+    # keep upper case
+    GEOSERVER_COVERAGE_AM_PM="${GEOSERVER_COVERAGE}+${FOR_AM_PM_UPPER}"
+    GEOSERVER_LAYER_AM_PM="${GEOSERVER_LAYER}_${FOR_AM_PM}"
+    GEOSERVER_DIR_DATA_AM_PM="`dirname ${GEOSERVER_DIR_DATA}`/${FOR_AM_PM}"
+    GEOSERVER_STORE_AM_PM="${GEOSERVER_WORKSPACE}/coveragestores/${GEOSERVER_LAYER_AM_PM}"
+    TMP_COVERAGE_AM_PM="/tmp/${GEOSERVER_COVERAGE_AM_PM}.xml"
+
+    echo "Publishing to ${GEOSERVER_STORE_AM_PM}"
+
+    # get rid of old granules
+    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE_AM_PM}/coverages/${GEOSERVER_COVERAGE_AM_PM}/index/granules.xml"
+    # update to match azure mount
+    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPOST -H "Content-type: text/plain" --write-out %{http_code} -d "${GEOSERVER_DIR_DATA_AM_PM}" "${GEOSERVER_STORE_AM_PM}/external.${GEOSERVER_EXTENSION}"
+
+    # download from actual coverage
+    # curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XGET "${GEOSERVER_STORE_AM_PM}/coverages/${GEOSERVER_COVERAGE_AM_PM}" > ${TMP_COVERAGE_AM_PM}
+
+    # change to am/pm coverage
+    sed -i "s/${GEOSERVER_LAYER}/${GEOSERVER_LAYER_AM_PM}/g" "${TMP_COVERAGE}"
+    sed -i "s/${GEOSERVER_COVERAGE}/${GEOSERVER_COVERAGE} ${FOR_AM_PM_UPPER}/g" "${TMP_COVERAGE}"
+    # upload with updated tag
+    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_COVERAGE} "${GEOSERVER_STORE_AM_PM}/coverages/${GEOSERVER_COVERAGE_AM_PM}"?calculate=nativebbox,latlonbbox,dimensions
+    # HACK: calculate sets band name to GRAY_INDEX so set again without calculate
+    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_COVERAGE} "${GEOSERVER_STORE_AM_PM}/coverages/${GEOSERVER_COVERAGE_AM_PM}"
 fi
