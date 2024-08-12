@@ -44,8 +44,8 @@ list(APPEND CMAKE_MODULE_PATH "/usr/lib/x86_64-linux-gnu/cmake")
 # target_link_libraries(${PROJECT_NAME} PUBLIC geotiff tiff Threads::Threads)
 
 find_package(TBB REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC geotiff tiff TBB::tbb)
-
+find_package(PROJ REQUIRED CONFIG)
+target_link_libraries(${PROJECT_NAME} PUBLIC geotiff tiff TBB::tbb PROJ::proj)
 
 # find_package(TBB REQUIRED)
 # # target_link_libraries(${PROJECT_NAME} PUBLIC geotiff tiff Threads::Threads TBB:tbb)

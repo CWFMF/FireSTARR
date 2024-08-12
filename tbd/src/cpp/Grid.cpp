@@ -7,6 +7,8 @@
 #include "Grid.h"
 #include "UTM.h"
 #include "Settings.h"
+#include "project.h"
+
 using tbd::Idx;
 namespace tbd::data
 {
@@ -129,12 +131,20 @@ unique_ptr<Coordinates> GridBase::findCoordinates(const topo::Point& point,
                                   std::get<2>(*full),
                                   std::get<3>(*full));
 }
+
 // Use pair instead of Location, so we can go above max columns & rows
 unique_ptr<FullCoordinates> GridBase::findFullCoordinates(const topo::Point& point,
                                                           const bool flipped) const
 {
   auto x = 0.0;
   auto y = 0.0;
+  auto proj4 = to_proj4(this->proj4_, point);
+  // logging::debug("Coordinates (%f, %f) converted to (%0.1f, %f, %f)",
+  //                point.latitude(),
+  //                point.longitude(),
+  //                this->zone(),
+  //                x,
+  //                y);
   lat_lon_to_utm(point, this->zone(), &x, &y);
   logging::debug("Coordinates (%f, %f) converted to (%0.1f, %f, %f)",
                  point.latitude(),
