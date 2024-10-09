@@ -44,12 +44,15 @@
     <ClInclude Include="Iteration.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="LogPoints.h" />
     <ClInclude Include="LookupTable.h" />
+    <ClInclude Include="MergeIterator.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Perimeter.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="ProbabilityMap.h" />
+    <ClInclude Include="SafeMap.h" />
     <ClInclude Include="SafeVector.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="Settings.h" />
@@ -65,6 +68,7 @@
     <ClInclude Include="unstable.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="UTM.h" />
+    <ClInclude Include="version.h" />
     <ClInclude Include="Weather.h" />
   </ItemGroup>
   <ItemGroup>
@@ -81,14 +85,19 @@
     <ClCompile Include="FuelType.cpp" />
     <ClCompile Include="FWI.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="InnerPos.cpp" />
     <ClCompile Include="IntensityMap.cpp" />
     <ClCompile Include="Iteration.cpp" />
+    <ClCompile Include="Location.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="LogPoints.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MergeIterator.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Perimeter.cpp" />
     <ClCompile Include="ProbabilityMap.cpp" />
+    <ClCompile Include="SafeMap.cpp" />
     <ClCompile Include="SafeVector.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="Settings.cpp" />

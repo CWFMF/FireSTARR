@@ -79,7 +79,9 @@ using std::async;
 using std::atomic;
 using std::endl;
 using std::fixed;
+#ifndef _WIN32
 using std::float16_t;
+#endif
 using std::function;
 using std::future;
 using std::get;

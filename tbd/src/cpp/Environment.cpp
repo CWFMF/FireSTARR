@@ -103,7 +103,7 @@ Environment Environment::loadEnvironment(const string dir_out,
     MathSize zone;
     MathSize meridian;
     unique_ptr<const EnvironmentInfo> cur_info;
-    if (sscanf(zone_guess.c_str(), "%lf", &zone))
+    if (sscanf(zone_guess.c_str(), "%lf", &zone) && !sim::Settings::forceFuel())
     {
       meridian = (zone - 15.0) * 6.0 - 93.0;
     }
@@ -165,10 +165,13 @@ Environment Environment::loadEnvironment(const string dir_out,
                        "Could not find an environment to use for (%f, %f)",
                        point.latitude(),
                        point.longitude());
-  logging::check_fatal(best_meridian != env_info->meridian(),
-                       "Thought file with best match was for meridian %ld but is actually %ld",
-                       best_meridian,
-                       env_info->meridian());
+  if (!sim::Settings::forceFuel())
+  {
+    logging::check_fatal(best_meridian != env_info->meridian(),
+                         "Thought file with best match was for meridian %ld but is actually %ld",
+                         best_meridian,
+                         env_info->meridian());
+  }
   logging::debug("Best match for (%f, %f) is zone %0.2f with a meridian of %0.2f",
                  point.latitude(),
                  point.longitude(),
