@@ -159,6 +159,36 @@ public:
    */
   static void setForceFuel(bool value) noexcept;
   /**
+   * \brief Whether or not to force greenup for all fires
+   * \return None
+   */
+  [[nodiscard]] static bool forceGreenup() noexcept;
+  /**
+   * \brief Whether or not to force greenup for all fires
+   * \return Whether or not to force greenup for all fires
+   */
+  static void setForceGreenup(bool value) noexcept;
+  /**
+   * \brief Whether or not to force no greenup for all fires
+   * \return None
+   */
+  [[nodiscard]] static bool forceNoGreenup() noexcept;
+  /**
+   * \brief Whether or not to force no greenup for all fires
+   * \return Whether or not to force no greenup for all fires
+   */
+  static void setForceNoGreenup(bool value) noexcept;
+  /**
+   * \brief Whether or not to force static curing value for all fires
+   * \return None
+   */
+  [[nodiscard]] static bool forceStaticCuring() noexcept;
+  /**
+   * \brief Whether or not to force static curing value for all fires
+   * \return Whether or not to force static curing value for all fires
+   */
+  static void setForceStaticCuring(bool value) noexcept;
+  /**
    * \brief Whether or not the start point is specified by row and column id of a forced fuel grid
    * \return Whether or not the start point is specified by row and column id of a forced fuel grid
    * \return None
@@ -190,6 +220,16 @@ public:
    * \return Set ignition position col
    */
   static void setIgnCol(const int value) noexcept;
+  /**
+   * \brief Static curing value
+   * \return Static curing value
+   */
+  [[nodiscard]] static int staticCuring() noexcept;
+  /**
+   * \brief Set static curing value
+   * \return Set static curing value
+   */
+  static void setStaticCuring(const int value) noexcept;
   /**
    * \brief Minimum rate of spread before fire is considered to be spreading (m/min)
    * \return Minimum rate of spread before fire is considered to be spreading (m/min)

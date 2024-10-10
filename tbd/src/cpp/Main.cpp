@@ -239,6 +239,9 @@ int main(const int argc, const char* const argv[])
     register_flag(&Settings::setSaveOccurrence, true, "--occurrence", "Output occurrence grids");
     register_flag(&Settings::setSaveSimulationArea, true, "--sim-area", "Output simulation area grids");
     register_flag(&Settings::setForceFuel, true, "--force-fuel", "Use first default fuel raster without checking coordinates");
+    register_flag(&Settings::setForceStaticCuring, true, "--force-curing", "Manually set grass curing for all fires");
+    register_flag(&Settings::setForceGreenup, true, "--force-greenup", "Force green up for all fires");
+    register_flag(&Settings::setForceNoGreenup, true, "--force-no-greenup", "Force no green up for all fires");
     register_setter<string>(log_file_name, "--log", "Output log file", false, &parse_string);
     size_t SKIPPED_ARGS = 0;
     if (ARGC > 1 && 0 == strcmp(ARGV[1], "surface"))
@@ -267,6 +270,7 @@ int main(const int argc, const char* const argv[])
       register_flag(&Settings::setRowColIgnition, true, "--rowcol-ignition", "Use row and col to specific start point. Assumes force-fuel is set.");
       register_setter<size_t>(&Settings::setIgnRow, "--ign-row", "Specify ignition row", false, &parse_size_t);
       register_setter<size_t>(&Settings::setIgnCol, "--ign-col", "Specify ignition column", false, &parse_size_t);
+      register_setter<size_t>(&Settings::setStaticCuring, "--curing", "Specify static grass curing. Requires the force-curing flag to be set.", false, &parse_size_t);
       register_setter<tbd::ThresholdSize>(&Settings::setConfidenceLevel, "--confidence", "Use specified confidence level", false, &parse_value);
       register_setter<string>(perim, "--perim", "Start from perimeter", false, &parse_string);
       register_setter<size_t>(size, "--size", "Start from size", false, &parse_size_t);

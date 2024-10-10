@@ -19,15 +19,15 @@ namespace tbd::fuel
  * \return Whether or no green-up has occurred
  */
 [[nodiscard]] constexpr bool calculate_is_green(const int nd)
-{
-  return nd >= 30;
-}
+  {
+    return nd >= 30;
+  }
 /**
  * \brief Use intersection of parabola with y = 120.0 line as point where grass greening starts happening.
  */
 static constexpr int START_GREENING = -43;
 [[nodiscard]] constexpr int calculate_grass_curing(const int nd)
-{
+  {
   return (nd < START_GREENING)
          ?   // we're before foliar moisture dip has started
            100
@@ -595,10 +595,14 @@ public:
   [[nodiscard]] static MathSize baseMultiplier(const int nd,
                                                const wx::FwiWeather& wx) noexcept
   {
-    const MathSize curing = wx.dc().asValue() > 500
-                            ?   // we're in drought conditions
-                              100
-                            : calculate_grass_curing(nd);
+    
+    const MathSize curing = sim::Settings::forceStaticCuring() 
+                            ? // forcing curing value
+                              sim::Settings::staticCuring()
+                            : wx.dc().asValue() > 500
+                              ?   // we're in drought conditions
+                                100
+                              : calculate_grass_curing(nd);
     return BASE_MULTIPLIER_CURING(curing);
   }
   /**
@@ -1215,9 +1219,13 @@ template <class FuelSpring, class FuelSummer>
                                                     FuelSummer>& fuel) noexcept
 {
   // if not green yet, then still in spring conditions
-  return calculate_is_green(nd)
+  return sim::Settings::forceGreenup()
          ? fuel.summer()
-         : fuel.spring();
+         : sim::Settings::forceNoGreenup()
+           ? fuel.spring()
+           : calculate_is_green(nd)
+             ? fuel.summer()
+             : fuel.spring();
 }
 template <class FuelSpring, class FuelSummer>
 [[nodiscard]] MathSize compare_by_season(const FuelVariable<FuelSpring, FuelSummer>& fuel,

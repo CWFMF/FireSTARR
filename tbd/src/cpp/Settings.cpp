@@ -200,6 +200,22 @@ public:
     ign_col_ = value;
   }
   /**
+   * \brief Static curing value
+   * \return Static curing value
+   */
+  [[nodiscard]] int staticCuring() const noexcept
+  {
+    return static_curing_;
+  }
+  /**
+   * \brief Set static curing value
+   * \return Set static curing value
+   */
+  void setStaticCuring(const int value) noexcept
+  {
+    static_curing_ = value;
+  }
+  /**
    * \brief Maximum time simulation can run before it is ended and whatever results it has are used (s)
    * \return Maximum time simulation can run before it is ended and whatever results it has are used (s)
    */
@@ -334,6 +350,10 @@ private:
    */
   atomic<int> ign_col_ = 1;
   /**
+   * \brief Static curing value
+   */
+  atomic<int> static_curing_ = 75;
+  /**
    * \brief Maximum time simulation can run before it is ended and whatever results it has are used (s)
    */
   atomic<size_t> maximum_time_seconds_;
@@ -433,6 +453,21 @@ public:
    * \return Whether or not to use first default fuel grid without checking coordinates
    */
   atomic<bool> force_fuel = false;
+  /**
+   * \brief Whether or not to force greenup for all fires
+   * \return Whether or not to force greenup for all fires
+   */
+  atomic<bool> force_greenup = false;
+  /**
+   * \brief Whether or not to force no greenup for all fires
+   * \return Whether or not to force no greenup for all fires
+   */
+  atomic<bool> force_no_greenup = false;
+  /**
+   * \brief Whether or not to force static curing value for all fires
+   * \return Whether or not to force static curing value for all fires
+   */
+  atomic<bool> force_curing = false;
   /**
    * \brief Whether or not the start point is specified by row and column id of a forced fuel grid
    * \return Whether or not the start point is specified by row and column id of a forced fuel grid
@@ -669,6 +704,30 @@ void Settings::setForceFuel(const bool value) noexcept
 {
   SettingsImplementation::instance().force_fuel = value;
 }
+bool Settings::forceGreenup() noexcept
+{
+  return SettingsImplementation::instance().force_greenup;
+}
+void Settings::setForceGreenup(const bool value) noexcept
+{
+  SettingsImplementation::instance().force_greenup = value;
+}
+bool Settings::forceNoGreenup() noexcept
+{
+  return SettingsImplementation::instance().force_no_greenup;
+}
+void Settings::setForceNoGreenup(const bool value) noexcept
+{
+  SettingsImplementation::instance().force_no_greenup = value;
+}
+bool Settings::forceStaticCuring() noexcept
+{
+  return SettingsImplementation::instance().force_curing;
+}
+void Settings::setForceStaticCuring(const bool value) noexcept
+{
+  SettingsImplementation::instance().force_curing= value;
+}
 bool Settings::rowColIgnition() noexcept
 {
   return SettingsImplementation::instance().rowcol_ignition;
@@ -692,6 +751,14 @@ int Settings::ignCol() noexcept
 void Settings::setIgnCol(const int value) noexcept
 {
   SettingsImplementation::instance().setIgnCol(value);
+}
+int Settings::staticCuring() noexcept
+{
+  return SettingsImplementation::instance().staticCuring();
+}
+void Settings::setStaticCuring(const int value) noexcept
+{
+  SettingsImplementation::instance().setStaticCuring(value);
 }
 MathSize Settings::minimumRos() noexcept
 {
