@@ -96,14 +96,7 @@ public:
    */
   void save(const string& dir, const string& base_name) const override
   {
-    if (Settings::saveAsAscii())
-    {
-      map_->saveToAsciiFile(dir, makeName(base_name, suffix_));
-    }
-    else
-    {
-      map_->saveToTiffFile(dir, makeName(base_name, suffix_));
-    }
+    map_->saveToFile(dir, makeName(base_name, suffix_));
   }
   /**
    * \brief Clear all observations

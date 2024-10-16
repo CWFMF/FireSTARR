@@ -12,6 +12,7 @@
 #include "Cell.h"
 #include "Log.h"
 #include "Point.h"
+#include "Settings.h"
 
 using tbd::topo::Location;
 using tbd::topo::Position;
@@ -529,21 +530,6 @@ public:
   D data;
 protected:
   virtual tuple<Idx, Idx, Idx, Idx> dataBounds() const = 0;
-public:
-  /**
-   * \brief Save GridMap contents to .asc file
-   * \param dir Directory to save into
-   * \param base_name File base name to use
-   */
-  string saveToAsciiFile(const string& dir, const string& base_name) const
-  {
-    return saveToAsciiFile<T>(
-      dir,
-      base_name,
-      [](V value) {
-        return static_cast<V>(value);
-      });
-  }
   /**
    * \brief Save GridMap contents to .asc file
    * \tparam R Type to be written to .asc file
@@ -627,21 +613,6 @@ public:
     return filename;
   }
   /**
-   * \brief Save contents to .tif file
-   * \param dir Directory to save into
-   * \param base_name File base name to usem
-   */
-  string saveToTiffFile(const string& dir,
-                        const string& base_name) const
-  {
-    return saveToTiffFile<T>(
-      dir,
-      base_name,
-      [](V value) {
-        return static_cast<V>(value);
-      });
-  }
-  /**
    * \brief Save GridMap contents to .tif file
    * \tparam R Type to be written to .tif file
    * \param dir Directory to save into
@@ -649,9 +620,9 @@ public:
    * \param convert Function to convert from V to R
    */
   template <class R>
-  string _saveToTiffFile(const string& dir,
-                         const string& base_name,
-                         std::function<R(T value)> convert) const
+  string saveToTiffFile(const string& dir,
+                        const string& base_name,
+                        std::function<R(T value)> convert) const
   {
 #ifdef DEBUG_GRIDS
     // enforce converting to an int and back produces same V
@@ -844,24 +815,101 @@ public:
     TIFFClose(tif);
     return filename;
   }
+public:
+  /**
+   * \brief Save GridMap contents to file based on settings
+   * \tparam R Type to be written to file
+   * \param dir Directory to save into
+   * \param base_name File base name to use
+   * \param convert Function to convert from V to R
+   */
   template <class R>
-  string saveToTiffFile(const string& dir,
-                        const string& base_name,
-                        std::function<R(T value)> convert) const
+  string saveToFileWithoutRetry(const string& dir,
+                                const string& base_name,
+                                std::function<R(T value)> convert) const
+  {
+    // NOTE: do this instead of function pointer because it's using templates
+    if (tbd::sim::Settings::saveAsAscii())
+    {
+      return saveToAsciiFile<R>(
+        dir,
+        base_name,
+        convert);
+    }
+    else
+    {
+      return saveToTiffFile<R>(
+        dir,
+        base_name,
+        convert);
+    }
+  }
+  /**
+   * \brief Save GridMap contents to file based on settings
+   * \tparam R Type to be written to file
+   * \param dir Directory to save into
+   * \param base_name File base name to use
+   * \param convert Function to convert from V to R
+   */
+  template <class R>
+  string saveToFileWithRetry(const string& dir,
+                             const string& base_name,
+                             std::function<R(T value)> convert) const
   {
     // HACK: (hopefully) ensure that write works
     try
     {
-      return _saveToTiffFile<R>(dir, base_name, convert);
+      // HACK: use different function name to prevent infinite recursion warning
+      return saveToFileWithoutRetry(dir, base_name, convert);
     }
     catch (const std::exception& err)
     {
-      logging::error("Error trying to write %s to %s so retrying",
+      logging::error("Error trying to write %s to %s so retrying\n%s",
                      base_name.c_str(),
-                     dir.c_str());
-      logging::error(err.what());
-      return _saveToTiffFile<R>(dir, base_name, convert);
+                     dir.c_str(),
+                     err.what());
+      try
+      {
+        return saveToFileWithoutRetry<R>(dir, base_name, convert);
+      }
+      catch (const std::exception& err_fatal)
+      {
+        // will exit if not supposed to retry
+        return logging::fatal<string>(
+          "Error trying to write %s to %s\n%s",
+          base_name.c_str(),
+          dir.c_str(),
+          err_fatal.what());
+      }
     }
+  }
+  /**
+   * \brief Save GridMap contents to file based on settings
+   * \tparam R Type to be written to file
+   * \param dir Directory to save into
+   * \param base_name File base name to use
+   * \param convert Function to convert from V to R
+   */
+  template <class R>
+  string saveToFile(const string& dir,
+                    const string& base_name,
+                    std::function<R(T value)> convert) const
+  {
+    return saveToFileWithRetry<R>(dir, base_name, convert);
+  }
+  /**
+   * \brief Save GridMap contents to file based on settings
+   * \param dir Directory to save into
+   * \param base_name File base name to use
+   */
+  string saveToFile(const string& dir, const string& base_name) const
+  {
+    return saveToFile<T>(
+      dir,
+      base_name,
+      [](V value) {
+        return static_cast<V>(value);
+      });
   }
 };
 }

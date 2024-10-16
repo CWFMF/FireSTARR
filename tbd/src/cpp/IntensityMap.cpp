@@ -224,18 +224,9 @@ void IntensityMap::save(const string& dir, const string& base_name) const
   // static std::function<DegreesSize(tbd::wx::Direction)> fct_raz = [](tbd::wx::Direction raz) {
   //   return static_cast<DegreesSize>(raz.asDegrees());
   // };
-  if (Settings::saveAsAscii())
-  {
-    intensity_max_->saveToAsciiFile(dir, base_name);
-    rate_of_spread_at_max_->saveToAsciiFile(dir, name_ros);
-    direction_of_spread_at_max_->saveToAsciiFile(dir, name_raz);
-  }
-  else
-  {
-    intensity_max_->saveToTiffFile(dir, base_name);
-    rate_of_spread_at_max_->saveToTiffFile(dir, name_ros);
-    direction_of_spread_at_max_->saveToTiffFile(dir, name_raz);
-  }
+  intensity_max_->saveToFile(dir, base_name);
+  rate_of_spread_at_max_->saveToFile(dir, name_ros);
+  direction_of_spread_at_max_->saveToFile(dir, name_raz);
 }
 MathSize IntensityMap::fireSize() const
 {
