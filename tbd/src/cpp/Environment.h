@@ -289,12 +289,13 @@ protected:
         {
           // NOTE: this needs to translate to internal codes?
           const auto f = fuel::FuelType::safeCode(fuel.at(loc));
-          auto s = static_cast<SlopeSize>(0);
-          auto a = static_cast<AspectSize>(0);
+          auto s = static_cast<SlopeSize>(INVALID_SLOPE);
+          auto a = static_cast<AspectSize>(INVALID_ASPECT);
           // HACK: don't calculate for outside box of cells
           if (r > 0 && r < fuel.rows() - 1 && c > 0 && c < fuel.columns() - 1)
           {
             MathSize dem[9];
+            bool valid = true;
             for (int i = -1; i < 2; ++i)
             {
               for (int j = -1; j < 2; ++j)
@@ -305,34 +306,48 @@ protected:
                 auto cur_loc = Location{actual_row, actual_column};
                 //                auto cur_h = cur_loc.hash();
                 //              dem[3 * (i + 1) + (j + 1)] = 1.0 * elevation.at(cur_h);
-                dem[3 * (i + 1) + (j + 1)] = 1.0 * elevation.at(cur_loc);
+                const auto v = elevation.at(cur_loc);
+                // can't calculate slope & aspect if any surrounding cell is nodata
+                if (elevation.nodataValue() == v)
+                {
+                  valid = false;
+                  break;
+                }
+                dem[3 * (i + 1) + (j + 1)] = 1.0 * v;
               }
-            }
-            // Horn's algorithm
-            const MathSize dx = ((dem[2] + dem[5] + dem[5] + dem[8])
-                                 - (dem[0] + dem[3] + dem[3] + dem[6]))
-                              / elevation.cellSize();
-            const MathSize dy = ((dem[6] + dem[7] + dem[7] + dem[8])
-                                 - (dem[0] + dem[1] + dem[1] + dem[2]))
-                              / elevation.cellSize();
-            const MathSize key = (dx * dx + dy * dy);
-            auto slope_pct = static_cast<float>(100 * (sqrt(key) / 8.0));
-            s = min(static_cast<SlopeSize>(MAX_SLOPE_FOR_DISTANCE), static_cast<SlopeSize>(round(slope_pct)));
-            static_assert(std::numeric_limits<SlopeSize>::max() >= MAX_SLOPE_FOR_DISTANCE);
-            MathSize aspect_azimuth = 0.0;
-
-            if (s > 0 && (dx != 0 || dy != 0))
-            {
-              aspect_azimuth = atan2(dy, -dx) * M_RADIANS_TO_DEGREES;
-              // NOTE: need to change this out of 'math' direction into 'real' direction (i.e. N is 0, not E)
-              aspect_azimuth = (aspect_azimuth > 90.0) ? (450.0 - aspect_azimuth) : (90.0 - aspect_azimuth);
-              if (aspect_azimuth == 360.0)
+              if (!valid)
               {
-                aspect_azimuth = 0.0;
+                break;
               }
             }
+            if (valid)
+            {
+              // Horn's algorithm
+              const MathSize dx = ((dem[2] + dem[5] + dem[5] + dem[8])
+                                   - (dem[0] + dem[3] + dem[3] + dem[6]))
+                                / elevation.cellSize();
+              const MathSize dy = ((dem[6] + dem[7] + dem[7] + dem[8])
+                                   - (dem[0] + dem[1] + dem[1] + dem[2]))
+                                / elevation.cellSize();
+              const MathSize key = (dx * dx + dy * dy);
+              auto slope_pct = static_cast<float>(100 * (sqrt(key) / 8.0));
+              s = min(static_cast<SlopeSize>(MAX_SLOPE_FOR_DISTANCE), static_cast<SlopeSize>(round(slope_pct)));
+              static_assert(std::numeric_limits<SlopeSize>::max() >= MAX_SLOPE_FOR_DISTANCE);
+              MathSize aspect_azimuth = 0.0;
 
-            a = static_cast<AspectSize>(round(aspect_azimuth));
+              if (s > 0 && (dx != 0 || dy != 0))
+              {
+                aspect_azimuth = atan2(dy, -dx) * M_RADIANS_TO_DEGREES;
+                // NOTE: need to change this out of 'math' direction into 'real' direction (i.e. N is 0, not E)
+                aspect_azimuth = (aspect_azimuth > 90.0) ? (450.0 - aspect_azimuth) : (90.0 - aspect_azimuth);
+                if (aspect_azimuth == 360.0)
+                {
+                  aspect_azimuth = 0.0;
+                }
+              }
+
+              a = static_cast<AspectSize>(round(aspect_azimuth));
+            }
           }
           const auto cell = Cell{h, s, a, f};
           values.at(h) = cell;
@@ -445,8 +460,18 @@ protected:
     logging::note("Start elevation is %d", elevation_);
     if (sim::Settings::saveSimulationArea())
     {
-      logging::debug("Saving fuel grid");
+      logging::debug("Saving simulation area");
       const auto lookup = sim::Settings::fuelLookup();
+      auto convert_to_slope =
+        [&elevation](
+          const Cell& v) -> SlopeSize {
+        return v.slope();
+      };
+      auto convert_to_aspect =
+        [&elevation](
+          const Cell& v) -> AspectSize {
+        return v.aspect();
+      };
       auto convert_to_area =
         [&elevation](
           const ElevationSize v) -> ElevationSize {
@@ -465,6 +490,17 @@ protected:
       elevation.saveToFile(
         dir_out_,
         "dem");
+      // save slope & aspect grids
+      cells_->saveToFile<SlopeSize>(
+        dir_out_,
+        "slope",
+        convert_to_slope,
+        static_cast<SlopeSize>(INVALID_SLOPE));
+      cells_->saveToFile<AspectSize>(
+        dir_out_,
+        "aspect",
+        convert_to_aspect,
+        static_cast<AspectSize>(INVALID_ASPECT));
       // HACK: make a grid with "3" as the value so if we merge max with it it'll cover up anything else
       elevation.saveToFile<ElevationSize>(
         dir_out_,

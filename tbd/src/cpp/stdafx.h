@@ -217,7 +217,15 @@ static constexpr auto MAX_ASPECT = 359;
 /**
  * \brief Maximum slope that can be stored - this is used in the horizontal distance calculation
  */
-static constexpr auto MAX_SLOPE_FOR_DISTANCE = 511;
+static constexpr auto MAX_SLOPE_FOR_DISTANCE = 500;
+/**
+ * \brief Invalid aspect value
+ */
+static constexpr auto INVALID_ASPECT = 361;
+/**
+ * \brief Invalid slope value
+ */
+static constexpr auto INVALID_SLOPE = 511;
 /**
  * \brief Number of all possible fuels in simulation
  */
