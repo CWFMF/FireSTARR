@@ -22,6 +22,11 @@ class Settings
 {
 public:
   /**
+   * \brief Write settings file to directory
+   * \param dirname Directory to write settings file in
+   */
+  static void saveSettings(const string& dirname) noexcept;
+  /**
    * \brief Set root directory and read settings from file
    * \param dirname Directory to use for settings and relative paths
    * \return Whether loading settings was successful

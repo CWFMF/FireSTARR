@@ -479,6 +479,7 @@ int main(const int argc, const char* const argv[])
     {
       tbd::util::make_directory_recursive(dir_out);
     }
+    Settings::saveSettings(output_directory);
     // if name starts with "/" then it's an absolute path, otherwise append to working directory
     const string log_file = log_file_name.starts_with("/") ? log_file_name : (output_directory + log_file_name);
     tbd::logging::check_fatal(!Log::openLogFile(log_file.c_str()),
@@ -582,6 +583,7 @@ int main(const int argc, const char* const argv[])
                          start_date.tm_min);
       start = start_date;
       log_args();
+      Settings::saveSettings(output_directory.c_str());
       result = tbd::sim::Model::runScenarios(output_directory,
                                              wx_file_name.c_str(),
                                              yesterday,

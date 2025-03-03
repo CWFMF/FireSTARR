@@ -10,6 +10,7 @@
 #include "default_settings.h"
 namespace tbd::sim
 {
+constexpr const char* FILE_SETTINGS = "settings.ini";
 template <class T>
 static vector<T> parse_list(string str, T (*convert)(const string& s))
 {
@@ -28,31 +29,78 @@ static vector<T> parse_list(string str, T (*convert)(const string& s))
   }
   return result;
 }
-string resolve_path(const string& dir_root, const string& path)
+string resolve_path(const string dir_root, const string path)
 {
   try
   {
-    if (!path.starts_with("/"))
-    {
-      // not an absolute path
-      // if binary path starts with ./ then ignore it
-      std::filesystem::path p = (0 == strcmp("./", dir_root.c_str())
-                                 || 0 == strcmp(".\\", dir_root.c_str()))
-                                ? path
-                                : (dir_root + path);
-      logging::info("Converting relative path %s to absolute path", path.c_str());
+    logging::note(
+      "Finding '%s' relative to '%s'",
+      path.c_str(),
+      dir_root.c_str());
+    const auto p_root = std::filesystem::canonical(dir_root);
+    const auto p = std::filesystem::canonical(path);
+    const auto p_rel = std::filesystem::relative(p, p_root);
+    const auto p_abs = std::filesystem::absolute(p_rel);
+    logging::note(
+      "'%s' relative to '%s' is '%s' which is '%s'",
+      p.generic_string().c_str(),
+      p_root.generic_string().c_str(),
+      p_rel.generic_string().c_str(),
+      p_abs.generic_string().c_str());
 #ifdef _WIN32
-      return std::filesystem::canonical(p).generic_string();
+    return p_abs.generic_string().c_str();
 #else
-      return std::filesystem::canonical(p).c_str();
+    return p_abs.c_str();
 #endif
-    }
-    return path;
+    //     if (!path.starts_with("/"))
+    //     {
+    //       // not an absolute path
+    //       // if binary path starts with ./ then ignore it
+    //       std::filesystem::path p = (0 == strcmp("./", dir_root.c_str())
+    //                                  || 0 == strcmp(".\\", dir_root.c_str()))
+    //                                 ? path
+    //                                 : (dir_root + path);
+    //       logging::info("Converting relative path %s to absolute path", path.c_str());
+    // #ifdef _WIN32
+    //       return std::filesystem::canonical(p).generic_string().c_str();
+    // #else
+    //       return std::filesystem::canonical(p).c_str();
+    // #endif
+    //     }
+    //     return path;
   }
-  catch (const std::exception&)
+  catch (const std::exception& ex)
   {
+    logging::error(ex.what());
     return "";
   }
+}
+string rel_path(const string dir_root, const string dirname, const string path)
+{
+  // logging::note(
+  //   "Finding '%s' relative to '%s' instead of '%s'",
+  //   path.c_str(),
+  //   dirname.c_str(),
+  //   dir_root.c_str());
+  // const auto p_rel = std::filesystem::relative(dir_root, path);
+  // logging::note("p_rel = '%s'", p_rel.generic_string().c_str());
+  // const auto p_abs = std::filesystem::absolute(p_rel);
+  // logging::note("p_abs = '%s'", p_abs.generic_string().c_str());
+  // const auto p_res = std::filesystem::relative(p_rel, dirname);
+  // logging::note("p_res = '%s'", p_res.generic_string().c_str());
+  // return p_res.generic_string().c_str();
+  const auto d_res = resolve_path(dir_root, dirname);
+  logging::note("d_res = '%s'", d_res.c_str());
+  const auto d_abs = std::filesystem::absolute(d_res);
+  logging::note("d_abs = '%s'", d_abs.generic_string().c_str());
+  logging::note(
+    "Finding '%s' relative to '%s' instead of '%s'",
+    path.c_str(),
+    d_abs.generic_string().c_str(),
+    dir_root.c_str());
+  const auto p_rel = std::filesystem::relative(path, d_abs);
+  logging::note("p_rel = '%s'", p_rel.generic_string().c_str());
+  return p_rel.generic_string().c_str();
 }
 /**
  * \brief Settings implementation class
@@ -283,6 +331,7 @@ public:
    */
   void setOutputDateOffsets(const char* value)
   {
+    output_date_offsets_str_ = value;
     output_date_offsets_ = parse_list<int>(value, [](const string& s) { return stoi(s); });
     max_date_offset_ = *std::max_element(output_date_offsets_.begin(), output_date_offsets_.end());
   }
@@ -293,6 +342,37 @@ public:
   [[nodiscard]] constexpr int maxDateOffset() const noexcept
   {
     return max_date_offset_;
+  }
+  void saveSettings(const string& dirname) noexcept
+  {
+    string filename = dirname + FILE_SETTINGS;
+    logging::note("Writing settings to %s", filename.c_str());
+    FILE* out = fopen(filename.c_str(), "w");
+    const auto raster_relative = rel_path(dir_root_, dirname, raster_root_);
+    const auto fuel_relative = rel_path(dir_root_, dirname, fuel_lookup_table_file_);
+    // HACK: hardcode settings for now
+    // HACK: use + to get value of atomic
+    fprintf(out, "# %s\n%s = %s\n", COMMENT_RASTER_ROOT, "RASTER_ROOT", raster_relative.c_str());
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_MINIMUM_ROS, "MINIMUM_ROS", +minimum_ros_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_MAX_SPREAD_DISTANCE, "MAX_SPREAD_DISTANCE", maximum_spread_distance_);
+    fprintf(out, "# %s\n%s = %s\n", COMMENT_OUTPUT_DATE_OFFSETS, "OUTPUT_DATE_OFFSETS", output_date_offsets_str_.c_str());
+    fprintf(out, "# %s\n%s = %s\n", COMMENT_FUEL_LOOKUP_TABLE, "FUEL_LOOKUP_TABLE", fuel_relative.c_str());
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_MINIMUM_FFMC, "MINIMUM_FFMC", minimum_ffmc_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_MINIMUM_FFMC_AT_NIGHT, "MINIMUM_FFMC_AT_NIGHT", minimum_ffmc_at_night_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_OFFSET_SUNRISE, "OFFSET_SUNRISE", offset_sunrise_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_OFFSET_SUNSET, "OFFSET_SUNSET", offset_sunset_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_THRESHOLD_SCENARIO_WEIGHT, "THRESHOLD_SCENARIO_WEIGHT", threshold_scenario_weight_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_THRESHOLD_DAILY_WEIGHT, "THRESHOLD_DAILY_WEIGHT", threshold_daily_weight_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_THRESHOLD_HOURLY_WEIGHT, "THRESHOLD_HOURLY_WEIGHT", threshold_hourly_weight_);
+    fprintf(out, "# %s\n%s = %d\n", COMMENT_DEFAULT_PERCENT_CONIFER, "DEFAULT_PERCENT_CONIFER", default_percent_conifer_);
+    fprintf(out, "# %s\n%s = %d\n", COMMENT_DEFAULT_PERCENT_DEAD_FIR, "DEFAULT_PERCENT_DEAD_FIR", default_percent_dead_fir_);
+    fprintf(out, "# %s\n%s = %zd\n", COMMENT_MAXIMUM_TIME, "MAXIMUM_TIME", +maximum_time_seconds_);
+    fprintf(out, "# %s\n%s = %zd\n", COMMENT_MAXIMUM_SIMULATIONS, "MAXIMUM_SIMULATIONS", maximum_count_simulations_);
+    fprintf(out, "# %s\n%s = %0.1f\n", COMMENT_CONFIDENCE_LEVEL, "CONFIDENCE_LEVEL", +confidence_level_);
+    fprintf(out, "# %s\n%s = %ld\n", COMMENT_INTENSITY_MAX_LOW, "INTENSITY_MAX_LOW", intensity_max_low_);
+    fprintf(out, "# %s\n%s = %ld\n", COMMENT_INTENSITY_MAX_MODERATE, "INTENSITY_MAX_MODERATE", intensity_max_moderate_);
+    fclose(out);
+    logging::note("Wrote settings to %s", filename.c_str());
   }
 private:
   /**
@@ -383,6 +463,10 @@ private:
    * \brief Days to output probability contours for (1 is start date, 2 is day after, etc.)
    */
   vector<int> output_date_offsets_;
+  /**
+   * \brief String representation of days to output probability contours for (1 is start date, 2 is day after, etc.)
+   */
+  string output_date_offsets_str_;
   /**
    * \brief Default Percent Conifer to use for M1/M2 fuels where none is specified (%)
    */
@@ -541,18 +625,18 @@ string get_path(const char* const dir_root, unordered_map<string, string>& setti
   {
     logging::error("Unable to resolve path for %s", key.c_str());
   }
+  return path;
 }
 SettingsImplementation::SettingsImplementation() noexcept
 {
   dir_root_ = "";
 }
-
 bool SettingsImplementation::setRoot(const char* dirname) noexcept
 {
   try
   {
     dir_root_ = dirname;
-    const auto filename = dir_root_ + "settings.ini";
+    const auto filename = dir_root_ + FILE_SETTINGS;
     unordered_map<string, string> settings{};
     ifstream in;
     in.open(filename.c_str());
@@ -621,6 +705,10 @@ bool SettingsImplementation::setRoot(const char* dirname) noexcept
     logging::fatal(ex);
     std::terminate();
   }
+}
+void Settings::saveSettings(const string& dirname) noexcept
+{
+  return SettingsImplementation::instance().saveSettings(dirname);
 }
 bool Settings::setRoot(const char* dirname) noexcept
 {
