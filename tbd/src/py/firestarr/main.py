@@ -1,9 +1,12 @@
 import datetime
+import json
 import os
 import sys
 import time
 
+from azure.storage.queue import QueueClient, QueueServiceClient
 from common import (
+    CONFIG,
     DEFAULT_FILE_LOG_LEVEL,
     DIR_LOG,
     DIR_OUTPUT,
@@ -148,12 +151,34 @@ def run_main(args):
     return no_retry or (not should_rerun)
 
 
+def scan_queue():
+    AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
+    AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
+    queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
+    queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
+    response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
+    for msg in response:
+        print("Message", msg.content, file=sys.stderr)
+        try:
+            queue_msg = json.loads(msg.content)
+        except Exception as ex:
+            logging.error(f"Unable to parse queue message:\n{msg.content}")
+            logging.fatal(ex)
+        # queue_client.delete_message(msg, msg.pop_receipt)
+        return queue_msg
+    print("Done", file=sys.stderr)
+
+
 if __name__ == "__main__":
     if not os.path.exists(FILE_TBD_BINARY):
         raise RuntimeError(f"Unable to locate simulation model binary file {FILE_TBD_BINARY}")
     if not os.path.exists(FILE_TBD_SETTINGS):
         raise RuntimeError(f"Unable to locate simulation model settings file {FILE_TBD_SETTINGS}")
     logging.info("Called with args %s", str(sys.argv))
+    if 1 == len(sys.argv):
+        msg = scan_queue()
+        print(f"Queue triggered with message:\n{msg}")
+        sys.argv = ["--no-publish", "--no-merge", "--no-retry", "--no-wait"]
     args_orig = sys.argv[1:]
     # rely on argument parsing later
     while do_retry:

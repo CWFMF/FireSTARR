@@ -217,6 +217,8 @@ def read_config(force=False):
             "AZURE_URL": "",
             "AZURE_TOKEN": "",
             "AZURE_CONTAINER": "",
+            "AZURE_QUEUE_CONNECTION": "",
+            "AZURE_QUEUE_NAME": "",
             "GEOSERVER_LAYER": "",
             "GEOSERVER_COVERAGE": "",
             "GEOSERVER_CREDENTIALS": "",
