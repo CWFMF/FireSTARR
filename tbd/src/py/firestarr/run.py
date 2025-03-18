@@ -47,6 +47,7 @@ from gis import (
     CRS_COMPARISON,
     CRS_SIMINPUT,
     CRS_WGS84,
+    VECTOR_FILE_EXTENSION,
     area_ha,
     find_invalid_tiffs,
     gdf_from_file,
@@ -889,6 +890,11 @@ class Run(object):
                 if FLAG_DEBUG_PERIMETERS:
                     gdf_to_file(df_final, self._dir_out, "df_fires_final")
                     gdf_to_file(df_fires, self._dir_out, "df_fires_after_final")
+                types = df_fires.dtypes
+                use_types = {k: v for k, v in types.items() if k in df_final.columns}
+                df_final = df_final.astype(use_types)
+                if FLAG_DEBUG_PERIMETERS:
+                    gdf_to_file(df_final, self._dir_out, "df_fires_final_convert")
                 df_final_copy = df_final.loc[:]
                 del df_final_copy["geometry"]
                 df_final_copy = df_final_copy.reset_index(drop=True)

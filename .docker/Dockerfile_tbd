@@ -11,7 +11,7 @@ RUN apt-get update --fix-missing \
   && chsh --shell /bin/bash ${USERNAME} \
   && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
   && chmod 0440 /etc/sudoers.d/${USERNAME} \
-  && echo export TMPDIR=/appl/data/tmp >> /home/${USERNAME}/.bashrc \
+  && echo export TMPDIR=/tmp >> /home/${USERNAME}/.bashrc \
   && mkdir -p /appl/tbd \
   && chown -R ${USERNAME}:${USERNAME} /appl
 
@@ -165,12 +165,17 @@ SHELL ["/bin/bash"]
 FROM scratch AS tbd_prod_stable
 ARG USERNAME
 COPY --from=tbd_prod / /
-COPY .docker/crontab /etc/crontab
 USER ${USERNAME}
-ENTRYPOINT ["sudo", "cron", "-f"]
+SHELL ["/bin/bash"]
+ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
+# ENTRYPOINT [ "/appl/tbd/scripts/lock_run.sh" ]
+#ENTRYPOINT ["/bin/bash", "-c", "python3 /appl/tbd/src/py/firestarr/main.py"]
 
 FROM tbd_prod_stable AS tbd_prod_svc
 ARG USERNAME
+# run as root so we can redirect to where docker logs will show progress
+COPY .docker/crontab /etc/crontab
 RUN sed -i 's/CRONJOB_RUN=.*/CRONJOB_RUN=1/g' /appl/config
 USER ${USERNAME}
 ENTRYPOINT ["sudo", "cron", "-f"]

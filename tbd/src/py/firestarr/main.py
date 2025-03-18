@@ -4,7 +4,6 @@ import os
 import sys
 import time
 
-from azure.storage.queue import QueueClient, QueueServiceClient
 from common import (
     CONFIG,
     DEFAULT_FILE_LOG_LEVEL,
@@ -152,6 +151,7 @@ def run_main(args):
 
 
 def scan_queue():
+    from azure.storage.queue import QueueClient, QueueServiceClient
     AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
     AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
@@ -161,11 +161,11 @@ def scan_queue():
         print("Message", msg.content, file=sys.stderr)
         try:
             queue_msg = json.loads(msg.content)
+            queue_client.delete_message(msg, msg.pop_receipt)
+            return queue_msg
         except Exception as ex:
             logging.error(f"Unable to parse queue message:\n{msg.content}")
             logging.fatal(ex)
-        # queue_client.delete_message(msg, msg.pop_receipt)
-        return queue_msg
     print("Done", file=sys.stderr)
 
 
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     if 1 == len(sys.argv):
         msg = scan_queue()
         print(f"Queue triggered with message:\n{msg}")
-        sys.argv = ["--no-publish", "--no-merge", "--no-retry", "--no-wait"]
+        sys.argv.extend(["--no-publish", "--no-merge", "--no-retry"])
     args_orig = sys.argv[1:]
     # rely on argument parsing later
     while do_retry:

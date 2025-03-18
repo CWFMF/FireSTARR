@@ -17,6 +17,7 @@ from common import (
     DIR_DOWNLOAD,
     DIR_EXTRACTED,
     DIR_RASTER,
+    DIR_SYS_TMP,
     DIR_TMP,
     do_nothing,
     ensure_dir,
@@ -489,17 +490,29 @@ def gdf_to_file(df, dir, base=None):
         for k in [x for x in df.columns if x != "geometry"]:
             v = df.dtypes[k]
             # HACK: convert any type of date into string
-            if "date" in str(v).lower():
+            if ("date" in str(v).lower()) or ("date" in str(k).lower()):
+                # HACK: replace "+00:00" with "Z" since xml and geoserver causes:
+                #       :org.w3c.dom.DOMException: INVALID_CHARACTER_ERR: An invalid or illegal XML character is specified.
                 df[k] = df[k].astype(str)
+                # HACK: does space break xml?
+                df[k] = df[k].apply(lambda x: x.replace("+00:00", "Z").replace(" ", "T"))
             elif v == np.int64:
                 df[k] = df[k].astype(int)
+        print(file)
+        print(df)
+        print(df.dtypes)
         # df_index = df.set_index(keys)
         fct_save = df.to_file
 
         def save_gpkg(f):
             # HACK: writing gpkg to azure mount is failing a lot so move after writing
-            f_tmp = f.replace("/", "_")
-            df.to_file(f_tmp, driver="GPKG")
+            # NOTE: having filename be different after moving was breaking geoserver so use basename
+            f_tmp = os.path.join(DIR_SYS_TMP, os.path.basename(f))
+            # df.to_file(f_tmp, driver="GPKG")
+            layer = os.path.splitext(os.path.basename(f))[0]
+            # df.to_file(f_tmp, driver="GPKG", layer=layer)
+            df.to_file(f_tmp, driver="GPKG", layer=layer, encoding='utf-8')
+            # df.to_file(f_tmp, driver="GPKG", engine="fiona")
             shutil.move(f_tmp, f)
             return f
 

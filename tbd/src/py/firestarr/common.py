@@ -146,8 +146,10 @@ DIR_RUNS = ensure_dir(os.path.join(DIR_DATA, "runs"))
 DIR_SIMS = ensure_dir(os.path.join(DIR_DATA, "sims"))
 SUBDIR_CURRENT = "current"
 # DIR_TMP = ensure_dir(os.path.join(DIR_DATA, "tmp"))
+# using /appl/data/tmp is not fixing things so revert to previous location
+DIR_SYS_TMP = os.environ.get("TEMPDIR") or os.environ.get("TMPDIR") or "/tmp"
 # should be better to not use container for temporary files?
-DIR_SYS_TMP = os.environ.get("TMPDIR") or "/appl/data/tmp"
+# DIR_SYS_TMP = os.environ.get("TEMPDIR") or os.environ.get("TMPDIR") or "/appl/data/tmp"
 DIR_TMP = ensure_dir(os.path.join(DIR_SYS_TMP, "firestarr"))
 DIR_LOCKS = ensure_dir(os.path.join(DIR_TMP, "locks"))
 

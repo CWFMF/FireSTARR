@@ -1,5 +1,6 @@
 azure-batch
 azure-storage-blob
+azure-storage-queue
 bs4
 ConfigParser
 filelock
