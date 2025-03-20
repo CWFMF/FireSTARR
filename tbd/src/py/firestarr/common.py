@@ -261,6 +261,14 @@ def read_config(force=False):
         for k, v in config.items("GLOBAL"):
             v = v.strip('"') if v.startswith('"') and v.endswith('"') else v.strip("'")
             CONFIG[k.upper()] = v
+        # for anything that's empty try to populate it from and environment variable
+        for k in CONFIG.keys():
+            if CONFIG[k] == "":
+                v = os.environ.get(k, "")
+                if v != "":
+                    # don't want value in log but want to note it was loaded from outside config file
+                    logging.info(f"Setting {k} from environment variable")
+                    CONFIG[k] = v
         file_bounds = CONFIG["BOUNDS_FILE"]
         if not os.path.isfile(file_bounds):
             if DEFAULT_BOUNDS != file_bounds:
