@@ -12,6 +12,9 @@ if [ -z "${GEOSERVER_LAYER}" ] \
     ; then
     echo Missing required configuration so not publishing
 else
+    if [ -z "${TMPDIR}" ]; then
+        TMPDIR=/tmp
+    fi
     GEOSERVER_EXTENSION=imagemosaic
     GEOSERVER_WORKSPACE=${GEOSERVER_SERVER}/workspaces/${GEOSERVER_WORKSPACE_NAME}
     GEOSERVER_STORE=${GEOSERVER_WORKSPACE}/coveragestores/${GEOSERVER_LAYER}

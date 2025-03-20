@@ -116,11 +116,15 @@ FROM tbd_gcc AS tbd_dev
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
+ENV TMPDIR=/tmp
 WORKDIR /appl/tbd/
 
 
 FROM tbd_dev AS tbd_dev_svc
 ARG USERNAME
+ARG VERSION
+ENV VERSION=${VERSION}
+ENV TMPDIR=/tmp
 # run as root so we can redirect to where docker logs will show progress
 COPY .docker/crontab /etc/crontab
 USER ${USERNAME}
@@ -131,6 +135,7 @@ ENTRYPOINT ["sudo", "cron", "-f"]
 FROM tbd_dev AS gis
 ARG USERNAME
 USER ${USERNAME}
+ENV TMPDIR=/tmp
 WORKDIR /appl/gis/
 RUN echo cd /appl/gis >> /home/${USERNAME}/.bashrc
 SHELL ["/bin/bash"]
@@ -147,6 +152,7 @@ FROM tbd_prod_base AS tbd_prod
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
+ENV TMPDIR=/tmp
 WORKDIR /appl/tbd
 COPY --chown=${USERNAME}:${USERNAME} ./config /appl/
 COPY --chown=${USERNAME}:${USERNAME} --from=tbd_build /appl/tbd/tbd .
@@ -166,6 +172,7 @@ FROM scratch AS tbd_prod_stable
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
+ENV TMPDIR=/tmp
 COPY --from=tbd_prod / /
 USER ${USERNAME}
 SHELL ["/bin/bash"]
@@ -178,6 +185,7 @@ FROM tbd_prod_stable AS tbd_prod_svc
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
+ENV TMPDIR=/tmp
 # run as root so we can redirect to where docker logs will show progress
 COPY .docker/crontab /etc/crontab
 RUN sed -i 's/CRONJOB_RUN=.*/CRONJOB_RUN=1/g' /appl/config
