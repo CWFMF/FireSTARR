@@ -215,7 +215,7 @@ def read_config(force=False):
             # use bounds from local directory if not specified
             "BOUNDS_FILE": DEFAULT_BOUNDS,
             "SPOTWX_API_KEY": "",
-            "SPOTWX_API_LIMITs": "150",
+            "SPOTWX_API_LIMIT": "",
             "AZURE_URL": "",
             "AZURE_TOKEN": "",
             "AZURE_CONTAINER": "",
