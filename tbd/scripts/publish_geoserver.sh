@@ -1,6 +1,7 @@
 #/bin/bash
 DIR=`dirname $(realpath "$0")`
 . /appl/data/config || . /appl/config
+echo "Publishing to geoserver ${GEOSERVER_SERVER}"
 
 if [ -z "${GEOSERVER_LAYER}" ] \
     || [ -z "${GEOSERVER_COVERAGE}" ] \

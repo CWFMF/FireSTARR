@@ -56,6 +56,8 @@ def publish_all(
             import publish_azure
 
             publish_azure.upload_dir(dir_output)
+            logging.info("Uploaded to azure")
+            logging.info(f"Publishing to geoserver from {dir_output}")
             # HACK: might be my imagination, but maybe there's a delay so wait a bit
             time.sleep(PUBLISH_AZURE_WAIT_TIME_SECONDS)
             import publish_geoserver

@@ -402,7 +402,7 @@ def start_process(run_what, cwd):
     @param cwd Directory to run in
     @return Running subprocess
     """
-    # logging.debug(run_what)
+    logging.info(f"Running in '{cwd}':\n\t{run_what}")
     p = subprocess.Popen(run_what, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd)
     p.args = run_what
     p.cwd = cwd
