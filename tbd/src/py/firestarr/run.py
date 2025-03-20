@@ -909,8 +909,12 @@ class Run(object):
                 # even if this is the wrong number of rows we still want to fix and return it
                 if len(df_final) == len(df_fires):
                     df_final_copy = df_fires_merge_final
-                    logging.info("Saving with extra information at end")
-                    gdf_to_file(df_final_copy, self._file_fires)
+                    if len(df_final_copy) == len(df_final):
+                        logging.info("Saving with extra information at end")
+                        gdf_to_file(df_final_copy, self._file_fires)
+                    else:
+                        logging.error(f"Have {len(df_final_copy)} fires but expected {len(df_final)}")
+                        logging.error(f"{df_final_copy}\nvs\n{df_final}")
                     # NOTE: only if all this worked do we actually assign again
                     df_final = df_final_copy
                 else:
