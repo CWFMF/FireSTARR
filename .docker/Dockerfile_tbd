@@ -1,6 +1,7 @@
 FROM debian:bookworm-slim AS minimal-with-user
 ARG USERNAME
 ARG USER_ID
+ENV TMPDIR=/tmp
 RUN apt-get update --fix-missing \
   && apt-get install -y locales \
   && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
@@ -11,7 +12,6 @@ RUN apt-get update --fix-missing \
   && chsh --shell /bin/bash ${USERNAME} \
   && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
   && chmod 0440 /etc/sudoers.d/${USERNAME} \
-  && echo export TMPDIR=/tmp >> /home/${USERNAME}/.bashrc \
   && mkdir -p /appl/tbd \
   && chown -R ${USERNAME}:${USERNAME} /appl
 
@@ -32,18 +32,19 @@ RUN apt-get update --fix-missing \
 FROM gcc-cmake-with_libs AS tbd_build
 ARG USERNAME
 ARG VERSION
+ENV VERSION=${VERSION}
 WORKDIR /appl/tbd
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/cpp src/cpp/
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/CMakeLists.txt .
 USER ${USERNAME}
-RUN echo export VERSION=${VERSION} >> /home/${USERNAME}/.bashrc \
-  && cmake -S . -B /appl/tbd/build -D CMAKE_BUILD_TYPE=Release \
+RUN cmake -S . -B /appl/tbd/build -D CMAKE_BUILD_TYPE=Release \
   && cmake --build /appl/tbd/build --config Release --target all -j $(nproc)
 
 
 FROM minimal-with-libs AS firestarr-base
 ARG USERNAME
 ARG VERSION
+ENV VERSION=${VERSION}
 USER root
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /appl/tbd
@@ -52,7 +53,6 @@ COPY --chown=${USERNAME}:${USERNAME} ./tbd/settings.ini /appl/tbd/
 COPY --chown=${USERNAME}:${USERNAME} --from=tbd_build /appl/tbd/tbd /appl/tbd/
 USER ${USERNAME}
 RUN echo cd /appl/tbd >> /home/${USERNAME}/.bashrc
-RUN echo export VERSION=${VERSION} >> /home/${USERNAME}/.bashrc
 
 
 # make image with only final layer
@@ -115,8 +115,8 @@ USER ${USERNAME}
 FROM tbd_gcc AS tbd_dev
 ARG USERNAME
 ARG VERSION
+ENV VERSION=${VERSION}
 WORKDIR /appl/tbd/
-RUN echo export VERSION=${VERSION} >> /home/${USERNAME}/.bashrc
 
 
 FROM tbd_dev AS tbd_dev_svc
@@ -146,6 +146,7 @@ USER ${USERNAME}
 FROM tbd_prod_base AS tbd_prod
 ARG USERNAME
 ARG VERSION
+ENV VERSION=${VERSION}
 WORKDIR /appl/tbd
 COPY --chown=${USERNAME}:${USERNAME} ./config /appl/
 COPY --chown=${USERNAME}:${USERNAME} --from=tbd_build /appl/tbd/tbd .
@@ -159,11 +160,12 @@ COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/NG_FWI.py .
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/old_cffdrs.py .
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/util.py .
 USER ${USERNAME}
-RUN echo export VERSION=${VERSION} >> /home/${USERNAME}/.bashrc
 SHELL ["/bin/bash"]
 
 FROM scratch AS tbd_prod_stable
 ARG USERNAME
+ARG VERSION
+ENV VERSION=${VERSION}
 COPY --from=tbd_prod / /
 USER ${USERNAME}
 SHELL ["/bin/bash"]
@@ -174,6 +176,8 @@ ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
 
 FROM tbd_prod_stable AS tbd_prod_svc
 ARG USERNAME
+ARG VERSION
+ENV VERSION=${VERSION}
 # run as root so we can redirect to where docker logs will show progress
 COPY .docker/crontab /etc/crontab
 RUN sed -i 's/CRONJOB_RUN=.*/CRONJOB_RUN=1/g' /appl/config
