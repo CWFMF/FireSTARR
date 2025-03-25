@@ -176,7 +176,7 @@ def save_http(
             return r
         # HACK: put in one last lock so it doesn't download twice
         with locks_for(_ + ".tmp"):
-            # HACK: one last check for file because it seems like spotwx limits rate of existing files
+            # HACK: one last check for file
             if not (keep_existing and os.path.isfile(_)):
                 r = _save_http_cached((fct_pre_save or do_nothing)(url), _, fct_is_invalid)
         # logging.debug(f"do_save({_}) - returning {r}")

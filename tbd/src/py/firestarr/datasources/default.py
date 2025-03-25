@@ -2,7 +2,7 @@ import datetime
 import os
 from functools import cache
 
-import datasources.spotwx
+import datasources.cwfif
 import numpy as np
 import pandas as pd
 from common import (
@@ -285,7 +285,7 @@ class SourceModelAll(SourceModel):
     def __init__(self, dir_out) -> None:
         super().__init__(bounds=None)
         self._dir_out = dir_out
-        self._sources = [datasources.spotwx.SourceGEPS(self._dir_out)] + [
+        self._sources = [datasources.cwfif.SourceGEPS(self._dir_out)] + [
             # order doesn't matter since everything gets used
             s(self._dir_out)
             for s in find_sources(SourceModel)

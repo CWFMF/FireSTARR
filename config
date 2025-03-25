@@ -25,11 +25,6 @@ BOUNDS_LONGITUDE_MAX=-52
 # area to look at for simulations
 BOUNDS_FILE="/appl/data/bounds.geojson"
 
-# requires a spotwx.io API key to get ensemble weather
-SPOTWX_API_KEY=
-# actually 180 by default, but don"t push it
-SPOTWX_API_LIMIT=150
-
 # if azure settings are specified then outputs will be published to container
 AZURE_URL=
 AZURE_TOKEN=

@@ -41,7 +41,7 @@ from common import (
 from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
 from datasources.default import SourceFireActive
-from datasources.spotwx import get_model_dir, get_model_dir_uncached
+from datasources.cwfif import get_model_dir, get_model_dir_uncached
 from fires import get_fires_folder, group_fires
 from gis import (
     CRS_COMPARISON,

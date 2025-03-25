@@ -16,7 +16,7 @@ from common import (
     check_arg,
     logging,
 )
-from datasources.spotwx import get_model_dir_uncached, set_model_dir
+from datasources.cwfif import get_model_dir_uncached, set_model_dir
 from log import add_log_file
 from redundancy import get_stack
 from run import Run, make_resume

@@ -31,7 +31,7 @@ from datasources.datatypes import (
     check_columns,
     make_template_empty,
 )
-from datasources.spotwx import fix_coords, fmt_rounded
+from datasources.cwfif import fix_coords, fmt_rounded
 from gis import find_closest, gdf_from_file, save_geojson
 from make_bounds import get_bounds_from_id
 from net import RETRY_MAX_ATTEMPTS, try_save_http
