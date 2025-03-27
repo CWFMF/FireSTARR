@@ -460,9 +460,7 @@ int main(const int argc, const char* const argv[])
       output_directory += '/';
     }
     const char* dir_out = output_directory.c_str();
-    struct stat info
-    {
-    };
+    struct stat info{};
     if (stat(dir_out, &info) != 0 || !(info.st_mode & S_IFDIR))
     {
       tbd::util::make_directory_recursive(dir_out);
