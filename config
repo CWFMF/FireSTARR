@@ -24,28 +24,3 @@ BOUNDS_LONGITUDE_MAX=-52
 
 # area to look at for simulations
 BOUNDS_FILE="/appl/data/bounds.geojson"
-
-# if azure settings are specified then outputs will be published to container
-AZURE_URL=
-AZURE_TOKEN=
-AZURE_CONTAINER=
-
-# if geoserver settings are specified then coverage will get updated
-# NOTE: relies on data being in GEOSERVER_DIR_DATA
-#       (accomplished by publishing to azure currently)
-GEOSERVER_LAYER=
-GEOSERVER_COVERAGE=
-GEOSERVER_CREDENTIALS=
-GEOSERVER_SERVER=
-GEOSERVER_WORKSPACE_NAME=
-GEOSERVER_DIR_DATA=
-
-# azure batch credentials
-BATCH_ACCOUNT_NAME=""
-BATCH_ACCOUNT_KEY=""
-STORAGE_ACCOUNT_NAME=""
-STORAGE_CONTAINER=""
-STORAGE_KEY=""
-REGISTRY_USER_NAME=""
-REGISTRY_PASSWORD=""
-
