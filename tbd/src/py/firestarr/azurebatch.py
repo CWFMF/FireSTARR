@@ -33,8 +33,8 @@ FILE_LOCK_BATCH_JOB = os.path.join(DIR_OUTPUT, "batch_job")
 _BATCH_ACCOUNT_NAME = CONFIG.get("BATCH_ACCOUNT_NAME")
 _BATCH_ACCOUNT_KEY = CONFIG.get("BATCH_ACCOUNT_KEY")
 _STORAGE_ACCOUNT_NAME = CONFIG.get("STORAGE_ACCOUNT_NAME")
-_STORAGE_CONTAINER = CONFIG.get("STORAGE_CONTAINER")
 _STORAGE_KEY = CONFIG.get("STORAGE_KEY")
+_STORAGE_FILE_SHARE = CONFIG.get("STORAGE_FILE_SHARE")
 _REGISTRY_USER_NAME = CONFIG.get("REGISTRY_USER_NAME")
 _REGISTRY_SERVER = f"{_REGISTRY_USER_NAME}.azurecr.io"
 _REGISTRY_PASSWORD = CONFIG.get("REGISTRY_PASSWORD")
@@ -42,15 +42,14 @@ _REGISTRY_URL = f"{_REGISTRY_SERVER}/firestarr"
 _CONTAINER_PY = f"{_REGISTRY_URL}/tbd_prod_stable:latest"
 _CONTAINER_BIN = f"{_REGISTRY_URL}/firestarr:latest"
 SSH_KEY = (
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQY2udxIHnsghQZXDXNge1RD"
-    "gzu5sWkHnbad5KGCI49TrwTPwheQfApkDwOvkhkwJG0m+xts9cimeW8IfdiWjH"
-    "bVe5a8SONR/cRD7uqMJHBr/rFWqM56N7AZpoPkxhbdDppC3kxocwKqn1M9miw1"
-    "hYksm20MaJ2y/M/zXQajM3T7vxjQtnnppF435vnQFrrY/cgLZNr+SZVt3D4I/l"
-    "9lSghi8a91PbsDCQL+kACuuWAXQWV5BYqVq/hkVz3wPhus6mlfYvz9DvtUhyth"
-    "zUYcXVUUe3118Gsw+VZ2u0KRNpNqhAdRZM1VkvQUuRMDdKq/zxxvk6suO0OL3E"
-    "EuGTgljKX/1LMXFgDBOEOgZAyE82wp21luuebRjX0n4wCxKFTZVhvUcs5O0W6/M"
-    "cJrQ2w4y2xtrCrPYvzrQEEfqRldDP8L5hFiERGYtFZFFEg1j7d+nWsc2xhWfaFmT"
-    "shW3xcJCtgmNPW1KfoO/6Frlr9/Njs+gLETXHZdGJbQ/TSKFprW0="
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyN9S1NfZnCWVCF8oYF5PSulDwbEr9ghX"
+    "KNq9iGfTZ/L64UdDd3LSZhu3WwUUBHrvMBkOxpeideyxYwucuwjMno/pgqcEjR9Mv1geWab"
+    "6febyyeGNvOi1XzYhuOqJHMfgmZIe5B1oU7QsqDrwh+uR94SFI3NzesQLpEIRFc75WyLkE/"
+    "9ljsC8WqS5JKFzuVRxiZ4q6r/+mMK974LftTUj3wESk2BQMFhK6ZGWtozalXPSkmdb4A0tN"
+    "J4X47vGVf/WyQFx2+eN+BFz4jt7dvzfrYqrPyoGF0aeiKDnBiRKxMuRXSupE8PR1pBcJUbu"
+    "7n7U+64P/u8YD74+3De1Nnj+BEIjGo5X/+y+LZ+PBpzhVoaLkOih/C5AI8ycfzul6in1lCA"
+    "nOXlQSa/SyI1vLEWS9dwBRHNI15Yf+nuvVxELVmA2MYdlnmeJMTVQQ2FE4h5UxFz+YI3ULX"
+    "xUwClrVR0jMLd3LvDPwfWfK+upUDgovZIXVSmxlTmcprS0xhKAYZLs="
 )
 
 
@@ -86,7 +85,7 @@ _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
 # # generally gets stuck on a few scenarios so scale way back until single-core performance improves for now
 # _POOL_VM_SIZE = "STANDARD_F8S_V2"
 _POOL_VM_SIZE = "STANDARD_F4S_V2"
-POOL_ID = "pool_firestarr"
+POOL_ID = "firestarr_batchpool"
 _MIN_NODES = 0
 # _MIN_NODES = 1
 _MAX_NODES = 50
@@ -118,7 +117,8 @@ _AUTO_SCALE_FORMULA = f"""
 """
 _AUTO_SCALE_EVALUATION_INTERVAL = datetime.timedelta(minutes=5)
 _BATCH_ACCOUNT_URL = f"https://{_BATCH_ACCOUNT_NAME}.canadacentral.batch.azure.com"
-_STORAGE_ACCOUNT_URL = f"https://{_STORAGE_ACCOUNT_NAME}.blob.core.windows.net"
+# _STORAGE_ACCOUNT_URL = f"https://{_STORAGE_ACCOUNT_NAME}.blob.core.windows.net"
+_AZURE_FILE_SHARE_URL = f"https://{_STORAGE_ACCOUNT_NAME}.file.core.windows.net/{_STORAGE_FILE_SHARE}"
 
 RELATIVE_MOUNT_PATH = "firestarr_data"
 ABSOLUTE_MOUNT_PATH = f"/mnt/batch/tasks/fsmounts/{RELATIVE_MOUNT_PATH}"
@@ -210,22 +210,25 @@ def create_container_pool(pool_id=POOL_ID, force=False, client=None):
         auto_scale_evaluation_interval=_AUTO_SCALE_EVALUATION_INTERVAL,
         mount_configuration=[
             batchmodels.MountConfiguration(
-                azure_blob_file_system_configuration=(
-                    batchmodels.AzureBlobFileSystemConfiguration(
+                azure_file_share_configuration=(
+                    batchmodels.AzureFileShareConfiguration(
                         account_name=_STORAGE_ACCOUNT_NAME,
-                        container_name=_STORAGE_CONTAINER,
+                        azure_file_url=_AZURE_FILE_SHARE_URL,
                         relative_mount_path=RELATIVE_MOUNT_PATH,
                         account_key=_STORAGE_KEY,
-                        blobfuse_options=" ".join(
-                            [
-                                f"-o {arg}"
-                                for arg in [
-                                    "attr_timeout=240",
-                                    "entry_timeout=240",
-                                    "negative_timeout=120",
-                                    "allow_other",
+                        mount_options=(
+                            "-o "
+                            + ",".join(
+                                [
+                                    "dir_mode=0777",
+                                    "file_mode=0777",
+                                    "uid=1000",
+                                    "gid=1000",
+                                    "mfsymlinks",
+                                    "nobrl",
+                                    "cache=none",
                                 ]
-                            ]
+                            )
                         ),
                     )
                 )
@@ -747,7 +750,7 @@ def get_login(pool_id=POOL_ID, client=None, node=0):
         pool_id,
         node_id,
     )
-    cmd = "sudo /mnt/batch/tasks/fsmounts/firestarr_data/container/run_docker_bash.sh"
+    cmd = f"sudo {ABSOLUTE_MOUNT_PATH}/container/run_docker_bash.sh"
     print(f"ssh -ti ~/.ssh/id_azure -p {s.remote_login_port} {user}@{s.remote_login_ip_address} {cmd}")
 
 

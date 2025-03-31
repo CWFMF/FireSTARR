@@ -214,18 +214,29 @@ def read_config(force=False):
             "BOUNDS_LONGITUDE_MAX": "-52",
             # use bounds from local directory if not specified
             "BOUNDS_FILE": DEFAULT_BOUNDS,
-            "AZURE_URL": "",
-            "AZURE_TOKEN": "",
-            "AZURE_CONTAINER": "",
-            "AZURE_QUEUE_CONNECTION": "",
-            "AZURE_QUEUE_NAME": "",
-            "GEOSERVER_LAYER": "",
-            "GEOSERVER_COVERAGE": "",
-            "GEOSERVER_CREDENTIALS": "",
-            "GEOSERVER_SERVER": "",
-            "GEOSERVER_WORKSPACE": "",
-            "GEOSERVER_DIR_DATA": "",
         }
+        OPTIONS = [
+            "AZURE_URL",
+            "AZURE_TOKEN",
+            "AZURE_CONTAINER",
+            "AZURE_QUEUE_CONNECTION",
+            "AZURE_QUEUE_NAME",
+            "GEOSERVER_LAYER",
+            "GEOSERVER_COVERAGE",
+            "GEOSERVER_CREDENTIALS",
+            "GEOSERVER_SERVER",
+            "GEOSERVER_WORKSPACE",
+            "GEOSERVER_DIR_DATA",
+            "BATCH_ACCOUNT_NAME",
+            "BATCH_ACCOUNT_KEY",
+            "STORAGE_ACCOUNT_NAME",
+            "STORAGE_FILE_SHARE",
+            "STORAGE_KEY",
+            "REGISTRY_USER_NAME",
+            "REGISTRY_PASSWORD",
+        ]
+        for opt in OPTIONS:
+            CONFIG[opt] = ""
         config = configparser.ConfigParser()
         # set default values and then read to overwrite with whatever is in config
         config.add_section("GLOBAL")
