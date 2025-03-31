@@ -216,6 +216,8 @@ def read_config(force=False):
             "BOUNDS_FILE": DEFAULT_BOUNDS,
         }
         OPTIONS = [
+            "FORCE_LOCAL_TASKS",
+            "FORCE_BATCH_TASKS",
             "AZURE_URL",
             "AZURE_TOKEN",
             "AZURE_CONTAINER",
