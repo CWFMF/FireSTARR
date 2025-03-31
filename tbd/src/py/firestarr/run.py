@@ -857,6 +857,8 @@ class Run(object):
                 values=successful,
                 desc="Running simulations via azurebatch",
                 callback_group=check_publish,
+                no_limit=True,
+                max_processes=len(dirs_fire),
             )
         else:
             successful, unsuccessful = keep_trying_groups(
