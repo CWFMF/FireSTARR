@@ -166,7 +166,6 @@ COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/NG_FWI.py .
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/old_cffdrs.py .
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/util.py .
 USER ${USERNAME}
-SHELL ["/bin/bash"]
 
 FROM scratch AS tbd_prod_stable
 ARG USERNAME
@@ -175,11 +174,8 @@ ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
 COPY --from=tbd_prod / /
 USER ${USERNAME}
-SHELL ["/bin/bash"]
+WORKDIR /appl/tbd
 ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
-# ENTRYPOINT [ "/appl/tbd/scripts/lock_run.sh" ]
-#ENTRYPOINT ["/bin/bash", "-c", "python3 /appl/tbd/src/py/firestarr/main.py"]
 
 FROM tbd_prod_stable AS tbd_prod_svc
 ARG USERNAME
@@ -189,5 +185,6 @@ ENV TMPDIR=/tmp
 # run as root so we can redirect to where docker logs will show progress
 COPY .docker/crontab /etc/crontab
 RUN sed -i 's/CRONJOB_RUN=.*/CRONJOB_RUN=1/g' /appl/config
+WORKDIR /appl/tbd
 USER ${USERNAME}
 ENTRYPOINT ["sudo", "cron", "-f"]
