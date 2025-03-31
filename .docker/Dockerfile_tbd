@@ -167,15 +167,25 @@ COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/old_cffdrs.py .
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/util.py .
 USER ${USERNAME}
 
-FROM scratch AS tbd_prod_stable
+# doesn't delete intermediaries, but maybe smaller between versions?
+FROM tbd_prod AS tbd_prod_stable
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
-COPY --from=tbd_prod / /
 USER ${USERNAME}
 WORKDIR /appl/tbd
 ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
+
+# FROM scratch AS tbd_prod_stable
+# ARG USERNAME
+# ARG VERSION
+# ENV VERSION=${VERSION}
+# ENV TMPDIR=/tmp
+# COPY --from=tbd_prod / /
+# USER ${USERNAME}
+# WORKDIR /appl/tbd
+# ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
 
 FROM tbd_prod_stable AS tbd_prod_svc
 ARG USERNAME
