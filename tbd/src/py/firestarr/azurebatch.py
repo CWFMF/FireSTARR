@@ -409,7 +409,7 @@ def make_or_get_simulation_task(job_id, dir_fire, client=None):
     return task, existed
 
 
-def add_simulation_task(job_id, dir_fire, wait=True, client=None, mark_as_done=False):
+def add_simulation_task(job_id, dir_fire, no_wait=False, client=None, mark_as_done=False):
     # def do_add_simulation_task():
     #     nonlocal client
     try:
@@ -455,7 +455,7 @@ def add_simulation_task(job_id, dir_fire, wait=True, client=None, mark_as_done=F
             # need to get task again in case it was just added
             task, task_existed = make_or_get_simulation_task(job_id, dir_fire, client=client)
             # wait if requested and task isn't done
-            if wait:
+            if not no_wait:
                 while True:
                     while True:
                         task = client.task.get(job_id, task.id)

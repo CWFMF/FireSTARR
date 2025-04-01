@@ -18,6 +18,7 @@ from common import (
 )
 from datasources.cwfif import get_model_dir_uncached, set_model_dir
 from log import add_log_file
+import numpy as np
 from redundancy import get_stack
 from run import Run, make_resume
 
@@ -32,19 +33,29 @@ WAIT_WX = SECONDS_PER_MINUTE * 5
 sys.path.append(os.path.dirname(sys.executable))
 sys.path.append("/usr/local/bin")
 
+no_wait = None
 did_wait = False
 run_current = None
 run_attempts = 0
 no_retry = False
 do_retry = True
+is_current = None
+is_published = None
+needs_publish = None
+should_resume = None
 
 
 def run_main(args):
+    global no_wait
     global did_wait
     global run_current
     global run_attempts
     global no_retry
     global do_retry
+    global is_published
+    global needs_publish
+    global is_current
+    global should_resume
 
     # HACK: just get some kind of parsing for right now
     do_resume, args = check_arg("--resume", args)
@@ -107,6 +118,7 @@ def run_main(args):
             do_publish=do_publish,
             do_merge=do_merge,
             prepare_only=prepare_only,
+            no_wait=no_wait,
         )
         logging.info(f"Resuming previous run in {run_current._dir_runs}")
     else:
@@ -120,7 +132,12 @@ def run_main(args):
                 logging.fatal("Cannot specify number of days if resuming")
                 sys.exit(-1)
             # if we give it a simulation directory then resume those sims
-            run_current = Run(dir=dir_arg, do_publish=do_publish, prepare_only=prepare_only)
+            run_current = Run(
+                dir=dir_arg,
+                do_publish=do_publish,
+                prepare_only=prepare_only,
+                no_wait=no_wait,
+            )
             logging.info(f"Resuming simulations in {dir_arg}")
             run_current.check_and_publish()
         else:
@@ -131,14 +148,15 @@ def run_main(args):
                 do_publish=do_publish,
                 do_merge=do_merge,
                 prepare_only=prepare_only,
+                no_wait=no_wait,
             )
     run_attempts += 1
     # returns true if just finished current run
-    is_current = run_current.run_until_successful_or_outdated(no_retry=no_retry)
+    is_current, df_final = run_current.run_until_successful_or_outdated(no_retry=no_retry)
     is_outdated = not is_current
     if prepare_only:
         do_retry = False
-        return True
+        return True, df_final
     is_published = run_current._published_clean
     needs_publish = run_current.check_do_publish() and not is_published
     should_rerun = (not no_resume) and (is_outdated or needs_publish)
@@ -147,17 +165,19 @@ def run_main(args):
         f"is_outdated = {is_outdated}, is_published = {is_published}, should_rerun = {should_rerun}, no_retry == {no_retry}"
     )
     # whether things should stop running
-    return no_retry or (not should_rerun)
+    return no_retry or (not should_rerun), df_final
 
 
 def scan_queue():
     from azure.storage.queue import QueueClient, QueueServiceClient
+
     AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
     AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
     for msg in response:
+        # FIX: right now any message causes a full run
         print("Message", msg.content, file=sys.stderr)
         try:
             queue_msg = json.loads(msg.content)
@@ -169,16 +189,40 @@ def scan_queue():
     print("Done", file=sys.stderr)
 
 
+def requeue():
+    from azure.storage.queue import QueueClient, QueueServiceClient
+
+    AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
+    AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
+    queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
+    queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
+    # FIX: figure out a useful/standardized message format
+    queue_client.send_message('{"msg": "Recheck outputs"}')
+    response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
+    print("Done requeue", file=sys.stderr)
+
+
+FROM_QUEUE = False
+
 if __name__ == "__main__":
     if not os.path.exists(FILE_TBD_BINARY):
         raise RuntimeError(f"Unable to locate simulation model binary file {FILE_TBD_BINARY}")
     if not os.path.exists(FILE_TBD_SETTINGS):
         raise RuntimeError(f"Unable to locate simulation model settings file {FILE_TBD_SETTINGS}")
     logging.info("Called with args %s", str(sys.argv))
-    if 1 == len(sys.argv):
+    FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
+    if FROM_QUEUE:
+        # allow other arguments but remove duplicates
+        QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry", "--no-wait"]
+        REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
+        for a in REMOVE_ARGS:
+            try:
+                sys.argv.remove(a)
+            except ValueError:
+                pass
         msg = scan_queue()
         print(f"Queue triggered with message:\n{msg}")
-        sys.argv.extend(["--no-publish", "--no-merge", "--no-retry"])
+        sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     # rely on argument parsing later
     while do_retry:
@@ -187,7 +231,8 @@ if __name__ == "__main__":
         args = args_orig[:]
         try:
             # returns true if just finished current run
-            if run_main(args):
+            is_current, df_final = run_main(args)
+            if is_current:
                 do_retry = False
                 break
             logging.info("Trying again because used old weather")
@@ -200,4 +245,11 @@ if __name__ == "__main__":
                 logging.error("Stopping because of error")
                 sys.exit(-1)
             logging.info("Trying again because of error")
+    if FROM_QUEUE:
+        if df_final is None or np.any(df_final["sim_time"].isna()):
+            logging.info("Requeuing")
+            requeue()
+        else:
+            logging.info(f"Not requeuing because final result is:\n{df_final}")
+
     logging.info("Finished successfully")

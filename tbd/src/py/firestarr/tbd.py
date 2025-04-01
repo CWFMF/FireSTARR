@@ -34,6 +34,7 @@ from common import (
     SUBDIR_CURRENT,
     WANT_DATES,
     ensure_dir,
+    finish_process,
     force_remove,
     get_stack,
     in_run_folder,
@@ -42,6 +43,7 @@ from common import (
     locks_for,
     logging,
     run_process,
+    start_process,
     try_remove,
 )
 from redundancy import call_safe
@@ -71,10 +73,14 @@ IS_USING_BATCH = None
 TIFF_SLEEP = 10
 
 
-def run_firestarr_local(dir_fire):
+def run_firestarr_local(dir_fire, no_wait=None):
     stdout, stderr = None, None
     try:
-        stdout, stderr = call_safe(run_process, ["./sim.sh"], dir_fire)
+        proc = call_safe(start_process, ["./sim.sh"], dir_fire)
+        if no_wait:
+            logging.info(f"Starting but not waiting for {dir_fire}")
+        else:
+            stdout, stderr = finish_process(proc)
     except KeyboardInterrupt as ex:
         raise ex
     except Exception as ex:
@@ -111,14 +117,15 @@ def find_running_local(dir_fire):
 def mark_as_done(dir_fire):
     if IS_USING_BATCH:
         # HACK: if using azure then mark task as completed
-        add_simulation_task(assign_job(dir_fire), dir_fire, wait=False, mark_as_done=True)
+        add_simulation_task(assign_job(dir_fire), dir_fire, no_wait=True, mark_as_done=True)
     # FIX: should we kill the process if running locally?
 
 
-def run_firestarr_batch(dir_fire, wait=True):
+def run_firestarr_batch(dir_fire, no_wait=False):
     sim_time = parse_sim_time(dir_fire)
     mark_as_done = sim_time is not None
-    add_simulation_task(assign_job(dir_fire), dir_fire, wait=wait, mark_as_done=mark_as_done)
+    # HACK: use no_wait since that's what other functions use
+    add_simulation_task(assign_job(dir_fire), dir_fire, no_wait=no_wait, mark_as_done=mark_as_done)
 
 
 def find_running_batch(dir_fire):
@@ -201,11 +208,11 @@ def assign_firestarr_batch(dir_fire, force_local=None, force_batch=None):
         return False
 
 
-def check_firestarr_batch(dir_fire):
+def check_firestarr_batch(dir_fire, no_wait=None):
     with locks_for(os.path.join(DIR_DATA, "check_batch_client")):
         if _RUN_FIRESTARR is None:
             assign_firestarr_batch(dir_fire)
-    return _RUN_FIRESTARR(dir_fire)
+    return _RUN_FIRESTARR(dir_fire, no_wait=no_wait)
 
 
 def check_firestarr_running(dir_fire):
@@ -215,12 +222,12 @@ def check_firestarr_running(dir_fire):
     return _FIND_RUNNING(dir_fire)
 
 
-def run_firestarr(dir_fire):
+def run_firestarr(dir_fire, no_wait=None):
     # FIX: this should definitely not be returning clock time if it's supposed to be simulation time
     # run generated command for parsing data
     t0 = timeit.default_timer()
     # expect everything to be in sim.sh
-    (_RUN_FIRESTARR or check_firestarr_batch)(dir_fire)
+    (_RUN_FIRESTARR or check_firestarr_batch)(dir_fire, no_wait=no_wait)
     t1 = timeit.default_timer()
     sim_time = t1 - t0
     return sim_time
@@ -564,18 +571,19 @@ def _run_fire_from_folder(
                 # HACK: return this again since it waits for the fire to finish at the start
                 if check_running(dir_fire):
                     # don't check this at the start since azure batch will create job and try to run it
-                    log_info(f"Already running {dir_fire} - waiting for it to finish")
-                    while check_running(dir_fire):
-                        time.sleep(10)
-                    log_info(f"Continuing after {dir_fire} finished running")
-                    return run_fire_from_folder(
-                        dir_fire,
-                        dir_output,
-                        verbose=verbose,
-                        prepare_only=prepare_only,
-                        run_only=run_only,
-                        no_wait=no_wait,
-                    )
+                    if not no_wait:
+                        log_info(f"Already running {dir_fire} - waiting for it to finish")
+                        while check_running(dir_fire):
+                            time.sleep(10)
+                        log_info(f"Continuing after {dir_fire} finished running")
+                        return run_fire_from_folder(
+                            dir_fire,
+                            dir_output,
+                            verbose=verbose,
+                            prepare_only=prepare_only,
+                            run_only=run_only,
+                            no_wait=no_wait,
+                        )
                 # if we're going to run then move old log if it exists
                 if os.path.isfile(file_log):
                     filetime = os.path.getmtime(file_log)
@@ -584,12 +592,16 @@ def _run_fire_from_folder(
                     logging.warning(f"Moving old log file from {file_log} to {file_log_old}")
                     shutil.move(file_log, file_log_old)
                 try:
-                    real_time = run_firestarr(dir_fire)
-                    while check_running(dir_fire):
+                    # FIX: not using/no return value
+                    logging.info(f"Begin run_firestarr({dir_fire}, no_wait={no_wait})")
+                    real_time = run_firestarr(dir_fire, no_wait=no_wait)
+                    logging.info(f"End run_firestarr({dir_fire}, no_wait={no_wait})")
+                    while not no_wait and check_running(dir_fire):
                         time.sleep(10)
+                    logging.info(f"Done run_firestarr({dir_fire}, no_wait={no_wait})")
                     # parse from file instead of using clock time
                     sim_time = parse_sim_time(dir_fire)
-                    if sim_time is None:
+                    if not no_wait and sim_time is None:
                         raise RuntimeError(f"Invalid simulation time for {dir_fire}")
                 except FileNotFoundError as ex:
                     # HACK: work around python not seeing processes that are too fast
@@ -597,7 +609,7 @@ def _run_fire_from_folder(
                     #       [Errno 2] No such file or directory: '/proc/[0-9]*/cwd'
                     # parse from file instead of using clock time
                     sim_time = parse_sim_time(dir_fire)
-                    if sim_time is None:
+                    if not no_wait and sim_time is None:
                         raise ex
             except KeyboardInterrupt as ex:
                 raise ex

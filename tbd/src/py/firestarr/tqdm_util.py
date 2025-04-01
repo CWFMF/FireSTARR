@@ -286,6 +286,7 @@ def keep_trying_groups(fct, values, *args, **kwargs):
                 good = []
                 bad = []
                 for r in ret:
+                    logging.info(f"Result {r}")
                     success, input, output = r
                     if success:
                         good.append(input)
@@ -305,4 +306,5 @@ def keep_trying_groups(fct, values, *args, **kwargs):
             num_prev = num_cur
         except BrokenPipeError:
             pass
+    logging.info(f"keep_trying_groups(...) gave:\n\nsuccessful:{successful}\n\nunsuccessful:\n{unsuccessful}")
     return successful, unsuccessful

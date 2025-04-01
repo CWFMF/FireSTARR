@@ -151,6 +151,7 @@ class Run(object):
         prepare_only=False,
         crs=CRS_COMPARISON,
         verbose=False,
+        no_wait=False,
     ) -> None:
         self._verbose = verbose
         self._max_days = MAX_NUM_DAYS if not max_days else max_days
@@ -158,6 +159,7 @@ class Run(object):
         self._do_merge = do_merge
         self._prepare_only = prepare_only
         self._dir_fires = dir_fires
+        self._no_wait = no_wait
         FMT_RUNID = "%Y%m%d%H%M"
         self._modelrun = None
         # use a common lock to ensure two files aren't open in different places
@@ -460,7 +462,7 @@ class Run(object):
 
         # HACK: thread is throwing errors so just actually wait for now
         result = self.run_until_successful(no_retry=no_retry)
-        return is_current()
+        return is_current(), result
         # p = None
         # try:
         #     if is_current():
@@ -630,12 +632,13 @@ class Run(object):
 
     @log_order(show_args=["dir_fire"])
     def do_run_fire(self, dir_fire, prepare_only=False, run_only=False, no_wait=False):
+        logging.info(f"do_run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
         result = tbd.run_fire_from_folder(
             dir_fire,
             self._dir_output,
             prepare_only=prepare_only,
             run_only=run_only,
-            no_wait=no_wait,
+            no_wait=self._no_wait or no_wait,
             verbose=self._verbose,
         )
         return result
@@ -830,8 +833,20 @@ class Run(object):
             attempts_by_area[k] = max_by_area
         update_max_attempts(max_attempts)
 
+        no_wait = self._no_wait or self._is_batch
+        logging.info(f"def run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
+        # if no_wait:
+        #     logging.info("Not waiting or checking publishing")
+        #     check_publish = do_nothing
+
         def run_fire(dir_fire):
-            return self.do_run_fire(dir_fire, run_only=True, no_wait=self._is_batch)
+            try:
+                return self.do_run_fire(dir_fire, run_only=True, no_wait=no_wait)
+            except Exception as ex:
+                logging.error(ex)
+                if no_wait:
+                    return True
+                raise ex
 
         def sort_dirs(for_area):
             # sort directories by number of times they failed in ascending order
@@ -868,6 +883,7 @@ class Run(object):
                 callback_group=check_publish,
             )
         # return all_results, list(all_dates), total_time
+        logging.info("Calculating time")
         t1 = timeit.default_timer()
         total_time = t1 - t0
         logging.info("Took %ds to run fires", total_time)
