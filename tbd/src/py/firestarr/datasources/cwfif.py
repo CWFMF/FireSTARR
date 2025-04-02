@@ -35,7 +35,7 @@ def make_cwfif_query(model, lat, lon, **kwargs):
         raise RuntimeError("No model specified")
     lat, lon = fix_coords(lat, lon)
     # HACK: needs member specified
-    if model == "geps":
+    if model == "geps" and "member" not in kwargs.keys():
         kwargs["member"] = "all"
     # lat=59&lon=-125&duration=999&model=all&format=csv&precision=2&latest=True
     url = URL_CWFIF_WX + "&".join(
@@ -52,55 +52,6 @@ def make_cwfif_query(model, lat, lon, **kwargs):
         + [f"{k}={v}" for k, v in kwargs.items()]
     )
     return url
-
-
-def make_cwfif_parse(need_column, fct_parse=None, expected_value=None):
-    def do_parse(_):
-        # df = read_csv_safe(_, encoding="utf-8")
-        df = read_csv_safe(_)
-        # df.columns = [x.lower for x in df.columns]
-        valid = need_column in df.columns
-        if valid:
-            if expected_value:
-                valid = list(np.unique(df[need_column])) == [expected_value]
-        if not valid:
-            with open(_) as f:
-                for line in f.readlines():
-                    if "api limit" in line.lower():
-                        logging.fatal(line)
-                        raise RuntimeError(line)
-            str_suffix = f" with value {expected_value}" if expected_value else ""
-            raise RuntimeError(f"Expected column {need_column}{str_suffix}")
-        return (fct_parse or do_nothing)(df)
-
-    return do_parse
-
-
-def get_model_dir_uncached(model):
-    model = model.lower()
-    # request middle of bounds since point shouldn't change model time
-    lat = BOUNDS["latitude"]["mid"]
-    lon = BOUNDS["longitude"]["mid"]
-    url = make_cwfif_query(model, lat, lon, recent="True")
-    save_as = os.path.join(ensure_dir(os.path.join(DIR_CWFIF, model)), f"cwfif_{model}_current.json")
-
-    def do_parse(_):
-        with open(_) as f:
-            txt = f.readlines()
-            # HACK: ignore case
-            txt = "".join(txt).lower()
-            j = json.loads(txt)
-            t = j[model]
-            model_time = datetime.datetime.strptime(t, "%Y-%m-%d %H:%MZ")
-            return ensure_dir(os.path.join(DIR_CWFIF, model, model_time.strftime("%Y%m%d_%HZ")))
-
-    return try_save_http(
-        url,
-        save_as,
-        keep_existing=False,
-        fct_pre_save=None,
-        fct_post_save=do_parse,
-    )
 
 
 # HACK: allow setting so it doesn't use current all the time
@@ -134,6 +85,64 @@ def fmt_rounded(x):
 
 def make_filename(model, lat, lon, ext):
     return f"cwfif_{model}_{fmt_rounded(lat)}_{fmt_rounded(lon)}.{ext}"
+
+
+def make_cwfif_parse(need_column, fct_parse=None, expected_value=None):
+    def do_parse(_):
+        # df = read_csv_safe(_, encoding="utf-8")
+        df = read_csv_safe(_)
+        # df.columns = [x.lower for x in df.columns]
+        valid = need_column in df.columns
+        if valid:
+            if expected_value:
+                valid = list(np.unique(df[need_column])) == [expected_value]
+        if not valid:
+            with open(_) as f:
+                for line in f.readlines():
+                    if "api limit" in line.lower():
+                        logging.fatal(line)
+                        raise RuntimeError(line)
+            str_suffix = f" with value {expected_value}" if expected_value else ""
+            raise RuntimeError(f"Expected column {need_column}{str_suffix}")
+        return (fct_parse or do_nothing)(df)
+
+    return do_parse
+
+
+def get_model_dir_uncached(model):
+    model = model.lower()
+    # request middle of bounds since point shouldn't change model time
+    lat = BOUNDS["latitude"]["mid"]
+    lon = BOUNDS["longitude"]["mid"]
+    # FIX: server isn't updating this, so use another method for now
+    # url = make_cwfif_query(model, lat, lon, recent="True")
+    # https://app-cwfmf-api-cwfis-dev.wittyplant-59b495b3.canadacentral.azurecontainerapps.io/gribwx?model=geps&lat=52.2&lon=-116.0&timezone=UTC&duration=1&format=csv&precision=1&latest=True&member=1
+    url = make_cwfif_query(
+        model,
+        lat,
+        lon,
+        timezone="UTC",
+        duration="1",
+        format="csv",
+        precision=1,
+        latest="True",
+        member=1,
+    )
+    save_as = os.path.join(ensure_dir(os.path.join(DIR_CWFIF, model)), f"cwfif_{model}_current.csv")
+
+    def do_parse(_):
+        df_run = pd.read_csv(_)
+        logging.info(f"Model info is\n{df_run}")
+        model_time = pd.to_datetime(df_run["datetime"]).max()
+        return ensure_dir(os.path.join(DIR_CWFIF, model, model_time.strftime("%Y%m%d_%HZ")))
+
+    return try_save_http(
+        url,
+        save_as,
+        keep_existing=False,
+        fct_pre_save=None,
+        fct_post_save=do_parse,
+    )
 
 
 @cache
