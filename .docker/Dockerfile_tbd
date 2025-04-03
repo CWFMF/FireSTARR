@@ -1,3 +1,4 @@
+# FIX: casing for layers is all over the place
 FROM debian:bookworm-slim AS minimal-with-user
 ARG USERNAME
 ARG USER_ID
@@ -41,25 +42,27 @@ RUN cmake -S . -B /appl/tbd/build -D CMAKE_BUILD_TYPE=Release \
   && cmake --build /appl/tbd/build --config Release --target all -j $(nproc)
 
 
-FROM minimal-with-libs AS firestarr-base
+FROM minimal-with-libs AS firestarr-base-env
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
 USER root
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# make a layer that's the environment for firestarr with scratch to clear out old layers
+FROM scratch AS firestarr-base
+COPY --from=firestarr-base-env / /
+
+# derive final image from base so updates to binary are small layers
+FROM firestarr-base AS firestarr
+ARG USERNAME
+USER ${USERNAME}
 WORKDIR /appl/tbd
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/fuel.lut /appl/tbd/
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/settings.ini /appl/tbd/
 COPY --chown=${USERNAME}:${USERNAME} --from=tbd_build /appl/tbd/tbd /appl/tbd/
 USER ${USERNAME}
 RUN echo cd /appl/tbd >> /home/${USERNAME}/.bashrc
-
-
-# make image with only final layer
-FROM scratch AS firestarr
-ARG USERNAME
-COPY --from=firestarr-base / /
-USER ${USERNAME}
 
 
 # saves more work to reuse python than it does to reuse gcc
@@ -142,12 +145,16 @@ SHELL ["/bin/bash"]
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 
-FROM tbd_base AS tbd_prod_base
+FROM tbd_base AS tbd_prod-base-env
 ARG USERNAME
 USER root
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 USER ${USERNAME}
 
+FROM scratch AS tbd_prod_base
+COPY --from=tbd_prod-base-env / /
+
+# derive final image from base so updates to binary are small layers
 FROM tbd_prod_base AS tbd_prod
 ARG USERNAME
 ARG VERSION
