@@ -36,7 +36,7 @@ if [ -f "${old}/sim.sh" ] && [ -f "${new}/sim.sh" ]; then
         # check that sim conditions, input tif and weather are the same
         # only care about simulation call line being the same so we can tweak script otherwise and still see as the same
         # not sure how to chain these without continue
-        (diff <(grep tbd ${old}/sim.sh) <(grep tbd ${new}/sim.sh) > /dev/null) \
+        (diff <(grep firestarr ${old}/sim.sh) <(grep firestarr ${new}/sim.sh) > /dev/null) \
             && ((diff -rqs ${old} ${new} | grep -v ".lock" | grep identical | grep ${d}/${d}.tif) > /dev/null) \
             && ((diff -rqs ${old} ${new} | grep -v ".lock" | grep identical | grep ${d}/firestarr_${d}_wx.csv) > /dev/null)
         # if last return succeeded then no differences

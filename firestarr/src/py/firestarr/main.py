@@ -4,13 +4,14 @@ import os
 import sys
 import time
 
+import numpy as np
 from common import (
     CONFIG,
     DEFAULT_FILE_LOG_LEVEL,
     DIR_LOG,
     DIR_OUTPUT,
-    FILE_TBD_BINARY,
-    FILE_TBD_SETTINGS,
+    FILE_APP_BINARY,
+    FILE_APP_SETTINGS,
     SECONDS_PER_MINUTE,
     WX_MODEL,
     check_arg,
@@ -18,7 +19,6 @@ from common import (
 )
 from datasources.cwfif import get_model_dir_uncached, set_model_dir
 from log import add_log_file
-import numpy as np
 from redundancy import get_stack
 from run import Run, make_resume
 
@@ -195,10 +195,10 @@ def requeue():
 FROM_QUEUE = False
 
 if __name__ == "__main__":
-    if not os.path.exists(FILE_TBD_BINARY):
-        raise RuntimeError(f"Unable to locate simulation model binary file {FILE_TBD_BINARY}")
-    if not os.path.exists(FILE_TBD_SETTINGS):
-        raise RuntimeError(f"Unable to locate simulation model settings file {FILE_TBD_SETTINGS}")
+    if not os.path.exists(FILE_APP_BINARY):
+        raise RuntimeError(f"Unable to locate simulation model binary file {FILE_APP_BINARY}")
+    if not os.path.exists(FILE_APP_SETTINGS):
+        raise RuntimeError(f"Unable to locate simulation model settings file {FILE_APP_SETTINGS}")
     logging.info("Called with args %s", str(sys.argv))
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
     if FROM_QUEUE:

@@ -1,11 +1,11 @@
 # # don't try publishing in scheduled lock_run.sh because check_and_publish.sh will do it
-# */5 * * * * root sudo -u user bash -c 'export IS_CRONJOB=1; /appl/tbd/scripts/force_run.sh --no-merge --no-publish | tee -a /appl/data/logs/lock_run.log'
+# */5 * * * * root sudo -u user bash -c 'export IS_CRONJOB=1; /appl/firestarr/scripts/force_run.sh --no-merge --no-publish | tee -a /appl/data/logs/lock_run.log'
 # # really don't like this but prevent deadlocks for now by killing things so they always run again
 # */31 * * * * root bash -c 'killall lock_run.sh python force_run.sh & rm /appl/data/update.lock | tee -a /appl/data/logs/killall.log'
 # * * * * * root sudo -u user bash -c 'date | tee -a /appl/data/test_cron'
-# */13 * * * * root sudo -u user bash -c 'export IS_CRONJOB=1; /appl/tbd/scripts/lock_publish.sh | tee -a /appl/data/logs/check_and_publish.log'
-# * */20 * * * root sudo -u user bash -c '/appl/tbd/scripts/archive_sims.sh | tee -a /appl/logs/archive.log'
+# */13 * * * * root sudo -u user bash -c 'export IS_CRONJOB=1; /appl/firestarr/scripts/lock_publish.sh | tee -a /appl/data/logs/check_and_publish.log'
+# * */20 * * * root sudo -u user bash -c '/appl/firestarr/scripts/archive_sims.sh | tee -a /appl/logs/archive.log'
 # # make sure we turn cronjobs back on overnight in case we forgot while working on things
 # * 0 * * * root sudo -u user bash -c 'sed -i "s/CRONJOB_RUN=.*/CRONJOB_RUN=1/g" /appl/data/config'
 # # try merging every half hour but let things run like before in the morning first
-# */30 0-5,12-23 * * * root sudo -u user bash -c 'export IS_CRONJOB=1; /appl/tbd/scripts/lock_merge.sh | tee -a /appl/data/logs/merge_inputs.log'
+# */30 0-5,12-23 * * * root sudo -u user bash -c 'export IS_CRONJOB=1; /appl/firestarr/scripts/lock_merge.sh | tee -a /appl/data/logs/merge_inputs.log'

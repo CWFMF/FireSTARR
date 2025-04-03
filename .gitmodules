@@ -1,4 +1,4 @@
-[submodule "tbd/cffdrs-ng"]
-	path = tbd/src/py/cffdrs-ng
+[submodule "cffdrs-ng"]
+	path = firestarr/src/py/cffdrs-ng
 	url = git@github.com:jordan-evens/cffdrs-ng.git
 	branch = main

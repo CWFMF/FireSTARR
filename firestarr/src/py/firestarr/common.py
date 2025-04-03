@@ -128,10 +128,12 @@ DIR_SRC_PY = os.path.dirname(DIR_SRC_PY_FIRSTARR)
 DIR_SRC_PY_CFFDRSNG = os.path.join(DIR_SRC_PY, "cffdrs-ng")
 sys.path.append(DIR_SRC_PY_CFFDRSNG)
 
-DIR_TBD = "/appl/tbd"
-FILE_TBD_BINARY = os.path.join(DIR_TBD, "tbd")
-FILE_TBD_SETTINGS = os.path.join(DIR_TBD, "settings.ini")
-DIR_SCRIPTS = os.path.join(DIR_TBD, "scripts")
+APP_NAME = "firestarr"
+DIR_APP = f"/appl/{APP_NAME}"
+FILE_APP_BINARY = os.path.join(DIR_APP, APP_NAME)
+FILE_APP_SETTINGS = os.path.join(DIR_APP, "settings.ini")
+DIR_SCRIPTS = os.path.join(DIR_APP, "scripts")
+# FIX: this is hardcoded in cpp?
 FILE_SIM_LOG = "firestarr.log"
 
 DIR_DATA = ensure_dir(os.path.abspath("/appl/data"))
@@ -938,7 +940,7 @@ def read_csv_safe(*args, **kwargs):
     return call_safe(pd.read_csv, *args, **kwargs)
 
 
-def count_procs(name="tbd"):
+def count_procs(name=APP_NAME):
     processes = []
     for p in psutil.process_iter():
         try:

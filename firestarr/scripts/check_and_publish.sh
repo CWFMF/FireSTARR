@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR=/appl/tbd
+DIR=/appl/firestarr
 pushd ${DIR}
 CURDATE=`date -u --rfc-3339=seconds`
 echo "${CURDATE}: Running check and publish"

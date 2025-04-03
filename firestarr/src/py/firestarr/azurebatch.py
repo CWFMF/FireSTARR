@@ -497,7 +497,7 @@ def get_container_settings(container, workdir=None, client=None):
     if client is None:
         client = get_batch_client()
     if workdir is None:
-        workdir = "/appl/tbd"
+        workdir = "/appl/firestarr"
     return batchmodels.TaskContainerSettings(
         image_name=_CONTAINER_BIN,
         container_run_options=" ".join(
@@ -702,7 +702,7 @@ def make_schedule(pool_id=POOL_ID, client=None):
                 kill_job_on_completion=True,
                 user_identity=get_user_identity(),
                 allow_low_priority_node=False,
-                command_line="/appl/tbd/scripts/lock_run.sh",
+                command_line="/appl/firestarr/scripts/lock_run.sh",
                 container_settings=get_container_settings(_CONTAINER_PY, client=client),
             ),
             constraints=batchmodels.JobConstraints(max_task_retry_count=0),
@@ -824,6 +824,6 @@ if __name__ == "__main__":
     # print(get_login())
     # pool_id = create_container_pool(force=True)
     # run_oneoff_task("echo test >> /appl/data/testoneoff")
-    # run_oneoff_task("/appl/tbd/scripts/force_run.sh")
+    # run_oneoff_task("/appl/firestarr/scripts/force_run.sh")
     # job_schedule_id = make_schedule(POOL_ID)
     # jobs, tasks, pools, nodes = get_active()

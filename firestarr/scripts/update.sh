@@ -30,7 +30,7 @@ else
     fi
 
     source /appl/.venv/bin/activate || echo No venv
-    cd /appl/tbd
+    cd /appl/firestarr
     # echo ${CURDATE} >> ${FILE_LOG}
     # copy after trying instead of going right to ${FILE_LATEST} in case curl fails and makes an empty file
     ( \
@@ -53,7 +53,7 @@ else
         || \
         ( \
             (echo ${CURDATE}: Running update  | tee -a ${FILE_LOG}) \
-            && (python /appl/tbd/src/py/firestarr/main.py $*) \
+            && (python /appl/firestarr/src/py/firestarr/main.py $*) \
             && (cp ${FILE_LATEST} ${FILE_CURRENT}) \
             && (echo $(date -u --rfc-3339=seconds): Done update  | tee -a ${FILE_LOG}) \
         ) \

@@ -4,20 +4,20 @@ set -e
 DIR=`dirname $(realpath "$0")`
 pushd ${DIR}
 
-pushd /appl/tbd
+pushd /appl/firestarr
 DIR_BUILD="${DIR}/build"
 VARIANT=Debug
 echo Set VARIANT=${VARIANT}
 # rm -rf ${DIR_BUILD} \
 #   &&
-  /usr/bin/cmake --no-warn-unused-cli -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=${VARIANT} -S/appl/tbd -B${DIR_BUILD} -G "Unix Makefiles" \
+  /usr/bin/cmake --no-warn-unused-cli -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=${VARIANT} -S/appl/firestarr -B${DIR_BUILD} -G "Unix Makefiles" \
   && /usr/bin/cmake --build ${DIR_BUILD} --config ${VARIANT} --target all -j 50 --
 popd
 
 DIR_OUT="./output"
 rm -rf ${DIR_OUT}
 
-./tbd "${DIR_OUT}" \
+./firestarr "${DIR_OUT}" \
     2023-08-03 \
     60.387 \
     -116.272 \

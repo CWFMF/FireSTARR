@@ -21,12 +21,14 @@ from azurebatch import (
     schedule_job_tasks,
 )
 from common import (
+    APP_NAME,
     CONFIG,
+    DIR_APP,
     DIR_DATA,
     DIR_OUTPUT,
     DIR_SIMS,
-    DIR_TBD,
     DIR_TMP,
+    FILE_APP_BINARY,
     FILE_SIM_LOG,
     FLAG_IGNORE_PERIM_OUTPUTS,
     FMT_FILE_SECOND,
@@ -66,14 +68,14 @@ TMP_SUFFIX = "__tmp__"
 # tasks that have this in their logs are considered successful
 SUCCESS_TEXT = "Total simulation time was"
 
-_RUN_FIRESTARR = None
+_RUN_SIM = None
 _FIND_RUNNING = None
 JOB_ID = None
 IS_USING_BATCH = None
 TIFF_SLEEP = 10
 
 
-def run_firestarr_local(dir_fire, no_wait=None):
+def run_sim_local(dir_fire, no_wait=None):
     stdout, stderr = None, None
     try:
         proc = call_safe(start_process, ["./sim.sh"], dir_fire)
@@ -104,7 +106,7 @@ def find_running_local(dir_fire):
     # NOTE: using as_dict() causes errors if process is finished
     for p in psutil.process_iter():
         try:
-            if p.name() == "tbd" and psutil.pid_exists(p.pid):
+            if p.name() == APP_NAME and psutil.pid_exists(p.pid):
                 cwd = p.cwd()
                 if cwd is not None and dir_fire in cwd:
                     processes.append(cwd)
@@ -121,7 +123,7 @@ def mark_as_done(dir_fire):
     # FIX: should we kill the process if running locally?
 
 
-def run_firestarr_batch(dir_fire, no_wait=False):
+def run_sim_batch(dir_fire, no_wait=False):
     sim_time = parse_sim_time(dir_fire)
     mark_as_done = sim_time is not None
     # HACK: use no_wait since that's what other functions use
@@ -175,8 +177,8 @@ def assign_job(dir_fire, client=None):
     return JOB_ID
 
 
-def assign_firestarr_batch(dir_fire, force_local=None, force_batch=None):
-    global _RUN_FIRESTARR
+def assign_sim_batch(dir_fire, force_local=None, force_batch=None):
+    global _RUN_SIM
     global _FIND_RUNNING
     global JOB_ID
     global IS_USING_BATCH
@@ -195,7 +197,7 @@ def assign_firestarr_batch(dir_fire, force_local=None, force_batch=None):
             if not is_running_on_azure():
                 logging.warning("Not running on azure but using batch")
             logging.info("Running using batch tasks")
-            _RUN_FIRESTARR = run_firestarr_batch
+            _RUN_SIM = run_sim_batch
             JOB_ID = None
             _FIND_RUNNING = find_running_batch
             IS_USING_BATCH = True
@@ -203,38 +205,38 @@ def assign_firestarr_batch(dir_fire, force_local=None, force_batch=None):
         if force_batch:
             raise RuntimeError("Forcing batch mode but no config set")
         logging.info("Running using local tasks")
-        _RUN_FIRESTARR = run_firestarr_local
+        _RUN_SIM = run_sim_local
         _FIND_RUNNING = find_running_local
         return False
 
 
-def check_firestarr_batch(dir_fire, no_wait=None):
+def check_sim_batch(dir_fire, no_wait=None):
     with locks_for(os.path.join(DIR_DATA, "check_batch_client")):
-        if _RUN_FIRESTARR is None:
-            assign_firestarr_batch(dir_fire)
-    return _RUN_FIRESTARR(dir_fire, no_wait=no_wait)
+        if _RUN_SIM is None:
+            assign_sim_batch(dir_fire)
+    return _RUN_SIM(dir_fire, no_wait=no_wait)
 
 
-def check_firestarr_running(dir_fire):
+def check_sim_running(dir_fire):
     with locks_for(os.path.join(DIR_DATA, "check_batch_client")):
         if _FIND_RUNNING is None:
-            assign_firestarr_batch(dir_fire)
+            assign_sim_batch(dir_fire)
     return _FIND_RUNNING(dir_fire)
 
 
-def run_firestarr(dir_fire, no_wait=None):
+def run_sim(dir_fire, no_wait=None):
     # FIX: this should definitely not be returning clock time if it's supposed to be simulation time
     # run generated command for parsing data
     t0 = timeit.default_timer()
     # expect everything to be in sim.sh
-    (_RUN_FIRESTARR or check_firestarr_batch)(dir_fire, no_wait=no_wait)
+    (_RUN_SIM or check_sim_batch)(dir_fire, no_wait=no_wait)
     t1 = timeit.default_timer()
     sim_time = t1 - t0
     return sim_time
 
 
 def find_running(dir_fire):
-    return (_FIND_RUNNING or check_firestarr_running)(dir_fire)
+    return (_FIND_RUNNING or check_sim_running)(dir_fire)
 
 
 def check_running(dir_fire):
@@ -255,7 +257,7 @@ def finish_job(job_id):
 
 def get_simulation_file(dir_fire):
     fire_name = os.path.basename(dir_fire)
-    return in_run_folder(os.path.join(dir_fire, f"firestarr_{fire_name}.geojson"))
+    return in_run_folder(os.path.join(dir_fire, f"{APP_NAME}_{fire_name}.geojson"))
 
 
 def find_outputs(dir_fire):
@@ -399,7 +401,7 @@ def parse_sim_time(dir_fire):
         if os.path.isfile(file_log):
             # if log says it ran then don't run it
             # HACK: just use tail instead of looping or seeking ourselves
-            stdout, stderr = run_process(["tail", "-1", file_log], "/appl/tbd")
+            stdout, stderr = run_process(["tail", "-1", file_log], DIR_APP)
             if stdout:
                 line = stdout.strip().split("\n")[-1]
                 g = re.match(".*Total simulation time was (.*) seconds", line)
@@ -508,7 +510,7 @@ def _run_fire_from_folder(
                 tz = int(tz)
                 log_info("Timezone offset is {}".format(tz))
                 start_date = start_time.date()
-                cmd = os.path.join(DIR_TBD, "tbd")
+                cmd = FILE_APP_BINARY
                 # want format like a list with no spaces
                 fmt_offsets = "[" + ",".join([str(x) for x in date_offsets]) + "]"
 
@@ -593,12 +595,12 @@ def _run_fire_from_folder(
                     shutil.move(file_log, file_log_old)
                 try:
                     # FIX: not using/no return value
-                    logging.info(f"Begin run_firestarr({dir_fire}, no_wait={no_wait})")
-                    real_time = run_firestarr(dir_fire, no_wait=no_wait)
-                    logging.info(f"End run_firestarr({dir_fire}, no_wait={no_wait})")
+                    logging.info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
+                    real_time = run_sim(dir_fire, no_wait=no_wait)
+                    logging.info(f"End run_sim({dir_fire}, no_wait={no_wait})")
                     while not no_wait and check_running(dir_fire):
                         time.sleep(10)
-                    logging.info(f"Done run_firestarr({dir_fire}, no_wait={no_wait})")
+                    logging.info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
                     # parse from file instead of using clock time
                     sim_time = parse_sim_time(dir_fire)
                     if not no_wait and sim_time is None:

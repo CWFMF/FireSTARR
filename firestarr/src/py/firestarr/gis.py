@@ -433,7 +433,7 @@ def project_raster(
                 # HACK: keep getting:
                 #     Exception ignored in: <built-in function delete_Dataset>
                 #     Traceback (most recent call last):
-                #     File "/appl/tbd/src/py/firestarr/gis.py", line 426, in do_save
+                #     File "/appl/firestarr/src/py/firestarr/gis.py", line 426, in do_save
                 #         warp = None
                 #         ^^^^
                 # if not should_ignore(ex):
@@ -511,7 +511,7 @@ def gdf_to_file(df, dir, base=None):
             # df.to_file(f_tmp, driver="GPKG")
             layer = os.path.splitext(os.path.basename(f))[0]
             # df.to_file(f_tmp, driver="GPKG", layer=layer)
-            df.to_file(f_tmp, driver="GPKG", layer=layer, encoding='utf-8')
+            df.to_file(f_tmp, driver="GPKG", layer=layer, encoding="utf-8")
             # df.to_file(f_tmp, driver="GPKG", engine="fiona")
             shutil.move(f_tmp, f)
             return f

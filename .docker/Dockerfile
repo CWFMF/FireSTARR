@@ -1,4 +1,3 @@
-# FIX: casing for layers is all over the place
 FROM debian:bookworm-slim AS minimal-with-user
 ARG USERNAME
 ARG USER_ID
@@ -13,7 +12,7 @@ RUN apt-get update --fix-missing \
   && chsh --shell /bin/bash ${USERNAME} \
   && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
   && chmod 0440 /etc/sudoers.d/${USERNAME} \
-  && mkdir -p /appl/tbd \
+  && mkdir -p /appl/firestarr \
   && chown -R ${USERNAME}:${USERNAME} /appl
 
 
@@ -34,12 +33,12 @@ FROM gcc-cmake-with-libs AS firestarr-build
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
-WORKDIR /appl/tbd
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/cpp src/cpp/
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/CMakeLists.txt .
+WORKDIR /appl/firestarr
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/cpp src/cpp/
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/CMakeLists.txt .
 USER ${USERNAME}
-RUN cmake -S . -B /appl/tbd/build -D CMAKE_BUILD_TYPE=Release \
-  && cmake --build /appl/tbd/build --config Release --target all -j $(nproc)
+RUN cmake -S . -B /appl/firestarr/build -D CMAKE_BUILD_TYPE=Release \
+  && cmake --build /appl/firestarr/build --config Release --target all -j $(nproc)
 
 
 FROM minimal-with-libs AS firestarr-base-env
@@ -57,12 +56,12 @@ COPY --from=firestarr-base-env / /
 FROM firestarr-base AS firestarr
 ARG USERNAME
 USER ${USERNAME}
-WORKDIR /appl/tbd
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/fuel.lut /appl/tbd/
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/settings.ini /appl/tbd/
-COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/tbd/tbd /appl/tbd/
+WORKDIR /appl/firestarr
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/fuel.lut /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/settings.ini /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/firestarr/firestarr /appl/firestarr/
 USER ${USERNAME}
-RUN echo cd /appl/tbd >> /home/${USERNAME}/.bashrc
+RUN echo cd /appl/firestarr >> /home/${USERNAME}/.bashrc
 
 
 # saves more work to reuse python than it does to reuse gcc
@@ -78,12 +77,12 @@ RUN apt-get update --fix-missing \
   && update-alternatives --install /usr/bin/python python /usr/bin/python3 10 \
   && python -c "from osgeo import gdal"
 USER ${USERNAME}
-WORKDIR /appl/tbd/
+WORKDIR /appl/firestarr/
 # if we make venv with with user then permissions should be correct
 # HACK: make sure python folder doesn't break if version changes
 # ensure that gdal can be imported at end
 RUN python -m venv --system-site-packages /appl/.venv \
-  && echo /appl/tbd/src/py/firestarr > /appl/.venv/lib/`ls -1 /appl/.venv/lib/ | grep python`/site-packages/firestarr.pth \
+  && echo /appl/firestarr/src/py/firestarr > /appl/.venv/lib/`ls -1 /appl/.venv/lib/ | grep python`/site-packages/firestarr.pth \
   && . /appl/.venv/bin/activate \
   && python -c "from osgeo import gdal" \
   && echo source /appl/.venv/bin/activate >> /home/${USERNAME}/.bashrc
@@ -91,16 +90,16 @@ RUN python -m venv --system-site-packages /appl/.venv \
 
 FROM py-gdal AS firestarr-app-base
 ARG USERNAME
-WORKDIR /appl/tbd/
+WORKDIR /appl/firestarr/
 # if we make venv with with user then permissions should be correct
-COPY --chown=${USERNAME}:${USERNAME} .docker/requirements_tbd.txt /appl/requirements_tbd.txt
+COPY --chown=${USERNAME}:${USERNAME} .docker/requirements.txt /appl/requirements.txt
 USER ${USERNAME}
-RUN echo cd /appl/tbd >> /home/${USERNAME}/.bashrc
+RUN echo cd /appl/firestarr >> /home/${USERNAME}/.bashrc
 # HACK: make sure osgeo/gdal is available before & after installing requirements
 RUN python -c "from osgeo import gdal" \
   && . /appl/.venv/bin/activate \
   && python -c "from osgeo import gdal" \
-  && python -m pip install -r /appl/requirements_tbd.txt \
+  && python -m pip install -r /appl/requirements.txt \
   && python -c "from osgeo import gdal"
 
 
@@ -120,7 +119,7 @@ ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
-WORKDIR /appl/tbd/
+WORKDIR /appl/firestarr/
 
 
 FROM firestarr-dev AS firestarr-dev-svc
@@ -160,18 +159,18 @@ ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
-WORKDIR /appl/tbd
+WORKDIR /appl/firestarr
 COPY --chown=${USERNAME}:${USERNAME} ./config /appl/
-COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/tbd/tbd .
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/bounds.geojson /appl/tbd/
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/fuel.lut /appl/tbd/
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/settings.ini /appl/tbd/
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/scripts /appl/tbd/scripts/
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/firestarr /appl/tbd/src/py/firestarr/
-WORKDIR /appl/tbd/src/py/cffdrs-ng
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/NG_FWI.py .
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/old_cffdrs.py .
-COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/util.py .
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/firestarr/firestarr .
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/bounds.geojson /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/fuel.lut /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/settings.ini /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/scripts /appl/firestarr/scripts/
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/py/firestarr /appl/firestarr/src/py/firestarr/
+WORKDIR /appl/firestarr/src/py/cffdrs-ng
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/py/cffdrs-ng/NG_FWI.py .
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/py/cffdrs-ng/old_cffdrs.py .
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/py/cffdrs-ng/util.py .
 USER ${USERNAME}
 
 # doesn't delete intermediaries, but maybe smaller between versions?
@@ -181,8 +180,8 @@ ARG VERSION
 ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
 USER ${USERNAME}
-WORKDIR /appl/tbd
-ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
+WORKDIR /appl/firestarr
+ENTRYPOINT [ "/appl/firestarr/scripts/publish_after.sh" ]
 
 FROM firestarr-app AS firestarr-app-svc
 ARG USERNAME
@@ -192,6 +191,6 @@ ENV TMPDIR=/tmp
 # run as root so we can redirect to where docker logs will show progress
 COPY .docker/crontab /etc/crontab
 RUN sed -i 's/CRONJOB_RUN=.*/CRONJOB_RUN=1/g' /appl/config
-WORKDIR /appl/tbd
+WORKDIR /appl/firestarr
 USER ${USERNAME}
 ENTRYPOINT ["sudo", "cron", "-f"]

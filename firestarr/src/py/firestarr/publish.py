@@ -24,12 +24,11 @@ from common import (
     zip_folder,
 )
 from gdal_merge_max import gdal_merge_max
-from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 from osgeo import gdal
 from redundancy import call_safe, get_stack
-from tqdm_util import keep_trying, pmap, tqdm
+from tqdm_util import keep_trying, tqdm
 
-from tbd import TMP_SUFFIX
+from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 
 
 def publish_all(

@@ -6,4 +6,4 @@ export IS_CRONJOB=${IS_CRONJOB}
 # try without lock_publish for now
 # ${DIR}/with_lock_publish.sh \
     ${DIR}/with_lock_update.sh \
-    /appl/tbd/scripts/merge_inputs.sh $*
+    /appl/firestarr/scripts/merge_inputs.sh $*

@@ -7,4 +7,4 @@
 # 4     get start time column
 # 5     convert start time to seconds
 # 6     subtract seconds from current time
-ps aux | grep /appl/tbd/tbd | grep -v grep | awk '{print $9}' | xargs -I {} date --date="{}" '+%s' | xargs -I time expr $(date '+%s') - time
+ps aux | grep /appl/firestarr/firestarr | grep -v grep | awk '{print $9}' | xargs -I {} date --date="{}" '+%s' | xargs -I time expr $(date '+%s') - time

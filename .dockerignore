@@ -4,12 +4,12 @@
 !.docker/requirements*.txt
 !.docker/crontab
 !gis
-!tbd/src
-!tbd/CMakeLists.txt
-!tbd/fuel.lut
-!tbd/bounds.geojson
-!tbd/scripts/*.sh
-!tbd/settings.ini
+!firestarr/src
+!firestarr/CMakeLists.txt
+!firestarr/fuel.lut
+!firestarr/bounds.geojson
+!firestarr/scripts/*.sh
+!firestarr/settings.ini
 !./config
 
 **/__pycache__

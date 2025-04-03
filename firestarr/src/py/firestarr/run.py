@@ -8,17 +8,19 @@ import timeit
 
 import numpy as np
 import pandas as pd
+import sim_wrapper
 from common import (
+    APP_NAME,
     BOUNDS,
     DEFAULT_FILE_LOG_LEVEL,
     DIR_OUTPUT,
     DIR_RUNS,
     DIR_SIMS,
+    FILE_APP_BINARY,
+    FILE_APP_SETTINGS,
     FILE_LOCK_MODEL,
     FILE_LOCK_PREPUBLISH,
     FILE_LOCK_PUBLISH,
-    FILE_TBD_BINARY,
-    FILE_TBD_SETTINGS,
     FLAG_IGNORE_PERIM_OUTPUTS,
     FLAG_SAVE_PREPARED,
     MAX_NUM_DAYS,
@@ -38,26 +40,25 @@ from common import (
     read_json_safe,
     try_remove,
 )
+from datasources.cwfif import get_model_dir, get_model_dir_uncached
 from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
 from datasources.default import SourceFireActive
-from datasources.cwfif import get_model_dir, get_model_dir_uncached
 from fires import get_fires_folder, group_fires
-from gis import (
-    CRS_COMPARISON,
-    CRS_SIMINPUT,
-    CRS_WGS84,
-    VECTOR_FILE_EXTENSION,
-    area_ha,
-    find_invalid_tiffs,
-    gdf_from_file,
-    gdf_to_file,
-    make_gdf_from_series,
-    vector_path,
-)
 from log import LOGGER_NAME, add_log_file
 from publish import merge_dirs, publish_all
 from redundancy import call_safe, get_stack
+from sim_wrapper import (
+    IS_USING_BATCH,
+    assign_sim_batch,
+    check_running,
+    copy_fire_outputs,
+    finish_job,
+    get_job_id,
+    get_simulation_file,
+    get_simulation_task,
+    schedule_tasks,
+)
 from simulation import Simulation
 from tqdm_util import (
     apply,
@@ -69,17 +70,17 @@ from tqdm_util import (
     update_max_attempts,
 )
 
-import tbd
-from tbd import (
-    IS_USING_BATCH,
-    assign_firestarr_batch,
-    check_running,
-    copy_fire_outputs,
-    finish_job,
-    get_job_id,
-    get_simulation_file,
-    get_simulation_task,
-    schedule_tasks,
+from gis import (
+    CRS_COMPARISON,
+    CRS_SIMINPUT,
+    CRS_WGS84,
+    VECTOR_FILE_EXTENSION,
+    area_ha,
+    find_invalid_tiffs,
+    gdf_from_file,
+    gdf_to_file,
+    make_gdf_from_series,
+    vector_path,
 )
 
 LOGGER_FIRE_ORDER = logging.getLogger(f"{LOGGER_NAME}_order.log")
@@ -242,7 +243,7 @@ class Run(object):
             self._origin = Origin(self._start_time)
             self._simulation = Simulation(self._dir_out, self._dir_sims, self._origin)
             self._src_fires = SourceFireGroup(self._dir_out, self._dir_fires, self._origin)
-            self._is_batch = assign_firestarr_batch(self._dir_sims)
+            self._is_batch = assign_sim_batch(self._dir_sims)
 
     def load_rundata(self):
         self._modelrun = None
@@ -529,9 +530,9 @@ class Run(object):
                 logging.info("Deleting existing fires")
                 force_remove(_)
             # keep a copy of the settings for reference
-            shutil.copy(FILE_TBD_SETTINGS, os.path.join(self._dir_model, "settings.ini"))
+            shutil.copy(FILE_APP_SETTINGS, os.path.join(self._dir_model, "settings.ini"))
             # also keep binary instead of trying to track source
-            shutil.copy(FILE_TBD_BINARY, os.path.join(self._dir_model, "tbd"))
+            shutil.copy(FILE_APP_BINARY, os.path.join(self._dir_model, APP_NAME))
             df_fires = self._src_fires.get_fires().to_crs(self._crs)
             gdf_to_file(df_fires, self._dir_out, "df_fires_groups")
             df_fires["area"] = area_ha(df_fires)
@@ -633,7 +634,7 @@ class Run(object):
     @log_order(show_args=["dir_fire"])
     def do_run_fire(self, dir_fire, prepare_only=False, run_only=False, no_wait=False):
         logging.info(f"do_run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
-        result = tbd.run_fire_from_folder(
+        result = sim_wrapper.run_fire_from_folder(
             dir_fire,
             self._dir_output,
             prepare_only=prepare_only,

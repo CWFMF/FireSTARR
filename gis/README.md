@@ -24,9 +24,9 @@ To minimize amount of downloaded data, run `python canvec.py extract Hydro` to j
 
 ## Step 5: Run grids/make_grids.py
 
-This should generate the rasters that are required for TBD to work
+This should generate the rasters that are required for FireSTARR to work
 
 ## Step 6: Place the grids in ../100m/default
 
-This will make the grids the default grids used for the TBD simulations. Otherwise, place
+This will make the grids the default grids used for the FireSTARR simulations. Otherwise, place
 them in ../100m/{YEAR} to have them be used for simulations occurring during a certain year.
