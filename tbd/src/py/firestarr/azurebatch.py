@@ -270,7 +270,24 @@ def make_or_get_job(pool_id=POOL_ID, job_id=None, client=None, *args, **kwargs):
             *args,
             **kwargs,
         )
-        client.job.add(job)
+        # HACK: fails if job is being deleted, but we must want it to exist so wait and readd
+        tries = 0
+        # HACK: only retry once
+        while 1 >= tries:
+            try:
+                tries = tries + 1
+                client.job.add(job)
+                break
+            except batchmodels.BatchErrorException as ex:
+                if "JobBeingDeleted" == ex.code:
+                    logging.warning(ex)
+                    logging.info("Waiting for job to be deleted")
+                    while job_exists(job_id):
+                        print(".", end="", flush=True)
+                        time.sleep(1)
+                else:
+                    raise ex
+
         return client.job.get(job_id), False
 
 
