@@ -23,14 +23,14 @@ RUN apt-get update --fix-missing \
   libgeotiff5
 
 
-FROM minimal-with-libs AS gcc-cmake-with_libs
+FROM minimal-with-libs AS gcc-cmake-with-libs
 RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
   libtiff-dev libgeotiff-dev \
   cmake gcc g++ make
 
 
-FROM gcc-cmake-with_libs AS tbd_build
+FROM gcc-cmake-with-libs AS firestarr-build
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
@@ -60,13 +60,13 @@ USER ${USERNAME}
 WORKDIR /appl/tbd
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/fuel.lut /appl/tbd/
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/settings.ini /appl/tbd/
-COPY --chown=${USERNAME}:${USERNAME} --from=tbd_build /appl/tbd/tbd /appl/tbd/
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/tbd/tbd /appl/tbd/
 USER ${USERNAME}
 RUN echo cd /appl/tbd >> /home/${USERNAME}/.bashrc
 
 
 # saves more work to reuse python than it does to reuse gcc
-FROM minimal-with-libs AS py_gdal
+FROM minimal-with-libs AS py-gdal
 ARG USERNAME
 USER root
 # ensure that gdal can be imported at end
@@ -89,7 +89,7 @@ RUN python -m venv --system-site-packages /appl/.venv \
   && echo source /appl/.venv/bin/activate >> /home/${USERNAME}/.bashrc
 
 
-FROM py_gdal AS tbd_base
+FROM py-gdal AS firestarr-app-base
 ARG USERNAME
 WORKDIR /appl/tbd/
 # if we make venv with with user then permissions should be correct
@@ -104,7 +104,7 @@ RUN python -c "from osgeo import gdal" \
   && python -c "from osgeo import gdal"
 
 
-FROM tbd_base AS tbd_gcc
+FROM firestarr-app-base AS firestarr-app-gcc
 ARG USERNAME
 USER root
 RUN apt-get update --fix-missing \
@@ -115,7 +115,7 @@ RUN apt-get update --fix-missing \
 USER ${USERNAME}
 
 
-FROM tbd_gcc AS tbd_dev
+FROM firestarr-app-gcc AS firestarr-dev
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
@@ -123,7 +123,7 @@ ENV TMPDIR=/tmp
 WORKDIR /appl/tbd/
 
 
-FROM tbd_dev AS tbd_dev_svc
+FROM firestarr-dev AS firestarr-dev-svc
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
@@ -135,7 +135,7 @@ SHELL ["/bin/bash"]
 ENTRYPOINT ["sudo", "cron", "-f"]
 
 
-FROM tbd_dev AS gis
+FROM firestarr-dev AS firestarr-setup-gis
 ARG USERNAME
 USER ${USERNAME}
 ENV TMPDIR=/tmp
@@ -145,24 +145,24 @@ SHELL ["/bin/bash"]
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 
-FROM tbd_base AS tbd_prod-base-env
+FROM firestarr-app-base AS firestarr-prod-base-env
 ARG USERNAME
 USER root
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 USER ${USERNAME}
 
-FROM scratch AS tbd_prod_base
-COPY --from=tbd_prod-base-env / /
+FROM scratch AS firestarr-prod-base
+COPY --from=firestarr-prod-base-env / /
 
 # derive final image from base so updates to binary are small layers
-FROM tbd_prod_base AS tbd_prod
+FROM firestarr-prod-base AS firestarr-prod
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
 WORKDIR /appl/tbd
 COPY --chown=${USERNAME}:${USERNAME} ./config /appl/
-COPY --chown=${USERNAME}:${USERNAME} --from=tbd_build /appl/tbd/tbd .
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/tbd/tbd .
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/bounds.geojson /appl/tbd/
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/fuel.lut /appl/tbd/
 COPY --chown=${USERNAME}:${USERNAME} ./tbd/settings.ini /appl/tbd/
@@ -175,7 +175,7 @@ COPY --chown=${USERNAME}:${USERNAME} ./tbd/src/py/cffdrs-ng/util.py .
 USER ${USERNAME}
 
 # doesn't delete intermediaries, but maybe smaller between versions?
-FROM tbd_prod AS tbd_prod_stable
+FROM firestarr-prod AS firestarr-app
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
@@ -184,17 +184,7 @@ USER ${USERNAME}
 WORKDIR /appl/tbd
 ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
 
-# FROM scratch AS tbd_prod_stable
-# ARG USERNAME
-# ARG VERSION
-# ENV VERSION=${VERSION}
-# ENV TMPDIR=/tmp
-# COPY --from=tbd_prod / /
-# USER ${USERNAME}
-# WORKDIR /appl/tbd
-# ENTRYPOINT [ "/appl/tbd/scripts/publish_after.sh" ]
-
-FROM tbd_prod_stable AS tbd_prod_svc
+FROM firestarr-app AS firestarr-app-svc
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}

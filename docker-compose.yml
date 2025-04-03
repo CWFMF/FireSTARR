@@ -1,15 +1,15 @@
 services:
-  gis:
-    image: tbd_gis
+  firestarr-setup-gis:
+    image: firestarr-setup-gis
     build:
       context: .
-      target: gis
+      target: firestarr-setup-gis
       dockerfile: .docker/Dockerfile_tbd
       args:
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - tbd_gis:${VERSION}
+        - firestarr-setup-gis:${VERSION}
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
       - type: bind
@@ -23,18 +23,18 @@ services:
     env_file:
       - .env
 
-  tbd_dev:
-    image: tbd_dev
+  firestarr-dev:
+    image: firestarr-dev
     build:
       context: .
-      target: tbd_dev
+      target: firestarr-dev
       dockerfile: .docker/Dockerfile_tbd
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - tbd_dev:${VERSION}
+        - firestarr-dev:${VERSION}
     security_opt:
       - seccomp:unconfined
     volumes:
@@ -53,18 +53,18 @@ services:
     env_file:
       - .env
 
-  tbd_dev_svc:
-    image: tbd_dev_svc
+  firestarr-dev-svc:
+    image: firestarr-dev-svc
     build:
       context: .
-      target: tbd_dev_svc
+      target: firestarr-dev-svc
       dockerfile: .docker/Dockerfile_tbd
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - tbd_dev_svc:${VERSION}
+        - firestarr-dev-svc:${VERSION}
     security_opt:
       - seccomp:unconfined
     volumes:
@@ -83,18 +83,18 @@ services:
     env_file:
       - .env
 
-  tbd_prod_stable:
-    image: tbd_prod_stable
+  firestarr-app:
+    image: firestarr-app
     build:
       context: .
-      target: tbd_prod_stable
+      target: firestarr-app
       dockerfile: .docker/Dockerfile_tbd
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - tbd_prod_stable:${VERSION}
+        - firestarr-app:${VERSION}
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
       - data:/appl/data
@@ -102,18 +102,18 @@ services:
     env_file:
       - .env
 
-  tbd_prod_svc:
-    image: tbd_prod_svc
+  firestarr-app-svc:
+    image: firestarr-app-svc
     build:
       context: .
-      target: tbd_prod_svc
+      target: firestarr-app-svc
       dockerfile: .docker/Dockerfile_tbd
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - tbd_prod_svc:${VERSION}
+        - firestarr-app-svc:${VERSION}
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
       - data:/appl/data
