@@ -28,13 +28,11 @@ LOG_MAIN = add_log_file(
     level=DEFAULT_FILE_LOG_LEVEL,
 )
 logging.info(f"Starting FireSTARR version {os.environ.get('VERSION', 'UNKNOWN')}")
-WAIT_WX = SECONDS_PER_MINUTE * 5
 
 sys.path.append(os.path.dirname(sys.executable))
 sys.path.append("/usr/local/bin")
 
 no_wait = None
-did_wait = False
 run_current = None
 run_attempts = 0
 no_retry = False
@@ -47,7 +45,6 @@ should_resume = None
 
 def run_main(args):
     global no_wait
-    global did_wait
     global run_current
     global run_attempts
     global no_retry
@@ -73,42 +70,35 @@ def run_main(args):
     do_publish = False if no_publish else None
     do_merge = False if no_merge else None
     do_wait = not no_wait
-    did_wait = False
-    if do_wait:
 
-        def wait_and_check_resume():
-            global did_wait
-            global ran_outdated
-            while True:
-                dir_model = get_model_dir_uncached(WX_MODEL)
-                modelrun = os.path.basename(dir_model)
-                # HACK: just trying to check if run used this weather
-                prev = make_resume(do_publish=False, do_merge=False)
-                if prev is None:
-                    return False
-                wx_updated = prev._modelrun != modelrun
-                if not wx_updated and not prev._published_clean:
-                    logging.info("Found previous run and trying to resume")
-                    ran_outdated = True
-                    # previous run is for same time, but didn't work
-                    return True
-                if wx_updated:
-                    # HACK: need to set this so cache isn't used
-                    set_model_dir(dir_model)
-                    logging.info(f"Have new weather for {dir_model}")
-                    break
-                logging.info(f"Previous run already used {modelrun} - " f"waiting {WAIT_WX}s for updated weather")
-                did_wait = True
-                time.sleep(WAIT_WX)
-            # have new weather so don't resume
+    def check_resume():
+        global ran_outdated
+        dir_model = get_model_dir_uncached(WX_MODEL)
+        modelrun = os.path.basename(dir_model)
+        # HACK: just trying to check if run used this weather
+        prev = make_resume(do_publish=False, do_merge=False)
+        if prev is None:
             return False
+        wx_updated = prev._modelrun != modelrun
+        logging.info(f"Current weather is {modelrun} vs old run {prev._modelrun}")
+        if not wx_updated and not prev._published_clean:
+            logging.info("Found previous run and trying to resume")
+            ran_outdated = True
+            # previous run is for same time, but didn't work
+            return True
+        if wx_updated:
+            # HACK: need to set this so cache isn't used
+            set_model_dir(dir_model)
+            logging.info(f"Have new weather for {dir_model}")
+        # have new weather so don't resume
+        return False
 
-        should_resume = wait_and_check_resume()
-        logging.info(f"Based on weather and previous run, should_resume == {should_resume}")
+    should_resume = check_resume()
+    logging.info(f"Based on weather and previous run, should_resume == {should_resume}")
     # assume resuming if not waiting
     if no_resume and should_resume:
         logging.warning("Should resume but was told not to, so making new run")
-    do_resume = (not no_resume) and (do_resume or (not do_wait) or should_resume)
+    do_resume = (not no_resume) and (do_resume or should_resume)
     if do_resume:
         if 1 < len(args):
             logging.fatal(f"Too many arguments:\n\t {sys.argv}")
