@@ -4,7 +4,7 @@ services:
     build:
       context: .
       target: firestarr-setup-gis
-      dockerfile: .docker/Dockerfile_tbd
+      dockerfile: .docker/Dockerfile
       args:
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
@@ -28,7 +28,7 @@ services:
     build:
       context: .
       target: firestarr-dev
-      dockerfile: .docker/Dockerfile_tbd
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -58,7 +58,7 @@ services:
     build:
       context: .
       target: firestarr-dev-svc
-      dockerfile: .docker/Dockerfile_tbd
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -88,7 +88,7 @@ services:
     build:
       context: .
       target: firestarr-app
-      dockerfile: .docker/Dockerfile_tbd
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -107,7 +107,7 @@ services:
     build:
       context: .
       target: firestarr-app-svc
-      dockerfile: .docker/Dockerfile_tbd
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -127,7 +127,7 @@ services:
     build:
       context: .
       target: firestarr
-      dockerfile: .docker/Dockerfile_tbd
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
