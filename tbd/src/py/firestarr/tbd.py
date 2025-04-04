@@ -626,23 +626,15 @@ def _run_fire_from_folder(
         else:
             # log_info("Simulation already ran but don't have processed outputs")
             log_info("Simulation already ran")
-            return df_fire
-        # try:
-        #     # save time if parsed or None if sim failed
-        #     df_fire["sim_time"] = sim_time
-        #     if "dates_out" in df_fire.columns:
-        #         del df_fire["dates_out"]
-        #     save_geojson(df_fire, file_sim)
-        # except KeyboardInterrupt as ex:
-        #     raise ex
-        # except Exception:
-        #     pass
-        # save time if parsed or None if sim failed
         if not sim_time:
             logging.error(f"Simulation time {sim_time} is invalid for {dir_fire}")
-        df_fire["sim_time"] = sim_time
-        # if "dates_out" in df_fire.columns:
-        #     del df_fire["dates_out"]
+        # HACK: just do this again here for now
+        sim_time_parsed = parse_sim_time(dir_fire)
+        sim_time = data.get("sim_time", None)
+        if not sim_time or sim_time != sim_time_parsed:
+            sim_time = sim_time_parsed
+            df_fire["sim_time"] = sim_time
+
         save_geojson(df_fire, file_sim)
         changed, is_interim, files_project = copy_fire_outputs(dir_fire, dir_output, changed)
         df_fire["changed"] = changed
