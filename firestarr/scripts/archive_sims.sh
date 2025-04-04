@@ -1,6 +1,8 @@
 #!/bin/bash
 KEEP_UNARCHIVED=10
 
+ARCHIVE_CURRENT=$1
+
 # NOTE: this merges sims and runs directories for this run into root of archive
 DIR_FROM_SIMS="/appl/data/sims"
 DIR_FROM_RUNS="/appl/data/runs"
@@ -86,10 +88,13 @@ do
   do_archive "${run}" 1
 done
 
-# do for everything after doing things that can be deleted
-for run in `ls -1 | grep -v "${SUBDIR_COMMON}"`
-do
-  do_archive "${run}"
-done
-
+if [ -z "${ARCHIVE_CURRENT}"]; then
+  echo "Not archiving things that aren't going to be deleted"
+else
+  # do for everything after doing things that can be deleted
+  for run in `ls -1 | grep -v "${SUBDIR_COMMON}"`
+  do
+    do_archive "${run}"
+  done
+fi
 popd
