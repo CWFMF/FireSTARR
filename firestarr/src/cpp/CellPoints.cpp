@@ -1,6 +1,6 @@
 /* Copyright (c) Jordan Evens, 2005, 2021 */
 /* Copyright (c) Queen's Printer for Ontario, 2020. */
-/* Copyright (c) His Majesty the King in Right of Canada as represented by the Minister of Natural Resources, 2021-2024. */
+/* Copyright (c) His Majesty the King in Right of Canada as represented by the Minister of Natural Resources, 2021-2025. */
 
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 

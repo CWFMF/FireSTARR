@@ -1,5 +1,5 @@
 /* Copyright (c) 2020,  Queen's Printer for Ontario */
-/* Copyright (c) His Majesty the King in Right of Canada as represented by the Minister of Natural Resources, 2024. */
+/* Copyright (c) His Majesty the King in Right of Canada as represented by the Minister of Natural Resources, 2024-2025. */
 
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
@@ -244,8 +244,8 @@ HorizontalAdjustment horizontal_adjustment(
   bool added = true;
 #define STEP_X 0.2
 #define STEP_MAX util::to_radians(max_angle_)
-  //MathSize step_x = STEP_X;
-  //MathSize step_x = STEP_X / length_to_breadth;
+  // MathSize step_x = STEP_X;
+  // MathSize step_x = STEP_X / length_to_breadth;
   MathSize step_x = STEP_X / pow(length_to_breadth, 0.5);
   MathSize theta = 0;
   MathSize angle = 0;
@@ -310,7 +310,7 @@ HorizontalAdjustment horizontal_adjustment(
     // last_angle = angle;
   }
   // just because 5 seems good for the front and 10 for the back
-  //step_max = 2.0 * STEP_MAX;
+  // step_max = 2.0 * STEP_MAX;
   cur_x -= (step_x / 2.0);
   // trying to pick less rear points
   // step_x *= length_to_breadth;

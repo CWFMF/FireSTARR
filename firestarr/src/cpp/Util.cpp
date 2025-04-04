@@ -1,5 +1,5 @@
 /* Copyright (c) Queen's Printer for Ontario, 2020. */
-/* Copyright (c) His Majesty the King in Right of Canada as represented by the Minister of Natural Resources, 2021-2024. */
+/* Copyright (c) His Majesty the King in Right of Canada as represented by the Minister of Natural Resources, 2021-2025. */
 
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
@@ -122,16 +122,12 @@ vector<string> find_rasters(const string& dir, const int year)
 }
 bool directory_exists(const char* dir) noexcept
 {
-  struct stat dir_info
-  {
-  };
+  struct stat dir_info{};
   return stat(dir, &dir_info) == 0 && dir_info.st_mode & S_IFDIR;
 }
 bool file_exists(const char* path) noexcept
 {
-  struct stat path_info
-  {
-  };
+  struct stat path_info{};
   // FIX: check that this works on symlinks
   return stat(path, &path_info) == 0 && path_info.st_mode & S_IFREG;
 }
@@ -143,9 +139,7 @@ void make_directory(const char* dir) noexcept
   if (-1 == mkdir(dir, 0777) && errno != EEXIST)
 #endif
   {
-    struct stat dir_info
-    {
-    };
+    struct stat dir_info{};
     if (stat(dir, &dir_info) != 0)
     {
       logging::fatal("Cannot create directory %s", dir);
