@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "Startup.h"
-namespace tbd::wx
+namespace fs::wx
 {
 Startup::Startup(string station,
                  const tm& generated,

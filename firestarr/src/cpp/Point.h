@@ -4,7 +4,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
-namespace tbd::topo
+namespace fs::topo
 {
 /**
  * \brief A geographic location in lat/long coordinates.

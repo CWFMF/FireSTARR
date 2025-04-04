@@ -9,9 +9,9 @@
 #include "InnerPos.h"
 #include "IntensityMap.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
-using tbd::wx::Direction;
+using fs::wx::Direction;
 // using sim::CellPoints;
 using topo::Cell;
 using topo::SpreadKey;

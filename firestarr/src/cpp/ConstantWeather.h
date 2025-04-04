@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "FireWeather.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 static vector<const wx::FwiWeather*>* make_constant_weather(const wx::Dc& dc,
                                                             const wx::Dmc& dmc,

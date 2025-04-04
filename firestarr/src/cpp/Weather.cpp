@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "Weather.h"
 #include "Log.h"
-namespace tbd::wx
+namespace fs::wx
 {
 const Temperature Temperature::Zero = Temperature(0);
 const RelativeHumidity RelativeHumidity::Zero = RelativeHumidity(0);

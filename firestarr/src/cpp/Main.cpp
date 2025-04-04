@@ -20,25 +20,25 @@
 #include "SpreadAlgorithm.h"
 #include "Util.h"
 #include "FireWeather.h"
-using tbd::logging::Log;
-using tbd::sim::Settings;
-using tbd::AspectSize;
-using tbd::SlopeSize;
-using tbd::INVALID_TIME;
-using tbd::INVALID_SLOPE;
-using tbd::INVALID_ASPECT;
-using tbd::wx::Ffmc;
-using tbd::wx::Dmc;
-using tbd::wx::Dc;
-using tbd::wx::Precipitation;
-using tbd::wx::Temperature;
-using tbd::wx::RelativeHumidity;
-using tbd::wx::Direction;
-using tbd::wx::Wind;
-using tbd::wx::Speed;
-using tbd::ThresholdSize;
-using tbd::wx::FwiWeather;
-using tbd::topo::StartPoint;
+using fs::logging::Log;
+using fs::sim::Settings;
+using fs::AspectSize;
+using fs::SlopeSize;
+using fs::INVALID_TIME;
+using fs::INVALID_SLOPE;
+using fs::INVALID_ASPECT;
+using fs::wx::Ffmc;
+using fs::wx::Dmc;
+using fs::wx::Dc;
+using fs::wx::Precipitation;
+using fs::wx::Temperature;
+using fs::wx::RelativeHumidity;
+using fs::wx::Direction;
+using fs::wx::Wind;
+using fs::wx::Speed;
+using fs::ThresholdSize;
+using fs::wx::FwiWeather;
+using fs::topo::StartPoint;
 static const char* BIN_NAME = nullptr;
 static map<std::string, std::function<void()>> PARSE_FCT{};
 static vector<std::pair<std::string, std::string>> PARSE_HELP{};
@@ -71,7 +71,7 @@ void show_args()
 void log_args()
 {
   auto args = get_args();
-  tbd::logging::note("Arguments are:\n%s\n", args.c_str());
+  fs::logging::note("Arguments are:\n%s\n", args.c_str());
 }
 void show_usage_and_exit(int exit_code)
 {
@@ -102,10 +102,10 @@ void show_help_and_exit()
 const char* get_arg() noexcept
 {
   // check if we don't have any more arguments
-  tbd::logging::check_fatal(CUR_ARG + 1 >= ARGC, "Missing argument to --%s", ARGV[CUR_ARG]);
+  fs::logging::check_fatal(CUR_ARG + 1 >= ARGC, "Missing argument to --%s", ARGV[CUR_ARG]);
   // NOTE: doing this breaks negative numbers, so don't check for '-' at start
   // // check if we have another flag right after
-  // tbd::logging::check_fatal('-' == ARGV[CUR_ARG + 1][0],
+  // fs::logging::check_fatal('-' == ARGV[CUR_ARG + 1][0],
   //                           "Missing argument to %s",
   //                           ARGV[CUR_ARG]);
   return ARGV[++CUR_ARG];
@@ -204,11 +204,11 @@ int main(const int argc, const char* const argv[])
   // {
   //   for (size_t slope = 0; slope < 500; ++slope)
   //   {
-  //     auto adj = tbd::horizontal_adjustment(aspect, slope);
+  //     auto adj = fs::horizontal_adjustment(aspect, slope);
   //     for (size_t theta = 0; theta < 360; ++theta)
   //     {
   //       // aspect is in degrees and theta is radians
-  //       const MathSize f = adj(tbd::util::to_radians(theta));
+  //       const MathSize f = adj(fs::util::to_radians(theta));
   //       // printf(
   //       //   "Adjustment for slope %ld with aspect %ld at angle %ld is %f\n",
   //       //   slope,
@@ -232,7 +232,7 @@ int main(const int argc, const char* const argv[])
 #else
   printf("FireSTARR %s <%s>\n\n", VERSION, COMPILE_DATE);
 #endif
-  tbd::debug::show_debug_settings();
+  fs::debug::show_debug_settings();
   ARGC = argc;
   ARGV = argv;
   auto bin = string(ARGV[CUR_ARG++]);
@@ -244,14 +244,14 @@ int main(const int argc, const char* const argv[])
   BIN_NAME = bin.c_str();
   Settings::setRoot(bin_dir.c_str());
   // _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-  Log::setLogLevel(tbd::logging::LOG_NOTE);
+  Log::setLogLevel(fs::logging::LOG_NOTE);
   register_argument("-h", "Show help", false, &show_help_and_exit);
-  // auto start_time = tbd::Clock::now();
-  // auto time = tbd::Clock::now();
+  // auto start_time = fs::Clock::now();
+  // auto time = fs::Clock::now();
   // constexpr size_t n_test = 100000000;
   // for (size_t i = 0; i < n_test; ++i)
   // {
-  //     time = tbd::Clock::now();
+  //     time = fs::Clock::now();
   // }
   // const auto run_time = time - start_time;
   // const auto run_time_seconds = std::chrono::duration_cast<std::chrono::seconds>(run_time);
@@ -289,7 +289,7 @@ int main(const int argc, const char* const argv[])
   MODE mode = SIMULATION;
   if (ARGC > 1 && 0 == strcmp(ARGV[1], "test"))
   {
-    tbd::logging::note("Running in test mode");
+    fs::logging::note("Running in test mode");
     mode = TEST;
     CUR_ARG += 1;
     SKIPPED_ARGS = 1;
@@ -326,7 +326,7 @@ int main(const int argc, const char* const argv[])
     register_setter<string>(log_file_name, "--log", "Output log file", false, &parse_string);
     if (ARGC > 1 && 0 == strcmp(ARGV[1], "surface"))
     {
-      tbd::logging::note("Running in probability surface mode");
+      fs::logging::note("Running in probability surface mode");
       mode = SURFACE;
       // skip 'surface' argument if present
       CUR_ARG += 1;
@@ -382,7 +382,7 @@ int main(const int argc, const char* const argv[])
         // check for single letter flags or '--'
         if (PARSE_FCT.find(arg) != PARSE_FCT.end())
         {
-          tbd::logging::debug("Found option for argument '%s'", arg.c_str());
+          fs::logging::debug("Found option for argument '%s'", arg.c_str());
           try
           {
             PARSE_FCT[arg]();
@@ -411,7 +411,7 @@ int main(const int argc, const char* const argv[])
       {
         // this is a positional argument so add to that list
         positional_args.emplace_back(arg);
-        tbd::logging::debug("Found positional argument '%s'", arg.c_str());
+        fs::logging::debug("Found positional argument '%s'", arg.c_str());
       }
       ++CUR_ARG;
     }
@@ -419,7 +419,7 @@ int main(const int argc, const char* const argv[])
     {
       if (kv.second && PARSE_HAVE.end() == PARSE_HAVE.find(kv.first))
       {
-        tbd::logging::fatal("%s must be specified", kv.first.c_str());
+        fs::logging::fatal("%s must be specified", kv.first.c_str());
       }
     }
     if (0 == positional_args.size())
@@ -436,7 +436,7 @@ int main(const int argc, const char* const argv[])
     auto get_positional = [&cur_arg, &positional_args, &has_positional]() {
       if (!has_positional())
       {
-        tbd::logging::error("Not enough positional arguments");
+        fs::logging::error("Not enough positional arguments");
         show_usage_and_exit();
       }
       // return from front and advance to next
@@ -446,12 +446,12 @@ int main(const int argc, const char* const argv[])
       // should be exactly at size since increments after getting argument
       if (positional_args.size() != cur_arg)
       {
-        tbd::logging::error("Too many positional arguments");
+        fs::logging::error("Too many positional arguments");
         show_usage_and_exit();
       }
     };
     // positional arguments all start with <output_dir> after mode (if applicable)
-    // "./tbd [surface] <output_dir> <yyyy-mm-dd> <lat> <lon> <HH:MM> [options] [-v | -q]"
+    // "<binary> [surface] <output_dir> <yyyy-mm-dd> <lat> <lon> <HH:MM> [options] [-v | -q]"
     string output_directory(get_positional());
     replace(output_directory.begin(), output_directory.end(), '\\', '/');
     if ('/' != output_directory[output_directory.length() - 1])
@@ -462,20 +462,20 @@ int main(const int argc, const char* const argv[])
     struct stat info{};
     if (stat(dir_out, &info) != 0 || !(info.st_mode & S_IFDIR))
     {
-      tbd::util::make_directory_recursive(dir_out);
+      fs::util::make_directory_recursive(dir_out);
     }
     // if name starts with "/" then it's an absolute path, otherwise append to working directory
     const string log_file = log_file_name.starts_with("/") ? log_file_name : (output_directory + log_file_name);
-    tbd::logging::check_fatal(!Log::openLogFile(log_file.c_str()),
-                              "Can't open log file %s",
-                              log_file.c_str());
-    tbd::logging::note("Output directory is %s", dir_out);
-    tbd::logging::note("Output log is %s", log_file.c_str());
+    fs::logging::check_fatal(!Log::openLogFile(log_file.c_str()),
+                             "Can't open log file %s",
+                             log_file.c_str());
+    fs::logging::note("Output directory is %s", dir_out);
+    fs::logging::note("Output log is %s", log_file.c_str());
     if (mode != TEST)
     {
       // handle surface/simulation positional arguments
       // positional arguments should be:
-      // "./tbd [surface] <output_dir> <yyyy-mm-dd> <lat> <lon> <HH:MM> [options] [-v | -q]"
+      // "<binary> [surface] <output_dir> <yyyy-mm-dd> <lat> <lon> <HH:MM> [options] [-v | -q]"
       string date(get_positional());
       tm start_date{};
       start_date.tm_year = stoi(date.substr(0, 4)) - 1900;
@@ -493,26 +493,26 @@ int main(const int argc, const char* const argv[])
         {
           // if this is a time then we aren't just running the weather
           start_date.tm_hour = stoi(arg.substr(0, 2));
-          tbd::logging::check_fatal(start_date.tm_hour < 0 || start_date.tm_hour > 23,
-                                    "Simulation start time has an invalid hour (%d)",
-                                    start_date.tm_hour);
+          fs::logging::check_fatal(start_date.tm_hour < 0 || start_date.tm_hour > 23,
+                                   "Simulation start time has an invalid hour (%d)",
+                                   start_date.tm_hour);
           start_date.tm_min = stoi(arg.substr(3, 2));
-          tbd::logging::check_fatal(start_date.tm_min < 0 || start_date.tm_min > 59,
-                                    "Simulation start time has an invalid minute (%d)",
-                                    start_date.tm_min);
-          tbd::logging::note("Simulation start time before fix_tm() is %d-%02d-%02d %02d:%02d",
-                             start_date.tm_year + 1900,
-                             start_date.tm_mon + 1,
-                             start_date.tm_mday,
-                             start_date.tm_hour,
-                             start_date.tm_min);
-          tbd::util::fix_tm(&start_date);
-          tbd::logging::note("Simulation start time after fix_tm() is %d-%02d-%02d %02d:%02d",
-                             start_date.tm_year + 1900,
-                             start_date.tm_mon + 1,
-                             start_date.tm_mday,
-                             start_date.tm_hour,
-                             start_date.tm_min);
+          fs::logging::check_fatal(start_date.tm_min < 0 || start_date.tm_min > 59,
+                                   "Simulation start time has an invalid minute (%d)",
+                                   start_date.tm_min);
+          fs::logging::note("Simulation start time before fix_tm() is %d-%02d-%02d %02d:%02d",
+                            start_date.tm_year + 1900,
+                            start_date.tm_mon + 1,
+                            start_date.tm_mday,
+                            start_date.tm_hour,
+                            start_date.tm_min);
+          fs::util::fix_tm(&start_date);
+          fs::logging::note("Simulation start time after fix_tm() is %d-%02d-%02d %02d:%02d",
+                            start_date.tm_year + 1900,
+                            start_date.tm_mon + 1,
+                            start_date.tm_mday,
+                            start_date.tm_hour,
+                            start_date.tm_min);
           // we were given a time, so number of days is until end of year
           start = start_date;
           const auto start_t = mktime(&start);
@@ -522,9 +522,9 @@ int main(const int argc, const char* const argv[])
           const auto seconds = difftime(mktime(&year_end), start_t);
           // start day counts too, so +1
           // HACK: but we don't want to go to Jan 1 so don't add 1
-          num_days = static_cast<size_t>(seconds / tbd::DAY_SECONDS);
-          tbd::logging::debug("Calculated number of days until end of year: %d",
-                              num_days);
+          num_days = static_cast<size_t>(seconds / fs::DAY_SECONDS);
+          fs::logging::debug("Calculated number of days until end of year: %d",
+                             num_days);
           // +1 because day 1 counts too
           // +2 so that results don't change when we change number of days
           num_days = min(num_days, static_cast<size_t>(Settings::maxDateOffset()) + 2);
@@ -538,7 +538,7 @@ int main(const int argc, const char* const argv[])
       // at this point we've parsed positional args and know we're not in test mode
       if (!PARSE_HAVE.contains("--apcp_prev"))
       {
-        tbd::logging::warning("Assuming 0 precipitation between noon yesterday and weather start for startup indices");
+        fs::logging::warning("Assuming 0 precipitation between noon yesterday and weather start for startup indices");
         apcp_prev = Precipitation::Zero;
       }
       // HACK: ISI for yesterday really doesn't matter so just use any wind
@@ -551,23 +551,23 @@ int main(const int argc, const char* const argv[])
                                         ffmc,
                                         dmc,
                                         dc);
-      tbd::util::fix_tm(&start_date);
-      tbd::logging::note("Simulation start time after fix_tm() again is %d-%02d-%02d %02d:%02d",
-                         start_date.tm_year + 1900,
-                         start_date.tm_mon + 1,
-                         start_date.tm_mday,
-                         start_date.tm_hour,
-                         start_date.tm_min);
+      fs::util::fix_tm(&start_date);
+      fs::logging::note("Simulation start time after fix_tm() again is %d-%02d-%02d %02d:%02d",
+                        start_date.tm_year + 1900,
+                        start_date.tm_mon + 1,
+                        start_date.tm_mday,
+                        start_date.tm_hour,
+                        start_date.tm_min);
       start = start_date;
       log_args();
-      result = tbd::sim::Model::runScenarios(output_directory,
-                                             wx_file_name.c_str(),
-                                             yesterday,
-                                             Settings::rasterRoot(),
-                                             start_point,
-                                             start,
-                                             perim,
-                                             size);
+      result = fs::sim::Model::runScenarios(output_directory,
+                                            wx_file_name.c_str(),
+                                            yesterday,
+                                            Settings::rasterRoot(),
+                                            start_point,
+                                            start,
+                                            perim,
+                                            size);
       Log::closeLogFile();
     }
     else
@@ -578,7 +578,7 @@ int main(const int argc, const char* const argv[])
         const auto arg = get_positional();
         if (0 != strcmp(arg.c_str(), "all"))
         {
-          tbd::logging::error("Only positional argument allowed for test mode aside from output directory is 'all' but got '%s'", arg.c_str());
+          fs::logging::error("Only positional argument allowed for test mode aside from output directory is 'all' but got '%s'", arg.c_str());
           show_usage_and_exit();
         }
         test_all = true;
@@ -593,7 +593,7 @@ int main(const int argc, const char* const argv[])
         dmc,
         dc);
       show_args();
-      result = tbd::sim::test(
+      result = fs::sim::test(
         output_directory,
         hours,
         &wx,
@@ -606,7 +606,7 @@ int main(const int argc, const char* const argv[])
   }
   catch (const std::exception& ex)
   {
-    tbd::logging::fatal(ex);
+    fs::logging::fatal(ex);
     std::terminate();
   }
 #endif

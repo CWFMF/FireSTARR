@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <string>
 
-namespace tbd::debug
+namespace fs::debug
 {
 constexpr auto HR = "**********************************************************************";
 constexpr auto EDGE = 3;

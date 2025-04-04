@@ -8,12 +8,12 @@
 #include "Settings.h"
 #include "UTM.h"
 
-using tbd::Idx;
-namespace tbd::data
+using fs::Idx;
+namespace fs::data
 {
-using tbd::topo::try_fix_meridian;
-using tbd::topo::from_lat_long;
-using tbd::topo::to_lat_long;
+using fs::topo::try_fix_meridian;
+using fs::topo::from_lat_long;
+using fs::topo::to_lat_long;
 string find_value(const string& key, const string& within)
 {
   const auto c = within.find(key);

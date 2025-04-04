@@ -5,8 +5,8 @@
 
 #include "stdafx.h"
 #include "FBP45.h"
-using tbd::util::LookupTable;
-namespace tbd::fuel::fbp
+using fs::util::LookupTable;
+namespace fs::fuel::fbp
 {
 MathSize FuelD1::isfD1(const SpreadInfo& spread,
                        const MathSize ros_multiplier,

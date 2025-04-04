@@ -8,7 +8,7 @@
 #include "Location.h"
 #include "FuelType.h"
 #include "Util.h"
-namespace tbd::topo
+namespace fs::topo
 {
 using SpreadKey = uint32_t;
 using fuel::INVALID_FUEL_CODE;
@@ -332,14 +332,14 @@ namespace std
  * \brief Provides hashing of Cell objects
  */
 template <>
-struct hash<tbd::topo::Cell>
+struct hash<fs::topo::Cell>
 {
   /**
    * \brief Provides hash for Cell objects
    * \param k Cell to get hash for
    * \return Hash value
    */
-  std::size_t operator()(const tbd::topo::Cell& k) const noexcept
+  std::size_t operator()(const fs::topo::Cell& k) const noexcept
   {
     return k.fullHash();
   }

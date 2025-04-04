@@ -21,7 +21,7 @@
 #include "Cell.h"
 #include "LogPoints.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 using topo::Position;
 using topo::Cell;
@@ -333,9 +333,9 @@ void Scenario::evaluate(const Event& event)
     case Event::FIRE_SPREAD:
       ++step_;
 #ifdef DEBUG_POINTS
-      // if (tbd::logging::Log::getLogLevel() >= tbd::logging::LOG_VERBOSE)
+      // if (fs::logging::Log::getLogLevel() >= fs::logging::LOG_VERBOSE)
       {
-        const auto ymd = tbd::make_timestamp(model().year(), event.time());
+        const auto ymd = fs::make_timestamp(model().year(), event.time());
         // log_note("Handling spread event for time %f representing %s with %ld points", event.time(), ymd.c_str(), points_.size());
       }
 #endif

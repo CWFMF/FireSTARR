@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "Duff.h"
-namespace tbd::fuel
+namespace fs::fuel
 {
 // const DuffType<172, 464, 139873, -3296, 4904, 568> Duff::FeatherMossUpper{};
 // const DuffType<191, 389, 132628, -1167, 3308, -2604> Duff::FeatherMossLower{};

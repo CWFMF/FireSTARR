@@ -5,7 +5,7 @@
 
 #pragma once
 #include "LookupTable.h"
-namespace tbd::fuel
+namespace fs::fuel
 {
 /*! \page survival Probability of fire survival
  *

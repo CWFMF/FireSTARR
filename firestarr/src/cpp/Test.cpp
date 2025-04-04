@@ -11,9 +11,9 @@
 #include "Util.h"
 #include "ConstantWeather.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
-using tbd::fuel::simplify_fuel_name;
+using fs::fuel::simplify_fuel_name;
 /**
  * \brief An Environment with no elevation and the same value in every Cell.
  */
@@ -161,7 +161,7 @@ string generate_test_name(
   const auto& fuel,
   const SlopeSize slope,
   const AspectSize aspect,
-  const tbd::wx::Wind& wind)
+  const fs::wx::Wind& wind)
 {
   // wind speed & direction can be decimal values, but slope and aspect are int
   constexpr auto mask = "%s_S%03d_A%03d_WD%05.1f_WS%05.1f";
@@ -345,7 +345,7 @@ const auto DEFAULT_FUEL_NAME = simplify_fuel_name(FUEL_NAMES[0]);
 int test(
   const string& output_directory,
   const DurationSize num_hours,
-  const tbd::wx::FwiWeather* wx,
+  const fs::wx::FwiWeather* wx,
   const string& constant_fuel_name,
   const SlopeSize constant_slope,
   const AspectSize constant_aspect,
@@ -359,13 +359,13 @@ int test(
   // make sure all tests run regardless of how long it takes
   Settings::setMaximumTimeSeconds(numeric_limits<size_t>::max());
   const auto hours = INVALID_TIME == num_hours ? DEFAULT_HOURS : num_hours;
-  const auto ffmc = (tbd::wx::Ffmc::Invalid == wx->ffmc()) ? DEFAULT_FFMC : wx->ffmc();
-  const auto dmc = (tbd::wx::Dmc::Invalid == wx->dmc()) ? DEFAULT_DMC : wx->dmc();
-  const auto dc = (tbd::wx::Dc::Invalid == wx->dc()) ? DEFAULT_DC : wx->dc();
+  const auto ffmc = (fs::wx::Ffmc::Invalid == wx->ffmc()) ? DEFAULT_FFMC : wx->ffmc();
+  const auto dmc = (fs::wx::Dmc::Invalid == wx->dmc()) ? DEFAULT_DMC : wx->dmc();
+  const auto dc = (fs::wx::Dc::Invalid == wx->dc()) ? DEFAULT_DC : wx->dc();
   // HACK: need to compare value and not object
-  const auto wind_direction = (tbd::wx::Direction::Invalid.asValue() == wx->wind().direction().asValue()) ? DEFAULT_WIND_DIRECTION : wx->wind().direction();
-  const auto wind_speed = (tbd::wx::Speed::Invalid.asValue() == wx->wind().speed().asValue()) ? DEFAULT_WIND_SPEED : wx->wind().speed();
-  const auto wind = tbd::wx::Wind(wind_direction, wind_speed);
+  const auto wind_direction = (fs::wx::Direction::Invalid.asValue() == wx->wind().direction().asValue()) ? DEFAULT_WIND_DIRECTION : wx->wind().direction();
+  const auto wind_speed = (fs::wx::Speed::Invalid.asValue() == wx->wind().speed().asValue()) ? DEFAULT_WIND_SPEED : wx->wind().speed();
+  const auto wind = fs::wx::Wind(wind_direction, wind_speed);
   static const wx::Temperature TEMP(20.0);
   static const wx::RelativeHumidity RH(30.0);
   static const wx::Precipitation PREC(0.0);
@@ -416,7 +416,7 @@ int test(
         aspects.emplace_back(constant_aspect);
       }
       auto wind_directions = vector<int>();
-      if (tbd::wx::Direction::Invalid == wx->wind().direction())
+      if (fs::wx::Direction::Invalid == wx->wind().direction())
       {
         for (auto wind_direction = 0; wind_direction < 360; wind_direction += WD_INCREMENT)
         {
@@ -428,7 +428,7 @@ int test(
         wind_directions.emplace_back(static_cast<int>(wx->wind().direction().asDegrees()));
       }
       auto wind_speeds = vector<int>();
-      if (tbd::wx::Speed::Invalid == wx->wind().speed())
+      if (fs::wx::Speed::Invalid == wx->wind().speed())
       {
         for (auto wind_speed = 0; wind_speed <= MAX_WIND; wind_speed += WS_INCREMENT)
         {

@@ -8,7 +8,7 @@
 #include "FuelType.h"
 #include "FireWeather.h"
 #include "Log.h"
-namespace tbd::fuel
+namespace fs::fuel
 {
 MathSize InvalidFuel::grass_curing(const int, const wx::FwiWeather&) const
 {

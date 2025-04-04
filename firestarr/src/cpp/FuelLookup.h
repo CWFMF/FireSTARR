@@ -10,7 +10,7 @@
 #include "FuelType.h"
 #include "Cell.h"
 #include "Util.h"
-namespace tbd::fuel
+namespace fs::fuel
 {
 class FuelLookupImpl;
 

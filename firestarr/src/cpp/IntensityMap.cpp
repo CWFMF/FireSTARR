@@ -8,7 +8,7 @@
 #include "Model.h"
 #include "Perimeter.h"
 #include "Weather.h"
-namespace tbd::sim
+namespace fs::sim
 {
 
 // FIX: maybe this can be more generic but just want to keep allocated objects and reuse them
@@ -189,12 +189,12 @@ bool IntensityMap::isSurrounded(const Location& location) const
 }
 void IntensityMap::ignite(const Location& location)
 {
-  burn(location, 1, 0, tbd::wx::Direction::Invalid);
+  burn(location, 1, 0, fs::wx::Direction::Invalid);
 }
 void IntensityMap::burn(const Location& location,
                         IntensitySize intensity,
                         MathSize ros,
-                        tbd::wx::Direction raz)
+                        fs::wx::Direction raz)
 {
   lock_guard<mutex> lock(mutex_);
   // const auto is_new = !(*is_burned_)[location.hash()];
@@ -253,7 +253,7 @@ void IntensityMap::save(const string& dir, const string& base_name) const
   const auto name_intensity = base_name + "_intensity";
   const auto name_ros = base_name + "_ros";
   const auto name_raz = base_name + "_raz";
-  // static std::function<DegreesSize(tbd::wx::Direction)> fct_raz = [](tbd::wx::Direction raz) {
+  // static std::function<DegreesSize(fs::wx::Direction)> fct_raz = [](fs::wx::Direction raz) {
   //   return static_cast<DegreesSize>(raz.asDegrees());
   // };
   // FIX: already done in IntensityObserver?

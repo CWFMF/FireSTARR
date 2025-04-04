@@ -4,7 +4,7 @@
 
 #include "LogPoints.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 // FIX: clean this up but for now just hide the details from outside
 class LogPoints

@@ -15,7 +15,7 @@
 #include "FireSpread.h"
 #include "CellPoints.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 class LogPoints;
 class IObserver;

@@ -11,7 +11,7 @@
 #ifdef DEBUG_FUEL_VARIABLE
 #include "Log.h"
 #endif
-namespace tbd::fuel
+namespace fs::fuel
 {
 /**
  * \brief Calculate if green-up has occurred

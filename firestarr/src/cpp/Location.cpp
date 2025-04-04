@@ -4,7 +4,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #include "Location.h"
-namespace tbd::topo
+namespace fs::topo
 {
 CellIndex relativeIndex(const Location& src, const Location& dst) noexcept
 {

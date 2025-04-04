@@ -8,10 +8,10 @@
 #include "Cell.h"
 #include "FireSpread.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 using topo::Cell;
-using tbd::wx::Direction;
+using fs::wx::Direction;
 /**
  * \brief A specific Event scheduled in a specific Scenario.
  */

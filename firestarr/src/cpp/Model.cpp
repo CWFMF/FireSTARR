@@ -13,7 +13,7 @@
 #include "ProbabilityMap.h"
 #include "FireWeatherDaily.h"
 #include "ConstantWeather.h"
-namespace tbd::sim
+namespace fs::sim
 {
 #ifdef DEBUG_WEATHER
 constexpr auto FMT_OUT = "%ld,%d-%02d-%02d %02d:%02d:%02d,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f,%1.6f%s";
@@ -1121,12 +1121,12 @@ int Model::runScenarios(const string dir_out,
                         const string& perimeter,
                         const size_t size)
 {
-  tbd::logging::note("Simulation start time at start of runScenarios() is %d-%02d-%02d %02d:%02d",
-                     start_time.tm_year + 1900,
-                     start_time.tm_mon + 1,
-                     start_time.tm_mday,
-                     start_time.tm_hour,
-                     start_time.tm_min);
+  fs::logging::note("Simulation start time at start of runScenarios() is %d-%02d-%02d %02d:%02d",
+                    start_time.tm_year + 1900,
+                    start_time.tm_mon + 1,
+                    start_time.tm_mday,
+                    start_time.tm_hour,
+                    start_time.tm_min);
   auto env = topo::Environment::loadEnvironment(dir_out,
                                                 raster_root,
                                                 start_point,
@@ -1312,7 +1312,7 @@ void Model::outputWeather(
         SlopeSize SLOPE_INCREMENT = 200;
         AspectSize ASPECT_MAX = 360;
         AspectSize ASPECT_INCREMENT = 450;
-        const auto lookup = tbd::sim::Settings::fuelLookup();
+        const auto lookup = fs::sim::Settings::fuelLookup();
         const auto fuel = lookup.byName("C-2");
         for (SlopeSize slope = 0; slope < SLOPE_MAX; slope += SLOPE_INCREMENT)
         {
@@ -1325,19 +1325,19 @@ void Model::outputWeather(
               const auto fuel_name = fuel->name();
 
               // calculate and output fbp
-              // const auto spread = tbd::sim::SpreadInfo(year_,
-              const tbd::sim::SpreadInfo spread(year_,
-                                                month,
-                                                day_of_month,
-                                                hour,
-                                                0,
-                                                latitude_,
-                                                longitude_,
-                                                env_->elevation(),
-                                                slope,
-                                                aspect,
-                                                fuel_name,
-                                                w);
+              // const auto spread = fs::sim::SpreadInfo(year_,
+              const fs::sim::SpreadInfo spread(year_,
+                                               month,
+                                               day_of_month,
+                                               hour,
+                                               0,
+                                               latitude_,
+                                               longitude_,
+                                               env_->elevation(),
+                                               slope,
+                                               aspect,
+                                               fuel_name,
+                                               w);
               // constexpr auto HEADER_FBP_PRIMARY = "CFB,CFC,FD,HFI,RAZ,ROS,SFC,TFC";
               constexpr auto FMT_FBP_OUT = "%ld,%d-%02d-%02d %02d:%02d:%02d,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g,%c,%1.6g,%1.6g,%1.6g,%1.6g,%1.6g%s";
               printf(FMT_FBP_OUT,

@@ -4,11 +4,11 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
-namespace tbd::wx
+namespace fs::wx
 {
 class FwiWeather;
 };
-namespace tbd::sim
+namespace fs::sim
 {
 #include "stdafx.h"
 
@@ -29,7 +29,7 @@ static const double TEST_YLLCORNER = 12646355.311160;
 int test(
   const string& output_directory,
   const DurationSize num_hours,
-  const tbd::wx::FwiWeather* wx,
+  const fs::wx::FwiWeather* wx,
   const string& fuel_name,
   const SlopeSize slope,
   const AspectSize aspect,

@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "Log.h"
-namespace tbd::logging
+namespace fs::logging
 {
 int Log::logging_level_ = LOG_DEBUG;
 // do this in .cpp so that we don't get unused warnings including the .h

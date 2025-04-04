@@ -7,7 +7,7 @@
 #include "FireSpread.h"
 #include "FuelType.h"
 #include "LookupTable.h"
-namespace tbd
+namespace fs
 {
 using sim::SpreadInfo;
 namespace fuel

@@ -118,7 +118,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{5a086e89-ca67-4aa2-9293-b0f1b6b6f2da}</ProjectGuid>
-    <RootNamespace>tbd</RootNamespace>
+    <RootNamespace>fs</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

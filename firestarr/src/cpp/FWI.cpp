@@ -42,7 +42,7 @@
 //
 //      Robert Field, robert.field@utoronto.ca
 //******************************************************************************************
-namespace tbd::wx
+namespace fs::wx
 {
 const Ffmc Ffmc::Zero = Ffmc(0);
 const Dmc Dmc::Zero = Dmc(0);

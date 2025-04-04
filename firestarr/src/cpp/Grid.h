@@ -14,8 +14,8 @@
 #include "Point.h"
 #include "Settings.h"
 
-using tbd::topo::Location;
-using tbd::topo::Position;
+using fs::topo::Location;
+using fs::topo::Position;
 using NodataIntType = int64_t;
 /**
  * \brief Provides hash function for Location.
@@ -28,13 +28,13 @@ struct std::hash<Location>
    * \param location Location to get value for
    * \return Hash value for a Location
    */
-  [[nodiscard]] constexpr tbd::HashSize operator()(
+  [[nodiscard]] constexpr fs::HashSize operator()(
     const Location& location) const noexcept
   {
     return location.hash();
   }
 };
-namespace tbd::data
+namespace fs::data
 {
 /**
  * \brief The base class with information for a grid of data with geographic coordinates.
@@ -786,7 +786,7 @@ public:
                                 const R no_data) const
   {
     // NOTE: do this instead of function pointer because it's using templates
-    if (tbd::sim::Settings::saveAsAscii())
+    if (fs::sim::Settings::saveAsAscii())
     {
       return this->template saveToAsciiFile<R>(
         dir,

@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "SafeVector.h"
 #include "Statistics.h"
-namespace tbd::util
+namespace fs::util
 {
 SafeVector::SafeVector(const SafeVector& rhs)
   : values_(rhs.values_)

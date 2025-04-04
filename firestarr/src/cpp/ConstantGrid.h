@@ -14,7 +14,7 @@
 #include "Util.h"
 #include "Settings.h"
 #include "FuelType.h"
-namespace tbd::data
+namespace fs::data
 {
 /**
  * \brief A GridData<T, V, const vector<T>> that cannot change once initialized.
@@ -310,16 +310,16 @@ public:
                 //   logging::debug("cur = %d", cur);
                 //   logging::debug("nodata_input = %d", nodata_input);
                 //   logging::debug("T = %s, V = %s", typeid(T).name(), typeid(V).name());
-                //   if constexpr (std::is_same_v<T, const tbd::fuel::FuelType*>)
+                //   if constexpr (std::is_same_v<T, const fs::fuel::FuelType*>)
                 //   {
-                //     auto f = static_cast<const tbd::fuel::FuelType*>(values.at(cur_hash));
+                //     auto f = static_cast<const fs::fuel::FuelType*>(values.at(cur_hash));
                 //     logging::debug("fuel %s has code %d",
-                //         tbd::fuel::FuelType::safeName(f),
-                //         tbd::fuel::FuelType::safeCode(f));
+                //         fs::fuel::FuelType::safeName(f),
+                //         fs::fuel::FuelType::safeCode(f));
                 //   }
                 //   logging::warning(err.what());
                 //   // logging::fatal(err.what());
-                //   tbd::sim::Settings::fuelLookup().listFuels();
+                //   fs::sim::Settings::fuelLookup().listFuels();
                 //   throw err;
                 // }
               }

@@ -13,7 +13,7 @@
 #include <proj.h>
 #include "stdafx.h"
 #include "Util.h"
-namespace tbd::topo
+namespace fs::topo
 {
 class Point;
 PJ* normalized_context(PJ_CONTEXT* C, const string& proj4_from, const string& proj4_to)
@@ -24,18 +24,18 @@ PJ* normalized_context(PJ_CONTEXT* C, const string& proj4_from, const string& pr
     proj4_from.c_str(),
     proj4_to.c_str(),
     NULL);
-  tbd::logging::check_fatal(0 == P, "Failed to create transformation object");
+  fs::logging::check_fatal(0 == P, "Failed to create transformation object");
   // This will ensure that the order of coordinates for the input CRS
   // will be longitude, latitude, whereas EPSG:4326 mandates latitude,
   // longitude
   PJ* P_norm = proj_normalize_for_visualization(C, P);
-  tbd::logging::check_fatal(0 == P_norm, "Failed to normalize transformation object");
+  fs::logging::check_fatal(0 == P_norm, "Failed to normalize transformation object");
   proj_destroy(P);
   return P_norm;
 }
 void from_lat_long(
   const string& proj4,
-  const tbd::topo::Point& point,
+  const fs::topo::Point& point,
   MathSize* x,
   MathSize* y)
 {
@@ -53,7 +53,7 @@ void from_lat_long(
   *y = b.enu.n;
   // #ifdef DEBUG_PROJ
   PJ_COORD c = proj_trans(P, PJ_INV, b);
-  tbd::logging::verbose(
+  fs::logging::verbose(
     "longitude: %f, latitude: %f => easting: %.3f, northing: %.3f => x: %.3f, y: %.3f => longitude: %g, latitude: %g",
     point.longitude(),
     point.latitude(),
@@ -67,7 +67,7 @@ void from_lat_long(
   proj_destroy(P);
   proj_context_destroy(C);
 }
-tbd::topo::Point to_lat_long(
+fs::topo::Point to_lat_long(
   const string& proj4,
   const MathSize x,
   const MathSize y)
@@ -101,7 +101,7 @@ string&& try_fix_meridian(string&& proj4)
     const auto zone_str = proj4.substr(zone_pos + 6);
     const auto zone = stoi(zone_str);
     // zone 15 is -93 and other zones are 6 degrees difference
-    const auto degrees = tbd::topo::utm_central_meridian(zone);
+    const auto degrees = fs::topo::utm_central_meridian(zone);
     // HACK: assume utm zone is at start
     proj4 = string(
       "+proj=tmerc +lat_0=0.000000000 +lon_0=" + to_string(degrees) + " +k=0.999600 +x_0=500000.000 +y_0=0.000");

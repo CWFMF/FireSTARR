@@ -36,7 +36,7 @@
 #define DEBUG_ANY
 #endif
 
-namespace tbd::debug
+namespace fs::debug
 {
 void show_debug_settings();
 }

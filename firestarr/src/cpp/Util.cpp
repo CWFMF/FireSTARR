@@ -11,7 +11,6 @@
 #ifdef _WIN32
 #include <direct.h>
 #endif
-namespace fs = std::filesystem;
 
 TIFF* GeoTiffOpen(const char* const filename, const char* const mode)
 {
@@ -59,19 +58,19 @@ int sxprintf(char* buffer, size_t N, const char* format, ...)
   va_end(args);
   return r;
 }
-namespace tbd::util
+namespace fs::util
 {
 void read_directory(const bool for_files, const string& name, vector<string>* v, const string& match)
 {
   string full_match = ".*/" + match;
   logging::verbose(("Matching '" + full_match + "'").c_str());
   static const std::regex re(full_match, std::regex_constants::icase);
-  for (const auto& entry : fs::directory_iterator(name))
+  for (const auto& entry : std::filesystem::directory_iterator(name))
   {
     logging::verbose(("Checking if file: " + entry.path().string()).c_str());
     if (
-      (for_files && fs::is_regular_file(entry))
-      || (!for_files && fs::is_directory(entry)))
+      (for_files && std::filesystem::is_regular_file(entry))
+      || (!for_files && std::filesystem::is_directory(entry)))
     {
       logging::extensive(("Checking regex match: " + entry.path().string()).c_str());
       if (std::regex_match(entry.path().string(), re))
@@ -237,7 +236,7 @@ UsageCount& UsageCount::operator++() noexcept
 constexpr int DAYS_IN_MONTH[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 constexpr int DAYS_IN_MONTH_LEAP[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-void tbd::month_and_day(const int year, const size_t day_of_year, size_t* month, size_t* day_of_month)
+void fs::month_and_day(const int year, const size_t day_of_year, size_t* month, size_t* day_of_month)
 {
   auto days = (is_leap_year(year) ? DAYS_IN_MONTH_LEAP : DAYS_IN_MONTH);
   *month = 1;
@@ -249,7 +248,7 @@ void tbd::month_and_day(const int year, const size_t day_of_year, size_t* month,
   }
   *day_of_month = days_left + 1;
 }
-bool tbd::is_leap_year(const int year)
+bool fs::is_leap_year(const int year)
 {
   if (year % 400 == 0)
   {
@@ -261,7 +260,7 @@ bool tbd::is_leap_year(const int year)
   }
   return (year % 4 == 0);
 }
-string tbd::make_timestamp(const int year, const DurationSize time)
+string fs::make_timestamp(const int year, const DurationSize time)
 {
   size_t day = floor(time);
   size_t hour = (time - day) * static_cast<DurationSize>(DAY_HOURS);

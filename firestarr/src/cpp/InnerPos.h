@@ -7,9 +7,9 @@
 #include "stdafx.h"
 #include "Cell.h"
 
-namespace tbd
+namespace fs
 {
-using tbd::wx::Direction;
+using fs::wx::Direction;
 using topo::Location;
 template <class S, int XMin, int XMax, int YMin, int YMax>
 class BoundedPoint
@@ -49,7 +49,7 @@ public:
 using ROSOffset = std::tuple<IntensitySize, ROSSize, Direction, Offset>;
 using OffsetSet = vector<ROSOffset>;
 }
-namespace tbd::sim
+namespace fs::sim
 {
 /**
  * \brief The position within a Cell that a spreading point has.

@@ -7,7 +7,7 @@
 #include "FireWeather.h"
 #include "FuelType.h"
 #include "Settings.h"
-namespace tbd::wx
+namespace fs::wx
 {
 /*!
  * \page weather Hourly fire and weather indices
@@ -26,7 +26,7 @@ static unique_ptr<SurvivalMap> make_survival(
   const vector<const FwiWeather*>& weather_by_hour_by_day)
 {
   auto result = make_unique<SurvivalMap>();
-  const bool deterministic = tbd::sim::Settings::deterministic();
+  const bool deterministic = fs::sim::Settings::deterministic();
   for (const auto& in_fuel : used_fuels)
   {
     if (nullptr != in_fuel

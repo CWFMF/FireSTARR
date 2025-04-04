@@ -7,7 +7,7 @@
 #include "Util.h"
 #define LOOKUP_TABLES_OFF 1
 #undef LOOKUP_TABLES_OFF
-namespace tbd::util
+namespace fs::util
 {
 /**
  * \brief A table initialized using the given function ranging over the number of digits and precision.

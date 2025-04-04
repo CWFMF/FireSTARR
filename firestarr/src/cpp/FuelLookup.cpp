@@ -9,7 +9,7 @@
 #include "FBP45.h"
 #include "Log.h"
 #include "Settings.h"
-namespace tbd::fuel
+namespace fs::fuel
 {
 string simplify_fuel_name(const string& fuel)
 {

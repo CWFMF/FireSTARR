@@ -6,7 +6,7 @@
 #pragma once
 #include <string>
 #include "Weather.h"
-namespace tbd::wx
+namespace fs::wx
 {
 /**
  * \brief Fine Fuel Moisture Code value.

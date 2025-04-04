@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "InnerPos.h"
 
-namespace tbd
+namespace fs
 {
 using HorizontalAdjustment = std::function<MathSize(MathSize)>;
 

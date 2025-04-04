@@ -9,7 +9,7 @@
 #include "Location.h"
 #include "Scenario.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 constexpr InnerSize DIST_22_5 = static_cast<InnerSize>(0.2071067811865475244008443621048490392848359376884740365883398689);
 constexpr InnerSize P_0_5 = static_cast<InnerSize>(0.5) + DIST_22_5;

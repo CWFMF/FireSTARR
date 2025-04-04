@@ -10,7 +10,7 @@
 #include "Settings.h"
 #include "Util.h"
 #include "InnerPos.h"
-namespace tbd::sim
+namespace fs::sim
 {
 
 static constexpr int MAX_SPREAD_ANGLE = 5.0;
@@ -210,7 +210,7 @@ public:
    * \brief Head fire spread direction
    * \return Head fire spread direction
    */
-  [[nodiscard]] constexpr tbd::wx::Direction headDirection() const
+  [[nodiscard]] constexpr fs::wx::Direction headDirection() const
   {
     return raz_;
   }
@@ -259,7 +259,7 @@ public:
       tfc_(-1),
       sfc_(-1),
       is_crown_(false),
-      raz_(tbd::wx::Direction::Invalid),
+      raz_(fs::wx::Direction::Invalid),
       nd_(-1) {
       };
   SpreadInfo(
@@ -378,7 +378,7 @@ private:
   /**
    * \brief Head fire spread direction
    */
-  tbd::wx::Direction raz_;
+  fs::wx::Direction raz_;
   /**
    * \brief Difference between date and the date of minimum foliar moisture content (from ST-X-3)
    */

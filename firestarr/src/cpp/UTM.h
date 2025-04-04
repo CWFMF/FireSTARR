@@ -8,7 +8,7 @@
 #include <proj.h>
 #include "stdafx.h"
 #include "Util.h"
-namespace tbd::topo
+namespace fs::topo
 {
 class Point;
 /**
@@ -31,10 +31,10 @@ class Point;
 }
 void from_lat_long(
   const string& proj4,
-  const tbd::topo::Point& point,
+  const fs::topo::Point& point,
   MathSize* x,
   MathSize* y);
-tbd::topo::Point to_lat_long(
+fs::topo::Point to_lat_long(
   const string& proj4,
   const MathSize x,
   const MathSize y);

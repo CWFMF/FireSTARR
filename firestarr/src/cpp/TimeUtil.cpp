@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "TimeUtil.h"
-namespace tbd::util
+namespace fs::util
 {
 void fix_tm(tm* t)
 {

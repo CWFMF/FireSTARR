@@ -12,7 +12,7 @@
 #include "unstable.h"
 #include "SpreadAlgorithm.h"
 
-namespace tbd::sim
+namespace fs::sim
 {
 // number of degrees between spread directions
 // if not defined then use variable step degrees
@@ -115,7 +115,7 @@ MathSize SpreadInfo::initial(SpreadInfo& spread,
       raz = util::RAD_360 - raz;
     }
   }
-  spread.raz_ = tbd::wx::Direction(raz, true);
+  spread.raz_ = fs::wx::Direction(raz, true);
   const auto isi = isz * STANDARD_WSV(wsv);
   // FIX: make this a member function so we don't need to preface head_ros_
   spread.head_ros_ = fuel->calculateRos(spread.nd(),
@@ -169,7 +169,7 @@ static topo::SpreadKey make_key(const SlopeSize slope,
                                 const AspectSize aspect,
                                 const char* fuel_name)
 {
-  const auto lookup = tbd::sim::Settings::fuelLookup();
+  const auto lookup = fs::sim::Settings::fuelLookup();
   const auto key = topo::Cell::key(topo::Cell::hashCell(slope,
                                                         aspect,
                                                         fuel::FuelType::safeCode(lookup.byName(fuel_name))));
@@ -219,7 +219,7 @@ SpreadInfo::SpreadInfo(
                slope,
                aspect,
                fuel_name,
-               calculate_nd_for_point(start_date.tm_yday, elevation, tbd::topo::Point(latitude, longitude)),
+               calculate_nd_for_point(start_date.tm_yday, elevation, fs::topo::Point(latitude, longitude)),
                weather)
 {
 }
@@ -261,7 +261,7 @@ SpreadInfo::SpreadInfo(const DurationSize time,
     tfc_(-1),
     sfc_(-1),
     is_crown_(false),
-    raz_(tbd::wx::Direction::Invalid),
+    raz_(fs::wx::Direction::Invalid),
     nd_(nd)
 {
   // HACK: use weather_daily to figure out probability of spread but hourly for ROS
@@ -380,7 +380,7 @@ SpreadInfo::SpreadInfo(const DurationSize time,
     tfc_ = -1;
     sfc_ = -1;
     is_crown_ = false;
-    raz_ = tbd::wx::Direction::Invalid;
+    raz_ = fs::wx::Direction::Invalid;
   }
 }
 // MathSize SpreadInfo::calculateSpreadProbability(const MathSize ros)

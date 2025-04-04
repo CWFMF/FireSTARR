@@ -4,7 +4,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
-namespace tbd::data
+namespace fs::data
 {
 /**
  * \brief A wrapper around a MathSize to ensure correct types are used.

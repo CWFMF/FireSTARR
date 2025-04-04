@@ -4,7 +4,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
-namespace tbd::logging
+namespace fs::logging
 {
 static const int LOG_EXTENSIVE = 0;
 static const int LOG_VERBOSE = 1;

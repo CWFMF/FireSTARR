@@ -14,7 +14,7 @@
 #include "Point.h"
 #include "Settings.h"
 
-namespace tbd::topo
+namespace fs::topo
 {
 using FuelGrid = data::ConstantGrid<const fuel::FuelType*, FuelSize>;
 using ElevationGrid = data::ConstantGrid<ElevationSize>;
@@ -26,7 +26,7 @@ using CellGrid = data::ConstantGrid<Cell, Topo>;
  * all simulations. These attributes are loaded from rasters at the start of the
  * process. These rasters must be in a UTM projection, and all rasters for a zone
  * must be named consistently across the different attributes. The GIS scripts
- * provided in the TBD project can generate these rasters for you.
+ * provided in the FireSTARR project can generate these rasters for you.
  *
  * Elevation is only read at the ignition point and it is assumed that elevation
  * is the same wherever it is used in a calculation. Despite this, slope and aspect

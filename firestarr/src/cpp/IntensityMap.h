@@ -9,7 +9,7 @@
 #include <bitset>
 #include "GridMap.h"
 #include "Location.h"
-namespace tbd
+namespace fs
 {
 namespace topo
 {
@@ -18,7 +18,7 @@ class Cell;
 }
 namespace sim
 {
-using tbd::topo::Position;
+using fs::topo::Position;
 class ProbabilityMap;
 class Model;
 using BurnedData = std::bitset<static_cast<size_t>(MAX_ROWS) * MAX_COLUMNS>;
@@ -119,12 +119,12 @@ public:
   void burn(const Location& location,
             IntensitySize intensity,
             MathSize ros,
-            tbd::wx::Direction raz);
+            fs::wx::Direction raz);
   template <class P>
   void burn(const Position<P>& position,
             const IntensitySize intensity,
             const MathSize ros,
-            const tbd::wx::Direction& raz)
+            const fs::wx::Direction& raz)
   {
     burn(
       Location{position.hash()},

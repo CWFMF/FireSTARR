@@ -10,7 +10,7 @@
 #include "FuelLookup.h"
 #include "FWI.h"
 #include "FireWeather.h"
-namespace tbd::wx
+namespace fs::wx
 {
 /**
  * \brief A stream of weather that gets used by a Scenario every Iteration.

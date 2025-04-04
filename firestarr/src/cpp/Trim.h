@@ -6,7 +6,7 @@
 #pragma once
 #include <string>
 // from https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
-namespace tbd::util
+namespace fs::util
 {
 /**
  * \brief Remove whitespace from left side of string

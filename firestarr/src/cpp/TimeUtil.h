@@ -4,7 +4,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
-namespace tbd::util
+namespace fs::util
 {
 /**
  * \brief Calculate tm fields from values already there
