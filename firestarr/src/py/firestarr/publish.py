@@ -24,11 +24,16 @@ from common import (
     zip_folder,
 )
 from gdal_merge_max import gdal_merge_max
+from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 from osgeo import gdal
 from redundancy import call_safe, get_stack
 from tqdm_util import keep_trying, tqdm
 
-from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
+
+# distinguish erros with publishing from other problems
+class PublishError(RuntimeError):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
 
 def publish_all(
@@ -77,7 +82,7 @@ def find_latest_outputs(dir_output=None):
             logging.info("Defaulting to directory %s", dir_output)
             return dir_output
         else:
-            raise RuntimeError(f'find_latest_outputs("{dir_output}") failed: No run found')
+            raise PublishError(f'find_latest_outputs("{dir_output}") failed: No run found')
     return dir_output
 
 
@@ -93,7 +98,7 @@ def merge_dirs(
     # expecting dir_input to be a path ending in a runid of form '%Y%m%d%H%M'
     dir_base = os.path.join(dir_input, "initial")
     if not os.path.isdir(dir_base):
-        raise RuntimeError(f"Directory {dir_base} missing")
+        raise PublishError(f"Directory {dir_base} missing")
     run_name = os.path.basename(dir_input)
     run_id = run_name[run_name.index("_") + 1 :]
     logging.info("Merging {}".format(dir_base))
@@ -113,7 +118,7 @@ def merge_dirs(
     dirs_what = [os.path.basename(for_what) for for_what in files_by_for_what.keys()]
     for_dates = [datetime.datetime.strptime(_, FMT_DATE_YMD) for _ in dirs_what if "perim" != _]
     if not for_dates:
-        raise RuntimeError("No dates to merge")
+        raise PublishError("No dates to merge")
     date_origin = min(for_dates)
     reprojected = {}
     for for_what, files in tqdm(files_by_for_what.items(), desc=f"Merging {dir_parent}"):

@@ -19,6 +19,7 @@ from common import (
 )
 from datasources.cwfif import get_model_dir_uncached, set_model_dir
 from log import add_log_file
+from publish import PublishError
 from redundancy import get_stack
 from run import Run, make_resume
 
@@ -237,6 +238,23 @@ if __name__ == "__main__":
                 sys.exit(-1)
             logging.info("Trying again because of error")
     if FROM_QUEUE:
+        # publish_all(
+        #     run_current._dir_output,
+        #     changed_only=False,
+        #     force=True,
+        #     merge_only=False,
+        # )
+        self = make_resume(do_publish=True, do_merge=True, no_wait=True)
+        try:
+            self.check_and_publish(force=True)
+        except PublishError as ex:
+            if should_resume:
+                # there shouldn't be an error if we were resuming
+                logging.error(ex)
+        try:
+            df_final = self.load_fires()
+        except RuntimeError as ex:
+            logging.error(ex)
         if df_final is None or np.any(df_final["sim_time"].isna()):
             logging.info("Requeuing")
             requeue()
