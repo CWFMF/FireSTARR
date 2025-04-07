@@ -45,6 +45,18 @@ from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
 from datasources.default import SourceFireActive
 from fires import get_fires_folder, group_fires
+from gis import (
+    CRS_COMPARISON,
+    CRS_SIMINPUT,
+    CRS_WGS84,
+    VECTOR_FILE_EXTENSION,
+    area_ha,
+    find_invalid_tiffs,
+    gdf_from_file,
+    gdf_to_file,
+    make_gdf_from_series,
+    vector_path,
+)
 from log import LOGGER_NAME, add_log_file
 from publish import merge_dirs, publish_all
 from redundancy import call_safe, get_stack
@@ -68,19 +80,6 @@ from tqdm_util import (
     pmap_by_group,
     tqdm,
     update_max_attempts,
-)
-
-from gis import (
-    CRS_COMPARISON,
-    CRS_SIMINPUT,
-    CRS_WGS84,
-    VECTOR_FILE_EXTENSION,
-    area_ha,
-    find_invalid_tiffs,
-    gdf_from_file,
-    gdf_to_file,
-    make_gdf_from_series,
-    vector_path,
 )
 
 LOGGER_FIRE_ORDER = logging.getLogger(f"{LOGGER_NAME}_order.log")
@@ -426,9 +425,6 @@ class Run(object):
         if ignore_incomplete_okay:
             num_done += len(is_ignored)
         successful = num_done == len(df_fires)
-        # HACK: abstract this later
-        if successful and self._is_batch:
-            finish_job(get_job_id(self._dir_sims))
         return not any_change or successful
 
     @log_order()
@@ -555,6 +551,19 @@ class Run(object):
         if not os.path.isfile(self._file_fires):
             raise RuntimeError(f"Expected fires to be in file {self._file_fires}")
         return gdf_from_file(self._file_fires).set_index(["fire_name"])
+
+    def ran_all(self):
+        df_final = None
+        try:
+            df_final = self.load_fires()
+        except RuntimeError as ex:
+            logging.error(ex)
+        if not (df_final is None or np.any(df_final["sim_time"].isna())):
+            # HACK: abstract this later
+            if self._is_batch:
+                finish_job(get_job_id(self._dir_sims))
+            return True
+        return False
 
     @log_order()
     def prep_folders(self, remove_existing=False, remove_invalid=False):

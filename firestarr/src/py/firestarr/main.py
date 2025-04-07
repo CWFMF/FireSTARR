@@ -244,21 +244,17 @@ if __name__ == "__main__":
         #     force=True,
         #     merge_only=False,
         # )
-        self = make_resume(do_publish=True, do_merge=True, no_wait=True)
+        run_current = make_resume(do_publish=True, do_merge=True, no_wait=True)
         try:
-            self.check_and_publish(force=True)
+            run_current.check_and_publish(force=True)
         except PublishError as ex:
             if should_resume:
                 # there shouldn't be an error if we were resuming
                 logging.error(ex)
-        try:
-            df_final = self.load_fires()
-        except RuntimeError as ex:
-            logging.error(ex)
-        if df_final is None or np.any(df_final["sim_time"].isna()):
+    if run_current.ran_all():
+        logging.info("Finished all simulations successfully")
+    else:
+        logging.info("Done but not all simulations have run")
+        if FROM_QUEUE:
             logging.info("Requeuing")
             requeue()
-        else:
-            logging.info(f"Not requeuing because final result is:\n{df_final}")
-
-    logging.info("Finished successfully")
