@@ -167,16 +167,17 @@ def scan_queue():
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
     for msg in response:
-        # FIX: right now any message causes a full run
-        print("Message", msg.content, file=sys.stderr)
         try:
-            queue_msg = json.loads(msg.content)
+            txt = msg.content
             queue_client.delete_message(msg, msg.pop_receipt)
+            # FIX: right now any message causes a full run
+            logging.info(f"Message {txt}")
+            queue_msg = json.loads(txt)
             return queue_msg
         except Exception as ex:
             logging.error(f"Unable to parse queue message:\n{msg.content}")
             logging.fatal(ex)
-    print("Done", file=sys.stderr)
+    logging.info("No message in queue, or failed to parse one")
 
 
 def requeue():
@@ -189,7 +190,7 @@ def requeue():
     # FIX: figure out a useful/standardized message format
     queue_client.send_message('{"msg": "Recheck outputs"}')
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
-    print("Done requeue", file=sys.stderr)
+    logging.info("Done requeue")
 
 
 FROM_QUEUE = False
@@ -211,7 +212,7 @@ if __name__ == "__main__":
             except ValueError:
                 pass
         msg = scan_queue()
-        print(f"Queue triggered with message:\n{msg}")
+        logging.info(f"Queue triggered with message:\n{msg}")
         sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     # rely on argument parsing later
