@@ -643,7 +643,7 @@ class Run(object):
 
     @log_order(show_args=["dir_fire"])
     def do_run_fire(self, dir_fire, prepare_only=False, run_only=False, no_wait=False):
-        logging.info(f"do_run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
+        logging.debug(f"do_run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
         result = sim_wrapper.run_fire_from_folder(
             dir_fire,
             self._dir_output,
@@ -845,7 +845,7 @@ class Run(object):
         update_max_attempts(max_attempts)
 
         no_wait = self._no_wait or self._is_batch
-        logging.info(f"def run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
+        logging.debug(f"def run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
         # if no_wait:
         #     logging.info("Not waiting or checking publishing")
         #     check_publish = do_nothing

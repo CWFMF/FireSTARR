@@ -286,7 +286,7 @@ def keep_trying_groups(fct, values, *args, **kwargs):
                 good = []
                 bad = []
                 for r in ret:
-                    logging.info(f"Result {r}")
+                    logging.debug(f"Result {r}")
                     success, input, output = r
                     if success:
                         good.append(input)

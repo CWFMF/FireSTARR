@@ -599,12 +599,12 @@ def _run_fire_from_folder(
                         shutil.move(file_log, file_log_old)
                     try:
                         # FIX: not using/no return value
-                        logging.info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
+                        log_info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
                         real_time = run_sim(dir_fire, no_wait=no_wait)
-                        logging.info(f"End run_sim({dir_fire}, no_wait={no_wait})")
+                        log_info(f"End run_sim({dir_fire}, no_wait={no_wait})")
                         while not no_wait and check_running(dir_fire):
                             time.sleep(10)
-                        logging.info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
+                        log_info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
                         # parse from file instead of using clock time
                         sim_time = parse_sim_time(dir_fire)
                         if not no_wait and sim_time is None:
@@ -618,7 +618,7 @@ def _run_fire_from_folder(
                         if not no_wait and sim_time is None:
                             raise ex
                 else:
-                    logging.info(f"Found sim_time {sim_time} for {dir_fire}")
+                    log_info(f"Found sim_time {sim_time} for {dir_fire}")
             except KeyboardInterrupt as ex:
                 raise ex
             except Exception as ex:
