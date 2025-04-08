@@ -280,12 +280,16 @@ def read_config(force=False):
                 v = os.environ.get(k, "")
                 if v != "":
                     # don't want value in log but want to note it was loaded from outside config file
-                    logging.info(f"Setting {k} from environment variable")
+                    logging.info("Setting %s from environment variable", k)
                     CONFIG[k] = v
         file_bounds = CONFIG["BOUNDS_FILE"]
         if not os.path.isfile(file_bounds):
             if DEFAULT_BOUNDS != file_bounds:
-                logging.warning(f"Bounds specified as {file_bounds} but not found - " f"reverting to {DEFAULT_BOUNDS}")
+                logging.warning(
+                    "Bounds specified as %s but not found - reverting to %s",
+                    file_bounds,
+                    DEFAULT_BOUNDS,
+                )
                 file_bounds = DEFAULT_BOUNDS
         if not os.path.isfile(file_bounds):
             if DEFAULT_BOUNDS == file_bounds:
@@ -423,7 +427,7 @@ def start_process(run_what, cwd):
     @param cwd Directory to run in
     @return Running subprocess
     """
-    logging.info(f"Running in '{cwd}':\n\t{run_what}")
+    logging.info("Running in '%s':\n\t%s", cwd, run_what)
     p = subprocess.Popen(run_what, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd)
     p.args = run_what
     p.cwd = cwd
@@ -592,7 +596,7 @@ class LockTracker(object):
         file_lock = f"{DIR_LOCKS}/{path.strip('/')}.lock"
         ensure_dir(os.path.dirname(file_lock))
         if FLAG_DEBUG_LOCKS:
-            logging.debug(f"Getting lock for '{path}' as '{file_lock}'")
+            logging.debug("Getting lock for '%s' as '%s'", path, file_lock)
         self._lock_files.add(file_lock)
         return FileLock(file_lock, DEFAULT_LOCK_TIMEOUT, thread_local=False)
 
@@ -618,12 +622,12 @@ def locks_for(paths):
                 locks.append(lock)
             except FileNotFoundError:
                 if FLAG_DEBUG_LOCKS:
-                    logging.debug(f"FileNotFoundError for {lock.lock_file}")
+                    logging.debug("FileNotFoundError for %s", lock.lock_file)
                 # lock is missing, so must have been deleted
                 pass
             except Exception as ex:
                 if FLAG_DEBUG_LOCKS:
-                    logging.debug(f"Exception for {lock.lock_file}")
+                    logging.debug("Exception for %s", lock.lock_file)
                 logging.error(get_stack(ex))
         yield locks
     finally:
@@ -631,13 +635,13 @@ def locks_for(paths):
             # HACK: is this causing the errors about deleting locks
             try:
                 if FLAG_DEBUG_LOCKS:
-                    logging.debug(f"Releasing lock {lock.lock_file}")
+                    logging.debug("Releasing lock %s", lock.lock_file)
                 lock.release()
             except KeyboardInterrupt as ex:
                 raise ex
             except Exception as ex:
                 if FLAG_DEBUG_LOCKS:
-                    logging.debug(f"Exception for {lock.lock_file}")
+                    logging.debug("Exception for %s", lock.lock_file)
                     logging.debug(get_stack(ex))
                 pass
 
@@ -691,7 +695,11 @@ def ensure(
                     try:
                         # fct is expected to make the path
                         result = fct_create(list_paths)
-                        logging.debug(f"fct_create({list_paths}) made {result}")
+                        logging.debug(
+                            "fct_create(%s) made %s",
+                            list_paths,
+                            result,
+                        )
                     except KeyboardInterrupt as ex:
                         raise ex
                     except Exception as ex:
@@ -700,7 +708,7 @@ def ensure(
                         ex_current = ex
                         retries -= 1
                 if ex_current is not None:
-                    logging.error(f"Raising {ex_current}")
+                    logging.error("Raising %s", ex_current)
                     # have to remove or why would result change?
                     try_remove(list_paths)
                     # HACK: seems to freeze on retry otherwise?
@@ -782,12 +790,12 @@ def ensures(
                         except Exception as ex:
                             # failed parsing file
                             ex_current = ex
-                            logging.error(f"Failed parsing {paths} so removing and retrying")
+                            logging.error("Failed parsing %s so removing and retrying", paths)
                             force_remove(paths)
                 except KeyboardInterrupt as ex:
                     raise ex
                 except Exception as ex:
-                    logging.error(f"Failed getting file: {ex}")
+                    logging.error("Failed getting file: %s", ex)
                     logging.error(get_stack(ex))
                     # failed getting file
                     ex_current = ex
@@ -963,5 +971,5 @@ def check_arg(a, args):
     if a in args:
         args.remove(a)
         flag = True
-    logging.info(f"Flag for {a} is set to {flag}")
+    logging.info("Flag for %s is set to %s", a, flag)
     return flag, args

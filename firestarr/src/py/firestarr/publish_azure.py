@@ -86,11 +86,11 @@ def upload_static():
     # delete old blobs
     blob_list = [x for x in container.list_blobs(name_starts_with=f"{dir_remote}/bounds.")]
     for blob in blob_list:
-        logging.info(f"Deleting {blob.name}")
+        logging.info("Deleting %s", blob.name)
         container.delete_blob(blob.name)
     # archive_current(container)
     for f in files_bounds:
-        logging.info(f"Pushing {f}")
+        logging.info("Pushing %s", f)
         path = os.path.join(dir_bounds, f)
         # HACK: just upload into archive too so we don't have to move later
         with open(path, "rb") as data:
@@ -101,11 +101,11 @@ def upload_dir(dir_run=None):
     if not FLAG_IGNORE_PERIM_OUTPUTS:
         raise NotImplementedError("Need to deal with perimeters properly")
     if not read_config():
-        logging.info(f"Azure not configured so not publishing {dir_run}")
+        logging.info("Azure not configured so not publishing %s", dir_run)
         return False
     if dir_run is None:
         dir_run = find_latest()
-    logging.info(f"Azure configured so publishing {dir_run}")
+    logging.info("Azure configured so publishing %s", dir_run)
     run_name = os.path.basename(dir_run)
     run_id = run_name[run_name.index("_") + 1 :]
     source = run_name[: run_name.index("_")]
@@ -152,7 +152,7 @@ def upload_dir(dir_run=None):
 
     def upload(path, name):
         nonlocal delete_after
-        logging.info(f"Pushing {name}")
+        logging.info("Pushing %s", name)
         with open(path, "rb") as data:
             container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
         # remove from list of files to delete if overwritten
@@ -181,7 +181,7 @@ def upload_dir(dir_run=None):
 
     # delete old blobs that weren't overwritten
     for f in delete_after:
-        logging.info(f"Removing {f.name}")
+        logging.info("Removing %s", f.name)
         container.delete_blob(f)
 
 

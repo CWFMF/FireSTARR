@@ -118,7 +118,7 @@ def override_fires(df_fires, df_override):
         matched = list(set(df_override.index).intersection(set(df_fires.index)))
         unmatched = list(set(df_override.index).difference(set(matched)))
         if unmatched:
-            logging.warning(f"Ignoring unmatched fires:\n{df_override.loc[unmatched]}")
+            logging.warning("Ignoring unmatched fires:\n%s", df_override.loc[unmatched])
         if 0 < len(matched):
             # can't join if nothing matches
             df_fires = df_fires.loc[:]

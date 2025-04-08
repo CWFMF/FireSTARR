@@ -79,7 +79,7 @@ def run_sim_local(dir_fire, no_wait=None):
     try:
         proc = call_safe(start_process, ["./sim.sh"], dir_fire)
         if no_wait:
-            logging.info(f"Starting but not waiting for {dir_fire}")
+            logging.info("Starting but not waiting for %s", dir_fire)
         else:
             stdout, stderr = finish_process(proc)
     except KeyboardInterrupt as ex:
@@ -96,7 +96,7 @@ def run_sim_local(dir_fire, no_wait=None):
 
         call_safe(save_logs)
 
-        logging.error(f"Failed running {dir_fire}")
+        logging.error("Failed running %s", dir_fire)
         raise ex
 
 
@@ -272,7 +272,7 @@ def find_outputs(dir_fire):
 
 def copy_fire_outputs(dir_fire, dir_output, changed):
     # simulation was done or is now, but outputs don't exist
-    logging.debug(f"Collecting outputs from {dir_fire}")
+    logging.debug("Collecting outputs from %s", dir_fire)
     fire_name = os.path.basename(dir_fire)
     files_prob, files_interim, files_perim = find_outputs(dir_fire)
     # HACK: keep track of changed files so we can make sure we copy new things until we can simplify this
@@ -286,7 +286,7 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
         if len(files_interim) != len(files_prob) or any(
             [is_newer_than(files_interim[i], files_prob[i]) for i in range(len(files_interim))]
         ):
-            logging.warning(f"Ignoring {files_prob} because {files_interim} is newer")
+            logging.warning("Ignoring %s because %s is newer", files_prob, files_interim)
             # NOTE: is there any reason to not delete these?
             # HACK: make a point of marking these as changed
             for file_old in files_prob:
@@ -301,7 +301,7 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
         # remove directory if interim folder exists
         force_remove(dir_tmp_fire)
     if files_interim and not files_prob:
-        logging.debug(f"Using interim rasters for {dir_fire}")
+        logging.debug("Using interim rasters for %s", dir_fire)
         # FIX: look at timestamps instead of always copying
         force_remove(dir_tmp_fire)
         call_safe(shutil.copytree, dir_fire, dir_tmp_fire, dirs_exist_ok=True)
@@ -316,11 +316,15 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
                 # try copying from original again to see if that helps
                 f_orig = f_interim.replace(dir_tmp_fire, dir_fire)
                 if is_invalid_tiff(f_orig, test_read=True):
-                    logging.warning(f"Sleeping for {TIFF_SLEEP}s in case {f_orig} is being written to")
+                    logging.warning(
+                        "Sleeping for %ss in case %s is being written to",
+                        TIFF_SLEEP,
+                        f_orig,
+                    )
                     time.sleep(TIFF_SLEEP)
                     if is_invalid_tiff(f_orig, test_read=True):
                         raise RuntimeError(f"Invalid tiff {f_orig}")
-                logging.warning(f"Trying to copy {f_orig} again since invalid")
+                logging.warning("Trying to copy %s again since invalid", f_orig)
                 # don't try this if the original is invalid but try copying again if it was
                 shutil.copyfile(
                     f_orig,
@@ -349,7 +353,7 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
     files_project = {}
     if files_prob:
         for prob in files_prob:
-            logging.debug(f"Adding raster to final outputs: {prob}")
+            logging.debug("Adding raster to final outputs: %s", prob)
             # want to put each probability raster into right date so we can combine them
             d = prob[(prob.rindex("_") + 1) : prob.rindex(".tif")].replace("-", "")
             # FIX: want all of these to be output at the size of the largest?
@@ -372,7 +376,7 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
     for file_src, file_out in files_project.items():
         changed = changed or file_src in files_changed or file_out in files_changed
         if changed or is_newer_than(file_src, file_out):
-            logging.debug(f"Adding raster to final outputs: {file_src}")
+            logging.debug("Adding raster to final outputs: %s", file_src)
             # if writing over file then get rid of it
             force_remove(file_out)
             # using previous extent is limiting later days
@@ -430,7 +434,7 @@ def _run_fire_from_folder(
         pass
 
     def dolog(msg, *args, **kwargs):
-        logging.info(f"{dir_fire}: {msg}", *args, **kwargs)
+        logging.info("%s: %s", dir_fire, msg, *args, **kwargs)
 
     if prepare_only and run_only:
         raise RuntimeError("Can't prepare_only and run_only at the same time")
@@ -595,7 +599,11 @@ def _run_fire_from_folder(
                         filetime = os.path.getmtime(file_log)
                         filedatetime = datetime.datetime.fromtimestamp(filetime)
                         file_log_old = file_log.replace(".log", f"{filedatetime.strftime(FMT_FILE_SECOND)}.log")
-                        logging.warning(f"Moving old log file from {file_log} to {file_log_old}")
+                        logging.warning(
+                            "Moving old log file from %s to %s",
+                            file_log,
+                            file_log_old,
+                        )
                         shutil.move(file_log, file_log_old)
                     try:
                         # FIX: not using/no return value
@@ -622,7 +630,7 @@ def _run_fire_from_folder(
             except KeyboardInterrupt as ex:
                 raise ex
             except Exception as ex:
-                logging.error(f"Couldn't run fire {dir_fire}")
+                logging.error("Couldn't run fire %s", dir_fire)
                 logging.error(get_stack(ex))
                 # force_remove(files_required)
                 # return None
@@ -635,7 +643,11 @@ def _run_fire_from_folder(
             # log_info("Simulation already ran but don't have processed outputs")
             log_info("Simulation already ran")
         if not sim_time:
-            logging.error(f"Simulation time {sim_time} is invalid for {dir_fire}")
+            logging.error(
+                "Simulation time %s is invalid for %s",
+                sim_time,
+                dir_fire,
+            )
         # HACK: just do this again here for now
         sim_time_parsed = parse_sim_time(dir_fire)
         sim_time = data.get("sim_time", None)

@@ -56,7 +56,7 @@ class SourceFeatureM3Service(SourceFeature):
             filter = f"lastdate >= {self._last_active_since.strftime('%Y-%m-%d')}T00:00:00Z"
 
         def do_parse(_):
-            logging.debug(f"Reading {_}")
+            logging.debug("Reading %s", _)
             df = gdf_from_file(_)
             df["datetime"] = to_utc(df["lastdate"])
             since = pd.to_datetime(self._last_active_since, utc=True)
@@ -167,8 +167,11 @@ class SourceFeatureM3(SourceFeature):
         self._last_active_since = (
             self._origin.offset(-last_active_since_offset)
             if last_active_since_offset is not None
-            else (datetime.date(self._origin.today.year, 1, 1)
-                  if CURRENT_YEAR_ONLY else datetime.date(self._origin.today.year - 1, 1, 1))
+            else (
+                datetime.date(self._origin.today.year, 1, 1)
+                if CURRENT_YEAR_ONLY
+                else datetime.date(self._origin.today.year - 1, 1, 1)
+            )
         )
         self._source = (SourceFeatureM3Service if USE_CWFIS_SERVICE else SourceFeatureM3Download)(
             self._dir_out, self._last_active_since

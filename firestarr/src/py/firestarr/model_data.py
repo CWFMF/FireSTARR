@@ -23,7 +23,11 @@ def make_query_geoserver(
     output_format="application/json",
     crs=None,
 ):
-    logging.debug(f"Getting table {table_name} in projection {str(CRS_COMPARISON)}")
+    logging.debug(
+        "Getting table %s in projection %s",
+        table_name,
+        str(CRS_COMPARISON),
+    )
     url = "&".join(
         [
             f"{wfs_root}&request=GetFeature",

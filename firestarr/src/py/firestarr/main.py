@@ -28,7 +28,7 @@ LOG_MAIN = add_log_file(
     os.path.join(DIR_LOG, f"firestarr_{datetime.date.today().strftime('%Y%m%d')}.log"),
     level=DEFAULT_FILE_LOG_LEVEL,
 )
-logging.info(f"Starting FireSTARR version {os.environ.get('VERSION', 'UNKNOWN')}")
+logging.info("Starting FireSTARR version %s", os.environ.get("VERSION", "UNKNOWN"))
 
 sys.path.append(os.path.dirname(sys.executable))
 sys.path.append("/usr/local/bin")
@@ -81,7 +81,11 @@ def run_main(args):
         if prev is None:
             return False
         wx_updated = prev._modelrun != modelrun
-        logging.info(f"Current weather is {modelrun} vs old run {prev._modelrun}")
+        logging.info(
+            "Current weather is %s vs old run %s",
+            modelrun,
+            prev._modelrun,
+        )
         if not wx_updated and not prev._published_clean:
             logging.info("Found previous run and trying to resume")
             ran_outdated = True
@@ -90,19 +94,19 @@ def run_main(args):
         if wx_updated:
             # HACK: need to set this so cache isn't used
             set_model_dir(dir_model)
-            logging.info(f"Have new weather for {dir_model}")
+            logging.info("Have new weather for %s", dir_model)
         # have new weather so don't resume
         return False
 
     should_resume = check_resume()
-    logging.info(f"Based on weather and previous run, should_resume == {should_resume}")
+    logging.info("Based on weather and previous run, should_resume == %s", should_resume)
     # assume resuming if not waiting
     if no_resume and should_resume:
         logging.warning("Should resume but was told not to, so making new run")
     do_resume = (not no_resume) and (do_resume or should_resume)
     if do_resume:
         if 1 < len(args):
-            logging.fatal(f"Too many arguments:\n\t {sys.argv}")
+            logging.fatal("Too many arguments:\n\t %s", sys.argv)
         dir_resume = args[0] if args else None
         run_current = make_resume(
             dir_resume,
@@ -111,12 +115,12 @@ def run_main(args):
             prepare_only=prepare_only,
             no_wait=no_wait,
         )
-        logging.info(f"Resuming previous run in {run_current._dir_runs}")
+        logging.info("Resuming previous run in %s", run_current._dir_runs)
     else:
         max_days = int(args[1]) if len(args) > 1 else None
         dir_arg = args[0] if len(args) > 0 else None
         if dir_arg and not os.path.isdir(dir_arg):
-            logging.fatal(f"Expected directory but got {dir_arg}")
+            logging.fatal("Expected directory but got %s", dir_arg)
             sys.exit(-1)
         if dir_arg and DIR_OUTPUT in os.path.abspath(dir_arg):
             if max_days:
@@ -129,7 +133,7 @@ def run_main(args):
                 prepare_only=prepare_only,
                 no_wait=no_wait,
             )
-            logging.info(f"Resuming simulations in {dir_arg}")
+            logging.info("Resuming simulations in %s", dir_arg)
             run_current.check_and_publish()
         else:
             logging.info("Starting new run")
@@ -152,8 +156,12 @@ def run_main(args):
     needs_publish = run_current.check_do_publish() and not is_published
     should_rerun = (not no_resume) and (is_outdated or needs_publish)
     logging.info(
-        f"Run {run_current._name}:\n\t"
-        f"is_outdated = {is_outdated}, is_published = {is_published}, should_rerun = {should_rerun}, no_retry == {no_retry}"
+        "Run %s:\n\tis_outdated = %s, is_published = %s, should_rerun = %s, no_retry == %s",
+        run_current._name,
+        is_outdated,
+        is_published,
+        should_rerun,
+        no_retry,
     )
     # whether things should stop running
     return no_retry or (not should_rerun), df_final
@@ -172,11 +180,11 @@ def scan_queue():
             txt = msg.content
             queue_client.delete_message(msg, msg.pop_receipt)
             # FIX: right now any message causes a full run
-            logging.info(f"Message {txt}")
+            logging.info("Message %s", txt)
             queue_msg = json.loads(txt)
             return queue_msg
         except Exception as ex:
-            logging.error(f"Unable to parse queue message:\n{msg.content}")
+            logging.error("Unable to parse queue message:\n%s", msg.content)
             logging.fatal(ex)
     logging.info("No message in queue, or failed to parse one")
 
@@ -213,7 +221,7 @@ if __name__ == "__main__":
             except ValueError:
                 pass
         msg = scan_queue()
-        logging.info(f"Queue triggered with message:\n{msg}")
+        logging.info("Queue triggered with message:\n%s", msg)
         sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     # rely on argument parsing later

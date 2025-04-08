@@ -393,13 +393,13 @@ def project_raster(
         input_raster = call_safe(gdal.Open, filename)
     except RuntimeError as ex:
         # NOTE: DO NOT DELETE SINCE SOMETHING ELSE COULD BE WRITING CONCURRENTLY
-        logging.error(f"Found invalid file {filename}")
+        logging.error("Found invalid file %s", filename)
         logging.error(get_stack(ex))
         return None
 
     if output_raster is None:
         output_raster = filename[:-4] + ".tif"
-    logging.debug(f"Projecting {filename} to {output_raster}")
+    logging.debug("Projecting %s to %s", filename, output_raster)
 
     with locks_for(output_raster):
 
@@ -464,7 +464,7 @@ def save_geojson(df, path):
     except KeyboardInterrupt as ex:
         raise ex
     except Exception as ex:
-        logging.error(f"Error writing to {file}:\n\t{df}")
+        logging.error("Error writing to %s:\n\t%s", file, df)
         logging.error(get_stack(ex))
         raise ex
 
@@ -492,7 +492,8 @@ def gdf_to_file(df, dir, base=None):
             # HACK: convert any type of date into string
             if ("date" in str(v).lower()) or ("date" in str(k).lower()):
                 # HACK: replace "+00:00" with "Z" since xml and geoserver causes:
-                #       :org.w3c.dom.DOMException: INVALID_CHARACTER_ERR: An invalid or illegal XML character is specified.
+                #       :org.w3c.dom.DOMException: INVALID_CHARACTER_ERR: An invalid or
+                #                                   illegal XML character is specified.
                 df[k] = df[k].astype(str)
                 # HACK: does space break xml?
                 df[k] = df[k].apply(lambda x: x.replace("+00:00", "Z").replace(" ", "T"))
@@ -526,7 +527,7 @@ def gdf_to_file(df, dir, base=None):
     except KeyboardInterrupt as ex:
         raise ex
     except Exception as ex:
-        logging.error(f"Error writing to {file}:\n\t{df}")
+        logging.error("Error writing to %s:\n\t%s", file, df)
         logging.error(get_stack(ex))
         raise ex
 

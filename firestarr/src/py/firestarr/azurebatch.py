@@ -140,7 +140,7 @@ def restart_unusable_nodes(pool_id=POOL_ID, client=None):
                         # HACK: update in case changed during loop
                         node = client.compute_node.get(pool_id, node_id)
                         if "unusable" == node.state:
-                            logging.error(f"Node unusable: {node_id}")
+                            logging.error("Node unusable: %s", node_id)
                             client.compute_node.reboot(pool_id, node_id, node_reboot_option="terminate")
                     except batchmodels.BatchErrorException:
                         # HACK: just ignore because probably another
@@ -161,7 +161,7 @@ def restart_unusable_nodes(pool_id=POOL_ID, client=None):
 #     except KeyboardInterrupt as ex:
 #         raise ex
 #     except batchmodels.BatchErrorException as ex:
-#         logging.warning(f"Ignoring {ex}")
+#         logging.warning("Ignoring %s", ex)
 #         logging.warning(get_stack(ex))
 
 
@@ -179,7 +179,7 @@ def restart_unusable_nodes(pool_id=POOL_ID, client=None):
 #         POOL_MONITOR_THREADS[pool_id] = Process(
 #             target=monitor_pool_nodes, args=[pool_id], daemon=True
 #         )
-#         logging.debug(f"Starting to monitor pool {pool_id}")
+#         logging.debug("Starting to monitor pool %s", pool_id)
 #         POOL_MONITOR_THREADS[pool_id].start()
 #         logging.debug("Done starting pool monitor")
 #     logging.debug("Done creating pool monitor")
@@ -251,7 +251,7 @@ def make_or_get_job(pool_id=POOL_ID, job_id=None, client=None, *args, **kwargs):
             job = client.job.get(job_id)
             # delete if exists and completed
             if "completed" == job.state:
-                logging.info(f"Deleting completed job {job_id}")
+                logging.info("Deleting completed job %s", job_id)
                 client.job.delete(job_id)
                 while job_exists(job_id):
                     print(".", end="", flush=True)
@@ -369,7 +369,7 @@ def check_successful(job_id, task_id=None, client=None):
         # check if all tasks in job are done
         for task in client.task.list(job_id):
             if not is_successful(task):
-                logging.error(f"Task {task.id} not successful")
+                logging.error("Task %s not successful", task.id)
                 return False
         return True
 
@@ -435,23 +435,29 @@ def add_simulation_task(job_id, dir_fire, no_wait=False, client=None, mark_as_do
         # HACK: assume jobs will never be completed without directories being correct
         if "completed" == job.state:
             if not mark_as_done:
-                logging.fatal(f"Job {job_id} is completed but simulation for {dir_fire} didn't finish properly")
+                logging.fatal(
+                    "Job %s is completed but simulation for %s didn't finish properly",
+                    job_id,
+                    dir_fire,
+                )
             else:
                 return task.id
         if task_existed:
             if mark_as_done:
                 # just return if no task but it's done already
-                # HACK: delete since can't mark as complete without showing as failure and still requesting nodes in AutoScale
+                # HACK: delete since can't mark as complete without showing as failure
+                #       and still requesting nodes in AutoScale
                 client.task.delete(job_id, task.id)
                 return None
 
-            # HACK: since sim.sh will complete successfully without running if run already succeeded, there's no harm in running tasks again
+            # HACK: since sim.sh will complete successfully without running if run already
+            #           succeeded, there's no harm in running tasks again
             # if task.state not in ["active", "running"]:
             if "completed" == task.state:
                 # if job_existed and "completed" == job.state:
                 #     # need to not be completed to edit
                 #     client.job.enable(job.id)
-                logging.warning(f"Deleting completed task to rerun {dir_fire}")
+                logging.warning("Deleting completed task to rerun %s", dir_fire)
                 client.task.delete(job_id, task.id)
                 while task_exists(job_id, task.id):
                     print(".", end="", flush=True)
@@ -527,7 +533,7 @@ def get_active(client=None, active_only=False):
             if "JobNotFound" != ex.error.code:
                 raise ex
             # job is listed as active but is invalid so need to recreate
-            logging.error(f"Batch task {job.id} is listed as active but invalid")
+            logging.error("Batch task %s is listed as active but invalid", job.id)
             j = make_or_get_job(job_id=job.id)
             # HACK: replace value in outside dictionary
             jobs[j.id] = j
@@ -575,7 +581,7 @@ def run_oneoff_task(cmd, pool_id=POOL_ID, client=None):
         user_identity=get_user_identity(),
     )
     client.task.add(job_id, task)
-    logging.info(f"Running {task.id}:\n\t{cmd}")
+    logging.info("Running %s:\n\t%s", task.id, cmd)
     if not check_successful(job_id, task_id, client=client):
         # wait if requested and task isn't done
         while True:
@@ -680,7 +686,7 @@ def make_schedule(pool_id=POOL_ID, client=None):
         client = get_batch_client()
     job_schedule_id = f"schedule_check_{pool_id}"
     if client.job_schedule.exists(job_schedule_id):
-        logging.warning(f"Deleting existing {job_schedule_id}")
+        logging.warning("Deleting existing %s", job_schedule_id)
         client.job_schedule.delete(job_schedule_id)
         while client.job_schedule.exists(job_schedule_id):
             print(".", end="", flush=True)

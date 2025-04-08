@@ -33,8 +33,12 @@ def update_max_attempts(n):
     # HACK: so we can lower number of concurrent processes when things fail
     if n > old:
         MAX_ATTEMPTS = n
+        cur = max_concurrent()
         logging.warning(
-            f"Increasing number of attempts so far to {n} from {old} means limiting to {max_concurrent()} concurrent now"
+            "Increasing number of attempts so far to %d from %d means limiting to %d concurrent now",
+            MAX_ATTEMPTS,
+            old,
+            cur,
         )
 
 
@@ -240,7 +244,7 @@ def keep_trying(fct, values, return_with_status=False, *args, **kwargs):
             if 0 == num_cur:
                 break
             if num_cur == num_prev:
-                logging.error(f"Settled on having {num_cur} results not working")
+                logging.error("Settled on having %d results not working", num_cur)
                 break
             num_prev = num_cur
         except BrokenPipeError:
@@ -286,13 +290,13 @@ def keep_trying_groups(fct, values, *args, **kwargs):
                 good = []
                 bad = []
                 for r in ret:
-                    logging.debug(f"Result {r}")
+                    logging.debug("Result %s", r)
                     success, input, output = r
                     if success:
                         good.append(input)
                     else:
                         bad.append(input)
-                        logging.error(f"{input} returned {output}")
+                        logging.error("%s returned %s", input, output)
                 if good:
                     successful[g] = successful.get(g, []) + good
                 if bad:
@@ -301,10 +305,14 @@ def keep_trying_groups(fct, values, *args, **kwargs):
                     done = False
             remaining = unsuccessful
             if num_cur > 0 and num_cur == num_prev:
-                logging.error(f"Settled on having {num_cur} results not working")
+                logging.error("Settled on having %ds results not working", num_cur)
                 break
             num_prev = num_cur
         except BrokenPipeError:
             pass
-    logging.info(f"keep_trying_groups(...) gave:\n\nsuccessful:{successful}\n\nunsuccessful:\n{unsuccessful}")
+    logging.debug(
+        "keep_trying_groups(...) gave:\n\nsuccessful:%s\n\nunsuccessful:\n%s",
+        successful,
+        unsuccessful,
+    )
     return successful, unsuccessful

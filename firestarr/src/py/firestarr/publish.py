@@ -55,21 +55,21 @@ def publish_all(
             force_project=force_project,
         )
         if merge_only:
-            logging.info(f"Stopping after merge for {dir_output}")
+            logging.info("Stopping after merge for %s", dir_output)
             return
         if changed or force or force_publish:
             import publish_azure
 
             publish_azure.upload_dir(dir_output)
             logging.info("Uploaded to azure")
-            logging.info(f"Publishing to geoserver from {dir_output}")
+            logging.info("Publishing to geoserver from %s", dir_output)
             # HACK: might be my imagination, but maybe there's a delay so wait a bit
             time.sleep(PUBLISH_AZURE_WAIT_TIME_SECONDS)
             import publish_geoserver
 
             publish_geoserver.publish_folder(dir_output)
         else:
-            logging.info(f"No changes for {os.path.basename(dir_output)} so not publishing")
+            logging.info("No changes for %s so not publishing", os.path.basename(dir_output))
 
 
 def find_latest_outputs(dir_output=None):
@@ -192,8 +192,9 @@ def merge_dirs(
                 # HACK: seems like currently making empty combined raster so delete
                 #       first in case it's merging into existing and causing problems
                 if changed_only and os.path.isfile(file_base):
-                    # this seems like it would be fine but if interim fire outputs update then cell probability generally
-                    # goes down, so merging with old final raster won't update those cells
+                    # this seems like it would be fine but if interim fire outputs update then
+                    # cell probability generally goes down, so merging with old final raster
+                    # won't update those cells
                     files_merge = files_crs_changed + [file_base]
                 else:
                     files_merge = files_crs
@@ -206,9 +207,13 @@ def merge_dirs(
                     if 1 == len(files_merge):
                         f = files_merge[0]
                         if f == file_tmp:
-                            logging.warning(f"Ignoring trying to merge file into iteslf: {f}")
+                            logging.warning("Ignoring trying to merge file into iteslf: %s", f)
                         else:
-                            logging.debug(f"Only have one file so just copying {f} to {file_tmp}")
+                            logging.debug(
+                                "Only have one file so just copying %s to %s",
+                                f,
+                                file_tmp,
+                            )
                             shutil.copy(f, file_tmp)
                     else:
                         invalid_files = gdal_merge_max(
@@ -220,7 +225,7 @@ def merge_dirs(
                         )
 
                     if invalid_files:
-                        logging.error(f"Removing invalid files {invalid_files}")
+                        logging.error("Removing invalid files %s", invalid_files)
                         force_remove(invalid_files)
 
                     if not find_invalid_tiffs(file_tmp):
@@ -229,7 +234,7 @@ def merge_dirs(
                             call_safe(shutil.move, file_tmp, file_base)
                         else:
                             # can't progressively update COG so need to copy final GTiff in full
-                            logging.info(f"Converting file to {FORMAT_OUTPUT}: {file_base}")
+                            logging.info("Converting file to %s: %s", FORMAT_OUTPUT, file_base)
                             gdal.Translate(
                                 file_base,
                                 file_tmp,
@@ -241,7 +246,7 @@ def merge_dirs(
                         changed = True
             else:
                 if verbose:
-                    logging.info(f"Output already exists for {file_base}")
+                    logging.info("Output already exists for %s", file_base)
             return changed, file_base
 
         # doing this by zones is way slower even if this fails

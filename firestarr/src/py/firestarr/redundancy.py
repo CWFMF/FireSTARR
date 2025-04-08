@@ -136,7 +136,12 @@ def load_safe(self):  # NOTE: if settings change, need to update attributes
                 ex_orig = ex
             if retries <= 0 or not should_ignore(ex):
                 raise ex_orig
-        logging.debug(f"Reinitializing after:\n\t{ex_current}\n\t{self._init_args}\n\t{self._init_kwds}")
+        logging.debug(
+            "Reinitializing after:\n\t%s\n\t%s\n\t%s",
+            ex_current,
+            self._init_args,
+            self._init_kwds,
+        )
         # need to reinitialize
         args = list(self._init_args) + list(self._init_kwds.values())
         for arg in args:

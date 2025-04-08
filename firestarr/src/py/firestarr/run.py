@@ -255,7 +255,7 @@ class Run(object):
                 self._modelrun = rundata.get("modelrun", None)
                 self._published_clean = rundata.get("published_clean", False)
             except Exception as ex:
-                logging.error(f"Couldn't load existing simulation file {self._file_rundata}")
+                logging.error("Couldn't load existing simulation file %s", self._file_rundata)
                 logging.error(get_stack(ex))
 
     def save_rundata(self):
@@ -282,7 +282,7 @@ class Run(object):
                     all_tiffs.append(os.path.join(root, f))
         invalid_paths = find_invalid_tiffs(all_tiffs)
         if invalid_paths:
-            logging.error(f"Found invalid paths:\n\t{invalid_paths}")
+            logging.error("Found invalid paths:\n\t%s", invalid_paths)
             if remove:
                 force_remove(invalid_paths)
         return invalid_paths
@@ -371,10 +371,10 @@ class Run(object):
                         is_prepared[dir_fire] = df_fire
                     elif len(files_project) != len_target:
                         if ignore_incomplete_okay:
-                            logging.error(f"Ignoring incomplete fire {dir_fire}")
+                            logging.error("Ignoring incomplete fire %s", dir_fire)
                             is_ignored[dir_fire] = df_fire
                         else:
-                            logging.warning(f"Adding incomplete fire {dir_fire}")
+                            logging.warning("Adding incomplete fire %s", dir_fire)
                             is_incomplete[dir_fire] = df_fire
                     else:
                         is_complete[dir_fire] = df_fire
@@ -422,7 +422,7 @@ class Run(object):
             )
         num_done = len(is_complete)
         if is_ignored:
-            logging.error(f"Ignored incomplete fires: {list(is_ignored.keys())}")
+            logging.error("Ignored incomplete fires: %s", list(is_ignored.keys()))
         if ignore_incomplete_okay:
             num_done += len(is_ignored)
         successful = num_done == len(df_fires)
@@ -444,7 +444,11 @@ class Run(object):
                     logging.error("Missing sim_time for some fires")
                 else:
                     total_time = (sim_times.astype(int)).sum()
-                    logging.info(f"Done running {len(df_final)} fires with a total simulation time of {total_time}")
+                    logging.info(
+                        "Done running %d fires with a total simulation time of %d",
+                        len(df_final),
+                        total_time,
+                    )
 
         # HACK: df_final isn't saved in some cases so do that here
         if df_final is not None:
@@ -499,7 +503,7 @@ class Run(object):
                     # publish didn't work, but nothing is running, so retry running?
                     logging.error("Changes found when publishing, but nothing running so retry")
         self.save_rundata()
-        logging.info(f"Finished simulation for {self._id}")
+        logging.info("Finished simulation for %s", self._id)
 
         # if this is done then shouldn't need any locks for it
         def find_locks(dir_find):
@@ -511,7 +515,7 @@ class Run(object):
                             files_lock.append(os.path.join(root, f))
             return files_lock
 
-        logging.info(f"Removing file locks for {self._id}")
+        logging.info("Removing file locks for %s", self._id)
         force_remove(
             itertools.chain.from_iterable(
                 [find_locks(d) for d in [self._dir_runs, self._dir_sims, self._dir_fires, self._dir_output]]
@@ -543,7 +547,7 @@ class Run(object):
             )
             df_prioritized = self.prioritize(df_fires)
             gdf_to_file(df_prioritized, _)
-            logging.info(f"CRS is {df_prioritized.crs} for:\n{df_prioritized}")
+            logging.info("CRS is %s for:\n%s", df_prioritized.crs, df_prioritized)
             return _
 
         return do_create(self._file_fires)
@@ -586,12 +590,12 @@ class Run(object):
             except KeyboardInterrupt as ex:
                 raise ex
             except Exception as ex:
-                logging.error(f"Error processing fire {fire_name}")
+                logging.error("Error processing fire %s", fire_name)
                 logging.error(get_stack(ex))
                 raise ex
 
         list_rows = list(zip(*list(df_fires.reset_index().iterrows())))[1]
-        logging.info(f"Setting up simulation inputs for {len(df_fires)} groups")
+        logging.info("Setting up simulation inputs for %d groups", len(df_fires))
         # for row_fire in tqdm(list_rows):
         #     do_fire(row_fire)
         files_sim = keep_trying(
@@ -599,7 +603,7 @@ class Run(object):
             list_rows,
             desc="Preparing groups",
         )
-        logging.info(f"Have {len(files_sim)} groups prepared")
+        logging.info("Have %d groups prepared", len(files_sim))
         if FLAG_SAVE_PREPARED:
             try:
                 df_fires_prepared = pd.concat([gdf_from_file(get_simulation_file(f)) for f in files_sim])
@@ -643,7 +647,11 @@ class Run(object):
 
     @log_order(show_args=["dir_fire"])
     def do_run_fire(self, dir_fire, prepare_only=False, run_only=False, no_wait=False):
-        logging.debug(f"do_run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
+        logging.debug(
+            "do_run_fire(...): self._no_wait = %s; no_wait = %s",
+            self._no_wait,
+            no_wait,
+        )
         result = sim_wrapper.run_fire_from_folder(
             dir_fire,
             self._dir_output,
@@ -662,7 +670,7 @@ class Run(object):
         diff_extra = dir_names.difference(fire_names)
         if diff_extra:
             error = f"Have directories for fires that aren't in input:\n{diff_extra}"
-            logging.error(f"Stopping completely since folder structure is invalid\n{error}")
+            logging.error("Stopping completely since folder structure is invalid\n%s", error)
             # HACK: deal with extra folders by always stopping for now
             sys.exit(-1)
             raise RuntimeError(error)
@@ -684,7 +692,7 @@ class Run(object):
         missing = [fire_name for fire_name, file_sim in expected.items() if not check_file(file_sim)]
         if missing:
             if remove_directory:
-                logging.info(f"Need to make directories for {len(missing)} simulations")
+                logging.info("Need to make directories for %d simulations", len(missing))
                 dirs_missing = [os.path.join(self._dir_sims, x) for x in missing]
                 dirs_missing_existing = [p for p in dirs_missing if os.path.isdir(p)]
                 apply(
@@ -693,7 +701,7 @@ class Run(object):
                     desc="Removing invalid fire directories",
                 )
             else:
-                logging.info(f"Need to fix geojson for {len(missing)} simulations")
+                logging.info("Need to fix geojson for %d simulations", len(missing))
                 for fire_name, file_sim in expected.items():
                     try_remove(file_sim)
         return missing
@@ -756,10 +764,10 @@ class Run(object):
                     # should be in the same order as input
                     dir_fire = dirs_sim[g][i]
                     if isinstance(result, Exception):
-                        # logging.warning(f"Exception running {dir_fire} was {result}")
+                        # logging.warning("Exception running %s was %s", dir_fire, result)
                         # seems to be happening when process finishes so quickly that python is still looking for it
                         #       [Errno 2] No such file or directory: '/proc/297805/cwd'
-                        logging.warning(f"Exception running {dir_fire} was:\n{get_stack(result)}")
+                        logging.warning("Exception running %s was:\n%s", dir_fire, get_stack(result))
                     if (
                         result is None
                         or isinstance(result, str)
@@ -768,7 +776,7 @@ class Run(object):
                     ):
                         logging.warning("Could not run fire %s", dir_fire)
                         if isinstance(result, str):
-                            logging.error(f"{dir_fire} result is string {result}")
+                            logging.error("%s result is string %s", dir_fire, result)
                             result = None
                         fire_name = os.path.basename(dir_fire)
                         if fire_name not in results:
@@ -803,7 +811,9 @@ class Run(object):
                             merge_only=not self.check_do_publish(),
                         )
                         logging.info(
-                            f"Done {'publishing' if self.check_do_publish() else 'merging'} directories for {g}"
+                            "Done %s directories for %s",
+                            "publishing" if self.check_do_publish() else "merging",
+                            g,
                         )
                     # just updated so not changed anymore
                     changed = False
@@ -845,7 +855,11 @@ class Run(object):
         update_max_attempts(max_attempts)
 
         no_wait = self._no_wait or self._is_batch
-        logging.debug(f"def run_fire(...): self._no_wait = {self._no_wait}; no_wait = {no_wait}")
+        logging.debug(
+            "def run_fire(...): self._no_wait = %s; no_wait = %s",
+            self._no_wait,
+            no_wait,
+        )
         # if no_wait:
         #     logging.info("Not waiting or checking publishing")
         #     check_publish = do_nothing
@@ -865,7 +879,7 @@ class Run(object):
 
         # dictionaries preserve insertion order
         dirs_sim = {k: sort_dirs(k) for k, v in sorted(attempts_by_area.items(), key=lambda kv: kv[1])}
-        # logging.debug(f"Sorted by area and number of failures is:\n\t{dirs_sim}")
+        # logging.debug("Sorted by area and number of failures is:\n\t%s", dirs_sim)
 
         if self._is_batch:
             dirs_fire = [os.path.join(self._dir_sims, x) for x in itertools.chain.from_iterable(dirs_sim.values())]
@@ -897,9 +911,9 @@ class Run(object):
         logging.info("Calculating time")
         t1 = timeit.default_timer()
         total_time = t1 - t0
-        logging.info("Took %ds to run fires", total_time)
-        logging.info("Successful simulations used %ds", sim_time)
-        if sim_times:
+        logging.info("Took %ss to run fires", total_time)
+        logging.info("Successful simulations used %ss", sim_time)
+        if sim_times and not np.any(np.isnan(sim_times)):
             logging.info(
                 "Shortest simulation took %ds, longest took %ds",
                 min(sim_times),
@@ -942,12 +956,20 @@ class Run(object):
                         logging.info("Saving with extra information at end")
                         gdf_to_file(df_final_copy, self._file_fires)
                     else:
-                        logging.error(f"Have {len(df_final_copy)} fires but expected {len(df_final)}")
-                        logging.error(f"{df_final_copy}\nvs\n{df_final}")
+                        logging.error(
+                            "Have %d fires but expected %d",
+                            len(df_final_copy),
+                            len(df_final),
+                        )
+                        logging.error("%s\nvs\n%s", df_final_copy, df_final)
                     # NOTE: only if all this worked do we actually assign again
                     df_final = df_final_copy
                 else:
-                    logging.error(f"Expected {len(df_fires)} at end but have {len(df_final)}")
+                    logging.error(
+                        "Expected %d at end but have %d",
+                        len(df_fires),
+                        len(df_final),
+                    )
             except Exception as ex:
                 logging.error("Couldn't save final fires")
                 logging.error(get_stack(ex))

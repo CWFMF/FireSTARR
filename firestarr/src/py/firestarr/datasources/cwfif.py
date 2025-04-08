@@ -17,9 +17,8 @@ from common import (
     remove_timezone_utc,
 )
 from datasources.datatypes import SourceModel
-from net import try_save_http
-
 from gis import gdf_from_file, save_geojson, to_gdf
+from net import try_save_http
 
 DIR_CWFIF = ensure_dir(os.path.join(DIR_DOWNLOAD, "cwfif"))
 URL_CWFIF_WX = "https://app-cwfmf-api-cwfis-dev.wittyplant-59b495b3.canadacentral.azurecontainerapps.io/gribwx?"
@@ -132,7 +131,7 @@ def get_model_dir_uncached(model):
 
     def do_parse(_):
         df_run = pd.read_csv(_)
-        logging.info(f"Model info is\n{df_run}")
+        logging.info("Model info is\n%s", df_run)
         model_time = pd.to_datetime(df_run["datetime"]).max()
         return ensure_dir(os.path.join(DIR_CWFIF, model, model_time.strftime("%Y%m%d_%HZ")))
 

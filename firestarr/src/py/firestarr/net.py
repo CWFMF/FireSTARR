@@ -72,7 +72,7 @@ def _save_http_uncached(
     fct_is_invalid=always_false,
 ):
     modlocal = None
-    logging.debug(f"Opening {url}")
+    logging.debug("Opening %s", url)
     response = requests.get(
         url,
         stream=True,
@@ -123,30 +123,30 @@ def _save_http_cached(
 
 
 def check_downloaded(path):
-    # logging.debug(f"check_downloaded({path}) - waiting")
+    # logging.debug("check_downloaded(%s) - waiting", path)
     with locks_for(CACHE_LOCK_FILE):
         # FIX: should return False if file no longer exists
-        # logging.debug(f"check_downloaded({path}) - checking")
+        # logging.debug("check_downloaded(%s) - checking", path)
         result = CACHE_DOWNLOADED.get(path, None)
-        # logging.debug(f"check_downloaded({path}) - returning {result}")
+        # logging.debug("check_downloaded(%s) - returning %s", path, result)
         return result
 
 
 def mark_downloaded(path, flag=True):
-    # logging.debug(f"mark_downloaded({path}, {flag})")
+    # logging.debug("mark_downloaded(%s, %s)", path, flag)
     if not (flag and path in CACHE_DOWNLOADED):
-        # logging.debug(f"mark_downloaded({path}, {flag}) - waiting")
+        # logging.debug("mark_downloaded(%s, %s) - waiting", path, flag)
         with locks_for(CACHE_LOCK_FILE):
-            # logging.debug(f"mark_downloaded({path}, {flag}) - marking")
+            # logging.debug("mark_downloaded(%s, %s) - marking", path, flag)
             if flag:
-                # logging.debug(f"mark_downloaded({path}, {flag}) - adding")
+                # logging.debug("mark_downloaded(%s, %s) - adding", path, flag)
                 CACHE_DOWNLOADED[path] = path
             elif path in CACHE_DOWNLOADED:
-                # logging.debug(f"mark_downloaded({path}, {flag}) - removing")
+                # logging.debug("mark_downloaded(%s, %s) - removing", path, flag)
                 del CACHE_DOWNLOADED[path]
     # else:
-    #     logging.debug(f"mark_downloaded({path}, {flag}) - do nothing")
-    # logging.debug(f"mark_downloaded({path}, {flag}) - returning {path}")
+    #     logging.debug("mark_downloaded(%s, %s) - do nothing", path, flag)
+    # logging.debug("mark_downloaded(%s, %s) - returning %s", path, flag, path)
     return path
 
 
@@ -158,7 +158,7 @@ def save_http(
     fct_post_save,
     fct_is_invalid=always_false,
 ):
-    logging.debug(f"save_http({url}, {save_as})")
+    logging.debug("save_http(%s, %s)", url, save_as)
 
     @ensures(
         paths=save_as,
@@ -169,17 +169,17 @@ def save_http(
     def do_save(_):
         # if another thread downloaded then don't do it again
         # @ensures already checked if file exists but we want to replace
-        # logging.debug(f"do_save({_})")
+        # logging.debug("do_save(%s)", _)
         r = check_downloaded(_)
         if r:
-            # logging.debug(f"{_} was downloaded already")
+            # logging.debug("%s was downloaded already", _)
             return r
         # HACK: put in one last lock so it doesn't download twice
         with locks_for(_ + ".tmp"):
             # HACK: one last check for file
             if not (keep_existing and os.path.isfile(_)):
                 r = _save_http_cached((fct_pre_save or do_nothing)(url), _, fct_is_invalid)
-        # logging.debug(f"do_save({_}) - returning {r}")
+        # logging.debug("do_save(%s) - returning %s", _, r)
         # mark_downloaded(_)
         return _
 
@@ -189,14 +189,14 @@ def save_http(
         # either way, call fct_post_save on the file
         r = check_downloaded(save_as)
         if not r:
-            # logging.debug(f"save_http({url}, {save_as}) - calling do_save({save_as})")
+            # logging.debug("save_http(%s, %s) - calling do_save(%s)", url, save_as, save_as)
             r = do_save(save_as)
             # might have already existed, so marking in do_save() might not happen
             r = mark_downloaded(r)
         # else:
-        #     logging.debug(f"save_http({url}, {save_as}) - {save_as} was downloaded")
+        #     logging.debug("save_http(%s, %s) - %s was downloaded", url, save_as, save_as)
         r = (fct_post_save or do_nothing)(r)
-        # logging.debug(f"save_http({url}, {save_as}) - returning {r}")
+        # logging.debug("save_http(%s, %s) - returning %s", url, save_as, r)
         if not check_downloaded(save_as):
             raise RuntimeError(f"Expected {save_as} to be marked as downloaded")
         return r
@@ -239,7 +239,7 @@ def try_save_http(
         except KeyboardInterrupt as ex:
             raise ex
         except Exception as ex:
-            logging.info(f"Caught {ex} in {__name__}")
+            logging.info("Caught %s in %s", ex, __name__)
             if isinstance(ex, KeyboardInterrupt):
                 raise ex
             m = mask_url(url)
@@ -250,8 +250,18 @@ def try_save_http(
                     CACHE_DOWNLOADED[save_as] = None
                 return None
             if FLAG_DEBUG or save_tries >= max_save_retries:
-                logging.error(f"Downloading {m} to {save_as} - Failed after {save_tries} attempts")
+                logging.error(
+                    "Downloading %s to %s - Failed after %s attempts",
+                    m,
+                    save_as,
+                    save_tries,
+                )
                 raise ex
-            logging.warning(f"Downloading {m} to {save_as} - Retrying after:\n\t{ex}")
+            logging.warning(
+                "Downloading %s to %s - Retrying after:\n\t%s",
+                m,
+                save_as,
+                ex,
+            )
             time.sleep(RETRY_DELAY)
             save_tries += 1

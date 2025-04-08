@@ -146,7 +146,12 @@ class Simulation(object):
             df_wx_actual = df_wx_actual.loc[dists == dist_min]
             # NOTE: actuals should be in LST already
             if dist_min > MAXIMUM_STATION_DISTANCE:
-                logging.warning(f"Station for ({lat}, {lon}) is {round(dist_min / KM_TO_M, 1)}km from location")
+                logging.warning(
+                    "Station for (%f, %f) is %fkm from location",
+                    lat,
+                    lon,
+                    round(dist_min / KM_TO_M, 1),
+                )
             ffmc_old, dmc_old, dc_old, time_startup = df_wx_actual.sort_values([COLUMN_TIME], ascending=False).iloc[0][
                 ["ffmc", "dmc", "dc", COLUMN_TIME]
             ]
