@@ -35,7 +35,6 @@ import math
 import os
 
 import numpy as np
-from gis import with_gdal_exceptions_off
 from osgeo import gdal
 from osgeo_utils.auxiliary.util import GetOutputDriverFor
 from redundancy import call_safe
@@ -43,6 +42,8 @@ from redundancy import call_safe
 # import logging
 from tqdm import tqdm
 from tqdm_util import keep_trying, pmap
+
+from gis import with_gdal_exceptions_off
 
 __version__ = "$id$"[5:-1]
 

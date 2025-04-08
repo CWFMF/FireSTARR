@@ -5,8 +5,9 @@ from functools import cache
 
 import tqdm_util
 from common import is_empty, logging, read_csv_safe
-from gis import CRS_COMPARISON, to_gdf
 from net import try_save_http
+
+from gis import CRS_COMPARISON, to_gdf
 
 WFS_ROOT = "https://cwfis.cfs.nrcan.gc.ca/geoserver/public/wms?service=wfs&version=2.0.0"
 DEFAULT_STATUS_IGNORE = ["OUT", "UC", "BH", "U"]

@@ -24,10 +24,11 @@ from common import (
     zip_folder,
 )
 from gdal_merge_max import gdal_merge_max
-from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 from osgeo import gdal
 from redundancy import call_safe, get_stack
 from tqdm_util import keep_trying, tqdm
+
+from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 
 
 # distinguish erros with publishing from other problems

@@ -45,18 +45,6 @@ from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
 from datasources.default import SourceFireActive
 from fires import get_fires_folder, group_fires
-from gis import (
-    CRS_COMPARISON,
-    CRS_SIMINPUT,
-    CRS_WGS84,
-    VECTOR_FILE_EXTENSION,
-    area_ha,
-    find_invalid_tiffs,
-    gdf_from_file,
-    gdf_to_file,
-    make_gdf_from_series,
-    vector_path,
-)
 from log import LOGGER_NAME, add_log_file
 from publish import merge_dirs, publish_all
 from redundancy import call_safe, get_stack
@@ -80,6 +68,19 @@ from tqdm_util import (
     pmap_by_group,
     tqdm,
     update_max_attempts,
+)
+
+from gis import (
+    CRS_COMPARISON,
+    CRS_SIMINPUT,
+    CRS_WGS84,
+    VECTOR_FILE_EXTENSION,
+    area_ha,
+    find_invalid_tiffs,
+    gdf_from_file,
+    gdf_to_file,
+    make_gdf_from_series,
+    vector_path,
 )
 
 LOGGER_FIRE_ORDER = logging.getLogger(f"{LOGGER_NAME}_order.log")

@@ -24,6 +24,7 @@ from common import (
     read_json_safe,
     remove_timezone_utc,
 )
+from datasources.cwfif import fix_coords, fmt_rounded
 from datasources.datatypes import (
     COLUMN_TIME,
     SourceFwi,
@@ -31,10 +32,10 @@ from datasources.datatypes import (
     check_columns,
     make_template_empty,
 )
-from datasources.cwfif import fix_coords, fmt_rounded
-from gis import find_closest, gdf_from_file, save_geojson
 from make_bounds import get_bounds_from_id
 from net import RETRY_MAX_ATTEMPTS, try_save_http
+
+from gis import find_closest, gdf_from_file, save_geojson
 
 DIR_AGENCY_ON = ensure_dir(os.path.join(DIR_DOWNLOAD, "agency", "ON"))
 SERVER_LIO = "https://ws.lioservices.lrc.gov.on.ca"

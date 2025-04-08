@@ -1,4 +1,5 @@
 import sys
+
 from common import check_arg, logging
 from main import make_resume
 

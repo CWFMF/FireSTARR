@@ -24,6 +24,7 @@ from datasources.datatypes import (
     SourceModel,
     make_template_empty,
 )
+
 from gis import (
     CRS_COMPARISON,
     CRS_WGS84,
