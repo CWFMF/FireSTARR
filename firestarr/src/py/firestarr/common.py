@@ -280,7 +280,7 @@ def read_config(force=False):
                 v = os.environ.get(k, "")
                 if v != "":
                     # don't want value in log but want to note it was loaded from outside config file
-                    logging.info("Setting %s from environment variable", k)
+                    logging.debug("Setting %s from environment variable", k)
                     CONFIG[k] = v
         file_bounds = CONFIG["BOUNDS_FILE"]
         if not os.path.isfile(file_bounds):
@@ -427,7 +427,7 @@ def start_process(run_what, cwd):
     @param cwd Directory to run in
     @return Running subprocess
     """
-    logging.info("Running in '%s':\n\t%s", cwd, run_what)
+    logging.debug("Running in '%s':\n\t%s", cwd, run_what)
     p = subprocess.Popen(run_what, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd)
     p.args = run_what
     p.cwd = cwd
@@ -455,14 +455,14 @@ def run_process(*args, **kwargs):
 def zip_folder(zip_name, path, ignore_locks=True):
     with zipfile.ZipFile(zip_name, "w") as zf:
         all_files = []
-        logging.info("Finding files")
+        logging.debug("Finding files")
         for root, dirs, files in os.walk(path):
             for d in dirs:
                 dir = os.path.join(root, d)
                 zf.write(dir, dir.replace(path, "").lstrip("/"))
             for f in files:
                 all_files.append(os.path.join(root, f))
-        logging.info("Zipping")
+        logging.debug("Zipping")
         for f in tqdm_util.apply(all_files, desc=os.path.basename(zip_name)):
             f_relative = f.replace(path, "").lstrip("/")
             if not f_relative.endswith(".lock") or not ignore_locks:
@@ -602,7 +602,7 @@ class LockTracker(object):
 
     def __del__(self) -> None:
         if FLAG_DEBUG_LOCKS:
-            logging.info(f"Removing locks on exit:\n\t{self._lock_files}")
+            logging.debug(f"Removing locks on exit:\n\t{self._lock_files}")
         try_remove(list(self._lock_files))
 
 
