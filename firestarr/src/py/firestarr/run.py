@@ -756,7 +756,7 @@ class Run(object):
             # global cur_group
             cur_group = g
             cur_results = sim_results
-            # print(f"g: {g}\n\tsim_results: {sim_results}")
+            # logging.debug("g: %s\n\tsim_results: %s", g, sim_results)
             with locks_for(FILE_LOCK_PREPUBLISH):
                 for i in range(len(sim_results)):
                     # result should be a geodataframe of the simulation data
@@ -823,7 +823,7 @@ class Run(object):
         # callback_publish = check_publish if self.check_do_merge() else do_nothing
 
         def prepare_fire(dir_fire):
-            # print(dir_fire)
+            # logging.debug(dir_fire)
             if check_running(dir_fire):
                 # already running, so prepared but no outputs
                 return dir_fire
@@ -953,7 +953,7 @@ class Run(object):
                 if len(df_final) == len(df_fires):
                     df_final_copy = df_fires_merge_final
                     if len(df_final_copy) == len(df_final):
-                        logging.info("Saving with extra information at end")
+                        logging.debug("Saving with extra information at end")
                         gdf_to_file(df_final_copy, self._file_fires)
                     else:
                         logging.error(

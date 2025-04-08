@@ -264,13 +264,13 @@ class Simulation(object):
             # figure out local sunrise/sunset
             # FIX: if values are not valid then station isn't started so use TMP to figure out when it should
             if not (0 <= ffmc_old):
-                print(f"Invalid FFMC value for startup {ffmc_old}")
+                logging.warning("Invalid FFMC value for startup %s", ffmc_old)
                 ffmc_old = 0
             if not (0 <= dmc_old):
-                print(f"Invalid DMC value for startup {dmc_old}")
+                logging.warning("Invalid DMC value for startup %s", dmc_old)
                 dmc_old = 0
             if not (0 <= dc_old):
-                print(f"Invalid DC value for startup {dc_old}")
+                logging.warning("Invalid DC value for startup %f", dc_old)
                 dc_old = 0
             # HACK: calculate from hour after startup since startup values are on startup hour
             df_wx_since_startup = df_wx_fire.loc[df_wx_fire["TIMESTAMP"] > time_startup].sort_values(

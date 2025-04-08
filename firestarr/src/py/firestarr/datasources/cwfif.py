@@ -191,7 +191,7 @@ def query_wx_ensembles_rounded(model, lat, lon):
         df = df.set_index(index_final)
         return df
 
-    print(url)
+    logging.debug(url)
     return try_save_http(
         url,
         save_as,

@@ -49,7 +49,7 @@ def try_call_safe(quiet, fct, *args, **kwargs):
             # OSError: [Errno 5] Input/output
             if retries <= 0 or not should_ignore(ex):
                 if not quiet:
-                    print(get_stack(ex))
+                    logging.error(get_stack(ex))
                 raise ex
             retries -= 1
 

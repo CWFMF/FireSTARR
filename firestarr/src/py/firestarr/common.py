@@ -602,7 +602,7 @@ class LockTracker(object):
 
     def __del__(self) -> None:
         if FLAG_DEBUG_LOCKS:
-            print(f"Removing locks on exit:\n\t{self._lock_files}")
+            logging.info(f"Removing locks on exit:\n\t{self._lock_files}")
         try_remove(list(self._lock_files))
 
 

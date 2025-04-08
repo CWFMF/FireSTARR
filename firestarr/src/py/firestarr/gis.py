@@ -217,7 +217,7 @@ def GetCellSize(raster):
     pixelSizeX = gt[1]
     pixelSizeY = -gt[5]
     if pixelSizeX != pixelSizeY:
-        print("Raster must have square pixels")
+        logging.fatal("Raster must have square pixels")
         sys.exit(-2)
     del r
     del gt
@@ -240,7 +240,7 @@ def Rasterize(file_lyr, raster, reference, datatype=gdal.GDT_Byte, creation_opti
         pixelSizeX = gt[1]
         pixelSizeY = -gt[5]
         if pixelSizeX != pixelSizeY:
-            print("Raster must have square pixels")
+            logging.fatal("Raster must have square pixels")
             sys.exit(-2)
 
         gdalformat = "GTiff"
@@ -253,7 +253,7 @@ def Rasterize(file_lyr, raster, reference, datatype=gdal.GDT_Byte, creation_opti
         lyr = feature.GetLayer()
 
         # Rasterise
-        # ~ print("Rasterising shapefile...")
+        # ~ logging.debug("Rasterising shapefile...")
         # crs = osr.SpatialReference(wkt=ref_raster.GetProjectionRef())
         crs = ref_raster.GetProjectionRef()
         output = gdal.GetDriverByName(gdalformat).Create(
@@ -499,9 +499,9 @@ def gdf_to_file(df, dir, base=None):
                 df[k] = df[k].apply(lambda x: x.replace("+00:00", "Z").replace(" ", "T"))
             elif v == np.int64:
                 df[k] = df[k].astype(int)
-        print(file)
-        print(df)
-        print(df.dtypes)
+        logging.debug(file)
+        logging.debug(df)
+        logging.debug(df.dtypes)
         # df_index = df.set_index(keys)
         fct_save = df.to_file
 
