@@ -48,8 +48,6 @@ from common import (
     start_process,
     try_remove,
 )
-from redundancy import call_safe
-
 from gis import (
     Rasterize,
     find_best_raster,
@@ -59,6 +57,7 @@ from gis import (
     save_geojson,
     save_point_file,
 )
+from redundancy import call_safe
 
 # set to "" if want intensity grids
 NO_INTENSITY = "--no-intensity"
@@ -586,33 +585,40 @@ def _run_fire_from_folder(
                             run_only=run_only,
                             no_wait=no_wait,
                         )
+                sim_time = None
                 # if we're going to run then move old log if it exists
                 if os.path.isfile(file_log):
-                    filetime = os.path.getmtime(file_log)
-                    filedatetime = datetime.datetime.fromtimestamp(filetime)
-                    file_log_old = file_log.replace(".log", f"{filedatetime.strftime(FMT_FILE_SECOND)}.log")
-                    logging.warning(f"Moving old log file from {file_log} to {file_log_old}")
-                    shutil.move(file_log, file_log_old)
-                try:
-                    # FIX: not using/no return value
-                    logging.info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
-                    real_time = run_sim(dir_fire, no_wait=no_wait)
-                    logging.info(f"End run_sim({dir_fire}, no_wait={no_wait})")
-                    while not no_wait and check_running(dir_fire):
-                        time.sleep(10)
-                    logging.info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
-                    # parse from file instead of using clock time
                     sim_time = parse_sim_time(dir_fire)
-                    if not no_wait and sim_time is None:
-                        raise RuntimeError(f"Invalid simulation time for {dir_fire}")
-                except FileNotFoundError as ex:
-                    # HACK: work around python not seeing processes that are too fast
-                    # seems to be happening when process finishes so quickly that python is still looking for it
-                    #       [Errno 2] No such file or directory: '/proc/[0-9]*/cwd'
-                    # parse from file instead of using clock time
-                    sim_time = parse_sim_time(dir_fire)
-                    if not no_wait and sim_time is None:
-                        raise ex
+                # HACK: check sim time before moving
+                if sim_time is None:
+                    if os.path.isfile(file_log):
+                        filetime = os.path.getmtime(file_log)
+                        filedatetime = datetime.datetime.fromtimestamp(filetime)
+                        file_log_old = file_log.replace(".log", f"{filedatetime.strftime(FMT_FILE_SECOND)}.log")
+                        logging.warning(f"Moving old log file from {file_log} to {file_log_old}")
+                        shutil.move(file_log, file_log_old)
+                    try:
+                        # FIX: not using/no return value
+                        logging.info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
+                        real_time = run_sim(dir_fire, no_wait=no_wait)
+                        logging.info(f"End run_sim({dir_fire}, no_wait={no_wait})")
+                        while not no_wait and check_running(dir_fire):
+                            time.sleep(10)
+                        logging.info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
+                        # parse from file instead of using clock time
+                        sim_time = parse_sim_time(dir_fire)
+                        if not no_wait and sim_time is None:
+                            raise RuntimeError(f"Invalid simulation time for {dir_fire}")
+                    except FileNotFoundError as ex:
+                        # HACK: work around python not seeing processes that are too fast
+                        # seems to be happening when process finishes so quickly that python is still looking for it
+                        #       [Errno 2] No such file or directory: '/proc/[0-9]*/cwd'
+                        # parse from file instead of using clock time
+                        sim_time = parse_sim_time(dir_fire)
+                        if not no_wait and sim_time is None:
+                            raise ex
+                else:
+                    logging.info(f"Found sim_time {sim_time} for {dir_fire}")
             except KeyboardInterrupt as ex:
                 raise ex
             except Exception as ex:
