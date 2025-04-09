@@ -259,7 +259,9 @@ if __name__ == "__main__":
         # )
         run_current = make_resume(do_publish=True, do_merge=True, no_wait=True)
         try:
-            run_current.check_and_publish(force=True)
+            # NOTE: was forcing to ensure publish, but try without
+            # run_current.check_and_publish(force=True)
+            run_current.check_and_publish()
         except PublishError as ex:
             if should_resume:
                 # there shouldn't be an error if we were resuming
