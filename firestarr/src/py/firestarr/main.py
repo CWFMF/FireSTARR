@@ -22,6 +22,7 @@ from log import add_log_file
 from publish import PublishError
 from redundancy import get_stack
 from run import Run, make_resume
+from sim_wrapper import assign_sim_batch
 
 # NOTE: rotating log file doesn't help because this isn't continuously running
 LOG_MAIN = add_log_file(
@@ -213,7 +214,11 @@ if __name__ == "__main__":
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
     if FROM_QUEUE:
         # allow other arguments but remove duplicates
-        QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry", "--no-wait"]
+        QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
+        # HACK: if not using batch then wait for results
+        if assign_sim_batch():
+            logging.debug("Not waiting since running in batch")
+            QUEUE_ARGS.extend(["--no-wait"])
         REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
         for a in REMOVE_ARGS:
             try:

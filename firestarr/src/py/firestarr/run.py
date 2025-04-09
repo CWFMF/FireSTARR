@@ -243,7 +243,7 @@ class Run(object):
             self._origin = Origin(self._start_time)
             self._simulation = Simulation(self._dir_out, self._dir_sims, self._origin)
             self._src_fires = SourceFireGroup(self._dir_out, self._dir_fires, self._origin)
-            self._is_batch = assign_sim_batch(self._dir_sims)
+            self._is_batch = assign_sim_batch()
 
     def load_rundata(self):
         self._modelrun = None

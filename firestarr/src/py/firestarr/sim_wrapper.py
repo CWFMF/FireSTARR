@@ -176,7 +176,7 @@ def assign_job(dir_fire, client=None):
     return JOB_ID
 
 
-def assign_sim_batch(dir_fire, force_local=None, force_batch=None):
+def assign_sim_batch(force_local=None, force_batch=None):
     global _RUN_SIM
     global _FIND_RUNNING
     global JOB_ID
@@ -212,14 +212,14 @@ def assign_sim_batch(dir_fire, force_local=None, force_batch=None):
 def check_sim_batch(dir_fire, no_wait=None):
     with locks_for(os.path.join(DIR_DATA, "check_batch_client")):
         if _RUN_SIM is None:
-            assign_sim_batch(dir_fire)
+            assign_sim_batch()
     return _RUN_SIM(dir_fire, no_wait=no_wait)
 
 
 def check_sim_running(dir_fire):
     with locks_for(os.path.join(DIR_DATA, "check_batch_client")):
         if _FIND_RUNNING is None:
-            assign_sim_batch(dir_fire)
+            assign_sim_batch()
     return _FIND_RUNNING(dir_fire)
 
 
