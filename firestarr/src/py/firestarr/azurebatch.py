@@ -66,12 +66,12 @@ def get_container_registries():
 
 _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
     image_reference=batchmodels.ImageReference(
-        publisher="microsoft-azure-batch",
-        offer="ubuntu-server-container",
-        sku="20-04-lts",
+        publisher="microsoft-dsvm",
+        offer="ubuntu-hpc",
+        sku="2204",
         version="latest",
     ),
-    node_agent_sku_id="batch.node.ubuntu 20.04",
+    node_agent_sku_id="batch.node.ubuntu 22.04",
     container_configuration=batchmodels.ContainerConfiguration(
         type="dockerCompatible",
         container_image_names=[_CONTAINER_PY, _CONTAINER_BIN],
