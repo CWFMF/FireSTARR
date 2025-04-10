@@ -173,9 +173,9 @@ class SourceFeatureM3(SourceFeature):
                 else datetime.date(self._origin.today.year - 1, 1, 1)
             )
         )
-        self._source = (SourceFeatureM3Service if USE_CWFIS_SERVICE else SourceFeatureM3Download)(
-            self._dir_out, self._last_active_since
-        )
+        # service not parsing correctly
+        # self._source = (SourceFeatureM3Service if USE_CWFIS_SERVICE else SourceFeatureM3Download)
+        self._source = SourceFeatureM3Download(self._dir_out, self._last_active_since)
 
     def _get_features(self):
         return self._source.get_features()
