@@ -410,7 +410,8 @@ class SourceFwiCwfisService(SourceFwi):
 class SourceFwiCwfis(SourceFwi):
     def __init__(self, dir_out) -> None:
         super().__init__(bounds=None)
-        self._source = SourceFwiCwfisService(dir_out) if USE_CWFIS_SERVICE else SourceFwiCwfisDownload(dir_out)
+        self._source = SourceFwiCwfisService(dir_out)
+        # if USE_CWFIS_SERVICE else SourceFwiCwfisDownload(dir_out)
 
     def _get_fwi(self, lat, lon, date):
         return self._source.get_fwi(lat, lon, date)
