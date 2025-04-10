@@ -440,6 +440,9 @@ def _run_fire_from_folder(
         raise RuntimeError("Can't prepare_only and run_only at the same time")
     log_info = dolog if verbose else nolog
 
+    # HACK: don't try to run in this function call if it was ever or is running
+    was_running = check_running(dir_fire)
+
     file_sim = get_simulation_file(ensure_dir(dir_fire))
     file_sh = os.path.join(dir_fire, "sim.sh")
     files_required = [file_sim, file_sh]
@@ -573,8 +576,10 @@ def _run_fire_from_folder(
                     # is prepared but not run
                     return df_fire
             try:
+                # HACK: don't try to run in this function call if it was ever or is running
+                was_running = (no_wait and was_running) or check_running(dir_fire)
                 # HACK: return this again since it waits for the fire to finish at the start
-                if check_running(dir_fire):
+                if was_running:
                     # don't check this at the start since azure batch will create job and try to run it
                     if not no_wait:
                         log_info(f"Already running {dir_fire} - waiting for it to finish")
@@ -593,8 +598,10 @@ def _run_fire_from_folder(
                 # if we're going to run then move old log if it exists
                 if os.path.isfile(file_log):
                     sim_time = parse_sim_time(dir_fire)
+                # HACK: don't try to run in this function call if it was ever or is running
+                was_running = (no_wait and was_running) or check_running(dir_fire)
                 # HACK: check sim time before moving
-                if sim_time is None:
+                if sim_time is None and not was_running:
                     if os.path.isfile(file_log):
                         filetime = os.path.getmtime(file_log)
                         filedatetime = datetime.datetime.fromtimestamp(filetime)
@@ -606,17 +613,20 @@ def _run_fire_from_folder(
                         )
                         shutil.move(file_log, file_log_old)
                     try:
-                        # FIX: not using/no return value
-                        log_info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
-                        real_time = run_sim(dir_fire, no_wait=no_wait)
-                        log_info(f"End run_sim({dir_fire}, no_wait={no_wait})")
-                        while not no_wait and check_running(dir_fire):
-                            time.sleep(10)
-                        log_info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
-                        # parse from file instead of using clock time
-                        sim_time = parse_sim_time(dir_fire)
-                        if not no_wait and sim_time is None:
-                            raise RuntimeError(f"Invalid simulation time for {dir_fire}")
+                        # HACK: don't try to run in this function call if it was ever or is running
+                        was_running = (no_wait and was_running) or check_running(dir_fire)
+                        if not was_running:
+                            # FIX: not using/no return value
+                            log_info(f"Begin run_sim({dir_fire}, no_wait={no_wait})")
+                            real_time = run_sim(dir_fire, no_wait=no_wait)
+                            log_info(f"End run_sim({dir_fire}, no_wait={no_wait})")
+                            while not no_wait and check_running(dir_fire):
+                                time.sleep(10)
+                            log_info(f"Done run_sim({dir_fire}, no_wait={no_wait})")
+                            # parse from file instead of using clock time
+                            sim_time = parse_sim_time(dir_fire)
+                            if not no_wait and sim_time is None:
+                                raise RuntimeError(f"Invalid simulation time for {dir_fire}")
                     except FileNotFoundError as ex:
                         # HACK: work around python not seeing processes that are too fast
                         # seems to be happening when process finishes so quickly that python is still looking for it
