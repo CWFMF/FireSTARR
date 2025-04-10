@@ -1,4 +1,27 @@
 cmake_minimum_required(VERSION 3.13)
+if(WIN32)
+  set(BUILD_SHARED_LIBS OFF)
+  set(VCPKG_LIBRARY_LINKAGE static)
+  set(VCPKG_TARGET_TRIPLET x64-windows-static)
+  if("${VCPKG_ROOT}" STREQUAL "")
+    set(VCPKG_ROOT $ENV{VCPKG_ROOT})
+  endif()
+  set(CMAKE_TOOLCHAIN_FILE
+      "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      CACHE STRING "Vcpkg toolchain file")
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
+endif()
+
+# Enable Hot Reload for MSVC compilers if supported.
+if(POLICY CMP0141)
+  cmake_policy(SET CMP0141 NEW)
+  string(CONCAT MSVC_OPTIONS "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>"
+      ",$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,"
+      "$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
+  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT
+      ${MSVC_OPTIONS})
+endif()
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -19,8 +42,11 @@ message("CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
 
 # set(CMAKE_CXX_FLAGS "-Wall -Wextra -std=c++20")
 if (WIN32)
-    # don't set -Wextra
-    set(CMAKE_CXX_FLAGS "-Wall")
+  # HACK: use same settings for RelWitDebInfo since can't figure out how to work with vcpkg
+  add_compile_options(
+    "$<$<CONFIG:RELEASE,RelWithDebInfo>:/O2;/MT>"
+    "$<$<CONFIG:MinSizeRel>:/Os;/MT>"
+    "$<$<CONFIG:DEBUG>:/Od;/MTd>")
 else()
     # HACK: if gcc supports ARCH_PREFERRED on this then use that else native
     execute_process(COMMAND bash -c "(gcc -march=native -Q --help=target | grep ${ARCH_PREFERRED} > /dev/null && echo -n ${ARCH_PREFERRED}) || (echo -n 'native')"
@@ -78,11 +104,15 @@ if(NOT WIN32)
 endif()
 
 add_executable(${PROJECT_NAME} ${SOURCES})
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 if (WIN32)
     find_package(GeoTIFF CONFIG REQUIRED)
+    find_package(PROJ CONFIG REQUIRED)
     target_include_directories(${PROJECT_NAME} PRIVATE ${GEOTIFF_INCLUDE_DIR})
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${GEOTIFF_LIBRARIES})
-else()
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${GEOTIFF_LIBRARIES} PROJ::proj)
+    target_compile_options(${PROJECT_NAME} PRIVATE /permissive- /EHsc)
+    target_link_options(${PROJECT_NAME} PRIVATE /NODEFAULTLIB:MSVCRT)
+  else()
     list(APPEND CMAKE_MODULE_PATH "/usr/lib/x86_64-linux-gnu/cmake")
 
     # not seeing GeoTIFF.cmake on linux for some reason
