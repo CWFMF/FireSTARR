@@ -410,8 +410,23 @@ class SourceFwiCwfisService(SourceFwi):
 class SourceFwiCwfis(SourceFwi):
     def __init__(self, dir_out) -> None:
         super().__init__(bounds=None)
-        self._source = SourceFwiCwfisService(dir_out)
-        # if USE_CWFIS_SERVICE else SourceFwiCwfisDownload(dir_out)
+        self._source_service = SourceFwiCwfisService(dir_out)
+        self._source_file = SourceFwiCwfisDownload(dir_out)
 
     def _get_fwi(self, lat, lon, date):
-        return self._source.get_fwi(lat, lon, date)
+        tried_file = False
+        try:
+            if not USE_CWFIS_SERVICE:
+                tried_file = True
+                return self._source_file.get_fwi(lat, lon, date)
+        except Exception as ex:
+            logging.error("Unable to use file source for fwi data")
+            logging.error(ex)
+        try:
+            return self._source_service.get_fwi(lat, lon, date)
+        except Exception as ex:
+            logging.error("Unable to use service source for fwi data")
+            logging.error(ex)
+        if not tried_file:
+            # revert to file if only tried service
+            return self._source_file.get_fwi(lat, lon, date)
