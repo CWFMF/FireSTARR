@@ -47,8 +47,7 @@ def make_query_geoserver(
 
 @cache
 def get_wx_cwfis(dir_out, date, indices="temp,rh,ws,wdir,precip,ffmc,dmc,dc,bui,isi,fwi,dsr"):
-    # HACK: use 2022 because it has 2023 in it right now
-    layer = "public:firewx_stns_2022"
+    layer = "public:firewx_stns"
     year = date.year
     month = date.month
     day = date.day

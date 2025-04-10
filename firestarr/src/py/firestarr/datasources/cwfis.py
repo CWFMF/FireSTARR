@@ -333,7 +333,7 @@ def select_fwi(lat, lon, df_wx, columns):
 
 
 class SourceFwiCwfisDownload(SourceFwi):
-    URL_STNS = f"{URL_CWFIS_DOWNLOADS}/fwi_obs/cwfis_allstn2022.csv"
+    URL_STNS = f"{URL_CWFIS_DOWNLOADS}/fwi_obs/cwfis_allstn2025.csv"
 
     def __init__(self, dir_out) -> None:
         super().__init__(bounds=None)
