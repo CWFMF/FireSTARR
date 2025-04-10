@@ -54,10 +54,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      # just publish the firestarr container for now
+      # just publish the first container matching repo name for now
       - name: Publish
         run: |
-          IMAGE_ROOT=`docker images | grep -i "^${{ env.IMAGE_NAME }}" | awk '{print $1}' | uniq`
+          IMAGE_ROOT=`docker images | grep -i "^${{ env.IMAGE_NAME }}" | awk '{print $1}' | sort | uniq | head -n1`
           REPO_OUT=${{ env.REGISTRY }}/${{ env.ORG_NAME }}
           # convert to lowecase
           REPO_OUT=${REPO_OUT,,}
