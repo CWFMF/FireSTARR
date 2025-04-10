@@ -100,18 +100,19 @@ _AUTO_SCALE_FORMULA = f"""
     $min_nodes = {_MIN_NODES};
     $max_nodes = {_MAX_NODES};
     $max_low = {_MAX_NODES if _USE_LOW_PRIORITY else 0};
-    $min_nodes = 0;
-    $max_nodes = 50;
     $samples = $PendingTasks.GetSamplePercent(TimeInterval_Minute);
     $pending = val($PendingTasks.GetSample(1), 0);
     $active = val($ActiveTasks.GetSample(1), 0);
-    $cur_dedicated= $CurrentDedicatedNodes;
-    $cur_spot = $CurrentLowPriorityNodes;
-    $cur_nodes = $cur_dedicated + $cur_spot;
+    $running = val($RunningTasks.GetSample(1), 0);
     $preempted = max(0, val($PreemptedNodeCount.GetSample(5 * TimeInterval_Minute), 0));
-    $node_limit = min((0 ==  $cur_nodes) ? 1 : ($cur_nodes * 2), $pending);
-    $TargetDedicatedNodes = min(min($node_limit, $preempted + $cur_dedicated), $max_nodes);
-    $TargetLowPriorityNodes = max(0, min($max_low, $node_limit) - $TargetDedicatedNodes);
+    $dedicated = $CurrentDedicatedNodes;
+    $spot = $CurrentLowPriorityNodes;
+    $want_nodes = ($pending > $dedicated || $spot > 0) ? ($pending - $spot) : 0;
+    $want_nodes = ($dedicated + $spot) >= $pending ? 0 : $want_nodes;
+    $use_nodes = $samples < 1 ? $min_nodes : $want_nodes;
+    $max_dedicated = max($min_nodes, min($max_nodes, $use_nodes));
+    $TargetDedicatedNodes = min($preempted + $dedicated, $max_dedicated);
+    $TargetLowPriorityNodes = max(0, min($max_low, $pending - $TargetDedicatedNodes));
     $NodeDeallocationOption = taskcompletion;
 """
 _AUTO_SCALE_EVALUATION_INTERVAL = datetime.timedelta(minutes=5)
