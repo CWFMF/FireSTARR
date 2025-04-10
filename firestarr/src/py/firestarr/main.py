@@ -171,6 +171,8 @@ def run_main(args):
 def scan_queue():
     from azure.storage.queue import QueueClient, QueueServiceClient
 
+    queue_msg = None
+    args = []
     AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
     AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
@@ -183,11 +185,30 @@ def scan_queue():
             # FIX: right now any message causes a full run
             logging.info("Message %s", txt)
             queue_msg = json.loads(txt)
-            return queue_msg
+            if "args" in queue_msg.keys():
+                args_given = queue_msg["args"]
+                logging.info("Trying to parse arguments %s", args_given)
+                if isinstance(args_given, str):
+                    args_given = args_given.strip().split(" ")
+                if not isinstance(args_given, list):
+                    raise ValueError("Excpected list of arguments but got %s", args_given)
+                args_given = [x.strip() for x in args_given]
+                try:
+                    for a in args_given:
+                        # HACK: should filter things out if they aren't valid args elsewhere
+                        if not isinstance(a, str) and a.startswith("--"):
+                            logging.fatal("Invalid argument given: %s", a)
+                            raise ValueError("Invalid argument given: %s" % a)
+                        args.extend([a])
+                except Exception as ex:
+                    logging.fatal(ex)
+                    raise ValueError("Invalid arguments given: %s" % a)
+            break
         except Exception as ex:
             logging.error("Unable to parse queue message:\n%s", msg.content)
             logging.fatal(ex)
     logging.info("No message in queue, or failed to parse one")
+    return queue_msg, args
 
 
 def requeue():
@@ -213,6 +234,16 @@ if __name__ == "__main__":
     logging.info("Called with args %s", str(sys.argv))
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
     if FROM_QUEUE:
+        msg, args = scan_queue()
+        logging.info("Queue triggered with message:\n%s\ngives arguments:\n%s", msg, args)
+        # HACK: double-check that we're using only `--` args for now
+        for a in args:
+            # HACK: should filter things out if they aren't valid args elsewhere
+            if not a.startswith("--"):
+                logging.fatal("Invalid argument given: %s", a)
+                raise ValueError("Invalid argument given: %s" % a)
+        # HACK: sketched out about this, but will let us tell things to re-run via queue
+        sys.argv.extend(args)
         # allow other arguments but remove duplicates
         QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
         # HACK: if not using batch then wait for results
@@ -225,8 +256,6 @@ if __name__ == "__main__":
                 sys.argv.remove(a)
             except ValueError:
                 pass
-        msg = scan_queue()
-        logging.info("Queue triggered with message:\n%s", msg)
         sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     # rely on argument parsing later
