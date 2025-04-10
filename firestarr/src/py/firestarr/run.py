@@ -913,12 +913,16 @@ class Run(object):
         total_time = t1 - t0
         logging.info("Took %ss to run fires", total_time)
         logging.info("Successful simulations used %ss", sim_time)
-        if sim_times and not np.any(np.isnan(sim_times)):
-            logging.info(
-                "Shortest simulation took %ds, longest took %ds",
-                min(sim_times),
-                max(sim_times),
-            )
+        try:
+            if sim_times and not np.any(np.isnan(sim_times)):
+                logging.info(
+                    "Shortest simulation took %ds, longest took %ds",
+                    min(sim_times),
+                    max(sim_times),
+                )
+        except Exception:
+            # can't get sim_time from what we have, but that'll happen when results aren't there at start
+            pass
         df_final = None
         try:
             df_list = [make_gdf_from_series(r, self._crs) for r in results.values() if r is not None]
