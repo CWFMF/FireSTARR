@@ -563,11 +563,15 @@ class Run(object):
             df_final = self.load_fires()
         except RuntimeError as ex:
             logging.error(ex)
-        if not (df_final is None or np.any(df_final["sim_time"].isna())):
-            # HACK: abstract this later
-            if self._is_batch:
-                finish_job(get_job_id(self._dir_sims))
-            return True
+        try:
+            if not (df_final is None or np.any(df_final["sim_time"].isna())):
+                # HACK: abstract this later
+                if self._is_batch:
+                    finish_job(get_job_id(self._dir_sims))
+                return True
+        except KeyError as ex:
+            # if sim_time column doesn't exist
+            pass
         return False
 
     @log_order()
