@@ -25,7 +25,16 @@ from datasources.datatypes import (
     make_point,
     make_template_empty,
 )
-from gis import CRS_COMPARISON, CRS_WGS84, KM_TO_M, gdf_from_file, gdf_to_file, to_gdf
+from gis import (
+    CRS_COMPARISON,
+    CRS_LAMBERT_ATLAS,
+    CRS_WGS84,
+    KM_TO_M,
+    gdf_from_file,
+    gdf_to_file,
+    make_empty_gdf,
+    to_gdf,
+)
 from model_data import DEFAULT_STATUS_IGNORE, URL_CWFIS_DOWNLOADS, make_query_geoserver
 from net import try_save_http
 
@@ -56,9 +65,13 @@ class SourceFeatureM3Service(SourceFeature):
             filter = f"lastdate >= {self._last_active_since.strftime('%Y-%m-%d')}T00:00:00Z"
 
         def do_parse(_):
-            logging.debug("Reading %s", _)
+            logging.info("Reading %s", _)
             df = gdf_from_file(_)
-            df["datetime"] = to_utc(df["lastdate"])
+            if 0 < len(df):
+                df["datetime"] = to_utc(df["lastdate"])
+            else:
+                # HACK: no data
+                return None
             since = pd.to_datetime(self._last_active_since, utc=True)
             return df.loc[df["datetime"] >= since]
 
@@ -80,16 +93,35 @@ class SourceFeatureM3Download(SourceFeature):
     @cache
     def _get_features(self):
         def get_shp(filename):
-            for ext in ["dbf", "prj", "shx", "shp"]:
-                url = f"{URL_CWFIS_DOWNLOADS}/hotspots/{filename}.{ext}"
-                # HACK: relies on .shp being last in list
-                f = try_save_http(
-                    url,
-                    os.path.join(self._dir_out, os.path.basename(url)),
-                    keep_existing=True,
-                    fct_pre_save=None,
-                    fct_post_save=None,
-                )
+            url = None
+            try:
+                for ext in ["dbf", "prj", "shx", "shp"]:
+                    url = f"{URL_CWFIS_DOWNLOADS}/hotspots/{filename}.{ext}"
+                    # HACK: relies on .shp being last in list
+                    f = try_save_http(
+                        url,
+                        os.path.join(self._dir_out, os.path.basename(url)),
+                        keep_existing=True,
+                        fct_pre_save=None,
+                        fct_post_save=None,
+                    )
+            except HTTPError as ex:
+                if 404 == ex.code:
+                    logging.warning("File doesn't exist at %s", url)
+                    # not much can be done if files don't exist
+                    # HACK: handle different filenames here so code outside is cleaner
+                    if "perimeters" == filename:
+                        return make_empty_gdf(
+                            ["UID", "HCOUNT", "AREA", "FIRSTDATE", "LASTDATE", "CONSIS_ID"],
+                            crs=CRS_LAMBERT_ATLAS,
+                        )
+                    elif "hotspots" == filename:
+                        return make_empty_gdf(
+                            ["LAT", "LON", "REP_DATE", "SOURCE", "SENSOR", "FWI", "FUEL", "ROS", "TFC", "HFI"],
+                            crs=CRS_LAMBERT_ATLAS,
+                        )
+                    else:
+                        raise RuntimeError("Unable to get shapefile for %s", filename)
             gdf = gdf_from_file(f)
             return gdf
 
@@ -117,8 +149,9 @@ class SourceFeatureM3Download(SourceFeature):
         df_pts.geometry = df_pts.simplify(resolution)
         # gdf_to_file(df_pts, self._dir_out, "df_hot/spots_simplify")
         logging.info("Finding times")
-        df_pts.loc[:, "LASTDATE"] = datetime.date.today()
-        df_pts["datetime"] = to_utc(df_pts["LASTDATE"])
+        # df_pts.loc[:, "LASTDATE"] = datetime.date.today()
+        # df_pts["datetime"] = to_utc(df_pts["LASTDATE"])
+        df_pts["datetime"] = to_utc(datetime.date.today())
         # df = df.reset_index()[["datetime", "geometry"]]
         # gdf_to_file(df, self._dir_out, "df_perimeters_basic")
         df_pts = df_pts.reset_index()[["datetime", "geometry"]]
@@ -164,7 +197,7 @@ class SourceFeatureM3(SourceFeature):
         self._origin = origin
         self._dir_out = dir_out
         # either use number of days or get everything for this year
-        self._last_active_since = (
+        self._last_active_since = to_utc(
             self._origin.offset(-last_active_since_offset)
             if last_active_since_offset is not None
             else (
@@ -173,12 +206,28 @@ class SourceFeatureM3(SourceFeature):
                 else datetime.date(self._origin.today.year - 1, 1, 1)
             )
         )
-        # service not parsing correctly
-        # self._source = (SourceFeatureM3Service if USE_CWFIS_SERVICE else SourceFeatureM3Download)
-        self._source = SourceFeatureM3Download(self._dir_out, self._last_active_since)
+        self._source_service = SourceFeatureM3Service(self._dir_out, self._last_active_since)
+        self._source_file = SourceFeatureM3Download(self._dir_out, self._last_active_since)
 
     def _get_features(self):
-        return self._source.get_features()
+        # HACK: fallback in either direction
+        # FIX: duplicated elsewhere
+        tried_file = False
+        try:
+            if not USE_CWFIS_SERVICE:
+                tried_file = True
+                return self._source_file._get_features()
+        except Exception as ex:
+            logging.error("Unable to use file source for M3 data")
+            logging.error(ex)
+        try:
+            return self._source_service._get_features()
+        except Exception as ex:
+            logging.error("Unable to use service source for m3fwi data")
+            logging.error(ex)
+        if not tried_file:
+            # revert to file if only tried service
+            return self._source_file._get_features()
 
 
 def make_name_ciffc(df):
@@ -414,6 +463,8 @@ class SourceFwiCwfis(SourceFwi):
         self._source_file = SourceFwiCwfisDownload(dir_out)
 
     def _get_fwi(self, lat, lon, date):
+        # HACK: fallback in either direction
+        # FIX: duplicated elsewhere
         tried_file = False
         try:
             if not USE_CWFIS_SERVICE:

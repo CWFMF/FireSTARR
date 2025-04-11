@@ -24,7 +24,6 @@ from datasources.datatypes import (
     SourceModel,
     make_template_empty,
 )
-
 from gis import (
     CRS_COMPARISON,
     CRS_WGS84,
@@ -233,10 +232,14 @@ class SourceFireActive(SourceFire):
             df_fires = override_fires(df_fires, df_src_fires)
             save_fires(df_fires, f"df_fires_after_fire_source_{i:02d}")
         df_fires = df_fires.reset_index()
-        logging.info(
-            "Have %d polygons that are not tied to a fire",
-            len(df_unmatched),
-        )
+        if df_unmatched is not None:
+            logging.info(
+                "Have %d polygons that are not tied to a fire",
+                len(df_unmatched),
+            )
+            # pretty sure U is unknown status
+            df_unmatched["status"] = "U"
+            df_unmatched["fire_name"] = [f"UNMATCHED_{x}" for x in df_unmatched.index]
         if self._status_include:
             df_fires = df_fires.loc[df_fires.status.isin(self._status_include)]
             logging.info(
@@ -253,9 +256,6 @@ class SourceFireActive(SourceFire):
                 self._status_omit,
             )
         save_fires(df_fires, "df_fires_after_status_omit")
-        # pretty sure U is unknown status
-        df_unmatched["status"] = "U"
-        df_unmatched["fire_name"] = [f"UNMATCHED_{x}" for x in df_unmatched.index]
         df_all = pd.concat([df_fires, df_unmatched])
         save_fires(df_fires, "df_fires_after_concat")
         return df_all
