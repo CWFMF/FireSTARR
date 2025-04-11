@@ -278,7 +278,7 @@ def make_or_get_job(pool_id=POOL_ID, job_id=None, client=None, *args, **kwargs):
                 client.job.add(job)
                 break
             except batchmodels.BatchErrorException as ex:
-                if "JobBeingDeleted" == ex.code:
+                if "JobBeingDeleted" in str(ex):
                     logging.warning(ex)
                     logging.info("Waiting for job to be deleted")
                     while job_exists(job_id):
