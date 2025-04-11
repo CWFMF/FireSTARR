@@ -571,8 +571,8 @@ def area_ha_to_radius_m(a):
     return math.sqrt(a * HA_TO_MSQ / math.pi)
 
 
-def make_empty_gdf(columns):
-    return gpd.GeoDataFrame({k: [] for k in columns + ["geometry"]}, crs=CRS_WGS84)
+def make_empty_gdf(columns, crs=CRS_WGS84):
+    return gpd.GeoDataFrame({k: [] for k in columns + ["geometry"]}, crs=crs)
 
 
 def make_gdf_from_series(row, crs):
