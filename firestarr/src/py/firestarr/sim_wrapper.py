@@ -9,6 +9,7 @@ import timeit
 import pandas as pd
 import psutil
 from azurebatch import (
+    _BATCH_POOL_ID,
     add_simulation_task,
     check_successful,
     find_tasks_running,
@@ -33,7 +34,6 @@ from common import (
     FLAG_IGNORE_PERIM_OUTPUTS,
     FMT_FILE_SECOND,
     SECONDS_PER_HOUR,
-    SUBDIR_CURRENT,
     WANT_DATES,
     ensure_dir,
     finish_process,
@@ -48,6 +48,8 @@ from common import (
     start_process,
     try_remove,
 )
+from redundancy import call_safe
+
 from gis import (
     Rasterize,
     find_best_raster,
@@ -57,7 +59,6 @@ from gis import (
     save_geojson,
     save_point_file,
 )
-from redundancy import call_safe
 
 # set to "" if want intensity grids
 NO_INTENSITY = "--no-intensity"
@@ -159,9 +160,10 @@ def get_nodes():
 def get_job_id(dir_fire):
     job_id = None
     if dir_fire.startswith(DIR_SIMS):
-        # job_id = dir_fire.replace(DIR_SIMS, "").strip("/").split("/")[0]
-        # always use the same job since we'll update/delete things as required
-        job_id = SUBDIR_CURRENT
+        job_id = dir_fire.replace(DIR_SIMS, "").strip("/").split("/")[0]
+    if "test" in _BATCH_POOL_ID.lower() and not job_id.lower().startswith("test_"):
+        job_id = f"test_{job_id}"
+        logging.debug(f"Using test pool so changing job name to {job_id}")
     return job_id
 
 
