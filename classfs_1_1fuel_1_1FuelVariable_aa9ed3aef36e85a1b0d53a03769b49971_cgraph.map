@@ -1,0 +1,7 @@
+<map id="fs::fuel::FuelVariable::criticalSurfaceIntensity" name="fs::fuel::FuelVariable::criticalSurfaceIntensity">
+<area shape="rect" id="Node000001" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="5,35,165,75"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelType.html#aae5110a72c024a0eac618b6c5707d98c" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="213,5,372,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,41,197,36,198,42,165,46"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#a8e80c78a184c3b7a10e8b155228a28bc" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="218,70,366,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,63,203,68,202,74,165,68"/>
+</map>

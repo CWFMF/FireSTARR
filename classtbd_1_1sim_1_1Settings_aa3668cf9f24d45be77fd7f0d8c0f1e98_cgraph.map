@@ -1,6 +1,0 @@
-<map id="tbd::sim::Settings::setSaveIndividual" name="tbd::sim::Settings::setSaveIndividual">
-<area shape="rect" id="Node000001" title="Set whether or not to save individual grids." alt="" coords="5,29,136,70"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="184,29,393,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,47,168,47,168,52,136,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="247,29,245,19,252,10,266,5,288,3,312,5,326,11,324,16,311,10,288,8,268,10,255,15,250,21,252,28"/>
-</map>

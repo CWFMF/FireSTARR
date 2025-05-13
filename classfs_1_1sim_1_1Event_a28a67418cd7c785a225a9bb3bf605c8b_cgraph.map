@@ -1,0 +1,11 @@
+<map id="fs::sim::Event::makeFireSpread" name="fs::sim::Event::makeFireSpread">
+<area shape="rect" id="Node000001" title="Make fire spread event." alt="" coords="5,84,164,125"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Event.html#ad11499e89a4df128d86f460c1cd42487" title="Burn Intensity (kW/m)" alt="" coords="215,5,367,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,82,211,41,230,34,232,39,213,46,126,86"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Event.html#ae25f2074b64b4ace0b42a32e681be5b0" title="Make fire spread event." alt="" coords="212,55,370,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,91,196,86,197,92,164,96"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Event.html#adb6d6b97ae63e01f9f5afbbb48f41c19" title="Head fire spread direction." alt="" coords="230,120,352,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,113,215,120,214,125,164,118"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Event.html#aed1c87fb0b88bee303cedf853eaee916" title="Head fire rate of spread (m/min)" alt="" coords="230,169,352,195"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="133,123,213,156,230,162,228,167,211,161,131,128"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fs::fuel::FuelMixed::ratioDeciduous" name="fs::fuel::FuelMixed::ratioDeciduous">
+<area shape="rect" id="Node000001" title="Percent Deciduous (% / 100)" alt="" coords="178,39,302,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelMixed.html#a62b0c32af63c50969ae38d66ff5be0f6" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 42]." alt="" coords="5,5,130,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,47,129,40,131,35,163,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelMixed.html#ae6f5f169c87e033ecf4003aaf05fae9d" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="5,71,130,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,76,130,82,130,77,162,71"/>
+</map>

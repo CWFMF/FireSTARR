@@ -1,0 +1,6 @@
+<map id="fs::wx::Direction" name="fs::wx::Direction">
+<area shape="rect" id="Node000001" title="Direction with access to degrees or radians." alt="" coords="15,82,126,108"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="143,88,153,95,145,103,127,105,126,100,142,98,148,95,140,92"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,47,73,82,68,82,68,47"/>
+</map>

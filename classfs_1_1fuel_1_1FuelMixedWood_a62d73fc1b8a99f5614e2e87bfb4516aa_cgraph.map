@@ -1,0 +1,9 @@
+<map id="fs::fuel::FuelMixedWood::surfaceFuelConsumption" name="fs::fuel::FuelMixedWood::surfaceFuelConsumption">
+<area shape="rect" id="Node000001" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 17]." alt="" coords="5,115,177,156"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelMixed.html#ac2d4d78e4ed3d0d6b62babe0467edfea" title=" " alt="" coords="233,5,407,76"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,112,217,80,219,85,143,117"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelMixed.html#a739c9320992b0b257003b717be1b110f" title=" " alt="" coords="225,100,415,171"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,133,209,133,209,138,177,138"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1FuelMixed.html#a47427e8d92ff4a529f34b103ec31d426" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 10]." alt="" coords="234,195,406,236"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="152,154,246,187,244,192,150,159"/>
+</map>

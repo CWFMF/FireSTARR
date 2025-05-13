@@ -1,0 +1,11 @@
+<map id="fs::fuel::FuelNonMixed::calculateRos" name="fs::fuel::FuelNonMixed::calculateRos">
+<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="5,47,154,88"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1StandardFuel.html#ac0d50fe58a637f32c007f395c64451d1" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="202,47,344,88"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,65,186,65,186,70,154,70"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1StandardFuel.html#a7d9579648ccb7d0476c41da3b18fbce4" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="392,5,547,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,47,400,33,401,38,345,52"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1StandardFuel.html#a195a5a2112d6dba7db89bac4ac8964fc" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="392,55,547,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="344,65,377,65,377,70,344,70"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1StandardFuel.html#a7e97f4ee73038e50918caa0691120961" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="398,104,541,145"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="345,86,384,97,383,102,344,91"/>
+</map>

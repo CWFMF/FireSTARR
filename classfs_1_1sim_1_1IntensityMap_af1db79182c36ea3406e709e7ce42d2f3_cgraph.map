@@ -1,0 +1,7 @@
+<map id="fs::sim::IntensityMap::canBurn" name="fs::sim::IntensityMap::canBurn">
+<area shape="rect" id="Node000001" title="Whether or not the Cell with the given hash can burn." alt="" coords="5,5,145,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityMap.html#aeae46aaa7e4d718352eb1587d1bce12b" title="Whether or not the Location with the given hash can burn." alt="" coords="193,5,332,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,23,177,23,177,28,145,28"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="380,5,496,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="333,23,365,23,365,28,333,28"/>
+</map>

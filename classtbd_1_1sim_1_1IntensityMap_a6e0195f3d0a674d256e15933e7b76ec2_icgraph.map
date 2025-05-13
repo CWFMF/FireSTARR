@@ -1,5 +1,0 @@
-<map id="tbd::sim::IntensityMap::burn" name="tbd::sim::IntensityMap::burn">
-<area shape="rect" id="Node000001" title="Update Location with specified values." alt="" coords="200,5,346,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1IntensityMap.html#a66174963b19d3be51f8c6a2e009258be" title="Mark given location as burned." alt="" coords="5,5,152,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,28,152,28,152,23,184,23"/>
-</map>

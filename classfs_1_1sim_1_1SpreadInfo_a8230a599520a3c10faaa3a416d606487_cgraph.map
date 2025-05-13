@@ -1,0 +1,7 @@
+<map id="fs::sim::SpreadInfo::wind" name="fs::sim::SpreadInfo::wind">
+<area shape="rect" id="Node000001" title="Wind used for spread." alt="" coords="5,35,134,75"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#ae9aaa7cd820d801c39e90852598d9fcf" title="FwiWeather used for spread." alt="" coords="188,5,316,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,42,172,36,173,41,134,47"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1Weather.html#a7a935528d978215e3c2861133de1de19" title="Wind (km/h)" alt="" coords="182,70,323,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,62,167,67,166,73,133,67"/>
+</map>

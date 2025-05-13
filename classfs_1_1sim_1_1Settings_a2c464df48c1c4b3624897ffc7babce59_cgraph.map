@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::defaultPercentConifer" name="fs::sim::Settings::defaultPercentConifer">
+<area shape="rect" id="Node000001" title="Default Percent Conifer to use for M1/M2 fuels where none is specified (%)" alt="" coords="5,51,152,91"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a15a0b10463b2bf0dbfb533ef0f9014c4" title="Default Percent Conifer to use for M1/M2 fuels where none is specified (%)" alt="" coords="200,5,402,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,54,184,47,185,52,152,59"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="200,95,402,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,83,185,89,184,94,151,88"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="259,95,257,85,264,76,278,70,301,68,325,70,339,77,337,82,324,76,301,73,280,75,267,80,262,86,264,93"/>
+</map>

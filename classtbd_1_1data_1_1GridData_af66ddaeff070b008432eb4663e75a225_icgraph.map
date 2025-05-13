@@ -1,5 +1,0 @@
-<map id="tbd::data::GridData::saveToTiffFile" name="tbd::data::GridData::saveToTiffFile">
-<area shape="rect" id="Node000001" title="Save contents to .tif file." alt="" coords="202,5,329,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Environment.html#aecd4954600dab2f8ef10720bd8d8d4c5" title="Load from rasters." alt="" coords="5,5,154,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,28,154,28,154,23,186,23"/>
-</map>

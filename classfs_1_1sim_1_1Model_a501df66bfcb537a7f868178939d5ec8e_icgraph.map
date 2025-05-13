@@ -1,0 +1,15 @@
+<map id="fs::sim::Model::releaseBurnedVector" name="fs::sim::Model::releaseBurnedVector">
+<area shape="rect" id="Node000001" title="Return a BurnedData so it can be used in the future." alt="" coords="577,79,767,119"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#a9104e341e59de6817afb4082e5bb5680" title="Clear the Event list and all other data." alt="" coords="398,49,520,90"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="562,87,520,81,521,75,563,81"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ab15673dbc91dfc9a3d1db7ec478612e6" title="Reset thresholds and set SafeVector to output results to." alt="" coords="207,5,330,46"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="618,74,575,55,529,40,477,31,424,26,330,25,330,20,425,21,478,26,530,35,577,50,621,69"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#aebc86dfc207e48b06be04a48d5d0a07c" title="Assign start Cell, reset thresholds and set SafeVector to output results to." alt="" coords="196,83,341,123"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="562,104,529,104,341,106,341,100,529,99,561,99"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="389,165,529,190"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="602,128,497,167,495,162,600,123"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="383,55,329,42,330,37,384,50"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="383,86,342,93,341,88,382,80"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1TestScenario.html#a0667115737ccae6c51f2cdb0667b2b49" title="Constructor." alt="" coords="5,5,148,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="191,28,148,28,148,23,191,23"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fs::sim::SpreadInfo::dmc" name="fs::sim::SpreadInfo::dmc">
+<area shape="rect" id="Node000001" title="Duff Moisture Code used for spread." alt="" coords="5,35,165,60"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FwiWeather.html#a1ca390d52b21ad7626e5201bea9c973a" title="Duff Moisture Code." alt="" coords="213,5,373,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,34,197,29,198,34,165,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#ae9aaa7cd820d801c39e90852598d9fcf" title="FwiWeather used for spread." alt="" coords="229,55,357,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,56,214,62,213,68,165,61"/>
+</map>

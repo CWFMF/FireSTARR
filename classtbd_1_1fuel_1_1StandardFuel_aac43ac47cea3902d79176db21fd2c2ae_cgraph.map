@@ -1,5 +1,0 @@
-<map id="tbd::fuel::StandardFuel::criticalSurfaceIntensity" name="tbd::fuel::StandardFuel::criticalSurfaceIntensity">
-<area shape="rect" id="Node000001" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="5,5,165,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1StandardFuel.html#a76ccb8402e6a771b48ce2b21c4f24dd8" title="Crown base height (m) [ST&#45;X&#45;3 table 8]." alt="" coords="213,13,389,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,23,197,23,197,28,165,28"/>
-</map>

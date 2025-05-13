@@ -1,0 +1,25 @@
+<map id="fs::sim::Scenario::burn" name="fs::sim::Scenario::burn">
+<area shape="rect" id="Node000001" title="Burn cell that Event takes place in." alt="" coords="5,200,153,226"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Event.html#a42d6f9837174b92c9a46d4bd63b6cb2c" title="Cell Event takes place in." alt="" coords="215,5,339,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,198,100,167,125,125,158,80,199,41,207,36,210,41,202,46,162,84,129,128,104,169,89,201"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="219,55,335,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="93,198,139,157,199,112,217,101,219,106,202,116,142,162,96,202"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="401,116,517,157"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="102,197,147,175,200,156,296,139,385,134,386,139,297,144,201,161,149,180,105,202"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Event.html#ad11499e89a4df128d86f460c1cd42487" title="Burn Intensity (kW/m)" alt="" coords="201,171,353,196"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="153,199,185,194,185,200,153,205"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#ab02ff5e0c425fd10edd755b622b0541b" title="Notify IObservers that a Cell has burned." alt="" coords="216,220,338,261"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="153,221,201,227,200,233,153,226"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Event.html#adb6d6b97ae63e01f9f5afbbb48f41c19" title="Head fire spread direction." alt="" coords="216,285,338,311"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="106,224,202,270,219,277,217,282,200,275,104,229"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Event.html#aed1c87fb0b88bee303cedf853eaee916" title="Head fire rate of spread (m/min)" alt="" coords="216,335,338,360"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="93,224,138,271,168,298,202,321,211,326,208,331,199,326,165,302,134,275,89,228"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="205,384,348,410"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="89,225,130,294,163,335,202,371,208,374,205,379,199,375,159,339,126,297,84,228"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="336,93,387,110,385,115,335,98"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="401,51,517,92"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="335,72,385,70,386,76,336,77"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="336,381,351,371,372,349,390,325,418,271,437,217,449,172,454,173,443,218,423,273,395,327,376,353,355,375,339,386"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="401,376,517,417"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="349,394,386,394,386,400,349,400"/>
+</map>

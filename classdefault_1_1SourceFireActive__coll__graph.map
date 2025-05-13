@@ -1,5 +1,7 @@
 <map id="default.SourceFireActive" name="default.SourceFireActive">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,169,105"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="45,5,129,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,46,90,79,84,79,84,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="8,109,172,135"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,90,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,44,88,107,83,110,56,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="114,5,152,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="124,46,98,110,93,107,119,44"/>
 </map>

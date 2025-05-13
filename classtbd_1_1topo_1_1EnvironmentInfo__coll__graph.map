@@ -1,8 +1,0 @@
-<map id="tbd::topo::EnvironmentInfo" name="tbd::topo::EnvironmentInfo">
-<area shape="rect" id="Node000001" title="Information regarding an Environment, such as grids to read and location." alt="" coords="5,202,176,228"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="141,96,272,122"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,134,106,203,102,199,180,130"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="33,5,87,31"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="56,46,50,83,53,123,68,166,85,200,81,203,63,168,48,125,45,83,50,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,37,188,93,185,98,91,42"/>
-</map>

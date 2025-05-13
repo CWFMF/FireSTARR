@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::fuelLookup" name="fs::sim::Settings::fuelLookup">
+<area shape="rect" id="Node000001" title="Fuel lookup table." alt="" coords="5,51,125,91"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a59e067bbca9d88108a6fc7ef6976e7c7" title="Fuel lookup table." alt="" coords="173,5,375,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,56,162,47,163,52,125,61"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="173,95,375,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,81,160,88,159,94,124,86"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="234,95,232,85,239,76,253,70,274,68,297,70,310,77,308,81,295,76,274,73,254,75,242,80,238,86,239,93"/>
+</map>

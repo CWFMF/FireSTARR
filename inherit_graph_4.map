@@ -1,21 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,172,48,198"/>
-<area shape="rect" id="Node000001" href="$classtbd_1_1BoundedPoint.html" title=" " alt="" coords="125,5,262,61"/>
-<area shape="poly" id="edge14_Node000000_Node000001" title=" " alt="" coords="36,157,59,114,75,91,94,71,123,52,126,57,97,75,79,94,63,116,41,159"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1BoundedPoint.html" title=" " alt="" coords="109,85,278,141"/>
-<area shape="poly" id="edge16_Node000000_Node000003" title=" " alt="" coords="61,166,95,151,121,139,123,144,97,156,63,171"/>
-<area shape="rect" id="Node000005" href="$classtbd_1_1BoundedPoint.html" title=" " alt="" coords="121,165,266,206"/>
-<area shape="poly" id="edge18_Node000000_Node000005" title=" " alt="" coords="63,183,120,183,120,188,63,188"/>
-<area shape="rect" id="Node000007" href="$classtbd_1_1BoundedPoint.html" title=" " alt="" coords="96,229,291,285"/>
-<area shape="poly" id="edge20_Node000000_Node000007" title=" " alt="" coords="63,199,97,215,123,226,121,231,95,220,61,204"/>
-<area shape="rect" id="Node000009" href="$classtbd_1_1BoundedPoint.html" title=" " alt="" coords="118,309,269,365"/>
-<area shape="poly" id="edge22_Node000000_Node000009" title=" " alt="" coords="41,211,63,254,79,276,97,295,119,310,116,314,94,299,75,279,59,257,36,213"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1Offset.html" title="Offset from a position." alt="" coords="361,20,441,46"/>
-<area shape="poly" id="edge15_Node000001_Node000002" title=" " alt="" coords="277,31,361,31,361,36,277,36"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1sim_1_1CellPos.html" title="The position within the Environment that a spreading point has." alt="" coords="343,100,460,126"/>
-<area shape="poly" id="edge17_Node000003_Node000004" title=" " alt="" coords="293,111,342,111,342,116,293,116"/>
-<area shape="rect" id="Node000006" href="$classtbd_1_1sim_1_1InnerPos.html" title="The position within a Cell that a spreading point has." alt="" coords="339,172,463,198"/>
-<area shape="poly" id="edge19_Node000005_Node000006" title=" " alt="" coords="282,183,338,183,338,188,282,188"/>
-<area shape="rect" id="Node000008" href="$classtbd_1_1sim_1_1XYPos.html" title="The position within the Environment that a spreading point has." alt="" coords="345,244,458,270"/>
-<area shape="poly" id="edge21_Node000007_Node000008" title=" " alt="" coords="307,255,344,255,344,260,307,260"/>
+<area shape="rect" id="Node000000" href="$classfs_1_1data_1_1Index.html" title=" " alt="" coords="5,5,147,31"/>
 </map>

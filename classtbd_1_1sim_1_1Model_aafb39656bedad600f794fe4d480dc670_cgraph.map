@@ -1,5 +1,0 @@
-<map id="tbd::sim::Model::runTime" name="tbd::sim::Model::runTime">
-<area shape="rect" id="Node000001" title="Duration that model has run for." alt="" coords="5,13,166,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Model.html#a9c8a88be0a576aa7193d83ff549b77a9" title="Time that execution started." alt="" coords="214,5,369,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,23,198,23,198,28,166,28"/>
-</map>

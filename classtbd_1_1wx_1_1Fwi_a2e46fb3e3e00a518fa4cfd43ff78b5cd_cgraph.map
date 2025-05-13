@@ -1,5 +1,0 @@
-<map id="tbd::wx::Fwi::Fwi" name="tbd::wx::Fwi::Fwi">
-<area shape="rect" id="Node000001" title="Calculate Fire Weather Index and verify previous value is within tolerance of calculated value." alt="" coords="5,5,121,31"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1Index.html#a73ac19ceae65d1bbb780dd470ebf5ed4" title="Returns value as a MathSize." alt="" coords="169,5,329,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,16,153,16,153,21,121,21"/>
-</map>

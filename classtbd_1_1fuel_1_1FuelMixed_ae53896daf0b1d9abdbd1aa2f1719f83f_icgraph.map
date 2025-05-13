@@ -1,7 +1,0 @@
-<map id="tbd::fuel::FuelMixed::ratioDeciduous" name="tbd::fuel::FuelMixed::ratioDeciduous">
-<area shape="rect" id="Node000001" title="Percent Deciduous (% / 100)" alt="" coords="185,39,316,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelMixed.html#ae6a5fe8f9969f30d147803da092d77e4" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 42]." alt="" coords="5,5,137,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,47,137,41,138,35,170,41"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelMixed.html#addc500f8f669387a07569484b5f74b6a" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="5,71,137,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,76,138,82,137,77,169,71"/>
-</map>

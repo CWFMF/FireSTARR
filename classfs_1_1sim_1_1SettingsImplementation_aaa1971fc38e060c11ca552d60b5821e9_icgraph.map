@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::offsetSunrise" name="fs::sim::SettingsImplementation::offsetSunrise">
+<area shape="rect" id="Node000001" title="Offset from sunrise at which the day is considered to start (hours)" alt="" coords="173,5,375,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#acb5e7e6c259b3b8abbc0329be086f40b" title="Offset from sunrise at which the day is considered to start (hours)" alt="" coords="5,5,125,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,28,125,28,125,23,157,23"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="fs::topo::Position::column" name="fs::topo::Position::column">
+<area shape="rect" id="Node000001" title="Column." alt="" coords="666,196,783,236"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695" title="Burn cell that Event takes place in." alt="" coords="464,47,611,73"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="702,184,666,134,643,109,617,87,594,76,596,71,620,83,646,105,670,130,706,181"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="252,22,392,47"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="712,182,699,145,680,105,653,66,617,37,587,23,555,14,488,8,424,13,371,24,370,19,424,8,488,3,556,9,589,18,620,32,656,63,684,102,704,143,717,180"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#ade6c0e0773b385f027b6d715b0d58208" title="Create a hash from given values." alt="" coords="480,97,596,138"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="679,189,617,153,591,141,593,136,620,148,681,185"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Model.html#a42d70f2bb1be879ff1bb847667a4590e" title="Find Cell(s) that can burn closest to Location." alt="" coords="457,423,618,449"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="716,252,702,290,682,333,655,376,620,413,600,425,597,420,617,409,650,372,677,330,697,288,711,251"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1IntensityMap.html#a58007c8fe48adefafe34a31ce660f87c" title="Whether or not all Locations surrounding the given Location are burned." alt="" coords="468,228,607,268"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="651,231,608,239,607,233,650,226"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Environment.html#aa4db63058221f4d45a2b7ce8e352e3fb" title="Combine rasters into ConstantGrid&lt;Cell, Topo&gt;" alt="" coords="467,293,608,334"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="680,247,620,282,593,295,591,290,617,278,678,243"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1topo_1_1Perimeter.html#a058c31a8b0611493b076ce23c8cc0717" title="Create a Perimeter of the given size at the given Location." alt="" coords="475,358,600,399"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="705,251,669,300,646,325,620,347,599,360,597,355,617,343,642,321,665,296,701,248"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="470,162,606,203"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="650,205,605,197,606,192,651,200"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="261,117,384,158"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="479,81,458,88,376,119,374,114,456,83,477,76"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="449,52,393,46,393,40,449,47"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="236,423,409,449"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="441,439,410,439,410,433,441,433"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,423,188,449"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="220,439,188,439,188,433,220,433"/>
+<area shape="poly" id="edge13_Node000012_Node000003" title=" " alt="" coords="454,168,383,153,385,148,455,163"/>
+</map>

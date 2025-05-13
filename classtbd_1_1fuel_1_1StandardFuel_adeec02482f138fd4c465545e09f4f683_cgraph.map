@@ -1,9 +1,0 @@
-<map id="tbd::fuel::StandardFuel::limitIsf" name="tbd::fuel::StandardFuel::limitIsf">
-<area shape="rect" id="Node000001" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,47,155,88"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1StandardFuel.html#acf0506cfd1c95cfde917e237edae7b20" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="203,5,365,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,47,212,33,214,38,156,52"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1StandardFuel.html#a685c075b0d952fb3561d342bfab60ae3" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="203,55,365,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,65,187,65,187,70,155,70"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1fuel_1_1StandardFuel.html#ab07e4d21bdc750d9e470c750119e0734" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="209,105,359,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,86,195,97,194,102,154,91"/>
-</map>

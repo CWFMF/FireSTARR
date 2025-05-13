@@ -1,0 +1,7 @@
+<map id="fs::sim::SpreadInfo::dc" name="fs::sim::SpreadInfo::dc">
+<area shape="rect" id="Node000001" title="Drought Code used for spread." alt="" coords="5,35,154,60"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FwiWeather.html#afba176eda60e611c21e3e0eea3b915ee" title="Drought Code." alt="" coords="202,5,351,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,34,186,29,187,34,155,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#ae9aaa7cd820d801c39e90852598d9fcf" title="FwiWeather used for spread." alt="" coords="212,55,340,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,55,197,62,196,67,154,61"/>
+</map>

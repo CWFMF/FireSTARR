@@ -1,0 +1,10 @@
+<map id="fs::topo::EnvironmentInfo::loadInfo" name="fs::topo::EnvironmentInfo::loadInfo">
+<area shape="rect" id="Node000001" title="Load EnvironmentInfo from given rasters." alt="" coords="5,39,169,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1EnvironmentInfo.html#aaba744f431976cc53f892d94d949d45f" title="Construct from given rasters." alt="" coords="217,5,380,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,43,201,38,202,44,169,49"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Settings.html#a654a6715cf89f321d081880176394598" title="Whether or not to run things asynchronously where possible." alt="" coords="239,71,358,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,69,224,77,223,82,169,74"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="428,71,630,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="358,88,413,88,413,94,358,94"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="486,71,484,61,491,52,506,46,529,44,554,46,569,53,567,58,553,52,529,49,507,51,494,56,489,62,491,69"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="fs::sim::Scenario::addEvent" name="fs::sim::Scenario::addEvent">
+<area shape="rect" id="Node000001" title="Whether or not Location with given hash has burned already." alt="" coords="366,55,488,96"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="177,5,317,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,54,289,34,291,29,352,49"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="179,55,315,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="351,78,316,78,316,73,351,73"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1TestScenario.html#a0667115737ccae6c51f2cdb0667b2b49" title="Constructor." alt="" coords="176,120,318,161"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="356,104,306,122,304,117,354,99"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,55,128,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="163,78,128,78,128,73,163,73"/>
+</map>

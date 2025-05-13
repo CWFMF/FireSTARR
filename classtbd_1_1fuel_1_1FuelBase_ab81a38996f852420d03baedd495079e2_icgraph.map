@@ -1,7 +1,0 @@
-<map id="tbd::fuel::FuelBase::inorganicPercent" name="tbd::fuel::FuelBase::inorganicPercent">
-<area shape="rect" id="Node000001" title="Inorganic Percent (% / 100) [Anderson table 1]." alt="" coords="361,5,488,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelBase.html#a911a1b7688f30e731de3494ed9da551d" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="186,5,313,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,28,313,28,313,23,345,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelBase.html#a4662bd37e08ba112c301e0f0e2217c61" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="170,28,138,28,138,23,170,23"/>
-</map>

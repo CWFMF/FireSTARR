@@ -1,7 +1,0 @@
-<map id="tbd::data::Grid&lt; T, V &gt;" name="tbd::data::Grid&lt; T, V &gt;">
-<area shape="rect" id="Node000001" title="A GridBase with an associated type of data." alt="" coords="5,169,152,195"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="13,94,144,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,135,81,169,76,169,76,135"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="52,5,105,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,47,81,94,76,94,76,47"/>
-</map>

@@ -1,0 +1,7 @@
+<map id="fs::sim::GridMapCache&lt; K &gt;" name="fs::sim::GridMapCache&lt; K &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,124,220,150"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,135,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,73,124,122,119,125,91,76"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="159,20,216,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,62,158,101,141,125,136,122,153,99,174,59"/>
+</map>

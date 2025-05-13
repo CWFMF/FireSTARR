@@ -1,5 +1,0 @@
-<map id="tbd::fuel::InvalidFuel" name="tbd::fuel::InvalidFuel">
-<area shape="rect" id="Node000001" title="Placeholder fuel that throws exceptions if it ever gets used." alt="" coords="5,79,141,105"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelType.html" title="An FBP fuel type." alt="" coords="10,5,136,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,46,76,79,70,79,70,46"/>
-</map>

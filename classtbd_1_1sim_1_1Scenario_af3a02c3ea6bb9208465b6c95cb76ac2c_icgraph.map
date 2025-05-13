@@ -1,5 +1,0 @@
-<map id="tbd::sim::Scenario::scheduleFireSpread" name="tbd::sim::Scenario::scheduleFireSpread">
-<area shape="rect" id="Node000001" title="Schedule a fire spread Event." alt="" coords="177,5,319,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#a6e8393dcbcbae5059de734a2e2ac59e5" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

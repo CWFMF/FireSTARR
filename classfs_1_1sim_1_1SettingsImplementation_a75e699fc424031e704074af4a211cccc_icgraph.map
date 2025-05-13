@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::setMaximumTimeSeconds" name="fs::sim::SettingsImplementation::setMaximumTimeSeconds">
+<area shape="rect" id="Node000001" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="229,5,431,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a8a16f5a2ac2b2c6f6df1649e138b6194" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="5,5,181,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,28,181,28,181,23,213,23"/>
+</map>

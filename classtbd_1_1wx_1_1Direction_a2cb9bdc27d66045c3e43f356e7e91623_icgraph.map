@@ -1,7 +1,0 @@
-<map id="tbd::wx::Direction::heading" name="tbd::wx::Direction::heading">
-<area shape="rect" id="Node000001" title="Heading (opposite of this direction)" alt="" coords="384,5,502,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1wx_1_1Wind.html#a19247e2afb9aea572e3dfbbbdf3dacbe" title="Direction wind is going towards." alt="" coords="189,13,336,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="368,28,336,28,336,23,368,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SpreadInfo.html#a65b6b8e2e165068d10e3e0b1247631ff" title=" " alt="" coords="5,5,141,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="173,28,141,28,141,23,173,23"/>
-</map>

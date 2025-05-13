@@ -1,5 +1,0 @@
-<map id="tbd::fuel::DuffType::b1" name="tbd::fuel::DuffType::b1">
-<area shape="rect" id="Node000001" title="B_1 [table 2]." alt="" coords="177,13,320,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1DuffType.html#a25fe1ee5ffe1bb32b37ceea590cc3cfa" title="Ignition Probability (% / 100) [eq Ig&#45;1]." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

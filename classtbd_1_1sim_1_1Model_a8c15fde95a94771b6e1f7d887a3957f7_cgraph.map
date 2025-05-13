@@ -1,5 +1,0 @@
-<map id="tbd::sim::Model::makeProbabilityMap" name="tbd::sim::Model::makeProbabilityMap">
-<area shape="rect" id="Node000001" title="Create a ProbabilityMap with the same extent as this." alt="" coords="5,13,236,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Environment.html#a1093d114b4dc084a497cd14e53753865" title="Make a ProbabilityMap that covers this Environment." alt="" coords="284,5,432,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,23,268,23,268,28,236,28"/>
-</map>

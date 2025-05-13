@@ -1,5 +1,0 @@
-<map id="tbd::fuel::FuelType::safeCode" name="tbd::fuel::FuelType::safeCode">
-<area shape="rect" id="Node000001" title="Convert FuelType to its code, or 0 if nullptr." alt="" coords="202,5,327,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Environment.html#acd1b7abcc900a54ac0f86d3e2909dfb6" title="Combine rasters into ConstantGrid&lt;Cell, Topo&gt;" alt="" coords="5,5,154,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,28,154,28,154,23,186,23"/>
-</map>

@@ -1,0 +1,22 @@
+<map id="fs::wx::FwiWeather::dc" name="fs::wx::FwiWeather::dc">
+<area shape="rect" id="Node000001" title="Drought Code." alt="" coords="810,92,959,118"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#ab22a5bdbfd33f8ff4ac13940c227ed38" title="Drought Code used for spread." alt="" coords="598,5,746,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="845,87,761,46,725,34,727,29,763,41,848,82"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelGrass.html#ad8db5191a91447367bc069bcfc2431f6" title="Grass curing." alt="" coords="609,55,735,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="794,95,735,87,736,82,794,90"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="582,120,762,146"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="795,119,762,124,762,118,794,114"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Model.html#afc26e7431fa1893a95806a49155a2f01" title="Set constant weather." alt="" coords="586,169,758,195"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="843,127,763,161,729,171,727,166,761,156,841,122"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1FuelGrass.html#ae2561aa442a3d8698d70f3ff2f5ae3c3" title="Calculate base rate of spread multiplier." alt="" coords="380,55,506,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="594,78,506,78,506,73,594,73"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1FuelGrass.html#a23274d1c77d66b2934b8bf8e025df1cc" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,56,131,97"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="365,69,304,63,241,61,179,63,131,69,131,64,178,58,241,56,304,58,365,63"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1FuelGrass.html#ac3faa812455e8d0027319b5a8513b143" title="Calculate rate of spread (m/min)" alt="" coords="179,96,304,137"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="365,94,305,107,304,101,364,89"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="163,102,130,94,131,89,164,96"/>
+<area shape="poly" id="edge7_Node000006_Node000006" title=" " alt="" coords="269,83,259,77,241,75,225,77,215,82,212,88,213,95,208,96,206,87,212,78,224,72,241,70,260,72,272,79"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="352,144,534,170"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="567,146,535,150,535,145,567,141"/>
+<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="570,174,534,170,535,164,571,168"/>
+</map>

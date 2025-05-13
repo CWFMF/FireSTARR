@@ -1,7 +1,0 @@
-<map id="tbd::sim::Scenario::saveObservers" name="tbd::sim::Scenario::saveObservers">
-<area shape="rect" id="Node000001" title="Tell Observers to save their data for the given time." alt="" coords="5,39,129,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#aa18d3d1ec8d12c832343413acd989903" title="Tell Observers to save their data with base file name." alt="" coords="177,5,300,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,44,161,38,162,43,130,50"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Scenario.html#a5b3ef3afb595d5c3413536ff811e2724" title="Simulation number." alt="" coords="177,71,300,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,68,162,74,161,79,129,73"/>
-</map>

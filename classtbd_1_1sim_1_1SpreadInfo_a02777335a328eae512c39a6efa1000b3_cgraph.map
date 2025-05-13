@@ -1,8 +1,0 @@
-<map id="tbd::sim::SpreadInfo::slopeFactor" name="tbd::sim::SpreadInfo::slopeFactor">
-<area shape="rect" id="Node000001" title="Slope factor calculated from percent slope." alt="" coords="5,22,141,63"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#af2567efd417d589cf26daa916789b58f" title="Slope used for spread (%)" alt="" coords="189,22,324,63"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,40,173,40,173,45,141,45"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1Cell.html#a50921e14148e473999c8335beb72cf3b" title="Slope (degrees)" alt="" coords="372,29,507,55"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="324,40,357,40,357,45,324,45"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="409,30,403,21,406,11,419,5,440,3,462,5,474,12,471,16,460,10,440,8,420,10,410,15,408,20,413,27"/>
-</map>

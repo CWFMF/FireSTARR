@@ -1,0 +1,8 @@
+<map id="fs::fuel::FuelLookupImpl::emplaceFuel" name="fs::fuel::FuelLookupImpl::emplaceFuel">
+<area shape="rect" id="Node000001" title="Put fuel into lookup table based on name." alt="" coords="5,29,164,70"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="49,29,47,19,53,10,66,5,85,3,105,5,117,11,115,16,103,10,84,8,67,10,56,15,52,20,54,28"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelType.html#a569db30b7eff537bebb1cdedf3ddc66a" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="212,29,330,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="164,47,196,47,196,52,164,52"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelType.html#affd57b5caf743abec81b2aef2b9a1164" title="Name of the fuel." alt="" coords="378,29,496,70"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="330,47,363,47,363,52,330,52"/>
+</map>

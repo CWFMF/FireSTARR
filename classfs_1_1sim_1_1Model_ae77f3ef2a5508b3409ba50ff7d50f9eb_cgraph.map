@@ -1,0 +1,5 @@
+<map id="fs::sim::Model::scenarioCount" name="fs::sim::Model::scenarioCount">
+<area shape="rect" id="Node000001" title="How many Scenarios are in each Iteration." alt="" coords="5,5,161,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#adaa00e8bec9c09a69e90542eb12aa2c9" title="How many ignition scenarios are being used." alt="" coords="209,5,356,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,23,193,23,193,28,161,28"/>
+</map>

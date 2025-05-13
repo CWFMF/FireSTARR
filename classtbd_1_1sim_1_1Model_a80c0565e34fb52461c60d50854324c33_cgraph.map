@@ -1,7 +1,0 @@
-<map id="tbd::sim::Model::getBurnedVector" name="tbd::sim::Model::getBurnedVector">
-<area shape="rect" id="Node000001" title="Acquire a BurnedData that has already burnt cells set." alt="" coords="5,27,178,68"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Model.html#a2ed07b79d248aad956bd806130ca6c1c" title="Environment simulation is occurring in." alt="" coords="226,5,410,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,34,210,29,210,35,178,39"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1Environment.html#a2479cae6779e52509e4dc1f9a11a1330" title="Create BurnedData and set burned bits based on Perimeter." alt="" coords="244,55,392,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,56,229,62,228,67,178,61"/>
-</map>

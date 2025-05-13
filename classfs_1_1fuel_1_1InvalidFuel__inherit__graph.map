@@ -1,0 +1,5 @@
+<map id="fs::fuel::InvalidFuel" name="fs::fuel::InvalidFuel">
+<area shape="rect" id="Node000001" title="Placeholder fuel that throws exceptions if it ever gets used." alt="" coords="5,79,134,105"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelType.html" title="An FBP fuel type." alt="" coords="10,5,129,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,46,72,79,67,79,67,46"/>
+</map>

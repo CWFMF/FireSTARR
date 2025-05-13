@@ -1,5 +1,0 @@
-<map id="tbd::wx::Wind::wsvY" name="tbd::wx::Wind::wsvY">
-<area shape="rect" id="Node000001" title="Y component of wind vector (km/h)" alt="" coords="189,13,324,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#a65b6b8e2e165068d10e3e0b1247631ff" title=" " alt="" coords="5,5,141,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,28,141,28,141,23,173,23"/>
-</map>

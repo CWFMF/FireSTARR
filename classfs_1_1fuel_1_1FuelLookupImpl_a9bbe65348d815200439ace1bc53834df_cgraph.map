@@ -1,0 +1,7 @@
+<map id="fs::fuel::FuelLookupImpl::fuelToCode" name="fs::fuel::FuelLookupImpl::fuelToCode">
+<area shape="rect" id="Node000001" title="Look up the original grid code for a FuelType." alt="" coords="5,39,164,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelType.html#a52562ef54b368d8d0c85d06a1a561e4f" title="Code for this fuel type." alt="" coords="212,5,330,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,42,196,36,197,42,165,47"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelType.html#affd57b5caf743abec81b2aef2b9a1164" title="Name of the fuel." alt="" coords="212,71,330,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,70,197,76,196,81,164,75"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="fs::wx::Direction::asDegrees" name="fs::wx::Direction::asDegrees">
+<area shape="rect" id="Node000001" title="Direction as degrees, where 0 is North and values increase clockwise." alt="" coords="745,39,862,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1Direction.html#ad63ea5d302a73c50afb56a75dafb3d80" title="Direction as radians, where 0 is North and values increase clockwise." alt="" coords="568,5,686,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="729,48,685,39,686,34,730,42"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1IntensityMap.html#a988b86544800a455f5f02cfef58e207f" title="Update Location with specified values." alt="" coords="557,71,697,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="730,75,697,81,696,76,729,70"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1Direction.html#a2785d74dc1e33238e63cacf472c116bc" title="Heading (opposite of this direction)" alt="" coords="381,5,498,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="552,28,499,28,499,23,552,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1Wind.html#a786e68f3df12d97296908e188b87ab8c" title="Direction wind is going towards." alt="" coords="182,13,322,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="366,28,322,28,322,23,366,23"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="5,5,134,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="166,28,134,28,134,23,166,23"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1IntensityMap.html#af32955a906493a0572ac9154662b1550" title="Mark given location as burned." alt="" coords="370,71,509,111"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="542,94,510,94,510,88,542,88"/>
+</map>

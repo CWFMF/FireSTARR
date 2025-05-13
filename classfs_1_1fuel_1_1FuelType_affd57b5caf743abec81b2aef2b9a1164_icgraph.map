@@ -1,0 +1,16 @@
+<map id="fs::fuel::FuelType::name" name="fs::fuel::FuelType::name">
+<area shape="rect" id="Node000001" title="Name of the fuel." alt="" coords="418,71,536,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelLookupImpl.html#a6772829239e3cdbaa0cbce342f3f0250" title="Put fuel into lookup table based on name." alt="" coords="212,5,370,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="403,68,350,49,352,44,404,63"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelLookupImpl.html#a9bbe65348d815200439ace1bc53834df" title="Look up the original grid code for a FuelType." alt="" coords="212,71,370,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="402,94,370,94,370,88,402,88"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1FuelType.html#a569db30b7eff537bebb1cdedf3ddc66a" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="232,136,350,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="404,119,351,138,350,133,402,114"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1FuelLookupImpl.html#a03c5fd3cd5b977c8a590cbdcf7250e65" title="Look up a FuelType based on the given code." alt="" coords="5,47,164,87"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="225,132,211,125,163,103,134,90,136,85,165,98,213,121,227,127"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1FuelLookupImpl.html#a5c5021ff40e5fe3e0226ae82c278bb22" title="Put fuel into lookup table based on name." alt="" coords="5,136,164,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="216,159,164,159,164,154,216,154"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="23,201,146,242"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="218,182,147,205,146,200,216,177"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="118,123,105,117,84,115,65,117,53,121,49,127,51,135,45,136,43,126,50,117,64,111,85,109,107,112,120,118"/>
+</map>

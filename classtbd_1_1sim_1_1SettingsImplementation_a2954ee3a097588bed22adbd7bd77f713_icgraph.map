@@ -1,5 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::confidenceLevel" name="tbd::sim::SettingsImplementation::confidenceLevel">
-<area shape="rect" id="Node000001" title="Confidence required before simulation stops (% / 100)" alt="" coords="175,5,384,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a1fd904c611ea8e0e529b14476ceb6747" title="Confidence required before simulation stops (% / 100)" alt="" coords="5,5,127,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,28,127,28,127,23,159,23"/>
-</map>

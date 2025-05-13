@@ -1,0 +1,7 @@
+<map id="fs::sim::Settings::minimumRos" name="fs::sim::Settings::minimumRos">
+<area shape="rect" id="Node000001" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="360,5,479,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,5,312,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,28,312,28,312,23,345,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,128,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="160,28,128,28,128,23,160,23"/>
+</map>

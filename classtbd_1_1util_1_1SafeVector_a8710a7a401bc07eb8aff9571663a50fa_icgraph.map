@@ -1,7 +1,0 @@
-<map id="tbd::util::SafeVector::addValue" name="tbd::util::SafeVector::addValue">
-<area shape="rect" id="Node000001" title="Add a value to the SafeVector." alt="" coords="348,5,481,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#a438e262358a5768ea7c1c44daac33b8b" title="Save state of Scenario at given time." alt="" coords="177,5,300,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="332,28,300,28,300,23,332,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Scenario.html#a6e8393dcbcbae5059de734a2e2ac59e5" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

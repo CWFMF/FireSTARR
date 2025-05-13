@@ -1,0 +1,5 @@
+<map id="fs::sim::Scenario::weather" name="fs::sim::Scenario::weather">
+<area shape="rect" id="Node000001" title="FwiWeather for given time." alt="" coords="5,5,128,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FireWeather.html#af0136dacf50a3e2bc2fdeacaf18358e3" title="Get FwiWeather for given time." alt="" coords="176,13,323,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,23,160,23,160,28,128,28"/>
+</map>

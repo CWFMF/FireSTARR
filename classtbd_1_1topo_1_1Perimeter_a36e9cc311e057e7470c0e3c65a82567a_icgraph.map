@@ -1,7 +1,0 @@
-<map id="tbd::topo::Perimeter::burned" name="tbd::topo::Perimeter::burned">
-<area shape="rect" id="Node000001" title="List of all burned Locations." alt="" coords="186,39,318,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Perimeter.html#a9a3c677ecad925b4fd8b02c2e95c0ddd" title="Create a Perimeter of the given size at the given Location." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,47,137,41,138,35,171,41"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1Perimeter.html#a541669edf82f5bc50c1d8ecf98c7093c" title="Initialize perimeter from a file." alt="" coords="5,71,138,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,76,138,82,138,77,170,71"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="tbd::topo::Environment::makeMap" name="tbd::topo::Environment::makeMap">
-<area shape="rect" id="Node000001" title="Create a GridMap&lt;Other&gt; covering this Environment." alt="" coords="186,5,334,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Perimeter.html#a9a3c677ecad925b4fd8b02c2e95c0ddd" title="Create a Perimeter of the given size at the given Location." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,28,138,28,138,23,170,23"/>
-</map>

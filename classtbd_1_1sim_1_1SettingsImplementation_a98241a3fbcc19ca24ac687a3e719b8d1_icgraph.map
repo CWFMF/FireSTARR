@@ -1,5 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::offsetSunrise" name="tbd::sim::SettingsImplementation::offsetSunrise">
-<area shape="rect" id="Node000001" title="Offset from sunrise at which the day is considered to start (hours)" alt="" coords="174,5,383,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#ae75c99d7f81bb7c9f871085975b392ff" title="Offset from sunrise at which the day is considered to start (hours)" alt="" coords="5,5,126,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,28,126,28,126,23,158,23"/>
-</map>

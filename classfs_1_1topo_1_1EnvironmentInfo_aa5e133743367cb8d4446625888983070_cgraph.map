@@ -1,0 +1,11 @@
+<map id="fs::topo::EnvironmentInfo::calculateColumns" name="fs::topo::EnvironmentInfo::calculateColumns">
+<area shape="rect" id="Node000001" title="Number of columns in grid." alt="" coords="5,71,169,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1GridBase.html#ae77f3d6439369ce9b9b6a476278f8efc" title="Number of columns in the GridBase." alt="" coords="217,71,347,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,88,201,88,201,94,169,94"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1GridBase.html#a36018525f0af09808eb17a86b6a3ac1a" title="Cell size used for GridBase." alt="" coords="395,5,518,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="337,68,385,49,387,54,339,73"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridBase.html#a9041142694e10f2cb5776cefe1f5ca09" title="Lower left corner X coordinate in meters." alt="" coords="395,71,518,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="347,88,380,88,380,94,347,94"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1GridBase.html#a16bd22199b244fe7cf96a513fd890149" title="Upper right corner X coordinate in meters." alt="" coords="395,136,518,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="339,109,387,128,385,133,337,114"/>
+</map>

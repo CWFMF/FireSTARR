@@ -1,5 +1,0 @@
-<map id="tbd::sim::Model::rows" name="tbd::sim::Model::rows">
-<area shape="rect" id="Node000001" title="Cell at the Location represented by the given hash." alt="" coords="177,13,318,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#af4cb7b607fc3c2966f50603fea3a99a4" title="Number of rows." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

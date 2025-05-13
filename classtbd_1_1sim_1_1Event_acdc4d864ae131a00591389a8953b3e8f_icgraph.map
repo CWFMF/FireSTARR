@@ -1,7 +1,0 @@
-<map id="tbd::sim::Event::type" name="tbd::sim::Event::type">
-<area shape="rect" id="Node000001" title="Type of Event." alt="" coords="211,46,346,72"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#a6e8393dcbcbae5059de734a2e2ac59e5" title="Take whatever steps are necessary to process the given Event." alt="" coords="22,5,146,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,47,145,39,146,34,196,42"/>
-<area shape="rect" id="Node000003" href="$structtbd_1_1sim_1_1EventCompare.html#a9e3b97cb45aeb065377acbc3aa7a581e" title="Defines ordering on Events." alt="" coords="5,71,163,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,75,164,81,163,75,195,70"/>
-</map>

@@ -1,0 +1,7 @@
+<map id="fs::topo::Perimeter::burned" name="fs::topo::Perimeter::burned">
+<area shape="rect" id="Node000001" title="Map of all burned Locations." alt="" coords="179,39,304,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Perimeter.html#a058c31a8b0611493b076ce23c8cc0717" title="Create a Perimeter of the given size at the given Location." alt="" coords="5,5,131,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,47,130,40,131,35,164,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Perimeter.html#ad44c584a5fe10ffc7a2ed93a0646f3f1" title="Initialize perimeter from a file." alt="" coords="5,71,131,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,76,131,82,130,77,163,71"/>
+</map>

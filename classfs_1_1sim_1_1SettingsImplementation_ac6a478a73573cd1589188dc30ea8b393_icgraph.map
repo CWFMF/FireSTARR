@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::thresholdHourlyWeight" name="fs::sim::SettingsImplementation::thresholdHourlyWeight">
+<area shape="rect" id="Node000001" title="Weight to give to hourly part of thresholds." alt="" coords="205,5,407,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#ac1298187c48b4dd16199d76ffe3ff355" title="Weight to give to hourly part of thresholds." alt="" coords="5,5,157,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,28,157,28,157,23,189,23"/>
+</map>

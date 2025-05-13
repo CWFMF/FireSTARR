@@ -1,5 +1,0 @@
-<map id="tbd::sim::Event::makeNewFire" name="tbd::sim::Event::makeNewFire">
-<area shape="rect" id="Node000001" title="Make new fire event." alt="" coords="201,5,393,31"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#af3f2c843f725009f553e56e3fe7cd0b2" title="Run the Scenario." alt="" coords="5,5,153,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,21,153,21,153,16,185,16"/>
-</map>

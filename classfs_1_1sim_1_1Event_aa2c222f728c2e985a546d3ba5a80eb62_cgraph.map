@@ -1,0 +1,5 @@
+<map id="fs::sim::Event::makeNewFire" name="fs::sim::Event::makeNewFire">
+<area shape="rect" id="Node000001" title="Make new fire event." alt="" coords="5,5,191,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Event.html#a42d6f9837174b92c9a46d4bd63b6cb2c" title="Cell Event takes place in." alt="" coords="239,5,363,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,16,223,16,223,21,191,21"/>
+</map>

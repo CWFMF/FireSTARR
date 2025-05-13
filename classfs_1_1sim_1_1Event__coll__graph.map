@@ -1,0 +1,12 @@
+<map id="fs::sim::Event" name="fs::sim::Event">
+<area shape="rect" id="Node000001" title="A specific Event scheduled in a specific Scenario." alt="" coords="84,203,182,229"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Cell.html" title="A Position with a Slope, Aspect, and Fuel." alt="" coords="24,98,116,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,137,97,178,119,201,115,205,93,181,74,139"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Position.html" title=" " alt="" coords="5,5,122,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,61,72,97,67,97,64,62"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1Direction.html" title="Direction with access to degrees or radians." alt="" coords="150,98,262,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="195,138,167,181,147,205,143,201,163,178,190,135"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="279,103,288,110,280,118,263,120,262,115,278,113,283,110,276,107"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="146,13,277,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="212,55,210,97,204,97,207,54"/>
+</map>

@@ -1,5 +1,0 @@
-<map id="tbd::sim::Scenario::evaluateNextEvent" name="tbd::sim::Scenario::evaluateNextEvent">
-<area shape="rect" id="Node000001" title="Evaluate next Event in the queue." alt="" coords="201,5,337,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#af3f2c843f725009f553e56e3fe7cd0b2" title="Run the Scenario." alt="" coords="5,13,153,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,28,153,28,153,23,185,23"/>
-</map>

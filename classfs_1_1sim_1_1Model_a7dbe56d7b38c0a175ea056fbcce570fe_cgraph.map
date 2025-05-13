@@ -1,0 +1,7 @@
+<map id="fs::sim::Model::getBurnedVector" name="fs::sim::Model::getBurnedVector">
+<area shape="rect" id="Node000001" title="Acquire a BurnedData that has already burnt cells set." alt="" coords="5,27,171,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#af243fb44ec4382c7f96552ad4702fb73" title="Environment simulation is occurring in." alt="" coords="219,5,396,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,34,203,29,204,35,172,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Environment.html#aab35bcdff50db3d3ec136132e656b84b" title="Create BurnedData and set burned bits based on Perimeter." alt="" coords="237,55,378,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="172,55,222,62,221,67,171,61"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="fs::topo::Environment::loadEnvironment" name="fs::topo::Environment::loadEnvironment">
+<area shape="rect" id="Node000001" title="Load from rasters in folder that have same projection as Perimeter." alt="" coords="5,92,147,133"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#af762b46765adaccb543d7bda48091029" title="Elevation of the origin Point." alt="" coords="206,5,347,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,89,194,55,206,50,208,55,196,60,122,94"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Point.html#ae3ebcb174d5002ff3d15ebd52e6a56da" title="Latitude (decimal degrees)" alt="" coords="203,70,350,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,99,187,93,188,99,147,105"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1EnvironmentInfo.html#a5777ecec36194270b0ed26b7cc4319cc" title="Load EnvironmentInfo from given rasters." alt="" coords="195,120,358,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="147,120,179,124,179,129,147,125"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1topo_1_1Point.html#a6cf786914bd3382401415edee74b1b18" title="Longitude (decimal degrees)" alt="" coords="198,185,355,210"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="115,131,196,170,215,177,213,182,194,175,113,136"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1EnvironmentInfo.html#aaba744f431976cc53f892d94d949d45f" title="Construct from given rasters." alt="" coords="406,88,569,129"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="358,125,390,120,391,126,359,131"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Settings.html#a654a6715cf89f321d081880176394598" title="Whether or not to run things asynchronously where possible." alt="" coords="428,153,547,194"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="359,151,413,159,412,165,358,156"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="617,153,820,194"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="548,171,602,171,602,176,548,176"/>
+<area shape="poly" id="edge7_Node000007_Node000007" title=" " alt="" coords="675,153,673,143,680,134,695,129,719,127,743,129,758,135,756,140,742,134,718,132,696,134,683,139,678,145,680,152"/>
+</map>

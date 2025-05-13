@@ -1,0 +1,10 @@
+<map id="fs::topo::Cell::slope" name="fs::topo::Cell::slope">
+<area shape="rect" id="Node000001" title="Slope (degrees)" alt="" coords="377,35,505,60"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="473,22,462,16,441,13,422,15,411,20,409,25,414,33,410,36,404,26,407,16,420,10,441,8,464,11,475,17"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Cell.html#a5719bec5468e37ff91f342d334d98fbb" title="Hash attributes into a Topo value." alt="" coords="182,5,329,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="361,38,329,32,330,27,362,32"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#a7566c794752d982b8fcbc92113ec51a7" title="Slope used for spread (%)" alt="" coords="191,55,320,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="362,62,320,68,319,63,361,57"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1SpreadInfo.html#ad445edf5cbfe72092fae19751a5905b8" title="Slope factor calculated from percent slope." alt="" coords="5,55,134,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="176,78,134,78,134,73,176,73"/>
+</map>

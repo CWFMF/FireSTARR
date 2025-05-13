@@ -1,0 +1,9 @@
+<map id="fs::util::Statistics::runsRequired" name="fs::util::Statistics::runsRequired">
+<area shape="rect" id="Node000001" title="Estimate how many more runs are required to achieve desired confidence." alt="" coords="5,63,122,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1util_1_1Statistics.html#ae9969dcc225138305035da61ee31d1f0" title="Mean (average) value." alt="" coords="176,5,292,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,61,160,48,162,53,123,66"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1util_1_1Statistics.html#adb154959e45ea88ce1e74f740b003627" title="Number of data points in the set." alt="" coords="170,70,299,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="122,80,154,80,154,86,122,86"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1util_1_1Statistics.html#acbdc7c932c27ad74799cf94081d00f61" title="Sample Variance." alt="" coords="174,120,294,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="123,100,160,113,158,118,121,105"/>
+</map>

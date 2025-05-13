@@ -1,6 +1,0 @@
-<map id="tbd::wx::RelativeHumidity" name="tbd::wx::RelativeHumidity">
-<area shape="rect" id="Node000001" title="Relative humidity as a percentage." alt="" coords="5,80,171,106"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="187,86,197,93,189,100,172,102,171,97,187,95,192,93,185,91"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="19,5,157,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,46,91,80,85,80,85,46"/>
-</map>

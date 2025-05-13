@@ -1,9 +1,0 @@
-<map id="tbd::fuel::FuelMixed::rosMultiplier" name="tbd::fuel::FuelMixed::rosMultiplier">
-<area shape="rect" id="Node000001" title="Rate of spread multiplier [ST&#45;X&#45;3 eq 27/28, GLC&#45;X&#45;10 eq 29/30]." alt="" coords="364,39,495,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelMixed.html#addc500f8f669387a07569484b5f74b6a" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="185,5,316,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="348,47,316,41,317,35,349,41"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelMixed.html#ad69fba9112fe80feab260c077c1b3a1c" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="185,71,316,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="349,76,317,82,316,77,348,71"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1fuel_1_1FuelMixed.html#ae6a5fe8f9969f30d147803da092d77e4" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 42]." alt="" coords="5,71,137,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="169,94,137,94,137,88,169,88"/>
-</map>

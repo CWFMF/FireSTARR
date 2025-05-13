@@ -1,0 +1,14 @@
+<map id="fs::fuel::StandardFuel::negB" name="fs::fuel::StandardFuel::negB">
+<area shape="rect" id="Node000001" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="588,39,731,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1StandardFuel.html#afb54a5d1506bf22006db926768ae846c" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="398,5,540,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="572,46,540,41,541,36,573,41"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1StandardFuel.html#ac0d50fe58a637f32c007f395c64451d1" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="398,71,540,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="573,76,541,82,540,76,572,71"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelNonMixed.html#a496c0ec1f9192b0292ca4f5a08352b32" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,67,154,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="383,32,295,40,202,54,143,69,142,64,201,48,295,35,383,27"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1FuelMixed.html#ae6f5f169c87e033ecf4003aaf05fae9d" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="214,63,338,103"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="382,90,338,88,339,83,382,85"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1FuelNonMixed.html#a0f77d7245ff8a6aa1b3bba1ec62564d2" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="202,128,350,169"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="385,119,348,130,346,125,383,114"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="193,125,146,110,147,105,195,120"/>
+</map>

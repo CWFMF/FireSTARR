@@ -1,7 +1,0 @@
-<map id="tbd::sim::Scenario::nd" name="tbd::sim::Scenario::nd">
-<area shape="rect" id="Node000001" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="5,42,149,68"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#a8d57284d0dcf9b23aeb0bfb19601fd87" title="Model this Scenario is running in." alt="" coords="199,5,322,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,41,183,35,184,41,150,46"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Model.html#ab6a0013110e093c85efa2c8fa8122460" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="197,70,324,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,63,182,68,181,74,149,69"/>
-</map>

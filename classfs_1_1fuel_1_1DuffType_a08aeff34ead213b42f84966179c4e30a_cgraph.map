@@ -1,0 +1,5 @@
+<map id="fs::fuel::DuffType::duffFunction" name="fs::fuel::DuffType::duffFunction">
+<area shape="rect" id="Node000001" title="Ignition Probability (% / 100) [eq Ig&#45;1]." alt="" coords="5,5,122,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1DuffType.html#a26b2227c7ab4e6e3307ce1fd6052148b" title="B_1 [table 2]." alt="" coords="170,13,306,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,23,154,23,154,28,122,28"/>
+</map>

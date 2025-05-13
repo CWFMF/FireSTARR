@@ -1,0 +1,38 @@
+<map id="fs::sim::Model::readWeather" name="fs::sim::Model::readWeather">
+<area shape="rect" id="Node000001" title="Read weather used for Scenarios." alt="" coords="5,383,185,408"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="237,5,390,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,382,103,321,124,229,142,178,165,128,194,81,231,40,234,38,237,42,235,44,199,85,170,131,147,180,130,231,108,322,100,383"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1FwiWeather.html#a09a04b3f2b1caaba68d084a71cbd1ac1" title="Build&#45;up Index." alt="" coords="237,55,390,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="96,382,107,328,131,249,148,206,171,164,198,124,231,90,234,87,238,91,234,93,202,128,175,167,153,209,136,251,112,329,101,383"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1FwiWeather.html#afba176eda60e611c21e3e0eea3b915ee" title="Drought Code." alt="" coords="239,104,388,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="97,381,111,335,137,270,176,200,202,167,231,139,235,136,238,140,234,143,206,171,181,203,142,272,116,337,102,383"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1wx_1_1Wind.html#a29ae1a2c1c0656ef3a26bbe2578c1658" title="Direction wind is coming from." alt="" coords="241,153,386,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="99,381,116,343,143,291,182,236,205,210,231,188,237,184,240,189,234,192,209,214,186,239,148,294,120,345,104,383"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1wx_1_1FwiWeather.html#a1ca390d52b21ad7626e5201bea9c973a" title="Duff Moisture Code." alt="" coords="233,203,394,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="102,381,151,313,188,273,231,239,241,233,244,237,234,243,192,277,155,317,107,384"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1wx_1_1FwiWeather.html#a23fce5b0eef748b143c53dc4f61d0889" title="Fine Fuel Moisture Code." alt="" coords="249,252,378,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="113,380,165,344,231,304,243,298,246,303,234,309,168,348,116,384"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="254,318,373,358"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="146,379,238,355,240,360,148,385"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1wx_1_1FwiWeather.html#a6cbfd261581cd9313b4d3e742da58897" title="Fire Weather Index." alt="" coords="237,383,390,408"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="185,393,222,393,222,398,185,398"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1wx_1_1FwiWeather.html#a1f6bf2b7071841062c64dc67d9a7ffa9" title="Initial Spread Index." alt="" coords="239,432,388,458"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="156,406,239,425,238,431,155,412"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1wx_1_1Weather.html#ad167981783683996815aec7567979c75" title="Precipitation (1hr accumulation) (mm)" alt="" coords="244,481,383,507"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="119,407,170,437,234,468,249,473,247,478,232,473,168,441,116,411"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1wx_1_1Weather.html#a814ee01b60a7cb46d589a11e7a21edbe" title="Relative Humidity (%)" alt="" coords="251,531,376,556"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="109,407,160,460,195,491,234,517,243,522,241,527,231,522,192,495,156,464,105,411"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1wx_1_1Wind.html#a3d3983bf955b0ef104129eb14f46ca53" title="Speed of wind (km/h)" alt="" coords="248,580,378,606"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="105,407,124,440,152,483,189,528,234,567,241,571,238,575,231,571,186,532,148,486,119,442,101,410"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1wx_1_1Weather.html#a187d8984b57ca622cf7a3a9515889982" title="Temperature (Celsius)" alt="" coords="242,629,385,655"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="103,408,119,449,146,505,184,565,208,592,234,616,239,619,236,624,231,620,204,596,180,568,141,507,114,451,98,410"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1wx_1_1Weather.html#a7a935528d978215e3c2861133de1de19" title="Wind (km/h)" alt="" coords="243,679,384,704"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="102,408,114,456,139,526,157,564,179,601,204,635,234,666,238,668,235,673,231,669,200,639,174,604,152,566,134,528,109,458,96,409"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1sim_1_1Model.html#a74d9d4d9cfe4cef59b3911e3a1cd92ed" title=" " alt="" coords="233,728,394,754"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="101,408,111,465,133,547,151,592,173,637,201,679,235,715,238,717,234,722,231,719,197,682,169,640,146,595,128,549,105,466,95,409"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1SettingsImplementation.html#a59e067bbca9d88108a6fc7ef6976e7c7" title="Fuel lookup table." alt="" coords="442,274,644,314"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="373,324,426,314,427,319,374,329"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="442,363,644,404"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="374,347,427,358,426,363,373,352"/>
+<area shape="poly" id="edge10_Node000010_Node000010" title=" " alt="" coords="500,363,498,353,505,344,520,339,543,337,568,339,583,345,581,350,567,344,543,342,521,344,508,348,503,354,505,362"/>
+</map>

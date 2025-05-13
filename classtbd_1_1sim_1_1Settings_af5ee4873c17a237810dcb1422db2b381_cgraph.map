@@ -1,8 +1,0 @@
-<map id="tbd::sim::Settings::outputDateOffsets" name="tbd::sim::Settings::outputDateOffsets">
-<area shape="rect" id="Node000001" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="5,63,138,103"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="186,29,395,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,70,170,65,171,71,139,76"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#a258b68a43b159fe1e5f32b7d7d016925" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="186,95,395,135"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="139,90,171,95,170,100,138,95"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="249,29,247,19,254,10,268,5,290,3,314,5,328,11,326,16,313,10,290,8,270,10,257,15,252,21,254,28"/>
-</map>

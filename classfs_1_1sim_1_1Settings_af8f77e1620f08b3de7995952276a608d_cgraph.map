@@ -1,0 +1,6 @@
+<map id="fs::sim::Settings::setSaveProbability" name="fs::sim::Settings::setSaveProbability">
+<area shape="rect" id="Node000001" title="Set whether or not to save probability grids." alt="" coords="5,29,135,70"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="183,29,385,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,47,167,47,167,52,135,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="243,29,241,19,248,10,262,5,284,3,307,5,321,11,319,16,306,10,284,8,264,10,251,15,247,20,249,28"/>
+</map>

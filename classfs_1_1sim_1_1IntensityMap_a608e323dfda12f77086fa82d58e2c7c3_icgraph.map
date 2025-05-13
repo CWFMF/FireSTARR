@@ -1,0 +1,5 @@
+<map id="fs::sim::IntensityMap::columns" name="fs::sim::IntensityMap::columns">
+<area shape="rect" id="Node000001" title="Number of columns in this extent." alt="" coords="193,5,332,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityMap.html#a58007c8fe48adefafe34a31ce660f87c" title="Whether or not all Locations surrounding the given Location are burned." alt="" coords="5,5,145,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,28,145,28,145,23,177,23"/>
+</map>

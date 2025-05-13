@@ -1,0 +1,13 @@
+<map id="fs::sim::SpreadInfo::nd" name="fs::sim::SpreadInfo::nd">
+<area shape="rect" id="Node000001" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="225,144,373,169"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelVariable.html#aafc20994f28f11b91fc647cfea561f1d" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="22,5,160,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,135,228,98,175,61,151,49,153,44,178,57,231,94,275,131"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelVariable.html#aa9ed3aef36e85a1b0d53a03769b49971" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="11,71,171,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,141,157,114,159,109,242,136"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1FuelVariable.html#a128228670d0b62528dfead30c199d036" title="Final rate of spread (m/min)" alt="" coords="22,136,160,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="209,159,160,159,160,154,209,154"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="27,201,155,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="242,177,157,204,155,199,240,172"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1FuelVariable.html#a1f3ef071d65c5b6f299a83191b23014b" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="5,267,177,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="275,182,231,219,178,256,153,268,151,264,175,251,228,215,271,178"/>
+</map>

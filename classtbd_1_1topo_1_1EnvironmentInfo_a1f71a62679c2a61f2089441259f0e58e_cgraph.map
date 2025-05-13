@@ -1,5 +1,0 @@
-<map id="tbd::topo::EnvironmentInfo::proj4" name="tbd::topo::EnvironmentInfo::proj4">
-<area shape="rect" id="Node000001" title="UTM projection that this uses." alt="" coords="5,5,176,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html#a45532381d3a3c56a39baa88dffab8a3a" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="224,5,354,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,23,208,23,208,28,176,28"/>
-</map>

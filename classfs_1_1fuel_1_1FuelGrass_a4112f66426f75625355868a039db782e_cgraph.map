@@ -1,0 +1,5 @@
+<map id="fs::fuel::FuelGrass::calculateRos" name="fs::fuel::FuelGrass::calculateRos">
+<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min)" alt="" coords="5,28,131,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1StandardFuel.html#ac0d50fe58a637f32c007f395c64451d1" title=" " alt="" coords="179,5,377,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,46,163,46,163,51,131,51"/>
+</map>

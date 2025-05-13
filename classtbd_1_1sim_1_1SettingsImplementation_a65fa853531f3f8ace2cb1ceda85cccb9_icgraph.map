@@ -1,5 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::setMaximumTimeSeconds" name="tbd::sim::SettingsImplementation::setMaximumTimeSeconds">
-<area shape="rect" id="Node000001" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="235,5,444,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a59177788c6c95f3df77cccf4c1a423a2" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="5,5,187,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,28,187,28,187,23,219,23"/>
-</map>

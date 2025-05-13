@@ -1,0 +1,7 @@
+<map id="fs::sim::Scenario::burn" name="fs::sim::Scenario::burn">
+<area shape="rect" id="Node000001" title="Burn cell that Event takes place in." alt="" coords="194,42,341,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="14,5,137,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,44,137,38,138,32,179,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,70,146,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,71,146,75,145,70,178,65"/>
+</map>

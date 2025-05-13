@@ -1,0 +1,9 @@
+<map id="fs::fuel::StandardFuel::limitIsf" name="fs::fuel::StandardFuel::limitIsf">
+<area shape="rect" id="Node000001" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,47,148,88"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1StandardFuel.html#a7d9579648ccb7d0476c41da3b18fbce4" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="196,5,351,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,47,204,33,205,38,149,52"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1StandardFuel.html#a195a5a2112d6dba7db89bac4ac8964fc" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="196,55,351,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,65,180,65,180,70,148,70"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1StandardFuel.html#a7e97f4ee73038e50918caa0691120961" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="202,104,344,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,86,188,97,187,102,147,91"/>
+</map>

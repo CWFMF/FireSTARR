@@ -1,6 +1,0 @@
-<map id="tbd::topo::Cell::aspect" name="tbd::topo::Cell::aspect">
-<area shape="rect" id="Node000001" title="Aspect (degrees)" alt="" coords="208,29,351,55"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="313,17,302,10,279,8,259,10,248,15,245,20,251,27,246,30,240,21,244,11,257,5,279,3,304,5,316,12"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Cell.html#a9eb36995b1284c53513c19a316bbbce7" title="Hash attributes into a Topo value." alt="" coords="5,29,160,55"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="192,45,160,45,160,40,192,40"/>
-</map>

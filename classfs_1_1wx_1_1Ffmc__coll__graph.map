@@ -1,0 +1,6 @@
+<map id="fs::wx::Ffmc" name="fs::wx::Ffmc">
+<area shape="rect" id="Node000001" title="Fine Fuel Moisture Code value." alt="" coords="25,82,116,108"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="132,87,142,95,134,103,116,105,115,100,132,98,137,95,129,92"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,47,73,82,68,82,68,47"/>
+</map>

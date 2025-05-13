@@ -1,0 +1,11 @@
+<map id="fs::sim::Iteration" name="fs::sim::Iteration">
+<area shape="rect" id="Node000001" title="Represents a full set of simulations using all available weather streams." alt="" coords="88,183,201,208"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,188,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,132,140,181,136,184,108,135"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1util_1_1SafeVector.html" title="A vector with added thread safety." alt="" coords="212,94,338,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="246,131,164,184,161,180,243,126"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="148,5,282,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="232,43,249,68,268,92,263,96,245,72,228,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="306,5,362,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="319,45,285,95,281,92,315,42"/>
+</map>

@@ -1,8 +1,0 @@
-<map id="tbd::sim::Settings::ignRow" name="tbd::sim::Settings::ignRow">
-<area shape="rect" id="Node000001" title="Ignition position row." alt="" coords="5,51,126,91"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#aefa5125a364f2ac2e1473411ad0cb954" title="Ignition position row." alt="" coords="174,5,383,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,56,165,47,166,52,126,61"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="174,95,383,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="126,81,163,88,162,94,125,86"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="238,95,236,85,243,76,257,70,278,68,301,70,315,77,313,81,300,76,278,73,258,75,246,80,241,86,243,93"/>
-</map>

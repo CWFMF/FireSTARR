@@ -1,6 +1,0 @@
-<map id="tbd::fuel::FuelGrass::calculateRos" name="tbd::fuel::FuelGrass::calculateRos">
-<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min)" alt="" coords="5,29,138,70"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="37,29,35,19,41,10,53,5,72,3,91,5,103,11,100,16,90,10,71,8,55,10,44,14,40,20,42,28"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelGrass.html#aec6d299a1cbc78eb9cdbb11e55e52dc4" title="Calculate base rate of spread multiplier." alt="" coords="186,29,318,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,47,170,47,170,52,138,52"/>
-</map>

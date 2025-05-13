@@ -1,0 +1,11 @@
+<map id="fs::sim::SettingsImplementation::maximumCountSimulations" name="fs::sim::SettingsImplementation::maximumCountSimulations">
+<area shape="rect" id="Node000001" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="865,5,1067,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a2344b8610f84eef9477742c7aef742ef" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="637,5,817,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="849,28,817,28,817,23,849,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a86991422a0f1e2bc74a8ec720159051c" title="Add statistics for completed iterations." alt="" coords="462,5,589,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="621,28,590,28,590,23,621,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,13,414,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="447,28,415,28,415,23,447,23"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,188,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="220,28,188,28,188,23,220,23"/>
+</map>

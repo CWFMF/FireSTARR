@@ -1,9 +1,0 @@
-<map id="tbd::logging::Log::getLogLevel" name="tbd::logging::Log::getLogLevel">
-<area shape="rect" id="Node000001" title="Get current logging level." alt="" coords="201,71,321,111"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1logging_1_1Log.html#a263b72785f49e64ea1d0afe7cd911930" title="Decrease amount of logging output by one level." alt="" coords="15,5,143,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,67,137,49,139,44,189,62"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1logging_1_1Log.html#a5b939553fc79d12a9aa86ba1c1214247" title="Increase amount of logging output by one level." alt="" coords="17,71,141,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,94,141,94,141,88,185,88"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1sim_1_1Scenario.html#af3f2c843f725009f553e56e3fe7cd0b2" title="Run the Scenario." alt="" coords="5,136,153,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="187,117,123,137,122,132,185,112"/>
-</map>

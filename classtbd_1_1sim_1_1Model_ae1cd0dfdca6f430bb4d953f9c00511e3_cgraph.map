@@ -1,5 +1,0 @@
-<map id="tbd::sim::Model::scenarioCount" name="tbd::sim::Model::scenarioCount">
-<area shape="rect" id="Node000001" title="How many Scenarios are in each Iteration." alt="" coords="5,5,168,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Model.html#a6b979c2c97aef9c929a2137a8f320afe" title="How many ignition scenarios are being used." alt="" coords="216,5,370,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,23,201,23,201,28,168,28"/>
-</map>

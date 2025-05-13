@@ -1,6 +1,0 @@
-<map id="tbd::fuel::FuelGrass::calculateRos" name="tbd::fuel::FuelGrass::calculateRos">
-<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min)" alt="" coords="186,29,318,70"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="281,16,270,10,252,8,235,10,225,14,221,20,222,28,217,29,216,19,221,10,233,5,252,3,272,5,283,11"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelGrass.html#a3f0b1c12b6ed37c04a4a3d124c6c7dab" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,29,138,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,52,138,52,138,47,170,47"/>
-</map>

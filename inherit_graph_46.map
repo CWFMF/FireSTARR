@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structtbd_1_1sim_1_1IObserver__deleter.html" title="Deleter for IObserver to get around incomplete class with unique_ptr." alt="" coords="5,5,135,46"/>
+<area shape="rect" id="Node000000" href="$classfs_1_1topo_1_1Position.html" title=" " alt="" coords="5,5,122,46"/>
+<area shape="rect" id="Node000001" href="$classfs_1_1topo_1_1Location.html" title=" " alt="" coords="170,13,289,38"/>
+<area shape="poly" id="edge124_Node000000_Node000001" title=" " alt="" coords="137,23,169,23,169,28,137,28"/>
 </map>

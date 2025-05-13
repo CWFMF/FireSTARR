@@ -1,7 +1,0 @@
-<map id="tbd::fuel::FuelVariable::criticalSurfaceIntensity" name="tbd::fuel::FuelVariable::criticalSurfaceIntensity">
-<area shape="rect" id="Node000001" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="5,35,165,75"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelType.html#a0e3f3aab98f4a8edf81d435c1f474c3f" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="213,5,372,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,41,197,36,198,42,165,46"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SpreadInfo.html#a531f07cd41d8492a60692b0ab696a6e2" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="215,70,370,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,63,199,68,199,73,165,68"/>
-</map>

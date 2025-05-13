@@ -1,5 +1,0 @@
-<map id="tbd::wx::FireWeather::weightedDsr" name="tbd::wx::FireWeather::weightedDsr">
-<area shape="rect" id="Node000001" title="Weighted Danger Severity Rating for the stream." alt="" coords="177,5,314,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#abdc479406b8c2fe764aa3fba6aa54f81" title="Weighted Danger Severity Rating." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

@@ -1,0 +1,88 @@
+<map id="fs::sim::Scenario::run" name="fs::sim::Scenario::run">
+<area shape="rect" id="Node000001" title="Run the Scenario." alt="" coords="5,697,146,723"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#a7bcdd23ef3fdd25a9518748e42801f00" title="Whether or not Location with given hash has burned already." alt="" coords="227,30,350,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,696,83,579,103,395,119,297,138,207,162,132,176,103,192,80,211,65,215,69,196,84,181,106,167,134,143,208,124,298,108,395,88,580,80,697"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695" title="Burn cell that Event takes place in." alt="" coords="215,196,362,222"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="76,697,88,606,112,469,128,397,147,331,168,277,192,239,206,227,209,231,196,243,173,279,152,333,134,399,118,470,94,607,81,697"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="474,55,590,96"/>
+<area shape="poly" id="edge20_Node000001_Node000005" title=" " alt="" coords="75,697,86,596,108,441,123,360,143,285,165,224,178,200,192,182,214,162,236,151,258,146,280,144,327,143,353,139,382,130,406,118,430,105,458,94,460,99,432,110,408,123,384,135,355,144,328,148,281,149,259,151,238,156,217,167,196,185,182,203,170,226,148,287,129,361,113,442,91,597,81,697"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="460,385,604,411"/>
+<area shape="poly" id="edge38_Node000001_Node000012" title=" " alt="" coords="76,697,87,612,110,485,126,420,145,361,167,314,192,283,240,255,263,248,286,247,309,250,333,257,384,283,397,292,404,303,411,326,417,350,423,361,433,371,448,380,445,385,429,375,418,364,412,352,406,328,399,305,393,296,382,287,331,262,308,255,286,252,264,254,242,260,195,287,171,316,150,363,131,422,116,487,93,613,81,697"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1sim_1_1Scenario.html#a3ec8d66722047224d21260ed80073ee4" title="Whether or not a Cell can burn." alt="" coords="227,296,350,337"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="74,697,79,635,95,542,110,490,130,438,157,390,192,347,211,333,214,337,196,351,162,393,135,441,115,492,100,543,84,635,80,697"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="217,361,360,387"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="75,697,82,642,100,562,115,517,135,474,160,433,192,398,202,390,205,394,195,401,164,436,139,476,120,519,105,563,87,643,80,698"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1sim_1_1Scenario.html#a58c8a66971a1fbf705536b3ed21d59ec" title="Number of Scenarios that have completed running." alt="" coords="227,411,350,452"/>
+<area shape="poly" id="edge21_Node000001_Node000019" title=" " alt="" coords="77,696,88,652,109,590,143,522,166,491,192,463,212,449,215,454,195,467,170,494,148,525,114,592,93,654,82,698"/>
+<area shape="rect" id="Node000020" href="$classfs_1_1sim_1_1Scenario.html#a446bcfa8b6de230e9ba37dfaeca2da69" title="Number of Scenarios that have been initialized." alt="" coords="227,476,350,517"/>
+<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="80,696,94,662,118,617,151,570,192,528,212,516,215,520,195,532,155,573,123,620,99,665,84,698"/>
+<area shape="rect" id="Node000021" href="$classfs_1_1sim_1_1Scenario.html#a87bd49ab3e8698667716a32eecf28266" title="Current fire size (ha)" alt="" coords="227,542,350,582"/>
+<area shape="poly" id="edge23_Node000001_Node000021" title=" " alt="" coords="86,695,130,649,160,622,192,599,213,587,215,592,195,603,163,627,134,653,90,699"/>
+<area shape="rect" id="Node000022" href="$classfs_1_1sim_1_1Model.html#af243fb44ec4382c7f96552ad4702fb73" title="Environment simulation is occurring in." alt="" coords="444,607,621,632"/>
+<area shape="poly" id="edge24_Node000001_Node000022" title=" " alt="" coords="93,695,137,667,193,642,252,628,314,619,428,613,428,618,314,624,253,633,195,647,140,672,96,699"/>
+<area shape="rect" id="Node000023" href="$classfs_1_1sim_1_1Scenario.html#a7466e8bfca49bae45f6b92df73401edc" title="Evaluate next Event in the queue." alt="" coords="223,722,354,762"/>
+<area shape="poly" id="edge25_Node000001_Node000023" title=" " alt="" coords="147,718,208,727,207,733,146,723"/>
+<area shape="rect" id="Node000024" href="$classfs_1_1sim_1_1Model.html#a7dbe56d7b38c0a175ea056fbcce570fe" title="Acquire a BurnedData that has already burnt cells set." alt="" coords="206,656,371,697"/>
+<area shape="poly" id="edge26_Node000001_Node000024" title=" " alt="" coords="146,697,190,690,191,695,147,702"/>
+<area shape="rect" id="Node000026" href="$classfs_1_1logging_1_1Log.html#a85989e714e8251f561b574c0ec415348" title="Get current logging level." alt="" coords="212,787,365,828"/>
+<area shape="poly" id="edge29_Node000001_Node000026" title=" " alt="" coords="100,721,195,772,211,779,209,784,193,777,97,726"/>
+<area shape="rect" id="Node000027" href="$classfs_1_1sim_1_1Event.html#ae4a72196bd272130156729d6cd1182cb" title="Make simulation end event." alt="" coords="209,852,368,878"/>
+<area shape="poly" id="edge30_Node000001_Node000027" title=" " alt="" coords="87,722,129,778,160,810,195,837,207,843,204,848,192,842,156,814,125,781,83,725"/>
+<area shape="rect" id="Node000028" href="$classfs_1_1sim_1_1Event.html#ae25f2074b64b4ace0b42a32e681be5b0" title="Make fire spread event." alt="" coords="209,902,368,942"/>
+<area shape="poly" id="edge31_Node000001_Node000028" title=" " alt="" coords="84,723,99,756,123,800,155,847,195,888,200,891,197,896,192,892,151,851,118,803,94,758,79,725"/>
+<area shape="rect" id="Node000029" href="$classfs_1_1sim_1_1Event.html#aa2c222f728c2e985a546d3ba5a80eb62" title="Make new fire event." alt="" coords="196,95,381,120"/>
+<area shape="poly" id="edge32_Node000001_Node000029" title=" " alt="" coords="75,697,85,589,106,422,122,333,141,252,164,184,177,158,192,138,205,126,208,130,196,141,182,161,169,186,146,253,127,334,112,422,90,590,80,697"/>
+<area shape="rect" id="Node000030" href="$classfs_1_1sim_1_1Event.html#ad962037502cb529f9abf30523709deac" title="Make simulation save event." alt="" coords="205,967,372,992"/>
+<area shape="poly" id="edge34_Node000001_Node000030" title=" " alt="" coords="82,723,92,767,113,829,147,896,169,926,195,952,202,957,198,961,192,956,165,929,142,898,108,832,87,769,77,724"/>
+<area shape="rect" id="Node000031" href="$classfs_1_1sim_1_1Scenario.html#a86df553a65867046b7d8d8d293c33885" title="Model this Scenario is running in." alt="" coords="227,1016,350,1057"/>
+<area shape="poly" id="edge35_Node000001_Node000031" title=" " alt="" coords="81,723,89,775,108,850,123,891,142,931,166,969,195,1003,215,1016,211,1021,192,1007,162,973,138,934,118,893,103,851,84,776,76,724"/>
+<area shape="rect" id="Node000032" href="$classfs_1_1sim_1_1Scenario.html#a47924867b226f054d83935d0b1aec409" title="Whether or not this Scenario has run already." alt="" coords="218,1081,358,1107"/>
+<area shape="poly" id="edge36_Node000001_Node000032" title=" " alt="" coords="80,723,84,785,99,878,114,929,134,979,161,1026,196,1067,206,1075,202,1079,192,1071,157,1029,129,982,109,931,94,879,78,786,74,724"/>
+<area shape="rect" id="Node000033" href="$classfs_1_1sim_1_1Model.html#a501df66bfcb537a7f868178939d5ec8e" title="Return a BurnedData so it can be used in the future." alt="" coords="194,1131,383,1172"/>
+<area shape="poly" id="edge37_Node000001_Node000033" title=" " alt="" coords="79,724,81,792,95,898,109,956,130,1014,158,1069,196,1118,197,1119,193,1123,192,1121,154,1072,125,1016,104,958,90,899,76,793,74,724"/>
+<area shape="rect" id="Node000034" href="$classfs_1_1sim_1_1Model.html#a9e2eed35c1d78b3f4efdfa78156cbed1" title="Duration that model has run for." alt="" coords="212,1196,365,1222"/>
+<area shape="poly" id="edge39_Node000001_Node000034" title=" " alt="" coords="81,723,93,815,116,953,132,1025,151,1091,172,1146,196,1182,200,1186,197,1190,192,1185,167,1148,146,1093,127,1027,111,954,88,815,76,724"/>
+<area shape="rect" id="Node000036" href="$classfs_1_1sim_1_1Model.html#ae77f3ef2a5508b3409ba50ff7d50f9eb" title="How many Scenarios are in each Iteration." alt="" coords="211,1246,366,1286"/>
+<area shape="poly" id="edge41_Node000001_Node000036" title=" " alt="" coords="81,723,92,822,114,976,130,1056,149,1130,171,1191,196,1233,200,1237,197,1241,192,1236,166,1193,144,1132,125,1057,109,977,86,823,75,724"/>
+<area shape="rect" id="Node000038" href="$classfs_1_1sim_1_1Scenario.html#af97116f70831c337af5d87720b68487c" title="Simulation number." alt="" coords="227,1311,350,1352"/>
+<area shape="poly" id="edge43_Node000001_Node000038" title=" " alt="" coords="80,723,90,833,111,1006,127,1096,146,1180,169,1250,182,1276,196,1296,215,1312,211,1316,192,1300,177,1279,164,1252,141,1182,121,1097,106,1006,84,834,75,724"/>
+<area shape="rect" id="Node000039" href="$classfs_1_1sim_1_1Settings.html#af568150489afe7210633273920d2dee6" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="229,1376,348,1417"/>
+<area shape="poly" id="edge44_Node000001_Node000039" title=" " alt="" coords="80,723,88,845,107,1037,123,1138,142,1232,167,1309,180,1339,196,1362,216,1378,213,1382,192,1365,176,1342,162,1311,137,1233,117,1139,102,1037,83,845,75,724"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Event.html#a42d6f9837174b92c9a46d4bd63b6cb2c" title="Cell Event takes place in." alt="" coords="470,5,594,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="309,193,345,167,381,131,395,107,402,85,410,63,429,41,454,28,457,32,433,46,415,66,407,86,400,109,385,134,348,171,312,198"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="346,193,381,175,397,158,404,141,413,123,429,105,458,90,460,94,433,110,417,126,409,143,401,161,385,179,349,198"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="694,163,810,204"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="362,202,678,185,679,190,362,208"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Event.html#ad11499e89a4df128d86f460c1cd42487" title="Burn Intensity (kW/m)" alt="" coords="456,271,608,296"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="331,220,384,238,432,257,456,264,454,269,430,262,382,243,329,225"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Scenario.html#ab02ff5e0c425fd10edd755b622b0541b" title="Notify IObservers that a Cell has burned." alt="" coords="471,320,593,361"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="348,220,385,239,401,256,409,274,417,291,433,307,458,321,455,325,429,311,413,294,405,276,397,259,381,243,346,225"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Event.html#adb6d6b97ae63e01f9f5afbbb48f41c19" title="Head fire spread direction." alt="" coords="472,120,593,146"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="331,193,473,148,475,153,333,198"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Event.html#aed1c87fb0b88bee303cedf853eaee916" title="Head fire rate of spread (m/min)" alt="" coords="471,221,593,247"/>
+<area shape="poly" id="edge11_Node000003_Node000011" title=" " alt="" coords="362,214,456,224,455,229,362,219"/>
+<area shape="poly" id="edge12_Node000003_Node000012" title=" " alt="" coords="355,220,385,239,398,256,405,273,409,307,413,340,420,356,433,371,447,381,444,385,429,375,415,358,408,341,404,308,400,275,394,259,381,243,352,225"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="592,89,634,105,675,127,712,152,709,156,673,132,632,110,590,94"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="694,55,810,96"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="591,73,678,73,678,78,591,78"/>
+<area shape="poly" id="edge13_Node000012_Node000006" title=" " alt="" coords="603,385,632,371,668,336,698,295,720,254,736,217,741,219,725,256,702,298,672,340,635,375,605,390"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="694,374,810,414"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="604,394,678,393,678,398,604,400"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="469,443,595,468"/>
+<area shape="poly" id="edge17_Node000015_Node000016" title=" " alt="" coords="347,385,384,397,432,421,471,435,469,440,430,426,382,402,346,390"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="681,439,823,480"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="596,454,666,455,666,461,596,459"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="871,447,1033,472"/>
+<area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="823,457,855,457,855,462,823,462"/>
+<area shape="poly" id="edge27_Node000024_Node000022" title=" " alt="" coords="371,655,459,634,460,639,372,660"/>
+<area shape="rect" id="Node000025" href="$classfs_1_1topo_1_1Environment.html#aab35bcdff50db3d3ec136132e656b84b" title="Create BurnedData and set burned bits based on Perimeter." alt="" coords="462,656,603,697"/>
+<area shape="poly" id="edge28_Node000024_Node000025" title=" " alt="" coords="372,674,446,674,446,680,372,680"/>
+<area shape="poly" id="edge33_Node000029_Node000004" title=" " alt="" coords="352,92,382,80,396,71,405,61,415,51,430,41,454,31,456,36,432,46,418,55,409,65,399,75,384,85,354,97"/>
+<area shape="rect" id="Node000035" href="$classfs_1_1sim_1_1Model.html#a8dc5126e33f45f989102536916797406" title="Time that execution started." alt="" coords="442,1196,623,1222"/>
+<area shape="poly" id="edge40_Node000034_Node000035" title=" " alt="" coords="365,1206,426,1206,426,1212,365,1212"/>
+<area shape="rect" id="Node000037" href="$classfs_1_1sim_1_1Model.html#adaa00e8bec9c09a69e90542eb12aa2c9" title="How many ignition scenarios are being used." alt="" coords="458,1246,606,1286"/>
+<area shape="poly" id="edge42_Node000036_Node000037" title=" " alt="" coords="367,1264,443,1264,443,1269,367,1269"/>
+<area shape="rect" id="Node000040" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="431,1376,633,1417"/>
+<area shape="poly" id="edge45_Node000039_Node000040" title=" " alt="" coords="349,1394,415,1394,415,1400,349,1400"/>
+<area shape="poly" id="edge46_Node000040_Node000040" title=" " alt="" coords="491,1376,489,1367,495,1357,510,1352,532,1350,556,1352,570,1358,568,1363,555,1357,532,1355,511,1357,499,1362,494,1368,496,1375"/>
+</map>

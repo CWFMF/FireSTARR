@@ -1,0 +1,5 @@
+<map id="fs::wx::Weather" name="fs::wx::Weather">
+<area shape="rect" id="Node000001" title="Collection of weather indices used for calculating FwiWeather." alt="" coords="16,5,124,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FwiWeather.html" title="A Weather value with calculated FWI indices." alt="" coords="5,79,135,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,46,73,79,67,79,67,46"/>
+</map>

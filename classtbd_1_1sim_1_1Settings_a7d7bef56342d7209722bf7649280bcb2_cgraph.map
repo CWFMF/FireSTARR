@@ -1,6 +1,0 @@
-<map id="tbd::sim::Settings::saveProbability" name="tbd::sim::Settings::saveProbability">
-<area shape="rect" id="Node000001" title="Whether or not to save probability grids." alt="" coords="5,29,126,70"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="174,29,383,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,47,158,47,158,52,126,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="238,29,236,19,243,10,257,5,278,3,301,5,315,11,313,16,300,10,278,8,258,10,246,15,241,20,243,28"/>
-</map>

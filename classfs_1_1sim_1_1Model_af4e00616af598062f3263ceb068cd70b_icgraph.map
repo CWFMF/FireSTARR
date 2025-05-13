@@ -1,0 +1,7 @@
+<map id="fs::sim::Model::shouldStop" name="fs::sim::Model::shouldStop">
+<area shape="rect" id="Node000001" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="462,5,633,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,5,414,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="447,21,414,21,414,16,447,16"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,5,188,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="220,21,188,21,188,16,220,16"/>
+</map>

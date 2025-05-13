@@ -1,0 +1,12 @@
+<map id="fs::topo::Cell::fuelCode" name="fs::topo::Cell::fuelCode">
+<area shape="rect" id="Node000001" title="Fuel." alt="" coords="549,46,698,72"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#aa4db63058221f4d45a2b7ce8e352e3fb" title="Combine rasters into ConstantGrid&lt;Cell, Topo&gt;" alt="" coords="360,5,501,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="534,46,502,41,502,35,535,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="370,71,492,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="535,76,493,84,492,78,534,71"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,71,128,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="354,91,312,90,176,90,128,91,128,86,176,84,312,84,354,85"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,99,312,139"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="354,105,313,111,312,106,353,100"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="160,109,128,103,129,98,161,103"/>
+</map>

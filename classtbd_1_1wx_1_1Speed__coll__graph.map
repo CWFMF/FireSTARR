@@ -1,6 +1,0 @@
-<map id="tbd::wx::Speed" name="tbd::wx::Speed">
-<area shape="rect" id="Node000001" title="Speed in kilometers per hour." alt="" coords="22,80,126,106"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="143,86,153,93,144,101,127,103,126,97,142,96,148,93,140,90"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,5,143,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,46,77,80,71,80,71,46"/>
-</map>

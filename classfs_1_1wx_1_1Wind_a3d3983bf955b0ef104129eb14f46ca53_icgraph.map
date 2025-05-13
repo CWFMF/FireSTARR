@@ -1,0 +1,9 @@
+<map id="fs::wx::Wind::speed" name="fs::wx::Wind::speed">
+<area shape="rect" id="Node000001" title="Speed of wind (km/h)" alt="" coords="463,42,593,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="261,5,390,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="447,46,390,38,390,32,448,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="236,70,415,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="448,69,416,73,415,68,447,63"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,70,188,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,86,188,86,188,80,220,80"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="fs::sim::ConstantWeather" name="fs::sim::ConstantWeather">
+<area shape="rect" id="Node000001" title="A FireWeather stream with the same value for every date and time." alt="" coords="83,184,248,210"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FireWeather.html" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="100,109,231,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,150,168,184,163,184,163,150"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,142,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="70,61,77,84,90,97,106,106,104,111,87,101,72,86,65,62"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="234,13,284,38"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="252,54,231,87,215,101,197,111,194,106,212,96,228,83,247,52"/>
+</map>

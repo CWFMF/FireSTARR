@@ -1,0 +1,6 @@
+<map id="fs::sim::Settings::setSaveOccurrence" name="fs::sim::Settings::setSaveOccurrence">
+<area shape="rect" id="Node000001" title="Set whether or not to save occurrence grids." alt="" coords="5,29,142,70"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="190,29,392,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,47,174,47,174,52,142,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="250,29,248,19,254,10,269,5,291,3,314,5,328,11,326,16,313,10,291,8,270,10,258,15,253,21,255,28"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="fs::sim::IObserver" name="fs::sim::IObserver">
+<area shape="rect" id="Node000001" title="Interface for observers that get notified when cells burn so they can track things." alt="" coords="5,112,128,137"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1MapObserver.html" title=" " alt="" coords="191,5,334,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,100,174,57,202,44,205,49,177,61,102,105"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1MapObserver.html" title=" " alt="" coords="191,71,334,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="142,109,190,101,191,106,143,114"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1MapObserver.html" title=" " alt="" coords="191,136,334,177"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="143,134,191,142,190,147,142,139"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1MapObserver.html" title="An IObserver that tracks notification data using a GridMap." alt="" coords="176,201,349,226"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="101,144,137,166,177,186,209,198,207,203,175,191,134,170,98,148"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1ArrivalObserver.html" title="Tracks when fire initially arrives in a Cell." alt="" coords="403,13,558,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,23,403,23,403,28,349,28"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1IntensityObserver.html" title="Tracks the intensity that Cells burn at." alt="" coords="397,78,564,104"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="350,88,397,88,397,94,350,94"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1SourceObserver.html" title="Tracks source Cell that fire arrived in Cell from." alt="" coords="401,144,560,169"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="349,154,400,154,400,159,349,159"/>
+</map>

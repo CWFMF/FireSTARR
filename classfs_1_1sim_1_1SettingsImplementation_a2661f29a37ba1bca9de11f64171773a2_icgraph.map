@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::setConfidenceLevel" name="fs::sim::SettingsImplementation::setConfidenceLevel">
+<area shape="rect" id="Node000001" title="Set confidence required before simulation stops (% / 100)" alt="" coords="189,5,391,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a0434ae78c005bf74f81dd9a1746a193b" title="Set confidence required before simulation stops (% / 100)" alt="" coords="5,5,141,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,28,141,28,141,23,173,23"/>
+</map>

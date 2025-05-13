@@ -1,7 +1,0 @@
-<map id="tbd::sim::Scenario::cellSize" name="tbd::sim::Scenario::cellSize">
-<area shape="rect" id="Node000001" title="Cell width and height (m)" alt="" coords="367,5,490,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#af3a02c3ea6bb9208465b6c95cb76ac2c" title="Schedule a fire spread Event." alt="" coords="177,5,319,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,28,320,28,320,23,351,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Scenario.html#a6e8393dcbcbae5059de734a2e2ac59e5" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

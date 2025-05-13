@@ -1,7 +1,0 @@
-<map id="tbd::sim::Event::makeNewFire" name="tbd::sim::Event::makeNewFire">
-<area shape="rect" id="Node000001" title="Make new fire event." alt="" coords="5,31,198,56"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Event.html#ae1a4980b2b8c3b678e0ecdcd896bba03" title="Cell Event takes place in." alt="" coords="248,5,380,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,29,232,25,233,30,198,35"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Event.html#a31e621da8d48deb889edfeec2e6dfbfc" title="Time of Event (decimal days)" alt="" coords="246,55,382,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,52,230,55,230,61,198,57"/>
-</map>

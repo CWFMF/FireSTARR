@@ -1,9 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::minimumRos" name="tbd::sim::SettingsImplementation::minimumRos">
-<area shape="rect" id="Node000001" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="535,5,745,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#af054ce9d27eef20a1f8297187088b5c1" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="367,5,487,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,28,488,28,488,23,520,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Scenario.html#af3a02c3ea6bb9208465b6c95cb76ac2c" title="Schedule a fire spread Event." alt="" coords="177,5,319,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="351,28,320,28,320,23,351,23"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1sim_1_1Scenario.html#a6e8393dcbcbae5059de734a2e2ac59e5" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="161,28,129,28,129,23,161,23"/>
-</map>

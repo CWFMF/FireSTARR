@@ -1,7 +1,0 @@
-<map id="tbd::sim::CellPos" name="tbd::sim::CellPos">
-<area shape="rect" id="Node000001" title="The position within the Environment that a spreading point has." alt="" coords="31,183,149,208"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1BoundedPoint.html" title=" " alt="" coords="5,79,175,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,150,93,182,87,182,87,150"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="37,5,143,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,47,93,78,87,78,87,47"/>
-</map>

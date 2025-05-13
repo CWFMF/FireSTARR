@@ -1,8 +1,0 @@
-<map id="tbd::topo::Position::column" name="tbd::topo::Position::column">
-<area shape="rect" id="Node000001" title="Column." alt="" coords="5,5,129,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Position.html#afd633a3f45012ab24cd0b719671bee03" title="Hash derived from row and column." alt="" coords="348,5,471,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,20,177,19,300,19,332,20,332,25,300,24,177,24,129,26"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1Position.html#a8d4e3e10cd34068a55511852b92994b7" title="Column." alt="" coords="177,33,300,74"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,33,162,38,161,44,129,38"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="300,41,332,36,333,41,301,46"/>
-</map>

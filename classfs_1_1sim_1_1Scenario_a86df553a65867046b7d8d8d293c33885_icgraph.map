@@ -1,0 +1,20 @@
+<map id="fs::sim::Scenario::model" name="fs::sim::Scenario::model">
+<area shape="rect" id="Node000001" title="Model this Scenario is running in." alt="" coords="559,138,682,179"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,20,128,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="597,127,561,82,537,61,510,45,461,27,410,16,358,10,306,8,208,15,129,28,128,23,207,10,306,3,358,4,411,10,463,22,512,40,540,57,564,78,601,124"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#a4fa7bd7009cda5175599ca8ee966f787" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="370,55,507,81"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="575,132,510,96,481,84,483,79,512,91,577,127"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ab15673dbc91dfc9a3d1db7ec478612e6" title="Reset thresholds and set SafeVector to output results to." alt="" coords="378,105,500,146"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="544,147,500,139,501,134,545,142"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#aebc86dfc207e48b06be04a48d5d0a07c" title="Assign start Cell, reset thresholds and set SafeVector to output results to." alt="" coords="366,170,511,211"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="544,175,512,180,511,175,544,169"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="368,235,509,261"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="577,189,512,225,483,237,481,232,510,220,574,185"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Scenario.html#a07d16e1850fc7f31f6b94d6d45ff50e2" title="Constructor." alt="" coords="378,285,500,326"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="597,193,560,235,513,275,495,287,492,282,510,271,556,231,593,189"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="179,48,315,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="355,71,315,71,315,65,355,65"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="163,58,128,52,129,47,164,52"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1TestScenario.html#a0667115737ccae6c51f2cdb0667b2b49" title="Constructor." alt="" coords="176,113,318,154"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="362,131,319,133,318,128,362,126"/>
+</map>

@@ -1,5 +1,0 @@
-<map id="tbd::data::Grid::at" name="tbd::data::Grid::at">
-<area shape="rect" id="Node000001" title="Value for grid at given Location." alt="" coords="5,13,123,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Position.html#afd633a3f45012ab24cd0b719671bee03" title="Hash derived from row and column." alt="" coords="171,5,294,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,23,155,23,155,28,123,28"/>
-</map>

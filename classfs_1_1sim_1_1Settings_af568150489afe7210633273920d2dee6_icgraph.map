@@ -1,0 +1,36 @@
+<map id="fs::sim::Settings::surface" name="fs::sim::Settings::surface">
+<area shape="rect" id="Node000001" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="699,238,819,278"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a86991422a0f1e2bc74a8ec720159051c" title="Add statistics for completed iterations." alt="" coords="493,104,620,145"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="726,229,691,196,650,166,616,148,618,143,653,161,695,192,730,225"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,112,414,138"/>
+<area shape="poly" id="edge14_Node000001_Node000003" title=" " alt="" coords="696,234,650,217,506,173,383,141,384,136,508,168,652,212,698,229"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,220,188,246"/>
+<area shape="poly" id="edge15_Node000001_Node000004" title=" " alt="" coords="684,256,651,254,188,238,188,232,651,249,684,251"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#a9104e341e59de6817afb4082e5bb5680" title="Clear the Event list and all other data." alt="" coords="496,435,618,476"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="746,294,710,361,684,395,653,426,620,444,617,439,650,421,680,392,706,358,741,291"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="238,271,412,296"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="684,265,412,281,412,276,684,260"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Model.html#a92e99adaad982ea2370de44f5a606903" title="Create an Iteration by initializing Scenarios." alt="" coords="462,5,651,31"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="747,223,735,181,715,133,687,85,650,44,633,34,636,29,653,40,691,82,720,131,740,180,752,222"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Iteration.html#ad62fa38e558795a8d21693276aab14c6" title="Assign start Cell and create new thresholds for use in each Scenario." alt="" coords="481,320,632,361"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="694,287,610,322,608,317,692,282"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="486,385,627,411"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="737,293,701,336,678,357,653,375,627,387,625,382,650,371,675,353,697,332,733,289"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="488,500,625,541"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="753,295,740,339,720,391,692,443,653,490,627,506,624,502,650,485,687,440,716,388,735,337,748,293"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1sim_1_1Model.html#af4e00616af598062f3263ceb068cd70b" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="471,55,642,80"/>
+<area shape="poly" id="edge18_Node000001_Node000015" title=" " alt="" coords="742,225,707,158,681,124,650,95,628,83,631,79,653,91,685,120,711,155,747,222"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="478,128,414,128,414,122,478,122"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="283,147,127,222,125,217,280,142"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#ab15673dbc91dfc9a3d1db7ec478612e6" title="Reset thresholds and set SafeVector to output results to." alt="" coords="264,435,386,476"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="480,458,386,458,386,453,480,453"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Scenario.html#aebc86dfc207e48b06be04a48d5d0a07c" title="Assign start Cell, reset thresholds and set SafeVector to output results to." alt="" coords="252,370,398,410"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="480,437,397,413,399,408,481,432"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1TestScenario.html#a0667115737ccae6c51f2cdb0667b2b49" title="Constructor." alt="" coords="25,435,168,476"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="248,458,168,458,168,453,248,453"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="248,269,157,249,158,244,250,264"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="479,38,463,45,397,79,346,114,343,109,394,75,461,40,478,33"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="264,500,386,541"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="473,524,387,524,387,518,473,518"/>
+<area shape="poly" id="edge19_Node000015_Node000003" title=" " alt="" coords="488,87,381,114,379,109,486,82"/>
+</map>

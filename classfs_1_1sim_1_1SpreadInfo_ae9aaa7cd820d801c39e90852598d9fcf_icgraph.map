@@ -1,0 +1,18 @@
+<map id="fs::sim::SpreadInfo::weather" name="fs::sim::SpreadInfo::weather">
+<area shape="rect" id="Node000001" title="FwiWeather used for spread." alt="" coords="389,126,517,166"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#a3fdf24693a277fd57dbe1ce936b7f6ba" title="Build&#45;up Index used for spread." alt="" coords="186,5,337,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="423,116,386,79,340,44,317,34,319,29,342,40,389,74,427,112"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#ab22a5bdbfd33f8ff4ac13940c227ed38" title="Drought Code used for spread." alt="" coords="187,55,336,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="399,121,340,94,310,83,312,78,342,89,401,116"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1SpreadInfo.html#a1297b25cee3c82859e5b35b87311a554" title="Duff Moisture Code used for spread." alt="" coords="182,104,341,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="374,137,341,132,342,126,374,131"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SpreadInfo.html#a66bf9df1cc0f0bd875d287319de74aed" title="Fine Fuel Moisture Code used for spread." alt="" coords="197,154,326,194"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="374,160,326,167,326,162,373,155"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1SpreadInfo.html#adcc9205105cd1fe8ca5298bcfb05d634" title="FFMC effect used for spread." alt="" coords="197,219,326,260"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="403,177,342,209,315,221,312,216,340,204,401,172"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1SpreadInfo.html#a8230a599520a3c10faaa3a416d606487" title="Wind used for spread." alt="" coords="197,284,326,325"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="431,181,393,228,343,274,322,286,319,282,339,269,389,224,427,177"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="5,252,134,293"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="182,256,135,264,134,259,182,251"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="182,294,134,286,135,281,182,289"/>
+</map>

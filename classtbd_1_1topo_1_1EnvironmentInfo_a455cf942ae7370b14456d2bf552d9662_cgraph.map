@@ -1,5 +1,0 @@
-<map id="tbd::topo::EnvironmentInfo::meridian" name="tbd::topo::EnvironmentInfo::meridian">
-<area shape="rect" id="Node000001" title="Central meridian of UTM projection this uses." alt="" coords="5,5,176,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html#a4ef0b541f977f1811a6558f2e2075ee7" title="Central meridian of UTM zone for this grid." alt="" coords="224,5,354,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,23,208,23,208,28,176,28"/>
-</map>

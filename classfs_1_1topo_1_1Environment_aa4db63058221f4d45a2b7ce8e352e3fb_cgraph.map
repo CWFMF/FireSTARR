@@ -1,0 +1,47 @@
+<map id="fs::topo::Environment::makeCells" name="fs::topo::Environment::makeCells">
+<area shape="rect" id="Node000001" title="Combine rasters into ConstantGrid&lt;Cell, Topo&gt;" alt="" coords="5,466,147,506"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Cell.html#a4a414983ea88620f6c926f909b1679b5" title="Aspect (degrees)" alt="" coords="201,5,337,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,465,77,390,92,280,107,219,128,158,156,100,193,48,205,37,209,41,197,52,160,103,132,160,112,220,97,281,83,390,80,466"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="391,85,553,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="78,465,91,382,116,269,132,211,150,160,170,119,193,92,219,77,248,67,278,61,309,60,369,66,420,78,419,83,368,71,309,65,279,67,249,72,222,81,196,96,175,122,155,162,137,213,121,270,97,383,83,466"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="198,106,340,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="77,465,85,406,105,325,120,281,139,237,163,195,193,158,196,155,200,158,197,161,168,198,144,239,125,283,110,327,91,407,82,466"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1GridBase.html#a36018525f0af09808eb17a86b6a3ac1a" title="Cell size used for GridBase." alt="" coords="207,171,330,212"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="79,465,91,417,113,353,146,284,168,252,193,223,197,219,200,223,197,227,172,255,151,287,118,355,96,418,84,466"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="211,236,327,277"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="82,464,98,427,121,380,153,331,193,287,196,284,200,288,197,291,157,334,126,383,102,430,87,466"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1data_1_1Grid.html#aa87ccfabbebec3079bbfa402de93089d" title="Number of columns in the GridBase." alt="" coords="195,301,343,327"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="86,464,128,402,158,367,193,337,202,332,205,336,196,342,162,371,132,405,91,467"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Environment.html#af762b46765adaccb543d7bda48091029" title="Elevation of the origin Point." alt="" coords="198,351,340,392"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="102,463,144,432,193,401,201,397,204,402,196,406,147,437,105,467"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1topo_1_1Cell.html#aac6eb5373fb309601c140ba56856555e" title="Fuel." alt="" coords="195,416,343,442"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="146,463,208,444,209,449,147,468"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1data_1_1GridBase.html#a29ec3f5503526f0374cd5e7c6dd7c203" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="207,466,330,506"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="147,484,192,484,192,489,147,489"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="197,531,340,556"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="147,504,209,523,208,528,146,510"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1data_1_1Grid.html#a44f0a8164d5d0bd2322a838977c943ad" title="Number of rows in the GridBase." alt="" coords="205,580,332,606"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="104,505,146,536,196,566,207,572,205,576,193,571,143,540,100,509"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1fuel_1_1FuelType.html#a869ecbe23092bf01cba4854b844de1d7" title="Convert FuelType to its code, or 0 if nullptr." alt="" coords="210,630,328,670"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="94,505,136,559,165,589,196,616,201,619,198,624,193,620,161,593,132,563,89,509"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1topo_1_1Cell.html#ae695df07e54ca7c8b59a641b5b06bf1b" title="Slope (degrees)" alt="" coords="205,695,333,720"/>
+<area shape="poly" id="edge19_Node000001_Node000018" title=" " alt="" coords="87,506,102,543,125,590,156,638,196,680,203,685,200,689,193,684,152,642,120,593,97,546,82,508"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1data_1_1GridBase.html#a9041142694e10f2cb5776cefe1f5ca09" title="Lower left corner X coordinate in meters." alt="" coords="207,744,330,785"/>
+<area shape="poly" id="edge20_Node000001_Node000019" title=" " alt="" coords="85,506,97,552,119,611,152,675,173,704,197,731,199,733,195,737,193,735,169,708,148,678,115,614,92,553,79,508"/>
+<area shape="rect" id="Node000020" href="$classfs_1_1data_1_1GridBase.html#a16bd22199b244fe7cf96a513fd890149" title="Upper right corner X coordinate in meters." alt="" coords="207,810,330,850"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="82,507,92,563,112,639,127,680,146,721,169,760,197,795,200,798,196,802,193,799,165,763,141,724,122,682,107,641,87,564,77,508"/>
+<area shape="rect" id="Node000021" href="$classfs_1_1data_1_1GridBase.html#a3ee33e834f28b44fb975727ec349e6e7" title="Lower left corner Y coordinate in meters." alt="" coords="207,875,330,916"/>
+<area shape="poly" id="edge22_Node000001_Node000021" title=" " alt="" coords="81,507,87,573,104,666,119,718,139,769,165,817,197,860,199,863,196,867,193,864,160,820,134,771,114,719,99,668,82,574,75,507"/>
+<area shape="rect" id="Node000022" href="$classfs_1_1data_1_1GridBase.html#aaec3bf977edc86fc3449b92ee83abbd8" title="Upper right corner Y coordinate in meters." alt="" coords="207,940,330,981"/>
+<area shape="poly" id="edge23_Node000001_Node000022" title=" " alt="" coords="80,507,82,583,97,694,112,755,132,816,160,874,197,926,199,929,195,932,193,929,156,876,128,818,107,756,92,695,77,584,74,507"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="339,114,375,109,376,114,340,119"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="414,379,530,420"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="324,275,344,287,397,326,442,366,438,370,394,330,342,291,322,280"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="414,236,530,277"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="327,254,398,254,398,260,327,260"/>
+<area shape="poly" id="edge14_Node000013_Node000007" title=" " alt="" coords="317,528,342,516,397,474,441,430,445,434,400,478,344,520,319,532"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="414,523,530,564"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="341,541,399,541,399,546,341,546"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1fuel_1_1FuelType.html#a52562ef54b368d8d0c85d06a1a561e4f" title="Code for this fuel type." alt="" coords="413,630,531,670"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="328,648,398,648,398,653,328,653"/>
+</map>

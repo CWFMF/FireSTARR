@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::setConfidenceLevel" name="fs::sim::Settings::setConfidenceLevel">
+<area shape="rect" id="Node000001" title="Set confidence required before simulation stops (% / 100)" alt="" coords="5,63,141,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="189,29,391,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,70,173,65,174,70,141,75"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a2661f29a37ba1bca9de11f64171773a2" title="Set confidence required before simulation stops (% / 100)" alt="" coords="189,95,391,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="141,90,174,95,173,100,141,96"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="249,29,247,19,254,10,268,5,290,3,313,5,327,11,325,16,312,10,290,8,269,10,257,15,252,21,254,28"/>
+</map>

@@ -1,5 +1,0 @@
-<map id="tbd::sim::CriticalSection::CriticalSection" name="tbd::sim::CriticalSection::CriticalSection">
-<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,5,162,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Semaphore.html#abb3ede7f055c8fc98800a1b4fc22ee09" title="Wait until allowed to run." alt="" coords="210,5,348,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,23,195,23,195,28,162,28"/>
-</map>

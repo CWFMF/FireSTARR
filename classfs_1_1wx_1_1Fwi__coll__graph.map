@@ -1,0 +1,6 @@
+<map id="fs::wx::Fwi" name="fs::wx::Fwi">
+<area shape="rect" id="Node000001" title="Fire Weather Index value." alt="" coords="30,82,111,108"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="128,87,138,95,129,103,112,105,111,100,127,98,133,95,125,92"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,47,73,82,68,82,68,47"/>
+</map>

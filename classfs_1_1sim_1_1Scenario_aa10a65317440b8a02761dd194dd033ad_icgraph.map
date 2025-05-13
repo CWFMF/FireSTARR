@@ -1,0 +1,11 @@
+<map id="fs::sim::Scenario::dayEnd" name="fs::sim::Scenario::dayEnd">
+<area shape="rect" id="Node000001" title="Sunset time for given day." alt="" coords="743,5,865,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#afcd2048a5e49aa2f51f1258152190b86" title="Whether or not time is after sunrise and before sunset." alt="" coords="572,5,695,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="727,28,695,28,695,23,727,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#a23238d09c03a661ab7218ace4e174988" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="360,5,524,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="557,28,525,28,525,23,557,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,5,312,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="344,28,312,28,312,23,344,23"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,128,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="160,28,128,28,128,23,160,23"/>
+</map>

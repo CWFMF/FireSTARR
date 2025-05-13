@@ -1,0 +1,7 @@
+<map id="fs::fuel::FuelType::calculateRos" name="fs::fuel::FuelType::calculateRos">
+<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min)" alt="" coords="191,39,309,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelVariable.html#aa164fe65e63d5091026bb73eabf90811" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="5,5,143,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,48,143,41,144,36,176,42"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="10,71,138,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="176,75,139,82,138,77,175,70"/>
+</map>

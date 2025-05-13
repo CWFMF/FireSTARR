@@ -1,5 +1,0 @@
-<map id="tbd::topo::Environment::columns" name="tbd::topo::Environment::columns">
-<area shape="rect" id="Node000001" title="Number of columns in grid." alt="" coords="5,5,154,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1Grid.html#ac057c771e231143bfd2f2d281b2a26fc" title="Number of columns in the GridBase." alt="" coords="202,13,357,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,23,186,23,186,28,154,28"/>
-</map>

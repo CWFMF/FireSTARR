@@ -1,0 +1,23 @@
+<map id="fs::sim::Model::findStarts" name="fs::sim::Model::findStarts">
+<area shape="rect" id="Node000001" title="Find Cell(s) that can burn closest to Location." alt="" coords="5,113,167,139"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="225,5,352,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,110,213,48,240,35,242,40,216,53,109,115"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="410,18,551,58"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="138,110,214,92,394,53,395,58,215,97,139,115"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="230,106,346,146"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="167,124,215,124,215,129,167,129"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#adaa00e8bec9c09a69e90542eb12aa2c9" title="How many ignition scenarios are being used." alt="" coords="215,171,362,212"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="129,137,209,163,208,168,127,142"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="217,236,360,262"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="103,137,151,178,216,221,229,227,226,232,213,226,148,182,100,142"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,22,395,27,395,32,351,27"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="599,25,762,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="552,36,584,36,584,41,552,41"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="422,167,539,208"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="348,142,409,162,407,167,346,147"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="422,102,539,142"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="347,122,407,121,407,126,347,128"/>
+<area shape="poly" id="edge10_Node000009_Node000006" title=" " alt="" coords="330,233,407,208,408,213,332,238"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="422,232,539,273"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="360,248,407,249,407,254,360,253"/>
+</map>

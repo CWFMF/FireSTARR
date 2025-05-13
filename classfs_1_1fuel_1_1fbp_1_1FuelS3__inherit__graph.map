@@ -1,0 +1,15 @@
+<map id="fs::fuel::fbp::FuelS3" name="fs::fuel::fbp::FuelS3">
+<area shape="rect" id="Node000001" title="FBP fuel type S&#45;3." alt="" coords="1379,28,1510,54"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelSlash.html" title=" " alt="" coords="1169,13,1331,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1347,38,1379,38,1379,43,1347,43"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelConifer.html" title=" " alt="" coords="975,13,1121,68"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1137,38,1168,38,1168,43,1137,43"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1FuelNonMixed.html" title="A StandardFuel that is not made of multiple fuels." alt="" coords="702,5,927,76"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="942,38,975,38,975,43,942,43"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1StandardFuel.html" title="A FuelBase made of a standard fuel type." alt="" coords="430,5,654,76"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="670,38,702,38,702,43,670,43"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1FuelBase.html" title="Base class for all FuelTypes." alt="" coords="172,13,382,68"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="397,38,429,38,429,43,397,43"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1fuel_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,28,124,54"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="139,38,171,38,171,43,139,43"/>
+</map>

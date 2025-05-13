@@ -1,0 +1,15 @@
+<map id="fs::topo::Environment::cellSize" name="fs::topo::Environment::cellSize">
+<area shape="rect" id="Node000001" title="Cell width and height (m)" alt="" coords="812,35,953,75"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#aeecdae3285e099b10b422592385e818b" title="Cell width and height (m)" alt="" coords="601,16,753,41"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="796,47,753,41,753,36,797,41"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="590,66,764,92"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="796,68,765,71,764,66,796,62"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#a340fdab57e1e7f5a1889ce96c85c1978" title="Cell width and height (m)" alt="" coords="390,5,512,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="586,30,513,29,513,24,586,25"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,5,312,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="374,28,313,28,313,23,374,23"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,128,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="160,28,128,28,128,23,160,23"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="360,70,542,96"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="575,83,543,84,543,79,575,78"/>
+</map>

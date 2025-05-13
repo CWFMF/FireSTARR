@@ -1,0 +1,7 @@
+<map id="fs::fuel::fbp::FuelD1D2" name="fs::fuel::fbp::FuelD1D2">
+<area shape="rect" id="Node000001" title="FBP fuel type D&#45;1/D&#45;2." alt="" coords="5,168,152,193"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelVariable.html" title=" " alt="" coords="10,79,147,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,135,81,167,76,167,76,135"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelType.html" title="An FBP fuel type." alt="" coords="19,5,138,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
+</map>

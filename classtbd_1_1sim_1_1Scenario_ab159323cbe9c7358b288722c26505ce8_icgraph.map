@@ -1,5 +1,0 @@
-<map id="tbd::sim::Scenario::reset" name="tbd::sim::Scenario::reset">
-<area shape="rect" id="Node000001" title="Reset thresholds and set SafeVector to output results to." alt="" coords="203,5,326,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1TestScenario.html#a18d88496e25dd9c171f860f4e9613490" title="Constructor." alt="" coords="5,5,155,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,28,155,28,155,23,187,23"/>
-</map>

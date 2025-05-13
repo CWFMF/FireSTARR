@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::thresholdScenarioWeight" name="fs::sim::SettingsImplementation::thresholdScenarioWeight">
+<area shape="rect" id="Node000001" title="Weight to give to Scenario part of thresholds." alt="" coords="219,5,421,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a5eb741525d8e657e35316370600ac70c" title="Weight to give to Scenario part of thresholds." alt="" coords="5,5,171,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,28,171,28,171,23,204,23"/>
+</map>

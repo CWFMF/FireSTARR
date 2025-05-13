@@ -1,5 +1,0 @@
-<map id="tbd::sim::MapObserver::getValue" name="tbd::sim::MapObserver::getValue">
-<area shape="rect" id="Node000001" title="Function that returns the value we care about regarding the Event." alt="" coords="204,5,354,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1MapObserver.html#ab1108854aebe460cce6aa3c0e89b10cb" title="Handle given event." alt="" coords="5,5,156,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,28,156,28,156,23,188,23"/>
-</map>

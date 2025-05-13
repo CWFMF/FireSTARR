@@ -1,0 +1,13 @@
+<map id="fs::sim::Scenario::cell" name="fs::sim::Scenario::cell">
+<area shape="rect" id="Node000001" title="Get Cell for given row and column." alt="" coords="548,56,691,82"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="360,5,500,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="553,54,480,34,481,29,555,49"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,48,312,89"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="533,72,312,72,312,66,533,66"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="369,106,491,146"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="561,89,493,110,491,105,559,84"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,78,128,118"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="161,85,129,91,128,85,160,80"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="354,105,312,92,313,87,355,100"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="353,123,128,105,128,100,354,118"/>
+</map>

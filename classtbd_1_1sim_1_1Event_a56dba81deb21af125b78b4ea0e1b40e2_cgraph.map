@@ -1,6 +1,0 @@
-<map id="tbd::sim::Event::makeFireSpread" name="tbd::sim::Event::makeFireSpread">
-<area shape="rect" id="Node000001" title="Make fire spread event." alt="" coords="5,29,171,70"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="50,29,48,19,55,10,68,5,88,3,110,5,123,11,120,16,108,10,88,8,69,10,58,15,54,20,55,28"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Event.html#a31e621da8d48deb889edfeec2e6dfbfc" title="Time of Event (decimal days)" alt="" coords="219,37,355,63"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="171,47,203,47,203,52,171,52"/>
-</map>

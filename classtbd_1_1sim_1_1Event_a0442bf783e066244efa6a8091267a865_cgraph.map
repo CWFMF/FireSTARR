@@ -1,5 +1,0 @@
-<map id="tbd::sim::Event::ros" name="tbd::sim::Event::ros">
-<area shape="rect" id="Node000001" title="Head fire rate of spread (m/min)" alt="" coords="5,13,135,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#aabc31f4145719c979f13e74807f8c2c5" title="Head fire rate of spread (m/min)" alt="" coords="183,5,318,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,23,167,23,167,28,135,28"/>
-</map>

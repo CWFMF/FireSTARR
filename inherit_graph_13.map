@@ -1,9 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,55,105,80"/>
-<area shape="rect" id="Node000001" href="$classagency__on_1_1SourceHourlyON.html" title=" " alt="" coords="153,5,337,31"/>
-<area shape="poly" id="edge36_Node000000_Node000001" title=" " alt="" coords="119,48,192,29,193,34,120,53"/>
-<area shape="rect" id="Node000002" href="$classdefault_1_1SourceHourlyBest.html" title=" " alt="" coords="161,55,329,80"/>
-<area shape="poly" id="edge37_Node000000_Node000002" title=" " alt="" coords="120,65,160,65,160,70,120,70"/>
-<area shape="rect" id="Node000003" href="$classdefault_1_1SourceHourlyEmpty.html" title=" " alt="" coords="156,104,334,130"/>
-<area shape="poly" id="edge38_Node000000_Node000003" title=" " alt="" coords="120,82,193,101,192,106,119,87"/>
+<area shape="rect" id="Node000000" href="$classfs_1_1data_1_1Index.html" title=" " alt="" coords="5,5,200,31"/>
 </map>

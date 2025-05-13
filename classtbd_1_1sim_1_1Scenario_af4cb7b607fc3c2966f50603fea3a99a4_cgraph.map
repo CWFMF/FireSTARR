@@ -1,9 +1,0 @@
-<map id="tbd::sim::Scenario::rows" name="tbd::sim::Scenario::rows">
-<area shape="rect" id="Node000001" title="Number of rows." alt="" coords="5,5,129,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Model.html#a7999049e2d7033817f635b0877305b26" title="Cell at the Location represented by the given hash." alt="" coords="177,13,318,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,23,161,23,161,28,129,28"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1Environment.html#ab82219745b374df569813e6e1ee4f218" title="Number of rows in grid." alt="" coords="366,5,514,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="318,23,351,23,351,28,318,28"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1data_1_1Grid.html#a8edef5e6e3c5a70f08b40200ce29f0c3" title="Number of rows in the GridBase." alt="" coords="562,13,697,39"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="515,23,547,23,547,28,515,28"/>
-</map>

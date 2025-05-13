@@ -1,0 +1,47 @@
+<map id="fs::topo::Environment::load" name="fs::topo::Environment::load">
+<area shape="rect" id="Node000001" title="Load from rasters." alt="" coords="5,136,147,177"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#af762b46765adaccb543d7bda48091029" title="Elevation of the origin Point." alt="" coords="197,5,338,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,133,140,96,193,57,202,51,205,56,196,61,143,100,101,137"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Environment.html#a9ccffa1f4d42ee08487cdfccba3dc559" title="Move constructor." alt="" coords="197,71,338,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,133,191,114,192,119,138,138"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="208,136,327,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="147,154,192,154,192,159,147,159"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1ConstantGrid.html#a7b0c53e8d214a67ea0b8e10285489370" title="Read a section of a TIFF into a ConstantGrid." alt="" coords="195,365,340,406"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="96,175,241,352,237,355,92,179"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1sim_1_1Settings.html#a654a6715cf89f321d081880176394598" title="Whether or not to run things asynchronously where possible." alt="" coords="208,201,327,242"/>
+<area shape="poly" id="edge25_Node000001_Node000019" title=" " alt="" coords="138,175,194,194,192,199,137,180"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SettingsImplementation.html#a59e067bbca9d88108a6fc7ef6976e7c7" title="Fuel lookup table." alt="" coords="388,79,590,119"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="327,138,393,121,394,126,328,144"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="388,168,590,209"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="328,162,373,169,372,174,327,168"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="447,168,445,158,452,149,467,143,489,141,513,144,527,150,525,155,512,149,489,147,468,149,455,153,450,159,452,167"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1data_1_1GridBase.html#ae77f3d6439369ce9b9b6a476278f8efc" title="Number of columns in the GridBase." alt="" coords="652,333,782,374"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="340,378,636,357,636,362,341,383"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1data_1_1GridBase.html#a36018525f0af09808eb17a86b6a3ac1a" title="Cell size used for GridBase." alt="" coords="844,391,967,431"/>
+<area shape="poly" id="edge16_Node000007_Node000009" title=" " alt="" coords="340,386,828,405,828,411,340,391"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1data_1_1GridBase.html#a9041142694e10f2cb5776cefe1f5ca09" title="Lower left corner X coordinate in meters." alt="" coords="844,243,967,283"/>
+<area shape="poly" id="edge23_Node000007_Node000010" title=" " alt="" coords="281,363,323,313,353,288,387,269,444,249,504,237,564,230,624,227,737,233,829,245,828,250,736,238,624,233,565,235,504,242,445,255,389,273,356,292,327,317,285,366"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1data_1_1GridBase.html#a2a7227a2aa8fc00ef52ff0578e1ace72" title="Number of rows in the GridBase." alt="" coords="655,448,779,489"/>
+<area shape="poly" id="edge12_Node000007_Node000012" title=" " alt="" coords="318,404,389,427,454,440,521,450,640,462,640,467,520,456,453,446,387,432,316,409"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1data_1_1GridBase.html#a3ee33e834f28b44fb975727ec349e6e7" title="Lower left corner Y coordinate in meters." alt="" coords="844,563,967,603"/>
+<area shape="poly" id="edge24_Node000007_Node000013" title=" " alt="" coords="280,405,296,438,320,477,351,516,389,549,442,576,500,595,559,607,619,612,678,613,734,610,829,597,829,602,734,615,678,618,619,618,558,612,498,600,440,581,387,553,347,520,315,480,291,440,275,407"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1data_1_1GridBase.html#a1a490ff2fbaba392972c51e2b85ed835" title="Find FullCoordinates for Point." alt="" coords="420,499,558,539"/>
+<area shape="poly" id="edge17_Node000007_Node000015" title=" " alt="" coords="292,404,336,441,389,478,413,490,410,495,387,483,332,445,289,408"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1data_1_1GridBase.html#a29ec3f5503526f0374cd5e7c6dd7c203" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="428,283,551,323"/>
+<area shape="poly" id="edge22_Node000007_Node000018" title=" " alt="" coords="323,362,417,327,419,332,325,367"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="784,371,830,385,828,390,782,376"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="760,330,847,288,849,293,762,335"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1data_1_1GridBase.html#a16bd22199b244fe7cf96a513fd890149" title="Upper right corner X coordinate in meters." alt="" coords="844,325,967,366"/>
+<area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="783,348,828,346,829,352,783,354"/>
+<area shape="poly" id="edge13_Node000012_Node000009" title=" " alt="" coords="778,447,828,432,830,437,780,452"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="775,487,797,498,836,524,871,551,867,555,833,528,794,503,772,492"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1data_1_1GridBase.html#aaec3bf977edc86fc3449b92ee83abbd8" title="Upper right corner Y coordinate in meters." alt="" coords="844,456,967,497"/>
+<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="779,468,828,470,828,476,779,474"/>
+<area shape="poly" id="edge18_Node000015_Node000008" title=" " alt="" coords="517,496,674,381,677,385,521,500"/>
+<area shape="poly" id="edge19_Node000015_Node000012" title=" " alt="" coords="557,501,639,483,640,488,559,506"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1topo_1_1Point.html#ae3ebcb174d5002ff3d15ebd52e6a56da" title="Latitude (decimal degrees)" alt="" coords="643,513,791,538"/>
+<area shape="poly" id="edge20_Node000015_Node000016" title=" " alt="" coords="558,518,628,520,628,526,558,524"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1topo_1_1Point.html#a6cf786914bd3382401415edee74b1b18" title="Longitude (decimal degrees)" alt="" coords="638,562,796,588"/>
+<area shape="poly" id="edge21_Node000015_Node000017" title=" " alt="" coords="559,533,648,555,646,561,557,538"/>
+<area shape="poly" id="edge26_Node000019_Node000006" title=" " alt="" coords="327,210,372,203,373,209,328,215"/>
+</map>

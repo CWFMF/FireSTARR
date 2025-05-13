@@ -1,0 +1,7 @@
+<map id="fs::sim::MapObserver::handleEvent" name="fs::sim::MapObserver::handleEvent">
+<area shape="rect" id="Node000001" title="Handle given event." alt="" coords="5,27,149,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Event.html#a42d6f9837174b92c9a46d4bd63b6cb2c" title="Cell Event takes place in." alt="" coords="206,5,330,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,34,191,27,191,33,150,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1MapObserver.html#a189aba37392be5fce503f4fa47f02200" title="Function that returns the value we care about regarding the Event." alt="" coords="197,55,340,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,55,182,60,181,65,149,61"/>
+</map>

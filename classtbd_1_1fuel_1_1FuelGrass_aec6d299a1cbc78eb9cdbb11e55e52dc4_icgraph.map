@@ -1,9 +1,0 @@
-<map id="tbd::fuel::FuelGrass::baseMultiplier" name="tbd::fuel::FuelGrass::baseMultiplier">
-<area shape="rect" id="Node000001" title="Calculate base rate of spread multiplier." alt="" coords="366,5,498,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelGrass.html#a3f0b1c12b6ed37c04a4a3d124c6c7dab" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="350,15,318,12,252,9,186,12,139,17,138,12,185,7,252,4,318,7,351,10"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelGrass.html#a6bd56d41b77dff9ea7409bc0f61ebdd8" title="Calculate rate of spread (m/min)" alt="" coords="186,45,318,86"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="352,46,319,54,318,48,350,41"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="170,50,137,43,139,38,171,45"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="281,32,270,26,252,24,235,26,225,30,221,36,222,44,217,45,216,35,221,26,233,21,252,19,272,21,283,27"/>
-</map>

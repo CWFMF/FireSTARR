@@ -1,6 +1,0 @@
-<map id="tbd::sim::Settings::saveSimulationArea" name="tbd::sim::Settings::saveSimulationArea">
-<area shape="rect" id="Node000001" title="Whether or not to save simulation area grids." alt="" coords="5,29,149,70"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="197,29,406,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,47,181,47,181,52,149,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="259,29,257,19,264,10,279,5,301,3,326,5,340,11,338,16,324,10,301,8,280,10,267,15,262,21,264,28"/>
-</map>

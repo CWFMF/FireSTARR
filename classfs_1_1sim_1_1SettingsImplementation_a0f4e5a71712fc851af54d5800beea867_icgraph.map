@@ -1,0 +1,7 @@
+<map id="fs::sim::SettingsImplementation::maxDateOffset" name="fs::sim::SettingsImplementation::maxDateOffset">
+<area shape="rect" id="Node000001" title="Whatever the maximum value in the date offsets is." alt="" coords="403,5,605,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a2f7fcc56938097b7a994b683964daf3d" title="Whatever the maximum value in the date offsets is." alt="" coords="236,5,355,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="388,28,355,28,355,23,388,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,188,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="220,28,188,28,188,23,220,23"/>
+</map>

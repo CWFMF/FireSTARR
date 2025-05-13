@@ -1,0 +1,5 @@
+<map id="fs::sim::IntensityMap::cend" name="fs::sim::IntensityMap::cend">
+<area shape="rect" id="Node000001" title="Iterator for underlying GridMap." alt="" coords="204,5,343,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1ProbabilityMap.html#ad4af24b0186adc040e0ce90429d81e7e" title="Add in an IntensityMap to the appropriate probability grid based on each cell burn intensity." alt="" coords="5,5,156,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,28,156,28,156,23,188,23"/>
+</map>

@@ -1,7 +1,0 @@
-<map id="tbd::sim::SpreadInfo::bui" name="tbd::sim::SpreadInfo::bui">
-<area shape="rect" id="Node000001" title="Build&#45;up Index used for spread." alt="" coords="5,35,164,60"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1wx_1_1FwiWeather.html#a615aa481314e36f242041bbaaa68768f" title="Build&#45;up Index." alt="" coords="212,5,371,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,34,196,29,197,34,165,39"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SpreadInfo.html#a0138fb6c4e3ad59eacb096d5864bc608" title="FwiWeather used for spread." alt="" coords="224,55,359,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,56,209,62,208,67,164,61"/>
-</map>

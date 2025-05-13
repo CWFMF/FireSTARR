@@ -1,5 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::thresholdHourlyWeight" name="tbd::sim::SettingsImplementation::thresholdHourlyWeight">
-<area shape="rect" id="Node000001" title="Weight to give to hourly part of thresholds." alt="" coords="211,5,420,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a96a29747dcd3d0f29bf23f3b96e466a6" title="Weight to give to hourly part of thresholds." alt="" coords="5,5,163,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,28,163,28,163,23,195,23"/>
-</map>

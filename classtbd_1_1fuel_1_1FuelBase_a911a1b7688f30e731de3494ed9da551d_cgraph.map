@@ -1,7 +1,0 @@
-<map id="tbd::fuel::FuelBase::probabilityPeat" name="tbd::fuel::FuelBase::probabilityPeat">
-<area shape="rect" id="Node000001" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="5,39,133,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelBase.html#a9e03e7c443c6cb4307fd3466bdb1da83" title="Duff Bulk Density (g/cm^3) [Anderson table 1]." alt="" coords="181,5,308,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,44,165,38,166,43,134,49"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelBase.html#ab81a38996f852420d03baedd495079e2" title="Inorganic Percent (% / 100) [Anderson table 1]." alt="" coords="181,71,308,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,68,166,74,165,79,133,73"/>
-</map>

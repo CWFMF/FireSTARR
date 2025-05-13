@@ -1,5 +1,0 @@
-<map id="tbd::sim::Event::raz" name="tbd::sim::Event::raz">
-<area shape="rect" id="Node000001" title="Head fire spread direction." alt="" coords="5,13,134,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#a08a2e58aa984b304a3e79a112dfdc6ab" title="Head fire spread direction." alt="" coords="182,5,317,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,23,166,23,166,28,134,28"/>
-</map>

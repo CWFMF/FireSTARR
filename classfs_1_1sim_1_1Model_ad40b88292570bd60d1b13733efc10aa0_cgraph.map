@@ -1,0 +1,9 @@
+<map id="fs::sim::Model::Model" name="fs::sim::Model::Model">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,70,147,96"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#af762b46765adaccb543d7bda48091029" title="Elevation of the origin Point." alt="" coords="203,5,344,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,67,187,48,189,53,124,72"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Point.html#ae3ebcb174d5002ff3d15ebd52e6a56da" title="Latitude (decimal degrees)" alt="" coords="200,70,347,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,80,184,80,184,86,147,86"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Point.html#a6cf786914bd3382401415edee74b1b18" title="Longitude (decimal degrees)" alt="" coords="195,120,352,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,94,205,113,204,118,130,99"/>
+</map>

@@ -1,11 +1,33 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,96,62,121"/>
-<area shape="rect" id="Node000001" href="$classgdal__merge__max_1_1file__info__max.html" title=" " alt="" coords="113,5,251,46"/>
-<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="64,84,108,55,130,44,132,49,111,60,66,88"/>
-<area shape="rect" id="Node000002" href="$classgis_1_1Extent.html" title=" " alt="" coords="143,70,221,96"/>
-<area shape="poly" id="edge11_Node000000_Node000002" title=" " alt="" coords="77,98,142,87,143,92,78,104"/>
-<area shape="rect" id="Node000003" href="$classrun_1_1Run.html" title=" " alt="" coords="149,120,215,145"/>
-<area shape="poly" id="edge12_Node000000_Node000003" title=" " alt="" coords="78,113,149,124,148,130,77,118"/>
-<area shape="rect" id="Node000004" href="$classsimulation_1_1Simulation.html" title=" " alt="" coords="110,169,254,195"/>
-<area shape="poly" id="edge13_Node000000_Node000004" title=" " alt="" coords="66,128,111,155,136,166,134,171,108,160,63,132"/>
+<area shape="rect" id="Node000000" href="$classfs_1_1data_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="5,246,129,271"/>
+<area shape="rect" id="Node000001" href="$classfs_1_1data_1_1Grid.html" title=" " alt="" coords="186,100,324,126"/>
+<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="92,233,175,163,231,124,234,129,178,167,95,237"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1data_1_1Grid.html" title=" " alt="" coords="185,178,324,203"/>
+<area shape="poly" id="edge15_Node000000_Node000006" title=" " alt="" coords="118,237,216,201,218,206,120,242"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1data_1_1Grid.html" title=" " alt="" coords="177,238,333,279"/>
+<area shape="poly" id="edge17_Node000000_Node000008" title=" " alt="" coords="144,256,177,256,177,261,144,261"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1data_1_1Grid.html" title=" " alt="" coords="191,304,318,344"/>
+<area shape="poly" id="edge21_Node000000_Node000012" title=" " alt="" coords="122,274,195,300,193,305,120,279"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1data_1_1Grid.html" title="A GridBase with an associated type of data." alt="" coords="185,368,324,394"/>
+<area shape="poly" id="edge24_Node000000_Node000015" title=" " alt="" coords="92,281,130,318,178,354,204,365,201,370,175,358,126,322,88,285"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="415,5,548,61"/>
+<area shape="poly" id="edge11_Node000001_Node000002" title=" " alt="" coords="307,92,414,54,415,59,309,97"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="406,85,558,141"/>
+<area shape="poly" id="edge13_Node000001_Node000004" title=" " alt="" coords="340,110,405,110,405,116,340,116"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1ConstantGrid.html" title="A GridData&lt;T, V, const vector&lt;T&gt;&gt; that cannot change once initialized." alt="" coords="630,13,776,54"/>
+<area shape="poly" id="edge12_Node000002_Node000003" title=" " alt="" coords="563,30,630,30,630,36,563,36"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1GridMap.html" title="A GridData that uses an unordered_map for storage." alt="" coords="640,93,766,134"/>
+<area shape="poly" id="edge14_Node000004_Node000005" title=" " alt="" coords="573,110,639,110,639,116,573,116"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1GridData.html" title="A Grid that defines the data structure used for storing values." alt="" coords="422,165,542,206"/>
+<area shape="poly" id="edge16_Node000006_Node000007" title=" " alt="" coords="340,186,421,184,421,189,340,191"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="381,230,582,300"/>
+<area shape="poly" id="edge18_Node000008_Node000009" title=" " alt="" coords="349,259,381,260,380,265,348,264"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1data_1_1GridMap.html" title=" " alt="" coords="640,245,766,286"/>
+<area shape="poly" id="edge19_Node000009_Node000010" title=" " alt="" coords="598,262,640,262,640,268,598,268"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1topo_1_1BurnedMap.html" title="A map of locations which have burned in a Scenario." alt="" coords="824,252,959,278"/>
+<area shape="poly" id="edge20_Node000010_Node000011" title=" " alt="" coords="782,262,823,262,823,268,782,268"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="409,324,554,380"/>
+<area shape="poly" id="edge22_Node000012_Node000013" title=" " alt="" coords="334,331,409,340,408,346,333,336"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1data_1_1GridMap.html" title=" " alt="" coords="640,332,766,372"/>
+<area shape="poly" id="edge23_Node000013_Node000014" title=" " alt="" coords="570,349,639,349,639,354,570,354"/>
 </map>

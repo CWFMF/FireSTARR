@@ -1,0 +1,39 @@
+<map id="fs::topo::Perimeter::Perimeter" name="fs::topo::Perimeter::Perimeter">
+<area shape="rect" id="Node000001" title="Initialize perimeter from a file." alt="" coords="5,71,131,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Perimeter.html#ab0250ce44b8345528136e2bd6236018f" title="Map of all burned Locations." alt="" coords="189,5,314,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,68,177,49,179,54,128,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="181,71,322,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,88,165,88,165,94,131,94"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1ConstantGrid.html#a7b0c53e8d214a67ea0b8e10285489370" title="Read a section of a TIFF into a ConstantGrid." alt="" coords="179,204,324,245"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="99,110,211,192,208,197,96,114"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="372,9,534,34"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="312,67,398,38,400,43,314,73"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1data_1_1GridBase.html#ae77f3d6439369ce9b9b6a476278f8efc" title="Number of columns in the GridBase." alt="" coords="596,209,726,250"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="325,223,372,224,580,227,580,232,372,230,325,229"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1GridBase.html#a36018525f0af09808eb17a86b6a3ac1a" title="Cell size used for GridBase." alt="" coords="788,275,911,315"/>
+<area shape="poly" id="edge13_Node000005_Node000007" title=" " alt="" coords="325,230,773,283,772,289,324,236"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1data_1_1GridBase.html#a9041142694e10f2cb5776cefe1f5ca09" title="Lower left corner X coordinate in meters." alt="" coords="788,99,911,139"/>
+<area shape="poly" id="edge20_Node000005_Node000008" title=" " alt="" coords="262,202,280,176,304,146,335,117,371,95,422,78,476,67,531,63,586,63,688,75,773,93,772,99,687,80,585,69,531,68,477,72,424,83,373,100,338,121,308,149,284,179,267,205"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1data_1_1GridBase.html#a2a7227a2aa8fc00ef52ff0578e1ace72" title="Number of rows in the GridBase." alt="" coords="599,340,723,381"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="273,243,316,283,343,303,373,319,426,337,481,349,584,359,583,364,480,354,424,343,371,324,341,308,313,287,269,247"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1data_1_1GridBase.html#a3ee33e834f28b44fb975727ec349e6e7" title="Lower left corner Y coordinate in meters." alt="" coords="788,405,911,446"/>
+<area shape="poly" id="edge21_Node000005_Node000011" title=" " alt="" coords="266,243,308,304,338,335,373,361,423,384,475,401,529,414,583,423,686,430,772,429,772,435,686,435,582,428,528,419,474,406,421,389,371,365,334,339,303,307,262,246"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1data_1_1GridBase.html#a1a490ff2fbaba392972c51e2b85ed835" title="Find FullCoordinates for Point." alt="" coords="384,109,522,150"/>
+<area shape="poly" id="edge14_Node000005_Node000013" title=" " alt="" coords="290,201,371,161,385,154,387,159,373,165,293,206"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1data_1_1GridBase.html#a29ec3f5503526f0374cd5e7c6dd7c203" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="392,175,515,215"/>
+<area shape="poly" id="edge19_Node000005_Node000016" title=" " alt="" coords="324,211,376,204,376,209,325,216"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="722,248,775,267,773,272,721,253"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="716,206,738,195,810,147,813,151,741,200,719,211"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1data_1_1GridBase.html#a16bd22199b244fe7cf96a513fd890149" title="Upper right corner X coordinate in meters." alt="" coords="788,209,911,250"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="727,227,773,227,773,232,727,232"/>
+<area shape="poly" id="edge10_Node000010_Node000007" title=" " alt="" coords="721,337,773,318,775,323,722,342"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="722,379,775,397,773,402,721,384"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1data_1_1GridBase.html#aaec3bf977edc86fc3449b92ee83abbd8" title="Upper right corner Y coordinate in meters." alt="" coords="788,340,911,381"/>
+<area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="723,358,772,358,772,363,723,363"/>
+<area shape="poly" id="edge15_Node000013_Node000006" title=" " alt="" coords="511,148,536,161,560,178,584,195,592,200,590,205,581,200,557,183,533,165,508,153"/>
+<area shape="poly" id="edge16_Node000013_Node000010" title=" " alt="" coords="519,148,536,161,555,185,564,209,571,233,585,260,634,326,629,330,580,263,566,234,559,210,551,188,532,165,516,153"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1topo_1_1Point.html#ae3ebcb174d5002ff3d15ebd52e6a56da" title="Latitude (decimal degrees)" alt="" coords="587,110,735,136"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="522,125,572,123,572,129,522,130"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1topo_1_1Point.html#a6cf786914bd3382401415edee74b1b18" title="Longitude (decimal degrees)" alt="" coords="582,160,740,185"/>
+<area shape="poly" id="edge18_Node000013_Node000015" title=" " alt="" coords="523,141,580,153,579,158,522,146"/>
+</map>

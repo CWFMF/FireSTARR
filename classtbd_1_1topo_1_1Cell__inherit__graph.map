@@ -1,5 +1,0 @@
-<map id="tbd::topo::Cell" name="tbd::topo::Cell">
-<area shape="rect" id="Node000001" title="A Position with a Slope, Aspect, and Fuel." alt="" coords="18,94,116,120"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Position.html" title=" " alt="" coords="5,5,129,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,62,70,93,64,93,64,62"/>
-</map>

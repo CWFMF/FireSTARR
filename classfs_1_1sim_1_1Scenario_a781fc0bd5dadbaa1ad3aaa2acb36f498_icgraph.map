@@ -1,0 +1,5 @@
+<map id="fs::sim::Scenario::registerObserver" name="fs::sim::Scenario::registerObserver">
+<area shape="rect" id="Node000001" title="Register an IObserver that will be notified when Cells burn." alt="" coords="196,5,318,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1TestScenario.html#a0667115737ccae6c51f2cdb0667b2b49" title="Constructor." alt="" coords="5,5,148,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,28,148,28,148,23,180,23"/>
+</map>

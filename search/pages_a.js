@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['simulation_20stop_20conditions_0',['Simulation stop conditions',['../ending.html',1,'']]],
-  ['stop_20conditions_1',['Simulation stop conditions',['../ending.html',1,'']]],
-  ['survival_2',['Probability of fire survival',['../survival.html',1,'']]]
+  ['readme_0',['README',['../md_gis_2README.html',1,'']]],
+  ['revisions_20to_20the_20cffdrs_1',['Interim Revisions to the CFFDRS',['../md_firestarr_2src_2py_2cffdrs-ng_2README.html',1,'']]]
 ];

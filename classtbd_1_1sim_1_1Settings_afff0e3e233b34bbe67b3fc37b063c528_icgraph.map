@@ -1,5 +1,0 @@
-<map id="tbd::sim::Settings::saveIntensity" name="tbd::sim::Settings::saveIntensity">
-<area shape="rect" id="Node000001" title="Whether or not to save intensity grids." alt="" coords="211,5,331,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1ProbabilityMap.html#ab1de25a4b8d6ad3832c06c1a47cc4e65" title="Combine results from another ProbabilityMap into this one." alt="" coords="5,5,163,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,28,163,28,163,23,195,23"/>
-</map>

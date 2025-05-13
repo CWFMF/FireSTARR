@@ -1,5 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::thresholdScenarioWeight" name="tbd::sim::SettingsImplementation::thresholdScenarioWeight">
-<area shape="rect" id="Node000001" title="Weight to give to Scenario part of thresholds." alt="" coords="225,5,434,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a5a2bc2bd0befb8f9c1eee477d004fb6f" title="Weight to give to Scenario part of thresholds." alt="" coords="5,5,177,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,28,177,28,177,23,209,23"/>
-</map>

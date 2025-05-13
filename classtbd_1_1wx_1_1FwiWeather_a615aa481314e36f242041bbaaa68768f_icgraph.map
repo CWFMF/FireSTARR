@@ -1,9 +1,0 @@
-<map id="tbd::wx::FwiWeather::bui" name="tbd::wx::FwiWeather::bui">
-<area shape="rect" id="Node000001" title="Build&#45;up Index." alt="" coords="477,31,636,56"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#a4135cffdbb16777c82b175de67467447" title="Build&#45;up Index used for spread." alt="" coords="257,5,415,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="461,35,415,30,416,25,462,30"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Model.html#a200d489a088a9ee24967f57d0c505e1d" title="Read weather used for Scenarios." alt="" coords="243,55,429,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="462,56,430,60,429,55,461,51"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1sim_1_1Model.html#a62b5ea759a1a5bdd71ebf3c42d34a9e9" title="Run Scenarios initialized from given inputs." alt="" coords="5,55,195,80"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="227,70,195,70,195,65,227,65"/>
-</map>

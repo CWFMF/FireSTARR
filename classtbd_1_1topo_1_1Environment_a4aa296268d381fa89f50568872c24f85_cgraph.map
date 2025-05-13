@@ -1,5 +1,0 @@
-<map id="tbd::topo::Environment::cellSize" name="tbd::topo::Environment::cellSize">
-<area shape="rect" id="Node000001" title="Cell width and height (m)" alt="" coords="5,5,154,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html#ae1cf6f4ac42aff5635dcea5269320db2" title="Cell size used for GridBase." alt="" coords="202,5,332,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,23,186,23,186,28,154,28"/>
-</map>

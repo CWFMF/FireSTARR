@@ -1,9 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::setOutputDateOffsets" name="tbd::sim::SettingsImplementation::setOutputDateOffsets">
-<area shape="rect" id="Node000001" title="Set days to output probability contours for (1 is start date, 2 is day after, etc...." alt="" coords="431,39,640,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a5e9af127fe24030459bce644c49a521b" title="Set days to output probability contours for (1 is start date, 2 is day after, etc...." alt="" coords="202,5,355,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,46,355,38,356,33,416,41"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ab913d3f07ddd123be919f85399dbd5a2" title="Set root directory and read settings from file." alt="" coords="174,71,383,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="416,77,384,81,383,75,415,71"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1sim_1_1Settings.html#a9f76745bf9ef3a746036b52d32e8935e" title="Set root directory and read settings from file." alt="" coords="5,71,126,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="158,94,126,94,126,88,158,88"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="tbd::sim::Settings::setRowColIgnition" name="tbd::sim::Settings::setRowColIgnition">
-<area shape="rect" id="Node000001" title="Whether or not the start point is specified by row and column id of a forced fuel grid." alt="" coords="5,29,138,70"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="186,29,395,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,47,170,47,170,52,138,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="249,29,247,19,254,10,268,5,290,3,314,5,328,11,326,16,313,10,290,8,270,10,257,15,252,21,254,28"/>
-</map>

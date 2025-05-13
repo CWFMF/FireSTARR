@@ -1,0 +1,7 @@
+<map id="fs::sim::SpreadInfo::ffmcEffect" name="fs::sim::SpreadInfo::ffmcEffect">
+<area shape="rect" id="Node000001" title="FFMC effect used for spread." alt="" coords="5,39,134,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FwiWeather.html#a1581b02ebdbc08a0d48511fac67443b5" title="Ffmc effect used for spread." alt="" coords="182,5,311,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,44,166,38,167,43,135,49"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SpreadInfo.html#ae9aaa7cd820d801c39e90852598d9fcf" title="FwiWeather used for spread." alt="" coords="182,71,310,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,68,168,74,167,79,134,73"/>
+</map>

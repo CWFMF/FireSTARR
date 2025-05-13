@@ -1,9 +1,0 @@
-<map id="tbd::data::GridBase::calculateColumns" name="tbd::data::GridBase::calculateColumns">
-<area shape="rect" id="Node000001" title="Number of columns in the GridBase." alt="" coords="5,71,136,111"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html#ae1cf6f4ac42aff5635dcea5269320db2" title="Cell size used for GridBase." alt="" coords="184,5,314,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,68,176,49,178,54,129,73"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1data_1_1GridBase.html#a39776f5df19a85f74faae06438ab9623" title="Lower left corner X coordinate in meters." alt="" coords="184,71,314,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,88,168,88,168,94,136,94"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1data_1_1GridBase.html#a8f50cc964a1c96ba36492301e171c9c5" title="Upper right corner X coordinate in meters." alt="" coords="184,136,314,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,109,178,128,176,133,127,114"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="tbd::sim::Settings::maximumCountSimulations" name="tbd::sim::Settings::maximumCountSimulations">
-<area shape="rect" id="Node000001" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="5,63,191,103"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="239,29,448,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,68,223,63,224,69,191,73"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#a1bfcd443fff006546ee81cc4087b021a" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="239,95,448,135"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="191,92,223,97,223,102,191,98"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="297,29,295,19,303,10,319,5,343,3,370,5,385,11,383,16,369,10,343,8,320,10,306,15,300,21,302,28"/>
-</map>

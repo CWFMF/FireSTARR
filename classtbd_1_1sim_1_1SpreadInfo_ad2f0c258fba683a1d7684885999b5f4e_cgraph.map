@@ -1,7 +1,0 @@
-<map id="tbd::sim::SpreadInfo::ffmc" name="tbd::sim::SpreadInfo::ffmc">
-<area shape="rect" id="Node000001" title="Fine Fuel Moisture Code used for spread." alt="" coords="5,39,141,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1wx_1_1FwiWeather.html#ab9564e1814824a379c43bb568c909f47" title="Fine Fuel Moisture Code." alt="" coords="189,5,325,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,44,173,38,174,43,142,49"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SpreadInfo.html#a0138fb6c4e3ad59eacb096d5864bc608" title="FwiWeather used for spread." alt="" coords="189,71,325,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,68,175,74,174,79,141,73"/>
-</map>

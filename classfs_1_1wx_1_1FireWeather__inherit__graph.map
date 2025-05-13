@@ -1,0 +1,7 @@
+<map id="fs::wx::FireWeather" name="fs::wx::FireWeather">
+<area shape="rect" id="Node000001" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="115,5,245,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1ConstantWeather.html" title="A FireWeather stream with the same value for every date and time." alt="" coords="5,79,171,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,43,105,81,102,77,151,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1FireWeatherDaily.html" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="194,79,352,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,39,259,77,256,81,206,43"/>
+</map>

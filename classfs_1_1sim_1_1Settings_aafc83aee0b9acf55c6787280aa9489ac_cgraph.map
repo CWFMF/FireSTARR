@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::thresholdDailyWeight" name="fs::sim::Settings::thresholdDailyWeight">
+<area shape="rect" id="Node000001" title="Weight to give to daily part of thresholds." alt="" coords="5,63,148,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="196,29,398,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,70,180,65,180,70,148,75"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a9b70a6271359ed102d712e30513938b1" title="Weight to give to daily part of thresholds." alt="" coords="196,95,398,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="148,91,180,95,180,101,148,96"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="255,29,253,19,260,10,275,5,297,3,321,5,335,11,333,16,319,10,297,8,276,10,263,15,258,21,260,28"/>
+</map>

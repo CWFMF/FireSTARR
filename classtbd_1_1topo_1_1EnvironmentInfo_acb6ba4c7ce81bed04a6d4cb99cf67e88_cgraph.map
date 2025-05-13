@@ -1,8 +1,0 @@
-<map id="tbd::topo::EnvironmentInfo::loadInfo" name="tbd::topo::EnvironmentInfo::loadInfo">
-<area shape="rect" id="Node000001" title="Load EnvironmentInfo from given rasters." alt="" coords="5,29,176,70"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a18bcbf516e300f035e3e0eee7adf46c6" title="Whether or not to run things asynchronously where possible." alt="" coords="224,29,344,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,47,208,47,208,52,176,52"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="392,29,601,70"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,47,376,47,376,52,344,52"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="456,29,454,19,461,10,475,5,497,3,520,5,533,11,531,16,518,10,497,8,476,10,464,15,460,20,462,28"/>
-</map>

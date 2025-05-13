@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::defaultPercentDeadFir" name="fs::sim::SettingsImplementation::defaultPercentDeadFir">
+<area shape="rect" id="Node000001" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="204,5,406,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a18769090b1b1e090e8a64cdb6b0d6149" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="5,5,156,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,28,156,28,156,23,188,23"/>
+</map>

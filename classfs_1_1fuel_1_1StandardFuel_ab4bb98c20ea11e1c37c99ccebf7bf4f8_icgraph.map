@@ -1,0 +1,7 @@
+<map id="fs::fuel::StandardFuel::cfl" name="fs::fuel::StandardFuel::cfl">
+<area shape="rect" id="Node000001" title="Crown fuel load (kg/m^2) [ST&#45;X&#45;3 table 8]." alt="" coords="382,13,543,38"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1StandardFuel.html#a6a596c87bbb8406f7dc80e1013a1ee55" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66]." alt="" coords="192,5,334,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="367,28,335,28,335,23,367,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelMixed.html#a8d840f34b5d5b474caa753a560e2f977" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66, pg 38]." alt="" coords="5,5,144,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,28,144,28,144,23,176,23"/>
+</map>

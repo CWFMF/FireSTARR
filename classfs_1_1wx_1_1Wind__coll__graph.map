@@ -1,0 +1,14 @@
+<map id="fs::wx::Wind" name="fs::wx::Wind">
+<area shape="rect" id="Node000001" title="Wind with a Speed and Direction." alt="" coords="122,176,211,201"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="228,179,238,188,229,197,212,200,211,194,227,192,233,188,225,184"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1Direction.html" title="Direction with access to degrees or radians." alt="" coords="15,82,126,108"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="96,117,155,173,152,177,92,120"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="143,88,153,95,145,103,127,105,126,100,142,98,148,95,140,92"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="73,47,73,82,68,82,68,47"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1Speed.html" title="Speed in kilometers per hour." alt="" coords="215,82,312,108"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="242,120,181,177,178,173,238,117"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="330,87,339,95,331,103,313,105,313,100,329,98,334,95,327,92"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="199,5,329,31"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="266,47,266,82,261,82,261,47"/>
+</map>

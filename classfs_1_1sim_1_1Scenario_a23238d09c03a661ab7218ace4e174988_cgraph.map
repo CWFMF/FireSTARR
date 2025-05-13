@@ -1,0 +1,25 @@
+<map id="fs::sim::Scenario::minimumFfmcForSpread" name="fs::sim::Scenario::minimumFfmcForSpread">
+<area shape="rect" id="Node000001" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="5,148,170,189"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#afcd2048a5e49aa2f51f1258152190b86" title="Whether or not time is after sunrise and before sunset." alt="" coords="231,71,353,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,145,221,115,223,120,144,150"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Settings.html#adba2725a33dc64c2339196fec6894b74" title="Minimum Fine Fuel Moisture Code required for spread during the day." alt="" coords="232,148,352,189"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="170,166,216,166,216,171,170,171"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Settings.html#a27c7d1cfd50db3593af559db376343d3" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="218,225,366,266"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="144,187,223,217,221,222,142,192"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#aa10a65317440b8a02761dd194dd033ad" title="Sunset time for given day." alt="" coords="454,5,576,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="353,71,438,45,440,50,354,76"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#a06bcec22a0aa50b28aae7ef54fa7f41a" title="Sunrise time for given day." alt="" coords="454,71,576,111"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="353,88,439,88,439,94,353,94"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1StartPoint.html#ac518ea69e1856da301648f671605e0c1" title="Sunset time." alt="" coords="664,5,792,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="577,23,649,23,649,28,577,28"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1StartPoint.html#a883fbd07ae95c81564702b0d8f4ab18a" title="Sunrise time." alt="" coords="664,71,792,111"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="577,88,649,88,649,94,577,94"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="414,225,616,266"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="353,186,441,217,439,222,351,191"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1SettingsImplementation.html#a4455ed56197bf0dfac1442a1ad68af79" title="Minimum Fine Fuel Moisture Code required for spread during the day." alt="" coords="414,136,616,177"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="352,162,399,160,399,165,352,168"/>
+<area shape="poly" id="edge8_Node000008_Node000008" title=" " alt="" coords="475,225,473,215,479,206,494,201,515,199,538,201,552,207,550,212,537,206,515,204,495,206,483,211,478,216,480,224"/>
+<area shape="poly" id="edge11_Node000010_Node000008" title=" " alt="" coords="367,243,398,243,398,248,367,248"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1SettingsImplementation.html#a8545e60898a134c3fb8a1d4e6d5bbac9" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="414,291,616,331"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="364,264,429,283,428,288,363,269"/>
+</map>

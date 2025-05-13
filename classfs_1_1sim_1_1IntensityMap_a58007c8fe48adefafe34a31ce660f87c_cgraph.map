@@ -1,0 +1,19 @@
+<map id="fs::sim::IntensityMap::isSurrounded" name="fs::sim::IntensityMap::isSurrounded">
+<area shape="rect" id="Node000001" title="Whether or not all Locations surrounding the given Location are burned." alt="" coords="5,104,145,145"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="206,9,322,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,101,191,61,203,55,206,60,194,65,116,106"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1IntensityMap.html#a608e323dfda12f77086fa82d58e2c7c3" title="Number of columns in this extent." alt="" coords="195,75,334,115"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="145,111,179,105,180,111,146,116"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="193,140,336,165"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="146,132,178,137,177,142,145,137"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1IntensityMap.html#a3d68f4f9a3718eab5912429527db0579" title="Number of rows in this extent." alt="" coords="195,213,334,254"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="113,143,216,203,213,208,111,147"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="384,71,500,111"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="324,47,370,63,368,68,322,52"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="384,5,500,46"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="323,26,368,25,369,30,323,31"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="303,136,368,114,370,119,305,141"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="384,136,500,177"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="336,151,369,152,368,157,336,157"/>
+<area shape="poly" id="edge9_Node000008_Node000008" title=" " alt="" coords="230,213,229,203,234,194,246,189,264,187,284,189,295,195,293,200,282,194,264,192,248,194,238,198,234,204,235,212"/>
+</map>

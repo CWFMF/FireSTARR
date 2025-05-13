@@ -1,0 +1,22 @@
+<map id="fs::fuel::FuelGrass::calculateRos" name="fs::fuel::FuelGrass::calculateRos">
+<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min)" alt="" coords="5,76,131,117"/>
+<area shape="poly" id="edge11_Node000001_Node000001" title=" " alt="" coords="35,76,33,67,38,58,50,52,68,50,87,52,98,59,96,63,85,57,68,55,52,57,42,62,38,68,40,75"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelGrass.html#ae2561aa442a3d8698d70f3ff2f5ae3c3" title="Calculate base rate of spread multiplier." alt="" coords="179,76,304,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,94,163,94,163,100,131,100"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelGrass.html#ad8db5191a91447367bc069bcfc2431f6" title="Grass curing." alt="" coords="352,76,477,117"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="304,94,337,94,337,100,304,100"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="525,5,679,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="453,73,524,40,539,34,541,39,526,45,455,78"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1wx_1_1FwiWeather.html#afba176eda60e611c21e3e0eea3b915ee" title="Drought Code." alt="" coords="527,55,677,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="477,84,512,79,513,84,478,90"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Settings.html#a1fbff261366a34e26554959e7a29258d" title="Whether or not to force static grass curing value for all fires." alt="" coords="541,104,663,145"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="478,104,526,111,525,116,477,109"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Settings.html#a6990d41a2d6c27686460fc6b3fbaccba" title="Static curing value." alt="" coords="542,170,662,210"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="453,115,527,154,539,161,537,165,524,159,451,120"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="727,104,929,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="663,122,711,122,711,128,663,128"/>
+<area shape="poly" id="edge7_Node000007_Node000007" title=" " alt="" coords="785,104,783,95,790,85,805,80,828,78,852,80,867,86,865,91,851,85,828,83,806,85,793,90,788,96,790,103"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="661,170,740,147,741,152,663,176"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1SettingsImplementation.html#a011f3f4d3854b721373979a89ae06d41" title="Static curing value." alt="" coords="727,170,929,210"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="662,188,711,188,711,193,662,193"/>
+</map>

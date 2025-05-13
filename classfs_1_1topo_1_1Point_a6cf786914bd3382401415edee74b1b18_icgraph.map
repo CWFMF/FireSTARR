@@ -1,0 +1,34 @@
+<map id="fs::topo::Point::longitude" name="fs::topo::Point::longitude">
+<area shape="rect" id="Node000001" title="Longitude (decimal degrees)" alt="" coords="885,238,1042,264"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1GridBase.html#a1a490ff2fbaba392972c51e2b85ed835" title="Find FullCoordinates for Point." alt="" coords="679,136,816,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="922,233,836,192,805,180,807,175,838,187,924,228"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1topo_1_1Environment.html#a99440da27dee39be90b1fd7eaaeec4f0" title="Load from rasters in folder that have same projection as Perimeter." alt="" coords="677,201,818,242"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="869,241,818,234,819,229,870,236"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1sim_1_1Model.html#ad40b88292570bd60d1b13733efc10aa0" title="Constructor." alt="" coords="677,266,818,292"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="870,266,819,272,818,267,869,260"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="658,316,837,341"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="921,273,838,307,803,317,802,312,836,302,919,268"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1GridBase.html#af6d2a153c573e182910b3cb96d91d8bd" title="Find Coordinates for Point." alt="" coords="458,71,581,111"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="663,135,581,111,582,106,665,130"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1EnvironmentInfo.html#afc39ab93e6200b33e882c3173626bf79" title="Determine FullCoordinates in the grid for the Point." alt="" coords="438,136,601,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="663,159,601,159,601,154,663,154"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1ConstantGrid.html#a7b0c53e8d214a67ea0b8e10285489370" title="Read a section of a TIFF into a ConstantGrid." alt="" coords="446,201,592,242"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="665,183,593,203,592,198,663,178"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Environment.html#ad3fb9b08a1fd25370e82b78bdecdf79e" title="Determine Coordinates in the grid for the Point." alt="" coords="228,5,369,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="442,71,369,49,370,44,443,66"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1EnvironmentInfo.html#ab62fb9710a8a371f6b8b2b10d735ef5b" title="Determine Coordinates in the grid for the Point." alt="" coords="217,71,380,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="442,94,381,94,381,88,442,88"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1topo_1_1Environment.html#a465c5203756477d966333f81f2083263" title="Load from rasters." alt="" coords="228,136,369,177"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="433,199,369,180,370,175,435,194"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Perimeter.html#ad44c584a5fe10ffc7a2ed93a0646f3f1" title="Initialize perimeter from a file." alt="" coords="236,201,361,242"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="431,224,361,224,361,219,431,219"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1data_1_1ConstantGrid.html#a2879bb3a0669a4879c4631e4443052d0" title="Read a section of a TIFF into a ConstantGrid." alt="" coords="226,267,371,307"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="435,249,371,269,369,263,433,244"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1data_1_1ConstantGrid.html#abb174cb8a7d9fa343e33fba501e28873" title="Read a section of a TIFF into a ConstantGrid." alt="" coords="226,332,371,373"/>
+<area shape="poly" id="edge11_Node000007_Node000012" title=" " alt="" coords="470,253,430,280,406,301,381,321,358,334,355,329,379,317,403,297,426,276,467,248"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1topo_1_1EnvironmentInfo.html#a5098f4a784df0f769720822292827a13" title="Load the full Environment using the given FuelLookup to determine fuels." alt="" coords="5,136,169,177"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="212,159,169,159,169,154,212,154"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="428,290,610,316"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="675,250,559,292,557,287,673,245"/>
+<area shape="poly" id="edge16_Node000016_Node000014" title=" " alt="" coords="643,319,610,316,611,310,643,314"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::minimumFfmcAtNight" name="fs::sim::Settings::minimumFfmcAtNight">
+<area shape="rect" id="Node000001" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="5,63,154,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="202,29,404,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,69,186,64,187,70,155,75"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a8545e60898a134c3fb8a1d4e6d5bbac9" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="202,95,404,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="155,91,187,96,186,101,154,96"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="261,29,259,19,266,10,280,5,303,3,327,5,341,11,339,16,326,10,303,8,282,10,269,15,264,21,266,28"/>
+</map>

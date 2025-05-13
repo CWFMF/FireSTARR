@@ -1,5 +1,0 @@
-<map id="tbd::data::GridMap::fireSize" name="tbd::data::GridMap::fireSize">
-<area shape="rect" id="Node000001" title="Calculate area for cells that have a value (ha)" alt="" coords="5,5,131,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html#ae1cf6f4ac42aff5635dcea5269320db2" title="Cell size used for GridBase." alt="" coords="179,5,309,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,23,163,23,163,28,131,28"/>
-</map>

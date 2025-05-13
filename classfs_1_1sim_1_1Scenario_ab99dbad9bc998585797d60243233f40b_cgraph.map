@@ -1,0 +1,5 @@
+<map id="fs::sim::Scenario::saveStats" name="fs::sim::Scenario::saveStats">
+<area shape="rect" id="Node000001" title="Save state of Scenario at given time." alt="" coords="5,5,128,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1util_1_1SafeVector.html#adcf51f00ae81e65e39fa3d6aa4ac177f" title="Add a value to the SafeVector." alt="" coords="176,5,302,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,23,160,23,160,28,128,28"/>
+</map>

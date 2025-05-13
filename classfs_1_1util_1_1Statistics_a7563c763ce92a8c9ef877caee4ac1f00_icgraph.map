@@ -1,0 +1,13 @@
+<map id="fs::util::Statistics::confidenceInterval" name="fs::util::Statistics::confidenceInterval">
+<area shape="rect" id="Node000001" title="Calculate Confidence Interval for given z value." alt="" coords="200,136,332,177"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1util_1_1Statistics.html#a2ae79008849e3d51b6b66a511d8be4e8" title="80% Confidence Interval" alt="" coords="5,5,152,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,127,194,94,150,61,128,49,131,44,153,57,197,90,235,123"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1util_1_1Statistics.html#a052b7c6ecbfc72db62bba370039a76ad" title="90% Confidence Interval" alt="" coords="5,71,152,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,133,138,114,140,109,192,128"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1util_1_1Statistics.html#a91017fb8888cbbd023d088e1b2af6658" title="95% Confidence Interval" alt="" coords="5,136,152,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="184,159,152,159,152,154,184,154"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1util_1_1Statistics.html#a491a33eb1041cb01326b4d6b2fd1dc0d" title="98% Confidence Interval" alt="" coords="5,201,152,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="192,185,140,203,138,198,190,180"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1util_1_1Statistics.html#a58e3bb15e65eec4102beeb0134c7ff8f" title="99% Confidence Interval" alt="" coords="5,267,152,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="235,189,197,223,153,256,131,268,128,264,150,251,194,219,232,185"/>
+</map>

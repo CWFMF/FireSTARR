@@ -1,0 +1,5 @@
+<map id="fs::sim::IntensityMap::burn" name="fs::sim::IntensityMap::burn">
+<area shape="rect" id="Node000001" title="Update Location with specified values." alt="" coords="193,5,332,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityMap.html#af32955a906493a0572ac9154662b1550" title="Mark given location as burned." alt="" coords="5,5,145,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,28,145,28,145,23,177,23"/>
+</map>

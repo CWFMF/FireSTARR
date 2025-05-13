@@ -1,8 +1,0 @@
-<map id="tbd::sim::Settings::defaultPercentDeadFir" name="tbd::sim::Settings::defaultPercentDeadFir">
-<area shape="rect" id="Node000001" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="5,51,162,91"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#a05c64d5bc93358d8721d3ca70d76cbc6" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="210,5,419,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,53,194,47,195,52,163,58"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="210,95,419,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,83,195,89,194,95,162,89"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="271,95,269,85,276,76,291,70,314,68,339,70,354,77,352,82,338,76,314,73,292,75,279,80,274,86,276,93"/>
-</map>

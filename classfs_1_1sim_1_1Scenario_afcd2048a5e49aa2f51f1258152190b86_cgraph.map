@@ -1,0 +1,11 @@
+<map id="fs::sim::Scenario::isAtNight" name="fs::sim::Scenario::isAtNight">
+<area shape="rect" id="Node000001" title="Whether or not time is after sunrise and before sunset." alt="" coords="5,39,128,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#aa10a65317440b8a02761dd194dd033ad" title="Sunset time for given day." alt="" coords="176,5,298,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,44,160,38,161,43,128,50"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#a06bcec22a0aa50b28aae7ef54fa7f41a" title="Sunrise time for given day." alt="" coords="176,71,298,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="128,68,161,74,160,79,127,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1StartPoint.html#ac518ea69e1856da301648f671605e0c1" title="Sunset time." alt="" coords="346,5,473,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="299,23,331,23,331,28,299,28"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1StartPoint.html#a883fbd07ae95c81564702b0d8f4ab18a" title="Sunrise time." alt="" coords="346,71,473,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="299,88,331,88,331,94,299,94"/>
+</map>

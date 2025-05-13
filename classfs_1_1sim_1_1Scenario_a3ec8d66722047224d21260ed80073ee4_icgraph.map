@@ -1,0 +1,5 @@
+<map id="fs::sim::Scenario::canBurn" name="fs::sim::Scenario::canBurn">
+<area shape="rect" id="Node000001" title="Whether or not a Cell can burn." alt="" coords="194,5,316,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,13,146,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,28,146,28,146,23,178,23"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="fs::fuel::FuelMixed::calculateRos" name="fs::fuel::FuelMixed::calculateRos">
+<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="5,136,130,177"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelMixed.html#ac2d4d78e4ed3d0d6b62babe0467edfea" title="Percent Conifer (% / 100)" alt="" coords="187,5,311,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,133,126,96,176,57,184,52,187,56,179,61,130,100,90,137"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelMixed.html#a739c9320992b0b257003b717be1b110f" title="Percent Deciduous (% / 100)" alt="" coords="187,71,311,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,133,175,115,177,120,127,138"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1StandardFuel.html#ac0d50fe58a637f32c007f395c64451d1" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="178,136,320,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="130,162,162,163,162,168,130,168"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="130,145,162,145,162,150,130,150"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1fuel_1_1FuelMixed.html#af6ed14180574b08f640dabda2608e9b7" title="Rate of spread multiplier [ST&#45;X&#45;3 eq 27/28, GLC&#45;X&#45;10 eq 29/30]." alt="" coords="187,201,311,242"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="127,175,177,193,175,198,125,180"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1StandardFuel.html#a7d9579648ccb7d0476c41da3b18fbce4" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="368,94,523,120"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="320,136,376,122,377,127,321,141"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1StandardFuel.html#a195a5a2112d6dba7db89bac4ac8964fc" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="368,144,523,169"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="320,154,353,154,353,159,320,159"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1fuel_1_1StandardFuel.html#a7e97f4ee73038e50918caa0691120961" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="374,193,517,234"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="321,174,360,186,359,191,320,180"/>
+</map>

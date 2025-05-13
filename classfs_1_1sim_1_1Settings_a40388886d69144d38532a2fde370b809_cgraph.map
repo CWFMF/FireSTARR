@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::outputDateOffsets" name="fs::sim::Settings::outputDateOffsets">
+<area shape="rect" id="Node000001" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="5,63,132,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="180,29,382,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,70,164,65,165,71,133,76"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#aa841124e31a823f7eec2f6fa4ecab325" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="180,95,382,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="133,90,165,95,164,100,132,95"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="241,29,239,19,245,10,259,5,281,3,304,5,318,11,315,16,302,10,281,8,261,10,248,15,244,20,246,28"/>
+</map>

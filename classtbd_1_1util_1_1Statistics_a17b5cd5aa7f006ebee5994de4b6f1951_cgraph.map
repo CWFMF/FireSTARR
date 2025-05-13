@@ -1,9 +1,0 @@
-<map id="tbd::util::Statistics::studentsT" name="tbd::util::Statistics::studentsT">
-<area shape="rect" id="Node000001" title="Calculate Student&#39;s T value." alt="" coords="5,63,129,103"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1util_1_1Statistics.html#a3d1d716ec5b123d729ed784611ec8f63" title="Mean (average) value." alt="" coords="183,5,307,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,61,167,48,169,53,130,66"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1util_1_1Statistics.html#a9153a28ce91d32818137cf7b5e788c1e" title="Number of data points in the set." alt="" coords="177,70,313,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,80,161,80,161,86,129,86"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1util_1_1Statistics.html#a902ed89cfcf500792ce70b10930dfd8a" title="Sample Variance." alt="" coords="183,120,307,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="130,100,169,113,167,118,128,105"/>
-</map>

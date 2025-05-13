@@ -1,5 +1,0 @@
-<map id="tbd::sim::Event::makeEnd" name="tbd::sim::Event::makeEnd">
-<area shape="rect" id="Node000001" title="Make simulation end event." alt="" coords="5,5,171,31"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Event.html#a31e621da8d48deb889edfeec2e6dfbfc" title="Time of Event (decimal days)" alt="" coords="219,5,355,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,16,203,16,203,21,171,21"/>
-</map>

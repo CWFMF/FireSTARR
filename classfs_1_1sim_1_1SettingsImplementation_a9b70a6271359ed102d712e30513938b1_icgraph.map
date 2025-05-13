@@ -1,0 +1,5 @@
+<map id="fs::sim::SettingsImplementation::thresholdDailyWeight" name="fs::sim::SettingsImplementation::thresholdDailyWeight">
+<area shape="rect" id="Node000001" title="Weight to give to daily part of thresholds." alt="" coords="196,5,398,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#aafc83aee0b9acf55c6787280aa9489ac" title="Weight to give to daily part of thresholds." alt="" coords="5,5,148,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,28,148,28,148,23,180,23"/>
+</map>

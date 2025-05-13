@@ -1,7 +1,0 @@
-<map id="tbd::sim::Scenario::completed" name="tbd::sim::Scenario::completed">
-<area shape="rect" id="Node000001" title="Number of Scenarios that have completed running." alt="" coords="243,23,366,64"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Scenario.html#af3f2c843f725009f553e56e3fe7cd0b2" title="Run the Scenario." alt="" coords="26,5,174,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,37,174,30,175,25,228,31"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Model.html#a62b5ea759a1a5bdd71ebf3c42d34a9e9" title="Run Scenarios initialized from given inputs." alt="" coords="5,55,195,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="228,55,195,59,195,54,227,50"/>
-</map>

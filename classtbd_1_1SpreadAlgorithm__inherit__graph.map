@@ -1,9 +1,0 @@
-<map id="tbd::SpreadAlgorithm" name="tbd::SpreadAlgorithm">
-<area shape="rect" id="Node000001" title=" " alt="" coords="130,5,271,31"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1BaseSpreadAlgorithm.html" title=" " alt="" coords="115,79,286,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,46,203,79,198,79,198,46"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1OriginalSpreadAlgorithm.html" title=" " alt="" coords="5,153,191,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="173,116,117,154,114,150,170,111"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1WidestEllipseAlgorithm.html" title=" " alt="" coords="214,153,393,178"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="232,111,287,150,284,154,229,116"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="tbd::sim::SettingsImplementation::maxDateOffset" name="tbd::sim::SettingsImplementation::maxDateOffset">
-<area shape="rect" id="Node000001" title="Whatever the maximum value in the date offsets is." alt="" coords="411,5,620,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a413def75a681b7dea372dd0df527c5fc" title="Whatever the maximum value in the date offsets is." alt="" coords="243,5,363,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="395,28,363,28,363,23,395,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Model.html#a62b5ea759a1a5bdd71ebf3c42d34a9e9" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,195,39"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="227,28,195,28,195,23,227,23"/>
-</map>

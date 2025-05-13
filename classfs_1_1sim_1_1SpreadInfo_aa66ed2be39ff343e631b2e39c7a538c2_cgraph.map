@@ -1,0 +1,5 @@
+<map id="fs::sim::SpreadInfo::isNotSpreading" name="fs::sim::SpreadInfo::isNotSpreading">
+<area shape="rect" id="Node000001" title="Whether or not there is no spread." alt="" coords="5,5,134,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#adf92e50956e21262f973921963326c11" title="Whether or not there is no spread for given conditions." alt="" coords="182,5,310,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,23,166,23,166,28,134,28"/>
+</map>

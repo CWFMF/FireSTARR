@@ -1,0 +1,6 @@
+<map id="fs::sim::IntensityMap::rows" name="fs::sim::IntensityMap::rows">
+<area shape="rect" id="Node000001" title="Number of rows in this extent." alt="" coords="193,29,332,70"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="293,16,281,10,262,8,245,10,234,15,230,20,232,28,227,29,225,19,231,10,243,5,262,3,283,5,295,11"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityMap.html#a58007c8fe48adefafe34a31ce660f87c" title="Whether or not all Locations surrounding the given Location are burned." alt="" coords="5,29,145,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,52,145,52,145,47,177,47"/>
+</map>

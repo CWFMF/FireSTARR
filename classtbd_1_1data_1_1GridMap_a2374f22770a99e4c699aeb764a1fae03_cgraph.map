@@ -1,9 +1,0 @@
-<map id="tbd::data::GridMap::makeEdge" name="tbd::data::GridMap::makeEdge">
-<area shape="rect" id="Node000001" title="Make a list of all Locations that are on the edge of cells with a value." alt="" coords="5,71,131,111"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridBase.html#ae1cf6f4ac42aff5635dcea5269320db2" title="Cell size used for GridBase." alt="" coords="179,5,309,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,68,172,49,174,54,126,73"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1data_1_1Grid.html#ac057c771e231143bfd2f2d281b2a26fc" title="Number of columns in the GridBase." alt="" coords="182,71,306,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,88,167,88,167,94,131,94"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1data_1_1Grid.html#a8edef5e6e3c5a70f08b40200ce29f0c3" title="Number of rows in the GridBase." alt="" coords="182,136,306,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,109,174,128,172,133,124,114"/>
-</map>

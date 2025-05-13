@@ -1,7 +1,0 @@
-<map id="tbd::sim::IObserver::makeName" name="tbd::sim::IObserver::makeName">
-<area shape="rect" id="Node000001" title="Make name to save file as." alt="" coords="228,39,357,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1MapObserver.html#a410c0c0bae901c60543b52fd9dc39314" title="Save observations." alt="" coords="17,5,168,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,48,168,41,169,36,213,43"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1IntensityObserver.html#a1024b1317514109ce0adc9beb376e767" title="Save observations." alt="" coords="5,71,180,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="213,74,181,80,180,74,212,69"/>
-</map>

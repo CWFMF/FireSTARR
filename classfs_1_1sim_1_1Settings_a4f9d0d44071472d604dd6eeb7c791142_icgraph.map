@@ -1,0 +1,5 @@
+<map id="fs::sim::Settings::saveIntensity" name="fs::sim::Settings::saveIntensity">
+<area shape="rect" id="Node000001" title="Whether or not to save intensity grids." alt="" coords="204,5,323,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1ProbabilityMap.html#ad6359ce73513952befeaf575acf7eec2" title="Combine results from another ProbabilityMap into this one." alt="" coords="5,5,156,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,28,156,28,156,23,188,23"/>
+</map>

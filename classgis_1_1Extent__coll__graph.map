@@ -1,5 +1,7 @@
 <map id="gis.Extent" name="gis.Extent">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,83,105"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="16,5,72,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,46,47,79,41,79,41,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="34,109,111,135"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,62,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="46,44,70,108,65,109,41,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="86,5,136,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="103,46,79,109,74,108,98,44"/>
 </map>

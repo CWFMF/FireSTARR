@@ -1,8 +1,0 @@
-<map id="tbd::sim::Settings::defaultPercentConifer" name="tbd::sim::Settings::defaultPercentConifer">
-<area shape="rect" id="Node000001" title="Default Percent Conifer to use for M1/M2 fuels where none is specified (%)" alt="" coords="5,51,158,91"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#a0aef8e8d63b56153bd70a732d1d8ff68" title="Default Percent Conifer to use for M1/M2 fuels where none is specified (%)" alt="" coords="206,5,415,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,53,190,47,191,52,159,59"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="206,95,415,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,83,191,89,190,95,158,88"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="267,95,265,85,272,76,287,70,310,68,335,70,350,77,348,82,334,76,310,73,289,75,275,80,270,86,272,93"/>
-</map>

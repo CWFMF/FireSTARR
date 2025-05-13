@@ -1,0 +1,8 @@
+<map id="fs::sim::SpreadInfo::slopeFactor" name="fs::sim::SpreadInfo::slopeFactor">
+<area shape="rect" id="Node000001" title="Slope factor calculated from percent slope." alt="" coords="5,22,134,62"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#a7566c794752d982b8fcbc92113ec51a7" title="Slope used for spread (%)" alt="" coords="182,22,310,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,40,166,40,166,45,134,45"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Cell.html#a7442e7c8a589c63685ab5e819453ab5a" title="Slope (degrees)" alt="" coords="358,29,486,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="310,40,342,40,342,45,310,45"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="392,30,387,21,390,11,402,5,422,3,444,5,455,12,452,16,442,10,422,8,404,10,394,15,392,20,397,28"/>
+</map>

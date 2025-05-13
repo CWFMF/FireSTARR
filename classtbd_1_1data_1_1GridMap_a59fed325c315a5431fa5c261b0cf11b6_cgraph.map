@@ -1,8 +1,0 @@
-<map id="tbd::data::GridMap::saveToProbabilityFile" name="tbd::data::GridMap::saveToProbabilityFile">
-<area shape="rect" id="Node000001" title="Save GridMap contents to .asc file as probability." alt="" coords="5,29,157,70"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Settings.html#a16c6ceeec1aef779f424f79b95eb263e" title="Whether or not to save grids as .asc." alt="" coords="205,29,325,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,47,189,47,189,52,157,52"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="373,29,582,70"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="325,47,357,47,357,52,325,52"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="437,29,435,19,442,10,456,5,478,3,501,5,514,11,512,16,499,10,478,8,457,10,445,15,441,20,443,28"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="tbd::sim::SpreadInfo::wind" name="tbd::sim::SpreadInfo::wind">
-<area shape="rect" id="Node000001" title="Wind used for spread." alt="" coords="5,35,141,75"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#a0138fb6c4e3ad59eacb096d5864bc608" title="FwiWeather used for spread." alt="" coords="195,5,331,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,42,179,36,180,41,141,47"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1wx_1_1Weather.html#aa54817af8bf73572d66ba1a87962a8b8" title="Wind (km/h)" alt="" coords="189,70,337,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,62,174,67,173,72,140,68"/>
-</map>

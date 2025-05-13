@@ -1,5 +1,0 @@
-<map id="tbd::fuel::FuelBase::ffmcRatio" name="tbd::fuel::FuelBase::ffmcRatio">
-<area shape="rect" id="Node000001" title="What fraction of the duff layer should use FFMC to determine moisture." alt="" coords="186,5,313,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelBase.html#a4662bd37e08ba112c301e0f0e2217c61" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,28,138,28,138,23,170,23"/>
-</map>

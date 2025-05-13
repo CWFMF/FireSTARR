@@ -1,0 +1,18 @@
+<map id="fs::sim::Model::setWeather" name="fs::sim::Model::setWeather">
+<area shape="rect" id="Node000001" title="Set constant weather." alt="" coords="5,112,178,138"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FwiWeather.html#afba176eda60e611c21e3e0eea3b915ee" title="Drought Code." alt="" coords="231,5,380,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,109,160,75,225,40,238,34,240,39,227,45,163,80,112,114"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1FwiWeather.html#a1ca390d52b21ad7626e5201bea9c973a" title="Duff Moisture Code." alt="" coords="226,55,386,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,109,240,82,241,87,143,114"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1FwiWeather.html#a23fce5b0eef748b143c53dc4f61d0889" title="Fine Fuel Moisture Code." alt="" coords="241,104,370,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="178,122,226,122,226,128,178,128"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="246,170,366,210"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="137,136,232,165,230,170,135,141"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1wx_1_1Weather.html#a7a935528d978215e3c2861133de1de19" title="Wind (km/h)" alt="" coords="235,235,376,260"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="109,136,160,177,227,220,241,226,239,231,224,225,156,181,106,140"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1SettingsImplementation.html#a59e067bbca9d88108a6fc7ef6976e7c7" title="Fuel lookup table." alt="" coords="434,126,636,166"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="366,176,418,166,419,171,367,181"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="434,215,636,256"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="367,199,419,210,418,215,366,205"/>
+<area shape="poly" id="edge7_Node000007_Node000007" title=" " alt="" coords="492,215,490,205,497,196,512,191,535,189,560,191,575,197,573,202,559,196,535,194,513,196,500,200,495,206,497,214"/>
+</map>

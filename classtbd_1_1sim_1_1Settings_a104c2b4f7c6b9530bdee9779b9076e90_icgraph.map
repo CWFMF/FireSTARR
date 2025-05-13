@@ -1,7 +1,0 @@
-<map id="tbd::sim::Settings::forceFuel" name="tbd::sim::Settings::forceFuel">
-<area shape="rect" id="Node000001" title="Whether or not to use first default fuel grid without checking coordinates." alt="" coords="439,5,559,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Environment.html#a1c523bb1dfaf4a0a267ff448dd1ad6c1" title="Load from rasters in folder that have same projection as Perimeter." alt="" coords="243,5,391,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="423,28,391,28,391,23,423,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Model.html#a62b5ea759a1a5bdd71ebf3c42d34a9e9" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,195,39"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="227,28,195,28,195,23,227,23"/>
-</map>

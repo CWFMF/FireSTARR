@@ -1,0 +1,5 @@
+<map id="fs::wx::Fwi::Fwi" name="fs::wx::Fwi::Fwi">
+<area shape="rect" id="Node000001" title="Calculate Fire Weather Index and verify previous value is within tolerance of calculated value." alt="" coords="5,5,114,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="162,5,315,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,16,146,16,146,21,114,21"/>
+</map>

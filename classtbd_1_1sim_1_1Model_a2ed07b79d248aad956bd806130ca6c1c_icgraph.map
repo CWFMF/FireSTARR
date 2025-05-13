@@ -1,8 +1,0 @@
-<map id="tbd::sim::Model::environment" name="tbd::sim::Model::environment">
-<area shape="rect" id="Node000001" title="Environment simulation is occurring in." alt="" coords="421,42,605,68"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Model.html#a80c0565e34fb52461c60d50854324c33" title="Acquire a BurnedData that has already burnt cells set." alt="" coords="201,5,373,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="405,44,373,40,374,34,406,38"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Scenario.html#af3f2c843f725009f553e56e3fe7cd0b2" title="Run the Scenario." alt="" coords="5,42,153,68"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="405,60,373,60,201,60,153,60,153,54,201,55,373,55,405,55"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="186,43,154,47,153,42,185,37"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="tbd::sim::Event::makeFireSpread" name="tbd::sim::Event::makeFireSpread">
-<area shape="rect" id="Node000001" title="Make fire spread event." alt="" coords="5,47,171,88"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Event.html#ae1a4980b2b8c3b678e0ecdcd896bba03" title="Cell Event takes place in." alt="" coords="228,5,360,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,45,222,33,223,38,171,50"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Event.html#ada978879b6f664b5bc7337ef3658b5d7" title="CellIndex for relative Cell that spread into from." alt="" coords="219,55,369,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,65,203,65,203,70,171,70"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1sim_1_1Event.html#a31e621da8d48deb889edfeec2e6dfbfc" title="Time of Event (decimal days)" alt="" coords="226,104,362,130"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,85,223,97,222,102,170,90"/>
-</map>

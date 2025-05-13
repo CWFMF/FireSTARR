@@ -1,0 +1,5 @@
+<map id="fs::data::LogValue" name="fs::data::LogValue">
+<area shape="rect" id="Node000001" title="A result of calling log(x) for some value of x, pre&#45;calculated at compile time." alt="" coords="32,79,156,105"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title=" " alt="" coords="5,5,183,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,46,97,79,91,79,91,46"/>
+</map>

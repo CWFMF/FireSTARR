@@ -1,0 +1,11 @@
+<map id="fs::wx::Wind::heading" name="fs::wx::Wind::heading">
+<area shape="rect" id="Node000001" title="Direction wind is going towards." alt="" coords="5,13,146,38"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1Direction.html#a2785d74dc1e33238e63cacf472c116bc" title="Heading (opposite of this direction)" alt="" coords="194,5,311,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,23,178,23,178,28,146,28"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1Direction.html#ad63ea5d302a73c50afb56a75dafb3d80" title="Direction as radians, where 0 is North and values increase clockwise." alt="" coords="359,5,476,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="311,23,344,23,344,28,311,28"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1Direction.html#ac5caf8fa7f5209a75db2846ec545958e" title="Direction as degrees, where 0 is North and values increase clockwise." alt="" coords="524,5,642,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="477,23,509,23,509,28,477,28"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="690,13,843,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="642,23,674,23,674,28,642,28"/>
+</map>

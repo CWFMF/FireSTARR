@@ -1,0 +1,5 @@
+<map id="fs::sim::Scenario::weightedDsr" name="fs::sim::Scenario::weightedDsr">
+<area shape="rect" id="Node000001" title="Weighted Danger Severity Rating." alt="" coords="5,5,128,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FireWeather.html#a147c8020721ac494a74422e1305dd77c" title="Weighted Danger Severity Rating for the stream." alt="" coords="176,5,306,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,23,160,23,160,28,128,28"/>
+</map>

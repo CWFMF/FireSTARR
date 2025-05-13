@@ -1,7 +1,0 @@
-<map id="tbd::wx::FireWeather" name="tbd::wx::FireWeather">
-<area shape="rect" id="Node000001" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="119,5,256,31"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1ConstantWeather.html" title="A FireWeather stream with the same value for every date and time." alt="" coords="5,79,178,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,43,109,81,106,76,158,38"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1wx_1_1FireWeatherDaily.html" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="202,79,368,105"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,38,270,76,267,81,215,43"/>
-</map>

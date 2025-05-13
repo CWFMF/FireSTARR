@@ -1,0 +1,5 @@
+<map id="fs::topo::EnvironmentInfo::proj4" name="fs::topo::EnvironmentInfo::proj4">
+<area shape="rect" id="Node000001" title="UTM projection that this uses." alt="" coords="5,5,169,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1GridBase.html#a29ec3f5503526f0374cd5e7c6dd7c203" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="217,5,340,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,23,201,23,201,28,169,28"/>
+</map>

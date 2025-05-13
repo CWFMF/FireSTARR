@@ -1,0 +1,15 @@
+<map id="fs::topo::BurnedMap" name="fs::topo::BurnedMap">
+<area shape="rect" id="Node000001" title="A map of locations which have burned in a Scenario." alt="" coords="986,61,1121,86"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1GridMap.html" title=" " alt="" coords="810,53,937,94"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="952,71,986,71,986,76,952,76"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="560,38,761,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="777,71,810,71,810,76,777,76"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1Grid.html" title=" " alt="" coords="322,5,479,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="495,40,560,52,559,58,494,46"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="145,13,268,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="283,23,322,23,322,28,283,28"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,13,59,38"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="74,23,144,23,144,28,74,28"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="317,71,484,111"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="499,82,559,78,559,83,499,87"/>
+</map>

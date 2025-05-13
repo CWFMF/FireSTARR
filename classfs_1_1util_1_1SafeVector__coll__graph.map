@@ -1,0 +1,7 @@
+<map id="fs::util::SafeVector" name="fs::util::SafeVector">
+<area shape="rect" id="Node000001" title="A vector with added thread safety." alt="" coords="68,94,194,120"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,139,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,42,125,92,120,95,86,45"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="162,5,219,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,46,161,72,142,96,138,92,156,68,174,43"/>
+</map>

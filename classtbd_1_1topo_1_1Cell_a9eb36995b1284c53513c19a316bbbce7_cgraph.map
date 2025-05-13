@@ -1,9 +1,0 @@
-<map id="tbd::topo::Cell::hashCell" name="tbd::topo::Cell::hashCell">
-<area shape="rect" id="Node000001" title="Hash attributes into a Topo value." alt="" coords="5,67,160,92"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Cell.html#abbe1919c790ee531970bb2d074b4a8b6" title="Aspect (degrees)" alt="" coords="208,29,351,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,63,193,56,194,61,154,69"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1Cell.html#a50921e14148e473999c8335beb72cf3b" title="Slope (degrees)" alt="" coords="212,103,347,128"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="157,90,197,98,196,103,156,96"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="246,30,240,21,244,11,257,5,279,3,304,5,316,12,313,17,302,10,279,8,259,10,248,15,245,20,251,27"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="246,104,240,94,244,84,257,78,279,76,304,79,316,86,313,90,302,84,279,81,259,83,248,88,245,93,251,101"/>
-</map>

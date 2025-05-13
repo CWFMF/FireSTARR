@@ -1,0 +1,14 @@
+<map id="fs::sim::SettingsImplementation::outputDateOffsets" name="fs::sim::SettingsImplementation::outputDateOffsets">
+<area shape="rect" id="Node000001" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="874,48,1076,89"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a40388886d69144d38532a2fde370b809" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="699,48,826,89"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="858,72,826,72,826,66,858,66"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a92e99adaad982ea2370de44f5a606903" title="Create an Iteration by initializing Scenarios." alt="" coords="462,5,651,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="684,52,611,34,613,29,685,47"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,31,414,56"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="684,67,414,51,415,46,684,62"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#a07d16e1850fc7f31f6b94d6d45ff50e2" title="Constructor." alt="" coords="496,106,618,146"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="686,93,619,112,618,107,684,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="447,33,415,36,414,31,446,28"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,31,188,56"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="220,46,188,46,188,41,220,41"/>
+</map>

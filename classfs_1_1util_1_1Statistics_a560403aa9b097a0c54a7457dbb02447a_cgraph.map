@@ -1,0 +1,11 @@
+<map id="fs::util::Statistics::isConfident" name="fs::util::Statistics::isConfident">
+<area shape="rect" id="Node000001" title="Whether or not we have less than the relative error and can be confident in the results." alt="" coords="5,63,122,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1util_1_1Statistics.html#a10be0307cb235f1c101ce7cdfe4db5ed" title="Calculate Student&#39;s T value." alt="" coords="170,63,286,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,80,154,80,154,86,122,86"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1util_1_1Statistics.html#ae9969dcc225138305035da61ee31d1f0" title="Mean (average) value." alt="" coords="340,5,457,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="286,61,325,48,327,53,287,66"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1util_1_1Statistics.html#adb154959e45ea88ce1e74f740b003627" title="Number of data points in the set." alt="" coords="334,70,463,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="287,80,319,80,319,86,287,86"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1util_1_1Statistics.html#acbdc7c932c27ad74799cf94081d00f61" title="Sample Variance." alt="" coords="338,120,459,161"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="287,100,324,113,323,118,286,105"/>
+</map>

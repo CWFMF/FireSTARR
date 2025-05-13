@@ -1,0 +1,6 @@
+<map id="fs::sim::SpreadInfo::slopeAzimuth" name="fs::sim::SpreadInfo::slopeAzimuth">
+<area shape="rect" id="Node000001" title="Aspect used for spread (degrees)" alt="" coords="5,22,134,62"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Cell.html#a305713a346cfedc67dd29d4db54217a1" title="Aspect (degrees)" alt="" coords="182,29,318,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,40,166,40,166,45,134,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="219,30,213,21,217,11,230,5,250,3,272,5,283,12,281,16,270,10,250,8,231,10,221,15,219,20,224,28"/>
+</map>

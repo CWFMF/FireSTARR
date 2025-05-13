@@ -1,0 +1,9 @@
+<map id="fs::wx::Direction::asRadians" name="fs::wx::Direction::asRadians">
+<area shape="rect" id="Node000001" title="Direction as radians, where 0 is North and values increase clockwise." alt="" coords="535,5,653,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1Direction.html#a2785d74dc1e33238e63cacf472c116bc" title="Heading (opposite of this direction)" alt="" coords="370,5,487,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,28,488,28,488,23,520,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1Wind.html#a786e68f3df12d97296908e188b87ab8c" title="Direction wind is going towards." alt="" coords="182,13,322,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="354,28,322,28,322,23,354,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="5,5,134,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="166,28,134,28,134,23,166,23"/>
+</map>

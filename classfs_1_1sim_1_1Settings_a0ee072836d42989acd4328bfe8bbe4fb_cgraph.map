@@ -1,0 +1,10 @@
+<map id="fs::sim::Settings::setRoot" name="fs::sim::Settings::setRoot">
+<area shape="rect" id="Node000001" title="Set root directory and read settings from file." alt="" coords="5,63,125,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="173,29,375,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,71,157,66,157,71,125,76"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a32ef3f2a35b2edf1826a29370a9c9075" title="Set root directory and read settings from file." alt="" coords="173,95,375,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="125,89,157,94,157,100,124,95"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="234,29,232,19,239,10,253,5,274,3,297,5,310,11,308,16,295,10,274,8,254,10,242,15,238,20,239,28"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1SettingsImplementation.html#a6778a405b70d6ee9bcf3522041ed1175" title="Set days to output probability contours for (1 is start date, 2 is day after, etc...." alt="" coords="423,95,625,135"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="376,112,408,112,408,118,376,118"/>
+</map>

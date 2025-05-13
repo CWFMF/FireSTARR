@@ -1,7 +1,0 @@
-<map id="tbd::data::GridBase::findCoordinates" name="tbd::data::GridBase::findCoordinates">
-<area shape="rect" id="Node000001" title="Find Coordinates for Point." alt="" coords="224,39,354,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Environment.html#a340fd51688713847b81e1032e1b0d9a2" title="Determine Coordinates in the grid for the Point." alt="" coords="16,5,165,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,48,165,41,166,36,209,43"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1topo_1_1EnvironmentInfo.html#a12255c1ea93603ca64c9fd8d7ec688a2" title="Determine Coordinates in the grid for the Point." alt="" coords="5,71,176,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,75,176,80,176,75,208,69"/>
-</map>

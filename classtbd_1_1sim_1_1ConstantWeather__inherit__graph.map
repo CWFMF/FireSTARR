@@ -1,5 +1,0 @@
-<map id="tbd::sim::ConstantWeather" name="tbd::sim::ConstantWeather">
-<area shape="rect" id="Node000001" title="A FireWeather stream with the same value for every date and time." alt="" coords="5,79,178,105"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1wx_1_1FireWeather.html" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="23,5,160,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,46,94,79,89,79,89,46"/>
-</map>

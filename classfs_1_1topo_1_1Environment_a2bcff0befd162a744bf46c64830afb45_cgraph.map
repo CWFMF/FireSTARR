@@ -1,0 +1,17 @@
+<map id="fs::topo::Environment::Environment" name="fs::topo::Environment::Environment">
+<area shape="rect" id="Node000001" title="Load from rasters." alt="" coords="5,104,147,145"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#af762b46765adaccb543d7bda48091029" title="Elevation of the origin Point." alt="" coords="195,5,336,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,101,193,57,205,51,207,56,196,61,115,106"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="206,71,325,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,109,190,101,191,107,147,115"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Settings.html#af233b7781c89f14a05b24e2e1f1b9806" title="Whether or not to save simulation area grids." alt="" coords="197,136,334,177"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="147,134,182,140,181,145,146,139"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1GridData.html#a3b0edb0d283bb069ef9df135c855286b" title="Save GridMap contents to file based on settings." alt="" coords="205,201,326,242"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="116,143,196,186,208,192,205,197,193,191,113,148"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1SettingsImplementation.html#a59e067bbca9d88108a6fc7ef6976e7c7" title="Fuel lookup table." alt="" coords="384,47,586,87"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="325,82,368,77,369,82,326,87"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="384,136,586,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="326,106,401,129,399,134,325,111"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="444,136,442,126,448,117,463,111,485,109,509,112,523,118,521,123,508,117,485,115,464,117,452,121,447,127,449,135"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="334,154,368,154,368,159,334,159"/>
+</map>

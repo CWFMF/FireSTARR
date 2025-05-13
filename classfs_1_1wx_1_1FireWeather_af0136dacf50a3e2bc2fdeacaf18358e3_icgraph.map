@@ -1,0 +1,15 @@
+<map id="fs::wx::FireWeather::at" name="fs::wx::FireWeather::at">
+<area shape="rect" id="Node000001" title="Get FwiWeather for given time." alt="" coords="530,78,678,104"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#a07d16e1850fc7f31f6b94d6d45ff50e2" title="Constructor." alt="" coords="360,5,482,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="551,75,479,49,481,44,553,70"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="360,71,482,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="515,94,483,94,483,88,515,88"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#a16d00c5a35b4ea00d95e187f62bc8c20" title="FwiWeather for given time." alt="" coords="360,136,482,177"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="553,112,481,138,479,133,551,107"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,100,128,141"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="345,100,129,118,128,113,345,95"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,128,312,169"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="346,118,310,130,308,125,344,113"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="160,138,128,133,129,127,161,133"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="344,156,312,154,313,149,345,150"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::maximumCountSimulations" name="fs::sim::Settings::maximumCountSimulations">
+<area shape="rect" id="Node000001" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="5,63,185,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="233,29,435,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,68,217,63,217,69,186,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a768ad8683b2ced676e5fe2fb9e39e392" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="233,95,435,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="186,92,217,97,217,102,185,98"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="289,29,287,19,294,10,310,5,334,3,360,5,375,11,373,16,358,10,334,8,311,10,297,15,292,21,294,28"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="fs::wx::Temperature" name="fs::wx::Temperature">
+<area shape="rect" id="Node000001" title="Temperature in degrees Celsius." alt="" coords="5,82,139,108"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="156,88,165,95,157,103,140,105,139,100,155,98,160,95,153,92"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="7,5,137,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,47,75,82,69,82,69,47"/>
+</map>

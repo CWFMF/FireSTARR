@@ -1,7 +1,0 @@
-<map id="tbd::data::GridMap::set" name="tbd::data::GridMap::set">
-<area shape="rect" id="Node000001" title="Set value at Location." alt="" coords="5,13,155,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1data_1_1GridMap.html#ad92598c8f71146a2d5155de8b45420a4" title="Retrieve value at Location." alt="" coords="203,13,345,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,23,188,23,188,28,155,28"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1data_1_1Grid.html#a01993ecfe26d753a215285e24f3de1e8" title="Value representing no data." alt="" coords="393,5,516,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="346,23,377,23,377,28,346,28"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="tbd::topo::Environment::load" name="tbd::topo::Environment::load">
-<area shape="rect" id="Node000001" title="Load from rasters." alt="" coords="224,5,372,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1EnvironmentInfo.html#a0af32f39d49e3a4a32ca4eea65676852" title="Load the full Environment using the given FuelLookup to determine fuels." alt="" coords="5,5,176,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,28,176,28,176,23,208,23"/>
-</map>

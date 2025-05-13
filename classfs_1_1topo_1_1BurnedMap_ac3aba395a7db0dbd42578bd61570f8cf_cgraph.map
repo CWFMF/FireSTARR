@@ -1,0 +1,17 @@
+<map id="fs::topo::BurnedMap::BurnedMap" name="fs::topo::BurnedMap::BurnedMap">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,179,141,219"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="209,5,350,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,176,125,118,154,85,187,57,195,52,198,56,190,61,158,89,129,121,89,180"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridBase.html#a36018525f0af09808eb17a86b6a3ac1a" title="Cell size used for GridBase." alt="" coords="218,71,341,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="100,176,140,148,187,121,202,114,204,119,190,125,143,153,103,180"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1Grid.html#aa87ccfabbebec3079bbfa402de93089d" title=" " alt="" coords="201,135,358,191"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="141,185,185,177,186,182,141,190"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1data_1_1Grid.html#a44f0a8164d5d0bd2322a838977c943ad" title=" " alt="" coords="189,215,370,255"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="141,208,174,214,173,219,141,213"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1GridBase.html#a9041142694e10f2cb5776cefe1f5ca09" title="Lower left corner X coordinate in meters." alt="" coords="218,280,341,321"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="107,218,190,265,204,271,202,276,187,269,105,222"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1data_1_1GridBase.html#a3ee33e834f28b44fb975727ec349e6e7" title="Lower left corner Y coordinate in meters." alt="" coords="218,345,341,386"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="89,218,130,274,159,304,190,330,205,339,202,344,187,335,155,308,126,277,85,222"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="418,13,580,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="351,23,402,23,402,28,351,28"/>
+</map>

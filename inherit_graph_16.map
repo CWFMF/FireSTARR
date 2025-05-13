@@ -1,3 +1,27 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structstd_1_1hash_3_01tbd_1_1topo_1_1Cell_01_4.html" title="Provides hashing of Cell objects." alt="" coords="5,5,139,46"/>
+<area shape="rect" id="Node000000" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,277,136,303"/>
+<area shape="rect" id="Node000001" href="$classfs_1_1wx_1_1Bui.html" title="Build&#45;up Index value." alt="" coords="223,5,302,31"/>
+<area shape="poly" id="edge26_Node000000_Node000001" title=" " alt="" coords="74,262,86,214,106,154,138,93,158,65,182,40,201,28,222,21,224,26,203,33,185,44,162,68,142,96,111,156,91,215,79,263"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1Dc.html" title="Drought Code value." alt="" coords="225,55,301,80"/>
+<area shape="poly" id="edge27_Node000000_Node000002" title=" " alt="" coords="78,261,92,223,114,177,144,130,182,89,202,78,223,70,225,76,204,82,185,94,148,133,118,179,97,225,83,263"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1Direction.html" title="Direction with access to degrees or radians." alt="" coords="207,104,318,130"/>
+<area shape="poly" id="edge28_Node000000_Node000003" title=" " alt="" coords="83,262,122,200,150,167,182,139,205,127,208,131,185,143,153,171,126,203,87,265"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1Dmc.html" title="Duff Moisture Code value." alt="" coords="219,153,306,179"/>
+<area shape="poly" id="edge29_Node000000_Node000004" title=" " alt="" coords="92,264,131,225,182,188,218,173,220,178,185,192,135,229,95,267"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1wx_1_1Dsr.html" title="Danger Severity Rating value." alt="" coords="223,203,303,228"/>
+<area shape="poly" id="edge30_Node000000_Node000005" title=" " alt="" coords="112,268,183,237,222,224,223,229,185,242,114,273"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1wx_1_1Ffmc.html" title="Fine Fuel Moisture Code value." alt="" coords="218,252,308,278"/>
+<area shape="poly" id="edge31_Node000000_Node000006" title=" " alt="" coords="150,277,217,268,217,273,151,282"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1wx_1_1Fwi.html" title="Fire Weather Index value." alt="" coords="222,301,304,327"/>
+<area shape="poly" id="edge32_Node000000_Node000007" title=" " alt="" coords="151,298,222,306,221,312,151,303"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1wx_1_1Isi.html" title="Initial Spread Index value." alt="" coords="226,351,300,376"/>
+<area shape="poly" id="edge33_Node000000_Node000008" title=" " alt="" coords="115,307,185,337,226,351,224,356,183,342,112,312"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1wx_1_1Precipitation.html" title="Precipitation (1hr accumulation) (mm)" alt="" coords="197,400,329,426"/>
+<area shape="poly" id="edge34_Node000000_Node000009" title=" " alt="" coords="96,313,135,351,185,387,209,397,206,402,182,391,132,355,92,317"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1wx_1_1RelativeHumidity.html" title="Relative humidity as a percentage." alt="" coords="184,449,342,475"/>
+<area shape="poly" id="edge35_Node000000_Node000010" title=" " alt="" coords="87,315,126,376,154,409,185,436,205,446,202,451,182,440,150,412,122,380,83,318"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1wx_1_1Speed.html" title="Speed in kilometers per hour." alt="" coords="214,499,312,524"/>
+<area shape="poly" id="edge36_Node000000_Node000011" title=" " alt="" coords="83,317,97,355,118,400,148,446,185,485,215,501,213,505,182,490,144,450,114,403,92,357,78,319"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1wx_1_1Temperature.html" title="Temperature in degrees Celsius." alt="" coords="196,548,330,574"/>
+<area shape="poly" id="edge37_Node000000_Node000012" title=" " alt="" coords="79,317,91,365,111,423,142,483,162,511,185,535,201,545,198,550,182,539,158,514,138,486,106,425,86,366,74,319"/>
 </map>

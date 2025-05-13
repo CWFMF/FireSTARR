@@ -1,7 +1,0 @@
-<map id="tbd::sim::ProbabilityMap::addProbability" name="tbd::sim::ProbabilityMap::addProbability">
-<area shape="rect" id="Node000001" title="Add in an IntensityMap to the appropriate probability grid based on each cell burn intensity." alt="" coords="5,39,163,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1IntensityMap.html#a7360af469f83f4d22f8684316498c6bd" title="Iterator for underlying GridMap." alt="" coords="211,5,357,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,43,195,38,196,43,164,48"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1IntensityMap.html#a5eb89aa10a18fd726b5f2e4ec80267f5" title="Iterator for underlying GridMap." alt="" coords="211,71,357,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,69,196,74,195,79,163,74"/>
-</map>

@@ -1,0 +1,5 @@
+<map id="fs::sim::CriticalSection::CriticalSection" name="fs::sim::CriticalSection::CriticalSection">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,5,155,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Semaphore.html#a9c25892196041a4fcc768a8e2e4ea76d" title="Wait until allowed to run." alt="" coords="203,5,334,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,23,187,23,187,28,155,28"/>
+</map>

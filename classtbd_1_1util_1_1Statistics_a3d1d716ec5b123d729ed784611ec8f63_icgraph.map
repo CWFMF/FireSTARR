@@ -1,9 +1,0 @@
-<map id="tbd::util::Statistics::mean" name="tbd::util::Statistics::mean">
-<area shape="rect" id="Node000001" title="Mean (average) value." alt="" coords="348,39,471,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1util_1_1Statistics.html#a3815d5c11f43f561aff9122efb1e6c1d" title="Estimate how many more runs are required to achieve desired confidence." alt="" coords="177,5,300,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="332,47,300,40,301,35,333,41"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1util_1_1Statistics.html#a17b5cd5aa7f006ebee5994de4b6f1951" title="Calculate Student&#39;s T value." alt="" coords="177,71,300,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="333,76,301,82,300,77,332,71"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1util_1_1Statistics.html#ad798bb67190fa432c6b8135fd2d81719" title="Whether or not we have less than the relative error and can be confident in the results." alt="" coords="5,71,129,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="161,94,129,94,129,88,161,88"/>
-</map>

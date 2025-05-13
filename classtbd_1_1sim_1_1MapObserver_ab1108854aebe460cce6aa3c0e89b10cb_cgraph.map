@@ -1,7 +1,0 @@
-<map id="tbd::sim::MapObserver::handleEvent" name="tbd::sim::MapObserver::handleEvent">
-<area shape="rect" id="Node000001" title="Handle given event." alt="" coords="5,27,156,68"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Event.html#ae1a4980b2b8c3b678e0ecdcd896bba03" title="Cell Event takes place in." alt="" coords="213,5,345,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,34,198,27,199,33,156,39"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1MapObserver.html#a84943329d0691ccbcf9a88e9676dfd96" title="Function that returns the value we care about regarding the Event." alt="" coords="204,55,354,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,55,189,60,188,65,155,61"/>
-</map>

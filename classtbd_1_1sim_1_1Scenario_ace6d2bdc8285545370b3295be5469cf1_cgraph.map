@@ -1,5 +1,0 @@
-<map id="tbd::sim::Scenario::dayEnd" name="tbd::sim::Scenario::dayEnd">
-<area shape="rect" id="Node000001" title="Sunset time for given day." alt="" coords="5,5,129,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1StartPoint.html#a7df768e40ac055da4a7bf23db2a1cedf" title="Sunset time." alt="" coords="177,5,311,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,23,161,23,161,28,129,28"/>
-</map>

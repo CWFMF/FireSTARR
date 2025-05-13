@@ -1,0 +1,5 @@
+<map id="fs::topo::Point" name="fs::topo::Point">
+<area shape="rect" id="Node000001" title="A geographic location in lat/long coordinates." alt="" coords="19,5,119,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1StartPoint.html" title="A Point that has sunrise and sunset times for each day." alt="" coords="5,79,133,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,46,72,79,66,79,66,46"/>
+</map>

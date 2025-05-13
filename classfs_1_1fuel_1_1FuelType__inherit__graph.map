@@ -1,0 +1,99 @@
+<map id="fs::fuel::FuelType" name="fs::fuel::FuelType">
+<area shape="rect" id="Node000001" title="An FBP fuel type." alt="" coords="5,237,124,262"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelVariable.html" title=" " alt="" coords="208,5,346,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,221,85,184,105,139,133,94,170,56,207,36,209,41,173,60,138,97,110,142,90,186,76,223"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1fuel_1_1FuelVariable.html" title=" " alt="" coords="176,70,378,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="82,223,120,179,170,135,190,124,193,128,173,140,124,182,86,226"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1fuel_1_1FuelVariable.html" title=" " alt="" coords="174,150,380,206"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="118,229,192,204,194,209,120,234"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1fuel_1_1FuelVariable.html" title=" " alt="" coords="201,229,353,270"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="140,247,200,247,200,252,140,252"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1fuel_1_1FuelBase.html" title="Base class for all FuelTypes." alt="" coords="172,294,382,350"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="120,265,194,291,192,296,118,270"/>
+<area shape="rect" id="Node000063" href="$classfs_1_1fuel_1_1FuelVariable.html" title="A fuel type that changes based on the season." alt="" coords="184,373,370,414"/>
+<area shape="poly" id="edge47_Node000001_Node000063" title=" " alt="" coords="86,273,123,318,147,340,173,359,194,370,192,375,170,364,143,344,119,321,82,277"/>
+<area shape="rect" id="Node000064" href="$classfs_1_1fuel_1_1InvalidFuel.html" title="Placeholder fuel that throws exceptions if it ever gets used." alt="" coords="213,438,341,464"/>
+<area shape="poly" id="edge48_Node000001_Node000064" title=" " alt="" coords="77,276,91,311,111,351,139,390,173,424,192,434,213,441,211,446,190,439,170,428,135,394,107,353,86,313,72,278"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1fbp_1_1FuelD1D2.html" title="FBP fuel type D&#45;1/D&#45;2." alt="" coords="469,13,615,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,23,469,23,469,28,361,28"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1fuel_1_1fbp_1_1FuelM1M2.html" title="FBP fuel type M&#45;1/M&#45;2." alt="" coords="467,77,617,118"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="393,95,467,95,467,100,393,100"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1fuel_1_1fbp_1_1FuelM3M4.html" title="FBP fuel type M&#45;3/M&#45;4." alt="" coords="467,157,617,198"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="395,175,467,175,467,180,395,180"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1fuel_1_1fbp_1_1FuelO1.html" title="FBP fuel type O&#45;1." alt="" coords="476,229,608,254"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="368,244,476,241,476,246,368,250"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1fuel_1_1StandardFuel.html" title=" " alt="" coords="443,278,641,349"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="397,315,443,314,443,319,398,321"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1fuel_1_1StandardFuel.html" title=" " alt="" coords="441,426,643,497"/>
+<area shape="poly" id="edge16_Node000010_Node000017" title=" " alt="" coords="371,354,383,359,440,391,491,423,488,428,437,395,381,364,369,358"/>
+<area shape="rect" id="Node000031" href="$classfs_1_1fuel_1_1StandardFuel.html" title="A FuelBase made of a standard fuel type." alt="" coords="430,705,654,776"/>
+<area shape="poly" id="edge30_Node000010_Node000031" title=" " alt="" coords="382,358,384,360,399,378,408,396,417,429,421,465,433,507,480,615,524,703,519,706,475,617,427,509,416,466,412,430,403,398,394,381,380,363,378,362"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1fuel_1_1FuelGrass.html" title=" " alt="" coords="752,152,877,193"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="649,268,653,265,667,251,676,237,685,222,701,208,725,194,751,184,753,189,727,199,704,212,689,225,680,239,671,254,656,269,652,272"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1fuel_1_1FuelGrass.html" title=" " alt="" coords="752,221,877,262"/>
+<area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="656,281,750,256,752,261,657,286"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1fuel_1_1FuelGrass.html" title="A grass fuel type." alt="" coords="752,293,877,334"/>
+<area shape="poly" id="edge15_Node000011_Node000016" title=" " alt="" coords="657,311,751,311,751,316,657,316"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1fuel_1_1fbp_1_1FuelO1A.html" title="FBP fuel type O&#45;1a." alt="" coords="1001,156,1141,181"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="892,168,1000,167,1000,172,893,174"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1fuel_1_1fbp_1_1FuelO1B.html" title="FBP fuel type O&#45;1b." alt="" coords="1001,205,1141,230"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="892,232,1000,222,1000,227,893,237"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1fuel_1_1FuelMixed.html" title=" " alt="" coords="718,372,911,428"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="658,433,717,419,719,425,659,438"/>
+<area shape="rect" id="Node000024" href="$classfs_1_1fuel_1_1FuelMixed.html" title=" " alt="" coords="727,480,902,550"/>
+<area shape="poly" id="edge23_Node000017_Node000024" title=" " alt="" coords="659,482,727,495,726,501,658,487"/>
+<area shape="rect" id="Node000030" href="$classfs_1_1fuel_1_1FuelMixed.html" title="A mixedwood fuel type." alt="" coords="716,574,913,645"/>
+<area shape="poly" id="edge29_Node000017_Node000030" title=" " alt="" coords="610,503,704,559,728,571,725,576,701,564,607,508"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1fuel_1_1FuelMixedDead.html" title=" " alt="" coords="993,255,1148,311"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="886,363,974,321,1000,309,1002,314,976,325,888,368"/>
+<area shape="rect" id="Node000021" href="$classfs_1_1fuel_1_1FuelMixedDead.html" title=" " alt="" coords="994,335,1148,391"/>
+<area shape="poly" id="edge20_Node000018_Node000021" title=" " alt="" coords="925,382,993,372,994,377,926,387"/>
+<area shape="rect" id="Node000023" href="$classfs_1_1fuel_1_1FuelMixedDead.html" title="A fuel made of dead fir and D1." alt="" coords="975,415,1167,471"/>
+<area shape="poly" id="edge22_Node000018_Node000023" title=" " alt="" coords="926,416,975,424,974,430,925,421"/>
+<area shape="rect" id="Node000020" href="$classfs_1_1fuel_1_1fbp_1_1FuelM3.html" title="FBP fuel type M&#45;3." alt="" coords="1244,263,1377,303"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="1164,280,1243,280,1243,286,1164,286"/>
+<area shape="rect" id="Node000022" href="$classfs_1_1fuel_1_1fbp_1_1FuelM4.html" title="FBP fuel type M&#45;4." alt="" coords="1244,343,1377,383"/>
+<area shape="poly" id="edge21_Node000021_Node000022" title=" " alt="" coords="1164,360,1243,360,1243,366,1164,366"/>
+<area shape="rect" id="Node000025" href="$classfs_1_1fuel_1_1FuelMixedWood.html" title=" " alt="" coords="992,495,1150,535"/>
+<area shape="poly" id="edge24_Node000024_Node000025" title=" " alt="" coords="917,512,992,512,992,518,917,518"/>
+<area shape="rect" id="Node000027" href="$classfs_1_1fuel_1_1FuelMixedWood.html" title=" " alt="" coords="992,560,1150,601"/>
+<area shape="poly" id="edge26_Node000024_Node000027" title=" " alt="" coords="918,538,992,558,991,563,916,544"/>
+<area shape="rect" id="Node000029" href="$classfs_1_1fuel_1_1FuelMixedWood.html" title="A fuel composed of C2 and D1 mixed." alt="" coords="976,625,1166,666"/>
+<area shape="poly" id="edge28_Node000024_Node000029" title=" " alt="" coords="916,552,928,560,943,573,953,586,962,598,976,610,1000,623,997,627,973,615,958,602,948,589,939,576,925,564,914,556"/>
+<area shape="rect" id="Node000026" href="$classfs_1_1fuel_1_1fbp_1_1FuelM1.html" title="FBP fuel type M&#45;1." alt="" coords="1244,495,1376,535"/>
+<area shape="poly" id="edge25_Node000025_Node000026" title=" " alt="" coords="1165,512,1243,512,1243,518,1165,518"/>
+<area shape="rect" id="Node000028" href="$classfs_1_1fuel_1_1fbp_1_1FuelM2.html" title="FBP fuel type M&#45;2." alt="" coords="1244,560,1376,601"/>
+<area shape="poly" id="edge27_Node000027_Node000028" title=" " alt="" coords="1165,578,1243,578,1243,583,1165,583"/>
+<area shape="rect" id="Node000032" href="$classfs_1_1fuel_1_1FuelNonMixed.html" title=" " alt="" coords="740,672,889,728"/>
+<area shape="poly" id="edge31_Node000031_Node000032" title=" " alt="" coords="669,719,740,709,740,714,670,724"/>
+<area shape="rect" id="Node000034" href="$classfs_1_1fuel_1_1FuelNonMixed.html" title=" " alt="" coords="740,752,889,808"/>
+<area shape="poly" id="edge33_Node000031_Node000034" title=" " alt="" coords="670,756,740,767,740,772,669,762"/>
+<area shape="rect" id="Node000036" href="$classfs_1_1fuel_1_1FuelNonMixed.html" title="A StandardFuel that is not made of multiple fuels." alt="" coords="702,970,927,1041"/>
+<area shape="poly" id="edge35_Node000031_Node000036" title=" " alt="" coords="593,785,779,968,775,972,589,789"/>
+<area shape="rect" id="Node000033" href="$classfs_1_1fuel_1_1fbp_1_1FuelD1.html" title="FBP fuel type D&#45;1." alt="" coords="1006,690,1136,716"/>
+<area shape="poly" id="edge32_Node000032_Node000033" title=" " alt="" coords="904,699,1005,700,1005,705,904,704"/>
+<area shape="rect" id="Node000035" href="$classfs_1_1fuel_1_1fbp_1_1FuelD2.html" title="FBP fuel type D&#45;2." alt="" coords="1006,754,1136,780"/>
+<area shape="poly" id="edge34_Node000034_Node000035" title=" " alt="" coords="904,773,1005,768,1005,773,904,778"/>
+<area shape="rect" id="Node000037" href="$classfs_1_1fuel_1_1FuelConifer.html" title=" " alt="" coords="1001,804,1141,874"/>
+<area shape="poly" id="edge36_Node000036_Node000037" title=" " alt="" coords="869,958,919,920,973,883,999,869,1002,873,976,888,922,925,872,962"/>
+<area shape="rect" id="Node000048" href="$classfs_1_1fuel_1_1FuelConifer.html" title=" " alt="" coords="998,898,1144,954"/>
+<area shape="poly" id="edge42_Node000036_Node000048" title=" " alt="" coords="941,963,996,946,998,951,942,969"/>
+<area shape="rect" id="Node000056" href="$classfs_1_1fuel_1_1FuelConifer.html" title=" " alt="" coords="1000,978,1142,1034"/>
+<area shape="poly" id="edge43_Node000036_Node000056" title=" " alt="" coords="942,1003,1000,1003,1000,1008,942,1008"/>
+<area shape="rect" id="Node000058" href="$classfs_1_1fuel_1_1FuelConifer.html" title=" " alt="" coords="1004,1058,1138,1114"/>
+<area shape="poly" id="edge44_Node000036_Node000058" title=" " alt="" coords="942,1043,1004,1062,1002,1067,940,1048"/>
+<area shape="rect" id="Node000060" href="$classfs_1_1fuel_1_1FuelConifer.html" title=" " alt="" coords="1004,1138,1138,1194"/>
+<area shape="poly" id="edge45_Node000036_Node000060" title=" " alt="" coords="870,1049,920,1087,976,1123,1004,1138,1002,1143,973,1128,917,1091,867,1053"/>
+<area shape="rect" id="Node000062" href="$classfs_1_1fuel_1_1FuelConifer.html" title="A conifer fuel type." alt="" coords="983,1217,1158,1288"/>
+<area shape="poly" id="edge46_Node000036_Node000062" title=" " alt="" coords="847,1052,903,1128,938,1168,976,1204,991,1214,988,1219,973,1208,934,1172,898,1132,843,1055"/>
+<area shape="rect" id="Node000038" href="$classfs_1_1fuel_1_1FuelJackpine.html" title=" " alt="" coords="1236,651,1384,707"/>
+<area shape="poly" id="edge37_Node000037_Node000038" title=" " alt="" coords="1152,800,1165,790,1180,772,1188,754,1197,736,1213,717,1234,703,1237,707,1217,721,1201,739,1193,756,1185,775,1169,794,1156,805"/>
+<area shape="rect" id="Node000040" href="$classfs_1_1fuel_1_1FuelJackpine.html" title=" " alt="" coords="1236,731,1384,787"/>
+<area shape="poly" id="edge38_Node000037_Node000040" title=" " alt="" coords="1155,808,1235,781,1236,786,1156,813"/>
+<area shape="rect" id="Node000042" href="$classfs_1_1fuel_1_1FuelPine.html" title=" " alt="" coords="1246,811,1374,867"/>
+<area shape="poly" id="edge39_Node000037_Node000042" title=" " alt="" coords="1156,836,1246,836,1246,842,1156,842"/>
+<area shape="rect" id="Node000044" href="$classfs_1_1fuel_1_1FuelPine.html" title=" " alt="" coords="1246,891,1374,947"/>
+<area shape="poly" id="edge40_Node000037_Node000044" title=" " alt="" coords="1156,865,1247,895,1245,900,1155,870"/>
+<area shape="rect" id="Node000046" href="$classfs_1_1fuel_1_1FuelJackpine.html" title="A fuel with jackpine as base fuel type." alt="" coords="1215,971,1405,1027"/>
+<area shape="poly" id="edge41_Node000037_Node000046" title=" " alt="" coords="1156,873,1169,884,1185,903,1193,922,1201,939,1217,957,1233,968,1230,973,1213,961,1197,942,1188,924,1180,906,1165,888,1152,878"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fs::fuel::StandardFuel::buiEffect" name="fs::fuel::StandardFuel::buiEffect">
+<area shape="rect" id="Node000001" title="BUI Effect on surface fire rate of spread [ST&#45;X&#45;3 eq 54]." alt="" coords="5,27,148,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="196,5,349,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,34,180,29,181,35,149,39"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1StandardFuel.html#adc781d0122d5d9f55dcbdc54b9534f6e" title="Average Build&#45;up Index for the fuel type [ST&#45;X&#45;3 table 7]." alt="" coords="201,55,344,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,55,187,61,186,66,148,60"/>
+</map>

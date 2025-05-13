@@ -1,0 +1,10 @@
+<map id="fs::sim::Scenario::extinctionThreshold" name="fs::sim::Scenario::extinctionThreshold">
+<area shape="rect" id="Node000001" title="Get extinction threshold for given time." alt="" coords="530,5,664,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="360,5,482,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="515,28,483,28,483,23,515,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,128,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,25,312,24,176,24,128,26,128,20,176,19,312,19,344,20"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="176,33,312,74"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="345,40,313,45,312,40,344,35"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="160,43,128,38,129,33,161,38"/>
+</map>

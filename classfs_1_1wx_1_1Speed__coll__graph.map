@@ -1,0 +1,6 @@
+<map id="fs::wx::Speed" name="fs::wx::Speed">
+<area shape="rect" id="Node000001" title="Speed in kilometers per hour." alt="" coords="22,82,119,108"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="136,87,146,95,137,103,120,105,119,100,135,98,141,95,133,92"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,47,73,82,68,82,68,47"/>
+</map>

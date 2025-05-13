@@ -1,0 +1,5 @@
+<map id="fs::fuel::FuelBase::crownFractionBurned" name="fs::fuel::FuelBase::crownFractionBurned">
+<area shape="rect" id="Node000001" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="5,5,156,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelType.html#a178b1dd856072724b0b37b8cbf854d0f" title="Crown fuel load (kg/m^2) [ST&#45;X&#45;3 table 8]." alt="" coords="204,13,341,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,23,188,23,188,28,156,28"/>
+</map>

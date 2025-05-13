@@ -1,0 +1,5 @@
+<map id="fs::wx::Precipitation" name="fs::wx::Precipitation">
+<area shape="rect" id="Node000001" title="Precipitation (1hr accumulation) (mm)" alt="" coords="5,79,138,105"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="6,5,137,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,46,74,79,69,79,69,46"/>
+</map>

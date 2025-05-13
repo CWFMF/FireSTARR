@@ -1,0 +1,5 @@
+<map id="fs::wx::Wind::wsvX" name="fs::wx::Wind::wsvX">
+<area shape="rect" id="Node000001" title="X component of wind vector (km/h)" alt="" coords="182,13,310,38"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#a2e908f072344d6d627c3af2ad89e7c42" title=" " alt="" coords="5,5,134,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,28,134,28,134,23,166,23"/>
+</map>

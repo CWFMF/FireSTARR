@@ -1,0 +1,17 @@
+<map id="fs::fuel::FuelGrass::grass_curing" name="fs::fuel::FuelGrass::grass_curing">
+<area shape="rect" id="Node000001" title="Grass curing." alt="" coords="5,76,131,117"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="179,5,332,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,73,178,40,193,34,194,39,180,45,109,78"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1FwiWeather.html#afba176eda60e611c21e3e0eea3b915ee" title="Drought Code." alt="" coords="181,55,330,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,84,165,79,166,84,131,90"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Settings.html#a1fbff261366a34e26554959e7a29258d" title="Whether or not to force static grass curing value for all fires." alt="" coords="195,104,316,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,104,179,111,179,116,130,109"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Settings.html#a6990d41a2d6c27686460fc6b3fbaccba" title="Static curing value." alt="" coords="196,170,315,210"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="107,115,180,154,192,161,190,165,177,159,104,120"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="380,104,582,145"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="316,122,364,122,364,128,316,128"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="439,104,436,95,443,85,458,80,481,78,506,80,520,86,518,91,504,85,481,83,460,85,447,90,442,96,444,103"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="315,170,393,147,395,152,316,176"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1SettingsImplementation.html#a011f3f4d3854b721373979a89ae06d41" title="Static curing value." alt="" coords="380,170,582,210"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="315,188,365,188,365,193,315,193"/>
+</map>

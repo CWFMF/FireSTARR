@@ -1,8 +1,0 @@
-<map id="tbd::sim::Settings::maximumTimeSeconds" name="tbd::sim::Settings::maximumTimeSeconds">
-<area shape="rect" id="Node000001" title="Maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="5,63,169,103"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SettingsImplementation.html#ac597be613111bd777ae6eafeb5c48c08" title="The singleton instance for this class." alt="" coords="217,29,426,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,69,201,64,202,69,169,74"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1SettingsImplementation.html#a07711fe2fd0963c95e141d909de23291" title="Maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="217,95,426,135"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="169,91,202,96,201,101,168,97"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="277,29,275,19,282,10,298,5,321,3,347,5,362,11,360,16,345,10,321,8,299,10,285,15,280,21,282,28"/>
-</map>

@@ -1,0 +1,5 @@
+<map id="fs::fuel::FuelType::safeName" name="fs::fuel::FuelType::safeName">
+<area shape="rect" id="Node000001" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="5,5,124,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelType.html#affd57b5caf743abec81b2aef2b9a1164" title="Name of the fuel." alt="" coords="172,5,290,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,23,156,23,156,28,124,28"/>
+</map>

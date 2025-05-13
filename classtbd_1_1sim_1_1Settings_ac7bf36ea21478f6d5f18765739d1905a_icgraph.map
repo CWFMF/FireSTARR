@@ -1,7 +1,0 @@
-<map id="tbd::sim::Settings::intensityMaxModerate" name="tbd::sim::Settings::intensityMaxModerate">
-<area shape="rect" id="Node000001" title="The maximum fire intensity for the &#39;moderate&#39; range of intensity (kW/m)" alt="" coords="476,5,629,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1Model.html#a212a6f12c38a255c7fbe21495d745b0e" title="Run Iterations until confidence is reached." alt="" coords="243,13,428,39"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,28,429,28,429,23,460,23"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1sim_1_1Model.html#a62b5ea759a1a5bdd71ebf3c42d34a9e9" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,195,39"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="227,28,195,28,195,23,227,23"/>
-</map>

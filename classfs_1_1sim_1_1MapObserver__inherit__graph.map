@@ -1,0 +1,5 @@
+<map id="fs::sim::MapObserver&lt; T &gt;" name="fs::sim::MapObserver&lt; T &gt;">
+<area shape="rect" id="Node000001" title="An IObserver that tracks notification data using a GridMap." alt="" coords="5,79,179,105"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IObserver.html" title="Interface for observers that get notified when cells burn so they can track things." alt="" coords="31,5,153,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
+</map>

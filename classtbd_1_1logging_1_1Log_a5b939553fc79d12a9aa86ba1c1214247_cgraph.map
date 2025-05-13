@@ -1,5 +1,0 @@
-<map id="tbd::logging::Log::increaseLogLevel" name="tbd::logging::Log::increaseLogLevel">
-<area shape="rect" id="Node000001" title="Increase amount of logging output by one level." alt="" coords="5,5,130,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1logging_1_1Log.html#ad0257a479532713ba0c577d474c6238c" title="Get current logging level." alt="" coords="178,5,298,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,23,162,23,162,28,130,28"/>
-</map>

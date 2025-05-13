@@ -1,5 +1,0 @@
-<map id="tbd::topo::Position::unhashRow" name="tbd::topo::Position::unhashRow">
-<area shape="rect" id="Node000001" title="Row from hash." alt="" coords="5,5,129,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1topo_1_1Position.html#afd633a3f45012ab24cd0b719671bee03" title="Hash derived from row and column." alt="" coords="177,5,300,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,23,161,23,161,28,129,28"/>
-</map>

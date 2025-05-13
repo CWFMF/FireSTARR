@@ -1,0 +1,9 @@
+<map id="fs::data::GridBase::calculateColumns" name="fs::data::GridBase::calculateColumns">
+<area shape="rect" id="Node000001" title="Number of columns in the GridBase." alt="" coords="5,71,136,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1data_1_1GridBase.html#a36018525f0af09808eb17a86b6a3ac1a" title="Cell size used for GridBase." alt="" coords="184,5,307,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,68,174,49,176,54,128,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1GridBase.html#a9041142694e10f2cb5776cefe1f5ca09" title="Lower left corner X coordinate in meters." alt="" coords="184,71,307,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,88,168,88,168,94,136,94"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridBase.html#a16bd22199b244fe7cf96a513fd890149" title="Upper right corner X coordinate in meters." alt="" coords="184,136,307,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="128,109,176,128,174,133,126,114"/>
+</map>

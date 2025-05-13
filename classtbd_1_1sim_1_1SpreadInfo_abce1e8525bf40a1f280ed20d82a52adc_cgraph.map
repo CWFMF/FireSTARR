@@ -1,5 +1,0 @@
-<map id="tbd::sim::SpreadInfo::isNotSpreading" name="tbd::sim::SpreadInfo::isNotSpreading">
-<area shape="rect" id="Node000001" title="Whether or not there is no spread." alt="" coords="5,5,141,46"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#a987c655dccedd3b1a8535ee38e1b7ae3" title="Whether or not there is no spread for given conditions." alt="" coords="189,5,324,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,23,173,23,173,28,141,28"/>
-</map>

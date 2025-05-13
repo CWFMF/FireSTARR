@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::defaultPercentDeadFir" name="fs::sim::Settings::defaultPercentDeadFir">
+<area shape="rect" id="Node000001" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="5,51,156,91"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#abff95616fe66b6f4d0cd1eb979a9172d" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="204,5,406,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,53,188,47,189,52,157,58"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="204,95,406,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,83,189,90,188,95,156,88"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="262,95,260,85,267,76,282,70,305,68,329,70,344,77,341,82,328,76,305,73,283,75,271,80,266,86,268,93"/>
+</map>

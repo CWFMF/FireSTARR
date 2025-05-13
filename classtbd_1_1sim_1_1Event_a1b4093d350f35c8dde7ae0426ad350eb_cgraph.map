@@ -1,5 +1,0 @@
-<map id="tbd::sim::Event::intensity" name="tbd::sim::Event::intensity">
-<area shape="rect" id="Node000001" title="Burn Intensity (kW/m)" alt="" coords="5,13,165,39"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1sim_1_1SpreadInfo.html#acf6caeaea04ef0330e2d9238f0cede7a" title="Maximum intensity in any direction for spread (kW/m)" alt="" coords="213,5,348,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,23,197,23,197,28,165,28"/>
-</map>

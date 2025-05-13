@@ -1,0 +1,5 @@
+<map id="fs::logging::Log::increaseLogLevel" name="fs::logging::Log::increaseLogLevel">
+<area shape="rect" id="Node000001" title="Increase amount of logging output by one level." alt="" coords="5,5,168,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1logging_1_1Log.html#a85989e714e8251f561b574c0ec415348" title="Get current logging level." alt="" coords="216,5,369,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,23,200,23,200,28,168,28"/>
+</map>

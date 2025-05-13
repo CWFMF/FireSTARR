@@ -1,0 +1,8 @@
+<map id="fs::sim::Settings::setMaximumTimeSeconds" name="fs::sim::Settings::setMaximumTimeSeconds">
+<area shape="rect" id="Node000001" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="5,63,181,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="229,29,431,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,68,213,63,213,69,181,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a75e699fc424031e704074af4a211cccc" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="229,95,431,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="181,92,213,97,213,102,181,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="285,29,283,19,290,10,306,5,330,3,355,5,371,11,369,16,354,10,330,8,307,10,293,15,288,21,290,28"/>
+</map>

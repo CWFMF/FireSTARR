@@ -1,7 +1,0 @@
-<map id="tbd::fuel::fbp::FuelM3M4&lt; PercentDeadFir &gt;" name="tbd::fuel::fbp::FuelM3M4&lt; PercentDeadFir &gt;">
-<area shape="rect" id="Node000001" title="FBP fuel type M&#45;3/M&#45;4." alt="" coords="29,183,187,223"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelVariable.html" title=" " alt="" coords="5,79,211,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,150,111,182,105,182,105,150"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelType.html" title="An FBP fuel type." alt="" coords="45,5,171,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,47,111,78,105,78,105,47"/>
-</map>

@@ -1,0 +1,9 @@
+<map id="fs::wx::FwiWeather::bui" name="fs::wx::FwiWeather::bui">
+<area shape="rect" id="Node000001" title="Build&#45;up Index." alt="" coords="463,31,615,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadInfo.html#a3fdf24693a277fd57dbe1ce936b7f6ba" title="Build&#45;up Index used for spread." alt="" coords="250,5,401,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="447,35,401,30,402,24,448,30"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="236,55,415,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="448,56,416,60,415,55,448,51"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,55,188,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,70,188,70,188,65,220,65"/>
+</map>

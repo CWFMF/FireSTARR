@@ -1,0 +1,5 @@
+<map id="fs::sim::Scenario::saveStats" name="fs::sim::Scenario::saveStats">
+<area shape="rect" id="Node000001" title="Save state of Scenario at given time." alt="" coords="176,5,298,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,5,128,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,28,128,28,128,23,160,23"/>
+</map>

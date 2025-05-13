@@ -1,0 +1,10 @@
+<map id="fs::fuel::FuelType::safeName" name="fs::fuel::FuelType::safeName">
+<area shape="rect" id="Node000001" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="212,95,330,135"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelLookupImpl.html#a03c5fd3cd5b977c8a590cbdcf7250e65" title="Look up a FuelType based on the given code." alt="" coords="5,5,164,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,89,163,61,135,49,137,44,165,57,220,84"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1fuel_1_1FuelLookupImpl.html#a5c5021ff40e5fe3e0226ae82c278bb22" title="Put fuel into lookup table based on name." alt="" coords="5,95,164,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,118,164,118,164,112,196,112"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="23,160,146,201"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="198,143,146,162,144,157,196,138"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="115,81,103,76,84,73,67,75,56,80,52,86,54,94,49,95,47,85,53,76,66,70,85,68,105,70,117,77"/>
+</map>

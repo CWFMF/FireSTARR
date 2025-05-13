@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['environment_0',['Fire environment',['../environment.html',1,'']]],
-  ['events_1',['Probability of events',['../probability.html',1,'']]]
+  ['documentation_0',['FireSTARR Documentation',['../index.html',1,'']]]
 ];

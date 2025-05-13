@@ -1,0 +1,9 @@
+<map id="fs::util::Statistics::sampleVariance" name="fs::util::Statistics::sampleVariance">
+<area shape="rect" id="Node000001" title="Sample Variance." alt="" coords="334,39,454,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1util_1_1Statistics.html#af2576897b0dbf075c821961526102c31" title="Estimate how many more runs are required to achieve desired confidence." alt="" coords="170,5,286,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="319,47,286,40,287,35,320,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1util_1_1Statistics.html#a10be0307cb235f1c101ce7cdfe4db5ed" title="Calculate Student&#39;s T value." alt="" coords="170,71,286,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="319,76,287,82,286,77,318,71"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1util_1_1Statistics.html#a560403aa9b097a0c54a7457dbb02447a" title="Whether or not we have less than the relative error and can be confident in the results." alt="" coords="5,71,122,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="154,94,122,94,122,88,154,88"/>
+</map>

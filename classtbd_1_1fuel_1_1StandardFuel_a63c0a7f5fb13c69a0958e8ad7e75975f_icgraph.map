@@ -1,9 +1,0 @@
-<map id="tbd::fuel::StandardFuel::rosBasic" name="tbd::fuel::StandardFuel::rosBasic">
-<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="412,39,561,79"/>
-<area shape="rect" id="Node000002" href="$classtbd_1_1fuel_1_1FuelNonMixed.html#a82586451973bd31584d3eb6b0e12ed85" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="209,5,364,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="396,47,364,41,365,36,397,41"/>
-<area shape="rect" id="Node000004" href="$classtbd_1_1fuel_1_1FuelMixed.html#addc500f8f669387a07569484b5f74b6a" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="221,71,352,111"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="397,76,353,83,352,78,396,71"/>
-<area shape="rect" id="Node000003" href="$classtbd_1_1fuel_1_1FuelNonMixed.html#af72f277252723f81b803803d8a1643c0" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,5,161,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="193,28,161,28,161,23,193,23"/>
-</map>

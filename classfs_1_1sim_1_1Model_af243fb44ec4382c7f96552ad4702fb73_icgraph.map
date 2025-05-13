@@ -1,0 +1,8 @@
+<map id="fs::sim::Model::environment" name="fs::sim::Model::environment">
+<area shape="rect" id="Node000001" title="Environment simulation is occurring in." alt="" coords="407,42,584,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a7dbe56d7b38c0a175ea056fbcce570fe" title="Acquire a BurnedData that has already burnt cells set." alt="" coords="194,5,359,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="391,44,359,39,360,34,392,38"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,42,146,68"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="391,60,359,60,194,60,146,60,146,54,194,55,359,55,391,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,43,146,47,145,42,178,37"/>
+</map>

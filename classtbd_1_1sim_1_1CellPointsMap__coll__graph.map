@@ -1,5 +1,0 @@
-<map id="tbd::sim::CellPointsMap" name="tbd::sim::CellPointsMap">
-<area shape="rect" id="Node000001" title=" " alt="" coords="10,109,167,135"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,172,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,61,91,109,86,109,86,61"/>
-</map>

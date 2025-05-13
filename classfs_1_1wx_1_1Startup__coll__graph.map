@@ -1,0 +1,27 @@
+<map id="fs::wx::Startup" name="fs::wx::Startup">
+<area shape="rect" id="Node000001" title="Startup values to initialize a weather stream calculation with." alt="" coords="288,173,390,199"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,82,59,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,112,161,147,226,163,287,175,286,180,225,168,160,152,70,117"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Point.html" title="A geographic location in lat/long coordinates." alt="" coords="82,82,182,108"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,113,247,147,306,170,304,175,245,152,169,118"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1Ffmc.html" title="Fine Fuel Moisture Code value." alt="" coords="206,82,296,108"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="275,117,329,171,325,175,271,121"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="312,87,322,95,314,103,296,105,296,100,312,98,317,95,309,92"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="186,5,316,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="253,47,253,82,248,82,248,47"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1wx_1_1Dmc.html" title="Duff Moisture Code value." alt="" coords="384,82,472,108"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="407,121,352,175,349,171,404,117"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="489,87,498,95,490,103,473,105,472,100,488,98,493,95,486,92"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="363,5,493,31"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="431,47,431,82,425,82,425,47"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1wx_1_1Dc.html" title="Drought Code value." alt="" coords="560,82,637,108"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="550,116,375,175,373,170,548,111"/>
+<area shape="poly" id="edge11_Node000008_Node000008" title=" " alt="" coords="654,87,663,95,655,103,637,105,637,100,653,99,658,95,651,91"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="534,5,664,31"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="601,47,601,82,596,82,596,47"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1wx_1_1Precipitation.html" title="Precipitation (1hr accumulation) (mm)" alt="" coords="726,82,858,108"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="715,114,391,177,390,172,714,109"/>
+<area shape="poly" id="edge14_Node000010_Node000010" title=" " alt="" coords="875,88,885,95,876,103,859,105,858,100,874,98,880,95,872,92"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1data_1_1Index.html" title="A wrapper around a MathSize to ensure correct types are used." alt="" coords="727,5,857,31"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="795,47,795,82,789,82,789,47"/>
+</map>
