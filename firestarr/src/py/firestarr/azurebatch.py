@@ -743,10 +743,23 @@ def last_failure(client=None):
     return t.as_dict()["execution_info"]["failure_info"]
 
 
-def get_login(pool_id=POOL_ID, client=None, node=0):
+def get_login(pool_id=POOL_ID, client=None, node=None):
     if client is None:
         client = get_batch_client()
-    node_id = list_nodes()[node].as_dict()["id"]
+    nodes = list_nodes()
+    if nodes is None or 0 == len(nodes):
+        raise RuntimeError("No nodes to login to")
+    use_node = nodes[node] if node is not None else None
+    if use_node is None:
+        for n in nodes:
+            tasks = n.recent_tasks
+            if tasks is not None:
+                for t in tasks:
+                    if "running" == t.task_state:
+                        use_node = n
+    if use_node is None:
+        use_node = nodes[0]
+    node_id = use_node.as_dict()["id"]
     # try:
     #     client.compute_node.delete_user(pool_id, node_id, "user")
     # except batchmodels.BatchErrorException:

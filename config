@@ -7,9 +7,6 @@ FORCE_BATCH_TASKS=
 # assign any value to make cronjob for update work
 CRONJOB_RUN=
 
-# how many runs to keep unarchived
-KEEP_UNARCHIVED=5
-
 # minimum latitude for area bounding box
 BOUNDS_LATITUDE_MIN=41
 
