@@ -233,6 +233,7 @@ def read_config(force=False):
             "GEOSERVER_DIR_DATA",
             "BATCH_ACCOUNT_NAME",
             "BATCH_ACCOUNT_KEY",
+            "BATCH_POOL_ID",
             "STORAGE_ACCOUNT_NAME",
             "STORAGE_FILE_SHARE",
             "STORAGE_KEY",

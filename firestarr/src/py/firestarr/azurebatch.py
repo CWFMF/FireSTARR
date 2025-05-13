@@ -32,6 +32,8 @@ FILE_LOCK_BATCH_JOB = os.path.join(DIR_OUTPUT, "batch_job")
 # HACK: just get the values out of here for now
 _BATCH_ACCOUNT_NAME = CONFIG.get("BATCH_ACCOUNT_NAME")
 _BATCH_ACCOUNT_KEY = CONFIG.get("BATCH_ACCOUNT_KEY")
+_BATCH_POOL_ID = CONFIG.get("BATCH_POOL_ID")
+
 _STORAGE_ACCOUNT_NAME = CONFIG.get("STORAGE_ACCOUNT_NAME")
 _STORAGE_KEY = CONFIG.get("STORAGE_KEY")
 _STORAGE_FILE_SHARE = CONFIG.get("STORAGE_FILE_SHARE")
@@ -85,7 +87,6 @@ _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
 # # generally gets stuck on a few scenarios so scale way back until single-core performance improves for now
 # _POOL_VM_SIZE = "STANDARD_F8S_V2"
 _POOL_VM_SIZE = "STANDARD_F4S_V2"
-POOL_ID = "firestarr_batchpool"
 _MIN_NODES = 0
 # _MIN_NODES = 1
 _MAX_NODES = 50
@@ -128,7 +129,7 @@ TASK_SLEEP = 30
 CLIENT = None
 
 
-def restart_unusable_nodes(pool_id=POOL_ID, client=None):
+def restart_unusable_nodes(pool_id=_BATCH_POOL_ID, client=None):
     try:
         if client is None:
             client = get_batch_client()
@@ -186,7 +187,7 @@ def restart_unusable_nodes(pool_id=POOL_ID, client=None):
 #     logging.debug("Done creating pool monitor")
 
 
-def create_container_pool(pool_id=POOL_ID, force=False, client=None):
+def create_container_pool(pool_id=_BATCH_POOL_ID, force=False, client=None):
     if client is None:
         client = get_batch_client()
     if client.pool.exists(pool_id):
@@ -239,7 +240,7 @@ def create_container_pool(pool_id=POOL_ID, force=False, client=None):
     return pool_id
 
 
-def make_or_get_job(pool_id=POOL_ID, job_id=None, client=None, *args, **kwargs):
+def make_or_get_job(pool_id=_BATCH_POOL_ID, job_id=None, client=None, *args, **kwargs):
     if client is None:
         client = get_batch_client()
     # # start monitoring pool for unusable nodes
@@ -554,7 +555,7 @@ def show_active(client=None):
     print(f"jobs:\n{jobs}\n\ntasks:\n{tasks}\n\npools:\n{pools}\n\nnodes:\n{nodes}\n")
 
 
-def run_oneoff_task(cmd, pool_id=POOL_ID, client=None):
+def run_oneoff_task(cmd, pool_id=_BATCH_POOL_ID, client=None):
     if client is None:
         client = get_batch_client()
     job_id = "job_oneoff"
@@ -647,7 +648,7 @@ def is_running_on_azure():
     # HACK: shell isn't set when ssh into node, but AZ_BATCH_POOL_ID is only in tasks?
     return (
         not CONFIG.get("FORCE_LOCAL_TASKS", False)
-        and os.environ.get("AZ_BATCH_POOL_ID", None) == POOL_ID
+        and os.environ.get("AZ_BATCH_POOL_ID", None) == _BATCH_POOL_ID
         or not os.environ.get("SHELL", False)
     )
 
@@ -676,13 +677,13 @@ def deactivate_job_schedules(client=None):
         client.job_schedule.disable(s.id)
 
 
-def list_nodes(pool_id=POOL_ID, client=None):
+def list_nodes(pool_id=_BATCH_POOL_ID, client=None):
     if client is None:
         client = get_batch_client()
     return [x for x in client.compute_node.list(pool_id)]
 
 
-def make_schedule(pool_id=POOL_ID, client=None):
+def make_schedule(pool_id=_BATCH_POOL_ID, client=None):
     if client is None:
         client = get_batch_client()
     job_schedule_id = f"schedule_check_{pool_id}"
@@ -743,7 +744,7 @@ def last_failure(client=None):
     return t.as_dict()["execution_info"]["failure_info"]
 
 
-def get_login(pool_id=POOL_ID, client=None, node=None):
+def get_login(pool_id=_BATCH_POOL_ID, client=None, node=None):
     if client is None:
         client = get_batch_client()
     nodes = list_nodes()
@@ -796,7 +797,7 @@ def job_from_task(task):
     return client.job.get(job_id)
 
 
-def evaluate_autoscale(pool_id=POOL_ID, client=None, print_result=True):
+def evaluate_autoscale(pool_id=_BATCH_POOL_ID, client=None, print_result=True):
     if client is None:
         client = get_batch_client()
     r = client.pool.evaluate_auto_scale(pool_id, _AUTO_SCALE_FORMULA)
@@ -807,7 +808,7 @@ def evaluate_autoscale(pool_id=POOL_ID, client=None, print_result=True):
         return r
 
 
-def enable_autoscale(pool_id=POOL_ID, client=None):
+def enable_autoscale(pool_id=_BATCH_POOL_ID, client=None):
     if client is None:
         client = get_batch_client()
     client.pool.enable_auto_scale(
@@ -843,5 +844,5 @@ if __name__ == "__main__":
     # pool_id = create_container_pool(force=True)
     # run_oneoff_task("echo test >> /appl/data/testoneoff")
     # run_oneoff_task("/appl/firestarr/scripts/force_run.sh")
-    # job_schedule_id = make_schedule(POOL_ID)
+    # job_schedule_id = make_schedule(_BATCH_POOL_ID)
     # jobs, tasks, pools, nodes = get_active()
