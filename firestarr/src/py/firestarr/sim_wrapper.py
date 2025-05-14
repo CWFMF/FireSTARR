@@ -31,6 +31,7 @@ from common import (
     DIR_TMP,
     FILE_APP_BINARY,
     FILE_SIM_LOG,
+    FILE_SIM_SCRIPT,
     FLAG_IGNORE_PERIM_OUTPUTS,
     FMT_FILE_SECOND,
     SECONDS_PER_HOUR,
@@ -48,8 +49,6 @@ from common import (
     start_process,
     try_remove,
 )
-from redundancy import call_safe
-
 from gis import (
     Rasterize,
     find_best_raster,
@@ -59,6 +58,7 @@ from gis import (
     save_geojson,
     save_point_file,
 )
+from redundancy import call_safe
 
 # set to "" if want intensity grids
 NO_INTENSITY = "--no-intensity"
@@ -78,7 +78,7 @@ TIFF_SLEEP = 10
 def run_sim_local(dir_fire, no_wait=None):
     stdout, stderr = None, None
     try:
-        proc = call_safe(start_process, ["./sim.sh"], dir_fire)
+        proc = call_safe(start_process, [f"./{FILE_SIM_SCRIPT}"], dir_fire)
         if no_wait:
             logging.info("Starting but not waiting for %s", dir_fire)
         else:
@@ -446,7 +446,7 @@ def _run_fire_from_folder(
     was_running = check_running(dir_fire)
 
     file_sim = get_simulation_file(ensure_dir(dir_fire))
-    file_sh = os.path.join(dir_fire, "sim.sh")
+    file_sh = os.path.join(dir_fire, FILE_SIM_SCRIPT)
     files_required = [file_sim, file_sh]
     # need directory for lock
     ensure_dir(os.path.dirname(file_sim))
@@ -559,15 +559,21 @@ def _run_fire_from_folder(
                         # NOTE: without stdbuf the output in tee and on the console lags
                         # use grep first so this finishes successfully if task starts again and time is there already
                         # add $* at end so with can call with more args from cli
+                        CHECK_SUCCESS_TEXT = f"(grep '{SUCCESS_TEXT}' {os.path.basename(file_log)} > /dev/null 2>&1)"
                         f_out.writelines(
                             [
-                                "#!/bin/bash\n",
-                                f"(grep '{SUCCESS_TEXT}' {os.path.basename(file_log)} > /dev/null 2>&1) || ( \\\n",
-                                "\tstdbuf -o0 \\\n",
-                                f"\t{cmd} {args} $* \\\n",
-                                "\t2>&1 | stdbuf -i0 -o0 tee -a from_tee.log \\\n",
-                                f"| grep '{SUCCESS_TEXT}' \\\n",
-                                ")\n",
+                                f"""#!/bin/bash
+{CHECK_SUCCESS_TEXT} \\
+|| ( \\
+  ( \\
+    stdbuf -o0 \\
+    {cmd} {args} $* \\
+    2>&1 \\
+  | stdbuf -i0 -o0 tee -a from_tee.log \\
+  ) \\
+  && {CHECK_SUCCESS_TEXT} \\
+)
+""",
                             ]
                         )
 

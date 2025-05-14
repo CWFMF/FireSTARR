@@ -135,6 +135,7 @@ FILE_APP_SETTINGS = os.path.join(DIR_APP, "settings.ini")
 DIR_SCRIPTS = os.path.join(DIR_APP, "scripts")
 # FIX: this is hardcoded in cpp?
 FILE_SIM_LOG = "firestarr.log"
+FILE_SIM_SCRIPT = "sim.sh"
 
 DIR_DATA = ensure_dir(os.path.abspath("/appl/data"))
 DIR_DOWNLOAD = ensure_dir(os.path.join(DIR_DATA, "download"))

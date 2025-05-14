@@ -21,6 +21,7 @@ from common import (
     FILE_LOCK_MODEL,
     FILE_LOCK_PREPUBLISH,
     FILE_LOCK_PUBLISH,
+    FILE_SIM_SCRIPT,
     FLAG_IGNORE_PERIM_OUTPUTS,
     FLAG_SAVE_PREPARED,
     MAX_NUM_DAYS,
@@ -45,6 +46,18 @@ from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
 from datasources.default import SourceFireActive
 from fires import get_fires_folder, group_fires
+from gis import (
+    CRS_COMPARISON,
+    CRS_SIMINPUT,
+    CRS_WGS84,
+    VECTOR_FILE_EXTENSION,
+    area_ha,
+    find_invalid_tiffs,
+    gdf_from_file,
+    gdf_to_file,
+    make_gdf_from_series,
+    vector_path,
+)
 from log import LOGGER_NAME, add_log_file
 from publish import merge_dirs, publish_all
 from redundancy import call_safe, get_stack
@@ -68,19 +81,6 @@ from tqdm_util import (
     pmap_by_group,
     tqdm,
     update_max_attempts,
-)
-
-from gis import (
-    CRS_COMPARISON,
-    CRS_SIMINPUT,
-    CRS_WGS84,
-    VECTOR_FILE_EXTENSION,
-    area_ha,
-    find_invalid_tiffs,
-    gdf_from_file,
-    gdf_to_file,
-    make_gdf_from_series,
-    vector_path,
 )
 
 LOGGER_FIRE_ORDER = logging.getLogger(f"{LOGGER_NAME}_order.log")
@@ -831,7 +831,7 @@ class Run(object):
             if check_running(dir_fire):
                 # already running, so prepared but no outputs
                 return dir_fire
-            if os.path.isfile(os.path.join(dir_fire, "sim.sh")):
+            if os.path.isfile(os.path.join(dir_fire, FILE_SIM_SCRIPT)):
                 return dir_fire
             return self.do_run_fire(dir_fire, prepare_only=True)
 
@@ -896,6 +896,7 @@ class Run(object):
             tasks_new = [x[0] for x in tasks_existed if not x[1]]
             # HACK: use any dir_fire for now since they should all work
             schedule_tasks(dirs_fire[0], tasks_new)
+            # once everything is scheduled then make job complete when tasks do
             successful, unsuccessful = keep_trying_groups(
                 fct=run_fire,
                 values=successful,

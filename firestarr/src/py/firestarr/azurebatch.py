@@ -16,6 +16,7 @@ from common import (
     CONFIG,
     DIR_OUTPUT,
     FILE_SIM_LOG,
+    FILE_SIM_SCRIPT,
     SECONDS_PER_MINUTE,
     locks_for,
     logging,
@@ -415,7 +416,7 @@ def make_or_get_simulation_task(job_id, dir_fire, client=None):
     if task is None:
         task = batch.models.TaskAddParameter(
             id=task_id,
-            command_line="./sim.sh",
+            command_line=FILE_SIM_SCRIPT,
             container_settings=get_container_settings(
                 _CONTAINER_BIN,
                 workdir=dir_fire,
