@@ -252,15 +252,7 @@ def make_or_get_job(pool_id=_BATCH_POOL_ID, job_id=None, client=None, *args, **k
             job_id = f"job_container_{run_id}"
         try:
             job = client.job.get(job_id)
-            # delete if exists and completed
-            if "completed" == job.state:
-                logging.info("Deleting completed job %s", job_id)
-                client.job.delete(job_id)
-                while job_exists(job_id):
-                    print(".", end="", flush=True)
-                    time.sleep(1)
-            else:
-                return job, True
+            return job, True
         except batchmodels.BatchErrorException:
             job_existed = False
             pass
@@ -450,23 +442,8 @@ def add_simulation_task(job_id, dir_fire, no_wait=False, client=None, mark_as_do
                 # just return if no task but it's done already
                 # HACK: delete since can't mark as complete without showing as failure
                 #       and still requesting nodes in AutoScale
-                client.task.delete(job_id, task.id)
+                client.task.terminate(job_id, task.id)
                 return None
-
-            # HACK: since sim.sh will complete successfully without running if run already
-            #           succeeded, there's no harm in running tasks again
-            # if task.state not in ["active", "running"]:
-            if "completed" == task.state:
-                # if job_existed and "completed" == job.state:
-                #     # need to not be completed to edit
-                #     client.job.enable(job.id)
-                logging.warning("Deleting completed task to rerun %s", dir_fire)
-                client.task.delete(job_id, task.id)
-                while task_exists(job_id, task.id):
-                    print(".", end="", flush=True)
-                    time.sleep(1)
-                # remake task so it can be added
-                task, task_existed = make_or_get_simulation_task(job_id, dir_fire, client=client)
         if mark_as_done:
             # task doesn't exist so just return
             return None
