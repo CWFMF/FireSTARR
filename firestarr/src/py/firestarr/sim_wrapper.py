@@ -11,6 +11,7 @@ import psutil
 from azurebatch import (
     _BATCH_POOL_ID,
     add_simulation_task,
+    batchmodels,
     check_successful,
     find_tasks_running,
     get_batch_client,
@@ -250,10 +251,13 @@ def finish_job(job_id):
         logging.error("Didn't use batch, but trying to finish job")
     else:
         client = get_batch_client()
-        job = client.job.get(job_id)
-        # mark as completed if not already
-        if "completed" != job.state:
-            client.job.terminate(job_id)
+        try:
+            job = client.job.get(job_id)
+            # mark as completed if not already
+            if "completed" != job.state:
+                client.job.terminate(job_id)
+        except batchmodels.BatchErrorException:
+            pass
 
 
 def get_simulation_file(dir_fire):

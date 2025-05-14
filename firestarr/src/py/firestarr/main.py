@@ -279,6 +279,14 @@ if __name__ == "__main__":
                 logging.error("Stopping because of error")
                 sys.exit(-1)
             logging.info("Trying again because of error")
+    # do this first to kill the azure batch job if everything is done
+    if run_current.ran_all():
+        logging.info("Finished all simulations successfully")
+    else:
+        logging.info("Done but not all simulations have run")
+        if FROM_QUEUE:
+            logging.info("Requeuing")
+            requeue()
     if FROM_QUEUE:
         # publish_all(
         #     run_current._dir_output,
@@ -295,10 +303,3 @@ if __name__ == "__main__":
             if should_resume:
                 # there shouldn't be an error if we were resuming
                 logging.error(ex)
-    if run_current.ran_all():
-        logging.info("Finished all simulations successfully")
-    else:
-        logging.info("Done but not all simulations have run")
-        if FROM_QUEUE:
-            logging.info("Requeuing")
-            requeue()
