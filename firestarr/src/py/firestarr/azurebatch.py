@@ -318,6 +318,12 @@ def schedule_job_tasks(job_id, tasks, client=None):
     if client is None:
         client = get_batch_client()
     client.task.add_collection(job_id, tasks)
+    job = client.job.get(job_id=job_id)
+    if "completed" != job.state:
+        client.job.patch(
+            job_id,
+            batchmodels.JobPatchParameter(on_all_tasks_complete="terminateJob"),
+        )
 
 
 def get_task_name(dir_fire):
