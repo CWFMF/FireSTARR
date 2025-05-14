@@ -98,6 +98,9 @@ _USE_LOW_PRIORITY = True
 # want to deallocate everything on completion
 # nodes don't deallocate until done if currently running and we set to 0
 # use low priority nodes if over max number, but they stay as spot nodes so maybe not great if getting preempted
+#
+# At the end, if we have more or the same amount of a type of node as we wanted
+# then set to 0 so they deallocate as they finish.
 _AUTO_SCALE_FORMULA = f"""
     $min_nodes = {_MIN_NODES};
     $max_nodes = {_MAX_NODES};
@@ -116,6 +119,8 @@ _AUTO_SCALE_FORMULA = f"""
     $TargetDedicatedNodes = min($preempted + $dedicated, $max_dedicated);
     $TargetLowPriorityNodes = max(0, min($max_low, $pending - $TargetDedicatedNodes));
     $NodeDeallocationOption = taskcompletion;
+    $TargetDedicatedNodes = ($CurrentDedicatedNodes >= $TargetDedicatedNodes) ? 0 : $TargetDedicatedNodes;
+    $TargetLowPriorityNodes = ($CurrentLowPriorityNodes >= $TargetLowPriorityNodes) ? 0 : $TargetLowPriorityNodes;
 """
 _AUTO_SCALE_EVALUATION_INTERVAL = datetime.timedelta(minutes=5)
 _BATCH_ACCOUNT_URL = f"https://{_BATCH_ACCOUNT_NAME}.canadacentral.batch.azure.com"
