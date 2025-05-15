@@ -444,11 +444,23 @@ def add_simulation_task(job_id, dir_fire, no_wait=False, client=None, mark_as_do
                 return task.id
         if task_existed:
             if mark_as_done:
-                # just return if no task but it's done already
-                # HACK: delete since can't mark as complete without showing as failure
-                #       and still requesting nodes in AutoScale
-                client.task.terminate(job_id, task.id)
+                if "completed" != task.state:
+                    # HACK: shows as failure, but deleting causes bug with pending tasks in scaling
+                    client.task.terminate(job_id, task.id)
                 return None
+            else:
+                # HACK: since sim.sh will complete successfully without running if run already
+                #           succeeded, there's no harm in running tasks again
+                # if task.state not in ["active", "running"]:
+                if "completed" == task.state and not mark_as_done:
+                    # sim didn't run properly but task exists as completed so delete and remake
+                    logging.warning("Deleting completed task to rerun %s", dir_fire)
+                    client.task.delete(job_id, task.id)
+                    while task_exists(job_id, task.id):
+                        print(".", end="", flush=True)
+                        time.sleep(1)
+                    # remake task so it can be added
+                    task, task_existed = make_or_get_simulation_task(job_id, dir_fire, client=client)
         if mark_as_done:
             # task doesn't exist so just return
             return None
