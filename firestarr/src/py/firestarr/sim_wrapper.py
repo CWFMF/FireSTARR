@@ -13,6 +13,7 @@ from azurebatch import (
     add_simulation_task,
     batchmodels,
     check_successful,
+    enable_autoscale,
     find_tasks_running,
     get_batch_client,
     have_batch_config,
@@ -50,6 +51,8 @@ from common import (
     start_process,
     try_remove,
 )
+from redundancy import call_safe
+
 from gis import (
     Rasterize,
     find_best_raster,
@@ -59,7 +62,6 @@ from gis import (
     save_geojson,
     save_point_file,
 )
-from redundancy import call_safe
 
 # set to "" if want intensity grids
 NO_INTENSITY = "--no-intensity"
@@ -72,6 +74,7 @@ SUCCESS_TEXT = "Total simulation time was"
 _RUN_SIM = None
 _FIND_RUNNING = None
 JOB_ID = None
+JOB_EXISTED = None
 IS_USING_BATCH = None
 TIFF_SLEEP = 10
 
@@ -152,6 +155,9 @@ def get_simulation_task(dir_fire):
 def schedule_tasks(dir_fire, tasks):
     # HACK: use any dir_fire for now since they should all work
     schedule_job_tasks(assign_job(dir_fire), tasks)
+    # HACK: scale here since autoscale takes a while to kick in
+    if JOB_EXISTED is not None and not JOB_EXISTED:
+        enable_autoscale()
 
 
 def get_nodes():
@@ -170,9 +176,10 @@ def get_job_id(dir_fire):
 
 def assign_job(dir_fire, client=None):
     global JOB_ID
+    global JOB_EXISTED
     job_id = get_job_id(dir_fire)
     if JOB_ID != job_id:
-        job, job_existed = make_or_get_job(job_id=job_id)
+        job, JOB_EXISTED = make_or_get_job(job_id=job_id)
         JOB_ID = job.id
     if JOB_ID is None:
         raise RuntimeError("No job id assigned")
@@ -183,6 +190,7 @@ def assign_sim_batch(force_local=None, force_batch=None):
     global _RUN_SIM
     global _FIND_RUNNING
     global JOB_ID
+    global JOB_EXISTED
     global IS_USING_BATCH
     if force_local is None:
         force_local = CONFIG.get("FORCE_LOCAL_TASKS", False)
@@ -201,6 +209,7 @@ def assign_sim_batch(force_local=None, force_batch=None):
             logging.info("Running using batch tasks")
             _RUN_SIM = run_sim_batch
             JOB_ID = None
+            JOB_EXISTED = None
             _FIND_RUNNING = find_running_batch
             IS_USING_BATCH = True
             return True
