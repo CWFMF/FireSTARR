@@ -894,8 +894,9 @@ class Run(object):
                 desc="Creating simulation taks",
             )
             tasks_new = [x[0] for x in tasks_existed if not x[1]]
-            # HACK: use any dir_fire for now since they should all work
-            schedule_tasks(dirs_fire[0], tasks_new)
+            if 0 < len(tasks_new):
+                # HACK: use any dir_fire for now since they should all work
+                schedule_tasks(dirs_fire[0], tasks_new)
             # once everything is scheduled then make job complete when tasks do
             successful, unsuccessful = keep_trying_groups(
                 fct=run_fire,
