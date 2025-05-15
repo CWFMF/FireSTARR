@@ -317,6 +317,23 @@ def add_monolithic_task(job_id, client=None):
 def schedule_job_tasks(job_id, tasks, client=None):
     if client is None:
         client = get_batch_client()
+    logging.info(
+        "Scheduling %d tasks under job %s",
+        len(tasks),
+        job_id,
+    )
+    # delete if exists and completed but need to run tasks
+    job, job_existed = make_or_get_job(job_id=job_id)
+    if "completed" == job.state:
+        logging.info(
+            "Deleting completed job %s because %d tasks need to run",
+            job_id,
+            len(tasks),
+        )
+        client.job.delete(job_id)
+        while job_exists(job_id):
+            print(".", end="", flush=True)
+            time.sleep(1)
     client.task.add_collection(job_id, tasks)
 
 
