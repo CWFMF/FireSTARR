@@ -776,11 +776,16 @@ class Run(object):
                         result is None
                         or isinstance(result, str)
                         or isinstance(result, Exception)
+                        or isinstance(result, bool)
                         or (not np.all(result.get("sim_time", False)))
                     ):
                         logging.warning("Could not run fire %s", dir_fire)
                         if isinstance(result, str):
                             logging.error("%s result is string %s", dir_fire, result)
+                            result = None
+                        # HACK: need to figure out what is returning bool, but do this for now
+                        if isinstance(result, bool):
+                            logging.error("%s result is bool %s", dir_fire, result)
                             result = None
                         fire_name = os.path.basename(dir_fire)
                         if fire_name not in results:
