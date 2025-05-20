@@ -187,6 +187,7 @@ def save_http(
         # if already downloaded then use existing file
         # if not downloaded then try to save but check cache before downloading
         # either way, call fct_post_save on the file
+        file_existed = os.path.isfile(save_as)
         r = check_downloaded(save_as)
         if not r:
             # logging.debug("save_http(%s, %s) - calling do_save(%s)", url, save_as, save_as)
@@ -195,7 +196,29 @@ def save_http(
             r = mark_downloaded(r)
         # else:
         #     logging.debug("save_http(%s, %s) - %s was downloaded", url, save_as, save_as)
-        r = (fct_post_save or do_nothing)(r)
+        try:
+            # HACK: if parsing fails then delete file
+            r = (fct_post_save or do_nothing)(r)
+        except KeyboardInterrupt as ex:
+            raise ex
+        except Exception as ex:
+            logging.debug(ex)
+            # @ensures should have taken care of deleting file
+            mark_downloaded(save_as, False)
+            if file_existed:
+                logging.error("Unable to parse existing file %s" % save_as)
+                os.remove(save_as)
+                return save_http(
+                    url,
+                    save_as,
+                    keep_existing,
+                    fct_pre_save,
+                    fct_post_save,
+                    fct_is_invalid,
+                )
+            else:
+                raise ex
+
         # logging.debug("save_http(%s, %s) - returning %s", url, save_as, r)
         if not check_downloaded(save_as):
             raise RuntimeError(f"Expected {save_as} to be marked as downloaded")
@@ -204,7 +227,7 @@ def save_http(
         raise ex
     except Exception as ex:
         logging.debug(ex)
-        # @ensures should have taken care of delting file
+        # @ensures should have taken care of deleting file
         mark_downloaded(save_as, False)
         raise ex
 
