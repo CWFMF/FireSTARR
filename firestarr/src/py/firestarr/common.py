@@ -332,18 +332,6 @@ def fix_timezone_offset(d):
     return (d + localdelta).replace(tzinfo=None)
 
 
-def copy_file(filename, toname):
-    """!
-    Copy file and keep timestamp the same
-    @param filename Source path to copy from
-    @param toname Destination path to copy to
-    @return None
-    """
-    shutil.copyfile(filename, toname)
-    filetime = os.path.getmtime(filename)
-    os.utime(toname, (filetime, filetime))
-
-
 def filterXY(data):
     data = data[data[:, :, 0] >= BOUNDS["latitude"]["min"]]
     data = data[data[:, 0] <= BOUNDS["latitude"]["max"]]

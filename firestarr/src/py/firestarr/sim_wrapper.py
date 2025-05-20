@@ -356,6 +356,7 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
 
         # HACK: since we already avoided files_prob if they were out of date then never worry about probs_tmp
         def check_valid(f_interim):
+            nonlocal files_changed
             f_tmp = f_interim.replace("interim_", "")
             if is_invalid_tiff(f_interim, test_read=True):
                 force_remove(f_interim)
@@ -372,12 +373,15 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
                         raise RuntimeError(f"Invalid tiff {f_orig}")
                 logging.warning("Trying to copy %s again since invalid", f_orig)
                 # don't try this if the original is invalid but try copying again if it was
-                shutil.copyfile(
+                shutil.copy2(
                     f_orig,
                     f_interim,
                 )
                 if is_invalid_tiff(f_interim, test_read=True):
                     raise RuntimeError(f"Invalid tiff after copy {f_interim}")
+                files_changed[f_tmp] = True
+            # is_changed = files_changed.get(f_tmp, False) or not os.path.exists(f_tmp) or is_newer_than(f_interim, f_tmp)
+            # files_changed[f_tmp] = is_changed
             # at this point f_interim is valid but needs to be renamed
             shutil.move(f_interim, f_tmp)
             if is_invalid_tiff(f_tmp, test_read=True):
@@ -390,10 +394,6 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
         if interim_tmp:
             raise RuntimeError("Expected files to be renamed")
         files_prob = probs_tmp
-        for f in files_prob:
-            files_changed[f] = True
-        # # force copying because not sure when interim is from
-        # changed = True
         suffix = TMP_SUFFIX
         is_interim = True
     files_project = {}
@@ -407,9 +407,8 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
             file_out = os.path.join(dir_region, d, f"{fire_name}{suffix}.tif")
             file_out_interim = os.path.join(dir_region, d, f"{fire_name}{TMP_SUFFIX}.tif")
             # if interim file already exists and is newer than last output it's fine
-            if os.path.exists(file_out_interim) and not is_newer_than(file_out_interim, file_out):
+            if os.path.exists(file_out) and is_newer_than(prob, file_out):
                 files_changed[prob] = True
-                files_project[prob] = file_out
                 if file_out != file_out_interim:
                     # remove interim if we have final
                     force_remove(file_out_interim)
@@ -435,6 +434,9 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
                 # HACK: if nodata is none then 0's should just show up as 0?
                 nodata=None,
             )
+            # HACK: set file time for projection from original
+            mtime = os.path.getmtime(file_src)
+            os.utime(file_out, (mtime, mtime))
             if extent is None:
                 raise RuntimeError(f"Fire {dir_fire} has invalid output file {file_src}")
             # if file didn't exist then it's changed now
