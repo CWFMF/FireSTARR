@@ -430,7 +430,12 @@ def start_process(run_what, cwd):
     @return Running subprocess
     """
     logging.debug("Running in '%s':\n\t%s", cwd, run_what)
-    p = subprocess.Popen(run_what, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd)
+    p = subprocess.Popen(
+        run_what,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        cwd=cwd,
+    )
     p.args = run_what
     p.cwd = cwd
     return p

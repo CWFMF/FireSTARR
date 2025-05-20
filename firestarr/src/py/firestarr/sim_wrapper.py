@@ -3,6 +3,7 @@ import math
 import os
 import re
 import shutil
+import sys
 import time
 import timeit
 
@@ -82,11 +83,41 @@ TIFF_SLEEP = 10
 def run_sim_local(dir_fire, no_wait=None):
     stdout, stderr = None, None
     try:
-        proc = call_safe(start_process, [f"./{FILE_SIM_SCRIPT}"], dir_fire)
         if no_wait:
+            # HACK: convoluted way of spawning a new process so it survies this ending
             logging.info("Starting but not waiting for %s", dir_fire)
-        else:
-            stdout, stderr = finish_process(proc)
+            # https://stackoverflow.com/questions/6011235/run-a-program-from-python-and-have-it-continue-to-run-after-the-script-is-kille
+            # do the UNIX double-fork magic, see Stevens' "Advanced
+            # Programming in the UNIX Environment" for details (ISBN 0201563177)
+            try:
+                pid = os.fork()
+                if pid > 0:
+                    # parent process, return and keep running
+                    return
+            except OSError as e:
+                print >> sys.stderr, "fork #1 failed: %d (%s)" % (e.errno, e.strerror)
+                sys.exit(1)
+
+            os.setsid()
+
+            # do second fork
+            try:
+                pid = os.fork()
+                if pid > 0:
+                    # exit from second parent
+                    sys.exit(0)
+            except OSError as e:
+                print >> sys.stderr, "fork #2 failed: %d (%s)" % (e.errno, e.strerror)
+                sys.exit(1)
+            # proc = call_safe(start_process, [f"./{FILE_SIM_SCRIPT}"], dir_fire)
+            # os._exit(os.EX_OK)
+        # else:
+        #     proc = call_safe(start_process, [f"./{FILE_SIM_SCRIPT}"], dir_fire)
+        #     stdout, stderr = finish_process(proc)
+        proc = call_safe(start_process, [f"./{FILE_SIM_SCRIPT}"], dir_fire)
+        stdout, stderr = finish_process(proc)
+        if no_wait:
+            os._exit(os.EX_OK)
     except KeyboardInterrupt as ex:
         raise ex
     except Exception as ex:
