@@ -25,11 +25,15 @@ static const InnerPos INVALID_INNER_POSITION{};
 static const pair<DistanceSize, InnerPos> INVALID_INNER_PAIR{INVALID_DISTANCE, {}};
 static const InnerSize INVALID_INNER_LOCATION = INVALID_INNER_PAIR.second.first;
 static const SpreadData INVALID_SPREAD_DATA{
-  INVALID_TIME,
+  INVALID_TIME
+#ifndef MODE_BP_ONLY
+  ,
   static_cast<IntensitySize>(0),
   INVALID_ROS,
   Direction::Invalid,
-  Direction::Invalid};
+  Direction::Invalid
+#endif
+};
 set<XYPos> CellPoints::unique() const noexcept
 {
   // // if any point is invalid then they all have to be
@@ -54,16 +58,24 @@ size_t CellPoints::size() const noexcept
 }
 #endif
 CellPoints::CellPoints(const Idx cell_x, const Idx cell_y) noexcept
-  : spread_arrival_(INVALID_SPREAD_DATA),
+  :
+#ifndef MODE_BP_ONLY
+    spread_arrival_(INVALID_SPREAD_DATA),
     spread_internal_(INVALID_SPREAD_DATA),
     spread_exit_(INVALID_SPREAD_DATA),
+#endif
     pts_({}),
-    cell_x_y_(cell_x, cell_y),
+    cell_x_y_(cell_x, cell_y)
+#ifndef MODE_BP_ONLY
+    ,
     src_(DIRECTION_NONE)
+#endif
 {
   std::fill(pts_.distances().begin(), pts_.distances().end(), INVALID_DISTANCE);
   std::fill(pts_.points().begin(), pts_.points().end(), INVALID_INNER_POSITION);
+#ifndef MODE_BP_ONLY
   std::fill(pts_.directions().begin(), pts_.directions().end(), INVALID_DIRECTION);
+#endif
 
 #ifdef DEBUG_CELLPOINTS
   logging::note("CellPoints is size %ld after creation and should be empty", size());
@@ -80,13 +92,21 @@ CellPoints::CellPoints(const CellPoints* rhs) noexcept
   *this = *rhs;
 }
 CellPoints::CellPoints(
+#ifndef MODE_BP_ONLY
   const XYPos& src,
+#endif
   const SpreadData& spread_current,
   const XYSize x,
   const XYSize y) noexcept
   : CellPoints(static_cast<Idx>(x), static_cast<Idx>(y))
 {
-  insert(src, spread_current, x, y);
+  insert(
+#ifndef MODE_BP_ONLY
+    src,
+#endif
+    spread_current,
+    x,
+    y);
 }
 
 using DISTANCE_PAIR = pair<DistanceSize, DistanceSize>;
@@ -126,7 +146,9 @@ constexpr std::array<DISTANCE_PAIR, NUM_DIRECTIONS> POINTS_OUTER{
 
 // TODO: add angle
 CellPoints& CellPoints::insert(
+#ifndef MODE_BP_ONLY
   const XYPos& src,
+#endif
   const SpreadData& spread_current,
   const XYSize x,
   const XYSize y) noexcept
@@ -141,22 +163,27 @@ CellPoints& CellPoints::insert(
     intensity,
     raz.asDegrees());
 #endif
+#ifndef MODE_BP_ONLY
   // count things as the same time if within a tolerance
   constexpr auto TIME_EPSILON_SECONDS = 1.0 * MINUTE_SECONDS;
   constexpr auto TIME_EPSILON = TIME_EPSILON_SECONDS / DAY_SECONDS;
+#endif
   // logging::note(
   //   "TIME_EPSILON of %f is %f seconds",
   //   TIME_EPSILON,
   //   TIME_EPSILON_SECONDS);
   if (0 < spread_current.time() && 0 > spread_arrival_.time())
   {
+#ifndef MODE_BP_ONLY
     logging::verbose(
       "No time so setting ros to %f at time %f",
       spread_current.ros(),
       spread_current.time());
+#endif
     // record ros and time if nothing yet
     spread_arrival_ = spread_current;
   }
+#ifndef MODE_BP_ONLY
   else
   {
     // initial burn will have an invalid direction, so needs to burn everywhere
@@ -201,6 +228,7 @@ CellPoints& CellPoints::insert(
       }
     }
   }
+#endif
   // NOTE: use location inside cell so smaller types can be more precise
   // since digits aren't wasted on cell
   const auto p0 = InnerPos(
@@ -220,11 +248,15 @@ CellPoints& CellPoints::insert(
     const auto d = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
     auto& p_d = pts_.distances()[i];
     auto& p_p = pts_.points()[i];
+#ifndef MODE_BP_ONLY
     auto& p_a = pts_.directions()[i];
+#endif
     closer[i] = (d < p_d);
     p_p = closer[i] ? p0 : p_p;
     p_d = closer[i] ? d : p_d;
+#ifndef MODE_BP_ONLY
     p_a = closer[i] ? spread_current.direction().asDegrees() : p_a;
+#endif
     // // worse than two checks + assignment
     // const auto& [p_new, d_new] =
     //   (d < p_d)
@@ -241,7 +273,7 @@ CellPoints& CellPoints::insert(
 #ifdef DEBUG_CELLPOINTS
   logging::note("now have %ld points", size());
 #endif
-
+#ifndef MODE_BP_ONLY
   const Location& dst = location();
   // adds 0 if the same so try without checking
   // if (src != dst)
@@ -283,6 +315,7 @@ CellPoints& CellPoints::insert(
       }
     }
   }
+#endif
   // FIX: do something with spread on exit
   return *this;
 }
@@ -296,17 +329,21 @@ CellPoints& CellPoints::insert(const InnerPos& p) noexcept
 {
   // HACK: FIX: just do something for now
   insert(
+#ifndef MODE_BP_ONLY
     INVALID_XY_POSITION,
+#endif
     INVALID_SPREAD_DATA,
     p.first,
     p.second);
   return *this;
 }
 
+#ifndef MODE_BP_ONLY
 void CellPoints::add_source(const CellIndex src)
 {
   src_ |= src;
 }
+#endif
 CellPoints& CellPoints::merge(const CellPoints& rhs)
 {
 #ifdef DEBUG_CELLPOINTS
@@ -328,7 +365,9 @@ CellPoints& CellPoints::merge(const CellPoints& rhs)
       p0[i] = p1[i];
     }
   }
+#ifndef MODE_BP_ONLY
   add_source(rhs.src_);
+#endif
 #ifdef DEBUG_CELLPOINTS
   logging::note(
     "Merging %ld with %ld gives %ld pts",
@@ -366,7 +405,9 @@ CellPointsMap::CellPointsMap()
 {
 }
 CellPoints& CellPointsMap::insert(
+#ifndef MODE_BP_ONLY
   const XYPos& src,
+#endif
   const SpreadData& spread_current,
   const XYSize x,
   const XYSize y) noexcept
@@ -375,13 +416,25 @@ CellPoints& CellPointsMap::insert(
   const auto n0 = size();
 #endif
   const Location location{static_cast<Idx>(y), static_cast<Idx>(x)};
-  auto e = map_.try_emplace(location, src, spread_current, x, y);
+  auto e = map_.try_emplace(location,
+#ifndef MODE_BP_ONLY
+                            src,
+#endif
+                            spread_current,
+                            x,
+                            y);
   CellPoints& cell_pts = e.first->second;
   if (!e.second)
   {
     // FIX: should use max of whatever ROS has entered during this time and not just first ros
     // tried to add new CellPoints but already there
-    cell_pts.insert(src, spread_current, x, y);
+    cell_pts.insert(
+#ifndef MODE_BP_ONLY
+      src,
+#endif
+      spread_current,
+      x,
+      y);
   }
 #ifdef DEBUG_CELLPOINTS
   logging::note(

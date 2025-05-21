@@ -15,14 +15,32 @@ using fs::wx::Direction;
 // using sim::CellPoints;
 using topo::Cell;
 using topo::SpreadKey;
-class SpreadData : std::tuple<DurationSize, IntensitySize, ROSSize, Direction, Direction>
+class SpreadData : std::tuple<DurationSize
+#ifndef MODE_BP_ONLY
+                              ,
+                              IntensitySize,
+                              ROSSize,
+                              Direction,
+                              Direction
+#endif
+                              >
 {
 public:
-  using std::tuple<DurationSize, IntensitySize, ROSSize, Direction, Direction>::tuple;
+  using std::tuple<DurationSize
+#ifndef MODE_BP_ONLY
+
+                   ,
+                   IntensitySize,
+                   ROSSize,
+                   Direction,
+                   Direction
+#endif
+                   >::tuple;
   DurationSize time() const
   {
     return std::get<0>(*this);
   }
+#ifndef MODE_BP_ONLY
   IntensitySize intensity() const
   {
     return std::get<1>(*this);
@@ -39,6 +57,7 @@ public:
   {
     return std::get<4>(*this);
   }
+#endif
 };
 
 static constexpr size_t FURTHEST_N = 0;
@@ -87,9 +106,16 @@ class CellPointsMap;
 // using array_cellpts = std::array<dist_pt, NUM_DIRECTIONS>;
 using array_dists = std::array<DistanceSize, NUM_DIRECTIONS>;
 using array_pts = std::array<InnerPos, NUM_DIRECTIONS>;
+#ifndef MODE_BP_ONLY
 // using array_cellpts = pair<CellPoints::array_dists, CellPoints::array_pts>;
 using array_dirs = std::array<MathSize, NUM_DIRECTIONS>;
-using array_cellpts = std::tuple<array_dists, array_pts, array_dirs>;
+#endif
+using array_cellpts = std::tuple<array_dists, array_pts
+#ifndef MODE_BP_ONLY
+                                 ,
+                                 array_dirs
+#endif
+                                 >;
 //   using array_cellpts = std::array<DistanceSize, NUM_DIRECTIONS>;
 class CellPointArrays
   : public array_cellpts
@@ -104,10 +130,12 @@ public:
   {
     return std::get<1>(*this);
   }
+#ifndef MODE_BP_ONLY
   inline const array_dirs& directions() const
   {
     return std::get<2>(*this);
   }
+#endif
   inline array_dists& distances()
   {
     return std::get<0>(*this);
@@ -116,10 +144,12 @@ public:
   {
     return std::get<1>(*this);
   }
+#ifndef MODE_BP_ONLY
   inline array_dirs& directions()
   {
     return std::get<2>(*this);
   }
+#endif
 };
 /**
  * Points in a cell furthest in each direction
@@ -135,7 +165,9 @@ public:
   CellPoints(const CellPoints* rhs) noexcept;
   //   CellPoints(const vector<InnerPos>& pts) noexcept;
   CellPoints(
+#ifndef MODE_BP_ONLY
     const XYPos& src,
+#endif
     const SpreadData& spread_current,
     const XYSize x,
     const XYSize y) noexcept;
@@ -144,7 +176,9 @@ public:
   CellPoints& operator=(CellPoints&& rhs) noexcept = default;
   CellPoints& operator=(const CellPoints& rhs) noexcept = default;
   CellPoints& insert(
+#ifndef MODE_BP_ONLY
     const XYPos& src,
+#endif
     const SpreadData& spread_current,
     const XYSize x,
     const XYSize y) noexcept;
@@ -164,11 +198,13 @@ public:
   //     }
   //     return *this;
   //   }
+#ifndef MODE_BP_ONLY
   void add_source(const CellIndex src);
   CellIndex sources() const
   {
     return src_;
   }
+#endif
   CellPoints& merge(const CellPoints& rhs);
   set<XYPos> unique() const noexcept;
 #ifdef DEBUG_CELLPOINTS
@@ -181,8 +217,10 @@ public:
   //   const array_pts points() const;
   bool empty() const;
   SpreadData spread_arrival_;
+#ifndef MODE_BP_ONLY
   SpreadData spread_internal_;
   SpreadData spread_exit_;
+#endif
   // DurationSize arrival_time_;
   // IntensitySize intensity_at_arrival_;
   // ROSSize ros_at_arrival_;
@@ -193,7 +231,9 @@ public:
   CellPointArrays pts_;
   // use Idx instead of Location so it can be negative (invalid)
   CellPos cell_x_y_;
+#ifndef MODE_BP_ONLY
   CellIndex src_;
+#endif
 private:
   CellPoints(const Idx cell_x, const Idx cell_y) noexcept;
   CellPoints(const XYPos& p) noexcept;
@@ -214,7 +254,9 @@ public:
   //   const XYSize x,
   //   const XYSize y) noexcept;
   CellPoints& insert(
+#ifndef MODE_BP_ONLY
     const XYPos& src,
+#endif
     const SpreadData& spread_current,
     const XYSize x,
     const XYSize y) noexcept;
