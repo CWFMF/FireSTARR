@@ -69,9 +69,13 @@ public:
                static_cast<Day>(start_date),
                static_cast<Day>(end_date))
   {
+#ifndef MODE_BP_ONLY
     registerObserver(new IntensityObserver(*this));
+#endif
     registerObserver(new ArrivalObserver(*this));
+#ifndef MODE_BP_ONLY
     registerObserver(new SourceObserver(*this));
+#endif
     addEvent(Event::makeEnd(end_date));
     last_save_ = end_date;
     final_sizes_ = {};

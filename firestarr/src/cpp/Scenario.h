@@ -413,12 +413,14 @@ public:
    * \param time Time to save data for
    */
   void saveObservers(DurationSize time) const;
+#ifndef MODE_BP_ONLY
   /**
    * \brief Save burn intensity information
    * \param dir Directory to save to
    * \param base_name Base file name
    */
   void saveIntensity(const string& dir, const string& base_name) const;
+#endif
   /**
    * \brief Whether or not this Scenario has run already
    * \return Whether or not this Scenario has run already

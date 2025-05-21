@@ -69,9 +69,10 @@ protected:
 };
 
 static auto CacheIntensitySize = GridMapCache<IntensitySize>(NO_INTENSITY);
+#ifndef MODE_BP_ONLY
 static auto CacheMathSize = GridMapCache<MathSize>(-1);
 static auto CacheDegreesSize = GridMapCache<DegreesSize>(-1);
-
+#endif
 // IntensityMap::IntensityMap(const Model& model, topo::Perimeter* perimeter) noexcept
 //   : model_(model),
 //     intensity_max_(acquire_map(model)),
@@ -101,8 +102,10 @@ static auto CacheDegreesSize = GridMapCache<DegreesSize>(-1);
 IntensityMap::IntensityMap(const Model& model) noexcept
   : model_(model),
     intensity_max_(CacheIntensitySize.acquire_map(model)),
+#ifndef MODE_BP_ONLY
     rate_of_spread_at_max_(CacheMathSize.acquire_map(model)),
     direction_of_spread_at_max_(CacheDegreesSize.acquire_map(model)),
+#endif
     is_burned_(model.getBurnedVector())
 {
 }
@@ -112,8 +115,10 @@ IntensityMap::IntensityMap(const IntensityMap& rhs)
   : IntensityMap(rhs.model_)
 {
   *intensity_max_ = *rhs.intensity_max_;
+#ifndef MODE_BP_ONLY
   *rate_of_spread_at_max_ = *rhs.rate_of_spread_at_max_;
   *direction_of_spread_at_max_ = *rhs.direction_of_spread_at_max_;
+#endif
   is_burned_ = rhs.is_burned_;
 }
 
@@ -128,8 +133,10 @@ IntensityMap::~IntensityMap() noexcept
 {
   model_.releaseBurnedVector(is_burned_);
   CacheIntensitySize.release_map(std::move(intensity_max_));
+#ifndef MODE_BP_ONLY
   CacheMathSize.release_map(std::move(rate_of_spread_at_max_));
   CacheDegreesSize.release_map(std::move(direction_of_spread_at_max_));
+#endif
 }
 void IntensityMap::applyPerimeter(const topo::Perimeter& perimeter) noexcept
 {
@@ -189,12 +196,23 @@ bool IntensityMap::isSurrounded(const Location& location) const
 }
 void IntensityMap::ignite(const Location& location)
 {
-  burn(location, 1, 0, fs::wx::Direction::Invalid);
+  burn(location
+#ifndef MODE_BP_ONLY
+       ,
+       1,
+       0,
+       fs::wx::Direction::Invalid
+#endif
+  );
 }
-void IntensityMap::burn(const Location& location,
+void IntensityMap::burn(const Location& location
+#ifndef MODE_BP_ONLY
+                        ,
                         IntensitySize intensity,
                         MathSize ros,
-                        fs::wx::Direction raz)
+                        fs::wx::Direction raz
+#endif
+)
 {
   lock_guard<mutex> lock(mutex_);
   // const auto is_new = !(*is_burned_)[location.hash()];
@@ -218,11 +236,17 @@ void IntensityMap::burn(const Location& location,
   // }
   if (!(*is_burned_)[location.hash()])
   {
-    intensity_max_->set(location, intensity);
+    intensity_max_->set(location,
+#ifdef MODE_BP_ONLY
+                        1);
+#else
+                        intensity);
     rate_of_spread_at_max_->set(location, ros);
     direction_of_spread_at_max_->set(location, static_cast<DegreesSize>(raz.asDegrees()));
+#endif
     (*is_burned_).set(location.hash());
   }
+#ifndef MODE_BP_ONLY
   else
   {
     const auto intensity_old = intensity_max_->at(location);
@@ -246,7 +270,9 @@ void IntensityMap::burn(const Location& location,
       direction_of_spread_at_max_->set(location, static_cast<DegreesSize>(raz.asDegrees()));
     }
   }
+#endif
 }
+#ifndef MODE_BP_ONLY
 void IntensityMap::save(const string& dir, const string& base_name) const
 {
   lock_guard<mutex> lock(mutex_);
@@ -264,6 +290,7 @@ void IntensityMap::save(const string& dir, const string& base_name) const
   // rate_of_spread_at_max_->saveToFile(dir, name_ros);
   direction_of_spread_at_max_->saveToFile(dir, name_raz);
 }
+#endif
 MathSize IntensityMap::fireSize() const
 {
   lock_guard<mutex> lock(mutex_);

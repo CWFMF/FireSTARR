@@ -480,10 +480,12 @@ void Scenario::saveObservers(const DurationSize time) const
            static_cast<int>(time));
   saveObservers(string(buffer));
 }
+#ifndef MODE_BP_ONLY
 void Scenario::saveIntensity(const string& dir, const string& base_name) const
 {
   intensity_->save(dir, base_name);
 }
+#endif
 bool Scenario::ran() const noexcept
 {
   return ran_;
@@ -569,7 +571,14 @@ void Scenario::burn(const Event& event)
 #endif
   // Observers only care about cells burning so do it here
   notify(event);
-  intensity_->burn(event.cell(), event.intensity(), event.ros(), event.raz());
+  intensity_->burn(event.cell()
+#ifndef MODE_BP_ONLY
+                     ,
+                   event.intensity(),
+                   event.ros(),
+                   event.raz()
+#endif
+  );
 #ifdef DEBUG_GRIDS
   log_check_fatal(
     !intensity_->hasBurned(event.cell()),
@@ -683,9 +692,11 @@ Scenario* Scenario::run(map<DurationSize, ProbabilityMap*>* probabilities)
     {
       const auto fake_event = Event::makeFireSpread(
         start_time_,
+#ifndef MODE_BP_ONLY
         0,
         0,
         Direction::Invalid,
+#endif
         location);
       burn(fake_event);
     }
@@ -1109,21 +1120,29 @@ void Scenario::scheduleFireSpread(const Event& event)
       log_points(step_, STAGE_SPREAD, new_time, pts);
       if (canBurn(for_cell) && max_intensity > 0)
       {
-        // // HACK: make sure it can't round down to 0
-        // const auto intensity = static_cast<IntensitySize>(max(
-        //   1.0,
-        //   max_intensity));
-        // HACK: just use the first cell as the source
-        // FIX: HACK: only output spread within for now
-        // const auto& spread = pts.spread_internal_;
+      // // HACK: make sure it can't round down to 0
+      // const auto intensity = static_cast<IntensitySize>(max(
+      //   1.0,
+      //   max_intensity));
+      // HACK: just use the first cell as the source
+      // FIX: HACK: only output spread within for now
+      // const auto& spread = pts.spread_internal_;
+#ifndef MODE_BP_ONLY
         const auto& spread = pts.spread_arrival_;
+#endif
         const auto fake_event = Event::makeFireSpread(
           new_time,
+#ifndef MODE_BP_ONLY
           spread.intensity(),
           spread.ros(),
           spread.direction(),
-          for_cell,
-          pts.sources());
+#endif
+          for_cell
+#ifndef MODE_BP_ONLY
+          ,
+          pts.sources()
+#endif
+        );
         burn(fake_event);
       }
       if (!(*unburnable_)[for_cell.hash()]

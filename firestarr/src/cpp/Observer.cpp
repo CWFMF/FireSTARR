@@ -45,6 +45,7 @@ DurationSize ArrivalObserver::getValue(const Event& event) const noexcept
 #endif
   return event.time();
 }
+#ifndef MODE_BP_ONLY
 SourceObserver::SourceObserver(const Scenario& scenario)
   : MapObserver<CellIndex>(scenario, static_cast<CellIndex>(255), "source")
 {
@@ -68,4 +69,5 @@ void IntensityObserver::save(const string& dir, const string& base_name) const
   // FIX: save what scenario is tracking for now, but should be converted
   scenario_.saveIntensity(dir, base_name);
 }
+#endif
 }
