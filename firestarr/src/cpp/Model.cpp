@@ -772,7 +772,6 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
                                                         const DurationSize start,
                                                         const Day start_day)
 {
-  mutex mutex_;
   auto last_date = start_day;
   for (const auto& i : Settings::outputDateOffsets())
   {
@@ -836,7 +835,7 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
   // typedef std::chrono::duration<float> s;
   bool is_being_cancelled = false;
   // HACK: use initial value for type
-  auto timer = std::thread([this, &mutex_, &scenarios_per_iteration, &scenarios_required_done, &scenarios_done, &all_probabilities, &iterations_done, &runs_left, &all_sizes, &all_iterations, &is_being_cancelled, &probabilities, &start_day]() {
+  auto timer = std::thread([this, &scenarios_per_iteration, &scenarios_required_done, &scenarios_done, &all_probabilities, &iterations_done, &runs_left, &all_sizes, &all_iterations, &is_being_cancelled, &probabilities, &start_day]() {
     constexpr auto CHECK_INTERVAL = std::chrono::seconds(1);
     // const auto SLEEP_INTERVAL = std::chrono::seconds(Settings::maximumTimeSeconds());
     do
@@ -850,46 +849,43 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
       logging::verbose("Checking clock [%ld of %ld]", runTime(), timeLimit());
     }
     while (runs_left > 0 && !shouldStop());
+    if (isOutOfTime())
     {
-      lock_guard<mutex> lock(mutex_);
-      if (isOutOfTime())
-      {
-        logging::warning("Ran out of time - cancelling simulations");
-      }
-      if (0 == iterations_done)
-      {
-        logging::warning("Ran out of time, but haven't finished any iterations, so cancelling all but first");
-      }
-      size_t i = 0;
-      for (auto& iter : all_iterations)
-      {
-        // don't cancel first iteration if no iterations are done
-        if (0 != iterations_done || 0 != i)
-        {
-          // if not over limit then just did all the runs so no warning
-          iter.cancel(shouldStop());
-        }
-        ++i;
-      }
-      // is_being_cancelled = (0 == iterations_done);
-      if (0 == iterations_done)
-      {
-        is_being_cancelled = true;
-        if (scenarios_required_done > 0)
-        {
-          logging::info("Saving interim results for (%ld of %ld) scenarios in timer thread", scenarios_required_done, scenarios_per_iteration);
-          saveProbabilities(all_probabilities[0], start_day, true);
-        }
-      }
-      const auto run_time_seconds = runTime().count();
-      // const auto run_time = last_checked_ - runningSince();
-      // const auto run_time_seconds = std::chrono::duration_cast<std::chrono::seconds>(run_time);
-      // const auto time_left = Settings::maximumTimeSeconds() - run_time_seconds.count();
-      const auto time_left = Settings::maximumTimeSeconds() - run_time_seconds;
-      logging::debug("Ending timer after %ld seconds with %ld seconds left",
-                     run_time_seconds,
-                     time_left);
+      logging::warning("Ran out of time - cancelling simulations");
     }
+    if (0 == iterations_done)
+    {
+      logging::warning("Ran out of time, but haven't finished any iterations, so cancelling all but first");
+    }
+    size_t i = 0;
+    for (auto& iter : all_iterations)
+    {
+      // don't cancel first iteration if no iterations are done
+      if (0 != iterations_done || 0 != i)
+      {
+        // if not over limit then just did all the runs so no warning
+        iter.cancel(shouldStop());
+      }
+      ++i;
+    }
+    // is_being_cancelled = (0 == iterations_done);
+    if (0 == iterations_done)
+    {
+      is_being_cancelled = true;
+      if (scenarios_required_done > 0)
+      {
+        logging::info("Saving interim results for (%ld of %ld) scenarios in timer thread", scenarios_required_done, scenarios_per_iteration);
+        saveProbabilities(all_probabilities[0], start_day, true);
+      }
+    }
+    const auto run_time_seconds = runTime().count();
+    // const auto run_time = last_checked_ - runningSince();
+    // const auto run_time_seconds = std::chrono::duration_cast<std::chrono::seconds>(run_time);
+    // const auto time_left = Settings::maximumTimeSeconds() - run_time_seconds.count();
+    const auto time_left = Settings::maximumTimeSeconds() - run_time_seconds;
+    logging::debug("Ending timer after %ld seconds with %ld seconds left",
+                   run_time_seconds,
+                   time_left);
   });
   auto threads = list<std::thread>{};
   // const auto finalize_probabilities = [&threads, &timer, &probabilities](bool do_cancel) {
@@ -1032,56 +1028,53 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
         threads.pop_front();
         ++k;
       }
+      auto final_sizes = iteration.finalSizes();
+      ++iterations_done;
+      for (auto& kv : all_probabilities[cur_iter])
       {
-        lock_guard<mutex> lock(mutex_);
-        auto final_sizes = iteration.finalSizes();
-        for (auto& kv : all_probabilities[cur_iter])
+        probabilities[kv.first]->addProbabilities(*kv.second);
+        // clear so we don't double count
+        kv.second->reset();
+      }
+      if (!add_statistics(&all_sizes, &means, &pct, final_sizes))
+      {
+        // ran out of time but timer should cancel everything
+        return finalize_probabilities();
+      }
+      // if (iterations_done >= MIN_ITERATIONS_BEFORE_CHECK)
+      {
+        if (Settings::surface())
         {
-          probabilities[kv.first]->addProbabilities(*kv.second);
-          // clear so we don't double count
-          kv.second->reset();
-        }
-        ++iterations_done;
-        if (!add_statistics(&all_sizes, &means, &pct, final_sizes))
-        {
-          // ran out of time but timer should cancel everything
-          return finalize_probabilities();
-        }
-        // if (iterations_done >= MIN_ITERATIONS_BEFORE_CHECK)
-        {
-          if (Settings::surface())
-          {
-            runs_left = ignitionScenarios() - iterations_done;
-          }
-          else
-          {
-            runs_left = runs_required(iterations_done, &all_sizes, &means, &pct, *this);
-            // runs_left = runs_required(iterations_done, &means, &pct, *this);
-            logging::note("Need another %d iterations", runs_left);
-          }
-        }
-        if (runs_left > 0)
-        {
-          if (reset_iter(iteration))
-          {
-            auto& scenarios = iteration.getScenarios();
-            for (auto s : scenarios)
-            {
-              threads.emplace_back(run_scenario,
-                                   s,
-                                   cur_iter,
-                                   false);
-            }
-            ++cur_iter;
-            // loop around to start if required
-            cur_iter %= all_iterations.size();
-          }
+          runs_left = ignitionScenarios() - iterations_done;
         }
         else
         {
-          // no runs required, so stop
-          return finalize_probabilities();
+          runs_left = runs_required(iterations_done, &all_sizes, &means, &pct, *this);
+          // runs_left = runs_required(iterations_done, &means, &pct, *this);
+          logging::note("Need another %d iterations", runs_left);
         }
+      }
+      if (runs_left > 0)
+      {
+        if (reset_iter(iteration))
+        {
+          auto& scenarios = iteration.getScenarios();
+          for (auto s : scenarios)
+          {
+            threads.emplace_back(run_scenario,
+                                 s,
+                                 cur_iter,
+                                 false);
+          }
+          ++cur_iter;
+          // loop around to start if required
+          cur_iter %= all_iterations.size();
+        }
+      }
+      else
+      {
+        // no runs required, so stop
+        return finalize_probabilities();
       }
     }
     // everything should be done when this section ends
