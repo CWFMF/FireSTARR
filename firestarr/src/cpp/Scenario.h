@@ -155,7 +155,7 @@ public:
    */
   [[nodiscard]]
 #ifdef NDEBUG
-  constexpr
+  CONSTEXPR
 #endif
     topo::Cell
     cell(const Idx row, const Idx column) const
@@ -435,11 +435,13 @@ public:
                               const topo::Cell& cell,
                               const DurationSize time_at_location) const
   {
+#ifndef MODE_BP_ONLY
     if (Settings::deterministic())
     {
       // always survive if deterministic
       return true;
     }
+#endif
     try
     {
       const auto fire_wx = weather_;

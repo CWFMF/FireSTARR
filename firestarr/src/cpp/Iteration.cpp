@@ -20,6 +20,7 @@ Iteration::Iteration(vector<Scenario*> scenarios) noexcept
   : scenarios_(std::move(scenarios))
 {
 }
+#ifndef MODE_BP_ONLY
 Iteration* Iteration::reset_with_new_start(const shared_ptr<topo::Cell>& start_cell)
 {
   // HACK: ensure only called with surface
@@ -38,6 +39,7 @@ Iteration* Iteration::reset_with_new_start(const shared_ptr<topo::Cell>& start_c
   }
   return this;
 }
+#endif
 Iteration* Iteration::reset(mt19937* mt_extinction, mt19937* mt_spread)
 {
   cancelled_ = false;

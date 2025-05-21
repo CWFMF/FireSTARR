@@ -268,9 +268,9 @@ public:
    * \param column Column
    */
 #ifdef NDEBUG
-  constexpr
+  CONSTEXPR
 #endif
-    Location(const Idx row, const Idx column) noexcept
+  Location(const Idx row, const Idx column) noexcept
     : Location(row, column, doHash(row, column) & HashMask)
   {
 #ifdef DEBUG_GRIDS

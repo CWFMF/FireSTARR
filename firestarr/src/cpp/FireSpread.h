@@ -53,9 +53,9 @@ public:
              int nd,
              const wx::FwiWeather* weather,
              const wx::FwiWeather* weather_daily);
-  constexpr SpreadInfo(SpreadInfo&& rhs) noexcept = default;
+  CONSTEXPR SpreadInfo(SpreadInfo&& rhs) noexcept = default;
   SpreadInfo(const SpreadInfo& rhs) noexcept = default;
-  constexpr SpreadInfo& operator=(SpreadInfo&& rhs) noexcept = default;
+  CONSTEXPR SpreadInfo& operator=(SpreadInfo&& rhs) noexcept = default;
   SpreadInfo& operator=(const SpreadInfo& rhs) noexcept = default;
   // static MathSize calculateSpreadProbability(MathSize ros);
   /**

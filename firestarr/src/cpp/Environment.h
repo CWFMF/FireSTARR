@@ -154,7 +154,7 @@ public:
    */
   [[nodiscard]]
 #ifdef NDEBUG
-  constexpr
+  CONSTEXPR
 #endif
     Cell
     cell(const Idx row, const Idx column) const
@@ -189,7 +189,7 @@ public:
    */
   [[nodiscard]]
 #ifdef NDEBUG
-  constexpr
+  CONSTEXPR
 #endif
     Cell
     offset(const sim::Event& event,
@@ -211,11 +211,15 @@ public:
    * \return ProbabilityMap with the same extent as this
    */
   [[nodiscard]] sim::ProbabilityMap* makeProbabilityMap(DurationSize time,
-                                                        DurationSize start_time,
+                                                        DurationSize start_time
+#ifndef MODE_BP_ONLY
+                                                        ,
                                                         int min_value,
                                                         int low_max,
                                                         int med_max,
-                                                        int max_value) const;
+                                                        int max_value
+#endif
+  ) const;
   /**
    * \brief Create a GridMap<Other> covering this Environment
    * \tparam Other Type of GridMap
@@ -471,6 +475,7 @@ protected:
   {
     // take elevation at point so that if max grid size changes elevation doesn't
     logging::note("Start elevation is %d", elevation_);
+#ifndef MODE_BP_ONLY
     if (sim::Settings::saveSimulationArea())
     {
       logging::debug("Saving simulation area");
@@ -521,9 +526,13 @@ protected:
         convert_to_area);
       logging::debug("Done saving fuel grid");
     }
+#endif
   }
 private:
-  const string dir_out_;
+#ifdef CPP23
+  const
+#endif
+    string dir_out_;
   /**
    * \brief Cells representing Environment
    */

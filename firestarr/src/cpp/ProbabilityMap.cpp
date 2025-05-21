@@ -24,22 +24,29 @@ static mutex PATHS_INTERIM_MUTEX{};
 ProbabilityMap::ProbabilityMap(const string dir_out,
                                const DurationSize time,
                                const DurationSize start_time,
+#ifndef MODE_BP_ONLY
+
                                const int min_value,
                                const int low_max,
                                const int med_max,
                                const int max_value,
+#endif
                                const data::GridBase& grid_info)
   : dir_out_(dir_out),
     all_(data::GridMap<size_t>(grid_info, 0)),
+#ifndef MODE_BP_ONLY
     high_(data::GridMap<size_t>(grid_info, 0)),
     med_(data::GridMap<size_t>(grid_info, 0)),
     low_(data::GridMap<size_t>(grid_info, 0)),
+#endif
     time_(time),
     start_time_(start_time),
+#ifndef MODE_BP_ONLY
     min_value_(min_value),
     max_value_(max_value),
     low_max_(low_max),
     med_max_(med_max),
+#endif
     perimeter_(nullptr)
 {
 }
@@ -48,10 +55,12 @@ ProbabilityMap* ProbabilityMap::copyEmpty() const
   return new ProbabilityMap(dir_out_,
                             time_,
                             start_time_,
+#ifndef MODE_BP_ONLY
                             min_value_,
                             low_max_,
                             med_max_,
                             max_value_,
+#endif
                             all_);
 }
 void ProbabilityMap::setPerimeter(const topo::Perimeter* const perimeter)
@@ -63,12 +72,15 @@ void ProbabilityMap::addProbabilities(const ProbabilityMap& rhs)
 #ifndef DEBUG_PROBABILITY
   logging::check_fatal(rhs.time_ != time_, "Wrong time");
   logging::check_fatal(rhs.start_time_ != start_time_, "Wrong start time");
+#ifndef MODE_BP_ONLY
   logging::check_fatal(rhs.min_value_ != min_value_, "Wrong min value");
   logging::check_fatal(rhs.max_value_ != max_value_, "Wrong max value");
   logging::check_fatal(rhs.low_max_ != low_max_, "Wrong low max value");
   logging::check_fatal(rhs.med_max_ != med_max_, "Wrong med max value");
 #endif
+#endif
   lock_guard<mutex> lock(mutex_);
+#ifndef MODE_BP_ONLY
   if (Settings::saveIntensity())
   {
     for (auto&& kv : rhs.low_.data)
@@ -84,6 +96,7 @@ void ProbabilityMap::addProbabilities(const ProbabilityMap& rhs)
       high_.data[kv.first] += kv.second;
     }
   }
+#endif
   for (auto&& kv : rhs.all_.data)
   {
     all_.data[kv.first] += kv.second;
@@ -103,6 +116,7 @@ void ProbabilityMap::addProbability(const IntensityMap& for_time)
       const auto k = kv.first;
       const auto v = kv.second;
       all_.data[k] += 1;
+#ifndef MODE_BP_ONLY
       if (Settings::saveIntensity())
       {
         if (v >= min_value_ && v <= low_max_)
@@ -122,6 +136,7 @@ void ProbabilityMap::addProbability(const IntensityMap& for_time)
           logging::fatal("Value %d doesn't fit into any range", v);
         }
       }
+#endif
     });
   const auto size = for_time.fireSize();
   static_cast<void>(util::insert_sorted(&sizes_, size));
@@ -156,7 +171,7 @@ bool ProbabilityMap::record_if_interim(const char* filename) const
 {
   lock_guard<mutex> lock(PATHS_INTERIM_MUTEX);
   logging::verbose("Checking if %s is interim", filename);
-  if (NULL != strstr(filename, "interim_"))
+  if (nullptr != strstr(filename, "interim_"))
   {
     logging::verbose("Recording %s as interim", filename);
     // is an interim file, so keep path for later deleting
@@ -238,8 +253,10 @@ void ProbabilityMap::saveAll(const tm& start_time,
     auto text = (is_interim ? "interim_" : "") + prefix;
     return make_string(text.c_str(), t, day);
   };
+#ifndef MODE_BP_ONLY
   if (sim::Settings::runAsync())
   {
+#endif
     vector<std::future<void>> results{};
     if (Settings::saveProbability())
     {
@@ -249,6 +266,7 @@ void ProbabilityMap::saveAll(const tm& start_time,
                               fix_string("probability"),
                               is_interim));
     }
+#ifndef MODE_BP_ONLY
     if (Settings::saveOccurrence())
     {
       results.push_back(async(launch::async,
@@ -271,6 +289,7 @@ void ProbabilityMap::saveAll(const tm& start_time,
                               this,
                               fix_string("intensity_H")));
     }
+#endif
     results.push_back(async(launch::async,
                             &ProbabilityMap::saveSizes,
                             this,
@@ -279,6 +298,7 @@ void ProbabilityMap::saveAll(const tm& start_time,
     {
       result.wait();
     }
+#ifndef MODE_BP_ONLY
   }
   else
   {
@@ -298,6 +318,7 @@ void ProbabilityMap::saveAll(const tm& start_time,
     }
     saveSizes(fix_string("sizes"));
   }
+#endif
 }
 void ProbabilityMap::saveTotal(const string& base_name, const bool is_interim) const
 {
@@ -317,6 +338,7 @@ void ProbabilityMap::saveTotalCount(const string& base_name) const
 {
   saveToProbabilityFile<uint32_t>(all_, dir_out_, base_name, 1);
 }
+#ifndef MODE_BP_ONLY
 void ProbabilityMap::saveHigh(const string& base_name) const
 {
   saveToProbabilityFile<float>(high_, dir_out_, base_name, static_cast<float>(numSizes()));
@@ -329,12 +351,15 @@ void ProbabilityMap::saveLow(const string& base_name) const
 {
   saveToProbabilityFile<float>(low_, dir_out_, base_name, static_cast<float>(numSizes()));
 }
+#endif
 void ProbabilityMap::reset()
 {
   all_.clear();
+#ifndef MODE_BP_ONLY
   low_.clear();
   med_.clear();
   high_.clear();
+#endif
   sizes_.clear();
 }
 }

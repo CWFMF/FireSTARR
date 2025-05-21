@@ -785,6 +785,7 @@ public:
                                 std::function<R(T value)> convert,
                                 const R no_data) const
   {
+#ifndef MODE_BP_ONLY
     // NOTE: do this instead of function pointer because it's using templates
     if (fs::sim::Settings::saveAsAscii())
     {
@@ -795,6 +796,7 @@ public:
         no_data);
     }
     else
+#endif
     {
       return this->template saveToTiffFile<R>(
         dir,

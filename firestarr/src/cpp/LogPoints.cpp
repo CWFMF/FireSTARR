@@ -12,7 +12,7 @@ class LogPoints
 public:
   ~LogPoints()
   {
-    if (NULL != log_points_)
+    if (nullptr != log_points_)
     {
       fclose(log_points_);
       fclose(log_stages_);
@@ -47,7 +47,7 @@ public:
     }
     else
     {
-      static_assert(NULL == nullptr);
+      // static_assert(NULL == nullptr);
       log_points_ = nullptr;
       log_stages_ = nullptr;
     }

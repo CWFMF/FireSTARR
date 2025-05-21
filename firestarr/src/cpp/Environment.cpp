@@ -26,8 +26,10 @@ Environment Environment::load(const string dir_out,
                               const string& in_elevation)
 {
   logging::note("Fuel raster is %s", in_fuel.c_str());
+#ifndef MODE_BP_ONLY
   if (sim::Settings::runAsync())
   {
+#endif
     logging::debug("Loading grids async");
     auto fuel = async(launch::async, [&in_fuel, &point]() { return FuelGrid::readTiff(in_fuel, point, sim::Settings::fuelLookup()); });
     auto elevation = async(launch::async, [&in_elevation, &point]() { return ElevationGrid::readTiff(in_elevation, point); });
@@ -36,6 +38,7 @@ Environment Environment::load(const string dir_out,
                        *unique_ptr<FuelGrid>(fuel.get()),
                        *unique_ptr<ElevationGrid>(elevation.get()),
                        point);
+#ifndef MODE_BP_ONLY
   }
   logging::warning("Loading grids synchronously");
   // HACK: need to copy strings since closures do that above
@@ -45,21 +48,28 @@ Environment Environment::load(const string dir_out,
                      *unique_ptr<ElevationGrid>(
                        ElevationGrid::readTiff(string(in_elevation), point)),
                      point);
+#endif
 }
 sim::ProbabilityMap* Environment::makeProbabilityMap(const DurationSize time,
-                                                     const DurationSize start_time,
+                                                     const DurationSize start_time
+#ifndef MODE_BP_ONLY
+                                                     ,
                                                      const int min_value,
                                                      const int low_max,
                                                      const int med_max,
-                                                     const int max_value) const
+                                                     const int max_value
+#endif
+) const
 {
   return new sim::ProbabilityMap(dir_out_,
                                  time,
                                  start_time,
+#ifndef MODE_BP_ONLY
                                  min_value,
                                  low_max,
                                  med_max,
                                  max_value,
+#endif
                                  *cells_);
 }
 Environment Environment::loadEnvironment(const string dir_out,

@@ -596,13 +596,17 @@ public:
    */
   [[nodiscard]] MathSize grass_curing(const int nd, const wx::FwiWeather& wx) const override
   {
-    return sim::Settings::forceStaticCuring()
-           ?   // forcing curing value
-             sim::Settings::staticCuring()
-           : wx.dc().asValue() > 500
-               ?   // we're in drought conditions
-               100
-               : calculate_grass_curing(nd);
+    return
+#ifndef MODE_BP_ONLY
+      sim::Settings::forceStaticCuring()
+        ?   // forcing curing value
+        sim::Settings::staticCuring()
+        :
+#endif
+        wx.dc().asValue() > 500
+          ?   // we're in drought conditions
+          100
+          : calculate_grass_curing(nd);
   }
   /**
    * \brief Calculate base rate of spread multiplier
@@ -1231,13 +1235,17 @@ template <class FuelSpring, class FuelSummer>
                                                     FuelSummer>& fuel) noexcept
 {
   // if not green yet, then still in spring conditions
-  return sim::Settings::forceGreenup()
-         ? fuel.summer()
-       : sim::Settings::forceNoGreenup()
-         ? fuel.spring()
-       : calculate_is_green(nd)
-         ? fuel.summer()
-         : fuel.spring();
+  return
+#ifndef MODE_BP_ONLY
+    sim::Settings::forceGreenup()
+      ? fuel.summer()
+    : sim::Settings::forceNoGreenup()
+      ? fuel.spring()
+    :
+#endif
+    calculate_is_green(nd)
+      ? fuel.summer()
+      : fuel.spring();
 }
 template <class FuelSpring, class FuelSummer>
 [[nodiscard]] MathSize compare_by_season(const FuelVariable<FuelSpring, FuelSummer>& fuel,

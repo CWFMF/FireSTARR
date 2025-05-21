@@ -4,6 +4,15 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
+#define MODE_BP_ONLY 1
+#if __cplusplus >= 202211L   // C++23
+#define CPP23
+#endif
+#if __cpp_constexpr >= 202211L   // C++23
+#define CONSTEXPR constexpr
+#else
+#define CONSTEXPR
+#endif
 #include "debug_settings.h"
 
 // #define VLD_FORCE_ENABLE

@@ -145,10 +145,14 @@ MathSize SpreadInfo::initial(SpreadInfo& spread,
 }
 static MathSize find_min_ros(const Scenario& scenario, const DurationSize time)
 {
-  return Settings::deterministic()
-         ? Settings::minimumRos()
-         : std::max(scenario.spreadThresholdByRos(time),
-                    Settings::minimumRos());
+  return
+#ifndef MODE_BP_ONLY
+    Settings::deterministic()
+      ? Settings::minimumRos()
+      :
+#endif
+      std::max(scenario.spreadThresholdByRos(time),
+               Settings::minimumRos());
 }
 SpreadInfo::SpreadInfo(const Scenario& scenario,
                        const DurationSize time,

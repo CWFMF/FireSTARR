@@ -178,6 +178,7 @@ static constexpr LogValue LOG_0_85{-0.16251892949777494};
 static constexpr LogValue LOG_0_90{-0.10536051565782628};
 static constexpr LogValue LOG_1_00{0.0};
 #ifndef _WIN32
+#if __cpp_constexpr >= 202211L   // C++20
 // windows won't use constexpr with log but we can MathSize check numbers are right when compiling elsewhere
 static constexpr LogValue LOG_0_70_CALC{log(0.7)};
 static constexpr LogValue LOG_0_75_CALC{log(0.75)};
@@ -190,5 +191,6 @@ static_assert(abs((LOG_0_75 - LOG_0_75_CALC).asValue()) < numeric_limits<MathSiz
 static_assert(abs((LOG_0_80 - LOG_0_80_CALC).asValue()) < numeric_limits<MathSize>::epsilon());
 static_assert(abs((LOG_0_90 - LOG_0_90_CALC).asValue()) < numeric_limits<MathSize>::epsilon());
 static_assert(abs((LOG_1_00 - LOG_1_00_CALC).asValue()) < numeric_limits<MathSize>::epsilon());
+#endif
 #endif
 }

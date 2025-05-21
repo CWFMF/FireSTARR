@@ -351,11 +351,15 @@ int test(
   const AspectSize constant_aspect,
   const bool test_all)
 {
-  // FIX: I think this does a lot of the same things as the test code is doing because it was
-  // derived from this code
+// FIX: I think this does a lot of the same things as the test code is doing because it was
+// derived from this code
+#ifndef MODE_BP_ONLY
   Settings::setDeterministic(true);
+#endif
   Settings::setMinimumRos(0.0);
+#ifndef MODE_BP_ONLY
   Settings::setSavePoints(false);
+#endif
   // make sure all tests run regardless of how long it takes
   Settings::setMaximumTimeSeconds(numeric_limits<size_t>::max());
   const auto hours = INVALID_TIME == num_hours ? DEFAULT_HOURS : num_hours;

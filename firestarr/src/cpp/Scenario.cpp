@@ -68,7 +68,9 @@ void Scenario::clear() noexcept
   arrival_ = {};
   //  points_.clear();
   points_ = {};
+#ifndef MODE_BP_ONLY
   if (!Settings::surface())
+#endif
   {
     spread_info_ = {};
   }
@@ -435,10 +437,12 @@ Scenario::Scenario(Model* model,
   logging::check_fatal(last_save > weather_->maxDate(),
                        "No weather for last save time %s",
                        make_timestamp(model->year(), last_save).c_str());
+#ifndef MODE_BP_ONLY
   init_log_points(model_->outputDirectory(),
                   Settings::savePoints(),
                   id_,
                   start_time_);
+#endif
 }
 void Scenario::saveStats(const DurationSize time) const
 {
@@ -705,8 +709,13 @@ Scenario* Scenario::run(map<DurationSize, ProbabilityMap*>* probabilities)
   const auto completed = ++COMPLETED;
   // const auto count = Settings::surface() ? model_->ignitionScenarios() : (+COUNT);
   // HACK: use + to pull value out of atomic
-  const auto count = Settings::surface() ? model_->scenarioCount() : (+COUNT);
+  const auto count =
+#ifndef MODE_BP_ONLY
+    Settings::surface() ? model_->scenarioCount() :
+#endif
+                        (+COUNT);
   const auto log_level = (0 == (completed % 1000)) ? logging::LOG_NOTE : logging::LOG_INFO;
+#ifndef MODE_BP_ONLY
   if (Settings::surface())
   {
     const auto ratio_done = static_cast<MathSize>(completed) / count;
@@ -722,6 +731,7 @@ Scenario* Scenario::run(map<DurationSize, ProbabilityMap*>* probabilities)
                currentFireSize());
   }
   else
+#endif
   {
 #ifdef NDEBUG
     log_output(log_level,
@@ -929,8 +939,16 @@ void Scenario::scheduleFireSpread(const Event& event)
   const auto this_time = util::time_index(time);
   // const auto wx_time = Settings::surface() ? util::to_time(util::time_index(static_cast<Day>(time), 16)) : util::to_time(this_time);
   // const auto wx_time = util::to_time(this_time);
-  const auto wx = Settings::surface() ? model_->yesterday() : weather(time);
-  const auto wx_daily = Settings::surface() ? model_->yesterday() : weather_daily(time);
+  const auto wx =
+#ifndef MODE_BP_ONLY
+    Settings::surface() ? model_->yesterday() :
+#endif
+                        weather(time);
+  const auto wx_daily =
+#ifndef MODE_BP_ONLY
+    Settings::surface() ? model_->yesterday() :
+#endif
+                        weather_daily(time);
   // note("time is %f", time);
   current_time_ = time;
   logging::check_fatal(nullptr == wx, "No weather available for time %f", time);
@@ -958,7 +976,9 @@ void Scenario::scheduleFireSpread(const Event& event)
     //                      "Expected to only pick weather time once");
     current_time_index_ = this_time;
     // seemed like it would be good to keep offsets but max_ros_ needs to reset or things slow to a crawl?
+#ifndef MODE_BP_ONLY
     if (!Settings::surface())
+#endif
     {
       spread_info_ = {};
     }

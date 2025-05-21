@@ -23,7 +23,7 @@ PJ* normalized_context(PJ_CONTEXT* C, const string& proj4_from, const string& pr
     C,
     proj4_from.c_str(),
     proj4_to.c_str(),
-    NULL);
+    nullptr);
   fs::logging::check_fatal(0 == P, "Failed to create transformation object");
   // This will ensure that the order of coordinates for the input CRS
   // will be longitude, latitude, whereas EPSG:4326 mandates latitude,

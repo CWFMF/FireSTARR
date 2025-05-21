@@ -135,6 +135,7 @@ public:
   {
     return default_percent_dead_fir_;
   }
+#ifndef MODE_BP_ONLY
   /**
    * \brief The maximum fire intensity for the 'low' range of intensity (kW/m)
    * \return The maximum fire intensity for the 'low' range of intensity (kW/m)
@@ -151,6 +152,7 @@ public:
   {
     return intensity_max_moderate_;
   }
+#endif
   /**
    * \brief Confidence required before simulation stops (% / 100)
    * \return Confidence required before simulation stops (% / 100)
@@ -175,6 +177,7 @@ public:
   {
     fuel_lookup_table_file_ = filename;
   }
+#ifndef MODE_BP_ONLY
   /**
    * \brief Static curing value
    * \return Static curing value
@@ -193,6 +196,7 @@ public:
     static_curing_ = value;
     force_curing = true;
   }
+#endif
   /**
    * \brief Maximum time simulation can run before it is ended and whatever results it has are used (s)
    * \return Maximum time simulation can run before it is ended and whatever results it has are used (s)
@@ -597,6 +601,7 @@ const fuel::FuelLookup& Settings::fuelLookup() noexcept
 {
   return SettingsImplementation::instance().fuelLookup();
 }
+#ifndef MODE_BP_ONLY
 bool Settings::saveIndividual() noexcept
 {
   return SettingsImplementation::instance().save_individual;
@@ -653,6 +658,7 @@ void Settings::setSaveIntensity(const bool value) noexcept
 {
   SettingsImplementation::instance().save_intensity = value;
 }
+#endif
 bool Settings::saveProbability() noexcept
 {
   return SettingsImplementation::instance().save_probability;
@@ -661,6 +667,7 @@ void Settings::setSaveProbability(const bool value) noexcept
 {
   SettingsImplementation::instance().save_probability = value;
 }
+#ifndef MODE_BP_ONLY
 bool Settings::saveOccurrence() noexcept
 {
   return SettingsImplementation::instance().save_occurrence;
@@ -705,6 +712,7 @@ void Settings::setStaticCuring(const int value) noexcept
 {
   SettingsImplementation::instance().setStaticCuring(value);
 }
+#endif
 MathSize Settings::minimumRos() noexcept
 {
   return SettingsImplementation::instance().minimumRos();
@@ -741,6 +749,7 @@ int Settings::defaultPercentDeadFir() noexcept
 {
   return SettingsImplementation::instance().defaultPercentDeadFir();
 }
+#ifndef MODE_BP_ONLY
 int Settings::intensityMaxLow() noexcept
 {
   return SettingsImplementation::instance().intensityMaxLow();
@@ -749,6 +758,7 @@ int Settings::intensityMaxModerate() noexcept
 {
   return SettingsImplementation::instance().intensityMaxModerate();
 }
+#endif
 ThresholdSize Settings::confidenceLevel() noexcept
 {
   return SettingsImplementation::instance().confidenceLevel();

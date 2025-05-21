@@ -46,6 +46,7 @@ public:
    * \return Fuel lookup table
    */
   [[nodiscard]] static const fuel::FuelLookup& fuelLookup() noexcept;
+#ifndef MODE_BP_ONLY
   /**
    * \brief Whether or not to save individual grids
    * \return Whether or not to save individual grids
@@ -123,6 +124,7 @@ public:
    * \return None
    */
   static void setSaveIntensity(bool value) noexcept;
+#endif
   /**
    * \brief Whether or not to save probability grids
    * \return Whether or not to save probability grids
@@ -134,6 +136,7 @@ public:
    * \return None
    */
   static void setSaveProbability(bool value) noexcept;
+#ifndef MODE_BP_ONLY
   /**
    * \brief Whether or not to save occurrence grids
    * \return Whether or not to save occurrence grids
@@ -191,6 +194,7 @@ public:
    * \return Set static curing value
    */
   static void setStaticCuring(const int value) noexcept;
+#endif
   /**
    * \brief Minimum rate of spread before fire is considered to be spreading (m/min)
    * \return Minimum rate of spread before fire is considered to be spreading (m/min)
@@ -232,6 +236,7 @@ public:
    * \return Percent of the stand that is composed of dead fir (NOT percent of the fir that is dead) (%)
    */
   [[nodiscard]] static int defaultPercentDeadFir() noexcept;
+#ifndef MODE_BP_ONLY
   /**
    * \brief The maximum fire intensity for the 'low' range of intensity (kW/m)
    * \return The maximum fire intensity for the 'low' range of intensity (kW/m)
@@ -242,6 +247,7 @@ public:
    * \return The maximum fire intensity for the 'moderate' range of intensity (kW/m)
    */
   [[nodiscard]] static int intensityMaxModerate() noexcept;
+#endif
   /**
    * \brief Confidence required before simulation stops (% / 100)
    * \return Confidence required before simulation stops (% / 100)
