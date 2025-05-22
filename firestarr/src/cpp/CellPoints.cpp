@@ -94,8 +94,8 @@ CellPoints::CellPoints(const CellPoints* rhs) noexcept
 CellPoints::CellPoints(
 #ifndef MODE_BP_ONLY
   const XYPos& src,
-#endif
   const SpreadData& spread_current,
+#endif
   const XYSize x,
   const XYSize y) noexcept
   : CellPoints(static_cast<Idx>(x), static_cast<Idx>(y))
@@ -103,8 +103,8 @@ CellPoints::CellPoints(
   insert(
 #ifndef MODE_BP_ONLY
     src,
-#endif
     spread_current,
+#endif
     x,
     y);
 }
@@ -148,8 +148,8 @@ constexpr std::array<DISTANCE_PAIR, NUM_DIRECTIONS> POINTS_OUTER{
 CellPoints& CellPoints::insert(
 #ifndef MODE_BP_ONLY
   const XYPos& src,
-#endif
   const SpreadData& spread_current,
+#endif
   const XYSize x,
   const XYSize y) noexcept
 {
@@ -327,8 +327,8 @@ CellPoints& CellPoints::insert(const InnerPos& p) noexcept
   insert(
 #ifndef MODE_BP_ONLY
     INVALID_XY_POSITION,
-#endif
     INVALID_SPREAD_DATA,
+#endif
     p.first,
     p.second);
   return *this;
@@ -403,8 +403,8 @@ CellPointsMap::CellPointsMap()
 CellPoints& CellPointsMap::insert(
 #ifndef MODE_BP_ONLY
   const XYPos& src,
-#endif
   const SpreadData& spread_current,
+#endif
   const XYSize x,
   const XYSize y) noexcept
 {
@@ -415,8 +415,8 @@ CellPoints& CellPointsMap::insert(
   auto e = map_.try_emplace(location,
 #ifndef MODE_BP_ONLY
                             src,
-#endif
                             spread_current,
+#endif
                             x,
                             y);
   CellPoints& cell_pts = e.first->second;
@@ -427,8 +427,8 @@ CellPoints& CellPointsMap::insert(
     cell_pts.insert(
 #ifndef MODE_BP_ONLY
       src,
-#endif
       spread_current,
+#endif
       x,
       y);
   }

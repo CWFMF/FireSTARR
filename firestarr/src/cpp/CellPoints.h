@@ -157,7 +157,7 @@ public:
 class CellPoints
 {
 public:
-  using spreading_points = map<SpreadKey, vector<pair<Location, CellPoints>>>;
+  using spreading_points = map<SpreadKey, map<Location, CellPoints>>;
   CellPoints() noexcept;
   //   // HACK: so we can emplace with NULL
   //   CellPoints(size_t) noexcept;
@@ -167,8 +167,8 @@ public:
   CellPoints(
 #ifndef MODE_BP_ONLY
     const XYPos& src,
-#endif
     const SpreadData& spread_current,
+#endif
     const XYSize x,
     const XYSize y) noexcept;
   CellPoints(CellPoints&& rhs) noexcept = default;
@@ -178,8 +178,8 @@ public:
   CellPoints& insert(
 #ifndef MODE_BP_ONLY
     const XYPos& src,
-#endif
     const SpreadData& spread_current,
+#endif
     const XYSize x,
     const XYSize y) noexcept;
   CellPoints& insert(const InnerPos& p) noexcept;
@@ -256,8 +256,8 @@ public:
   CellPoints& insert(
 #ifndef MODE_BP_ONLY
     const XYPos& src,
-#endif
     const SpreadData& spread_current,
+#endif
     const XYSize x,
     const XYSize y) noexcept;
   CellPointsMap& merge(
