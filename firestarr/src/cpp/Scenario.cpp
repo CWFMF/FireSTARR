@@ -56,10 +56,12 @@ void do_par(T& for_list, F fct)
     for_list.end(),
     fct);
 }
+#ifndef MODE_BP_ONLY
 void IObserver_deleter::operator()(IObserver* ptr) const
 {
   delete ptr;
 }
+#endif
 void Scenario::clear() noexcept
 {
   //  scheduler_.clear();
@@ -225,10 +227,12 @@ Scenario* Scenario::reset_with_new_start(const shared_ptr<Cell>& start_cell,
   final_sizes_ = final_sizes;
   ran_ = false;
   clear();
+#ifndef MODE_BP_ONLY
   for (const auto& o : observers_)
   {
     o->reset();
   }
+#endif
   current_time_ = start_time_ - 1;
   points_ = {};
   intensity_ = make_unique<IntensityMap>(model());
@@ -292,10 +296,12 @@ Scenario* Scenario::reset(mt19937* mt_extinction,
   //  std::fill(spread_thresholds_by_ros_.begin(), spread_thresholds_by_ros_.end(), 1.0 - abs(1.0 / (10 * id_)));
   // std::fill(extinction_thresholds_.begin(), extinction_thresholds_.end(), 0.5);
   //  std::fill(spread_thresholds_by_ros_.begin(), spread_thresholds_by_ros_.end(), SpreadInfo::calculateRosFromThreshold(0.5));
+#ifndef MODE_BP_ONLY
   for (const auto& o : observers_)
   {
     o->reset();
   }
+#endif
   current_time_ = start_time_ - 1;
   points_ = {};
   // don't do this until we run so that we don't allocate memory too soon
@@ -344,7 +350,9 @@ void Scenario::evaluate(const Event& event)
       scheduleFireSpread(event);
       break;
     case Event::SAVE:
+#ifndef MODE_BP_ONLY
       saveObservers(event.time());
+#endif
       saveStats(event.time());
       break;
     case Event::NEW_FIRE:
@@ -460,6 +468,7 @@ void Scenario::saveStats(const DurationSize time) const
     final_sizes_->addValue(intensity_->fireSize());
   }
 }
+#ifndef MODE_BP_ONLY
 void Scenario::registerObserver(IObserver* observer)
 {
   observers_.push_back(unique_ptr<IObserver, IObserver_deleter>(observer));
@@ -488,7 +497,6 @@ void Scenario::saveObservers(const DurationSize time) const
            static_cast<int>(time));
   saveObservers(string(buffer));
 }
-#ifndef MODE_BP_ONLY
 void Scenario::saveIntensity(const string& dir, const string& base_name) const
 {
   intensity_->save(dir, base_name);
@@ -499,7 +507,10 @@ bool Scenario::ran() const noexcept
   return ran_;
 }
 Scenario::Scenario(Scenario&& rhs) noexcept
-  : observers_(std::move(rhs.observers_)),
+  :
+#ifndef MODE_BP_ONLY
+    observers_(std::move(rhs.observers_)),
+#endif
     save_points_(std::move(rhs.save_points_)),
     extinction_thresholds_(std::move(rhs.extinction_thresholds_)),
     spread_thresholds_by_ros_(std::move(rhs.spread_thresholds_by_ros_)),
@@ -533,7 +544,9 @@ Scenario& Scenario::operator=(Scenario&& rhs) noexcept
 {
   if (this != &rhs)
   {
+#ifndef MODE_BP_ONLY
     observers_ = std::move(rhs.observers_);
+#endif
     save_points_ = std::move(rhs.save_points_);
     extinction_thresholds_ = std::move(rhs.extinction_thresholds_);
     spread_thresholds_by_ros_ = std::move(rhs.spread_thresholds_by_ros_);
@@ -578,7 +591,9 @@ void Scenario::burn(const Event& event)
     event.cell().row());
 #endif
   // Observers only care about cells burning so do it here
+#ifndef MODE_BP_ONLY
   notify(event);
+#endif
   intensity_->burn(event.cell()
 #ifndef MODE_BP_ONLY
                      ,

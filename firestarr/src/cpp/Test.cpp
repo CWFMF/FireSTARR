@@ -71,9 +71,7 @@ public:
   {
 #ifndef MODE_BP_ONLY
     registerObserver(new IntensityObserver(*this));
-#endif
     registerObserver(new ArrivalObserver(*this));
-#ifndef MODE_BP_ONLY
     registerObserver(new SourceObserver(*this));
 #endif
     addEvent(Event::makeEnd(end_date));
@@ -269,7 +267,9 @@ string run_test(const string base_directory,
     "Saving results for %s in %s",
     test_name.c_str(),
     output_directory.c_str());
+#ifndef MODE_BP_ONLY
   scenario.saveObservers(test_name);
+#endif
   logging::note("Final Size: %0.0f, ROS: %0.2f",
                 scenario.currentFireSize(),
                 info.headRos());

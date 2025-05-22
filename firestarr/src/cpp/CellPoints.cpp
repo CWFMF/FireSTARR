@@ -167,23 +167,19 @@ CellPoints& CellPoints::insert(
   // count things as the same time if within a tolerance
   constexpr auto TIME_EPSILON_SECONDS = 1.0 * MINUTE_SECONDS;
   constexpr auto TIME_EPSILON = TIME_EPSILON_SECONDS / DAY_SECONDS;
-#endif
   // logging::note(
   //   "TIME_EPSILON of %f is %f seconds",
   //   TIME_EPSILON,
   //   TIME_EPSILON_SECONDS);
   if (0 < spread_current.time() && 0 > spread_arrival_.time())
   {
-#ifndef MODE_BP_ONLY
     logging::verbose(
       "No time so setting ros to %f at time %f",
       spread_current.ros(),
       spread_current.time());
-#endif
     // record ros and time if nothing yet
     spread_arrival_ = spread_current;
   }
-#ifndef MODE_BP_ONLY
   else
   {
     // initial burn will have an invalid direction, so needs to burn everywhere

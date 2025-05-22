@@ -7,6 +7,7 @@
 #include "Observer.h"
 namespace fs::sim
 {
+#ifndef MODE_BP_ONLY
 string IObserver::makeName(const string& base_name, const string& suffix)
 {
   if (base_name.length() > 0)
@@ -45,7 +46,6 @@ DurationSize ArrivalObserver::getValue(const Event& event) const noexcept
 #endif
   return event.time();
 }
-#ifndef MODE_BP_ONLY
 SourceObserver::SourceObserver(const Scenario& scenario)
   : MapObserver<CellIndex>(scenario, static_cast<CellIndex>(255), "source")
 {

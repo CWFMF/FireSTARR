@@ -11,6 +11,7 @@
 #include "Scenario.h"
 namespace fs::sim
 {
+#ifndef MODE_BP_ONLY
 class Event;
 class Scenario;
 /**
@@ -141,7 +142,6 @@ public:
   explicit ArrivalObserver(const Scenario& scenario);
   [[nodiscard]] DurationSize getValue(const Event& event) const noexcept override;
 };
-#ifndef MODE_BP_ONLY
 /**
  * \brief Tracks source Cell that fire arrived in Cell from.
  */
