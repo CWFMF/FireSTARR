@@ -348,7 +348,9 @@ void Scenario::evaluate(const Event& event)
       saveStats(event.time());
       break;
     case Event::NEW_FIRE:
+#ifndef MODE_BP_ONLY
       log_point(step_, STAGE_NEW, event.time(), p.column() + CELL_CENTER, p.row() + CELL_CENTER);
+#endif
       // HACK: don't do this in constructor because scenario creates this in its constructor
       // HACK: insert point as originating from itself
       points_.insert(
@@ -1161,12 +1163,14 @@ void Scenario::scheduleFireSpread(const Event& event)
       // ******************* CHECK THIS BECAUSE IF SOMETHING IS IN HERE SHOULD IT ALWAYS HAVE SPREAD????? *****************8
       const auto& seek_spread = spread_info_.find(for_cell.key());
       const auto max_intensity = (spread_info_.end() == seek_spread) ? 0 : seek_spread->second.maxIntensity();
-      // // if we don't have empty cells anymore then intensity should always be >0?
-      // logging::check_fatal(max_intensity <= 0,
-      //                      "Expected max_intensity to be > 0 but got %f",
-      //                      max_intensity);
-      // HACK: just use side-effect to log and check bounds
+// // if we don't have empty cells anymore then intensity should always be >0?
+// logging::check_fatal(max_intensity <= 0,
+//                      "Expected max_intensity to be > 0 but got %f",
+//                      max_intensity);
+// HACK: just use side-effect to log and check bounds
+#ifndef MODE_BP_ONLY
       log_points(step_, STAGE_SPREAD, new_time, pts);
+#endif
       if (canBurn(for_cell) && max_intensity > 0)
       {
       // // HACK: make sure it can't round down to 0
@@ -1199,7 +1203,9 @@ void Scenario::scheduleFireSpread(const Event& event)
           && ((survives(new_time, for_cell, new_time - arrival_[for_cell])
                && !isSurrounded(for_cell))))
       {
+#ifndef MODE_BP_ONLY
         log_points(step_, STAGE_CONDENSE, new_time, pts);
+#endif
         const auto r = for_cell.row();
         const auto c = for_cell.column();
         const Location loc{r, c};

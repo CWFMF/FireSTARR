@@ -6,6 +6,7 @@
 
 namespace fs::sim
 {
+#ifndef MODE_BP_ONLY
 constexpr auto STAGE_CONDENSE = 'C';
 constexpr auto STAGE_NEW = 'N';
 constexpr auto STAGE_SPREAD = 'S';
@@ -25,4 +26,5 @@ void log_points(size_t step,
                 const char stage,
                 const DurationSize time,
                 const CellPoints& points);
+#endif
 };
