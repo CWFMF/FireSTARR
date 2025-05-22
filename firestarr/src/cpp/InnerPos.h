@@ -46,13 +46,7 @@ public:
    */
   using BoundedPoint<DistanceSize, -1, 1, -1, 1>::BoundedPoint;
 };
-using ROSOffset = std::tuple<
-#ifndef MODE_BP_ONLY
-  IntensitySize,
-  ROSSize,
-  Direction,
-#endif
-  Offset>;
+using ROSOffset = std::tuple<Offset>;
 using OffsetSet = vector<ROSOffset>;
 }
 namespace fs::sim

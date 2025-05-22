@@ -135,24 +135,6 @@ public:
   {
     return default_percent_dead_fir_;
   }
-#ifndef MODE_BP_ONLY
-  /**
-   * \brief The maximum fire intensity for the 'low' range of intensity (kW/m)
-   * \return The maximum fire intensity for the 'low' range of intensity (kW/m)
-   */
-  [[nodiscard]] constexpr int intensityMaxLow() const noexcept
-  {
-    return intensity_max_low_;
-  }
-  /**
-   * \brief The maximum fire intensity for the 'moderate' range of intensity (kW/m)
-   * \return The maximum fire intensity for the 'moderate' range of intensity (kW/m)
-   */
-  [[nodiscard]] constexpr int intensityMaxModerate() const noexcept
-  {
-    return intensity_max_moderate_;
-  }
-#endif
   /**
    * \brief Confidence required before simulation stops (% / 100)
    * \return Confidence required before simulation stops (% / 100)
@@ -177,26 +159,6 @@ public:
   {
     fuel_lookup_table_file_ = filename;
   }
-#ifndef MODE_BP_ONLY
-  /**
-   * \brief Static curing value
-   * \return Static curing value
-   */
-  [[nodiscard]] int staticCuring() const noexcept
-  {
-    return static_curing_;
-  }
-  /**
-   * \brief Set static curing value
-   * \return Set static curing value
-   */
-  void setStaticCuring(const int value) noexcept
-  {
-    logging::check_fatal(0 > value || 100 < value, "Grass curing (%) must be in range [0-100] but got %d", value);
-    static_curing_ = value;
-    force_curing = true;
-  }
-#endif
   /**
    * \brief Maximum time simulation can run before it is ended and whatever results it has are used (s)
    * \return Maximum time simulation can run before it is ended and whatever results it has are used (s)
@@ -601,64 +563,6 @@ const fuel::FuelLookup& Settings::fuelLookup() noexcept
 {
   return SettingsImplementation::instance().fuelLookup();
 }
-#ifndef MODE_BP_ONLY
-bool Settings::saveIndividual() noexcept
-{
-  return SettingsImplementation::instance().save_individual;
-}
-void Settings::setSaveIndividual(const bool value) noexcept
-{
-  SettingsImplementation::instance().save_individual = value;
-}
-bool Settings::runAsync() noexcept
-{
-  return SettingsImplementation::instance().run_async;
-}
-void Settings::setRunAsync(const bool value) noexcept
-{
-  SettingsImplementation::instance().run_async = value;
-}
-bool Settings::deterministic() noexcept
-{
-  return SettingsImplementation::instance().deterministic;
-}
-bool Settings::surface() noexcept
-{
-  return SettingsImplementation::instance().surface;
-}
-void Settings::setSurface(const bool value) noexcept
-{
-  SettingsImplementation::instance().surface = value;
-}
-void Settings::setDeterministic(const bool value) noexcept
-{
-  SettingsImplementation::instance().deterministic = value;
-}
-bool Settings::saveAsAscii() noexcept
-{
-  return SettingsImplementation::instance().save_as_ascii;
-}
-void Settings::setSaveAsAscii(const bool value) noexcept
-{
-  SettingsImplementation::instance().save_as_ascii = value;
-}
-bool Settings::savePoints() noexcept
-{
-  return SettingsImplementation::instance().save_points;
-}
-void Settings::setSavePoints(const bool value) noexcept
-{
-  SettingsImplementation::instance().save_points = value;
-}
-bool Settings::saveIntensity() noexcept
-{
-  return SettingsImplementation::instance().save_intensity;
-}
-void Settings::setSaveIntensity(const bool value) noexcept
-{
-  SettingsImplementation::instance().save_intensity = value;
-}
-#endif
 bool Settings::saveProbability() noexcept
 {
   return SettingsImplementation::instance().save_probability;
@@ -667,52 +571,6 @@ void Settings::setSaveProbability(const bool value) noexcept
 {
   SettingsImplementation::instance().save_probability = value;
 }
-#ifndef MODE_BP_ONLY
-bool Settings::saveOccurrence() noexcept
-{
-  return SettingsImplementation::instance().save_occurrence;
-}
-void Settings::setSaveOccurrence(const bool value) noexcept
-{
-  SettingsImplementation::instance().save_occurrence = value;
-}
-bool Settings::saveSimulationArea() noexcept
-{
-  return SettingsImplementation::instance().save_simulation_area;
-}
-void Settings::setSaveSimulationArea(const bool value) noexcept
-{
-  SettingsImplementation::instance().save_simulation_area = value;
-}
-bool Settings::forceGreenup() noexcept
-{
-  return SettingsImplementation::instance().force_greenup;
-}
-void Settings::setForceGreenup(const bool value) noexcept
-{
-  SettingsImplementation::instance().force_greenup = value;
-}
-bool Settings::forceNoGreenup() noexcept
-{
-  return SettingsImplementation::instance().force_no_greenup;
-}
-void Settings::setForceNoGreenup(const bool value) noexcept
-{
-  SettingsImplementation::instance().force_no_greenup = value;
-}
-bool Settings::forceStaticCuring() noexcept
-{
-  return SettingsImplementation::instance().force_curing;
-}
-int Settings::staticCuring() noexcept
-{
-  return SettingsImplementation::instance().staticCuring();
-}
-void Settings::setStaticCuring(const int value) noexcept
-{
-  SettingsImplementation::instance().setStaticCuring(value);
-}
-#endif
 MathSize Settings::minimumRos() noexcept
 {
   return SettingsImplementation::instance().minimumRos();
@@ -749,16 +607,6 @@ int Settings::defaultPercentDeadFir() noexcept
 {
   return SettingsImplementation::instance().defaultPercentDeadFir();
 }
-#ifndef MODE_BP_ONLY
-int Settings::intensityMaxLow() noexcept
-{
-  return SettingsImplementation::instance().intensityMaxLow();
-}
-int Settings::intensityMaxModerate() noexcept
-{
-  return SettingsImplementation::instance().intensityMaxModerate();
-}
-#endif
 ThresholdSize Settings::confidenceLevel() noexcept
 {
   return SettingsImplementation::instance().confidenceLevel();

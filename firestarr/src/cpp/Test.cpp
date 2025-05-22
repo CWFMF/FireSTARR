@@ -69,11 +69,6 @@ public:
                static_cast<Day>(start_date),
                static_cast<Day>(end_date))
   {
-#ifndef MODE_BP_ONLY
-    registerObserver(new IntensityObserver(*this));
-    registerObserver(new ArrivalObserver(*this));
-    registerObserver(new SourceObserver(*this));
-#endif
     addEvent(Event::makeEnd(end_date));
     last_save_ = end_date;
     final_sizes_ = {};
@@ -267,9 +262,6 @@ string run_test(const string base_directory,
     "Saving results for %s in %s",
     test_name.c_str(),
     output_directory.c_str());
-#ifndef MODE_BP_ONLY
-  scenario.saveObservers(test_name);
-#endif
   logging::note("Final Size: %0.0f, ROS: %0.2f",
                 scenario.currentFireSize(),
                 info.headRos());
@@ -355,15 +347,9 @@ int test(
   const AspectSize constant_aspect,
   const bool test_all)
 {
-// FIX: I think this does a lot of the same things as the test code is doing because it was
-// derived from this code
-#ifndef MODE_BP_ONLY
-  Settings::setDeterministic(true);
-#endif
+  // FIX: I think this does a lot of the same things as the test code is doing because it was
+  // derived from this code
   Settings::setMinimumRos(0.0);
-#ifndef MODE_BP_ONLY
-  Settings::setSavePoints(false);
-#endif
   // make sure all tests run regardless of how long it takes
   Settings::setMaximumTimeSeconds(numeric_limits<size_t>::max());
   const auto hours = INVALID_TIME == num_hours ? DEFAULT_HOURS : num_hours;

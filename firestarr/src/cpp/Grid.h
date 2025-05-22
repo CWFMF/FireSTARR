@@ -785,25 +785,11 @@ public:
                                 std::function<R(T value)> convert,
                                 const R no_data) const
   {
-#ifndef MODE_BP_ONLY
-    // NOTE: do this instead of function pointer because it's using templates
-    if (fs::sim::Settings::saveAsAscii())
-    {
-      return this->template saveToAsciiFile<R>(
-        dir,
-        base_name,
-        convert,
-        no_data);
-    }
-    else
-#endif
-    {
-      return this->template saveToTiffFile<R>(
-        dir,
-        base_name,
-        convert,
-        no_data);
-    }
+    return this->template saveToTiffFile<R>(
+      dir,
+      base_name,
+      convert,
+      no_data);
   }
   /**
    * \brief Save GridMap contents to file based on settings

@@ -46,85 +46,6 @@ public:
    * \return Fuel lookup table
    */
   [[nodiscard]] static const fuel::FuelLookup& fuelLookup() noexcept;
-#ifndef MODE_BP_ONLY
-  /**
-   * \brief Whether or not to save individual grids
-   * \return Whether or not to save individual grids
-   */
-  [[nodiscard]] static bool saveIndividual() noexcept;
-  /**
-   * \brief Set whether or not to save individual grids
-   * \param value Whether or not to save individual grids
-   * \return None
-   */
-  static void setSaveIndividual(bool value) noexcept;
-  /**
-   * \brief Whether or not to run things asynchronously where possible
-   * \return Whether or not to run things asynchronously where possible
-   */
-  [[nodiscard]] static bool runAsync() noexcept;
-  /**
-   * \brief Set whether or not to run things asynchronously where possible
-   * \param value Whether or not to run things asynchronously where possible
-   * \return None
-   */
-  static void setRunAsync(bool value) noexcept;
-  /**
-   * \brief Whether or not to run deterministically (100% chance of spread & survival)
-   * \return Whether or not to run deterministically (100% chance of spread & survival)
-   */
-  [[nodiscard]] static bool deterministic() noexcept;
-  /**
-   * \brief Set whether or not to run deterministically (100% chance of spread & survival)
-   * \param value Whether or not to run deterministically (100% chance of spread & survival)
-   * \return None
-   */
-  static void setDeterministic(bool value) noexcept;
-  /**
-   * \brief Whether or not to run all Cell(s) that can burn in entire Environment
-   * \return Whether or not to run all Cell(s) that can burn in entire Environment
-   */
-  [[nodiscard]] static bool surface() noexcept;
-  /**
-   * \brief Set whether or not to run all Cell(s) that can burn in entire Environment
-   * \param value Whether or not to run all Cell(s) that can burn in entire Environment
-   * \return None
-   */
-  static void setSurface(bool value) noexcept;
-  /**
-   * \brief Whether or not to save grids as .asc
-   * \return Whether or not to save grids as .asc
-   */
-  [[nodiscard]] static bool saveAsAscii() noexcept;
-  /**
-   * \brief Set whether or not to save grids as .asc
-   * \param value Whether or not to save grids as .asc
-   * \return None
-   */
-  static void setSaveAsAscii(bool value) noexcept;
-  /**
-   * \brief Whether or not to save points used for spread
-   * \return Whether or not to save points used for spread
-   */
-  [[nodiscard]] static bool savePoints() noexcept;
-  /**
-   * \brief Set whether or not to save points used for spread
-   * \param value Whether or not to save points used for spread
-   * \return None
-   */
-  static void setSavePoints(bool value) noexcept;
-  /**
-   * \brief Whether or not to save intensity grids
-   * \return Whether or not to save intensity grids
-   */
-  [[nodiscard]] static bool saveIntensity() noexcept;
-  /**
-   * \brief Set whether or not to save intensity grids
-   * \param value Whether or not to save intensity grids
-   * \return None
-   */
-  static void setSaveIntensity(bool value) noexcept;
-#endif
   /**
    * \brief Whether or not to save probability grids
    * \return Whether or not to save probability grids
@@ -136,65 +57,6 @@ public:
    * \return None
    */
   static void setSaveProbability(bool value) noexcept;
-#ifndef MODE_BP_ONLY
-  /**
-   * \brief Whether or not to save occurrence grids
-   * \return Whether or not to save occurrence grids
-   */
-  [[nodiscard]] static bool saveOccurrence() noexcept;
-  /**
-   * \brief Set whether or not to save occurrence grids
-   * \param value Whether or not to save occurrence grids
-   * \return None
-   */
-  static void setSaveOccurrence(bool value) noexcept;
-  /**
-   * \brief Whether or not to save simulation area grids
-   * \return Whether or not to save simulation area grids
-   */
-  [[nodiscard]] static bool saveSimulationArea() noexcept;
-  /**
-   * \brief Set whether or not to save simulation area grids
-   * \param value Whether or not to save simulation area grids
-   * \return None
-   */
-  static void setSaveSimulationArea(bool value) noexcept;
-  /**
-   * \brief Whether or not to force greenup for all fires
-   * \return None
-   */
-  [[nodiscard]] static bool forceGreenup() noexcept;
-  /**
-   * \brief Whether or not to force greenup for all fires
-   * \return Whether or not to force greenup for all fires
-   */
-  static void setForceGreenup(bool value) noexcept;
-  /**
-   * \brief Whether or not to force no greenup for all fires
-   * \return None
-   */
-  [[nodiscard]] static bool forceNoGreenup() noexcept;
-  /**
-   * \brief Whether or not to force no greenup for all fires
-   * \return Whether or not to force no greenup for all fires
-   */
-  static void setForceNoGreenup(bool value) noexcept;
-  /**
-   * \brief Whether or not to force static grass curing value for all fires
-   * \return Whether or not to force static grass curing value for all fires
-   */
-  [[nodiscard]] static bool forceStaticCuring() noexcept;
-  /**
-   * \brief Static curing value
-   * \return Static curing value
-   */
-  [[nodiscard]] static int staticCuring() noexcept;
-  /**
-   * \brief Set static curing value
-   * \return Set static curing value
-   */
-  static void setStaticCuring(const int value) noexcept;
-#endif
   /**
    * \brief Minimum rate of spread before fire is considered to be spreading (m/min)
    * \return Minimum rate of spread before fire is considered to be spreading (m/min)
@@ -236,18 +98,6 @@ public:
    * \return Percent of the stand that is composed of dead fir (NOT percent of the fir that is dead) (%)
    */
   [[nodiscard]] static int defaultPercentDeadFir() noexcept;
-#ifndef MODE_BP_ONLY
-  /**
-   * \brief The maximum fire intensity for the 'low' range of intensity (kW/m)
-   * \return The maximum fire intensity for the 'low' range of intensity (kW/m)
-   */
-  [[nodiscard]] static int intensityMaxLow() noexcept;
-  /**
-   * \brief The maximum fire intensity for the 'moderate' range of intensity (kW/m)
-   * \return The maximum fire intensity for the 'moderate' range of intensity (kW/m)
-   */
-  [[nodiscard]] static int intensityMaxModerate() noexcept;
-#endif
   /**
    * \brief Confidence required before simulation stops (% / 100)
    * \return Confidence required before simulation stops (% / 100)

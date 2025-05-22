@@ -211,15 +211,7 @@ public:
    * \return ProbabilityMap with the same extent as this
    */
   [[nodiscard]] sim::ProbabilityMap* makeProbabilityMap(DurationSize time,
-                                                        DurationSize start_time
-#ifndef MODE_BP_ONLY
-                                                        ,
-                                                        int min_value,
-                                                        int low_max,
-                                                        int med_max,
-                                                        int max_value
-#endif
-  ) const;
+                                                        DurationSize start_time) const;
   /**
    * \brief Create a GridMap<Other> covering this Environment
    * \tparam Other Type of GridMap
@@ -475,58 +467,6 @@ protected:
   {
     // take elevation at point so that if max grid size changes elevation doesn't
     logging::note("Start elevation is %d", elevation_);
-#ifndef MODE_BP_ONLY
-    if (sim::Settings::saveSimulationArea())
-    {
-      logging::debug("Saving simulation area");
-      const auto lookup = sim::Settings::fuelLookup();
-      auto convert_to_slope =
-        [&elevation](
-          const Cell& v) -> SlopeSize {
-        return v.slope();
-      };
-      auto convert_to_aspect =
-        [&elevation](
-          const Cell& v) -> AspectSize {
-        return v.aspect();
-      };
-      auto convert_to_area =
-        [&elevation](
-          const ElevationSize v) -> ElevationSize {
-        // need to still be nodata if it was
-        return (v == elevation.nodataValue()) ? v : 3;
-      };
-      auto convert_to_fuelcode =
-        [&lookup](
-          const fuel::FuelType* const value) -> FuelSize {
-        return lookup.fuelToCode(value);
-      };
-      fuel.saveToFile<FuelSize>(
-        dir_out_,
-        "fuel",
-        convert_to_fuelcode);
-      elevation.saveToFile(
-        dir_out_,
-        "dem");
-      // save slope & aspect grids
-      cells_->saveToFile<SlopeSize>(
-        dir_out_,
-        "slope",
-        convert_to_slope,
-        static_cast<SlopeSize>(INVALID_SLOPE));
-      cells_->saveToFile<AspectSize>(
-        dir_out_,
-        "aspect",
-        convert_to_aspect,
-        static_cast<AspectSize>(INVALID_ASPECT));
-      // HACK: make a grid with "3" as the value so if we merge max with it it'll cover up anything else
-      elevation.saveToFile<ElevationSize>(
-        dir_out_,
-        "simulation_area",
-        convert_to_area);
-      logging::debug("Done saving fuel grid");
-    }
-#endif
   }
 private:
 #ifdef CPP23

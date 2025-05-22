@@ -20,26 +20,6 @@ Iteration::Iteration(vector<Scenario*> scenarios) noexcept
   : scenarios_(std::move(scenarios))
 {
 }
-#ifndef MODE_BP_ONLY
-Iteration* Iteration::reset_with_new_start(const shared_ptr<topo::Cell>& start_cell)
-{
-  // HACK: ensure only called with surface
-  logging::check_fatal(!Settings::surface(), "Called reset_with_new_start() when not calculating surface");
-  // HACK: just copy code for now
-  // FIX: remove duplicate code
-  cancelled_ = false;
-  final_sizes_ = {};
-  auto i = 0;
-  // could have multiple weather scenarios so this still makes sense to loop
-  for (auto& scenario : scenarios_)
-  {
-    logging::extensive("Resetting scenario %d", i);
-    static_cast<void>(scenario->reset_with_new_start(start_cell, &final_sizes_));
-    ++i;
-  }
-  return this;
-}
-#endif
 Iteration* Iteration::reset(mt19937* mt_extinction, mt19937* mt_spread)
 {
   cancelled_ = false;

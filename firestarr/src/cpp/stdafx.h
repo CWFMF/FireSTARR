@@ -4,7 +4,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #pragma once
-#define MODE_BP_ONLY 1
 #if __cplusplus >= 202211L   // C++23
 #define CPP23
 #endif
