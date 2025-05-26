@@ -52,8 +52,6 @@ from common import (
     start_process,
     try_remove,
 )
-from redundancy import call_safe
-
 from gis import (
     Rasterize,
     find_best_raster,
@@ -63,10 +61,11 @@ from gis import (
     save_geojson,
     save_point_file,
 )
+from redundancy import call_safe
 
 # set to "" if want intensity grids
-NO_INTENSITY = "--no-intensity"
-# NO_INTENSITY = ""
+# NO_INTENSITY = "--no-intensity"
+NO_INTENSITY = ""
 
 TMP_SUFFIX = "__tmp__"
 # tasks that have this in their logs are considered successful
