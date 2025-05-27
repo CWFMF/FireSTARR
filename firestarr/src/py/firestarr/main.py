@@ -24,6 +24,7 @@ from redundancy import get_stack
 from run import Run, make_resume
 from sim_wrapper import assign_sim_batch
 
+TEXT_GEPS_MSG = "'model_name': 'GEPS'"
 # NOTE: rotating log file doesn't help because this isn't continuously running
 LOG_MAIN = add_log_file(
     os.path.join(DIR_LOG, f"firestarr_{datetime.date.today().strftime('%Y%m%d')}.log"),
@@ -178,6 +179,8 @@ def scan_queue():
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
+    is_geps = False
+    msg_orig = None
     for msg in response:
         try:
             txt = msg.content
@@ -185,29 +188,36 @@ def scan_queue():
             # FIX: right now any message causes a full run
             logging.info("Message %s", txt)
             queue_msg = json.loads(txt)
-            if "args" in queue_msg.keys():
-                args_given = queue_msg["args"]
-                logging.info("Trying to parse arguments %s", args_given)
-                if isinstance(args_given, str):
-                    args_given = args_given.strip().split(" ")
-                if not isinstance(args_given, list):
-                    raise ValueError("Excpected list of arguments but got %s", args_given)
-                args_given = [x.strip() for x in args_given]
-                try:
-                    for a in args_given:
-                        # HACK: should filter things out if they aren't valid args elsewhere
-                        if not isinstance(a, str) and a.startswith("--"):
-                            logging.fatal("Invalid argument given: %s", a)
-                            raise ValueError("Invalid argument given: %s" % a)
-                        args.extend([a])
-                except Exception as ex:
-                    logging.fatal(ex)
-                    raise ValueError("Invalid arguments given: %s" % a)
-            break
+            if not is_geps:
+                msg_orig = queue_msg
+                if "args" in queue_msg.keys():
+                    args_given = queue_msg["args"]
+                    logging.info("Trying to parse arguments %s", args_given)
+                    if isinstance(args_given, str):
+                        args_given = args_given.strip().split(" ")
+                    if not isinstance(args_given, list):
+                        raise ValueError("Excpected list of arguments but got %s", args_given)
+                    args_given = [x.strip() for x in args_given]
+                    try:
+                        for a in args_given:
+                            # HACK: should filter things out if they aren't valid args elsewhere
+                            if not isinstance(a, str) and a.startswith("--"):
+                                logging.fatal("Invalid argument given: %s", a)
+                                raise ValueError("Invalid argument given: %s" % a)
+                            args.extend([a])
+                    except Exception as ex:
+                        logging.fatal(ex)
+                        raise ValueError("Invalid arguments given: %s" % a)
+            is_geps = TEXT_GEPS_MSG in txt
+            if is_geps:
+                logging.info("Clearing queue %s because of GEPS message:\n%s" % AZURE_QUEUE_NAME, txt)
+            else:
+                break
         except Exception as ex:
             logging.error("Unable to parse queue message:\n%s", msg.content)
             logging.fatal(ex)
-    logging.info("No message in queue, or failed to parse one")
+    if msg_orig is None:
+        logging.info("No message in queue, or failed to parse one")
     return queue_msg, args
 
 
@@ -251,7 +261,7 @@ if __name__ == "__main__":
             logging.debug("Not waiting since running in batch")
             QUEUE_ARGS.extend(["--no-wait"])
         # {'model_name': 'GEPS', 'forecast_date': '20250523', 'utc_time': '00'}
-        if "'model_name': 'GEPS'" in msg:
+        if msg is not None and TEXT_GEPS_MSG in msg:
             logging.warning("Forcing new run because GEPS is updated")
             QUEUE_ARGS.extend(["--no-resume"])
         REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
