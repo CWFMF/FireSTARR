@@ -230,12 +230,13 @@ public:
    */
   [[nodiscard]] constexpr MathSize foliarMoisture() const
   {
+    const auto nd = abs(nd_);
     // don't need to check  `&& nd_ < 50` in second part because of reordering
-    return nd_ >= 50
+    return nd >= 50
            ? 120.0
-         : nd_ >= 30
-           ? 32.9 + 3.17 * nd_ - 0.0288 * nd_ * nd_
-           : 85.0 + 0.0189 * nd_ * nd_;
+         : nd >= 30
+           ? 32.9 + 3.17 * nd - 0.0288 * nd * nd
+           : 85.0 + 0.0189 * nd * nd;
   }
   /**
    * \brief Whether or not there is no spread for given conditions

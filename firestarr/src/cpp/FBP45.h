@@ -28,16 +28,17 @@ namespace fs::fuel
 static constexpr int START_GREENING = -43;
 [[nodiscard]] constexpr int calculate_grass_curing(const int nd)
 {
-  return (nd < START_GREENING)
-         ?   // we're before foliar moisture dip has started
-           100
-         : (nd >= 50)
-             ? 0   // foliar moisture is at 120.0, so grass should be totally uncured
-             // HACK: invent a formula that has 50% curing at the bottom of the foliar
-             // moisture dip foliar moisture above ranges between 120 and 85, with 85
-             // being at the point where we want 50% cured Curing:
-             // -43 => 100, 0 => 50, 50 => 0 least-squares best fit:
-             : static_cast<int>(52.5042 - 1.07324 * nd);
+  const auto curing = (nd < START_GREENING)
+                      ?   // we're before foliar moisture dip has started
+                        100
+                      : (nd >= 50)
+                          ? 0   // foliar moisture is at 120.0, so grass should be totally uncured
+                          // HACK: invent a formula that has 50% curing at the bottom of the foliar
+                          // moisture dip foliar moisture above ranges between 120 and 85, with 85
+                          // being at the point where we want 50% cured Curing:
+                          // -43 => 100, 0 => 50, 50 => 0 least-squares best fit:
+                          : static_cast<int>(52.5042 - 1.07324 * nd);
+  return max(0, min(100, curing));
 }
 [[nodiscard]] static MathSize
   calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui) noexcept
