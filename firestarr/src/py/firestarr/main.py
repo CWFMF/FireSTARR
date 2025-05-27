@@ -250,6 +250,10 @@ if __name__ == "__main__":
         if assign_sim_batch():
             logging.debug("Not waiting since running in batch")
             QUEUE_ARGS.extend(["--no-wait"])
+        # {'model_name': 'GEPS', 'forecast_date': '20250523', 'utc_time': '00'}
+        if "'model_name': 'GEPS'" in msg:
+            logging.warning("Forcing new run because GEPS is updated")
+            QUEUE_ARGS.extend(["--no-resume"])
         REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
         for a in REMOVE_ARGS:
             try:
