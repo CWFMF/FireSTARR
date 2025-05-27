@@ -43,7 +43,7 @@ def read_config():
     except ValueError as ex:
         logging.error(ex)
         logging.warning("Unable to read azure config")
-    return np.all(bool(x) for x in [AZURE_URL, AZURE_TOKEN, AZURE_CONTAINER])
+    return np.all([x is not None and 0 < len(x) for x in [AZURE_URL, AZURE_TOKEN, AZURE_CONTAINER]])
 
 
 def get_blob_service_client():
