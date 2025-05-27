@@ -56,6 +56,7 @@ from gis import (
     gdf_from_file,
     gdf_to_file,
     make_gdf_from_series,
+    to_gdf,
     vector_path,
 )
 from log import LOGGER_NAME, add_log_file
@@ -84,6 +85,7 @@ from tqdm_util import (
 )
 
 LOGGER_FIRE_ORDER = logging.getLogger(f"{LOGGER_NAME}_order.log")
+FIRE_SIZE_BOUNDS_LIMIT = 100000
 
 
 def log_order(*args, **kwargs):
@@ -634,7 +636,16 @@ class Run(object):
                 df_bounds = gdf_from_file(file_bounds).to_crs(df.crs)
         df[["ID", "PRIORITY", "DURATION"]] = "", 0, self._max_days
         if df_bounds is not None:
-            df_join = df[["geometry"]].sjoin(df_bounds)
+            # HACK: to_gdf will convert these into points
+            df_reset = df.reset_index().to_crs(CRS_COMPARISON)
+            df_small = df_reset[df_reset["area"] < FIRE_SIZE_BOUNDS_LIMIT].set_index("fire_name")
+            df_large = df_reset[df_reset["area"] >= FIRE_SIZE_BOUNDS_LIMIT].set_index("fire_name")
+            df_large.loc[:, "geometry"] = df_large.centroid
+            df_join_small = df_small[["geometry"]].sjoin(df_bounds)
+            df_join_centroids = df_large[["geometry"]].sjoin(df_bounds).drop(axis=1, columns=["geometry"])
+            df_join_large = df_join_centroids.join(df_fires)
+            df_join_large = df_join_large[df_join_small.columns]
+            df_join = pd.concat([df_join_small, df_join_large])
             # only keep fires that are in bounds
             df = df.loc[np.unique(df_join.index)]
             if "PRIORITY" in df_join.columns:
