@@ -179,7 +179,7 @@ def scan_queue():
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
-    is_geps = False
+    do_clear = False
     msg_orig = None
     for msg in response:
         try:
@@ -188,7 +188,7 @@ def scan_queue():
             # FIX: right now any message causes a full run
             logging.info("Message %s", txt)
             queue_msg = json.loads(txt)
-            if not is_geps:
+            if not do_clear:
                 msg_orig = queue_msg
                 if "args" in queue_msg.keys():
                     args_given = queue_msg["args"]
@@ -211,6 +211,10 @@ def scan_queue():
             is_geps = TEXT_GEPS_MSG in txt
             if is_geps:
                 logging.info("Clearing queue %s because of GEPS message:\n%s" % AZURE_QUEUE_NAME, txt)
+                do_clear = True
+            elif "--no-resume" in args:
+                logging.info("Clearing queue %s because called with:\n%s" % AZURE_QUEUE_NAME, txt)
+                do_clear = True
             else:
                 break
         except Exception as ex:
