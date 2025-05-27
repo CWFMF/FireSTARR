@@ -119,8 +119,10 @@ _AUTO_SCALE_FORMULA = f"""
     $TargetDedicatedNodes = min($preempted + $dedicated, $max_dedicated);
     $TargetLowPriorityNodes = max(0, min($max_low, $pending - $TargetDedicatedNodes));
     $NodeDeallocationOption = taskcompletion;
-    $TargetDedicatedNodes = ($CurrentDedicatedNodes >= $TargetDedicatedNodes) ? 0 : $TargetDedicatedNodes;
-    $TargetLowPriorityNodes = ($CurrentLowPriorityNodes >= $TargetLowPriorityNodes) ? 0 : $TargetLowPriorityNodes;
+    $TargetDedicatedNodes = ($CurrentDedicatedNodes >= $TargetDedicatedNodes) ? ceil($TargetDedicatedNodes / 2) : $TargetDedicatedNodes;
+    $TargetLowPriorityNodes = ($CurrentLowPriorityNodes >= $TargetLowPriorityNodes) ? ceil($TargetLowPriorityNodes / 2) : $TargetLowPriorityNodes;
+    $TargetDedicatedNodes = (1 == $TargetDedicatedNodes) ? ((0 == $active) ? 0 : 1) : $TargetDedicatedNodes;
+    $TargetLowPriorityNodes = (1 == $TargetLowPriorityNodes) ? ((0 == $active) ? 0 : 1) : $TargetLowPriorityNodes;
 """
 _AUTO_SCALE_EVALUATION_INTERVAL = datetime.timedelta(minutes=5)
 _BATCH_ACCOUNT_URL = f"https://{_BATCH_ACCOUNT_NAME}.canadacentral.batch.azure.com"
