@@ -50,6 +50,7 @@ services:
     restart: on-failure
     cap_add:
       - SYS_PTRACE
+      - SYS_ADMIN
     env_file:
       - .env
 
@@ -80,6 +81,7 @@ services:
     restart: on-failure
     cap_add:
       - SYS_PTRACE
+      - SYS_ADMIN
     env_file:
       - .env
 
