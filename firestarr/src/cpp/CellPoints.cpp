@@ -128,8 +128,6 @@ CellPoints& CellPoints::insert(
   const auto x0 = static_cast<DistanceSize>(p0.first);
   const auto y0 = static_cast<DistanceSize>(p0.second);
   // CHECK: FIX: is this initializing everything to false or just one element?
-  std::array<bool, NUM_DIRECTIONS> closer{};
-  std::fill_n(closer.begin(), NUM_DIRECTIONS, false);
   // static_assert(pts_.first.size() == NUM_DIRECTIONS);
   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
   {
@@ -139,9 +137,11 @@ CellPoints& CellPoints::insert(
     const auto d = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
     auto& p_d = pts_.distances()[i];
     auto& p_p = pts_.points()[i];
-    closer[i] = (d < p_d);
-    p_p = closer[i] ? p0 : p_p;
-    p_d = closer[i] ? d : p_d;
+    // closer[i] = (d < p_d);
+    // p_p = closer[i] ? p0 : p_p;
+    // p_d = closer[i] ? d : p_d;
+    p_p = (d < p_d) ? p0 : p_p;
+    p_d = (d < p_d) ? d : p_d;
     // // worse than two checks + assignment
     // const auto& [p_new, d_new] =
     //   (d < p_d)
