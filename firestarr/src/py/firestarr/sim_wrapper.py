@@ -27,6 +27,7 @@ from azurebatch import (
 from common import (
     APP_NAME,
     CONFIG,
+    DEFAULT_SETTINGS_FILE,
     DIR_APP,
     DIR_DATA,
     DIR_OUTPUT,
@@ -37,6 +38,7 @@ from common import (
     FILE_SIM_SCRIPT,
     FLAG_IGNORE_PERIM_OUTPUTS,
     FMT_FILE_SECOND,
+    PREFERRED_SETTINGS_FILE,
     SECONDS_PER_HOUR,
     WANT_DATES,
     ensure_dir,
@@ -52,6 +54,8 @@ from common import (
     start_process,
     try_remove,
 )
+from redundancy import call_safe
+
 from gis import (
     Rasterize,
     find_best_raster,
@@ -61,7 +65,6 @@ from gis import (
     save_geojson,
     save_point_file,
 )
-from redundancy import call_safe
 
 # set to "" if want intensity grids
 # NO_INTENSITY = "--no-intensity"
@@ -608,6 +611,10 @@ def _run_fire_from_folder(
                         f_out.writelines(
                             [
                                 f"""#!/bin/bash
+# HACK: binary needs settings.ini but need to replace what's in container if other settings in /appl/data
+if [ -f "{PREFERRED_SETTINGS_FILE}" ]; then
+    cp "{PREFERRED_SETTINGS_FILE}" "{DEFAULT_SETTINGS_FILE}"
+fi
 {CHECK_SUCCESS_TEXT} \\
 || ( \\
   ( \\

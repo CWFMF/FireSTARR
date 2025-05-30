@@ -98,8 +98,9 @@ BOUNDS = None
 SETTINGS_FILE = None
 PREFERRED_CONFIG_FILE = r"../data/config"
 DEFAULT_CONFIG_FILE = r"../config"
-PREFERRED_SETTINGS_FILE = r"../data/settings.ini"
-DEFAULT_SETTINGS_FILE = r"./settings.ini"
+# HACK: use absolute paths for now so sim.sh gets them
+PREFERRED_SETTINGS_FILE = r"/appl/data/settings.ini"
+DEFAULT_SETTINGS_FILE = r"/appl/firestarr/settings.ini"
 
 # loaded configuration
 CONFIG = None
@@ -207,15 +208,15 @@ def read_config(force=False):
     global CONFIG
     global BOUNDS
     if os.path.isfile(PREFERRED_CONFIG_FILE):
-        SETTINGS_FILE = PREFERRED_CONFIG_FILE
+        CONFIG_FILE = PREFERRED_CONFIG_FILE
     else:
-        SETTINGS_FILE = DEFAULT_CONFIG_FILE
+        CONFIG_FILE = DEFAULT_CONFIG_FILE
     # HACK: copy over /appl/firestarr/settings.ini because binary will read that
     #       and it's part of container so it won't change otherwises
     if os.path.isfile(PREFERRED_SETTINGS_FILE):
         logging.info("Replacing default settings with contents of %s" % PREFERRED_SETTINGS_FILE)
         shutil.copy2(PREFERRED_SETTINGS_FILE, DEFAULT_SETTINGS_FILE)
-    logging.info("Reading config file {}".format(SETTINGS_FILE))
+    logging.info("Reading config file {}".format(CONFIG_FILE))
     if force or CONFIG is None:
         # default to all of canada
         CONFIG = {
@@ -257,13 +258,13 @@ def read_config(force=False):
         for k, v in CONFIG.items():
             config.set("GLOBAL", k, v)
         try:
-            with open(SETTINGS_FILE) as configfile:
+            with open(CONFIG_FILE) as configfile:
                 # fake a config section so it works with parser
-                config.read_file(itertools.chain(["[GLOBAL]"], configfile), source=SETTINGS_FILE)
+                config.read_file(itertools.chain(["[GLOBAL]"], configfile), source=CONFIG_FILE)
         except KeyboardInterrupt as ex:
             raise ex
         except Exception:
-            logging.info("Creating new config file {}".format(SETTINGS_FILE))
+            logging.info("Creating new config file {}".format(CONFIG_FILE))
             # HACK: don't output section header because it breaks bash
             from io import StringIO
 
@@ -278,7 +279,7 @@ def read_config(force=False):
                 k = split[0]
                 v = " = ".join(split[1:])
                 fixed.append(f"{k.upper()}={v}\n")
-            with open(SETTINGS_FILE, "w") as f:
+            with open(CONFIG_FILE, "w") as f:
                 f.writelines(fixed)
         # assign to CONFIG so defaults get overwritten
         for k, v in config.items("GLOBAL"):
