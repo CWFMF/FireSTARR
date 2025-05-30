@@ -3,7 +3,7 @@ from typing import final
 
 import geopandas as gpd
 import numpy as np
-
+import pandas as pd
 from gis import CRS_WGS84, make_empty_gdf
 
 COLUMNS_STATION = ["lat", "lon"]
@@ -228,3 +228,59 @@ class SourceFireWeather(Source):
     @final
     def get_fire_weather(self, lat, lon, date):
         return self.check_columns(self._get_fire_weather(lat, lon, date))
+
+
+def wx_interpolate(df):
+    date_min = df["datetime"].min()
+    date_max = df["datetime"].max()
+    times = pd.DataFrame(pd.date_range(date_min, date_max, freq="h").values, columns=["datetime"])
+    crs = df.crs
+    index_names = df.index.names
+    df = df.reset_index()
+    idx_geom = ["lat", "lon", "geometry"]
+    gdf_geom = df[idx_geom].drop_duplicates().reset_index(drop=True)
+    del df["geometry"]
+    groups = []
+    for i, g in df.groupby(index_names):
+        g_fill = pd.merge(times, g, how="left")
+        # treat rain as if it all happened at start of any gaps
+        g_fill["prec"] = g_fill["prec"].fillna(0)
+        g_fill = g_fill.ffill()
+        g_fill[index_names] = i
+        groups.append(g_fill)
+    df_filled = to_gdf(pd.merge(pd.concat(groups), gdf_geom), crs)
+    df_filled.set_index(index_names)
+    return df_filled
+
+
+def splice_models(df_wx_models):
+    # fill before selecting after hourly so that we always have the hour
+    # right after the hourly
+    # HACK: FIX: right now wx_interpolate() is just filling but if it actually interpolated
+    #       then it'd probably need to be in local time
+    df_wx_forecast = pd.concat([wx_interpolate(g) for i, g in df_wx_models.groupby(COLUMN_MODEL)])
+    # splice every other member onto shorter members
+    dates_by_model = df_wx_forecast.groupby("model")[COLUMN_TIME].max().sort_values(ascending=False)
+    # deprecated
+    # df_wx_forecast.loc[:, "id"] = df_wx_forecast["id"].apply(lambda x: f"{x:02d}")
+    ids = df_wx_forecast["id"]
+    del df_wx_forecast["id"]
+    df_wx_forecast.loc[:, "id"] = ids.apply(lambda x: f"{x:02d}")
+    df_spliced = None
+    for (
+        idx,
+        model,
+        date_end,
+    ) in dates_by_model.reset_index().itertuples():
+        df_model = df_wx_forecast.loc[df_wx_forecast["model"] == model]
+        if df_spliced is not None:
+            df_append = df_spliced.loc[df_spliced[COLUMN_TIME] > date_end]
+            for i, g1 in df_model.groupby(COLUMNS_STREAM):
+                for j, g2 in df_append.groupby(COLUMNS_STREAM):
+                    df_cur = pd.concat([g1, g2])
+                    df_cur.loc[:, "model"] = f"{i[0]}x{j[0]}"
+                    df_cur.loc[:, "id"] = f"{i[1]}x{j[1]}"
+                    df_spliced = pd.concat([df_spliced, df_cur])
+        else:
+            df_spliced = df_model
+    return df_spliced

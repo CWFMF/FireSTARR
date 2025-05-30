@@ -1,13 +1,14 @@
 import datetime
 import os
+import sys
 
 import numpy as np
 import pandas as pd
 import pytz
 from common import (
+    DIR_SRC_PY,
     FLAG_DEBUG,
     SECONDS_PER_HOUR,
-    cffdrs,
     ensure_dir,
     ensures,
     in_run_folder,
@@ -18,20 +19,37 @@ from common import (
     tqdm_util,
     tz_from_offset,
 )
-from datasources.datatypes import COLUMN_MODEL, COLUMN_TIME, COLUMNS_STREAM
+from datasources.datatypes import (
+    COLUMN_MODEL,
+    COLUMN_TIME,
+    COLUMNS_STREAM,
+    splice_models,
+)
 from datasources.default import (
     SourceFwiBest,
     SourceHourlyBest,
     SourceModelAll,
     wx_interpolate,
 )
+from gis import CRS_COMPARISON, KM_TO_M, gdf_from_file, make_point, save_geojson
 from redundancy import NUM_RETRIES
 from sim_wrapper import get_simulation_file
 from timezonefinder import TimezoneFinder
 
-from gis import CRS_COMPARISON, KM_TO_M, gdf_from_file, make_point, save_geojson
-
 MAXIMUM_STATION_DISTANCE = 100 * KM_TO_M
+
+
+DIR_SRC_PY_CFFDRSNG = os.path.join(DIR_SRC_PY, "cffdrs-ng")
+sys.path.append(DIR_SRC_PY_CFFDRSNG)
+
+
+def import_cffdrs():
+    import NG_FWI as cffdrs
+
+    return cffdrs
+
+
+cffdrs = import_cffdrs()
 
 
 def save_wx_input(df_wx, file_wx):
@@ -162,37 +180,11 @@ class Simulation(object):
             df_wx_models = self._src_models.get_wx_model(lat, lon)
             # NOTE: model wx comes as UTC
             df_wx_models[COLUMN_TIME] = df_wx_models[COLUMN_TIME].apply(utc_to_lst_no_timezone)
-            # fill before selecting after hourly so that we always have the hour
-            # right after the hourly
-            df_wx_forecast = pd.concat([wx_interpolate(g) for i, g in df_wx_models.groupby(COLUMN_MODEL)])
+            df_spliced = splice_models(df_wx_models)
             cur_time = None
             if not is_empty(df_wx_hourly_date):
                 cur_time = max(df_wx_hourly_date[COLUMN_TIME])
-                df_wx_forecast = df_wx_forecast.loc[df_wx_forecast[COLUMN_TIME] > cur_time]
-            # splice every other member onto shorter members
-            dates_by_model = df_wx_forecast.groupby("model")[COLUMN_TIME].max().sort_values(ascending=False)
-            # deprecated
-            # df_wx_forecast.loc[:, "id"] = df_wx_forecast["id"].apply(lambda x: f"{x:02d}")
-            ids = df_wx_forecast["id"]
-            del df_wx_forecast["id"]
-            df_wx_forecast.loc[:, "id"] = ids.apply(lambda x: f"{x:02d}")
-            df_spliced = None
-            for (
-                idx,
-                model,
-                date_end,
-            ) in dates_by_model.reset_index().itertuples():
-                df_model = df_wx_forecast.loc[df_wx_forecast["model"] == model]
-                if df_spliced is not None:
-                    df_append = df_spliced.loc[df_spliced[COLUMN_TIME] > date_end]
-                    for i, g1 in df_model.groupby(COLUMNS_STREAM):
-                        for j, g2 in df_append.groupby(COLUMNS_STREAM):
-                            df_cur = pd.concat([g1, g2])
-                            df_cur.loc[:, "model"] = f"{i[0]}x{j[0]}"
-                            df_cur.loc[:, "id"] = f"{i[1]}x{j[1]}"
-                            df_spliced = pd.concat([df_spliced, df_cur])
-                else:
-                    df_spliced = df_model
+                df_spliced = df_spliced.loc[df_spliced[COLUMN_TIME] > cur_time]
             df_streams = None
             # HACK: avoid comparing to empty df
             df_wx_hourly = df_wx_hourly_date

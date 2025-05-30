@@ -129,8 +129,6 @@ CELL_SIZE = 100
 
 DIR_SRC_PY_FIRSTARR = os.path.dirname(__file__)
 DIR_SRC_PY = os.path.dirname(DIR_SRC_PY_FIRSTARR)
-DIR_SRC_PY_CFFDRSNG = os.path.join(DIR_SRC_PY, "cffdrs-ng")
-sys.path.append(DIR_SRC_PY_CFFDRSNG)
 
 APP_NAME = "firestarr"
 DIR_APP = f"/appl/{APP_NAME}"
@@ -876,15 +874,6 @@ def parse_str_list(s):
         return float(x)
 
     return [parse(x.strip()) for x in s[1:-1].split(",")]
-
-
-def import_cffdrs():
-    import NG_FWI as cffdrs
-
-    return cffdrs
-
-
-cffdrs = import_cffdrs()
 
 
 def find_ranges_missing(datetime_start, datetime_end, times, freq="H"):
