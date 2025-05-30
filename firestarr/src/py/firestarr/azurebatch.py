@@ -119,8 +119,8 @@ _AUTO_SCALE_FORMULA = f"""
     $TargetDedicatedNodes = min($preempted + $dedicated, $max_dedicated);
     $TargetLowPriorityNodes = max(0, min($max_low, $pending - $TargetDedicatedNodes));
     $NodeDeallocationOption = taskcompletion;
-    $TargetDedicatedNodes = ($CurrentDedicatedNodes >= $TargetDedicatedNodes) ? ceil($TargetDedicatedNodes / 2) : $TargetDedicatedNodes;
-    $TargetLowPriorityNodes = ($CurrentLowPriorityNodes >= $TargetLowPriorityNodes) ? ceil($TargetLowPriorityNodes / 2) : $TargetLowPriorityNodes;
+    $TargetDedicatedNodes = ($CurrentDedicatedNodes >= $TargetDedicatedNodes) ? ceil($TargetDedicatedNodes / 4 * 3) : $TargetDedicatedNodes;
+    $TargetLowPriorityNodes = ($CurrentLowPriorityNodes >= $TargetLowPriorityNodes) ? ceil($TargetLowPriorityNodes / 4 * 3) : $TargetLowPriorityNodes;
     $TargetDedicatedNodes = (1 == $TargetDedicatedNodes) ? ((0 == $active) ? 0 : 1) : $TargetDedicatedNodes;
     $TargetLowPriorityNodes = (1 == $TargetLowPriorityNodes) ? ((0 == $active) ? 0 : 1) : $TargetLowPriorityNodes;
 """
