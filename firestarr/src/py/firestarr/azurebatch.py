@@ -84,10 +84,10 @@ _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
 # _POOL_VM_SIZE = "STANDARD_F72S_V2"
 # _POOL_VM_SIZE = "STANDARD_F32S_V2"
 # only running 21 streams for now so don't use 32 cores
-# _POOL_VM_SIZE = "STANDARD_F16S_V2"
+_POOL_VM_SIZE = "STANDARD_F16S_V2"
 # # generally gets stuck on a few scenarios so scale way back until single-core performance improves for now
 # _POOL_VM_SIZE = "STANDARD_F8S_V2"
-_POOL_VM_SIZE = "STANDARD_F4S_V2"
+# _POOL_VM_SIZE = "STANDARD_F4S_V2"
 _MIN_NODES = 0
 # _MIN_NODES = 1
 _MAX_NODES = 100
