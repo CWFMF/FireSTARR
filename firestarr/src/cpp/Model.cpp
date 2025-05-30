@@ -83,13 +83,13 @@ Model::Model(const string dir_out,
   for (auto day = 0; day < MAX_DAYS; ++day)
   {
     nd_.at(static_cast<size_t>(day)) = static_cast<int>(day - nd_for_point);
-    logging::info("Day %d has nd %d, is%s green, %d%% curing",
-                  day,
-                  nd_.at(static_cast<size_t>(day)),
-                  fuel::calculate_is_green(nd_.at(static_cast<size_t>(day)))
-                    ? ""
-                    : " not",
-                  fuel::calculate_grass_curing(nd_.at(static_cast<size_t>(day))));
+    logging::debug("Day %d has nd %d, is%s green, %d%% curing",
+                   day,
+                   nd_.at(static_cast<size_t>(day)),
+                   fuel::calculate_is_green(nd_.at(static_cast<size_t>(day)))
+                     ? ""
+                     : " not",
+                   fuel::calculate_grass_curing(nd_.at(static_cast<size_t>(day))));
   }
 }
 void Model::setWeather(const wx::FwiWeather& weather, const Day start_day)
