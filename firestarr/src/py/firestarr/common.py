@@ -96,8 +96,11 @@ BOUNDS = None
 
 # file to load settings from
 SETTINGS_FILE = None
-PREFERRED_SETTINGS_FILE = r"../data/config"
-DEFAULT_SETTINGS_FILE = r"../config"
+PREFERRED_CONFIG_FILE = r"../data/config"
+DEFAULT_CONFIG_FILE = r"../config"
+PREFERRED_SETTINGS_FILE = r"../data/settings.ini"
+DEFAULT_SETTINGS_FILE = r"./settings.ini"
+
 # loaded configuration
 CONFIG = None
 
@@ -203,10 +206,15 @@ def read_config(force=False):
     """
     global CONFIG
     global BOUNDS
-    if os.path.isfile(PREFERRED_SETTINGS_FILE):
-        SETTINGS_FILE = PREFERRED_SETTINGS_FILE
+    if os.path.isfile(PREFERRED_CONFIG_FILE):
+        SETTINGS_FILE = PREFERRED_CONFIG_FILE
     else:
-        SETTINGS_FILE = DEFAULT_SETTINGS_FILE
+        SETTINGS_FILE = DEFAULT_CONFIG_FILE
+    # HACK: copy over /appl/firestarr/settings.ini because binary will read that
+    #       and it's part of container so it won't change otherwises
+    if os.path.isfile(PREFERRED_SETTINGS_FILE):
+        logging.info("Replacing default settings with contents of %s" % PREFERRED_SETTINGS_FILE)
+        shutil.copy2(PREFERRED_SETTINGS_FILE, DEFAULT_SETTINGS_FILE)
     logging.info("Reading config file {}".format(SETTINGS_FILE))
     if force or CONFIG is None:
         # default to all of canada
