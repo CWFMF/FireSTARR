@@ -575,7 +575,7 @@ map<DurationSize, util::SafeVector*> make_size_map(const vector<DurationSize>& s
   }
   return result;
 }
-bool Model::add_statistics(vector<MathSize>* all_sizes,
+void Model::add_statistics(vector<MathSize>* all_sizes,
                            vector<MathSize>* means,
                            vector<MathSize>* pct,
                            const util::SafeVector& sizes)
@@ -591,23 +591,6 @@ bool Model::add_statistics(vector<MathSize>* all_sizes,
     static_cast<void>(util::insert_sorted(all_sizes, size));
   }
   is_over_simulation_count_ = all_sizes->size() >= Settings::maximumCountSimulations();
-  if (isOverSimulationCountLimit())
-  {
-    logging::note(
-      "Stopping after %d iterations. Simulation limit of %d simulations has been reached.",
-      all_sizes->size(),
-      Settings::maximumCountSimulations());
-    return false;
-  }
-  if (isOutOfTime())
-  {
-    logging::note(
-      "Stopping after %d iterations. Time limit of %d seconds has been reached.",
-      pct->size(),
-      Settings::maximumTimeSeconds());
-    return false;
-  }
-  return true;
 }
 /*!
  * \page ending Simulation stop conditions
@@ -934,17 +917,10 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
       // clear so we don't double count
       kv.second->reset();
     }
-    if (!add_statistics(&all_sizes, &means, &pct, final_sizes))
-    {
-      // ran out of time but timer should cancel everything
-      return finalize_probabilities();
-    }
-    // if (iterations_done >= MIN_ITERATIONS_BEFORE_CHECK)
-    {
-      runs_left = runs_required(iterations_done, &all_sizes, &means, &pct, *this);
-      // runs_left = runs_required(iterations_done, &means, &pct, *this);
-      logging::note("Need another %d iterations", runs_left);
-    }
+    add_statistics(&all_sizes, &means, &pct, final_sizes);
+    runs_left = runs_required(iterations_done, &all_sizes, &means, &pct, *this);
+    // runs_left = runs_required(iterations_done, &means, &pct, *this);
+    logging::note("Need another %d iterations", runs_left);
     if (runs_left > 0)
     {
       if (reset_iter(iteration))
@@ -961,11 +937,6 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
         // loop around to start if required
         cur_iter %= all_iterations.size();
       }
-    }
-    else
-    {
-      // no runs required, so stop
-      return finalize_probabilities();
     }
   }
   // everything should be done when this section ends
