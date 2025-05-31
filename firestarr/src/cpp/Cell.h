@@ -231,11 +231,7 @@ protected:
    * PADDING                                                    10
    * Fuel                     0 - 140           0 - 140         8       0 - 255
    * Aspect                   0 - 359           0 - 359         9       0 - 511
-<<<<<<< HEAD
    * Slope                    0 - infinity      0 - 511         9       0 - 511
-=======
-   * Slope                    0 - infinity      0 - 127         7       0 - 127
->>>>>>> 70c2f12ad (quick fix for seasonal/specific mixedwood fuels)
    * Extra                                                      8
    *
    * Rows and Columns are restricted to 4096 since that's what gets clipped out of
