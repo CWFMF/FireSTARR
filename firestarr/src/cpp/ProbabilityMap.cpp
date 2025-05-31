@@ -21,6 +21,12 @@ static constexpr size_t VALUE_PROCESSED = 4;
 static set<string> PATHS_INTERIM{};
 static mutex PATHS_INTERIM_MUTEX{};
 
+ProbabilityMap::~ProbabilityMap()
+{
+  // make sure we don't delete if still locked
+  lock_guard<mutex> lock(mutex_);
+}
+
 ProbabilityMap::ProbabilityMap(const string dir_out,
                                const DurationSize time,
                                const DurationSize start_time,
@@ -41,6 +47,7 @@ ProbabilityMap* ProbabilityMap::copyEmpty() const
 }
 void ProbabilityMap::setPerimeter(const topo::Perimeter* const perimeter)
 {
+  lock_guard<mutex> lock(mutex_);
   perimeter_ = perimeter;
 }
 void ProbabilityMap::addProbabilities(const ProbabilityMap& rhs)
@@ -50,6 +57,8 @@ void ProbabilityMap::addProbabilities(const ProbabilityMap& rhs)
   logging::check_fatal(rhs.start_time_ != start_time_, "Wrong start time");
 #endif
   lock_guard<mutex> lock(mutex_);
+  // need to lock both maps
+  lock_guard<mutex> lock_rhs(rhs.mutex_);
   for (auto&& kv : rhs.all_.data)
   {
     all_.data[kv.first] += kv.second;
@@ -86,6 +95,7 @@ size_t ProbabilityMap::numSizes() const noexcept
 }
 void ProbabilityMap::show() const
 {
+  lock_guard<mutex> lock(mutex_);
   // even if we only ran the actuals we'll still have multiple scenarios
   // with different randomThreshold values
   const auto day = static_cast<int>(time_ - floor(start_time_));
@@ -100,7 +110,7 @@ void ProbabilityMap::show() const
 }
 bool ProbabilityMap::record_if_interim(const char* filename) const
 {
-  lock_guard<mutex> lock(PATHS_INTERIM_MUTEX);
+  lock_guard<mutex> lock_interim(PATHS_INTERIM_MUTEX);
   logging::verbose("Checking if %s is interim", filename);
   if (nullptr != strstr(filename, "interim_"))
   {
@@ -147,7 +157,7 @@ string make_string(const char* name, const tm& t, const int day)
 };
 void ProbabilityMap::deleteInterim()
 {
-  lock_guard<mutex> lock(PATHS_INTERIM_MUTEX);
+  lock_guard<mutex> lock_interim(PATHS_INTERIM_MUTEX);
   for (const auto& path : PATHS_INTERIM)
   {
     logging::debug("Removing interim file %s", path.c_str());
@@ -222,6 +232,7 @@ void ProbabilityMap::saveTotalCount(const string& base_name) const
 }
 void ProbabilityMap::reset()
 {
+  lock_guard<mutex> lock(mutex_);
   all_.clear();
   sizes_.clear();
 }

@@ -691,6 +691,10 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
                   fuel::calculate_is_green(n) ? "after" : "before",
                   fuel::calculate_grass_curing(n));
   }
+  if (!is_interim)
+  {
+    ProbabilityMap::deleteInterim();
+  }
   return final_time;
 }
 map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& start_point,
@@ -1056,7 +1060,6 @@ int Model::runScenarios(const string dir_out,
   show_probabilities(probabilities);
   // auto final_time =
   model.saveProbabilities(probabilities, start_day, false);
-  ProbabilityMap::deleteInterim();
   // HACK: update last checked time to use in calculation
   model.last_checked_ = Clock::now();
   logging::note("Total simulation time was %ld seconds", model.runTime());
