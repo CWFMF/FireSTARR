@@ -119,6 +119,16 @@ public:
    */
   static void setMaximumTimeSeconds(const size_t value) noexcept;
   /**
+   * \brief Time between generating interim outputs (s)
+   * \return Time between generating interim outputs (s)
+   */
+  [[nodiscard]] static size_t interimOutputIntervalSeconds() noexcept;
+  /**
+   * \brief Set time between generating interim outputs (s)
+   * \return Set time between generating interim outputs (s)
+   */
+  static void setInterimOutputIntervalSeconds(const size_t value) noexcept;
+  /**
    * \brief Maximum number of simulations that can run before it is ended and whatever results it has are used
    * \return Maximum number of simulations that can run before it is ended and whatever results it has are used
    */

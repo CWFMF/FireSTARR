@@ -176,6 +176,22 @@ public:
     maximum_time_seconds_ = value;
   }
   /**
+   * \brief Time between generating interim outputs (s)
+   * \return Time between generating interim outputs (s)
+   */
+  [[nodiscard]] size_t interimOutputIntervalSeconds() const noexcept
+  {
+    return interim_output_interval_seconds_;
+  }
+  /**
+   * \brief Set time between generating interim outputs (s)
+   * \return Set time between generating interim outputs (s)
+   */
+  void setInterimOutputIntervalSeconds(const size_t value) noexcept
+  {
+    interim_output_interval_seconds_ = value;
+  }
+  /**
    * \brief Maximum number of simulations that can run before it is ended and whatever results it has are used
    * \return Maximum number of simulations that can run before it is ended and whatever results it has are used
    */
@@ -301,6 +317,10 @@ private:
    * \brief Maximum time simulation can run before it is ended and whatever results it has are used (s)
    */
   atomic<size_t> maximum_time_seconds_;
+  /**
+   * \brief Time between generating interim outputs (s)
+   */
+  atomic<size_t> interim_output_interval_seconds_;
   /**
    * @brief Maximum number of simulations that can run before it is ended and whatever results it has are used
    */
@@ -519,6 +539,7 @@ void SettingsImplementation::setRoot(const char* dirname) noexcept
     offset_sunset_ = stod(get_value(settings, "OFFSET_SUNSET"));
     confidence_level_ = stod(get_value(settings, "CONFIDENCE_LEVEL"));
     maximum_time_seconds_ = stol(get_value(settings, "MAXIMUM_TIME"));
+    interim_output_interval_seconds_ = stol(get_value(settings, "INTERIM_OUTPUT_INTERVAL"));
     maximum_count_simulations_ = stol(get_value(settings, "MAXIMUM_SIMULATIONS"));
     threshold_scenario_weight_ = stod(get_value(settings, "THRESHOLD_SCENARIO_WEIGHT"));
     threshold_daily_weight_ = stod(get_value(settings, "THRESHOLD_DAILY_WEIGHT"));
@@ -622,6 +643,14 @@ size_t Settings::maximumTimeSeconds() noexcept
 void Settings::setMaximumTimeSeconds(const size_t value) noexcept
 {
   return SettingsImplementation::instance().setMaximumTimeSeconds(value);
+}
+size_t Settings::interimOutputIntervalSeconds() noexcept
+{
+  return SettingsImplementation::instance().interimOutputIntervalSeconds();
+}
+void Settings::setInterimOutputIntervalSeconds(const size_t value) noexcept
+{
+  return SettingsImplementation::instance().setInterimOutputIntervalSeconds(value);
 }
 size_t Settings::maximumCountSimulations() noexcept
 {
