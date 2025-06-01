@@ -524,6 +524,11 @@ Iteration Model::readScenarios(const topo::StartPoint& start_point,
   const auto run_time_seconds = std::chrono::duration_cast<std::chrono::seconds>(run_time);
   return run_time_seconds;
 }
+[[nodiscard]] std::chrono::seconds Model::timeSinceLastSave() const
+{
+  return std::chrono::duration_cast<std::chrono::seconds>(
+    last_checked_ - no_interim_save_since_);
+}
 bool Model::shouldStop() const noexcept
 {
   return (isOutOfTime() || isOverSimulationCountLimit());
@@ -662,7 +667,7 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
 {
   lock_guard<mutex> lock(mutex_);
   auto final_time = numeric_limits<DurationSize>::min();
-  if (scenarios_last_save_ == scenarios_done_)
+  if (is_interim && scenarios_last_save_ == scenarios_done_)
   {
     logging::error("No change since last call to saveProbabilities");
   }
@@ -671,16 +676,20 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
     if (is_being_cancelled_)
     {
       logging::info(
-        "Saving interim results for (%ld of %ld) required scenarios because cancelling",
+        "Saving%s results for (%ld of %ld) required scenarios%s",
+        is_interim ? " interim" : "",
         scenarios_required_done_,
-        scenarios_per_iteration_);
+        scenarios_per_iteration_,
+        is_being_cancelled_ ? " because cancelling" : "");
     }
     else
     {
       logging::info(
-        "Saving interim results for %ld scenarios (%ld new since last save)",
+        "Saving%s results for %ld scenarios (%ld new in %lds since last save)",
+        is_interim ? " interim" : "",
         scenarios_done_,
-        scenarios_done_ - scenarios_last_save_);
+        scenarios_done_ - scenarios_last_save_,
+        timeSinceLastSave().count());
     }
     for (const auto& by_time : probabilities)
     {
@@ -690,12 +699,15 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
       logging::debug("Setting perimeter");
       prob->setPerimeter(this->perimeter_.get());
       prob->saveAll(this->start_time_, time, is_interim);
-      const auto day = static_cast<int>(round(time));
-      const auto n = nd(day);
-      logging::note("Fuels for day %d are %s green-up and grass has %d%% curing",
-                    day - static_cast<int>(start_day),
-                    fuel::calculate_is_green(n) ? "after" : "before",
-                    fuel::calculate_grass_curing(n));
+      if (!is_interim)
+      {
+        const auto day = static_cast<int>(round(time));
+        const auto n = nd(day);
+        logging::note("Fuels for day %d are %s green-up and grass has %d%% curing",
+                      day - static_cast<int>(start_day),
+                      fuel::calculate_is_green(n) ? "after" : "before",
+                      fuel::calculate_grass_curing(n));
+      }
     }
     interim_changed_ = false;
     should_output_interim_ = false;
@@ -782,9 +794,7 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
       std::this_thread::sleep_for(CHECK_INTERVAL);
       // set bool so other things don't need to check clock
       is_out_of_time_ = runTime().count() >= timeLimit().count();
-      const auto interim_time_seconds = std::chrono::duration_cast<std::chrono::seconds>(
-        last_checked_ - no_interim_save_since_);
-      should_output_interim_ = interim_time_seconds.count() >= interimTimeLimit().count();
+      should_output_interim_ = timeSinceLastSave().count() >= interimTimeLimit().count();
       if (should_output_interim_ && interim_changed_)
       {
         saveProbabilities(all_probabilities[0], start_day, true);
@@ -905,11 +915,8 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
                    scenarios_per_iteration_,
                    (is_being_cancelled_ ? "is" : "not"));
     // no point in saving interim if final is done
-    if (
-      (!is_being_cancelled_ && should_output_interim_)
-      || (is_required
-          && is_being_cancelled_
-          && scenarios_per_iteration_ != scenarios_required_done_))
+    if (!(is_being_cancelled_
+          && scenarios_per_iteration_ == scenarios_required_done_))
     {
       saveProbabilities(all_probabilities[0], start_day, true);
     }

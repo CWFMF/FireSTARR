@@ -301,6 +301,11 @@ public:
    */
   [[nodiscard]] std::chrono::seconds runTime() const;
   /**
+   * \brief Time since last interim save
+   * \return std::chrono::seconds  Time since last interim save
+   */
+  [[nodiscard]] std::chrono::seconds timeSinceLastSave() const;
+  /**
    * \brief Create a ProbabilityMap with the same extent as this
    * \param time Time in simulation this ProbabilityMap represents
    * \param start_time Start time of simulation
