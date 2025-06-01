@@ -105,11 +105,11 @@ _AUTO_SCALE_FORMULA = f"""
     $min_nodes = {_MIN_NODES};
     $max_nodes = {_MAX_NODES};
     $max_low = {_MAX_NODES if _USE_LOW_PRIORITY else 0};
-    $samples = $PendingTasks.GetSamplePercent(TimeInterval_Minute);
+    $samples = $PreemptedNodeCount.GetSamplePercent(5 * TimeInterval_Minute);
     $pending = val($PendingTasks.GetSample(1), 0);
     $active = val($ActiveTasks.GetSample(1), 0);
     $running = val($RunningTasks.GetSample(1), 0);
-    $preempted = max(0, val($PreemptedNodeCount.GetSample(5 * TimeInterval_Minute), 0));
+    $preempted = $samples >= 70 ? max(0, val($PreemptedNodeCount.GetSample(5 * TimeInterval_Minute), 0)) : 0;
     $dedicated = $CurrentDedicatedNodes;
     $spot = $CurrentLowPriorityNodes;
     $want_nodes = ($pending > $dedicated || $spot > 0) ? ($pending - $spot) : 0;
