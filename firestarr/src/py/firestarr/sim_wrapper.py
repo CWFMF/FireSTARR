@@ -19,6 +19,7 @@ from azurebatch import (
     get_batch_client,
     have_batch_config,
     is_running_on_azure,
+    job_exists,
     list_nodes,
     make_or_get_job,
     make_or_get_simulation_task,
@@ -187,9 +188,15 @@ def get_simulation_task(dir_fire):
 
 def schedule_tasks(dir_fire, tasks):
     # HACK: use any dir_fire for now since they should all work
-    schedule_job_tasks(assign_job(dir_fire), tasks)
+    job_id = assign_job(dir_fire)
+    schedule_job_tasks(job_id, tasks)
     # HACK: scale here since autoscale takes a while to kick in
     if JOB_EXISTED is not None and not JOB_EXISTED:
+        # HACK: wait until job exists before scaling or nothing happens
+        while not job_exists(job_id):
+            print(".", end="", flush=True)
+            time.sleep(1)
+        print("", flush=True)
         enable_autoscale()
 
 
