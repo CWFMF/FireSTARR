@@ -1,6 +1,7 @@
 import datetime
 import os
 import re
+import textwrap
 import time
 
 import azure.batch as batch
@@ -92,38 +93,78 @@ _MIN_NODES = 0
 # _MIN_NODES = 1
 _MAX_NODES = 100
 _USE_LOW_PRIORITY = True
-# _MAX_NODES = 1
-# if any tasks pending but not running then want enough nodes to start
-# those and keep the current ones running, but if nothing in queue then
-# want to deallocate everything on completion
-# nodes don't deallocate until done if currently running and we set to 0
-# use low priority nodes if over max number, but they stay as spot nodes so maybe not great if getting preempted
-#
-# At the end, if we have more or the same amount of a type of node as we wanted
-# then set to 0 so they deallocate as they finish.
-_AUTO_SCALE_FORMULA = f"""
-    $min_nodes = {_MIN_NODES};
-    $max_nodes = {_MAX_NODES};
-    $max_low = {_MAX_NODES if _USE_LOW_PRIORITY else 0};
-    $samples = $PreemptedNodeCount.GetSamplePercent(5 * TimeInterval_Minute);
-    $pending = val($PendingTasks.GetSample(1), 0);
-    $active = val($ActiveTasks.GetSample(1), 0);
-    $running = val($RunningTasks.GetSample(1), 0);
-    $preempted = $samples >= 70 ? max(0, val($PreemptedNodeCount.GetSample(5 * TimeInterval_Minute), 0)) : 0;
-    $dedicated = $CurrentDedicatedNodes;
-    $spot = $CurrentLowPriorityNodes;
-    $want_nodes = ($pending > $dedicated || $spot > 0) ? ($pending - $spot) : 0;
-    $want_nodes = ($dedicated + $spot) >= $pending ? 0 : $want_nodes;
-    $use_nodes = $samples < 1 ? $min_nodes : $want_nodes;
-    $max_dedicated = max($min_nodes, min($max_nodes, $use_nodes));
-    $TargetDedicatedNodes = min($preempted + $dedicated, $max_dedicated);
-    $TargetLowPriorityNodes = max(0, min($max_low, $pending - $TargetDedicatedNodes));
-    $NodeDeallocationOption = taskcompletion;
-    $TargetDedicatedNodes = ($dedicated >= $TargetDedicatedNodes) ? ceil($TargetDedicatedNodes / 4 * 3) : $TargetDedicatedNodes;
-    $TargetLowPriorityNodes = ($spot >= $TargetLowPriorityNodes) ? ceil($TargetLowPriorityNodes / 4 * 3) : $TargetLowPriorityNodes;
-    $TargetDedicatedNodes = (1 == $TargetDedicatedNodes) ? ((0 == $active) ? 0 : 1) : $TargetDedicatedNodes;
-    $TargetLowPriorityNodes = (1 == $TargetLowPriorityNodes) ? ((0 == $active) ? 0 : 1) : $TargetLowPriorityNodes;
-"""
+
+
+def create_autoscale_formula():
+    # HACK: makes it easier to see where variables are used and prevent typos
+    active = "active"
+    dedicated = "dedicated"
+    nodes = "nodes"
+    pending = "pending"
+    preempted = "preempted"
+    running = "running"
+    samples = "samples"
+    spot = "spot"
+
+    # _MAX_NODES = 1
+    # if any tasks pending but not running then want enough nodes to start
+    # those and keep the current ones running, but if nothing in queue then
+    # want to deallocate everything on completion
+    # nodes don't deallocate until done if currently running and we set to 0
+    # use low priority nodes if over max number, but they stay as spot nodes so maybe not great if getting preempted
+    #
+    # At the end, if we have more or the same amount of a type of node as we wanted
+    # then set to 0 so they deallocate as they finish.
+    def make_node_limit_formula(result, var):
+        # if there are enough nodes to run things:
+        #   - reduce number of nodes to a little below what's required right now
+        #       - so scaling happens sooner but it's still trying to reduce count
+        # don't set to 0 nodes until we only have 1 thing left running
+        sufficient = f"{var}_sufficient"
+        scale_target = f"{var}_scale_target"
+        last_node = f"{var}_is_last_node"
+        return f"""
+            ${sufficient} = ($num_{var} >= ${result});
+            ${scale_target} = min(${result}, ceil(max($num_{var}, ${result}) / 4 * 3));
+            ${last_node} = (1 == ${result});
+            ${result} = ${sufficient} ? ${scale_target} : ${result};
+            ${result} = ${last_node} ? ((0 == $num_{active}) ? 0 : 1) : ${result};
+            """
+
+    # NOTE: defines a bunch of variables that are only used once, but that makes it
+    #       easier to tell the control flow when evaluating on azure
+    # HACK: remove indenting but was having issues when last two lines were in same f-string
+    return textwrap.dedent(
+        f"""
+            ${nodes}_min = {_MIN_NODES};
+            ${nodes}_max = {_MAX_NODES};
+            ${spot}_max = {_MAX_NODES if _USE_LOW_PRIORITY else 0};
+            ${samples}_pct = $PreemptedNodeCount.GetSamplePercent(5 * TimeInterval_Minute);
+            ${samples}_sufficient = ${samples}_pct >= 70;
+
+            $num_{pending} = val($PendingTasks.GetSample(1), 0);
+            $num_{active} = val($ActiveTasks.GetSample(1), 0);
+            $num_{running} = val($RunningTasks.GetSample(1), 0);
+            $num_{preempted} = ${samples}_sufficient ? val($PreemptedNodeCount.GetSample(5 * TimeInterval_Minute),  0) : 0;
+            $num_{dedicated} = $CurrentDedicatedNodes;
+            $num_{spot} = $CurrentLowPriorityNodes;
+
+            ${nodes}_are_required = $num_{pending} > $num_{dedicated} || $num_{spot} > 0;
+            ${nodes}_sufficient = ($num_{dedicated} + $num_{spot}) >= $num_{pending};
+            ${nodes}_desired_initial = ${nodes}_are_required ? ($num_{pending} - $num_{spot}) : 0;
+            ${nodes}_desired = ${nodes}_sufficient ? 0 : ${nodes}_desired_initial;
+            ${nodes}_to_use = ${samples}_sufficient ? ${nodes}_min : ${nodes}_desired;
+            ${dedicated}_max = max(${nodes}_min, min(${nodes}_max, ${nodes}_to_use));
+
+            $TargetDedicatedNodes = min($num_{preempted} + $num_{dedicated}, ${dedicated}_max);
+            $TargetLowPriorityNodes = max(0, min(${spot}_max, $num_{pending} - $TargetDedicatedNodes));
+            $NodeDeallocationOption = taskcompletion;
+            """
+        f"{make_node_limit_formula('TargetDedicatedNodes', dedicated)}"
+        f"{make_node_limit_formula('TargetLowPriorityNodes', spot)}"
+    ).strip()
+
+
 _AUTO_SCALE_EVALUATION_INTERVAL = datetime.timedelta(minutes=5)
 _BATCH_ACCOUNT_URL = f"https://{_BATCH_ACCOUNT_NAME}.canadacentral.batch.azure.com"
 # _STORAGE_ACCOUNT_URL = f"https://{_STORAGE_ACCOUNT_NAME}.blob.core.windows.net"
@@ -215,7 +256,7 @@ def create_container_pool(pool_id=_BATCH_POOL_ID, force=False, client=None):
         vm_size=_POOL_VM_SIZE,
         # target_dedicated_nodes=1,
         enable_auto_scale=True,
-        auto_scale_formula=_AUTO_SCALE_FORMULA,
+        auto_scale_formula=create_autoscale_formula(),
         auto_scale_evaluation_interval=_AUTO_SCALE_EVALUATION_INTERVAL,
         mount_configuration=[
             batchmodels.MountConfiguration(
@@ -814,7 +855,7 @@ def job_from_task(task):
 def evaluate_autoscale(pool_id=_BATCH_POOL_ID, client=None, print_result=True):
     if client is None:
         client = get_batch_client()
-    r = client.pool.evaluate_auto_scale(pool_id, _AUTO_SCALE_FORMULA)
+    r = client.pool.evaluate_auto_scale(pool_id, create_autoscale_formula())
     r = r.results.replace(";", ";\n").replace("=", " = ")
     if print_result:
         print(r)
@@ -827,7 +868,7 @@ def enable_autoscale(pool_id=_BATCH_POOL_ID, client=None):
         client = get_batch_client()
     client.pool.enable_auto_scale(
         pool_id,
-        auto_scale_formula=_AUTO_SCALE_FORMULA,
+        auto_scale_formula=create_autoscale_formula(),
         auto_scale_evaluation_interval=_AUTO_SCALE_EVALUATION_INTERVAL,
     )
     evaluate_autoscale(pool_id=pool_id, client=client)
