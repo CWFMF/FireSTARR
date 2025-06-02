@@ -667,12 +667,23 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
 {
   lock_guard<mutex> lock(mutex_);
   auto final_time = numeric_limits<DurationSize>::min();
-  if (is_interim && scenarios_last_save_ == scenarios_done_)
+  const ProcessingStatus processing_status =
+    !is_interim
+      ? processed
+      : (
+          0 == scenarios_done_
+            ? unprocessed
+            : processing);
+  if (
+    (processing_status == processing)
+    && (scenarios_last_save_ == scenarios_done_))
   {
     logging::error("No change since last call to saveProbabilities");
   }
-  else if (!is_interim || should_output_interim_)
+  else if (
+    (processing_status != processing) || should_output_interim_)
   {
+    // HACK: use max as "never saved" and replace with 0 on first save
     if (is_being_cancelled_)
     {
       logging::info(
@@ -698,8 +709,8 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
       const auto prob = by_time.second;
       logging::debug("Setting perimeter");
       prob->setPerimeter(this->perimeter_.get());
-      prob->saveAll(this->start_time_, time, is_interim);
-      if (!is_interim)
+      prob->saveAll(this->start_time_, time, processing_status);
+      if (processing_status == processed)
       {
         const auto day = static_cast<int>(round(time));
         const auto n = nd(day);
@@ -709,6 +720,7 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
                       fuel::calculate_grass_curing(n));
       }
     }
+    logging::debug("Done saving proabability grids");
     interim_changed_ = false;
     should_output_interim_ = false;
     scenarios_last_save_ = scenarios_done_;

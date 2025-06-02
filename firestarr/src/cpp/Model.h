@@ -529,7 +529,7 @@ private:
   /**
    * \brief If interim outputs are different than last time they were saved
    */
-  bool interim_changed_ = false;
+  bool interim_changed_ = true;
   /**
    * \brief If simulation is over max simulation count
    */

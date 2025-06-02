@@ -11,10 +11,6 @@
 #include "GridMap.h"
 namespace fs::sim
 {
-static constexpr size_t VALUE_UNPROCESSED = 2;
-static constexpr size_t VALUE_PROCESSING = 3;
-static constexpr size_t VALUE_PROCESSED = 4;
-
 /**
  * \brief List of interim files that were saved
  */
@@ -182,9 +178,10 @@ void ProbabilityMap::deleteInterim()
 }
 void ProbabilityMap::saveAll(const tm& start_time,
                              const DurationSize time,
-                             const bool is_interim) const
+                             const ProcessingStatus processing_status) const
 {
   lock_guard<mutex> lock(mutex_);
+  const auto is_interim = processed != processing_status;
   auto t = start_time;
   auto ticks = mktime(&t);
   const auto day = static_cast<int>(round(time));
@@ -201,7 +198,7 @@ void ProbabilityMap::saveAll(const tm& start_time,
                             &ProbabilityMap::saveTotal,
                             this,
                             fix_string("probability"),
-                            is_interim));
+                            processing_status));
   }
   results.push_back(async(launch::async,
                           &ProbabilityMap::saveSizes,
@@ -212,7 +209,7 @@ void ProbabilityMap::saveAll(const tm& start_time,
     result.wait();
   }
 }
-void ProbabilityMap::saveTotal(const string& base_name, const bool is_interim) const
+void ProbabilityMap::saveTotal(const string& base_name, const ProcessingStatus processing_status) const
 {
   // FIX: do this for other outputs too
   auto with_perim = all_;
@@ -221,10 +218,17 @@ void ProbabilityMap::saveTotal(const string& base_name, const bool is_interim) c
     for (auto loc : perimeter_->burned())
     {
       // multiply initial perimeter cells so that probability shows processing status
-      with_perim.data[loc] *= (is_interim ? VALUE_PROCESSING : VALUE_PROCESSED);
+      // HACK: value is 0 if nothing is saved yet
+      with_perim.data[loc] = max(static_cast<size_t>(1), with_perim.data[loc]) * processing_status;
     }
   }
-  saveToProbabilityFile<float>(with_perim, dir_out_, base_name, static_cast<float>(numSizes()));
+  // HACK: numSize() is going to be 0 if nothing saved yet
+  const auto divisor = max(static_cast<float>(1.0), static_cast<float>(numSizes()));
+  saveToProbabilityFile<float>(
+    with_perim,
+    dir_out_,
+    base_name,
+    divisor);
 }
 void ProbabilityMap::saveTotalCount(const string& base_name) const
 {
