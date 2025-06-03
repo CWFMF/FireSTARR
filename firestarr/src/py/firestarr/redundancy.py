@@ -31,6 +31,8 @@ def should_ignore(ex):
         "tiffreaddirectory",
         # also TIFFReadEncodedTile
         "tiffread",
+        # HACK: throwing RuntimeError with "Invalid tiff"
+        "invalid tiff",
     ]
     # no point in looping if we already know the answer
     for s in ignore:

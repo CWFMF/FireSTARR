@@ -971,7 +971,12 @@ class Run(object):
                 df_fires_geom = df_fires.reset_index()[["fire_name", "geometry"]]
                 if FLAG_DEBUG_PERIMETERS:
                     gdf_to_file(df_fires_geom, self._dir_out, "df_fires_geom")
+                # FIX: this is trying to include missing?
                 df_fires_merge_final = pd.merge(df_fires_geom, df_final_copy, how="left").set_index("fire_name")
+                # HACK: add any rows from original that aren't in new
+                missing = [x for x in df_fires["fire_name"] if x not in df_fires_merge_final["fire_name"]]
+                logging.error("Missing %d fires from simulation results" % len(missing))
+                df_fires_merge_final = pd.concat([df_fires_merge_final, df_final[missing]])
                 if FLAG_DEBUG_PERIMETERS:
                     gdf_to_file(df_fires_merge_final, self._dir_out, "df_fires_merge_final")
                 gdf_to_file(df_fires_merge_final, self._dir_out, "df_fires_pre_final")
