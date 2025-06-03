@@ -223,6 +223,9 @@ def merge_dirs(
                             a_nodata=-1,
                             description=description,
                         )
+                    mtime = np.max([os.path.getmtime(f) for f in files_merge])
+                    # set modified time for merged raster to last modified input
+                    os.utime(file_tmp, (mtime, mtime))
 
                     if invalid_files:
                         logging.error("Removing invalid files %s", invalid_files)
@@ -243,6 +246,7 @@ def merge_dirs(
                                 creationOptions=creation_options,
                             )
                             force_remove(file_tmp)
+                        os.utime(file_base, (mtime, mtime))
                         changed = True
             else:
                 if verbose:

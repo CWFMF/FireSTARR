@@ -416,8 +416,9 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
             file_out = os.path.join(dir_region, d, f"{fire_name}{suffix}.tif")
             file_out_interim = os.path.join(dir_region, d, f"{fire_name}{TMP_SUFFIX}.tif")
             # if interim file already exists and is newer than last output it's fine
-            if os.path.exists(file_out) and is_newer_than(prob, file_out):
-                files_changed[prob] = True
+            if os.path.exists(file_out):
+                if is_newer_than(prob, file_out):
+                    files_changed[prob] = True
                 if file_out != file_out_interim:
                     # remove interim if we have final
                     force_remove(file_out_interim)
