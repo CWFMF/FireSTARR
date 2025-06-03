@@ -232,8 +232,11 @@ def requeue():
     AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
-    # FIX: figure out a useful/standardized message format
-    queue_client.send_message('{"msg": "Recheck outputs"}')
+    # HACK: don't insert "recheck" message if there is any message in the queue already
+    #       because that will trigger recheck already
+    if 0 == len(queue_client.peek_messages()):
+        # FIX: figure out a useful/standardized message format
+        queue_client.send_message('{"msg": "Recheck outputs"}')
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
     logging.info("Done requeue")
 
