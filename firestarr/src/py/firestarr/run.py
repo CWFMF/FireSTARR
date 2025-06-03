@@ -974,16 +974,16 @@ class Run(object):
                 # FIX: this is trying to include missing?
                 df_fires_merge_final = pd.merge(df_fires_geom, df_final_copy, how="left").set_index("fire_name")
                 # HACK: add any rows from original that aren't in new
-                missing = [x for x in df_fires["fire_name"] if x not in df_fires_merge_final["fire_name"]]
+                missing = [x for x in df_fires.index if x not in df_fires_merge_final.index]
                 logging.error("Missing %d fires from simulation results" % len(missing))
-                df_fires_merge_final = pd.concat([df_fires_merge_final, df_final[missing]])
+                df_fires_merge_final = pd.concat([df_fires_merge_final, df_fires.loc[missing]])
                 if FLAG_DEBUG_PERIMETERS:
                     gdf_to_file(df_fires_merge_final, self._dir_out, "df_fires_merge_final")
                 gdf_to_file(df_fires_merge_final, self._dir_out, "df_fires_pre_final")
                 # even if this is the wrong number of rows we still want to fix and return it
                 if len(df_final) == len(df_fires):
                     df_final_copy = df_fires_merge_final
-                    if len(df_final_copy) == len(df_final):
+                    if len(df_final_copy) == len(df_fires):
                         logging.debug("Saving with extra information at end")
                         gdf_to_file(df_final_copy, self._file_fires)
                     else:
