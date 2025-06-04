@@ -684,18 +684,21 @@ class Run(object):
         dir_names = set(dirs_fire)
         diff_extra = dir_names.difference(fire_names)
         expected = {f: get_simulation_file(os.path.join(self._dir_sims, f)) for f in fire_names}
+        # missing_extra = []
         if 0 < len(diff_extra):
             expected_extra = [get_simulation_file(os.path.join(self._dir_sims, f)) for f in diff_extra]
-            load_extra = [gdf_from_file(f) for f in expected_extra]
-            df_extra = pd.concat(load_extra).set_index(["fire_name"])
-            df_fires_fixed = pd.concat([df_fires, df_extra.to_crs(df_fires.crs)])
-            reloaded = len(df_fires_fixed) - len(df_fires)
-            if 0 != reloaded:
-                logging.warning("Added %d fires that were missing from list by loading from directories" % reloaded)
-                df_fires = df_fires_fixed
-                gdf_to_file(df_fires, self._file_fires)
-                df_fires = self.load_fires()
-                return self.find_unprepared(df_fires, remove_directory=remove_directory)
+            load_extra = [gdf_from_file(f) for f in expected_extra if os.path.isfile(f)]
+            # missing_extra = [f for f in expected_extra if not os.path.isfile(f)]
+            if 0 < len(load_extra):
+                df_extra = pd.concat(load_extra).set_index(["fire_name"])
+                df_fires_fixed = pd.concat([df_fires, df_extra.to_crs(df_fires.crs)])
+                reloaded = len(df_fires_fixed) - len(df_fires)
+                if 0 != reloaded:
+                    logging.warning("Added %d fires that were missing from list by loading from directories" % reloaded)
+                    df_fires = df_fires_fixed
+                    gdf_to_file(df_fires, self._file_fires)
+                    df_fires = self.load_fires()
+                    return self.find_unprepared(df_fires, remove_directory=remove_directory)
 
         def check_file(file_sim):
             try:
