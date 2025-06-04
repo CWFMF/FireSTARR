@@ -683,13 +683,19 @@ class Run(object):
         fire_names = set(df_fires.index)
         dir_names = set(dirs_fire)
         diff_extra = dir_names.difference(fire_names)
-        if diff_extra:
-            error = f"Have directories for fires that aren't in input:\n{diff_extra}"
-            logging.error("Stopping completely since folder structure is invalid\n%s", error)
-            # HACK: deal with extra folders by always stopping for now
-            sys.exit(-1)
-            raise RuntimeError(error)
         expected = {f: get_simulation_file(os.path.join(self._dir_sims, f)) for f in fire_names}
+        if 0 < len(diff_extra):
+            expected_extra = [get_simulation_file(os.path.join(self._dir_sims, f)) for f in diff_extra]
+            load_extra = [gdf_from_file(f) for f in expected_extra]
+            df_extra = pd.concat(load_extra).set_index(["fire_name"])
+            df_fires_fixed = pd.concat([df_fires, df_extra.to_crs(df_fires.crs)])
+            reloaded = len(df_fires_fixed) - len(df_fires)
+            if 0 != reloaded:
+                logging.warning("Added %d fires that were missing from list by loading from directories" % reloaded)
+                df_fires = df_fires_fixed
+                gdf_to_file(df_fires, self._file_fires)
+                df_fires = self.load_fires()
+                return self.find_unprepared(df_fires, remove_directory=remove_directory)
 
         def check_file(file_sim):
             try:
@@ -983,7 +989,7 @@ class Run(object):
                 # even if this is the wrong number of rows we still want to fix and return it
                 if len(df_final) == len(df_fires):
                     df_final_copy = df_fires_merge_final
-                    if len(df_final_copy) == len(df_fires):
+                    if len(df_final_copy) == len(df_fires) and len(df_final) == len(df_final_copy):
                         logging.debug("Saving with extra information at end")
                         gdf_to_file(df_final_copy, self._file_fires)
                     else:
