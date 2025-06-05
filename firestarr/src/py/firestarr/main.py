@@ -44,6 +44,7 @@ is_current = None
 is_published = None
 needs_publish = None
 should_resume = None
+FROM_QUEUE = False
 
 
 def run_main(args):
@@ -139,6 +140,9 @@ def run_main(args):
             run_current.check_and_publish()
         else:
             logging.info("Starting new run")
+            if FROM_QUEUE:
+                logging.info("Clearing queue since new run is starting")
+                clear_queue()
             run_current = Run(
                 dir_fires=dir_arg,
                 max_days=max_days,
@@ -167,6 +171,16 @@ def run_main(args):
     )
     # whether things should stop running
     return no_retry or (not should_rerun), df_final
+
+
+def clear_queue():
+    from azure.storage.queue import QueueClient, QueueServiceClient
+
+    AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
+    AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
+    queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
+    queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
+    queue_client.clear_messages()
 
 
 def scan_queue():
@@ -240,8 +254,6 @@ def requeue():
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
     logging.info("Done requeue")
 
-
-FROM_QUEUE = False
 
 if __name__ == "__main__":
     if not os.path.exists(FILE_APP_BINARY):
