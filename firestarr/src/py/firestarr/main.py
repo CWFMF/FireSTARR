@@ -1,3 +1,4 @@
+import base64
 import datetime
 import json
 import os
@@ -25,7 +26,7 @@ from run import Run, make_resume
 from sim_wrapper import assign_sim_batch
 
 MODEL_TRIGGERS = ["GEPS", "M3"]
-TEXT_MODEL_MSG = "'model_name': '{}'"
+TEXT_MODEL_MSG = r"'model_name': '{}'"
 
 # NOTE: rotating log file doesn't help because this isn't continuously running
 LOG_MAIN = add_log_file(
@@ -195,21 +196,29 @@ def scan_queue():
     queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
+    msg_orig = None
     for msg in response:
         try:
             txt = msg.content
+            try:
+                txt = base64.b64decode(txt).decode("utf-8")
+            except KeyboardInterrupt as ex:
+                raise ex
+            except Exception:
+                # HACK: try and fail to decode means it's not encoded
+                pass
             queue_client.delete_message(msg, msg.pop_receipt)
             # FIX: right now any message causes a full run
             logging.info("Message %s", txt)
+            msg_orig = txt
             queue_msg = json.loads(txt)
-            msg_orig = queue_msg
             if "args" in queue_msg.keys():
                 args_given = queue_msg["args"]
                 logging.info("Trying to parse arguments %s", args_given)
                 if isinstance(args_given, str):
                     args_given = args_given.strip().split(" ")
                 if not isinstance(args_given, list):
-                    raise ValueError("Excpected list of arguments but got %s", args_given)
+                    raise ValueError("Expected list of arguments but got %s", args_given)
                 args_given = [x.strip() for x in args_given]
                 try:
                     for a in args_given:
@@ -227,7 +236,7 @@ def scan_queue():
             logging.fatal(ex)
     if msg_orig is None:
         logging.info("No message in queue, or failed to parse one")
-    return queue_msg, args
+    return msg_orig, args
 
 
 def requeue():
