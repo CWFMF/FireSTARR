@@ -128,7 +128,7 @@ def create_autoscale_formula():
             ${scale_target} = min(${result}, ceil(max($num_{var}, ${result}) / 4 * 3));
             ${last_node} = (1 == ${result});
             ${result} = ${sufficient} ? ${scale_target} : ${result};
-            ${result} = ${last_node} ? ((0 == $num_{active}) ? 0 : 1) : ${result};
+            ${result} = ${last_node} ? ((0 == $num_{pending}) ? 0 : 1) : ${result};
             """
 
     # NOTE: defines a bunch of variables that are only used once, but that makes it
