@@ -894,9 +894,10 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
     Model::task_limiter.set_limit(MAX_THREADS);
   }
   const auto MAX_CONCURRENT = std::max<size_t>(MAX_THREADS, 1);
+  constexpr auto MIN_CONCURRENT = 2;
   const auto concurrent_iterations = std::max<size_t>(
     MAX_CONCURRENT / all_iterations[0].getScenarios().size(),
-    1);
+    MIN_CONCURRENT);
   // HACK: just set max of 4 for now
   // constexpr auto MIN_ITERATIONS_BEFORE_CHECK = 4;
   // const auto concurrent_iterations = std::min(
