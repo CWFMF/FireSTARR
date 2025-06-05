@@ -891,17 +891,17 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
     logging::note("Increasing to use at least one thread for each of %ld scenarios", scenarios_per_iteration_);
     Model::task_limiter.set_limit(MAX_THREADS);
   }
-  // const auto MAX_CONCURRENT = std::max<size_t>(MAX_THREADS, 1);
-  // const auto concurrent_iterations = std::max<size_t>(
-  //   MAX_CONCURRENT / all_iterations[0].getScenarios().size(),
-  //   1);
+  const auto MAX_CONCURRENT = std::max<size_t>(MAX_THREADS, 1);
+  const auto concurrent_iterations = std::max<size_t>(
+    MAX_CONCURRENT / all_iterations[0].getScenarios().size(),
+    1);
   // HACK: just set max of 4 for now
   // constexpr auto MIN_ITERATIONS_BEFORE_CHECK = 4;
   // const auto concurrent_iterations = std::min(
   //   static_cast<size_t>(MIN_ITERATIONS_BEFORE_CHECK),
   //   MAX_THREADS);
   // no point in running multiple iterations if deterministic
-  const auto concurrent_iterations = 1;
+  // const auto concurrent_iterations = 1;
   // const auto concurrent_iterations = MAX_THREADS;
   for (size_t x = 1; x < concurrent_iterations; ++x)
   {
