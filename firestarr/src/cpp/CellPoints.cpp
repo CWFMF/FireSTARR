@@ -29,7 +29,9 @@ static const SpreadData INVALID_SPREAD_DATA{
 set<XYPos> CellPoints::unique() const noexcept
 {
   // // if any point is invalid then they all have to be
-  if (INVALID_DISTANCE == pts_.distances()[0])
+  if (
+    // !can_burn_ ||
+    INVALID_DISTANCE == pts_.distances()[0])
   {
     return {};
   }
@@ -49,19 +51,26 @@ size_t CellPoints::size() const noexcept
   return unique().size();
 }
 #endif
-CellPoints::CellPoints(const Idx cell_x, const Idx cell_y) noexcept
+CellPoints::CellPoints(
+  const BurnedData& unburnable,
+  const Idx cell_x,
+  const Idx cell_y) noexcept
   : pts_(),
     cell_x_y_(cell_x, cell_y)
 {
-  std::fill(pts_.distances().begin(), pts_.distances().end(), INVALID_DISTANCE);
-  std::fill(pts_.points().begin(), pts_.points().end(), INVALID_INNER_POSITION);
+  can_burn_ = !unburnable[cell_x_y_.hash()];
+  // if (can_burn_)
+  {
+    std::fill(pts_.distances().begin(), pts_.distances().end(), INVALID_DISTANCE);
+    std::fill(pts_.points().begin(), pts_.points().end(), INVALID_INNER_POSITION);
 
 #ifdef DEBUG_CELLPOINTS
-  logging::note("CellPoints is size %ld after creation and should be empty", size());
+    logging::note("CellPoints is size %ld after creation and should be empty", size());
 #endif
+  }
 }
 CellPoints::CellPoints() noexcept
-  : CellPoints(INVALID_XY_LOCATION, INVALID_XY_LOCATION)
+  : CellPoints(false, INVALID_XY_LOCATION, INVALID_XY_LOCATION)
 {
 }
 CellPoints::CellPoints(const CellPoints* rhs) noexcept
@@ -71,9 +80,10 @@ CellPoints::CellPoints(const CellPoints* rhs) noexcept
   *this = *rhs;
 }
 CellPoints::CellPoints(
+  const BurnedData& unburnable,
   const XYSize x,
   const XYSize y) noexcept
-  : CellPoints(static_cast<Idx>(x), static_cast<Idx>(y))
+  : CellPoints(unburnable, static_cast<Idx>(x), static_cast<Idx>(y))
 {
   insert(
     x,
@@ -120,7 +130,10 @@ CellPoints& CellPoints::insert(
   const XYSize x,
   const XYSize y) noexcept
 {
-  insert_pt(x, y, cell_x_y_, pts_);
+  // if (can_burn_)
+  {
+    insert_pt(x, y, cell_x_y_, pts_);
+  }
   return *this;
 }
 #undef D_PTS
@@ -167,63 +180,68 @@ void insert_pt(
     pts);
 }
 
-CellPoints::CellPoints(const XYPos& p) noexcept
-  : CellPoints(p.first, p.second)
-{
-}
-
 CellPoints& CellPoints::insert(const InnerPos& p) noexcept
 {
-  // HACK: FIX: just do something for now
-  insert(
-    p.first,
-    p.second);
-  return *this;
-}
-
-CellPointArrays::CellPointArrays(const InnerSize x, const InnerSize y)
-  : CellPointArrays(InnerPos(x, y))
-{
-}
-
-CellPointArrays::CellPointArrays(const InnerPos& p0)
-{
-  // need to calculate distances, but we know everything is the same point
-  const auto x0 = static_cast<DistanceSize>(p0.first);
-  const auto y0 = static_cast<DistanceSize>(p0.second);
-  std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
-  auto& dists = distances();
-  for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
+  // if (can_burn_)
   {
-    const auto& p1 = POINTS_OUTER[i];
-    const auto& x1 = p1.first;
-    const auto& y1 = p1.second;
-    dists[i] = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
+    // HACK: FIX: just do something for now
+    insert(
+      p.first,
+      p.second);
   }
-}
-CellPointArrays& CellPointArrays::insert(const InnerSize x, const InnerSize y)
-{
-  insert_pt(x, y, *this);
   return *this;
 }
+
+// CellPointArrays::CellPointArrays(const InnerSize x, const InnerSize y)
+//   : CellPointArrays(InnerPos(x, y))
+// {
+// }
+
+// CellPointArrays::CellPointArrays(const InnerPos& p0)
+// {
+//   // need to calculate distances, but we know everything is the same point
+//   const auto x0 = static_cast<DistanceSize>(p0.first);
+//   const auto y0 = static_cast<DistanceSize>(p0.second);
+//   std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
+//   auto& dists = distances();
+//   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
+//   {
+//     const auto& p1 = POINTS_OUTER[i];
+//     const auto& x1 = p1.first;
+//     const auto& y1 = p1.second;
+//     dists[i] = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
+//   }
+// }
+// CellPointArrays& CellPointArrays::insert(const InnerSize x, const InnerSize y)
+// {
+//   insert_pt(x, y, *this);
+//   return *this;
+// }
 bool CellPoints::operator<(const CellPoints& rhs) const noexcept
 {
-  if (cell_x_y_ == rhs.cell_x_y_)
+  // if (can_burn_ == rhs.can_burn_)
   {
-    return pts_.points() < rhs.pts_.points();
+    if (cell_x_y_ == rhs.cell_x_y_)
+    {
+      return pts_.points() < rhs.pts_.points();
+    }
+    return cell_x_y_ < rhs.cell_x_y_;
   }
-  return cell_x_y_ < rhs.cell_x_y_;
+  // return can_burn_;
 }
 bool CellPoints::operator==(const CellPoints& rhs) const noexcept
 {
   return (
     cell_x_y_ == rhs.cell_x_y_
+    && can_burn_ && rhs.can_burn_
     && pts_.points() == rhs.pts_.points());
 }
 bool CellPoints::empty() const
 {
   // NOTE: if anything is invalid then everything must be
-  return (INVALID_DISTANCE == pts_.distances()[0]);
+  return (
+    // !can_burn_ ||
+    INVALID_DISTANCE == pts_.distances()[0]);
 }
 [[nodiscard]] Location CellPoints::location() const noexcept
 {
@@ -234,6 +252,7 @@ CellPointsMap::CellPointsMap()
 {
 }
 CellPoints& CellPointsMap::insert(
+  const BurnedData& unburnable,
   const XYSize x,
   const XYSize y) noexcept
 {
@@ -242,6 +261,7 @@ CellPoints& CellPointsMap::insert(
 #endif
   const Location location{static_cast<Idx>(y), static_cast<Idx>(x)};
   auto e = map_.try_emplace(location.hash(),
+                            unburnable,
                             x,
                             y);
   CellPoints& cell_pts = e.first->second;

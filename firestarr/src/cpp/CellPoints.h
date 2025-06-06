@@ -78,9 +78,9 @@ class CellPointArrays
 {
 public:
   using array_cellpts::array_cellpts;
-  CellPointArrays(const InnerPos& p0);
-  CellPointArrays(const InnerSize x, const InnerSize y);
-  CellPointArrays& insert(const InnerSize x, const InnerSize y);
+  // CellPointArrays(const InnerPos& p0);
+  // CellPointArrays(const InnerSize x, const InnerSize y);
+  // CellPointArrays& insert(const InnerSize x, const InnerSize y);
   inline const array_dists& distances() const
   {
     return std::get<0>(*this);
@@ -124,6 +124,7 @@ public:
   CellPoints(const CellPoints* rhs) noexcept;
   //   CellPoints(const vector<InnerPos>& pts) noexcept;
   CellPoints(
+    const BurnedData& unburnable,
     const XYSize x,
     const XYSize y) noexcept;
   CellPoints(CellPoints&& rhs) noexcept = default;
@@ -138,7 +139,7 @@ public:
   bool operator<(const CellPoints& rhs) const noexcept;
   bool operator==(const CellPoints& rhs) const noexcept;
   [[nodiscard]] Location location() const noexcept;
-  void clear();
+  // void clear();
   //   const array_pts points() const;
   bool empty() const;
   // DurationSize arrival_time_;
@@ -148,12 +149,15 @@ public:
   // friend CellPointsMap;
   // FIX: just access directly for now
 public:
+  bool can_burn_;
   CellPointArrays pts_;
   // use Idx instead of Location so it can be negative (invalid)
   CellPos cell_x_y_;
 private:
-  CellPoints(const Idx cell_x, const Idx cell_y) noexcept;
-  CellPoints(const XYPos& p) noexcept;
+  CellPoints(
+    const BurnedData& unburnable,
+    const Idx cell_x,
+    const Idx cell_y) noexcept;
 };
 
 using spreading_points = CellPoints::spreading_points;
@@ -164,6 +168,7 @@ class CellPointsMap
 public:
   CellPointsMap();
   CellPoints& insert(
+    const BurnedData& unburnable,
     const XYSize x,
     const XYSize y) noexcept;
   set<XYPos> unique() const noexcept;

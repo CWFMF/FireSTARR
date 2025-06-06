@@ -333,6 +333,7 @@ void Scenario::evaluate(const Event& event)
       // HACK: don't do this in constructor because scenario creates this in its constructor
       // HACK: insert point as originating from itself
       points_.insert(
+        *unburnable_,
         x,
         y);
       if (fuel::is_null_fuel(event.cell()))
@@ -585,6 +586,7 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
                   x,
                   y);
       points_.insert(
+        *unburnable_,
         x,
         y);
       // auto e = points_.try_emplace(cell, cell.column() + CELL_CENTER, cell.row() + CELL_CENTER);
@@ -671,7 +673,8 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
   }
   return this;
 }
-vector<XYPos> apply_offsets_spreadkey(
+void apply_offsets_spreadkey(
+  CellPointsMap& points,
   const BurnedData& unburnable,
   const DurationSize& arrival_time,
   const DurationSize& duration,
@@ -680,7 +683,7 @@ vector<XYPos> apply_offsets_spreadkey(
 {
   // NOTE: really tried to do this in parallel, but not enough points
   // in a cell for it to work well
-  vector<XYPos> r1{};
+  // vector<XYPos> r1{};
   OffsetSet offsets_after_duration{};
   logging::verbose("Applying %ld offsets", offsets.size());
   // // offsets_after_duration.resize(offsets.size());
@@ -746,13 +749,10 @@ vector<XYPos> apply_offsets_spreadkey(
         {
           const auto new_x = x_o + pt.first + cell_x;
           const auto new_y = y_o + pt.second + cell_y;
-          const HashSize hash_value = Location(new_y, new_x).hash();
-          if (!unburnable[hash_value])
-          {
-            r1.emplace_back(
-              new_x,
-              new_y);
-          }
+          points.insert(
+            unburnable,
+            new_x,
+            new_y);
 #ifdef DEBUG_CELLPOINTS
           logging::note("r1 is now %ld items", r1.size());
 #endif
@@ -760,7 +760,7 @@ vector<XYPos> apply_offsets_spreadkey(
       }
     }
   }
-  return r1;
+  // return r1;
 }
 void Scenario::scheduleFireSpread(const Event& event)
 {
@@ -881,39 +881,44 @@ void Scenario::scheduleFireSpread(const Event& event)
     const auto& offsets = spread_info_[key].offsets();
     spreading_points::mapped_type& pts = kv0.second;
     // FIX: just decomposing for now
-    auto r = apply_offsets_spreadkey(*unburnable_, new_time, duration, offsets, pts);
-    for (XYPos& p : r)
-    {
-      cell_pts.insert(p.x(), p.y());
-    }
+    // auto r =
+    apply_offsets_spreadkey(cell_pts, *unburnable_, new_time, duration, offsets, pts);
+    // for (XYPos& p : r)
+    // {
+    //   // cell_pts.insert(p.x(), p.y());
+    //   points_.insert(p.x(), p.y());
+    // }
   }
-  // cell_pts.remove_if(
-  //   [this](
-  //     const pair<HashSize, CellPoints>& kv) {
-  //     const auto& hash_value = kv.first;
-  //     const Location location{hash_value};
-  //     // clear out if unburnable
-  //     const auto do_clear = (*unburnable_)[hash_value];
-  //     if (do_clear)
-  //     {
-  //       logging::error(
-  //         "Shouldn't have unburnable cell (%d, %d)",
-  //         location.column(),
-  //         location.row());
-  //     }
-  //     return do_clear;
-  //   });
+  cell_pts.remove_if(
+    [this](
+      const pair<HashSize, CellPoints>& kv) {
+      const auto& hash_value = kv.first;
+      const Location location{hash_value};
+      // clear out if unburnable
+      const auto do_clear = (*unburnable_)[hash_value];
+      // if (do_clear)
+      // {
+      //   logging::error(
+      //     "Shouldn't have unburnable cell (%d, %d)",
+      //     location.column(),
+      //     location.row());
+      // }
+      return do_clear;
+    });
   for (auto& p : points_.unique())
   {
-    cell_pts.insert(p.x(), p.y());
+    cell_pts.insert(*unburnable_, p.x(), p.y());
   }
   points_ = cell_pts;
   // if we move everything out of points_ we can parallelize this check?
   do_each(
     points_.map_,
     [this, &new_time](pair<const HashSize, CellPoints>& kv) {
-      const auto& hash_value = kv.first;
       CellPoints& pts = kv.second;
+      if (!pts.can_burn_)
+      {
+      }
+      const auto& hash_value = kv.first;
       const auto for_cell = cell(hash_value);
       // logging::check_fatal(pts.empty(), "Empty points for some reason");
       // ******************* CHECK THIS BECAUSE IF SOMETHING IS IN HERE SHOULD IT ALWAYS HAVE SPREAD????? *****************8
