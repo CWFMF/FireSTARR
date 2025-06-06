@@ -25,7 +25,7 @@ from redundancy import get_stack
 from run import Run, make_resume
 from sim_wrapper import assign_sim_batch
 
-MODEL_TRIGGERS = ["GEPS", "M3"]
+MODEL_TRIGGERS = ["geps", "m3"]
 TEXT_MODEL_MSG = r"'model_name': '{}'"
 
 # NOTE: rotating log file doesn't help because this isn't continuously running
@@ -230,7 +230,16 @@ def scan_queue():
                 except Exception as ex:
                     logging.fatal(ex)
                     raise ValueError("Invalid arguments given: %s" % a)
-                break
+            elif "model_name" in queue_msg.keys():
+                model = queue_msg["model_name"].lower()
+                if model in MODEL_TRIGGERS:
+                    logging.info("Starting new run because %s is updated" % model)
+                    args.extend(["--no-resume"])
+            elif "msg" in queue_msg.keys():
+                logging.info("Triggered with message '%s'" % queue_msg["msg"])
+            else:
+                raise ValueError("Expected args or model_name in message")
+            break
         except Exception as ex:
             logging.error("Unable to parse queue message:\n%s", msg.content)
             logging.fatal(ex)
@@ -279,13 +288,6 @@ if __name__ == "__main__":
         if assign_sim_batch():
             logging.debug("Not waiting since running in batch")
             QUEUE_ARGS.extend(["--no-wait"])
-        # {'model_name': 'GEPS', 'forecast_date': '20250523', 'utc_time': '00'}
-        if msg is not None:
-            for model in MODEL_TRIGGERS:
-                if TEXT_MODEL_MSG.format(model).lower() in msg.lower():
-                    logging.warning("Forcing new run because %s is updated" % model)
-                    QUEUE_ARGS.extend(["--no-resume"])
-                    break
         REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
         for a in REMOVE_ARGS:
             try:
