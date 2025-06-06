@@ -50,7 +50,7 @@ size_t CellPoints::size() const noexcept
 }
 #endif
 CellPoints::CellPoints(const Idx cell_x, const Idx cell_y) noexcept
-  : pts_({}),
+  : pts_(),
     cell_x_y_(cell_x, cell_y)
 {
   std::fill(pts_.distances().begin(), pts_.distances().end(), INVALID_DISTANCE);
@@ -120,45 +120,53 @@ CellPoints& CellPoints::insert(
   const XYSize x,
   const XYSize y) noexcept
 {
-  // NOTE: use location inside cell so smaller types can be more precise
-  // since digits aren't wasted on cell
-  const auto p0 = InnerPos(
-    static_cast<InnerSize>(x - cell_x_y_.first),
-    static_cast<InnerSize>(y - cell_x_y_.second));
+  insert_pt(x, y, cell_x_y_, pts_);
+  return *this;
+}
+#undef D_PTS
+void insert_pt(
+  const InnerPos& p0,
+  CellPointArrays& pts) noexcept
+{
   const auto x0 = static_cast<DistanceSize>(p0.first);
   const auto y0 = static_cast<DistanceSize>(p0.second);
+
   // CHECK: FIX: is this initializing everything to false or just one element?
-  // static_assert(pts_.first.size() == NUM_DIRECTIONS);
   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
   {
     const auto& p1 = POINTS_OUTER[i];
     const auto& x1 = p1.first;
     const auto& y1 = p1.second;
     const auto d = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
-    auto& p_d = pts_.distances()[i];
-    auto& p_p = pts_.points()[i];
-    // closer[i] = (d < p_d);
-    // p_p = closer[i] ? p0 : p_p;
-    // p_d = closer[i] ? d : p_d;
+    auto& p_d = pts.distances()[i];
+    auto& p_p = pts.points()[i];
     p_p = (d < p_d) ? p0 : p_p;
     p_d = (d < p_d) ? d : p_d;
-    // // worse than two checks + assignment
-    // const auto& [p_new, d_new] =
-    //   (d < p_d)
-    //     ? std::make_tuple(p0, d)
-    //     : std::make_tuple(p_p, p_d);
-    // p_p = p_new;
-    // p_d = d_new;
-    // // worse than two checks + assignment
-    // std::tie(p_d, p_p) =
-    //   (d < p_d)
-    //     ? std::make_tuple(d, p0)
-    //     : std::make_tuple(p_d, p_p);
   }
-  // FIX: do something with spread on exit
-  return *this;
 }
-#undef D_PTS
+
+void insert_pt(
+  const InnerSize x,
+  const InnerSize y,
+  CellPointArrays& pts) noexcept
+{
+  // NOTE: use location inside cell so smaller types can be more precise
+  // since digits aren't wasted on cell
+  const auto p0 = InnerPos(x, y);
+  insert_pt(p0, pts);
+}
+void insert_pt(
+  const XYSize x,
+  const XYSize y,
+  const CellPos& cell_x_y,
+  CellPointArrays& pts) noexcept
+{
+  insert_pt(
+    static_cast<InnerSize>(x - cell_x_y.first),
+    static_cast<InnerSize>(y - cell_x_y.second),
+    pts);
+}
+
 CellPoints::CellPoints(const XYPos& p) noexcept
   : CellPoints(p.first, p.second)
 {
@@ -173,23 +181,29 @@ CellPoints& CellPoints::insert(const InnerPos& p) noexcept
   return *this;
 }
 
-CellPoints& CellPoints::merge(const CellPoints& rhs)
+CellPointArrays::CellPointArrays(const InnerSize x, const InnerSize y)
+  : CellPointArrays(InnerPos(x, y))
 {
-  // either both invalid or lower one is valid
-  cell_x_y_ = min(cell_x_y_, rhs.cell_x_y_);
-  auto& d0 = pts_.distances();
-  auto& d1 = rhs.pts_.distances();
-  auto& p0 = pts_.points();
-  auto& p1 = rhs.pts_.points();
-  // we know distances in each direction so just pick closer
-  for (size_t i = 0; i < d0.size(); ++i)
+}
+
+CellPointArrays::CellPointArrays(const InnerPos& p0)
+{
+  // need to calculate distances, but we know everything is the same point
+  const auto x0 = static_cast<DistanceSize>(p0.first);
+  const auto y0 = static_cast<DistanceSize>(p0.second);
+  std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
+  auto& dists = distances();
+  for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
   {
-    if (d1[i] < d0[i])
-    {
-      d0[i] = d1[i];
-      p0[i] = p1[i];
-    }
+    const auto& p1 = POINTS_OUTER[i];
+    const auto& x1 = p1.first;
+    const auto& y1 = p1.second;
+    dists[i] = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
   }
+}
+CellPointArrays& CellPointArrays::insert(const InnerSize x, const InnerSize y)
+{
+  insert_pt(x, y, *this);
   return *this;
 }
 bool CellPoints::operator<(const CellPoints& rhs) const noexcept
@@ -240,29 +254,6 @@ CellPoints& CellPointsMap::insert(
       y);
   }
   return cell_pts;
-}
-CellPointsMap& CellPointsMap::merge(
-  const BurnedData& unburnable,
-  const CellPointsMap& rhs) noexcept
-{
-  // FIX: if we iterate through both they should be sorted
-  for (const auto& kv : rhs.map_)
-  {
-    const auto h = kv.first.hash();
-    if (!unburnable[h])
-    {
-      const CellPoints& pts = kv.second;
-      const Location location = pts.location();
-      auto e = map_.try_emplace(location, pts);
-      CellPoints& cell_pts = e.first->second;
-      if (!e.second)
-      {
-        // couldn't insert
-        cell_pts.merge(pts);
-      }
-    }
-  }
-  return *this;
 }
 void CellPointsMap::remove_if(std::function<bool(const pair<Location, CellPoints>&)> F) noexcept
 {

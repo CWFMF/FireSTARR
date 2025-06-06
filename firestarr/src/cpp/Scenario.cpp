@@ -671,7 +671,7 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
   }
   return this;
 }
-CellPointsMap apply_offsets_spreadkey(
+vector<XYPos> apply_offsets_spreadkey(
   const DurationSize& arrival_time,
   const DurationSize& duration,
   const OffsetSet& offsets,
@@ -679,7 +679,7 @@ CellPointsMap apply_offsets_spreadkey(
 {
   // NOTE: really tried to do this in parallel, but not enough points
   // in a cell for it to work well
-  CellPointsMap r1{};
+  vector<XYPos> r1{};
   OffsetSet offsets_after_duration{};
   logging::verbose("Applying %ld offsets", offsets.size());
   // // offsets_after_duration.resize(offsets.size());
@@ -745,7 +745,7 @@ CellPointsMap apply_offsets_spreadkey(
         {
           const auto new_x = x_o + pt.first + cell_x;
           const auto new_y = y_o + pt.second + cell_y;
-          r1.insert(
+          r1.emplace_back(
             new_x,
             new_y);
 #ifdef DEBUG_CELLPOINTS
@@ -868,28 +868,40 @@ void Scenario::scheduleFireSpread(const Event& event)
   // note("Spreading for %f minutes", duration);
   const auto new_time = time + duration / DAY_MINUTES;
   CellPointsMap cell_pts{};
-  auto spread = std::views::transform(
-    to_spread,
-    [this, &duration, &new_time](
-      spreading_points::value_type& kv0) -> CellPointsMap {
-      auto& key = kv0.first;
-      const auto& offsets = spread_info_[key].offsets();
-      spreading_points::mapped_type& cell_pts = kv0.second;
-      auto r = apply_offsets_spreadkey(new_time, duration, offsets, cell_pts);
-      return r;
-    });
-  auto it = spread.begin();
-  while (spread.end() != it)
+  for (spreading_points::value_type& kv0 : to_spread)
   {
-    const CellPointsMap& cell_pts_cur = *it;
-    // // HACK: keep old behaviour until we can figure out whey removing isn't the same as not adding
-    // const auto h = cell_pts.location().hash();
-    // if (!unburnable[h])
-    // {
-    cell_pts.merge(*unburnable_, cell_pts_cur);
-    // }
-    ++it;
+    auto& key = kv0.first;
+    const auto& offsets = spread_info_[key].offsets();
+    spreading_points::mapped_type& pts = kv0.second;
+    // FIX: just decomposing for now
+    auto r = apply_offsets_spreadkey(new_time, duration, offsets, pts);
+    for (XYPos& p : r)
+    {
+      cell_pts.insert(p.x(), p.y());
+    }
   }
+  // auto spread = std::views::transform(
+  //   to_spread,
+  //   [this, &duration, &new_time](
+  //     spreading_points::value_type& kv0) -> CellPointsMap {
+  //     auto& key = kv0.first;
+  //     const auto& offsets = spread_info_[key].offsets();
+  //     spreading_points::mapped_type& cell_pts = kv0.second;
+  //     auto r = apply_offsets_spreadkey(new_time, duration, offsets, cell_pts);
+  //     return r;
+  //   });
+  // auto it = spread.begin();
+  // while (spread.end() != it)
+  // {
+  //   const CellPointsMap& cell_pts_cur = *it;
+  //   // // HACK: keep old behaviour until we can figure out whey removing isn't the same as not adding
+  //   // const auto h = cell_pts.location().hash();
+  //   // if (!unburnable[h])
+  //   // {
+  //   cell_pts.merge(*unburnable_, cell_pts_cur);
+  //   // }
+  //   ++it;
+  // }
 #ifdef DEBUG_CELLPOINTS
   const auto n_c = cell_pts.size();
 #endif
@@ -906,9 +918,14 @@ void Scenario::scheduleFireSpread(const Event& event)
   logging::note("%ld cell_pts before remove_if() and %ld after", n_c, cell_pts.size());
 #endif
   // need to merge new points back into cells that didn't spread
-  points_.merge(
-    *unburnable_,
-    cell_pts);
+  // points_.merge(
+  //   *unburnable_,
+  //   cell_pts);
+  for (auto& p : points_.unique())
+  {
+    cell_pts.insert(p.x(), p.y());
+  }
+  points_ = cell_pts;
   // if we move everything out of points_ we can parallelize this check?
   do_each(
     points_.map_,

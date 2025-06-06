@@ -33,6 +33,14 @@ public:
   {
     return static_cast<T>(class_type(this->first + o.first, this->second + o.second));
   }
+  inline auto& x() const
+  {
+    return this->first;
+  }
+  inline auto& y() const
+  {
+    return this->second;
+  }
 };
 /**
  * \brief Offset from a position
