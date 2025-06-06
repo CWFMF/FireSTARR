@@ -258,8 +258,9 @@ def requeue():
     # HACK: don't insert "recheck" message if there is any message in the queue already
     #       because that will trigger recheck already
     if 0 == len(queue_client.peek_messages()):
-        # FIX: figure out a useful/standardized message format
-        queue_client.send_message('{"msg": "Recheck outputs"}')
+        # HACK: if we tell it to resume then it'll not resetart with new weather
+        #       until a message about it shows up
+        queue_client.send_message('{"args": "--resume"}')
     response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
     logging.info("Done requeue")
 
