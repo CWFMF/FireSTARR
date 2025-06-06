@@ -370,10 +370,12 @@ void Model::findStarts(const Location location)
         if (1 == range || abs(x) == range || abs(y) == range)
         {
           //          const auto loc = env_->cell(location.hash() + (y * MAX_COLUMNS) + x);
-          const auto loc = env_->cell(Location(location.row() + y, location.column() + x));
+          const HashSize hash_value = Location(location.row() + y, location.column() + x).hash();
+          const auto loc = env_->cell(hash_value);
           if (!fuel::is_null_fuel(loc))
           {
-            starts_.push_back(make_shared<topo::Cell>(cell(loc)));
+            // FIX: why is this not just hash_value directly?
+            starts_.push_back(hash_value);
           }
         }
       }
@@ -384,7 +386,8 @@ void Model::findStarts(const Location location)
   logging::info("Using %d start locations:", ignitionScenarios());
   for (const auto& s : starts_)
   {
-    logging::info("\t%d, %d", s->row(), s->column());
+    const Location location{s};
+    logging::info("\t%d, %d", location.row(), location.column());
   }
 }
 void Model::makeStarts(Coordinates coordinates,
@@ -392,7 +395,8 @@ void Model::makeStarts(Coordinates coordinates,
                        string perim,
                        size_t size)
 {
-  Location location(std::get<0>(coordinates), std::get<1>(coordinates));
+  const Location location(std::get<0>(coordinates), std::get<1>(coordinates));
+  HashSize hash_value = location.hash();
   if (!perim.empty())
   {
     logging::note("Initializing from perimeter %s", perim.c_str());
@@ -406,7 +410,7 @@ void Model::makeStarts(Coordinates coordinates,
       // use whatever the one cell is instead of the lat/long
       if (1 == s)
       {
-        location = *(burned.begin());
+        hash_value = *(burned.begin());
       }
       // HACK: use 0 for 0 or 1 so it'll assign by point
       size = 0;
@@ -418,7 +422,7 @@ void Model::makeStarts(Coordinates coordinates,
   {
     logging::note("Initializing from size %d ha", size);
     perimeter_ = make_shared<topo::Perimeter>(
-      cell(location),
+      hash_value,
       size,
       *env_);
   }
@@ -428,7 +432,7 @@ void Model::makeStarts(Coordinates coordinates,
     logging::check_fatal(size != 0 && !perim.empty(), "Can't specify size and perimeter");
     // we have a perimeter to start from
     // HACK: make sure this isn't empty
-    starts_.push_back(make_shared<topo::Cell>(cell(location)));
+    starts_.push_back(hash_value);
     logging::note("Fire starting with size %0.1f ha",
                   perimeter_->burned().size() * env_->cellSize() / 100.0);
   }
@@ -443,13 +447,13 @@ void Model::makeStarts(Coordinates coordinates,
     }
     logging::note("Fire starting with size %0.1f ha", env_->cellSize() / 100.0);
     //    if (0 == size && fuel::is_null_fuel(cell(location.hash())))
-    if (0 == size && fuel::is_null_fuel(cell(location)))
+    if (0 == size && fuel::is_null_fuel(cell(hash_value)))
     {
       findStarts(location);
     }
     else
     {
-      starts_.push_back(make_shared<topo::Cell>(cell(location)));
+      starts_.push_back(hash_value);
     }
   }
   // if (nullptr != perimeter_)

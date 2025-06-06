@@ -116,7 +116,7 @@ void insert_pt(
 class CellPoints
 {
 public:
-  using spreading_points = map<SpreadKey, vector<pair<Location, CellPoints>>>;
+  using spreading_points = map<SpreadKey, vector<pair<HashSize, CellPoints>>>;
   CellPoints() noexcept;
   //   // HACK: so we can emplace with NULL
   //   CellPoints(size_t) noexcept;
@@ -171,9 +171,9 @@ public:
   size_t size() const noexcept;
 #endif
   // apply function to each CellPoints within and remove matches
-  void remove_if(std::function<bool(const pair<Location, CellPoints>&)> F) noexcept;
+  void remove_if(std::function<bool(const pair<HashSize, CellPoints>&)> F) noexcept;
   // FIX: public for debugging right now
   // private:
-  map<Location, CellPoints> map_;
+  map<HashSize, CellPoints> map_;
 };
 }

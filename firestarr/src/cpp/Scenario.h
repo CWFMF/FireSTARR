@@ -95,7 +95,7 @@ public:
            wx::FireWeather* weather,
            wx::FireWeather* weather_daily,
            DurationSize start_time,
-           const shared_ptr<topo::Cell>& start_cell,
+           const HashSize start_cell,
            const topo::StartPoint& start_point,
            Day start_day,
            Day last_date);
@@ -119,7 +119,7 @@ public:
    * \param final_sizes SafeVector to output results to
    * \return This
    */
-  [[nodiscard]] Scenario* reset_with_new_start(const shared_ptr<topo::Cell>& start_cell,
+  [[nodiscard]] Scenario* reset_with_new_start(const shared_ptr<HashSize>& start_cell,
                                                util::SafeVector* final_sizes);
   /**
    * \brief Reset thresholds and set SafeVector to output results to
@@ -156,15 +156,9 @@ public:
   {
     return model_->cell(row, column);
   }
-  /**
-   * \brief Get Cell for given Location
-   * \param location Location
-   * \return Cell for given Location
-   */
-  template <class P>
-  [[nodiscard]] constexpr topo::Cell cell(const Position<P>& position) const
+  [[nodiscard]] constexpr topo::Cell cell(const HashSize hash_value) const
   {
-    return model_->cell(position);
+    return model_->cell(hash_value);
   }
   /**
    * \brief Number of rows
@@ -313,12 +307,7 @@ public:
    * \param location Location to check if is surrounded
    * \return Whether or not the given Location is surrounded by cells that are burnt
    */
-  [[nodiscard]] bool isSurrounded(const Location& location) const;
-  template <class P>
-  [[nodiscard]] bool isSurrounded(const Position<P>& position) const
-  {
-    return isSurrounded(Location{position.hash()});
-  }
+  [[nodiscard]] bool isSurrounded(const HashSize hash_value) const;
   /**
    * \brief Cell that InnerPos falls within
    * \param p InnerPos
@@ -346,7 +335,7 @@ public:
    * \param location Cell
    * \return Whether or not a Cell can burn
    */
-  [[nodiscard]] bool canBurn(const topo::Cell& location) const;
+  [[nodiscard]] bool canBurn(const HashSize hash_value) const;
   /**
    * \brief Whether or not Cell with the given hash can burn
    * \param hash Hash for Cell to check
@@ -358,12 +347,7 @@ public:
    * \param location Location to check
    * \return Whether or not Location has burned already
    */
-  [[nodiscard]] bool hasBurned(const Location& location) const;
-  template <class P>
-  [[nodiscard]] bool hasBurned(const Position<P>& position) const
-  {
-    return hasBurned(Location{position.hash()});
-  }
+  [[nodiscard]] bool hasBurned(const HashSize hash_value) const;
   /**
    * \brief Whether or not Location with given hash has burned already
    * \param hash Hash of Location to check
@@ -484,7 +468,7 @@ protected:
            DurationSize start_time,
            //  const shared_ptr<IntensityMap>& initial_intensity,
            const shared_ptr<topo::Perimeter>& perimeter,
-           const shared_ptr<topo::Cell>& start_cell,
+           const shared_ptr<HashSize>& start_cell,
            topo::StartPoint start_point,
            Day start_day,
            Day last_date);
@@ -535,7 +519,7 @@ protected:
   /**
    * \brief Map of when Cell had first Point arrive in it
    */
-  map<topo::Cell, DurationSize> arrival_{};
+  map<HashSize, DurationSize> arrival_{};
   /**
    * \brief Maximum rate of spread for current time
    */
@@ -543,7 +527,7 @@ protected:
   /**
    * \brief Cell that the Scenario starts from if no Perimeter
    */
-  shared_ptr<topo::Cell> start_cell_;
+  shared_ptr<HashSize> start_cell_;
   /**
    * \brief Hourly weather to use for this Scenario
    */

@@ -54,7 +54,7 @@ public:
    * \param weather Constant weather to use for duration of simulation
    */
   TestScenario(Model* model,
-               const shared_ptr<topo::Cell>& start_cell,
+               const HashSize start_cell,
                const topo::StartPoint& start_point,
                const int start_date,
                const DurationSize end_date,
@@ -244,13 +244,13 @@ string run_test(const string base_directory,
   const Location start_location(static_cast<Idx>(MAX_ROWS / 2),
                                 static_cast<Idx>(MAX_COLUMNS / 2));
   Model model(output_directory, ForPoint, &env);
-  const auto start_cell = make_shared<topo::Cell>(model.cell(start_location));
+  const auto start_cell = model.cell(start_location.hash());
   ConstantWeather weather(fuel, start_date, dc, dmc, ffmc, wind);
-  TestScenario scenario(&model, start_cell, ForPoint, start_date, end_date, &weather);
+  TestScenario scenario(&model, start_cell.hash(), ForPoint, start_date, end_date, &weather);
   const auto w = weather.at(start_date);
   auto info = SpreadInfo(scenario,
                          start_date,
-                         start_cell->key(),
+                         start_cell.key(),
                          model.nd(start_date),
                          w);
   showSpread(info, w, fuel);

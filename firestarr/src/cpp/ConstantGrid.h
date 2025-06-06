@@ -26,48 +26,41 @@ class ConstantGrid
   : public GridData<T, V, const vector<T>>
 {
 public:
-  /**
-   * \brief Value for grid at given Location.
-   * \param location Location to get value for.
-   * \return Value at grid Location.
-   */
-  [[nodiscard]] constexpr T at(const Location& location) const noexcept override
+  [[nodiscard]] constexpr T at(const HashSize hash_value) const noexcept override
   {
-#ifdef DEBUG_GRIDS
-    logging::check_fatal(location.row() >= this->rows() || location.column() >= this->columns(), "Out of bounds (%d, %d)", location.row(), location.column());
-#endif
-#ifdef DEBUG_POINTS
-    {
-      const Location loc{location.row(), location.column()};
-      logging::check_equal(
-        loc.column(),
-        location.column(),
-        "column");
-      logging::check_equal(
-        loc.row(),
-        location.row(),
-        "row");
-      // if we're going to use the hash then we need to make sure it actually matches
-      logging::check_equal(
-        loc.hash(),
-        location.hash(),
-        "hash");
-    }
-#endif
-    // return at(location.hash());
-    return this->data.at(location.hash());
-  }
-  template <class P>
-  [[nodiscard]] constexpr T at(const Position<P>& position) const noexcept
-  {
-    return at(Location{position.hash()});
+    // #ifdef DEBUG_GRIDS
+    //     const auto location = Location{hash_value};
+    //     logging::check_fatal(location.row() >= this->rows() || location.column() >= this->columns(), "Out of bounds (%d, %d)", location.row(), location.column());
+    // #endif
+    // #ifdef DEBUG_POINTS
+    // #ifndef DEBUG_GRIDS
+    //     const auto location = Location{hash_value};
+    // #endif
+    //     {
+    //       const Location loc{location.row(), location.column()};
+    //       logging::check_equal(
+    //         loc.column(),
+    //         location.column(),
+    //         "column");
+    //       logging::check_equal(
+    //         loc.row(),
+    //         location.row(),
+    //         "row");
+    //       // if we're going to use the hash then we need to make sure it actually matches
+    //       logging::check_equal(
+    //         loc.hash(),
+    //         location.hash(),
+    //         "hash");
+    //     }
+    // #endif
+    return this->data.at(hash_value);
   }
   /**
    * \brief Value for grid at given Location.
    * \param hash HashSize hash for Location to get value for.
    * \return Value at grid Location.
    */
-  //  [[nodiscard]] constexpr T at(const HashSize hash) const noexcept
+  //  [[nodiscard]] constexpr T at(const HashSize hash_value) const noexcept
   //  {
   //    return this->data.at(hash);
   //  }
@@ -75,7 +68,7 @@ public:
    * \brief Throw an error because ConstantGrid can't change values.
    */
   // ! @cond Doxygen_Suppress
-  void set(const Location&, const T) override
+  void set(const HashSize, const T) override
   // ! @endcond
   {
     throw runtime_error("Cannot change ConstantGrid");

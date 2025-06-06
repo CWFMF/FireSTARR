@@ -241,7 +241,7 @@ CellPoints& CellPointsMap::insert(
   const auto n0 = size();
 #endif
   const Location location{static_cast<Idx>(y), static_cast<Idx>(x)};
-  auto e = map_.try_emplace(location,
+  auto e = map_.try_emplace(location.hash(),
                             x,
                             y);
   CellPoints& cell_pts = e.first->second;
@@ -255,7 +255,7 @@ CellPoints& CellPointsMap::insert(
   }
   return cell_pts;
 }
-void CellPointsMap::remove_if(std::function<bool(const pair<Location, CellPoints>&)> F) noexcept
+void CellPointsMap::remove_if(std::function<bool(const pair<HashSize, CellPoints>&)> F) noexcept
 {
   auto it = map_.begin();
   while (map_.end() != it)

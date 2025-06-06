@@ -160,24 +160,23 @@ public:
     Cell
     cell(const Idx row, const Idx column) const
   {
-    return cells_->at(Location(row, column));
+    return cells_->at(Location(row, column).hash());
   }
   /**
    * \brief Cell at given Location
    * \param location Location
    * \return Cell at given Location
    */
-  template <class P>
-  [[nodiscard]] constexpr Cell cell(const Position<P>& position) const
+  [[nodiscard]] constexpr Cell cell(const HashSize hash_value) const
   {
-    return cells_->at(position);
+    return cells_->at(hash_value);
   }
   /**
    * \brief Cell at Location with given hash
    * \param hash_size Hash
    * \return Cell at Location with given hash
    */
-  //  [[nodiscard]] constexpr Cell cell(const HashSize hash_size) const
+  //  [[nodiscard]] constexpr Cell cell(const HashSize hash_value_size) const
   //  {
   //    return cells_->at(hash_size);
   //  }
@@ -199,7 +198,7 @@ public:
   {
     const auto& p = event.cell();
     // return cell(p.hash() + column + static_cast<HashSize>(MAX_COLUMNS) * row);
-    return cell(Location(p.row() + row, p.column() + column));
+    return cell(Location(p.row() + row, p.column() + column).hash());
   }
   /**
    * \brief Make a ProbabilityMap that covers this Environment
@@ -258,36 +257,15 @@ protected:
     logging::check_equal(fuel.yllcorner(), elevation.yllcorner(), "yllcorner");
     static Cell nodata{};
     auto values = vector<Cell>{fuel.data.size()};
-    vector<HashSize> hashes{};
-    //    for (HashSize h = 0; h < static_cast<size_t>(MAX_ROWS) * MAX_COLUMNS; ++h)
-    //    {
-    //      hashes.emplace_back(h);
-    //    }
     for (Idx r = 0; r < fuel.rows(); ++r)
     {
       for (Idx c = 0; c < fuel.columns(); ++c)
       {
-        const auto h = hashes.emplace_back(Location(r, c).hash());
-        //        hashes.emplace_back(Location(r, c).hash());
-        //      }
-        //    }
-        //    std::for_each(
-        //      std::execution::par_unseq,
-        //      hashes.begin(),
-        //      hashes.end(),
-        //      [&fuel, &values, &elevation](auto&& h)
-        //      {
-        const topo::Location loc{r, c, h};
-        //        const topo::Location loc{static_cast<Idx>(h / MAX_COLUMNS),
-        //                                 static_cast<Idx>(h % MAX_COLUMNS),
-        //                                 h};
-        //        const auto r = loc.row();
-        //        const auto c = loc.column();
-        //        const auto f = fuel::FuelType::safeCode(fuel.at(h));
+        const auto hash_value = Location(r, c).hash();
         if (r >= 0 && r < fuel.rows() && c >= 0 && c < fuel.columns())
         {
           // NOTE: this needs to translate to internal codes?
-          const auto f = fuel::FuelType::safeCode(fuel.at(loc));
+          const auto f = fuel::FuelType::safeCode(fuel.at(hash_value));
           auto s = static_cast<SlopeSize>(INVALID_SLOPE);
           auto a = static_cast<AspectSize>(INVALID_ASPECT);
           // HACK: don't calculate for outside box of cells
@@ -305,7 +283,7 @@ protected:
                 auto cur_loc = Location{actual_row, actual_column};
                 //                auto cur_h = cur_loc.hash();
                 //              dem[3 * (i + 1) + (j + 1)] = 1.0 * elevation.at(cur_h);
-                const auto v = elevation.at(cur_loc);
+                const auto v = elevation.at(cur_loc.hash());
                 // can't calculate slope & aspect if any surrounding cell is nodata
                 if (elevation.nodataValue() == v)
                 {
@@ -348,13 +326,13 @@ protected:
               a = static_cast<AspectSize>(round(aspect_azimuth));
             }
           }
-          const auto cell = Cell{h, s, a, f};
-          values.at(h) = cell;
+          const auto cell = Cell{r, c, s, a, f};
+          values.at(cell.hash()) = cell;
 #ifdef DEBUG_GRIDS
 #ifndef VLD_RPTHOOK_INSTALL
           logging::check_equal(cell.row(), r, "Cell row");
           logging::check_equal(cell.column(), c, "Cell column");
-          const auto v = values.at(h);
+          const auto v = values.at(hash_value);
           logging::check_equal(v.row(), r, "Row");
           logging::check_equal(v.column(), c, "Column");
           if (!(INVALID_SLOPE == cell.slope() || INVALID_ASPECT == cell.aspect() || INVALID_FUEL_CODE == cell.fuelCode()))
@@ -416,13 +394,15 @@ protected:
       for (Idx c = 0; c < columns(); ++c)
       {
         const Location location(r, c);
+        const HashSize hash_value = location.hash();
+        const Cell cell = cells.at(hash_value);
         // HACK: just mark outside edge as unburnable so we never need to check
         bool is_outer = 0 == r
                      || 0 == c
                      || (rows() - 1) == r
                      || (columns() - 1) == c;
         // (*result)[location.hash()] = (nullptr == fuel::fuel_by_code(cells.at(location).fuelCode()));
-        (*result)[location.hash()] = is_outer || fuel::is_null_fuel(cells.at(location));
+        (*result)[hash_value] = is_outer || fuel::is_null_fuel(cell);
         //        if (fuel::is_null_fuel(cell(location)))
         //        {
         //          not_burnable_[location.hash()] = true;
@@ -466,7 +446,7 @@ protected:
     : Environment(dir_out,
                   makeCells(fuel,
                             elevation),
-                  elevation.at(Location(*elevation.findCoordinates(point, false).get())))
+                  elevation.at(Location(*elevation.findCoordinates(point, false).get()).hash()))
   {
     // take elevation at point so that if max grid size changes elevation doesn't
     logging::note("Start elevation is %d", elevation_);
