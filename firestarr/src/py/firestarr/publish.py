@@ -24,11 +24,10 @@ from common import (
     zip_folder,
 )
 from gdal_merge_max import gdal_merge_max
+from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 from osgeo import gdal
 from redundancy import call_safe, get_stack
 from tqdm_util import keep_trying, tqdm
-
-from gis import CRS_COMPARISON, find_invalid_tiffs, project_raster
 
 
 # distinguish erros with publishing from other problems
@@ -53,6 +52,7 @@ def publish_all(
             changed_only=changed_only,
             force=force,
             force_project=force_project,
+            create_zip=not merge_only,
         )
         if merge_only:
             logging.info("Stopping after merge for %s", dir_output)
@@ -93,6 +93,7 @@ def merge_dirs(
     force=False,
     force_project=False,
     creation_options=CREATION_OPTIONS,
+    create_zip=True,
 ):
     any_change = False
     dir_input = find_latest_outputs(dir_input)
@@ -290,16 +291,17 @@ def merge_dirs(
 
         any_change = any_change or changed
     logging.info("Final results of merge are in %s", dir_combined)
-    try:
-        run_id = os.path.basename(dir_input)
-        file_zip = os.path.join(DIR_ZIP, f"{run_name}.zip")
-        if any_change or not os.path.isfile(file_zip):
-            logging.info("Creating archive %s", file_zip)
-            zip_folder(file_zip, dir_combined)
-    except KeyboardInterrupt as ex:
-        raise ex
-    except Exception as ex:
-        logging.error("Ignoring zip error")
-        logging.error(get_stack(ex))
+    if create_zip:
+        try:
+            run_id = os.path.basename(dir_input)
+            file_zip = os.path.join(DIR_ZIP, f"{run_name}.zip")
+            if any_change or not os.path.isfile(file_zip):
+                logging.info("Creating archive %s", file_zip)
+                zip_folder(file_zip, dir_combined)
+        except KeyboardInterrupt as ex:
+            raise ex
+        except Exception as ex:
+            logging.error("Ignoring zip error")
+            logging.error(get_stack(ex))
 
     return any_change
