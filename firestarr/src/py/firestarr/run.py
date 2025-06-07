@@ -297,6 +297,7 @@ class Run(object):
         force_copy=False,
         force=False,
         no_wait=True,
+        require_all=False,
     ):
         if no_publish is None:
             no_publish = not self.check_do_publish()
@@ -324,6 +325,7 @@ class Run(object):
         want_dates = WANT_DATES
 
         dirs_fire = [os.path.join(self._dir_sims, fire_name) for fire_name in df_fires.index]
+        num_fires = len(dirs_fire)
         results = keep_trying(
             fct=check_copy_outputs,
             values=dirs_fire,
@@ -386,13 +388,16 @@ class Run(object):
                 # if nothing changed then fire is complete
                 is_complete[dir_fire] = df_fire
         # publish before and after fixing things
+        num_complete = len(is_complete)
+        logging.info("%d of %d groups have at least started" % (num_complete, num_fires))
+        merge_only = not (self.check_do_publish() and ((not require_all) or (num_fires == num_complete)))
         if not no_publish and not no_wait:
-            logging.info("Publishing")
+            logging.info("Merging" if merge_only else "Publishing")
             publish_all(
                 self._dir_output,
                 changed_only=False,
                 force=any_change,
-                merge_only=not self.check_do_publish(),
+                merge_only=merge_only,
             )
             changed = False
         if is_prepared and run_incomplete:
@@ -415,12 +420,12 @@ class Run(object):
         # not waiting shouldn't trigger this if nothing is different
         # if not no_publish and (no_wait or any_change):
         if self.check_do_merge():
-            logging.info("Publishing" if self.check_do_publish() else "Merging")
+            logging.info("Merging" if merge_only else "Publishing")
             publish_all(
                 self._dir_output,
                 changed_only=False,
                 force=any_change or force,
-                merge_only=not self.check_do_publish(),
+                merge_only=merge_only,
             )
         num_done = len(is_complete)
         if is_ignored:

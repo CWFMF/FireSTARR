@@ -337,7 +337,7 @@ if __name__ == "__main__":
         try:
             # NOTE: was forcing to ensure publish, but try without
             # run_current.check_and_publish(force=True)
-            run_current.check_and_publish()
+            run_current.check_and_publish(require_all=True)
         except PublishError as ex:
             if should_resume:
                 # there shouldn't be an error if we were resuming
