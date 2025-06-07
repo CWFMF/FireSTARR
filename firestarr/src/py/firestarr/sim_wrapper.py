@@ -55,8 +55,6 @@ from common import (
     start_process,
     try_remove,
 )
-from redundancy import call_safe
-
 from gis import (
     Rasterize,
     find_best_raster,
@@ -66,6 +64,7 @@ from gis import (
     save_geojson,
     save_point_file,
 )
+from redundancy import call_safe
 
 # set to "" if want intensity grids
 # NO_INTENSITY = "--no-intensity"
@@ -186,6 +185,17 @@ def get_simulation_task(dir_fire):
     return make_or_get_simulation_task(assign_job(dir_fire), dir_fire)
 
 
+def cancel_other_jobs(job_id):
+    # HACK: don't cancel test in live and vice-versa
+    prefix = job_id[:3]
+    client = get_batch_client()
+    active_jobs = [x for x in client.job.list() if "active" == x.state and x.id.startswith(prefix)]
+    other_jobs = [x.id for x in active_jobs if x.id != job_id]
+    logging.info("Cancelling active jobs since now running %s: %s" % (job_id, other_jobs))
+    for j in other_jobs:
+        client.job.terminate(job_id=j)
+
+
 def schedule_tasks(dir_fire, tasks):
     # HACK: use any dir_fire for now since they should all work
     job_id = assign_job(dir_fire)
@@ -198,6 +208,7 @@ def schedule_tasks(dir_fire, tasks):
             time.sleep(1)
         print("", flush=True)
         enable_autoscale()
+    cancel_other_jobs(job_id)
 
 
 def get_nodes():
