@@ -226,6 +226,7 @@ def read_config(force=False):
             "BOUNDS_FILE": DEFAULT_BOUNDS,
         }
         OPTIONS = [
+            "NO_AGENCY_PERIMS",
             "FORCE_LOCAL_TASKS",
             "FORCE_BATCH_TASKS",
             "AZURE_URL",

@@ -6,6 +6,7 @@ import datasources.cwfif
 import numpy as np
 import pandas as pd
 from common import (
+    CONFIG,
     DEFAULT_M3_UNMATCHED_LAST_ACTIVE_IN_DAYS,
     DIR_SRC_PY_FIRSTARR,
     listdir_sorted,
@@ -174,13 +175,17 @@ class SourceFireActive(SourceFire):
         # sources for features that we don't have a fire attached to
         self._source_features = [
             SourceFeatureM3(self._dir_out, self._origin),
-        ] + [
-            # want private sources last so they override public ones
-            s(self._dir_out)
-            for s in find_sources(SourceFeature, private_first=False)
         ]
-        # sources for features that area associated with specific fires
-        self._source_fires = [s(self._dir_out) for s in find_sources(SourceFire, private_first=False)]
+        self._source_fires = []
+        if not CONFIG.get("NO_AGENCY_PERIMS", False):
+            logging.info("Including agency fire sources")
+            self._source_features += [
+                # want private sources last so they override public ones
+                s(self._dir_out)
+                for s in find_sources(SourceFeature, private_first=False)
+            ]
+            # sources for features that area associated with specific fires
+            self._source_fires = [s(self._dir_out) for s in find_sources(SourceFire, private_first=False)]
 
     @cache
     def _get_fires(self):
