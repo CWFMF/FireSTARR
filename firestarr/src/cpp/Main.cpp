@@ -195,6 +195,8 @@ void register_index(T& index, string v, string help, bool required)
 // }
 int main(const int argc, const char* const argv[])
 {
+  // HACK: not seeing log messagee on fatal error
+  setvbuf(stdout, NULL, _IONBF, 0);
   // FILE* out_adj = fopen("horizontal_adjustment.csv", "w");
   // fprintf(
   //   out_adj,

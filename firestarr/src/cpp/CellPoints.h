@@ -124,8 +124,8 @@ public:
   CellPoints(const CellPoints* rhs) noexcept;
   //   CellPoints(const vector<InnerPos>& pts) noexcept;
   CellPoints(
-    const HashSize hash_uninit,
-    const bool can_burn_uninit,
+    // const HashSize hash_uninit,
+    // const bool can_burn_uninit,
     const bool can_burn_unburnable,
     const bool can_burn_non_fuel,
     const bool can_burn_has_not_burned,
@@ -161,11 +161,11 @@ public:
   bool can_burn_has_not_burned_;
   bool can_burn_non_fuel_;
   bool can_burn_unburnable_;
-  bool can_burn_uninit_;
+  // bool can_burn_uninit_;
   CellPointArrays pts_;
   // use Idx instead of Location so it can be negative (invalid)
   CellPos cell_x_y_;
-  HashSize hash_uninit_;
+  // HashSize hash_uninit_;
 private:
   CellPoints(
     const Scenario& scenario,

@@ -84,6 +84,16 @@ class XYPos
 {
 public:
   using BoundedPoint<XYSize, 0, MAX_COLUMNS, 0, MAX_ROWS>::BoundedPoint;
+  XYPos(
+    const Idx x0,
+    const Idx y0,
+    const InnerSize x1,
+    const InnerSize y1)
+    : XYPos(
+        static_cast<XYSize>(x0) + static_cast<XYSize>(x1),
+        static_cast<XYSize>(y0) + static_cast<XYSize>(y1))
+  {
+  }
 };
 /**
  * \brief The position within the Environment that a spreading point has.

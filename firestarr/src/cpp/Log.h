@@ -170,8 +170,12 @@ void check_equal(const V& lhs, const V& rhs, const char* name)
   noexcept
 #endif
 {
+  const auto fmt =
+    typeid(lhs) == typeid(size_t)
+      ? "Expected %s to be %ld but got %ld"
+      : "Expected %s to be %d but got %d";
   logging::check_fatal(lhs != rhs,
-                       "Expected %s to be %d but got %d",
+                       fmt,
                        name,
                        rhs,
                        lhs);
@@ -216,6 +220,7 @@ T fatal(const char* format, va_list* args)
   // format message and then output so we don't parse args twice and can use for error
   auto msg = format_log_message("", format, args);
   output(LOG_FATAL, msg.c_str());
+  fflush(stdout);
   Log::closeLogFile();
 #ifdef NDEBUG
   exit(EXIT_FAILURE);

@@ -19,7 +19,7 @@ constexpr InnerSize M_0_5 = static_cast<InnerSize>(0.5) - DIST_22_5;
 // shouldn't be any way to be further than twice the entire width of the area
 static const auto INVALID_DISTANCE = static_cast<DistanceSize>(MAX_ROWS * MAX_ROWS);
 static const XYPos INVALID_XY_POSITION{};
-static const pair<DistanceSize, XYPos> INVALID_XY_PAIR{INVALID_DISTANCE, {}};
+static const pair<DistanceSize, XYPos> INVALID_XY_PAIR{INVALID_DISTANCE, INVALID_XY_POSITION};
 static const XYSize INVALID_XY_LOCATION = INVALID_XY_PAIR.second.first;
 static const InnerPos INVALID_INNER_POSITION{};
 static const pair<DistanceSize, InnerPos> INVALID_INNER_PAIR{INVALID_DISTANCE, {}};
@@ -56,8 +56,8 @@ size_t CellPoints::size() const noexcept
 }
 #endif
 CellPoints::CellPoints(
-  const HashSize hash_uninit,
-  const bool can_burn_uninit,
+  // const HashSize hash_uninit,
+  // const bool can_burn_uninit,
   const bool can_burn_unburnable,
   const bool can_burn_non_fuel,
   const bool can_burn_has_not_burned,
@@ -67,10 +67,11 @@ CellPoints::CellPoints(
     can_burn_has_not_burned_(can_burn_has_not_burned),
     can_burn_non_fuel_(can_burn_non_fuel),
     can_burn_unburnable_(can_burn_unburnable),
-    can_burn_uninit_(can_burn_uninit),
+    // can_burn_uninit_(can_burn_uninit),
     pts_(),
-    cell_x_y_(cell),
-    hash_uninit_(hash_uninit)
+    cell_x_y_(cell)
+// ,
+// hash_uninit_(hash_uninit)
 
 {
   // logging::check_equal(hash_uninit_, cell_x_y_.hash(), "hash_uninit");
@@ -89,8 +90,8 @@ CellPoints::CellPoints(
   const CellPos& cell) noexcept
   // : CellPoints(!unburnable[cell_x_y_.hash()], cell)
   : CellPoints(
-      cell_x_y_.hash(),
-      !scenario.cannotSpread(cell_x_y_.hash()),
+      // cell_x_y_.hash(),
+      // !scenario.cannotSpread(cell_x_y_.hash()),
       !scenario.cannotSpread(cell.hash()),
       scenario.hasNotBurned(cell.hash()),
       scenario.hasNotBurned(cell.hash()),
@@ -103,7 +104,14 @@ CellPoints::CellPoints(
 {
 }
 CellPoints::CellPoints() noexcept
-  : CellPoints(INVALID_INDEX, false, false, false, false, false, CellPos{INVALID_INDEX, INVALID_INDEX})
+  : CellPoints(
+      // INVALID_INDEX,
+      //  false,
+      false,
+      false,
+      false,
+      false,
+      CellPos{INVALID_INDEX, INVALID_INDEX})
 {
 }
 CellPoints::CellPoints(const CellPoints* rhs) noexcept
