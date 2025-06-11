@@ -20,10 +20,10 @@ constexpr InnerSize M_0_5 = static_cast<InnerSize>(0.5) - DIST_22_5;
 static const auto INVALID_DISTANCE = static_cast<DistanceSize>(MAX_ROWS * MAX_ROWS);
 static const XYPos INVALID_XY_POSITION{};
 static const pair<DistanceSize, XYPos> INVALID_XY_PAIR{INVALID_DISTANCE, INVALID_XY_POSITION};
-static const XYSize INVALID_XY_LOCATION = INVALID_XY_PAIR.second.first;
+static const XYSize INVALID_XY_LOCATION = INVALID_XY_PAIR.second.x();
 static const InnerPos INVALID_INNER_POSITION{};
 static const pair<DistanceSize, InnerPos> INVALID_INNER_PAIR{INVALID_DISTANCE, {}};
-static const InnerSize INVALID_INNER_LOCATION = INVALID_INNER_PAIR.second.first;
+static const InnerSize INVALID_INNER_LOCATION = INVALID_INNER_PAIR.second.x();
 static const SpreadData INVALID_SPREAD_DATA{
   INVALID_TIME};
 set<XYPos> CellPoints::unique() const noexcept
@@ -32,21 +32,53 @@ set<XYPos> CellPoints::unique() const noexcept
     INVALID_DISTANCE != pts_.distances()[0],
     can_burn_,
     "can_burn_");
+#ifdef DEBUG_CELLPOINTS
+  auto first_valid = (INVALID_DISTANCE != pts_.distances()[0]);
+  logging::check_equal(
+    can_burn_,
+    first_valid,
+    "Distance should be invalid if can't burn");
+#endif
   // // if any point is invalid then they all have to be
   if (
     // !can_burn_ ||
     INVALID_DISTANCE == pts_.distances()[0])
   {
-    return {};
+    return set<XYPos>{};
   }
   else
   {
+#ifdef DEBUG_CELLPOINTS
+    logging::check_fatal(
+      INVALID_DISTANCE == pts_.distances()[0],
+      "Shouldn't have invalid distance if any points");
+    logging::check_fatal(
+      cell_x_y_.x() == -1,
+      "Shouldn't have invalid x if any points");
+    logging::check_fatal(
+      cell_x_y_.y() == -1,
+      "Shouldn't have invalid y if any points");
+#endif
     const auto& pts_all = std::views::transform(
       pts_.points(),
       [this](const auto& p) {
-        return XYPos(p.first + cell_x_y_.first, p.second + cell_x_y_.second);
+        return XYPos(p.x() + cell_x_y_.x(), p.y() + cell_x_y_.y());
       });
-    return {pts_all.begin(), pts_all.end()};
+    set<XYPos> ret{pts_all.begin(), pts_all.end()};
+#ifdef DEBUG_CELLPOINTS
+    for (auto& p0 : pts_.points())
+    {
+      XYPos p1{
+        static_cast<XYSize>(cell_x_y_.x()) + p0.x(),
+        static_cast<XYSize>(cell_x_y_.y()) + p0.y()};
+      logging::check_fatal(
+        !ret.contains(p1),
+        "Don't have expected point (%f, %f)",
+        p0.x(),
+        p0.y());
+    }
+#endif
+    return ret;
   }
 }
 #ifdef DEBUG_CELLPOINTS
@@ -81,6 +113,11 @@ CellPoints::CellPoints(
     std::fill(pts_.points().begin(), pts_.points().end(), INVALID_INNER_POSITION);
 
 #ifdef DEBUG_CELLPOINTS
+    auto first_valid = (INVALID_DISTANCE != pts_.distances()[0]);
+    logging::check_equal(
+      can_burn_,
+      first_valid,
+      "Distance should be invalid if can't burn");
     logging::note("CellPoints is size %ld after creation and should be empty", size());
 #endif
   }
@@ -113,24 +150,36 @@ CellPoints::CellPoints() noexcept
       false,
       CellPos{INVALID_INDEX, INVALID_INDEX})
 {
+  pts_.distances()[0] = INVALID_DISTANCE;
+#ifdef DEBUG_CELLPOINTS
+  logging::check_fatal(
+    !empty(),
+    "Excpected empty CellPoints with default constructor");
+#endif
 }
 CellPoints::CellPoints(const CellPoints* rhs) noexcept
-  : CellPoints()
 {
   logging::check_fatal(nullptr == rhs, "Initializing CellPoints from nullptr");
   *this = *rhs;
 }
 CellPoints::CellPoints(
   const Scenario& scenario,
-  const XYSize x,
-  const XYSize y) noexcept
+  const XYPos p) noexcept
   : CellPoints(
       scenario,
-      CellPos(static_cast<Idx>(x), static_cast<Idx>(y)))
+      CellPos(static_cast<Idx>(p.x()), static_cast<Idx>(p.y())))
 {
-  insert(
-    x,
-    y);
+  // #ifdef DEBUG_CELLPOINTS
+  //   // HACK: checking for this so need to do it before insert
+  //   pts_.distances()[0] = INVALID_DISTANCE;
+  // #endif
+  insert(p);
+#ifdef DEBUG_CELLPOINTS
+  logging::check_equal(
+    can_burn_ ? 1 : 0,
+    size(),
+    "CellPoints after first insert");
+#endif
 }
 
 using DISTANCE_PAIR = pair<DistanceSize, DistanceSize>;
@@ -170,13 +219,30 @@ constexpr std::array<DISTANCE_PAIR, NUM_DIRECTIONS> POINTS_OUTER{
 
 // TODO: add angle
 CellPoints& CellPoints::insert(
-  const XYSize x,
-  const XYSize y) noexcept
+  const XYPos& p) noexcept
 {
+#ifdef DEBUG_CELLPOINTS
+  const auto n0 = size();
+  const Location loc{p.hash()};
+  logging::check_equal(
+    loc.column(),
+    this->cell_x_y_.x(),
+    "Cell x position");
+  logging::check_equal(
+    loc.row(),
+    this->cell_x_y_.y(),
+    "Cell y position");
+#endif
   if (can_burn_)
   {
-    insert_pt(x, y, cell_x_y_, pts_);
+    insert_pt(p.x(), p.y(), cell_x_y_, pts_);
   }
+#ifdef DEBUG_CELLPOINTS
+  const auto n1 = size();
+  logging::check_fatal(
+    !can_burn_ && n0 != n1,
+    "Number of points when can't burn");
+#endif
   return *this;
 }
 #undef D_PTS
@@ -184,8 +250,8 @@ void insert_pt(
   const InnerPos& p0,
   CellPointArrays& pts) noexcept
 {
-  const auto x0 = static_cast<DistanceSize>(p0.first);
-  const auto y0 = static_cast<DistanceSize>(p0.second);
+  const auto x0 = static_cast<DistanceSize>(p0.x());
+  const auto y0 = static_cast<DistanceSize>(p0.y());
 
   // CHECK: FIX: is this initializing everything to false or just one element?
   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
@@ -218,19 +284,18 @@ void insert_pt(
   CellPointArrays& pts) noexcept
 {
   insert_pt(
-    static_cast<InnerSize>(x - cell_x_y.first),
-    static_cast<InnerSize>(y - cell_x_y.second),
+    static_cast<InnerSize>(x - cell_x_y.x()),
+    static_cast<InnerSize>(y - cell_x_y.y()),
     pts);
 }
 
-CellPoints& CellPoints::insert(const InnerPos& p) noexcept
-{
-  insert(
-    p.first,
-    p.second);
-  return *this;
-}
-
+// CellPoints& CellPoints::insert(const InnerPos& p) noexcept
+// {
+//   insert(
+//     p.first,
+//     p.second);
+//   return *this;
+// }
 // CellPointArrays::CellPointArrays(const InnerSize x, const InnerSize y)
 //   : CellPointArrays(InnerPos(x, y))
 // {
@@ -239,8 +304,8 @@ CellPoints& CellPoints::insert(const InnerPos& p) noexcept
 // CellPointArrays::CellPointArrays(const InnerPos& p0)
 // {
 //   // need to calculate distances, but we know everything is the same point
-//   const auto x0 = static_cast<DistanceSize>(p0.first);
-//   const auto y0 = static_cast<DistanceSize>(p0.second);
+//   const auto x0 = static_cast<DistanceSize>(p0.x());
+//   const auto y0 = static_cast<DistanceSize>(p0.y());
 //   std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
 //   auto& dists = distances();
 //   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
@@ -288,7 +353,7 @@ bool CellPoints::empty() const
 }
 [[nodiscard]] Location CellPoints::location() const noexcept
 {
-  return Location{cell_x_y_.second, cell_x_y_.first};
+  return Location{cell_x_y_.y(), cell_x_y_.x()};
 }
 CellPointsMap::CellPointsMap()
   : map_({})
@@ -296,26 +361,26 @@ CellPointsMap::CellPointsMap()
 }
 CellPoints& CellPointsMap::insert(
   const Scenario& scenario,
-  const XYSize x,
-  const XYSize y) noexcept
+  const XYPos p) noexcept
 {
 #ifdef DEBUG_CELLPOINTS
   const auto n0 = size();
+  logging::info("Adding (%f, %f) to %ld points", p.x(), p.y(), n0);
 #endif
-  const Location location{static_cast<Idx>(y), static_cast<Idx>(x)};
-  auto e = map_.try_emplace(location.hash(),
+  auto e = map_.try_emplace(p.hash(),
                             scenario,
-                            x,
-                            y);
+                            p);
   CellPoints& cell_pts = e.first->second;
   if (!e.second)
   {
     // FIX: should use max of whatever ROS has entered during this time and not just first ros
     // tried to add new CellPoints but already there
-    cell_pts.insert(
-      x,
-      y);
+    cell_pts.insert(p);
   }
+#ifdef DEBUG_CELLPOINTS
+  const auto n1 = size();
+  logging::info("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n1);
+#endif
   return cell_pts;
 }
 void CellPointsMap::remove_if(std::function<bool(const pair<HashSize, CellPoints>&)> F) noexcept
@@ -335,14 +400,27 @@ void CellPointsMap::remove_if(std::function<bool(const pair<HashSize, CellPoints
 }
 set<XYPos> CellPointsMap::unique() const noexcept
 {
+#ifdef DEBUG_CELLPOINTS
+  bool any_pts = false;
+#endif
   set<XYPos> r{};
   for (auto& lp : map_)
   {
-    for (auto& p : lp.second.unique())
+    auto& cp = lp.second;
+#ifdef DEBUG_CELLPOINTS
+    any_pts |= (!cp.empty());
+#endif
+    for (auto& p : cp.unique())
     {
       r.insert(p);
     }
   }
+#ifdef DEBUG_CELLPOINTS
+  logging::check_fatal(
+    !any_pts && !r.empty(),
+    "Should have no points but have %ld",
+    r.size());
+#endif
   return r;
 }
 #ifdef DEBUG_CELLPOINTS

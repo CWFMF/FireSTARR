@@ -133,16 +133,12 @@ public:
     const CellPos& cell) noexcept;
   CellPoints(
     const Scenario& scenario,
-    const XYSize x,
-    const XYSize y) noexcept;
+    const XYPos p) noexcept;
   CellPoints(CellPoints&& rhs) noexcept = default;
   CellPoints(const CellPoints& rhs) noexcept = default;
   CellPoints& operator=(CellPoints&& rhs) noexcept = default;
   CellPoints& operator=(const CellPoints& rhs) noexcept = default;
-  CellPoints& insert(
-    const XYSize x,
-    const XYSize y) noexcept;
-  CellPoints& insert(const InnerPos& p) noexcept;
+  CellPoints& insert(const XYPos& p) noexcept;
   set<XYPos> unique() const noexcept;
   bool operator<(const CellPoints& rhs) const noexcept;
   bool operator==(const CellPoints& rhs) const noexcept;
@@ -150,6 +146,9 @@ public:
   // void clear();
   //   const array_pts points() const;
   bool empty() const;
+#ifdef DEBUG_CELLPOINTS
+  size_t size() const noexcept;
+#endif
   // DurationSize arrival_time_;
   // IntensitySize intensity_at_arrival_;
   // ROSSize ros_at_arrival_;
@@ -181,8 +180,7 @@ public:
   CellPointsMap();
   CellPoints& insert(
     const Scenario& scenario,
-    const XYSize x,
-    const XYSize y) noexcept;
+    const XYPos p) noexcept;
   set<XYPos> unique() const noexcept;
 #ifdef DEBUG_CELLPOINTS
   size_t size() const noexcept;

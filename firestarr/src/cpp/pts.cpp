@@ -5,6 +5,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #include "pts.h"
+#ifdef DEBUG_NEW_SPREAD
 #include "Log.h"
 #include "Location.h"
 #include "Scenario.h"
@@ -20,10 +21,10 @@ constexpr InnerSize M_0_5 = static_cast<InnerSize>(0.5) - DIST_22_5;
 static const auto INVALID_DISTANCE = static_cast<DistanceSize>(MAX_ROWS * MAX_ROWS);
 static const XYPos INVALID_XY_POSITION{};
 static const pair<DistanceSize, XYPos> INVALID_XY_PAIR{INVALID_DISTANCE, INVALID_XY_POSITION};
-static const XYSize INVALID_XY_LOCATION = INVALID_XY_PAIR.second.first;
+static const XYSize INVALID_XY_LOCATION = INVALID_XY_PAIR.second.x();
 static const InnerPos INVALID_INNER_POSITION{};
 static const pair<DistanceSize, InnerPos> INVALID_INNER_PAIR{INVALID_DISTANCE, {}};
-static const InnerSize INVALID_INNER_LOCATION = INVALID_INNER_PAIR.second.first;
+static const InnerSize INVALID_INNER_LOCATION = INVALID_INNER_PAIR.second.x();
 static const SpreadData INVALID_SPREAD_DATA{
   INVALID_TIME};
 
@@ -68,8 +69,16 @@ constexpr inline auto dist_line(const auto& a, const auto& b)
 }
 Pts::Pts()
 {
-  // actually only need to set first value to denote empty
-  distances()[0] = INVALID_DIRECTION;
+  // // actually only need to set first value to denote empty
+  // distances()[0] = INVALID_DIRECTION;
+  std::fill_n(
+    &(distances()[0]),
+    NUM_DIRECTIONS,
+    INVALID_DIRECTION);
+  std::fill_n(
+    &(points()[0]),
+    NUM_DIRECTIONS,
+    INVALID_INNER_POSITION);
 }
 Pts::Pts(const BurnedData& unburnable, const XYPos p)
   : Pts()
@@ -78,8 +87,8 @@ Pts::Pts(const BurnedData& unburnable, const XYPos p)
   {
     XYSize integral;
     // need to calculate distances, but we know everything is the same point
-    const auto x0 = static_cast<DistanceSize>(modf(p.first, &integral));
-    const auto y0 = static_cast<DistanceSize>(modf(p.second, &integral));
+    const auto x0 = static_cast<DistanceSize>(modf(p.x(), &integral));
+    const auto y0 = static_cast<DistanceSize>(modf(p.y(), &integral));
     const InnerPos p0{x0, y0};
     auto& pts = points();
     auto& dists = distances();
@@ -92,15 +101,15 @@ Pts::Pts(const BurnedData& unburnable, const XYPos p)
       dists[i] = dist_line(x0, x1) + dist_line(y0, y1);
     }
   }
-  //   else
-  //   {
-  //     // actually only need to set first value
-  //     distances()[0] = INVALID_DIRECTION;
-  //     // std::fill_n(
-  //     //   &(distances()[0]),
-  //     //   NUM_DIRECTIONS,
-  //     //   INVALID_DIRECTION);
-  //   }
+  // else
+  // {
+  //   // actually only need to set first value
+  //   distances()[0] = INVALID_DIRECTION;
+  //   // std::fill_n(
+  //   //   &(distances()[0]),
+  //   //   NUM_DIRECTIONS,
+  //   //   INVALID_DIRECTION);
+  // }
 }
 Pts& Pts::insert(const XYSize x,
                  const XYSize y)
@@ -202,3 +211,4 @@ size_t PtMap::size() const noexcept
   return unique().size();
 }
 }
+#endif

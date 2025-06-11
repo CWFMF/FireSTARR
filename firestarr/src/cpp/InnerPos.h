@@ -13,17 +13,32 @@ using fs::wx::Direction;
 using topo::Location;
 template <class S, int XMin, int XMax, int YMin, int YMax>
 class BoundedPoint
-  : public pair<S, S>
 {
 protected:
   using class_type = BoundedPoint<S, XMin, XMax, YMin, YMax>;
   static constexpr auto INVALID_X = XMin - 1;
   static constexpr auto INVALID_Y = YMin - 1;
 public:
-  using pair<S, S>::pair;
+  constexpr BoundedPoint(const S& x, const S& y)
+    : xy_(x, y)
+  {
+  }
+  constexpr BoundedPoint(const class_type* p)
+    : BoundedPoint(p->x(), p->y())
+  {
+  }
+  constexpr BoundedPoint(const class_type& p)
+    : BoundedPoint(p.x(), p.y())
+  {
+  }
   constexpr BoundedPoint() noexcept
     : BoundedPoint(XMin - 1, YMin - 1)
   {
+  }
+  constexpr class_type& operator=(const class_type& rhs)
+  {
+    xy_ = rhs.xy_;
+    return *this;
   }
   /**
    * \brief Add offset to position and return result
@@ -31,25 +46,35 @@ public:
   template <class T, class O>
   [[nodiscard]] constexpr T add(const O& o) const noexcept
   {
-    return static_cast<T>(class_type(this->first + o.first, this->second + o.second));
+    return static_cast<T>(class_type(xy_.first + o.xy_.first, xy_.second + o.xy_.second));
   }
   inline auto& x() const
   {
-    return this->first;
+    return xy_.first;
   }
   inline auto& y() const
   {
-    return this->second;
+    return xy_.second;
   }
   CONSTEXPR Location location() const
   {
     // HACK: Location is (row, column) and this is (x, y)
-    return {static_cast<Idx>(this->second), static_cast<Idx>(this->first)};
+    return {static_cast<Idx>(xy_.second), static_cast<Idx>(xy_.first)};
   }
   CONSTEXPR HashSize hash() const
   {
     return location().hash();
   }
+  bool operator<(const auto& rhs) const
+  {
+    return xy_ < rhs.xy_;
+  }
+  bool operator==(const auto& rhs) const
+  {
+    return xy_ == rhs.xy_;
+  }
+private:
+  pair<S, S> xy_;
 };
 /**
  * \brief Offset from a position

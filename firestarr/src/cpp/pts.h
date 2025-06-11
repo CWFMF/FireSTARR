@@ -9,7 +9,7 @@
 #include "CellPoints.h"
 #include "InnerPos.h"
 #include "IntensityMap.h"
-
+#ifdef DEBUG_NEW_SPREAD
 namespace fs::sim
 {
 class Pts
@@ -79,3 +79,4 @@ public:
   map<HashSize, Pts> map_;
 };
 }
+#endif
