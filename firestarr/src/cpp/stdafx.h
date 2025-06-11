@@ -155,6 +155,7 @@ static constexpr CellIndex DIRECTION_SE = 0b10000000;
  * \brief A row or column index for a grid
  */
 using Idx = int16_t;
+constexpr auto INVALID_INDEX = std::numeric_limits<Idx>::min();
 /**
  * \brief A row or column index for a grid not in memory yet
  */

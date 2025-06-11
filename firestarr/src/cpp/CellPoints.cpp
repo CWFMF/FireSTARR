@@ -52,13 +52,14 @@ size_t CellPoints::size() const noexcept
 }
 #endif
 CellPoints::CellPoints(
-  const BurnedData& unburnable,
+  const bool can_burn,
   const Idx cell_x,
   const Idx cell_y) noexcept
-  : pts_(),
+  : can_burn_(can_burn),
+    pts_(),
     cell_x_y_(cell_x, cell_y)
+
 {
-  can_burn_ = !unburnable[cell_x_y_.hash()];
   // if (can_burn_)
   {
     std::fill(pts_.distances().begin(), pts_.distances().end(), INVALID_DISTANCE);
@@ -69,8 +70,15 @@ CellPoints::CellPoints(
 #endif
   }
 }
+CellPoints::CellPoints(
+  const BurnedData& unburnable,
+  const Idx cell_x,
+  const Idx cell_y) noexcept
+  : CellPoints(!unburnable[cell_x_y_.hash()], cell_x, cell_y)
+{
+}
 CellPoints::CellPoints() noexcept
-  : CellPoints(false, INVALID_XY_LOCATION, INVALID_XY_LOCATION)
+  : CellPoints(false, INVALID_INDEX, INVALID_INDEX)
 {
 }
 CellPoints::CellPoints(const CellPoints* rhs) noexcept
@@ -182,13 +190,9 @@ void insert_pt(
 
 CellPoints& CellPoints::insert(const InnerPos& p) noexcept
 {
-  // if (can_burn_)
-  {
-    // HACK: FIX: just do something for now
-    insert(
-      p.first,
-      p.second);
-  }
+  insert(
+    p.first,
+    p.second);
   return *this;
 }
 
@@ -233,7 +237,7 @@ bool CellPoints::operator==(const CellPoints& rhs) const noexcept
 {
   return (
     cell_x_y_ == rhs.cell_x_y_
-    && can_burn_ && rhs.can_burn_
+    // && can_burn_ && rhs.can_burn_
     && pts_.points() == rhs.pts_.points());
 }
 bool CellPoints::empty() const
