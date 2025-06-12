@@ -336,6 +336,7 @@ public:
    * \return Whether or not a Cell can burn
    */
   // [[nodiscard]] bool canBurn(const HashSize hash_value) const;
+  [[nodiscard]] bool cannotSpread(const HashSize hash_value) const;
   [[nodiscard]] bool hasNotBurned(const HashSize hash_value) const;
   /**
    * \brief Whether or not Cell with the given hash can burn

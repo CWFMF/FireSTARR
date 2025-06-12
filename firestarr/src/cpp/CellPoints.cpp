@@ -101,6 +101,14 @@ CellPoints::CellPoints(
       // !scenario.isUnburnable(cell.hash()),
       cell)
 {
+  logging::check_equal(
+    !scenario.cannotSpread(hash_uninit_),
+    can_burn_uninit_,
+    "can_burn_uninit_");
+  logging::check_equal(
+    !scenario.cannotSpread(cell_x_y_.hash()),
+    can_burn_unburnable_,
+    "can_burn_unburnable_");
   // logging::check_equal(
   //   unburnable[hash_uninit_],
   //   unburnable[cell_x_y_.hash()],

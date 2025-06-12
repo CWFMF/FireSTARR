@@ -990,6 +990,10 @@ MathSize
 //   return intensity_->canBurn(hash_value);
 //   // return !isUnburnable(hash_value);
 // }
+bool Scenario::cannotSpread(const HashSize hash_value) const
+{
+  return (*unburnable_)[hash_value];
+}
 bool Scenario::hasNotBurned(const HashSize hash_value) const
 {
   return intensity_->canBurn(hash_value);
