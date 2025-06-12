@@ -85,38 +85,21 @@ CellPoints::CellPoints(
   }
 }
 CellPoints::CellPoints(
-  const BurnedData& unburnable,
   const Scenario& scenario,
   const CellPos& cell) noexcept
   // : CellPoints(!unburnable[cell_x_y_.hash()], cell)
   : CellPoints(
       cell_x_y_.hash(),
-      !unburnable[cell_x_y_.hash()],
-      !unburnable[cell.hash()],
+      !scenario.cannotSpread(cell_x_y_.hash()),
+      !scenario.cannotSpread(cell.hash()),
       scenario.hasNotBurned(cell.hash()),
       scenario.hasNotBurned(cell.hash()),
-      !unburnable[cell.hash()],
+      !scenario.cannotSpread(cell.hash()),
       // !scenario.isUnburnable(cell.hash()),
       // // !unburnable[cell.hash()],
       // !scenario.isUnburnable(cell.hash()),
       cell)
 {
-  logging::check_equal(
-    !scenario.cannotSpread(hash_uninit_),
-    can_burn_uninit_,
-    "can_burn_uninit_");
-  logging::check_equal(
-    !scenario.cannotSpread(cell_x_y_.hash()),
-    can_burn_unburnable_,
-    "can_burn_unburnable_");
-  // logging::check_equal(
-  //   unburnable[hash_uninit_],
-  //   unburnable[cell_x_y_.hash()],
-  //   "unburnable[hash_uninit]");
-  // logging::check_equal(
-  //   !unburnable[hash_uninit_],
-  //   can_burn_,
-  //   "unburnable[hash_uninit]");
 }
 CellPoints::CellPoints() noexcept
   : CellPoints(INVALID_INDEX, false, false, false, false, false, CellPos{INVALID_INDEX, INVALID_INDEX})
@@ -129,12 +112,10 @@ CellPoints::CellPoints(const CellPoints* rhs) noexcept
   *this = *rhs;
 }
 CellPoints::CellPoints(
-  const BurnedData& unburnable,
   const Scenario& scenario,
   const XYSize x,
   const XYSize y) noexcept
   : CellPoints(
-      unburnable,
       scenario,
       CellPos(static_cast<Idx>(x), static_cast<Idx>(y)))
 {
@@ -305,7 +286,6 @@ CellPointsMap::CellPointsMap()
 {
 }
 CellPoints& CellPointsMap::insert(
-  const BurnedData& unburnable,
   const Scenario& scenario,
   const XYSize x,
   const XYSize y) noexcept
@@ -315,7 +295,6 @@ CellPoints& CellPointsMap::insert(
 #endif
   const Location location{static_cast<Idx>(y), static_cast<Idx>(x)};
   auto e = map_.try_emplace(location.hash(),
-                            unburnable,
                             scenario,
                             x,
                             y);

@@ -333,7 +333,6 @@ void Scenario::evaluate(const Event& event)
       // HACK: don't do this in constructor because scenario creates this in its constructor
       // HACK: insert point as originating from itself
       points_.insert(
-        *unburnable_,
         *this,
         x,
         y);
@@ -499,7 +498,7 @@ void Scenario::burn(const Event& event)
 #endif
 #ifdef DEBUG_POINTS
   log_check_fatal(
-    (*unburnable_)[hash_value],
+    cannotSpread(hash_value),
     "Burning unburnable cell (%d, %d)",
     event.cell().column(),
     event.cell().row());
@@ -587,7 +586,6 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
                   x,
                   y);
       points_.insert(
-        *unburnable_,
         *this,
         x,
         y);
@@ -678,7 +676,6 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
 }
 void apply_offsets_spreadkey(
   CellPointsMap& points,
-  const BurnedData& unburnable,
   const Scenario& scenario,
   const DurationSize& arrival_time,
   const DurationSize& duration,
@@ -754,7 +751,6 @@ void apply_offsets_spreadkey(
           const auto new_x = x_o + pt.first + cell_x;
           const auto new_y = y_o + pt.second + cell_y;
           points.insert(
-            unburnable,
             scenario,
             new_x,
             new_y);
@@ -828,7 +824,7 @@ void Scenario::scheduleFireSpread(const Event& event)
       // HACK: need to lookup before emplace since might try to create Cell without fuel
       // if (!fuel::is_null_fuel(loc))
       // const auto h = for_cell.hash();
-      // if (!(*unburnable_)[h])
+      // if (!(cannotSpread(h))
       // if (hasNotBurned(hash_value))
       // if (!isUnburnable(hash_value))
       {
@@ -890,7 +886,6 @@ void Scenario::scheduleFireSpread(const Event& event)
     // auto r =
     apply_offsets_spreadkey(
       cell_pts,
-      *unburnable_,
       *this,
       new_time,
       duration,
@@ -908,7 +903,7 @@ void Scenario::scheduleFireSpread(const Event& event)
       const auto& hash_value = kv.first;
       const Location location{hash_value};
       // clear out if unburnable
-      const auto do_clear = (*unburnable_)[hash_value];
+      const auto do_clear = cannotSpread(hash_value);
       // if (do_clear)
       // {
       //   logging::error(
@@ -920,7 +915,7 @@ void Scenario::scheduleFireSpread(const Event& event)
     });
   for (auto& p : points_.unique())
   {
-    cell_pts.insert(*unburnable_, *this, p.x(), p.y());
+    cell_pts.insert(*this, p.x(), p.y());
   }
   points_ = cell_pts;
   // if we move everything out of points_ we can parallelize this check?
@@ -959,7 +954,7 @@ void Scenario::scheduleFireSpread(const Event& event)
           for_cell);
         burn(fake_event);
       }
-      if (!(*unburnable_)[hash_value]
+      if (!(cannotSpread(hash_value))
           // && hasNotBurned(for_cell)
           && ((survives(new_time, for_cell, new_time - arrival_[hash_value])
                && !isSurrounded(hash_value))))

@@ -132,7 +132,6 @@ public:
     const bool can_burn,
     const CellPos& cell) noexcept;
   CellPoints(
-    const BurnedData& unburnable,
     const Scenario& scenario,
     const XYSize x,
     const XYSize y) noexcept;
@@ -169,7 +168,6 @@ public:
   HashSize hash_uninit_;
 private:
   CellPoints(
-    const BurnedData& unburnable,
     const Scenario& scenario,
     const CellPos& cell) noexcept;
 };
@@ -182,7 +180,6 @@ class CellPointsMap
 public:
   CellPointsMap();
   CellPoints& insert(
-    const BurnedData& unburnable,
     const Scenario& scenario,
     const XYSize x,
     const XYSize y) noexcept;
