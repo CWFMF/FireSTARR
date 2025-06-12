@@ -973,6 +973,10 @@ bool Scenario::canBurn(const HashSize hash_value) const
 {
   return intensity_->canBurn(hash_value);
 }
+bool Scenario::isUnburnable(const HashSize hash_value) const
+{
+  return model_->isUnburnable(hash_value);
+}
 bool Scenario::hasBurned(const HashSize hash_value) const
 {
   return intensity_->hasBurned(hash_value);

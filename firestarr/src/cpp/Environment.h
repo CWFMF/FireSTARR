@@ -226,6 +226,16 @@ public:
     return make_unique<data::GridMap<Other>>(*cells_, nodata);
   }
   /**
+   * \brief Whether or not the Cell with the given hash can't burn
+   * \param hash Hash for Cell to check
+   * \return Whether or not the Cell with the given hash can't burn
+   */
+  [[nodiscard]] bool isUnburnable(const HashSize hash_value) const
+  {
+    // don't need a lock since read only
+    return ((*not_burnable_)[hash_value]);
+  }
+  /**
    * \brief Create BurnedData and set burned bits based on Perimeter
    * \return BurnedData with all initially burned locations set
    */
