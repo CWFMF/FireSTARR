@@ -611,7 +611,8 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
     const auto& location = cell(hash_value);
     // const auto& location = kv.first;
     // would be burned already if perimeter applied
-    if (canBurn(hash_value))
+    if (hasNotBurned(hash_value))
+    // if (!isUnburnable(hash_value))
     {
       const auto fake_event = Event::makeFireSpread(
         start_time_,
@@ -828,7 +829,8 @@ void Scenario::scheduleFireSpread(const Event& event)
       // if (!fuel::is_null_fuel(loc))
       // const auto h = for_cell.hash();
       // if (!(*unburnable_)[h])
-      // if (canBurn(for_cell))
+      // if (hasNotBurned(hash_value))
+      // if (!isUnburnable(hash_value))
       {
         const SpreadInfo tmp{*this, time, key, nd(time), wx};
         const auto& origin_inserted = spread_info_.try_emplace(key, *this, time, key, nd(time), wx);
@@ -940,7 +942,10 @@ void Scenario::scheduleFireSpread(const Event& event)
       //                      "Expected max_intensity to be > 0 but got %f",
       //                      max_intensity);
       // HACK: just use side-effect to log and check bounds
-      if (canBurn(hash_value) && max_intensity > 0)
+      if (
+        hasNotBurned(hash_value)
+        // !isUnburnable(hash_value)
+        && max_intensity > 0)
       {
         // // HACK: make sure it can't round down to 0
         // const auto intensity = static_cast<IntensitySize>(max(
@@ -955,7 +960,7 @@ void Scenario::scheduleFireSpread(const Event& event)
         burn(fake_event);
       }
       if (!(*unburnable_)[hash_value]
-          // && canBurn(for_cell)
+          // && hasNotBurned(for_cell)
           && ((survives(new_time, for_cell, new_time - arrival_[hash_value])
                && !isSurrounded(hash_value))))
       {
@@ -980,9 +985,15 @@ MathSize
 {
   return intensity_->fireSize();
 }
-bool Scenario::canBurn(const HashSize hash_value) const
+// bool Scenario::canBurn(const HashSize hash_value) const
+// {
+//   return intensity_->canBurn(hash_value);
+//   // return !isUnburnable(hash_value);
+// }
+bool Scenario::hasNotBurned(const HashSize hash_value) const
 {
   return intensity_->canBurn(hash_value);
+  // return !isUnburnable(hash_value);
 }
 bool Scenario::isUnburnable(const HashSize hash_value) const
 {

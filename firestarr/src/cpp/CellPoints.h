@@ -128,6 +128,7 @@ public:
     const bool can_burn_uninit,
     const bool can_burn_unburnable,
     const bool can_burn_non_fuel,
+    const bool can_burn_has_not_burned,
     const bool can_burn,
     const CellPos& cell) noexcept;
   CellPoints(
@@ -158,6 +159,7 @@ public:
   // FIX: just access directly for now
 public:
   bool can_burn_;
+  bool can_burn_has_not_burned_;
   bool can_burn_non_fuel_;
   bool can_burn_unburnable_;
   bool can_burn_uninit_;

@@ -60,9 +60,11 @@ CellPoints::CellPoints(
   const bool can_burn_uninit,
   const bool can_burn_unburnable,
   const bool can_burn_non_fuel,
+  const bool can_burn_has_not_burned,
   const bool can_burn,
   const CellPos& cell) noexcept
   : can_burn_(can_burn),
+    can_burn_has_not_burned_(can_burn_has_not_burned),
     can_burn_non_fuel_(can_burn_non_fuel),
     can_burn_unburnable_(can_burn_unburnable),
     can_burn_uninit_(can_burn_uninit),
@@ -91,8 +93,12 @@ CellPoints::CellPoints(
       cell_x_y_.hash(),
       !unburnable[cell_x_y_.hash()],
       !unburnable[cell.hash()],
-      scenario.canBurn(cell.hash()),
+      scenario.hasNotBurned(cell.hash()),
+      scenario.hasNotBurned(cell.hash()),
       !unburnable[cell.hash()],
+      // !scenario.isUnburnable(cell.hash()),
+      // // !unburnable[cell.hash()],
+      // !scenario.isUnburnable(cell.hash()),
       cell)
 {
   // logging::check_equal(
@@ -105,7 +111,7 @@ CellPoints::CellPoints(
   //   "unburnable[hash_uninit]");
 }
 CellPoints::CellPoints() noexcept
-  : CellPoints(INVALID_INDEX, false, false, false, false, CellPos{INVALID_INDEX, INVALID_INDEX})
+  : CellPoints(INVALID_INDEX, false, false, false, false, false, CellPos{INVALID_INDEX, INVALID_INDEX})
 {
 }
 CellPoints::CellPoints(const CellPoints* rhs) noexcept

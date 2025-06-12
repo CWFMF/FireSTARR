@@ -335,7 +335,8 @@ public:
    * \param location Cell
    * \return Whether or not a Cell can burn
    */
-  [[nodiscard]] bool canBurn(const HashSize hash_value) const;
+  // [[nodiscard]] bool canBurn(const HashSize hash_value) const;
+  [[nodiscard]] bool hasNotBurned(const HashSize hash_value) const;
   /**
    * \brief Whether or not Cell with the given hash can burn
    * \param hash Hash for Cell to check
