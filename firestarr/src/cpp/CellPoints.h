@@ -24,7 +24,7 @@ public:
     return std::get<0>(*this);
   }
 };
-
+class Scenario;
 static constexpr size_t FURTHEST_N = 0;
 static constexpr size_t FURTHEST_NNE = 1;
 static constexpr size_t FURTHEST_NE = 2;
@@ -126,10 +126,13 @@ public:
   CellPoints(
     const HashSize hash_uninit,
     const bool can_burn_uninit,
+    const bool can_burn_unburnable,
+    const bool can_burn_non_fuel,
     const bool can_burn,
     const CellPos& cell) noexcept;
   CellPoints(
     const BurnedData& unburnable,
+    const Scenario& scenario,
     const XYSize x,
     const XYSize y) noexcept;
   CellPoints(CellPoints&& rhs) noexcept = default;
@@ -155,6 +158,8 @@ public:
   // FIX: just access directly for now
 public:
   bool can_burn_;
+  bool can_burn_non_fuel_;
+  bool can_burn_unburnable_;
   bool can_burn_uninit_;
   CellPointArrays pts_;
   // use Idx instead of Location so it can be negative (invalid)
@@ -163,6 +168,7 @@ public:
 private:
   CellPoints(
     const BurnedData& unburnable,
+    const Scenario& scenario,
     const CellPos& cell) noexcept;
 };
 
@@ -175,6 +181,7 @@ public:
   CellPointsMap();
   CellPoints& insert(
     const BurnedData& unburnable,
+    const Scenario& scenario,
     const XYSize x,
     const XYSize y) noexcept;
   set<XYPos> unique() const noexcept;

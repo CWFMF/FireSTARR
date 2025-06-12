@@ -334,6 +334,7 @@ void Scenario::evaluate(const Event& event)
       // HACK: insert point as originating from itself
       points_.insert(
         *unburnable_,
+        *this,
         x,
         y);
       if (fuel::is_null_fuel(event.cell()))
@@ -587,6 +588,7 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
                   y);
       points_.insert(
         *unburnable_,
+        *this,
         x,
         y);
       // auto e = points_.try_emplace(cell, cell.column() + CELL_CENTER, cell.row() + CELL_CENTER);
@@ -676,6 +678,7 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
 void apply_offsets_spreadkey(
   CellPointsMap& points,
   const BurnedData& unburnable,
+  const Scenario& scenario,
   const DurationSize& arrival_time,
   const DurationSize& duration,
   const OffsetSet& offsets,
@@ -751,6 +754,7 @@ void apply_offsets_spreadkey(
           const auto new_y = y_o + pt.second + cell_y;
           points.insert(
             unburnable,
+            scenario,
             new_x,
             new_y);
 #ifdef DEBUG_CELLPOINTS
@@ -882,7 +886,14 @@ void Scenario::scheduleFireSpread(const Event& event)
     spreading_points::mapped_type& pts = kv0.second;
     // FIX: just decomposing for now
     // auto r =
-    apply_offsets_spreadkey(cell_pts, *unburnable_, new_time, duration, offsets, pts);
+    apply_offsets_spreadkey(
+      cell_pts,
+      *unburnable_,
+      *this,
+      new_time,
+      duration,
+      offsets,
+      pts);
     // for (XYPos& p : r)
     // {
     //   // cell_pts.insert(p.x(), p.y());
@@ -907,7 +918,7 @@ void Scenario::scheduleFireSpread(const Event& event)
     });
   for (auto& p : points_.unique())
   {
-    cell_pts.insert(*unburnable_, p.x(), p.y());
+    cell_pts.insert(*unburnable_, *this, p.x(), p.y());
   }
   points_ = cell_pts;
   // if we move everything out of points_ we can parallelize this check?
