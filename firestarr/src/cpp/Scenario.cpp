@@ -31,6 +31,7 @@ using topo::StartPoint;
 
 constexpr auto CELL_CENTER = static_cast<InnerSize>(0.5);
 constexpr auto PRECISION = static_cast<MathSize>(0.001);
+static constexpr array_pts NoPoints{};
 static atomic<size_t> COUNT = 0;
 static atomic<size_t> COMPLETED = 0;
 static atomic<size_t> TOTAL_STEPS = 0;
@@ -966,6 +967,7 @@ void Scenario::scheduleFireSpread(const Event& event)
   }
   // get once and keep
   const auto ros_min = Settings::minimumRos();
+  auto points_before = points_;
   spreading_points to_spread{};
   // make block to prevent it being visible beyond use
   {
@@ -1074,7 +1076,7 @@ void Scenario::scheduleFireSpread(const Event& event)
   // if we move everything out of points_ we can parallelize this check?
   do_each(
     points_.map_,
-    [this, &new_time](pair<const Location, CellPoints>& kv) {
+    [this, &new_time, &points_before](pair<const Location, CellPoints>& kv) {
       const auto for_cell = cell(kv.first);
       CellPoints& pts = kv.second;
       // logging::check_fatal(pts.empty(), "Empty points for some reason");
@@ -1104,6 +1106,8 @@ void Scenario::scheduleFireSpread(const Event& event)
           spread.direction(),
           for_cell,
           pts.sources());
+          (points_before.map_.find(kv.first) == points_before.map_.end()) ? NoPoints : points_before.map_.at(kv.first).points().points(),
+          pts.points().points());
         burn(fake_event);
       }
       if (!(*unburnable_)[for_cell.hash()]

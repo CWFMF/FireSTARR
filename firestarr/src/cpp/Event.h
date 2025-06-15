@@ -7,11 +7,13 @@
 #include "stdafx.h"
 #include "Cell.h"
 #include "FireSpread.h"
+#include "CellPoints.h"
 
 namespace fs::sim
 {
 using topo::Cell;
 using fs::wx::Direction;
+//using array_pts = std::array<InnerPos, NUM_DIRECTIONS>;
 /**
  * \brief A specific Event scheduled in a specific Scenario.
  */
@@ -21,7 +23,10 @@ public:
   /**
    * \brief Cell representing no location
    */
-  static constexpr Cell NoLocation{};
+  static constexpr Cell NoLocation{};/**
+   * \brief points array representing no points
+   */
+  static constexpr array_pts NoPoints{};
   // HACK: use type, so we can sort without having to give different times to them
   /**
    * \brief Type of Event
@@ -46,7 +51,29 @@ public:
       0,
       0,
       Direction::Invalid,
-      0};
+      0,
+      NoPoints,
+      NoPoints};
+  }
+  [[nodiscard]] static Event makeEvent(
+    const DurationSize time,
+    const Cell& cell,
+    const Type type,
+    const array_pts points_before,
+    const array_pts points_after)
+  {
+    return {
+      time,
+      cell,
+      0,
+      type,
+      0,
+      0,
+      Direction::Invalid,
+      0,
+      points_before,
+      points_after
+    };
   }
   /**
    * \brief Make simulation end event
@@ -99,6 +126,16 @@ public:
       NoLocation,
       FIRE_SPREAD);
   }
+  [[nodiscard]] static Event makeFireSpread(const DurationSize time, const array_pts points_before, const array_pts points_after)
+  {
+    return makeEvent(
+      time,
+      NoLocation,
+      FIRE_SPREAD,
+      points_before,
+      points_after
+    );
+  }
   /**
    * \brief Make fire spread event
    * \param time Time to schedule for
@@ -144,7 +181,28 @@ public:
     const Cell& cell,
     const CellIndex source)
   {
-    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0};
+    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0, NoPoints, NoPoints};
+  } 
+  /**
+    * \brief Make fire spread event
+    * \param time Time to schedule for
+    * \param intensity Intensity to spread with (kW/m)
+    * \param cell Cell to spread in
+    * \param points_before spread
+    * \param points_after spread
+    * \return Event created
+    */
+  [[nodiscard]] static Event makeFireSpread(
+    const DurationSize time,
+    const IntensitySize intensity,
+    const ROSSize ros,
+    const Direction raz,
+    const Cell& cell,
+    const CellIndex source,
+    const array_pts points_before,
+    const array_pts points_after)
+  {
+    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0, points_before, points_after};
   }
   ~Event() = default;
   /**
@@ -233,7 +291,23 @@ public:
   {
     return source_;
   }
-private:
+  /**
+   * \brief Cell points array from before the spread event
+   * \return Cell points array from before the spread event
+   */
+  [[nodiscard]] constexpr array_pts points_before() const
+  {
+    return points_before_;
+  }
+  /**
+   * \brief Cell points array from after the spread event
+   * \return Cell points array from after the spread event
+   */
+  [[nodiscard]] constexpr array_pts points_after() const
+  {
+    return points_after_;
+  }
+public:
   /**
    * \brief Constructor
    * \param time Time to schedule for
@@ -250,7 +324,9 @@ private:
                   const IntensitySize intensity,
                   const ROSSize ros,
                   const Direction raz,
-                  const DurationSize time_at_location)
+                  const DurationSize time_at_location,
+                  const array_pts points_before,
+                  const array_pts points_after)
     : time_(time),
       time_at_location_(time_at_location),
       cell_(cell),
@@ -258,7 +334,9 @@ private:
       intensity_(intensity),
       ros_(ros),
       raz_(raz),
-      source_(source)
+      source_(source),
+      points_before_(points_before),
+      points_after_(points_after)
   {
   }
   /**
@@ -288,5 +366,7 @@ private:
    * \brief CellIndex for relative Cell that spread into from
    */
   CellIndex source_;
+  array_pts points_before_;
+  array_pts points_after_;
 };
 }

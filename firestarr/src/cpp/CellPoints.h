@@ -169,6 +169,10 @@ public:
   {
     return src_;
   }
+  CellPointArrays points() const
+  {
+    return pts_;
+  }
   CellPoints& merge(const CellPoints& rhs);
   set<XYPos> unique() const noexcept;
 #ifdef DEBUG_CELLPOINTS
