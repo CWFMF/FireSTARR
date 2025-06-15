@@ -122,6 +122,38 @@ protected:
    */
   string suffix_;
 };
+class FBPObserver final
+  : public IObserver
+{
+public:
+  ~FBPObserver() override = default;
+  FBPObserver(const FBPObserver& rhs) = delete;
+  FBPObserver(FBPObserver&& rhs) = delete;
+  FBPObserver& operator=(const FBPObserver& rhs) = delete;
+  FBPObserver& operator=(FBPObserver&& rhs) = delete;
+  /**
+   * \brief Constructor
+   * \param scenario Scenario to track
+   */
+  FBPObserver(const Scenario& scenario)
+    : ros_map_(scenario.model().environment().makeMap<ROSSize>(0)),
+      scenario_(scenario)
+  {
+  }
+  [[nodiscard]] ROSSize getValue(const Event& event) const noexcept;
+  [[nodiscard]] void handleEvent(const Event& event) noexcept override;
+  [[nodiscard]] void save(const string& dir, const string& base_name) const override;
+  [[nodiscard]] void reset() noexcept override;
+protected:
+  /**
+   * \brief Map of observations
+   */
+  unique_ptr<data::GridMap<ROSSize>> ros_map_;
+  /**
+   * \brief Scenario being observed
+   */
+  const Scenario& scenario_;
+};
 /**
  * \brief Tracks when fire initially arrives in a Cell.
  */

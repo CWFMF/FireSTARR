@@ -1105,7 +1105,7 @@ void Scenario::scheduleFireSpread(const Event& event)
           spread.ros(),
           spread.direction(),
           for_cell,
-          pts.sources());
+          pts.sources(),
           (points_before.map_.find(kv.first) == points_before.map_.end()) ? NoPoints : points_before.map_.at(kv.first).points().points(),
           pts.points().points());
         burn(fake_event);

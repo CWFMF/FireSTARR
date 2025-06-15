@@ -15,6 +15,33 @@ string IObserver::makeName(const string& base_name, const string& suffix)
   }
   return suffix;
 }
+
+constexpr ROSSize NODATA_ROS = 0;
+ROSSize FBPObserver::getValue(const Event& event) const noexcept
+{
+  return event.time();
+}
+void FBPObserver::handleEvent(const Event& event) noexcept
+{
+    ros_map_->set(event.cell(), getValue(event));
+}
+/**
+ * \brief Save observations
+ * \param dir Directory to save to
+ * \param base_name Base file name to save to
+ */
+void FBPObserver::save(const string& dir, const string& base_name) const
+{
+  ros_map_->saveToFile(dir, makeName(base_name, "testing_ros"));
+}
+/**
+ * \brief Clear all observations
+ */
+void FBPObserver::reset() noexcept
+{
+  ros_map_->clear();
+}
+
 constexpr DurationSize NODATA_ARRIVAL = 0;
 ArrivalObserver::ArrivalObserver(const Scenario& scenario)
   : MapObserver<DurationSize>(scenario, NODATA_ARRIVAL, "arrival")
