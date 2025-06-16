@@ -251,7 +251,7 @@ void IntensityMap::save(const string& dir, const string& base_name) const
 {
   lock_guard<mutex> lock(mutex_);
   const auto name_intensity = base_name + "_intensity";
-  const auto name_ros = base_name + "_ros";
+  const auto name_ros = base_name + "_ros_old";
   const auto name_raz = base_name + "_raz";
   // static std::function<DegreesSize(fs::wx::Direction)> fct_raz = [](fs::wx::Direction raz) {
   //   return static_cast<DegreesSize>(raz.asDegrees());

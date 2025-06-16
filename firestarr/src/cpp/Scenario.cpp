@@ -1076,7 +1076,7 @@ void Scenario::scheduleFireSpread(const Event& event)
   // if we move everything out of points_ we can parallelize this check?
   do_each(
     points_.map_,
-    [this, &new_time, &points_before](pair<const Location, CellPoints>& kv) {
+    [this, &new_time, &points_before, &duration](pair<const Location, CellPoints>& kv) {
       const auto for_cell = cell(kv.first);
       CellPoints& pts = kv.second;
       // logging::check_fatal(pts.empty(), "Empty points for some reason");
@@ -1099,6 +1099,7 @@ void Scenario::scheduleFireSpread(const Event& event)
         // FIX: HACK: only output spread within for now
         // const auto& spread = pts.spread_internal_;
         const auto& spread = pts.spread_arrival_;
+        const auto& cell_points_before = points_before.map_.find(kv.first);
         const auto fake_event = Event::makeFireSpread(
           new_time,
           spread.intensity(),
@@ -1106,8 +1107,9 @@ void Scenario::scheduleFireSpread(const Event& event)
           spread.direction(),
           for_cell,
           pts.sources(),
-          (points_before.map_.find(kv.first) == points_before.map_.end()) ? NoPoints : points_before.map_.at(kv.first).points().points(),
-          pts.points().points());
+          (cell_points_before == points_before.map_.end()) ? NoPoints : cell_points_before->second.points().points(),   //.second.points().points(),
+          pts.points().points(),
+          (DurationSize)duration);
         burn(fake_event);
       }
       if (!(*unburnable_)[for_cell.hash()]

@@ -7,6 +7,7 @@
 #include "Observer.h"
 namespace fs::sim
 {
+static constexpr array_pts NoPoints{};
 string IObserver::makeName(const string& base_name, const string& suffix)
 {
   if (base_name.length() > 0)
@@ -19,11 +20,56 @@ string IObserver::makeName(const string& base_name, const string& suffix)
 constexpr ROSSize NODATA_ROS = 0;
 ROSSize FBPObserver::getValue(const Event& event) const noexcept
 {
-  return event.time();
+  ROSSize max_ros = 0.0;
+  auto points_before = event.points_before();
+  auto points_after = event.points_after();
+
+  // Ensure points before is defined
+  if (NoPoints == points_before)
+  {
+    return (max_ros);
+  }
+
+  for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
+  {
+     const auto& p0 = points_before[i];
+     const auto& x0 = p0.first;
+     const auto& y0 = p0.second;
+     const auto& p1 = points_after[i];
+     const auto& x1 = p1.first;
+     const auto& y1 = p1.second;
+
+     const auto d = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1)) * 100.0; // TODO: this should be cell size
+     const auto ros = d / event.duration(); // Is duration in min or sec?
+     if (ros > max_ros)
+     {
+       max_ros = ros;
+       //calculate direction between p0 and p1 (compass, not math)
+       // calculate intensity from spread_info sfc + ros?
+     }
+   }
+
+  return max_ros;
 }
 void FBPObserver::handleEvent(const Event& event) noexcept
 {
-    ros_map_->set(event.cell(), getValue(event));
+  // Compare current ROS to past max
+  // is there a value in map
+  auto value = getValue(event);
+  auto& cell = event.cell();
+  auto& map = *ros_map_;
+  if (!map.contains(cell))
+  {
+    map.set(cell, value);
+  }
+  else
+  {
+    auto value_old = map.at(cell);
+    if (value > value_old)
+    {
+      map.set(cell, value);
+    }
+  }
 }
 /**
  * \brief Save observations
@@ -32,7 +78,7 @@ void FBPObserver::handleEvent(const Event& event) noexcept
  */
 void FBPObserver::save(const string& dir, const string& base_name) const
 {
-  ros_map_->saveToFile(dir, makeName(base_name, "testing_ros"));
+  ros_map_->saveToFile(dir, makeName(base_name, "ros"));
 }
 /**
  * \brief Clear all observations

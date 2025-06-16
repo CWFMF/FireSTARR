@@ -53,27 +53,8 @@ public:
       Direction::Invalid,
       0,
       NoPoints,
-      NoPoints};
-  }
-  [[nodiscard]] static Event makeEvent(
-    const DurationSize time,
-    const Cell& cell,
-    const Type type,
-    const array_pts points_before,
-    const array_pts points_after)
-  {
-    return {
-      time,
-      cell,
-      0,
-      type,
-      0,
-      0,
-      Direction::Invalid,
-      0,
-      points_before,
-      points_after
-    };
+      NoPoints,
+      0};
   }
   /**
    * \brief Make simulation end event
@@ -126,16 +107,6 @@ public:
       NoLocation,
       FIRE_SPREAD);
   }
-  [[nodiscard]] static Event makeFireSpread(const DurationSize time, const array_pts points_before, const array_pts points_after)
-  {
-    return makeEvent(
-      time,
-      NoLocation,
-      FIRE_SPREAD,
-      points_before,
-      points_after
-    );
-  }
   /**
    * \brief Make fire spread event
    * \param time Time to schedule for
@@ -181,7 +152,7 @@ public:
     const Cell& cell,
     const CellIndex source)
   {
-    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0, NoPoints, NoPoints};
+    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0, NoPoints, NoPoints, 0};
   } 
   /**
     * \brief Make fire spread event
@@ -200,9 +171,10 @@ public:
     const Cell& cell,
     const CellIndex source,
     const array_pts points_before,
-    const array_pts points_after)
+    const array_pts points_after,
+    const DurationSize duration)
   {
-    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0, points_before, points_after};
+    return {time, cell, source, FIRE_SPREAD, intensity, ros, raz, 0, points_before, points_after, duration};
   }
   ~Event() = default;
   /**
@@ -307,6 +279,14 @@ public:
   {
     return points_after_;
   }
+  /**
+   * \brief Duration of spread event
+   * \return Duration of spread event
+   */
+  [[nodiscard]] constexpr DurationSize duration() const
+  {
+    return duration_;
+  }
 public:
   /**
    * \brief Constructor
@@ -326,7 +306,8 @@ public:
                   const Direction raz,
                   const DurationSize time_at_location,
                   const array_pts points_before,
-                  const array_pts points_after)
+                  const array_pts points_after,
+                  const DurationSize duration)
     : time_(time),
       time_at_location_(time_at_location),
       cell_(cell),
@@ -336,7 +317,8 @@ public:
       raz_(raz),
       source_(source),
       points_before_(points_before),
-      points_after_(points_after)
+      points_after_(points_after),
+      duration_(duration)
   {
   }
   /**
@@ -368,5 +350,6 @@ public:
   CellIndex source_;
   array_pts points_before_;
   array_pts points_after_;
+  DurationSize duration_;
 };
 }
