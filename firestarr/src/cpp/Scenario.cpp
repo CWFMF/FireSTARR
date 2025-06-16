@@ -917,7 +917,7 @@ void apply_offsets_spreadkey(
             {new_x,
              new_y});
 #ifdef DEBUG_CELLPOINTS
-          logging::note("r1 is now %ld items", r1.size());
+          logging::note("r1 is now %ld items", points.size());
 #endif
         }
       }

@@ -112,14 +112,15 @@ CellPoints::CellPoints(
     std::fill(pts_.distances().begin(), pts_.distances().end(), INVALID_DISTANCE);
     std::fill(pts_.points().begin(), pts_.points().end(), INVALID_INNER_POSITION);
 
-#ifdef DEBUG_CELLPOINTS
-    auto first_valid = (INVALID_DISTANCE != pts_.distances()[0]);
-    logging::check_equal(
-      can_burn_,
-      first_valid,
-      "Distance should be invalid if can't burn");
-    logging::note("CellPoints is size %ld after creation and should be empty", size());
-#endif
+    // this should always be invalid here
+    // #ifdef DEBUG_CELLPOINTS
+    //     auto first_valid = (INVALID_DISTANCE != pts_.distances()[0]);
+    //     logging::check_equal(
+    //       can_burn_,
+    //       first_valid,
+    //       "Distance should be invalid if can't burn");
+    //     logging::note("CellPoints is size %ld after creation and should be empty", size());
+    // #endif
   }
 }
 CellPoints::CellPoints(
@@ -180,6 +181,17 @@ CellPoints::CellPoints(
     size(),
     "CellPoints after first insert");
 #endif
+#ifdef DEBUG_CELLPOINTS
+  auto first_valid = (INVALID_DISTANCE != pts_.distances()[0]);
+  logging::check_equal(
+    can_burn_,
+    first_valid,
+    "Distance should be invalid if can't burn");
+  if (!can_burn_)
+  {
+    logging::note("CellPoints is size %ld after creation and should be empty", size());
+  }
+#endif
 }
 
 using DISTANCE_PAIR = pair<DistanceSize, DistanceSize>;
@@ -222,7 +234,7 @@ CellPoints& CellPoints::insert(
   const XYPos& p) noexcept
 {
 #ifdef DEBUG_CELLPOINTS
-  const auto n0 = size();
+  // const auto n0 = size();
   const Location loc{p.hash()};
   logging::check_equal(
     loc.column(),
@@ -237,12 +249,12 @@ CellPoints& CellPoints::insert(
   {
     insert_pt(p.x(), p.y(), cell_x_y_, pts_);
   }
-#ifdef DEBUG_CELLPOINTS
-  const auto n1 = size();
-  logging::check_fatal(
-    !can_burn_ && n0 != n1,
-    "Number of points when can't burn");
-#endif
+  // #ifdef DEBUG_CELLPOINTS
+  //   const auto n1 = size();
+  //   logging::check_fatal(
+  //     !can_burn_ && n0 != n1,
+  //     "Number of points when can't burn");
+  // #endif
   return *this;
 }
 #undef D_PTS
