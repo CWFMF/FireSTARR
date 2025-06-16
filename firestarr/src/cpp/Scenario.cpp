@@ -826,7 +826,12 @@ void Scenario::scheduleFireSpread(const Event& event)
       // const auto h = for_cell.hash();
       // if (!(cannotSpread(hash_value)))
       // if (hasNotBurned(hash_value))
-      if (!isUnburnable(hash_value))
+      // if (!isUnburnable(hash_value))
+      logging::check_fatal(
+        isUnburnable(hash_value),
+        "Unburnable cell (%d, %d) in burning cells",
+        loc.column(),
+        loc.row());
       {
         // const SpreadInfo tmp{*this, time, key, nd(time), wx};
         const auto& origin_inserted = spread_info_.try_emplace(key, *this, time, key, nd(time), wx);
