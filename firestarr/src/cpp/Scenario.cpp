@@ -897,13 +897,19 @@ void Scenario::scheduleFireSpread(const Event& event)
     //   points_.insert(p.x(), p.y());
     // }
   }
-  cell_pts.remove_if(
+  for (auto& p : points_.unique())
+  {
+    cell_pts.insert(*this, p.x(), p.y());
+  }
+  points_ = cell_pts;
+  // check after inserting new points since cells that didn't spread could be surrounded now
+  points_.remove_if(
     [this](
       const pair<HashSize, CellPoints>& kv) {
       const auto& hash_value = kv.first;
       const Location location{hash_value};
       // clear out if unburnable
-      const auto do_clear = cannotSpread(hash_value);
+      const auto do_clear = cannotSpread(hash_value) || isSurrounded(hash_value);
       // if (do_clear)
       // {
       //   logging::error(
@@ -913,19 +919,11 @@ void Scenario::scheduleFireSpread(const Event& event)
       // }
       return do_clear;
     });
-  for (auto& p : points_.unique())
-  {
-    cell_pts.insert(*this, p.x(), p.y());
-  }
-  points_ = cell_pts;
   // if we move everything out of points_ we can parallelize this check?
   do_each(
     points_.map_,
     [this, &new_time](pair<const HashSize, CellPoints>& kv) {
       CellPoints& pts = kv.second;
-      if (!pts.can_burn_)
-      {
-      }
       const auto& hash_value = kv.first;
       const auto for_cell = cell(hash_value);
       // logging::check_fatal(pts.empty(), "Empty points for some reason");
