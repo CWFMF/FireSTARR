@@ -95,6 +95,7 @@ CellPoints::CellPoints(
       scenario.hasNotBurned(cell.hash()),
       scenario.hasNotBurned(cell.hash()),
       !scenario.cannotSpread(cell.hash()),
+      // scenario.hasNotBurned(cell.hash()),
       // !scenario.isUnburnable(cell.hash()),
       // // !unburnable[cell.hash()],
       // !scenario.isUnburnable(cell.hash()),

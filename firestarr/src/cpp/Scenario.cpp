@@ -824,11 +824,11 @@ void Scenario::scheduleFireSpread(const Event& event)
       // HACK: need to lookup before emplace since might try to create Cell without fuel
       // if (!fuel::is_null_fuel(loc))
       // const auto h = for_cell.hash();
-      // if (!(cannotSpread(h))
+      // if (!(cannotSpread(hash_value)))
       // if (hasNotBurned(hash_value))
-      // if (!isUnburnable(hash_value))
+      if (!isUnburnable(hash_value))
       {
-        const SpreadInfo tmp{*this, time, key, nd(time), wx};
+        // const SpreadInfo tmp{*this, time, key, nd(time), wx};
         const auto& origin_inserted = spread_info_.try_emplace(key, *this, time, key, nd(time), wx);
         // any cell that has the same fuel, slope, and aspect has the same spread
         const auto& origin = origin_inserted.first->second;
