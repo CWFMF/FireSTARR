@@ -41,10 +41,9 @@ from common import (
     read_json_safe,
     try_remove,
 )
-from datasources.cwfif import get_model_dir, get_model_dir_uncached
 from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
-from datasources.default import SourceFireActive
+from datasources.default import SourceFireActive, get_model_dir, get_model_dir_uncached
 from fires import get_fires_folder, group_fires
 from gis import (
     CRS_COMPARISON,

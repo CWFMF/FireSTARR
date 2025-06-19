@@ -26,6 +26,8 @@ URL_CWFIF_WX = "https://app-cwfmf-api-cwfis-dev.wittyplant-59b495b3.canadacentra
 # CHECK: seems like just rounding to 0.5 wouldn't always give the same closest
 #       value as actual distance calculation?
 COORDINATE_PRECISION = 1
+# seconds before request timeout
+URL_TIMEOUT = 30
 
 
 def make_cwfif_query(model, lat, lon, **kwargs):
@@ -141,6 +143,7 @@ def get_model_dir_uncached(model):
         keep_existing=False,
         fct_pre_save=None,
         fct_post_save=do_parse,
+        timeout=URL_TIMEOUT,
     )
 
 

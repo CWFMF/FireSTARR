@@ -243,6 +243,8 @@ def read_config(force=False):
             "BATCH_ACCOUNT_NAME",
             "BATCH_ACCOUNT_KEY",
             "BATCH_POOL_ID",
+            "SPOTWX_API_KEY",
+            "SPOTWX_API_LIMIT",
             "STORAGE_ACCOUNT_NAME",
             "STORAGE_FILE_SHARE",
             "STORAGE_KEY",

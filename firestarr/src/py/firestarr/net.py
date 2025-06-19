@@ -70,6 +70,7 @@ def _save_http_uncached(
     url,
     save_as,
     fct_is_invalid=always_false,
+    **kwargs,
 ):
     modlocal = None
     logging.debug("Opening %s", url)
@@ -78,6 +79,7 @@ def _save_http_uncached(
         stream=True,
         verify=VERIFY,
         headers=HEADERS,
+        **kwargs,
     )
     if 200 != response.status_code or fct_is_invalid(response):
         url_masked = mask_url(url)
@@ -118,8 +120,9 @@ def _save_http_cached(
     url,
     save_as,
     fct_is_invalid=always_false,
+    **kwargs,
 ):
-    return call_safe(_save_http_uncached, url, save_as, fct_is_invalid)
+    return call_safe(_save_http_uncached, url, save_as, fct_is_invalid, **kwargs)
 
 
 def check_downloaded(path):
@@ -157,6 +160,7 @@ def save_http(
     fct_pre_save,
     fct_post_save,
     fct_is_invalid=always_false,
+    **kwargs,
 ):
     logging.debug("save_http(%s, %s)", url, save_as)
 
@@ -178,7 +182,7 @@ def save_http(
         with locks_for(_ + ".tmp"):
             # HACK: one last check for file
             if not (keep_existing and os.path.isfile(_)):
-                r = _save_http_cached((fct_pre_save or do_nothing)(url), _, fct_is_invalid)
+                r = _save_http_cached((fct_pre_save or do_nothing)(url), _, fct_is_invalid, **kwargs)
         # logging.debug("do_save(%s) - returning %s", _, r)
         # mark_downloaded(_)
         return _
@@ -215,6 +219,7 @@ def save_http(
                     fct_pre_save,
                     fct_post_save,
                     fct_is_invalid,
+                    **kwargs,
                 )
             else:
                 raise ex
@@ -254,11 +259,12 @@ def try_save_http(
     max_save_retries=RETRY_MAX_ATTEMPTS,
     check_code=False,
     fct_is_invalid=always_false,
+    **kwargs,
 ):
     save_tries = 0
     while True:
         try:
-            return save_http(url, save_as, keep_existing, fct_pre_save, fct_post_save, fct_is_invalid)
+            return save_http(url, save_as, keep_existing, fct_pre_save, fct_post_save, fct_is_invalid, **kwargs)
         except KeyboardInterrupt as ex:
             raise ex
         except Exception as ex:
@@ -266,8 +272,8 @@ def try_save_http(
             if isinstance(ex, KeyboardInterrupt):
                 raise ex
             m = mask_url(url)
-            # no point in retrying if URL doesn't exist or is forbidden
-            if check_code and isinstance(ex, HTTPError) and ex.code in [403, 404]:
+            # no point in retrying if URL doesn't exist, is forbidden, or timed out
+            if check_code and isinstance(ex, HTTPError) and ex.code in [403, 404, 504]:
                 # if we're checking for code then return None since file can't exist
                 with locks_for(CACHE_LOCK_FILE):
                     CACHE_DOWNLOADED[save_as] = None

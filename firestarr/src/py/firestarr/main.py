@@ -18,7 +18,7 @@ from common import (
     check_arg,
     logging,
 )
-from datasources.cwfif import get_model_dir_uncached, set_model_dir
+from datasources.default import get_model_dir_uncached, set_model_dir
 from log import add_log_file
 from publish import PublishError
 from redundancy import get_stack

@@ -3,12 +3,14 @@ import os
 from functools import cache
 
 import datasources.cwfif
+import datasources.spotwx
 import numpy as np
 import pandas as pd
 from common import (
     CONFIG,
     DEFAULT_M3_UNMATCHED_LAST_ACTIVE_IN_DAYS,
     DIR_SRC_PY_FIRSTARR,
+    WX_MODEL,
     listdir_sorted,
     logging,
     pick_max,
@@ -36,6 +38,41 @@ from gis import (
 )
 
 STATUS_RANK = ["OUT", "UC", "BH", "OC", "UNK"]
+
+# HACK: allow setting so it doesn't use current all the time
+_MODEL_DIR = None
+_MODEL_DATA_SOURCE = None
+
+
+def find_model_data_source():
+    global _MODEL_DATA_SOURCE
+    # HACK: set data source to use based on if we can get there
+    if _MODEL_DATA_SOURCE is None:
+        try:
+            dir_model = datasources.cwfif.get_model_dir_uncached(WX_MODEL)
+            _MODEL_DATA_SOURCE = datasources.cwfif
+        except KeyboardInterrupt as ex:
+            raise ex
+        except Exception as ex:
+            logging.error("CWFIF not working so using spotwx")
+            logging.error(ex)
+            # HACK: if cwfif fails use spotwx
+            _MODEL_DATA_SOURCE = datasources.spotwx
+    return _MODEL_DATA_SOURCE
+
+
+def get_model_dir_uncached(model):
+    return find_model_data_source().get_model_dir_uncached(model)
+
+
+@cache
+def get_model_dir(model):
+    global _MODEL_DIR
+    return _MODEL_DIR or get_model_dir_uncached(model)
+
+
+def set_model_dir(dir_model):
+    find_model_data_source().set_model_dir(dir_model)
 
 
 def wx_interpolate(df):
@@ -291,7 +328,7 @@ class SourceModelAll(SourceModel):
     def __init__(self, dir_out) -> None:
         super().__init__(bounds=None)
         self._dir_out = dir_out
-        self._sources = [datasources.cwfif.SourceGEPS(self._dir_out)] + [
+        self._sources = [_MODEL_DATA_SOURCE.SourceGEPS(self._dir_out)] + [
             # order doesn't matter since everything gets used
             s(self._dir_out)
             for s in find_sources(SourceModel)
