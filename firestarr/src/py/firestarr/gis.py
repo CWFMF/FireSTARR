@@ -49,6 +49,9 @@ VECTOR_FILE_EXTENSION = "gpkg"
 
 
 def gdf_from_file(filename, *args, **kwargs):
+    if not (os.path.isfile(filename) and 0 < os.path.getsize(filename)):
+        logging.error("File %s doesn't exist or is empty" % filename)
+        return None
     import warnings
 
     with warnings.catch_warnings():
