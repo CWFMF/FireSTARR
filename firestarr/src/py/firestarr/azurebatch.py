@@ -864,14 +864,20 @@ def evaluate_autoscale(pool_id=_BATCH_POOL_ID, client=None, print_result=True):
 
 
 def enable_autoscale(pool_id=_BATCH_POOL_ID, client=None):
-    if client is None:
-        client = get_batch_client()
-    client.pool.enable_auto_scale(
-        pool_id,
-        auto_scale_formula=create_autoscale_formula(),
-        auto_scale_evaluation_interval=_AUTO_SCALE_EVALUATION_INTERVAL,
-    )
-    evaluate_autoscale(pool_id=pool_id, client=client)
+    try:
+        if client is None:
+            client = get_batch_client()
+        client.pool.enable_auto_scale(
+            pool_id,
+            auto_scale_formula=create_autoscale_formula(),
+            auto_scale_evaluation_interval=_AUTO_SCALE_EVALUATION_INTERVAL,
+        )
+        evaluate_autoscale(pool_id=pool_id, client=client)
+    except KeyboardInterrupt as ex:
+        raise ex
+    except Exception as ex:
+        logging.error("Ignoring error in enable_autoscale()")
+        logging.error(ex)
 
 
 # def get_log(task):

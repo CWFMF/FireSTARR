@@ -55,6 +55,8 @@ from common import (
     start_process,
     try_remove,
 )
+from redundancy import call_safe
+
 from gis import (
     Rasterize,
     find_best_raster,
@@ -64,7 +66,6 @@ from gis import (
     save_geojson,
     save_point_file,
 )
-from redundancy import call_safe
 
 # set to "" if want intensity grids
 # NO_INTENSITY = "--no-intensity"
@@ -207,7 +208,8 @@ def schedule_tasks(dir_fire, tasks):
             print(".", end="", flush=True)
             time.sleep(1)
         print("", flush=True)
-        enable_autoscale()
+        # this seems to cause a bunch of problems?
+        # enable_autoscale()
     cancel_other_jobs(job_id)
 
 
