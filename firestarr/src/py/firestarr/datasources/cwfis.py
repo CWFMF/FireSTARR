@@ -9,11 +9,11 @@ import model_data
 import pandas as pd
 import tqdm_util
 from common import (
+    CONFIG,
     CURRENT_YEAR_ONLY,
     DEFAULT_LAST_ACTIVE_SINCE_OFFSET,
     FLAG_DEBUG,
     FMT_DATE_YMD,
-    USE_CWFIS_SERVICE,
     logging,
     read_csv_safe,
     to_utc,
@@ -214,7 +214,7 @@ class SourceFeatureM3(SourceFeature):
         # FIX: duplicated elsewhere
         tried_file = False
         try:
-            if not USE_CWFIS_SERVICE:
+            if not CONFIG["PREFER_CWFIS_WMS"]:
                 tried_file = True
                 return self._source_file._get_features()
         except Exception as ex:
@@ -467,7 +467,7 @@ class SourceFwiCwfis(SourceFwi):
         # FIX: duplicated elsewhere
         tried_file = False
         try:
-            if not USE_CWFIS_SERVICE:
+            if not CONFIG["PREFER_CWFIS_WMS"]:
                 tried_file = True
                 return self._source_file.get_fwi(lat, lon, date)
         except Exception as ex:

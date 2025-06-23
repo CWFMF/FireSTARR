@@ -61,7 +61,6 @@ PUBLISH_AZURE_WAIT_TIME_SECONDS = 10
 FORMAT_OUTPUT = "COG"
 # FORMAT_OUTPUT = "GTiff"
 
-USE_CWFIS_SERVICE = False
 TIMEDELTA_DAY = datetime.timedelta(days=1)
 TIMEDELTA_HOUR = datetime.timedelta(hours=1)
 
@@ -197,6 +196,28 @@ def to_utc(d):
     return pd.to_datetime(d, errors="coerce", utc=True)
 
 
+def is_truthy(v):
+    bool_value = v
+    if bool != type(v):
+        if v is None or "" == v:
+            bool_value = False
+        else:
+            try:
+                bool_value = 0 != int(v)
+            except KeyboardInterrupt as ex:
+                raise ex
+            except Exception as ex:
+                TRUE_VALUES = ["t", "true"]
+                FALSE_VALUES = ["f", "false"]
+                s = str(v).lower()
+                if s in TRUE_VALUES:
+                    bool_value = True
+                elif s not in FALSE_VALUES:
+                    raise RuntimeError(f"{v} is not a valid value to convert to bool")
+    print("Converting '%s' to bool %s" % (v, bool_value))
+    return bool_value
+
+
 def read_config(force=False):
     """!
     Read configuration from default file
@@ -225,10 +246,15 @@ def read_config(force=False):
             # use bounds from local directory if not specified
             "BOUNDS_FILE": DEFAULT_BOUNDS,
         }
-        OPTIONS = [
+        # Set boolean options as True if have a value and not set to 0
+        OPTIONS_BOOL = [
             "NO_AGENCY_PERIMS",
             "FORCE_LOCAL_TASKS",
             "FORCE_BATCH_TASKS",
+            "PREFER_CWFIS_WMS",
+            "PREFER_SPOTWX",
+        ]
+        OPTIONS = [
             "AZURE_URL",
             "AZURE_TOKEN",
             "AZURE_CONTAINER",
@@ -250,7 +276,7 @@ def read_config(force=False):
             "STORAGE_KEY",
             "REGISTRY_USER_NAME",
             "REGISTRY_PASSWORD",
-        ]
+        ] + OPTIONS_BOOL
         for opt in OPTIONS:
             CONFIG[opt] = ""
         config = configparser.ConfigParser()
@@ -285,6 +311,7 @@ def read_config(force=False):
         # assign to CONFIG so defaults get overwritten
         for k, v in config.items("GLOBAL"):
             v = v.strip('"') if v.startswith('"') and v.endswith('"') else v.strip("'")
+            print("%s == %s" % (k, v))
             CONFIG[k.upper()] = v
         # for anything that's empty try to populate it from and environment variable
         for k in CONFIG.keys():
@@ -292,8 +319,11 @@ def read_config(force=False):
                 v = os.environ.get(k, "")
                 if v != "":
                     # don't want value in log but want to note it was loaded from outside config file
-                    logging.debug("Setting %s from environment variable", k)
+                    logging.debug("Setting %s from environment variable" % k)
                     CONFIG[k] = v
+        for k in OPTIONS_BOOL:
+            CONFIG[k] = is_truthy(CONFIG.get(k, 0))
+            print("%s is %s" % (k, CONFIG[k]))
         file_bounds = CONFIG["BOUNDS_FILE"]
         if not os.path.isfile(file_bounds):
             if DEFAULT_BOUNDS != file_bounds:

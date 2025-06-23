@@ -214,7 +214,7 @@ class SourceFireActive(SourceFire):
             SourceFeatureM3(self._dir_out, self._origin),
         ]
         self._source_fires = []
-        if not CONFIG.get("NO_AGENCY_PERIMS", False):
+        if not CONFIG["NO_AGENCY_PERIMS"]:
             logging.info("Including agency fire sources")
             self._source_features += [
                 # want private sources last so they override public ones
