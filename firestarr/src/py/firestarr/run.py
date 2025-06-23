@@ -531,34 +531,56 @@ class Run(object):
         return df_final
 
     def save_fires(self, df_fires, save_to):
+        FLAG_IGNORE_SAVE_ERRORS = True
+        is_valid = True
         if save_to != self._file_fires:
             raise RuntimeError("Called save_fires() with path %s instead of %s" % (self._file_fires, save_to))
         save_bak = os.path.join(os.path.dirname(save_to), "bkup_" + os.path.basename(save_to))
+        save_tmp = os.path.join(os.path.dirname(save_to), "tmp_" + os.path.basename(save_to))
         if self._num_fires_initial is None:
             if os.path.isfile(save_bak):
+                is_valid = False
                 raise RuntimeError("Should be doing initial save, but backup %s already exists" % save_bak)
             gdf_to_file(df_fires, save_bak)
-            gdf_to_file(df_fires, save_to)
             self._num_fires_initial = len(df_fires)
         else:
             if self._num_fires_initial != len(df_fires):
                 msg = "Expected %d fires when saving but have %d" % (self._num_fires_initial, len(df_fires))
                 logging.error(msg)
-                raise RuntimeError(msg)
+                is_valid = False
+                if not FLAG_IGNORE_SAVE_ERRORS:
+                    raise RuntimeError(msg)
+        if not is_valid:
+            logging.error("Not saving df_fires with invalid number of fires")
+            return
+        gdf_to_file(df_fires, save_tmp)
         # HACK: really need to figure out how this is saving without all fires
-        df_cur = gdf_from_file(self._file_fires).set_index(["fire_name"])
-        df_bak = gdf_from_file(save_bak).set_index(["fire_name"])
-        # it's okay if they're different, but they need the same number of rows with the same fires
-        n0 = len(df_cur)
-        n1 = len(df_bak)
-        if n0 != n1:
-            msg = "Expected %d fires when comparing to backup but have %d" % (n0, n1)
-            logging.error(msg)
-            raise RuntimeError(msg)
-        if self._num_fires_initial != n1:
-            msg = "Expected %d fires when comparing to backup but have %d" % (self._num_fires_initial, n1)
-            logging.error(msg)
-            raise RuntimeError(msg)
+
+        def cmp_files(f1, f2):
+            is_valid = True
+            df_cur = gdf_from_file(f1).set_index(["fire_name"])
+            df_bak = gdf_from_file(f2).set_index(["fire_name"])
+            # it's okay if they're different, but they need the same number of rows with the same fires
+            n0 = len(df_cur)
+            n1 = len(df_bak)
+            if n0 != n1:
+                msg = "Expected %d fires when comparing to backup but have %d" % (n0, n1)
+                logging.error(msg)
+                is_valid = False
+                if not FLAG_IGNORE_SAVE_ERRORS:
+                    raise RuntimeError(msg)
+            if self._num_fires_initial != n1:
+                msg = "Expected %d fires when comparing to backup but have %d" % (self._num_fires_initial, n1)
+                logging.error(msg)
+                is_valid = False
+                if not FLAG_IGNORE_SAVE_ERRORS:
+                    raise RuntimeError(msg)
+            return is_valid
+
+        if cmp_files(save_tmp, save_bak):
+            shutil.move(save_tmp, save_to)
+            if not cmp_files(save_to, save_bak):
+                logging.error("Somehow have wrong number of fires after moving tmp file")
 
     @log_order()
     def prep_fires(self, force=False):
