@@ -503,6 +503,7 @@ protected:
   /**
    * \brief Contains information on cells that are not burnable
    */
+public:
   BurnedData* unburnable_;
   BurnedData* unburnable_new_;
   /**

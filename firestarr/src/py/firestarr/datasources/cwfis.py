@@ -218,11 +218,15 @@ class SourceFeatureM3(SourceFeature):
             if not CONFIG["PREFER_CWFIS_WMS"]:
                 tried_file = True
                 return self._source_file._get_features()
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             logging.error("Unable to use file source for M3 data")
             logging.error(ex)
         try:
             return self._source_service._get_features()
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             logging.error("Unable to use service source for m3fwi data")
             logging.error(ex)
@@ -471,11 +475,15 @@ class SourceFwiCwfis(SourceFwi):
             if not CONFIG["PREFER_CWFIS_WMS"]:
                 tried_file = True
                 return self._source_file.get_fwi(lat, lon, date)
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             logging.error("Unable to use file source for fwi data")
             logging.error(ex)
         try:
             return self._source_service.get_fwi(lat, lon, date)
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             logging.error("Unable to use service source for fwi data")
             logging.error(ex)

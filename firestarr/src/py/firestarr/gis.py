@@ -609,6 +609,8 @@ def with_gdal_exceptions_off(fct, *args, **kwargs):
             # HACK: if exceptions are on then gdal_merge throws one
             gdal.DontUseExceptions()
             return fct(*args, **kwargs)
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             # HACK: logging trace doesn't show substitution, so try making string first
             str_error = f"Error calling {fct} with arguments:\n\t{args}\n\t{kwargs}"

@@ -48,6 +48,8 @@ def try_call_safe(quiet, fct, *args, **kwargs):
     while True:
         try:
             return fct(*args, **kwargs)
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             # ignore because azure is throwing them all the time
             # OSError: [Errno 5] Input/output
@@ -134,6 +136,8 @@ def load_safe(self):  # NOTE: if settings change, need to update attributes
         try:
             obj = dill._dill.StockUnpickler.load(self)
             break
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             ex_current = ex
             if ex_orig is None:

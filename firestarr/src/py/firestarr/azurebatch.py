@@ -549,6 +549,8 @@ def add_simulation_task(job_id, dir_fire, no_wait=False, client=None, mark_as_do
         # # HACK: want to check somewhere and this seems good enough for now
         # restart_unusable_nodes(client=client)
         return task.id
+    except KeyboardInterrupt as ex:
+        raise ex
     except Exception as ex:
         return ex
     # # HACK: getting SSL errors so use call_safe()

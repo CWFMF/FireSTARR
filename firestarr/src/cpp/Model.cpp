@@ -22,7 +22,7 @@ constexpr auto FMT_OUT = "%ld,%d-%02d-%02d %02d:%02d:%02d,%1.6f,%1.6f,%1.6f,%1.6
 // HACK: assume using half the CPUs probably means that faster cores are being used?
 constexpr MathSize PCT_CPU = 0.5;
 // Semaphore Model::task_limiter{static_cast<int>(std::thread::hardware_concurrency())};
-Semaphore Model::task_limiter{1};
+Semaphore Model::task_limiter{0};
 BurnedData* Model::getBurnedVector() const noexcept
 {
   try
@@ -888,28 +888,8 @@ map<DurationSize, shared_ptr<ProbabilityMap>> Model::runIterations(const topo::S
     }
     return true;
   };
-  // FIX: I think we can just have 2 Iteration objects and roll through starting
-  // threads in the second one as the first one finishes?
-  // const auto MAX_THREADS = static_cast<size_t>(std::thread::hardware_concurrency() * PCT_CPU);
-  // const auto MAX_THREADS = static_cast<size_t>(std::thread::hardware_concurrency() / 4);
-  // const auto MAX_THREADS = std::thread::hardware_concurrency() - 1;
-  const auto HARDWARE_THREADS = static_cast<size_t>(std::thread::hardware_concurrency());
-  // maybe a bit slower but prefer to run all scenarios at the same time
-  const auto MAX_THREADS = max(HARDWARE_THREADS, scenarios_per_iteration_);
-  if (MAX_THREADS > HARDWARE_THREADS)
-  {
-    logging::note("Increasing to use at least one thread for each of %ld scenarios", scenarios_per_iteration_);
-    Model::task_limiter.set_limit(MAX_THREADS);
-  }
-  const auto less_than_scenario = (Settings::maximumCountSimulations() <= scenarios_per_iteration_);
-  const auto MAX_CONCURRENT = std::max<size_t>(MAX_THREADS, 1);
-  const auto MIN_CONCURRENT = 2;
-  const auto concurrent_iterations =
-    less_than_scenario
-      ? 1
-      : std::max<size_t>(
-          MAX_CONCURRENT / all_iterations[0].getScenarios().size(),
-          MIN_CONCURRENT);
+  const auto MAX_THREADS = 1;
+  const auto concurrent_iterations = 1;
   // HACK: just set max of 4 for now
   // constexpr auto MIN_ITERATIONS_BEFORE_CHECK = 4;
   // const auto concurrent_iterations = std::min(

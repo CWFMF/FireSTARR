@@ -661,6 +661,8 @@ def locks_for(paths):
                     logging.debug("FileNotFoundError for %s", lock.lock_file)
                 # lock is missing, so must have been deleted
                 pass
+            except KeyboardInterrupt as ex:
+                raise ex
             except Exception as ex:
                 if FLAG_DEBUG_LOCKS:
                     logging.debug("Exception for %s", lock.lock_file)

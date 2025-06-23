@@ -44,7 +44,7 @@ set<XYPos> CellPoints::unique() const noexcept
     // !can_burn_ ||
     INVALID_DISTANCE == pts_.distances()[0])
   {
-    return set<XYPos>{};
+    return {};
   }
   else
   {
@@ -119,7 +119,7 @@ CellPoints::CellPoints(
     //       can_burn_,
     //       first_valid,
     //       "Distance should be invalid if can't burn");
-    //     logging::note("CellPoints is size %ld after creation and should be empty", size());
+    //     logging::verbose("CellPoints is size %ld after creation and should be empty", size());
     // #endif
   }
 }
@@ -189,7 +189,7 @@ CellPoints::CellPoints(
     "Distance should be invalid if can't burn");
   if (!can_burn_)
   {
-    logging::note("CellPoints is size %ld after creation and should be empty", size());
+    logging::verbose("CellPoints is size %ld after creation and should be empty", size());
   }
 #endif
 }
@@ -245,6 +245,11 @@ CellPoints& CellPoints::insert(
     this->cell_x_y_.y(),
     "Cell y position");
 #endif
+  logging::verbose(
+    "CellPoints: (%d, %d) %s burn",
+    cell_x_y_.x(),
+    cell_x_y_.y(),
+    can_burn_ ? "can" : "cannot");
   if (can_burn_)
   {
     insert_pt(p.x(), p.y(), cell_x_y_, pts_);
@@ -274,6 +279,14 @@ void insert_pt(
     const auto d = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
     auto& p_d = pts.distances()[i];
     auto& p_p = pts.points()[i];
+    if (d < p_d)
+    {
+      logging::verbose(
+        "CellPoints: Inserting as %s: (%f, %f)",
+        DIRECTION_NAMES[i],
+        p0.x(),
+        p0.y());
+    }
     p_p = (d < p_d) ? p0 : p_p;
     p_d = (d < p_d) ? d : p_d;
   }
@@ -377,7 +390,7 @@ CellPoints& CellPointsMap::insert(
 {
 #ifdef DEBUG_CELLPOINTS
   const auto n0 = size();
-  logging::info("Adding (%f, %f) to %ld points", p.x(), p.y(), n0);
+  logging::verbose("Adding (%f, %f) to %ld points", p.x(), p.y(), n0);
 #endif
   auto e = map_.try_emplace(p.hash(),
                             scenario,
@@ -391,7 +404,7 @@ CellPoints& CellPointsMap::insert(
   }
 #ifdef DEBUG_CELLPOINTS
   const auto n1 = size();
-  logging::info("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n1);
+  logging::verbose("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n1);
 #endif
   return cell_pts;
 }
@@ -412,27 +425,29 @@ void CellPointsMap::remove_if(std::function<bool(const pair<HashSize, CellPoints
 }
 set<XYPos> CellPointsMap::unique() const noexcept
 {
-#ifdef DEBUG_CELLPOINTS
-  bool any_pts = false;
-#endif
   set<XYPos> r{};
   for (auto& lp : map_)
   {
-    auto& cp = lp.second;
-#ifdef DEBUG_CELLPOINTS
-    any_pts |= (!cp.empty());
-#endif
-    for (auto& p : cp.unique())
+    for (auto& p : lp.second.unique())
     {
       r.insert(p);
     }
   }
-#ifdef DEBUG_CELLPOINTS
-  logging::check_fatal(
-    !any_pts && !r.empty(),
-    "Should have no points but have %ld",
-    r.size());
-#endif
+  return r;
+}
+set<XYPos> CellPointsMap::unique(const HashSize hash_value) const noexcept
+{
+  set<XYPos> r{};
+  for (auto& kv : map_)
+  {
+    if (kv.first == hash_value)
+    {
+      for (auto& p : kv.second.unique())
+      {
+        r.insert(p);
+      }
+    }
+  }
   return r;
 }
 #ifdef DEBUG_CELLPOINTS

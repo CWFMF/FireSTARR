@@ -45,19 +45,6 @@ from datasources.cwfis import FLAG_DEBUG_PERIMETERS
 from datasources.datatypes import SourceFire
 from datasources.default import SourceFireActive, get_model_dir, get_model_dir_uncached
 from fires import get_fires_folder, group_fires
-from gis import (
-    CRS_COMPARISON,
-    CRS_SIMINPUT,
-    CRS_WGS84,
-    VECTOR_FILE_EXTENSION,
-    area_ha,
-    find_invalid_tiffs,
-    gdf_from_file,
-    gdf_to_file,
-    make_gdf_from_series,
-    to_gdf,
-    vector_path,
-)
 from log import LOGGER_NAME, add_log_file
 from publish import merge_dirs, publish_all
 from redundancy import call_safe, get_stack
@@ -82,6 +69,20 @@ from tqdm_util import (
     tqdm,
     try_once_groups,
     update_max_attempts,
+)
+
+from gis import (
+    CRS_COMPARISON,
+    CRS_SIMINPUT,
+    CRS_WGS84,
+    VECTOR_FILE_EXTENSION,
+    area_ha,
+    find_invalid_tiffs,
+    gdf_from_file,
+    gdf_to_file,
+    make_gdf_from_series,
+    to_gdf,
+    vector_path,
 )
 
 LOGGER_FIRE_ORDER = logging.getLogger(f"{LOGGER_NAME}_order.log")
@@ -257,6 +258,8 @@ class Run(object):
                 rundata = read_json_safe(self._file_rundata)
                 self._modelrun = rundata.get("modelrun", None)
                 self._published_clean = rundata.get("published_clean", False)
+            except KeyboardInterrupt as ex:
+                raise ex
             except Exception as ex:
                 logging.error("Couldn't load existing simulation file %s", self._file_rundata)
                 logging.error(get_stack(ex))
@@ -691,6 +694,8 @@ class Run(object):
                     self._dir_out,
                     "df_fires_prepared",
                 )
+            except KeyboardInterrupt as ex:
+                raise ex
             except Exception as ex:
                 logging.debug("Couldn't save prepared fires")
                 logging.debug(get_stack(ex))
@@ -1004,6 +1009,8 @@ class Run(object):
                     min(sim_times),
                     max(sim_times),
                 )
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception:
             # can't get sim_time from what we have, but that'll happen when results aren't there at start
             pass
@@ -1063,9 +1070,13 @@ class Run(object):
                         len(df_fires),
                         len(df_final),
                     )
+            except KeyboardInterrupt as ex:
+                raise ex
             except Exception as ex:
                 logging.error("Couldn't save final fires")
                 logging.error(get_stack(ex))
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             # ignore for now
             pass

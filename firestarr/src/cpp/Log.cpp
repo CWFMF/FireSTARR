@@ -83,20 +83,33 @@ void output(const int log_level, const char* format, va_list* args)
   noexcept
 #endif
 {
+#ifdef NDEBUG
   if (Log::getLogLevel() > log_level)
   {
     return;
   }
+#endif
   try
   {
     lock_guard<mutex> lock(mutex_);
     auto msg = format_log_message(LOG_LABELS[log_level], format, args);
-    printf("%s\n", msg.c_str());
-    // fflush(stdout);
-    if (nullptr != out_)
+#ifndef NDEBUG
+    // if debugging then output everything to log file but not necessarily stdout
+    if (log_level >= Log::getLogLevel())
+#endif
     {
-      fprintf(out_, "%s\n", msg.c_str());
-      fflush(out_);
+      printf("%s\n", msg.c_str());
+    }
+#ifndef NDEBUG
+    // if debugging then output everything to log file but not necessarily stdout
+    if (log_level >= LOG_VERBOSE)
+#endif
+    {   // fflush(stdout);
+      if (nullptr != out_)
+      {
+        fprintf(out_, "%s\n", msg.c_str());
+        fflush(out_);
+      }
     }
   }
   catch (const std::exception& ex)

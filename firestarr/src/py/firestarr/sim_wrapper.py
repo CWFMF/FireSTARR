@@ -149,6 +149,8 @@ def find_running_local(dir_fire):
                 cwd = p.cwd()
                 if cwd is not None and dir_fire in cwd:
                     processes.append(cwd)
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             # HACK: a bunch of different error types can happen if process is no longer running
             continue

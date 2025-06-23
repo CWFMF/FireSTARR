@@ -227,6 +227,8 @@ def scan_queue():
                             logging.fatal("Invalid argument given: %s", a)
                             raise ValueError("Invalid argument given: %s" % a)
                         args.extend([a])
+                except KeyboardInterrupt as ex:
+                    raise ex
                 except Exception as ex:
                     logging.fatal(ex)
                     raise ValueError("Invalid arguments given: %s" % a)
@@ -240,6 +242,8 @@ def scan_queue():
             else:
                 raise ValueError("Expected args or model_name in message")
             break
+        except KeyboardInterrupt as ex:
+            raise ex
         except Exception as ex:
             logging.error("Unable to parse queue message:\n%s", msg.content)
             logging.fatal(ex)

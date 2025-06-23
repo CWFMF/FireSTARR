@@ -68,6 +68,7 @@ constexpr inline auto dist_line(const auto& a, const auto& b)
   return ((a - b) * (a - b));
 }
 Pts::Pts()
+  : cell_x_y_(INVALID_INDEX, INVALID_INDEX)
 {
   // // actually only need to set first value to denote empty
   // distances()[0] = INVALID_DIRECTION;
@@ -83,37 +84,63 @@ Pts::Pts()
 Pts::Pts(const BurnedData& unburnable, const XYPos p)
   : Pts()
 {
+  cell_x_y_ =
+    {static_cast<Idx>(p.x()),
+     static_cast<Idx>(p.y())};
+  // HACK: assign value of first item if burnable
   if (!unburnable[p.hash()])
   {
-    XYSize integral;
-    // need to calculate distances, but we know everything is the same point
-    const auto x0 = static_cast<DistanceSize>(modf(p.x(), &integral));
-    const auto y0 = static_cast<DistanceSize>(modf(p.y(), &integral));
-    const InnerPos p0{x0, y0};
-    auto& pts = points();
-    auto& dists = distances();
-    std::fill_n(&(pts[0]), NUM_DIRECTIONS, p0);
-    for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
-    {
-      const auto& p1 = POINTS_OUTER[i];
-      const auto& x1 = p1.first;
-      const auto& y1 = p1.second;
-      dists[i] = dist_line(x0, x1) + dist_line(y0, y1);
-    }
+    distances()[0] = INVALID_DISTANCE - 1;
   }
-  // else
+  insert(p);
+  // if (!unburnable[p.hash()])
   // {
-  //   // actually only need to set first value
-  //   distances()[0] = INVALID_DIRECTION;
-  //   // std::fill_n(
-  //   //   &(distances()[0]),
-  //   //   NUM_DIRECTIONS,
-  //   //   INVALID_DIRECTION);
+  //   XYSize integral;
+  //   // need to calculate distances, but we know everything is the same point
+  //   const auto x0 = static_cast<DistanceSize>(modf(p.x(), &integral));
+  //   const auto y0 = static_cast<DistanceSize>(modf(p.y(), &integral));
+  //   const InnerPos p0{x0, y0};
+  //   auto& pts = points();
+  //   auto& dists = distances();
+  //   std::fill_n(&(pts[0]), NUM_DIRECTIONS, p0);
+  //   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
+  //   {
+  //     const auto& p1 = POINTS_OUTER[i];
+  //     const auto& x1 = p1.first;
+  //     const auto& y1 = p1.second;
+  //     dists[i] = dist_line(x0, x1) + dist_line(y0, y1);
+  //   }
   // }
+  // // else
+  // // {
+  // //   // actually only need to set first value
+  // //   distances()[0] = INVALID_DIRECTION;
+  // //   // std::fill_n(
+  // //   //   &(distances()[0]),
+  // //   //   NUM_DIRECTIONS,
+  // //   //   INVALID_DIRECTION);
+  // // }
 }
 Pts& Pts::insert(const XYSize x,
                  const XYSize y)
 {
+#ifdef DEBUG_CELLPOINTS
+  const auto n0 = size();
+  {
+    const set<XYPos> u = unique();
+    show_points<XYPos, XYSize, std::set<XYPos>>(
+      u,
+      "Pts: Adding (%f, %f) to %ld points",
+      x,
+      y,
+      n0);
+  }
+#endif
+  logging::verbose(
+    "Pts: (%d, %d) %s burn",
+    cell_x_y_.x(),
+    cell_x_y_.y(),
+    canBurn() ? "can" : "cannot");
   if (canBurn())
   {
     XYSize integral;
@@ -132,10 +159,35 @@ Pts& Pts::insert(const XYSize x,
       const auto d = dist_line(x0, x1) + dist_line(y0, y1);
       auto& p_d = dists[i];
       auto& p_p = pts[i];
+      if (d < p_d)
+      {
+        logging::verbose(
+          "Pts: Inserting (%f, %f) into (%d, %d) as %s: (%f, %f)",
+          x,
+          y,
+          cell_x_y_.x(),
+          cell_x_y_.y(),
+          DIRECTION_NAMES[i],
+          p0.x(),
+          p0.y());
+      }
       p_p = (d < p_d) ? p0 : p_p;
       p_d = (d < p_d) ? d : p_d;
     }
   }
+#ifdef DEBUG_CELLPOINTS
+  const auto n1 = size();
+  {
+    const set<XYPos> u = unique();
+    show_points<XYPos, XYSize, std::set<XYPos>>(
+      u,
+      "Pts: Adding (%f, %f) to %ld points gives %ld",
+      x,
+      y,
+      n0,
+      n1);
+  }
+#endif
   return *this;
 }
 inline bool Pts::canBurn() const
@@ -151,45 +203,145 @@ bool Pts::empty() const
 
 Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
 {
+  logging::verbose(
+    "Pts::insert: (%f, %f) %s burn",
+    p0.x(),
+    p0.y(),
+    unburnable[p0.hash()] ? "can" : "cannot");
   auto p = map_.try_emplace(
     p0.hash(),
     unburnable,
     p0);
+  logging::verbose(
+    "Pts::insert: %s (%f, %f)",
+    p.second ? "emplaced" : "inserting",
+    p0.x(),
+    p0.y());
   auto& pts = p.first->second;
   if (!p.second)
   {
     pts.insert(p0);
   }
+#ifdef DEBUG_CELLPOINTS
+  const auto n1 = size();
+  {
+    const set<XYPos> u = unique();
+    show_points<XYPos, XYSize, std::set<XYPos>>(
+      u,
+      "Pts: Adding (%f, %f) gives %ld points",
+      p0.x(),
+      p0.y(),
+      n1);
+  }
+#endif
   return pts;
 }
-set<InnerPos> Pts::unique() const noexcept
+set<XYPos> Pts::unique() const noexcept
 {
-  // if any point is invalid then they all have to be
-  return canBurn()
-         ? set<InnerPos>{points().cbegin(), points().cend()}
-         : set<InnerPos>{};
+  set<XYPos> r{};
+  Location loc{cell_x_y_.hash()};
+  add_unique(loc, r);
+  {
+    show_points<XYPos, XYSize, std::set<XYPos>>(
+      r,
+      "Generated unique points as:");
+  }
+  return r;
 }
 void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
 {
-  const auto pts = unique();
-  //   logging::info("Have %ld points", pts.size());
-  //   for (auto& p : pts)
-  //   {
-  //     logging::info("(%f, %f)", p.x(), p.y());
-  //   }
-  std::transform(
-    pts.cbegin(),
-    pts.cend(),
-    std::insert_iterator(into, end(into)),
-    [loc](auto& p1) -> XYPos {
-      XYPos p{loc.column(), loc.row(), p1.x(), p1.y()};
-      //   logging::info("generated point is (%f, %f)", p.x(), p.y());
-      return p;
-    });
+  logging::check_equal(
+    loc.column(),
+    cell_x_y_.x(),
+    "Pts::add_unique: x");
+  logging::check_equal(
+    loc.row(),
+    cell_x_y_.y(),
+    "Pts::add_unique: y");
+  // if any point is invalid then they all have to be
+  logging::verbose(
+    "Pts::add_unique: (%d, %d) %s burn",
+    cell_x_y_.x(),
+    cell_x_y_.y(),
+    canBurn() ? "can" : "cannot");
+  if (canBurn())
+  {
+    logging::verbose(
+      "Pts::add_unique: starting with %ld points",
+      into.size());
+    const auto& pts = points();
+    for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
+    {
+      const auto& p = pts[i];
+      logging::verbose(
+        "Pts::add_unique: (%f, %f) as %s",
+        p.x(),
+        p.y(),
+        DIRECTION_NAMES[i]);
+      into.insert(
+        {cell_x_y_.x(),
+         cell_x_y_.y(),
+         p.x(),
+         p.y()});
+      logging::verbose(
+        "Pts::add_unique: now %ld points",
+        into.size());
+    }
+    // std::transform(
+    //   points().cbegin(),
+    //   points().cend(),
+    //   std::insert_iterator(into, end(into)),
+    //   [this](auto& p) -> XYPos {
+    //     return {
+    //       cell_x_y_.x(),
+    //       cell_x_y_.y(),
+    //       p.x(),
+    //       p.y()};
+    //   });
+    logging::check_fatal(
+      0 == into.size(),
+      "Pts::add_unique: Can burn but no points");
+    // logging::note(
+    //   "Pts: Have %ld points",
+    //   into.size());
+  }
+  // const auto pts = unique();
+  // //   logging::verbose("Have %ld points", pts.size());
+  // //   for (auto& p : pts)
+  // //   {
+  // //     logging::verbose("(%f, %f)", p.x(), p.y());
+  // //   }
+  // std::transform(
+  //   pts.cbegin(),
+  //   pts.cend(),
+  //   std::insert_iterator(into, end(into)),
+  //   [loc](auto& p1) -> XYPos {
+  //     XYPos p{loc.column(), loc.row(), p1.x(), p1.y()};
+  //     //   logging::verbose("generated point is (%f, %f)", p.x(), p.y());
+  //     return p;
+  //   });
 }
 size_t Pts::size() const noexcept
 {
   return unique().size();
+}
+set<XYPos> PtMap::unique(const HashSize hash_value) const noexcept
+{
+  set<XYPos> r{};
+  for (auto& kv : map_)
+  {
+    if (kv.first == hash_value)
+    {
+      const auto& loc = Location{kv.first};
+      logging::verbose(
+        "PtMap::unique: Adding unique for cell (%d, %d)",
+        loc.column(),
+        loc.row());
+      auto& pts = kv.second;
+      pts.add_unique(loc, r);
+    }
+  }
+  return r;
 }
 set<XYPos> PtMap::unique() const noexcept
 {
@@ -206,9 +358,22 @@ void PtMap::add_unique(set<XYPos>& into) const noexcept
     pts.add_unique(loc, into);
   }
 }
+set<HashSize> PtMap::keys() const noexcept
+{
+  set<HashSize> r{};
+  for (auto& kv : map_)
+  {
+    r.insert(kv.first);
+  }
+  return r;
+}
 size_t PtMap::size() const noexcept
 {
   return unique().size();
+}
+size_t PtMap::erase(const HashSize hash_value) noexcept
+{
+  return map_.erase(hash_value);
 }
 }
 #endif
