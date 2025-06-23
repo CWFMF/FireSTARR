@@ -63,13 +63,10 @@ def publish_all(
             publish_azure.upload_dir(dir_output)
             logging.info("Uploaded to azure")
             logging.info("Publishing to geoserver from %s", dir_output)
-            import publish_geoserver
-
             # HACK: might be my imagination, but maybe there's a delay so wait a bit
             time.sleep(PUBLISH_AZURE_WAIT_TIME_SECONDS)
-            publish_geoserver.publish_folder(dir_output)
-            # HACK: keep having things not showing up on map until manual publish so try this
-            time.sleep(PUBLISH_AZURE_WAIT_TIME_SECONDS)
+            import publish_geoserver
+
             publish_geoserver.publish_folder(dir_output)
         else:
             logging.info("No changes for %s so not publishing", os.path.basename(dir_output))
