@@ -48,16 +48,20 @@ def find_model_data_source():
     global _MODEL_DATA_SOURCE
     # HACK: set data source to use based on if we can get there
     if _MODEL_DATA_SOURCE is None:
-        try:
-            dir_model = datasources.cwfif.get_model_dir_uncached(WX_MODEL)
-            _MODEL_DATA_SOURCE = datasources.cwfif
-        except KeyboardInterrupt as ex:
-            raise ex
-        except Exception as ex:
-            logging.error("CWFIF not working so using spotwx")
-            logging.error(ex)
-            # HACK: if cwfif fails use spotwx
-            _MODEL_DATA_SOURCE = datasources.spotwx
+        if CONFIG["PREFER_SPOTWX"]:
+            logging.info("Using spotwx as first choice for models")
+        else:
+            try:
+                dir_model = datasources.cwfif.get_model_dir_uncached(WX_MODEL)
+                _MODEL_DATA_SOURCE = datasources.cwfif
+                return _MODEL_DATA_SOURCE
+            except KeyboardInterrupt as ex:
+                raise ex
+            except Exception as ex:
+                logging.error("CWFIF not working so using spotwx")
+                logging.error(ex)
+        # HACK: if cwfif fails use spotwx
+        _MODEL_DATA_SOURCE = datasources.spotwx
     return _MODEL_DATA_SOURCE
 
 
