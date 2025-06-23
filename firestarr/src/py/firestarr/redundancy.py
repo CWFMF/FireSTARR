@@ -33,6 +33,8 @@ def should_ignore(ex):
         "tiffread",
         # HACK: throwing RuntimeError with "Invalid tiff"
         "invalid tiff",
+        # started getting this when trying to write to geojson
+        "cple_openfailederror",
     ]
     # no point in looping if we already know the answer
     for s in ignore:
