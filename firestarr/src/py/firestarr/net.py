@@ -273,7 +273,9 @@ def try_save_http(
                 raise ex
             m = mask_url(url)
             # no point in retrying if URL doesn't exist, is forbidden, or timed out
-            if check_code and isinstance(ex, HTTPError) and ex.code in [403, 404, 504]:
+            # IGNORE_ERROR_CODES = [403, 404, 504]
+            IGNORE_ERROR_CODES = [403, 404]
+            if check_code and isinstance(ex, HTTPError) and ex.code in IGNORE_ERROR_CODES:
                 # if we're checking for code then return None since file can't exist
                 with locks_for(CACHE_LOCK_FILE):
                     CACHE_DOWNLOADED[save_as] = None
