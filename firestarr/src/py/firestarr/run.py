@@ -235,6 +235,7 @@ class Run(object):
             self._dir_output = ensure_dir(os.path.join(DIR_OUTPUT, self._name))
             self._crs = crs
             self._file_fires = vector_path(self._dir_out, "df_fires_prioritized")
+            self._num_fires_initial = None
             self._file_rundata = os.path.join(self._dir_out, "run.json")
             self.load_rundata()
             if not self._modelrun:
@@ -459,7 +460,7 @@ class Run(object):
         # HACK: df_final isn't saved in some cases so do that here
         if df_final is not None:
             # if only prepared then will be empty
-            gdf_to_file(df_final, self._file_fires)
+            self.save_fires(df_final, self._file_fires)
         return df_final, changed
 
     def run_until_successful_or_outdated(self, no_retry=False):
@@ -529,6 +530,36 @@ class Run(object):
         )
         return df_final
 
+    def save_fires(self, df_fires, save_to):
+        if save_to != self._file_fires:
+            raise RuntimeError("Called save_fires() with path %s instead of %s" % (self._file_fires, save_to))
+        save_bak = os.path.join(os.path.dirname(save_to), "bkup_" + os.path.basename(save_to))
+        if self._num_fires_initial is None:
+            if os.path.isfile(save_bak):
+                raise RuntimeError("Should be doing initial save, but backup %s already exists" % save_bak)
+            gdf_to_file(df_fires, save_bak)
+            gdf_to_file(df_fires, save_to)
+            self._num_fires_initial = len(df_fires)
+        else:
+            if self._num_fires_initial != len(df_fires):
+                msg = "Expected %d fires when saving but have %d" % (self._num_fires_initial, len(df_fires))
+                logging.error(msg)
+                raise RuntimeError(msg)
+        # HACK: really need to figure out how this is saving without all fires
+        df_cur = gdf_from_file(self._file_fires).set_index(["fire_name"])
+        df_bak = gdf_from_file(save_bak).set_index(["fire_name"])
+        # it's okay if they're different, but they need the same number of rows with the same fires
+        n0 = len(df_cur)
+        n1 = len(df_bak)
+        if n0 != n1:
+            msg = "Expected %d fires when comparing to backup but have %d" % (n0, n1)
+            logging.error(msg)
+            raise RuntimeError(msg)
+        if self._num_fires_initial != n1:
+            msg = "Expected %d fires when comparing to backup but have %d" % (self._num_fires_initial, n1)
+            logging.error(msg)
+            raise RuntimeError(msg)
+
     @log_order()
     def prep_fires(self, force=False):
         @ensures(self._file_fires, True, replace=force)
@@ -552,7 +583,7 @@ class Run(object):
                 )
             )
             df_prioritized = self.prioritize(df_fires)
-            gdf_to_file(df_prioritized, _)
+            self.save_fires(df_prioritized, _)
             logging.info("CRS is %s for:\n%s", df_prioritized.crs, df_prioritized)
             return _
 
@@ -561,7 +592,15 @@ class Run(object):
     def load_fires(self):
         if not os.path.isfile(self._file_fires):
             raise RuntimeError(f"Expected fires to be in file {self._file_fires}")
-        return gdf_from_file(self._file_fires).set_index(["fire_name"])
+        df_fires = gdf_from_file(self._file_fires).set_index(["fire_name"])
+        n = len(df_fires)
+        if self._num_fires_initial is None:
+            self._num_fires_initial = n
+        elif n != self._num_fires_initial:
+            msg = "Expected %d fires when saving but have %d" % (self._num_fires_initial, n)
+            logging.error(msg)
+            raise RuntimeError(msg)
+        return df_fires
 
     def ran_all(self):
         df_final = None
@@ -697,7 +736,7 @@ class Run(object):
 
         def check_file(file_sim):
             try:
-                if os.path.isfile(file_sim):
+                if os.path.isfile(file_sim) and 0 < os.path.getsize(file_sim):
                     df_fire = gdf_from_file(file_sim)
                     if 1 != len(df_fire):
                         raise RuntimeError(f"Expected exactly one fire in file {file_sim}")
@@ -989,7 +1028,7 @@ class Run(object):
                     df_final_copy = df_fires_merge_final
                     if len(df_final_copy) == len(df_fires) and len(df_final) == len(df_final_copy):
                         logging.debug("Saving with extra information at end")
-                        gdf_to_file(df_final_copy, self._file_fires)
+                        self.save_fires(df_final_copy, self._file_fires)
                     else:
                         logging.error(
                             "Have %d fires but expected %d",
