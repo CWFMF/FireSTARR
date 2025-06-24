@@ -155,7 +155,10 @@ def query_wx_ensembles_rounded(model, lat, lon):
         lat,
         lon,
         timezone="UTC",
-        duration=999,
+        # duration=999,
+        # HACK: 24 hrs * 15 days is 360hrs but don't be that exact
+        #       - don't want everything from 30 day run though
+        duration=400,
         format="csv",
         precision=1,
         latest=True,
