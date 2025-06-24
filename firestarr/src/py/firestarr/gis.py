@@ -11,6 +11,7 @@ import fiona.drvsupport
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+import pyogrio
 import pyproj
 from common import (
     CREATION_OPTIONS,
@@ -27,6 +28,7 @@ from common import (
     listdir_sorted,
     locks_for,
     logging,
+    try_remove,
     unzip,
 )
 from multiprocess import Lock
@@ -57,8 +59,20 @@ def gdf_from_file(filename, *args, **kwargs):
     with warnings.catch_warnings():
         # avoid a bunch of ogr warnings
         warnings.filterwarnings("ignore", message="Several features with id = 0 have been found")
+
         # funnel everything through this so we can ignore file type everywhere else
-        fct_read = gpd.read_parquet if filename.lower().endswith(".parquet") else gpd.read_file
+        def read_gdf(*args, **kwargs):
+            try:
+                return gpd.read_file(*args, **kwargs)
+            except KeyboardInterrupt as ex:
+                raise ex
+            except pyogrio.errors.DataSourceError as ex:
+                if "unterminated array" in str(ex).lower():
+                    logging.error("Removing invalid file %s" % filename)
+                    try_remove(filename, force=True)
+                raise ex
+
+        fct_read = gpd.read_parquet if filename.lower().endswith(".parquet") else read_gdf
         return call_safe(fct_read, filename, *args, **kwargs)
 
 
