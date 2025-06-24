@@ -909,9 +909,9 @@ class Run(object):
 
         def prepare_fire(dir_fire):
             # logging.debug(dir_fire)
-            if check_running(dir_fire):
-                # already running, so prepared but no outputs
-                return dir_fire
+            # if check_running(dir_fire):
+            #     # already running, so prepared but no outputs
+            #     return dir_fire
             if os.path.isfile(os.path.join(dir_fire, FILE_SIM_SCRIPT)):
                 return dir_fire
             return self.do_run_fire(dir_fire, prepare_only=True)
