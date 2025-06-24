@@ -545,6 +545,9 @@ def _run_fire_from_folder(
         if not sim_time or sim_time != sim_time_parsed:
             sim_time = sim_time_parsed
             df_fire["sim_time"] = sim_time
+            # FIX: saving again is causing failure when files corrupt
+            # save_geojson(df_fire, file_sim)
+        if not os.path.isfile(file_sim):
             save_geojson(df_fire, file_sim)
         want_dates = WANT_DATES
         max_days = data["max_days"]
@@ -746,7 +749,8 @@ fi
             sim_time = sim_time_parsed
             df_fire["sim_time"] = sim_time
 
-        save_geojson(df_fire, file_sim)
+        # FIX: saving again is causing failure when files corrupt
+        # save_geojson(df_fire, file_sim)
         changed, is_interim, files_project = copy_fire_outputs(dir_fire, dir_output, changed)
         df_fire["changed"] = changed
         return df_fire
