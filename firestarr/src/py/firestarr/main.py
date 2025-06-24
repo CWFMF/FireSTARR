@@ -316,29 +316,42 @@ if __name__ == "__main__":
             logging.error(get_stack(ex))
             if no_retry:
                 logging.error("Stopping because of error")
+                if FROM_QUEUE:
+                    logging.info("Requeuing")
+                    requeue()
                 sys.exit(-1)
             logging.info("Trying again because of error")
-    # do this first to kill the azure batch job if everything is done
-    if run_current.ran_all():
-        logging.info("Finished all simulations successfully")
-    else:
-        logging.info("Done but not all simulations have run")
+    try:
+        # do this first to kill the azure batch job if everything is done
+        if run_current.ran_all():
+            logging.info("Finished all simulations successfully")
+        else:
+            logging.info("Done but not all simulations have run")
+            if FROM_QUEUE:
+                logging.info("Requeuing")
+                requeue()
         if FROM_QUEUE:
-            logging.info("Requeuing")
-            requeue()
-    if FROM_QUEUE:
-        # publish_all(
-        #     run_current._dir_output,
-        #     changed_only=False,
-        #     force=True,
-        #     merge_only=False,
-        # )
-        run_current = make_resume(do_publish=True, do_merge=True, no_wait=True)
-        try:
-            # NOTE: was forcing to ensure publish, but try without
-            # run_current.check_and_publish(force=True)
-            run_current.check_and_publish(require_all=True)
-        except PublishError as ex:
-            if should_resume:
-                # there shouldn't be an error if we were resuming
-                logging.error(ex)
+            # publish_all(
+            #     run_current._dir_output,
+            #     changed_only=False,
+            #     force=True,
+            #     merge_only=False,
+            # )
+            run_current = make_resume(do_publish=True, do_merge=True, no_wait=True)
+            try:
+                # NOTE: was forcing to ensure publish, but try without
+                # run_current.check_and_publish(force=True)
+                run_current.check_and_publish(require_all=True)
+            except PublishError as ex:
+                if should_resume:
+                    # there shouldn't be an error if we were resuming
+                    logging.error(ex)
+    except KeyboardInterrupt as ex:
+        raise ex
+    except Exception as ex:
+        logging.error(ex)
+        logging.error(get_stack(ex))
+        if no_retry:
+            logging.error("Stopping because of error")
+            sys.exit(-1)
+        logging.info("Trying again because of error")

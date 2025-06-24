@@ -423,8 +423,9 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
         except KeyboardInterrupt as ex:
             raise ex
         except shutil.Error as ex:
-            logging.error("Error interim processing outputs for %s" % dir_fire)
-            logging.error(ex)
+            msg = "Error interim processing outputs for %s:\n%s" % (dir_fire, get_stack(ex))
+            logging.error(msg)
+            raise RuntimeError(msg)
     files_project = {}
     if files_prob:
         for prob in files_prob:
