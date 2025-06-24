@@ -372,52 +372,59 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
         logging.debug("Using interim rasters for %s", dir_fire)
         # FIX: look at timestamps instead of always copying
         force_remove(dir_tmp_fire)
-        call_safe(shutil.copytree, dir_fire, dir_tmp_fire, dirs_exist_ok=True)
-        # double check that outputs weren't created while copying
-        probs_tmp, interim_tmp, files_perim = find_outputs(dir_tmp_fire)
+        try:
+            # HACK: just don't do this fire if this fails
+            shutil.copytree(dir_fire, dir_tmp_fire, dirs_exist_ok=True)
+            # double check that outputs weren't created while copying
+            probs_tmp, interim_tmp, files_perim = find_outputs(dir_tmp_fire)
 
-        # HACK: since we already avoided files_prob if they were out of date then never worry about probs_tmp
-        def check_valid(f_interim):
-            nonlocal files_changed
-            f_tmp = f_interim.replace("interim_", "")
-            if is_invalid_tiff(f_interim, test_read=True):
-                force_remove(f_interim)
-                # try copying from original again to see if that helps
-                f_orig = f_interim.replace(dir_tmp_fire, dir_fire)
-                if is_invalid_tiff(f_orig, test_read=True):
-                    logging.warning(
-                        "Sleeping for %ss in case %s is being written to",
-                        TIFF_SLEEP,
-                        f_orig,
-                    )
-                    time.sleep(TIFF_SLEEP)
-                    if is_invalid_tiff(f_orig, test_read=True):
-                        raise RuntimeError(f"Invalid tiff {f_orig}")
-                logging.warning("Trying to copy %s again since invalid", f_orig)
-                # don't try this if the original is invalid but try copying again if it was
-                shutil.copy2(
-                    f_orig,
-                    f_interim,
-                )
+            # HACK: since we already avoided files_prob if they were out of date then never worry about probs_tmp
+            def check_valid(f_interim):
+                nonlocal files_changed
+                f_tmp = f_interim.replace("interim_", "")
                 if is_invalid_tiff(f_interim, test_read=True):
-                    raise RuntimeError(f"Invalid tiff after copy {f_interim}")
-                files_changed[f_tmp] = True
-            # is_changed = files_changed.get(f_tmp, False) or not os.path.exists(f_tmp) or is_newer_than(f_interim, f_tmp)
-            # files_changed[f_tmp] = is_changed
-            # at this point f_interim is valid but needs to be renamed
-            shutil.move(f_interim, f_tmp)
-            if is_invalid_tiff(f_tmp, test_read=True):
-                raise RuntimeError(f"Invalid tiff after rename to {f_tmp}")
+                    force_remove(f_interim)
+                    # try copying from original again to see if that helps
+                    f_orig = f_interim.replace(dir_tmp_fire, dir_fire)
+                    if is_invalid_tiff(f_orig, test_read=True):
+                        logging.warning(
+                            "Sleeping for %ss in case %s is being written to",
+                            TIFF_SLEEP,
+                            f_orig,
+                        )
+                        time.sleep(TIFF_SLEEP)
+                        if is_invalid_tiff(f_orig, test_read=True):
+                            raise RuntimeError(f"Invalid tiff {f_orig}")
+                    logging.warning("Trying to copy %s again since invalid", f_orig)
+                    # don't try this if the original is invalid but try copying again if it was
+                    shutil.copy2(
+                        f_orig,
+                        f_interim,
+                    )
+                    if is_invalid_tiff(f_interim, test_read=True):
+                        raise RuntimeError(f"Invalid tiff after copy {f_interim}")
+                    files_changed[f_tmp] = True
+                # is_changed = files_changed.get(f_tmp, False) or not os.path.exists(f_tmp) or is_newer_than(f_interim, f_tmp)
+                # files_changed[f_tmp] = is_changed
+                # at this point f_interim is valid but needs to be renamed
+                shutil.move(f_interim, f_tmp)
+                if is_invalid_tiff(f_tmp, test_read=True):
+                    raise RuntimeError(f"Invalid tiff after rename to {f_tmp}")
 
-        for f_interim in interim_tmp:
-            # HACK: maybe overkill to nest but try copying original again in case it was being written to
-            call_safe(check_valid, f_interim)
-        probs_tmp, interim_tmp, files_perim = find_outputs(dir_tmp_fire)
-        if interim_tmp:
-            raise RuntimeError("Expected files to be renamed")
-        files_prob = probs_tmp
-        suffix = TMP_SUFFIX
-        is_interim = True
+            for f_interim in interim_tmp:
+                # HACK: maybe overkill to nest but try copying original again in case it was being written to
+                call_safe(check_valid, f_interim)
+            probs_tmp, interim_tmp, files_perim = find_outputs(dir_tmp_fire)
+            if interim_tmp:
+                raise RuntimeError("Expected files to be renamed")
+            files_prob = probs_tmp
+            suffix = TMP_SUFFIX
+            is_interim = True
+        except KeyboardInterrupt as ex:
+            raise ex
+        except shutil.Error as ex:
+            logging.error("Error interim processing outputs for %s" % dir_fire)
+            logging.error(ex)
     files_project = {}
     if files_prob:
         for prob in files_prob:
