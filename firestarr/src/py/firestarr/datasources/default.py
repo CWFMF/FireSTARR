@@ -332,6 +332,8 @@ class SourceModelAll(SourceModel):
     def __init__(self, dir_out) -> None:
         super().__init__(bounds=None)
         self._dir_out = dir_out
+        if _MODEL_DATA_SOURCE is None:
+            find_model_data_source()
         self._sources = [_MODEL_DATA_SOURCE.SourceGEPS(self._dir_out)] + [
             # order doesn't matter since everything gets used
             s(self._dir_out)
