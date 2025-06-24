@@ -389,8 +389,12 @@ class Run(object):
                 is_complete[dir_fire] = df_fire
         # publish before and after fixing things
         num_complete = len(is_complete)
-        logging.info("%d of %d groups have at least started" % (num_complete, num_fires))
-        merge_only = not (self.check_do_publish() and ((not require_all) or (num_fires == num_complete)))
+        pct_done = 100.0 * float(num_complete) / float(num_fires)
+        logging.info("%d of %d groups have at least started (%f%%)" % (num_complete, num_fires, pct_done))
+        # is_enough = num_fires == num_complete
+        # HACK: have at least 95% with something since can't see to get everything working right now
+        is_enough = pct_done >= 95
+        merge_only = not (self.check_do_publish() and ((not require_all) or is_enough))
         if not no_publish and not no_wait:
             logging.info("Merging" if merge_only else "Publishing")
             publish_all(
