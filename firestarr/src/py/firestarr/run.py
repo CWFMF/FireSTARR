@@ -80,6 +80,7 @@ from tqdm_util import (
     pmap,
     pmap_by_group,
     tqdm,
+    try_once_groups,
     update_max_attempts,
 )
 
@@ -954,13 +955,7 @@ class Run(object):
         #     check_publish = do_nothing
 
         def run_fire(dir_fire):
-            try:
-                return self.do_run_fire(dir_fire, run_only=True, no_wait=no_wait)
-            except Exception as ex:
-                logging.error(ex)
-                if no_wait:
-                    return None
-                raise ex
+            return self.do_run_fire(dir_fire, run_only=True, no_wait=no_wait)
 
         def sort_dirs(for_area):
             # sort directories by number of times they failed in ascending order
@@ -983,13 +978,13 @@ class Run(object):
                 # HACK: use any dir_fire for now since they should all work
                 schedule_tasks(dirs_fire[0], tasks_new)
             # once everything is scheduled then make job complete when tasks do
-            successful, unsuccessful = keep_trying_groups(
+            successful, unsuccessful = try_once_groups(
                 fct=run_fire,
                 values=successful,
                 desc="Running simulations via azurebatch",
                 callback_group=check_publish,
-                no_limit=True,
-                max_processes=len(dirs_fire),
+                # no_limit=True,
+                # max_processes=len(dirs_fire),
             )
         else:
             successful, unsuccessful = keep_trying_groups(

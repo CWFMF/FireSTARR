@@ -316,3 +316,62 @@ def keep_trying_groups(fct, values, *args, **kwargs):
         unsuccessful,
     )
     return successful, unsuccessful
+
+
+# HACK: just trying to get azure to work at this point
+def try_once_groups(fct, values, *args, **kwargs):
+    done = False
+    remaining = {k: v for k, v in values.items()}
+    num_prev = None
+    unsuccessful = {}
+    successful = {}
+
+    def fct_try(dir_fire):
+        try:
+            return (True, dir_fire, fct(dir_fire))
+        except KeyboardInterrupt as ex:
+            raise ex
+        except Exception as ex:
+            # was returning directory but that doesn't help
+            logging.error(get_stack(ex))
+            return (False, dir_fire, ex)
+            # return (False, ex)
+
+    try:
+        run_completed = pmap_by_group(
+            fct_try,
+            remaining,
+            *args,
+            **kwargs,
+        )
+        unsuccessful = {}
+        done = True
+        num_cur = 0
+        for g, ret in run_completed.items():
+            good = []
+            bad = []
+            for r in ret:
+                logging.debug("Result %s", r)
+                success, input, output = r
+                if success:
+                    good.append(input)
+                else:
+                    bad.append(input)
+                    logging.error("%s returned %s", input, output)
+            if good:
+                successful[g] = successful.get(g, []) + good
+            if bad:
+                unsuccessful[g] = bad
+                num_cur += len(bad)
+        remaining = unsuccessful
+        if num_cur > 0 and num_cur == num_prev:
+            logging.error("Settled on having %ds results not working", num_cur)
+        num_prev = num_cur
+    except BrokenPipeError:
+        pass
+    logging.debug(
+        "keep_trying_groups(...) gave:\n\nsuccessful:%s\n\nunsuccessful:\n%s",
+        successful,
+        unsuccessful,
+    )
+    return successful, unsuccessful
