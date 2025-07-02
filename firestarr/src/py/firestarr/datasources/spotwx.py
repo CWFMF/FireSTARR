@@ -40,7 +40,11 @@ def get_spotwx_key():
 
 
 def get_spotwx_limit():
-    return int(CONFIG.get("SPOTWX_API_LIMIT"))
+    try:
+        return int(CONFIG.get("SPOTWX_API_LIMIT"))
+    except ValueError as ex:
+        logging.error("spotwx api request limit not set")
+        return 0
     # return 5
 
 
