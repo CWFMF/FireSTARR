@@ -1,18 +1,15 @@
 <map id="fs::sim::SettingsImplementation::fuelLookup" name="fs::sim::SettingsImplementation::fuelLookup">
-<area shape="rect" id="Node000001" title="Fuel lookup table." alt="" coords="630,100,833,141"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="463,100,582,141"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="615,123,583,123,583,118,615,118"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Environment.html#a2bcff0befd162a744bf46c64830afb45" title="Load from rasters." alt="" coords="255,5,396,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="474,94,414,61,385,49,387,44,416,57,477,90"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Environment.html#a465c5203756477d966333f81f2083263" title="Load from rasters." alt="" coords="255,71,396,111"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="447,112,396,104,397,99,448,107"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="236,136,415,161"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="448,134,416,138,415,133,447,128"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#afc26e7431fa1893a95806a49155a2f01" title="Set constant weather." alt="" coords="239,185,412,210"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="472,151,416,176,384,187,382,182,414,171,470,146"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1EnvironmentInfo.html#a5098f4a784df0f769720822292827a13" title="Load the full Environment using the given FuelLookup to determine fuels." alt="" coords="15,71,178,111"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="239,94,179,94,179,88,239,88"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,160,188,185"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="221,162,188,165,188,160,220,157"/>
-<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="224,189,188,185,188,180,224,184"/>
+<area shape="rect" id="Node000001" title="Fuel lookup table." alt="" coords="630,63,833,103"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="463,63,582,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="615,86,583,86,583,80,615,80"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Environment.html#a465c5203756477d966333f81f2083263" title="Load from rasters." alt="" coords="255,5,396,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="447,64,396,49,397,44,449,59"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="236,70,415,96"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="447,86,416,86,416,80,447,80"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Model.html#afc26e7431fa1893a95806a49155a2f01" title="Set constant weather." alt="" coords="239,120,412,145"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="448,104,380,122,379,116,447,99"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1EnvironmentInfo.html#a5098f4a784df0f769720822292827a13" title="Load the full Environment using the given FuelLookup to determine fuels." alt="" coords="15,5,178,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="239,28,179,28,179,23,239,23"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,70,188,96"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="220,86,188,86,188,80,220,80"/>
 </map>

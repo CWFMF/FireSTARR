@@ -1,5 +1,0 @@
-<map id="fs::topo::Environment::makeProbabilityMap" name="fs::topo::Environment::makeProbabilityMap">
-<area shape="rect" id="Node000001" title="Make a ProbabilityMap that covers this Environment." alt="" coords="277,5,421,46"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a8a87e16ee2e9104c43555ba9b12412ca" title="Create a ProbabilityMap with the same extent as this." alt="" coords="5,13,229,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,28,229,28,229,23,261,23"/>
-</map>

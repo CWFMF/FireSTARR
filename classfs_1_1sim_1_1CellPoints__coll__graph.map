@@ -1,17 +1,13 @@
 <map id="fs::sim::CellPoints" name="fs::sim::CellPoints">
-<area shape="rect" id="Node000001" title=" " alt="" coords="698,86,822,111"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SpreadData.html" title=" " alt="" coords="411,26,544,51"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="560,52,675,76,703,82,702,88,673,81,559,57"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="174,5,337,61"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,33,411,34,411,40,352,38"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1CellPointArrays.html" title=" " alt="" coords="401,86,555,111"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="571,96,698,96,698,101,571,101"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="208,86,303,111"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="318,96,400,96,400,101,318,101"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1CellPos.html" title="The position within the Environment that a spreading point has." alt="" coords="423,139,533,165"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="548,139,673,116,705,109,706,115,675,121,549,144"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1BoundedPoint.html" title=" " alt="" coords="160,136,351,192"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="367,155,422,152,423,157,367,160"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="5,151,111,177"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="126,161,159,161,159,166,126,166"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="98,274,222,300"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1CellPointArrays.html" title=" " alt="" coords="5,185,160,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,221,151,272,147,275,102,225"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="30,95,124,121"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,137,84,185,79,185,76,137"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1CellPos.html" title="The position within the Environment that a spreading point has." alt="" coords="186,185,296,211"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="221,224,173,275,169,272,218,221"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1BoundedPoint.html" title=" " alt="" coords="148,80,340,136"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="245,152,244,185,239,185,240,152"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="191,5,296,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="246,47,246,80,241,80,241,47"/>
 </map>

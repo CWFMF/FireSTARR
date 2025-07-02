@@ -1,5 +1,0 @@
-<map id="fs::sim::Scenario::saveIntensity" name="fs::sim::Scenario::saveIntensity">
-<area shape="rect" id="Node000001" title="Save burn intensity information." alt="" coords="221,5,343,46"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityObserver.html#a83a9b200129fd67e639be57166460afc" title="Save observations." alt="" coords="5,5,173,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,28,173,28,173,23,205,23"/>
-</map>

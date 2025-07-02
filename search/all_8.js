@@ -20,7 +20,7 @@ var searchData=
   ['buieffect_17',['buiEffect',['../classfs_1_1fuel_1_1FuelVariable.html#ab1ef28a5cf83c39d3ba126be5e8f622d',1,'fs::fuel::FuelVariable::buiEffect()'],['../classfs_1_1fuel_1_1FuelType.html#a61a4c4df386ac5b8d270c4092a3cf2fb',1,'fs::fuel::FuelType::buiEffect()'],['../classfs_1_1fuel_1_1InvalidFuel.html#a039c201ba822ad53224667d995fa3bbd',1,'fs::fuel::InvalidFuel::buiEffect()'],['../classfs_1_1fuel_1_1StandardFuel.html#a14ec2c560497dd577d2c800288ed2d42',1,'fs::fuel::StandardFuel::buiEffect()']]],
   ['build_5fsas_5furl_18',['build_sas_url',['../namespaceazurebatch__helpers.html#a4d06b01a50ad5a4f5a904564f3437ce7',1,'azurebatch_helpers']]],
   ['bulkdensity_19',['bulkDensity',['../classfs_1_1fuel_1_1FuelBase.html#af43d3ebc7fecfeabba933432f8c00029',1,'fs::fuel::FuelBase']]],
-  ['burn_20',['burn',['../classfs_1_1sim_1_1IntensityMap.html#a988b86544800a455f5f02cfef58e207f',1,'fs::sim::IntensityMap::burn()'],['../classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695',1,'fs::sim::Scenario::burn()']]],
+  ['burn_20',['burn',['../classfs_1_1sim_1_1IntensityMap.html#a0d1494426d7365b507dc4a7660066670',1,'fs::sim::IntensityMap::burn()'],['../classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695',1,'fs::sim::Scenario::burn()']]],
   ['burned_21',['burned',['../classfs_1_1topo_1_1Perimeter.html#ab0250ce44b8345528136e2bd6236018f',1,'fs::topo::Perimeter']]],
   ['burned_5f_22',['burned_',['../classfs_1_1topo_1_1Perimeter.html#a1ee5419ee3b0d943a97311a929766fb8',1,'fs::topo::Perimeter']]],
   ['burnedmap_23',['BurnedMap',['../classfs_1_1topo_1_1BurnedMap.html',1,'fs::topo::BurnedMap'],['../classfs_1_1topo_1_1BurnedMap.html#ac3aba395a7db0dbd42578bd61570f8cf',1,'fs::topo::BurnedMap::BurnedMap()']]],

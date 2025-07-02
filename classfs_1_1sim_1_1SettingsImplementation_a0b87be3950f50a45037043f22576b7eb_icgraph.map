@@ -1,0 +1,95 @@
+<map id="fs::sim::SettingsImplementation::instance" name="fs::sim::SettingsImplementation::instance">
+<area shape="rect" id="Node000001" title="The singleton instance for this class." alt="" coords="961,836,1163,877"/>
+<area shape="poly" id="edge10_Node000001_Node000001" title=" " alt="" coords="1104,823,1088,817,1062,815,1037,817,1022,821,1017,827,1019,835,1014,836,1012,826,1020,817,1036,811,1062,809,1089,812,1106,818"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#a2ddf488609fcdd719251cd8f24e73598" title="Confidence required before simulation stops (% / 100)" alt="" coords="747,5,866,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1056,821,1044,659,1018,431,999,315,975,208,946,120,929,87,911,61,890,45,865,35,867,30,893,40,915,57,933,84,951,118,980,207,1004,314,1024,431,1050,659,1061,820"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Settings.html#a2c464df48c1c4b3624897ffc7babce59" title="Default Percent Conifer to use for M1/M2 fuels where none is specified (%)" alt="" coords="733,71,880,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1055,821,1042,671,1014,463,995,357,971,260,943,180,927,149,911,126,896,114,879,105,881,100,899,109,915,123,932,147,948,178,976,258,1000,355,1020,462,1047,670,1061,820"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Settings.html#a18769090b1b1e090e8a64cdb6b0d6149" title="Default Percent Dead Fir to use for M3/M4 fuels where none is specified (%)" alt="" coords="731,136,882,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1055,821,1039,684,1010,495,991,399,968,312,941,240,926,212,911,191,897,180,881,171,883,167,900,176,915,188,931,210,946,238,973,310,996,398,1016,494,1044,683,1060,821"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Settings.html#a8cf6fcfbca154bbba9b46a063d5d5db5" title="Fuel lookup table." alt="" coords="747,201,866,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1054,821,1036,696,1006,527,986,441,964,364,939,300,911,257,890,241,865,232,867,227,893,237,915,253,943,298,969,362,992,440,1011,526,1042,695,1059,821"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Settings.html#ac622f2450b77045f0ea8d7d5176663f6" title="Time between generating interim outputs (s)" alt="" coords="710,267,903,307"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="1058,820,1054,724,1046,661,1034,593,1016,522,990,452,955,386,911,328,888,310,891,306,915,324,960,383,995,450,1021,520,1039,591,1052,660,1059,723,1064,820"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1sim_1_1Settings.html#a2f7fcc56938097b7a994b683964daf3d" title="Whatever the maximum value in the date offsets is." alt="" coords="266,472,385,513"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="1053,821,1039,759,1014,684,995,646,972,610,944,578,912,552,463,552,410,536,364,516,366,511,412,531,463,547,914,547,948,574,976,606,1000,643,1018,682,1045,758,1058,820"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1sim_1_1Settings.html#a2344b8610f84eef9477742c7aef742ef" title="Maximum number of simulations that can run before it is ended and whatever results it has are used." alt="" coords="717,381,896,422"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="1056,821,1046,742,1022,639,1003,584,979,531,948,481,911,437,895,425,898,420,914,433,953,478,984,528,1008,582,1027,637,1051,741,1061,820"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1sim_1_1Settings.html#a0bb44f24d4b6ad7c184daeff50325694" title="Maximum distance that the fire is allowed to spread in one step (# of cells)" alt="" coords="473,807,642,847"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="945,867,826,869,700,862,637,851,638,845,701,856,827,863,945,861"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1sim_1_1Settings.html#a8d7966b28fe798443412ab34b6adaca3" title="Maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="479,267,636,307"/>
+<area shape="poly" id="edge21_Node000001_Node000019" title=" " alt="" coords="1058,821,1053,730,1046,671,1033,608,1015,544,989,481,955,422,911,372,636,307,637,302,914,367,959,419,994,478,1020,542,1039,607,1051,670,1059,729,1064,820"/>
+<area shape="rect" id="Node000020" href="$classfs_1_1sim_1_1Settings.html#adba2725a33dc64c2339196fec6894b74" title="Minimum Fine Fuel Moisture Code required for spread during the day." alt="" coords="747,627,866,667"/>
+<area shape="poly" id="edge24_Node000001_Node000020" title=" " alt="" coords="1037,825,985,756,950,720,911,688,865,665,868,660,914,683,954,716,989,752,1042,821"/>
+<area shape="rect" id="Node000022" href="$classfs_1_1sim_1_1Settings.html#a27c7d1cfd50db3593af559db376343d3" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="732,561,881,602"/>
+<area shape="poly" id="edge27_Node000001_Node000022" title=" " alt="" coords="1046,822,1026,776,997,721,959,665,936,639,911,617,880,600,882,595,914,613,940,636,963,661,1002,718,1031,774,1051,820"/>
+<area shape="rect" id="Node000023" href="$classfs_1_1sim_1_1Settings.html#a4e8b2a2029db0cd36f28b0e304dae8de" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="498,688,617,729"/>
+<area shape="poly" id="edge29_Node000001_Node000023" title=" " alt="" coords="1032,826,980,775,947,751,912,732,874,719,835,710,756,701,681,700,618,703,618,698,681,694,756,695,836,705,876,714,914,727,950,746,984,771,1036,822"/>
+<area shape="rect" id="Node000024" href="$classfs_1_1sim_1_1Settings.html#acb5e7e6c259b3b8abbc0329be086f40b" title="Offset from sunrise at which the day is considered to start (hours)" alt="" coords="747,741,866,782"/>
+<area shape="poly" id="edge31_Node000001_Node000024" title=" " alt="" coords="998,832,912,798,866,782,867,777,914,792,1000,827"/>
+<area shape="rect" id="Node000025" href="$classfs_1_1sim_1_1Settings.html#a14290fbe8137b29d6bd58f45c082843e" title="Offset from sunrise at which the day is considered to end (hours)" alt="" coords="747,807,866,847"/>
+<area shape="poly" id="edge32_Node000001_Node000025" title=" " alt="" coords="945,846,866,836,867,831,946,840"/>
+<area shape="rect" id="Node000026" href="$classfs_1_1sim_1_1Settings.html#a40388886d69144d38532a2fde370b809" title="Days to output probability contours for (1 is start date, 2 is day after, etc.)" alt="" coords="743,447,870,487"/>
+<area shape="poly" id="edge33_Node000001_Node000026" title=" " alt="" coords="1052,821,1038,755,1012,671,993,627,970,584,943,543,911,508,891,493,869,483,871,478,894,489,914,504,947,540,975,581,998,625,1017,669,1043,754,1058,820"/>
+<area shape="rect" id="Node000029" href="$classfs_1_1sim_1_1Settings.html#a6fb787594171a48a91931b701575257d" title="Root directory that raster inputs are stored in." alt="" coords="747,921,866,962"/>
+<area shape="poly" id="edge38_Node000001_Node000029" title=" " alt="" coords="985,884,868,924,866,919,984,879"/>
+<area shape="rect" id="Node000030" href="$classfs_1_1sim_1_1Settings.html#adc6bb48412b2b24f36907242634d53f8" title="Whether or not to save probability grids." alt="" coords="747,987,866,1027"/>
+<area shape="poly" id="edge39_Node000001_Node000030" title=" " alt="" coords="1030,889,978,934,914,976,867,995,865,990,911,971,975,929,1027,885"/>
+<area shape="rect" id="Node000032" href="$classfs_1_1sim_1_1Settings.html#a0434ae78c005bf74f81dd9a1746a193b" title="Set confidence required before simulation stops (% / 100)" alt="" coords="739,1052,874,1093"/>
+<area shape="poly" id="edge41_Node000001_Node000032" title=" " alt="" coords="1044,891,992,967,956,1007,914,1041,875,1060,873,1055,911,1037,952,1003,988,963,1040,888"/>
+<area shape="rect" id="Node000033" href="$classfs_1_1sim_1_1Settings.html#a65bc82a41ed136a2f338ac635dea5d68" title="Set fuel lookup table file." alt="" coords="737,1117,876,1158"/>
+<area shape="poly" id="edge42_Node000001_Node000033" title=" " alt="" coords="1051,892,1032,940,1003,998,964,1056,940,1083,914,1107,878,1126,875,1121,911,1102,936,1079,959,1053,998,995,1027,938,1046,890"/>
+<area shape="rect" id="Node000034" href="$classfs_1_1sim_1_1Settings.html#acf03a41df03c541fc28ae5a1e14870f9" title="Set time between generating interim outputs (s)" alt="" coords="700,1183,913,1223"/>
+<area shape="poly" id="edge43_Node000001_Node000034" title=" " alt="" coords="1056,892,1040,953,1013,1028,994,1067,971,1105,945,1140,914,1172,896,1184,893,1180,911,1168,941,1137,967,1102,989,1064,1008,1026,1035,951,1051,891"/>
+<area shape="rect" id="Node000035" href="$classfs_1_1sim_1_1Settings.html#a8a16f5a2ac2b2c6f6df1649e138b6194" title="Set maximum time simulation can run before it is ended and whatever results it has are used (s)" alt="" coords="719,1248,894,1289"/>
+<area shape="poly" id="edge44_Node000001_Node000035" title=" " alt="" coords="1059,893,1047,964,1022,1057,1003,1105,979,1153,950,1198,914,1237,896,1250,893,1246,911,1233,945,1194,974,1150,998,1103,1017,1055,1042,963,1054,892"/>
+<area shape="rect" id="Node000036" href="$classfs_1_1sim_1_1Settings.html#a1ef4a526cdc7855c06e292caa17a2795" title="Set days to output probability contours for (1 is start date, 2 is day after, etc...." alt="" coords="733,1313,880,1354"/>
+<area shape="poly" id="edge45_Node000001_Node000036" title=" " alt="" coords="1062,892,1053,975,1030,1085,1012,1143,986,1201,954,1255,915,1302,899,1314,882,1323,879,1318,896,1310,911,1298,950,1252,982,1198,1007,1141,1025,1083,1048,974,1056,892"/>
+<area shape="rect" id="Node000037" href="$classfs_1_1sim_1_1Settings.html#a4d23121aff157fd6ec2ce82ef1f4b778" title="Set raster root directory." alt="" coords="747,1379,866,1419"/>
+<area shape="poly" id="edge46_Node000001_Node000037" title=" " alt="" coords="1064,892,1059,986,1051,1047,1039,1113,1020,1181,994,1248,959,1312,915,1368,893,1384,868,1393,866,1388,890,1379,911,1364,955,1309,989,1246,1015,1180,1033,1112,1046,1046,1053,985,1058,892"/>
+<area shape="rect" id="Node000038" href="$classfs_1_1sim_1_1Settings.html#a0ee072836d42989acd4328bfe8bbe4fb" title="Set root directory and read settings from file." alt="" coords="747,1444,866,1485"/>
+<area shape="poly" id="edge47_Node000001_Node000038" title=" " alt="" coords="1059,892,1040,1013,1009,1174,990,1256,967,1330,942,1391,915,1433,893,1449,867,1459,865,1454,890,1445,911,1429,938,1388,962,1328,985,1254,1004,1173,1035,1012,1053,892"/>
+<area shape="rect" id="Node000039" href="$classfs_1_1sim_1_1Settings.html#af8f77e1620f08b3de7995952276a608d" title="Set whether or not to save probability grids." alt="" coords="742,1509,871,1550"/>
+<area shape="poly" id="edge48_Node000001_Node000039" title=" " alt="" coords="1060,892,1043,1025,1014,1206,994,1298,971,1382,945,1450,930,1477,915,1498,895,1513,873,1523,870,1518,892,1509,911,1494,926,1475,940,1448,966,1380,989,1297,1009,1205,1038,1024,1054,892"/>
+<area shape="rect" id="Node000040" href="$classfs_1_1sim_1_1Settings.html#aafc83aee0b9acf55c6787280aa9489ac" title="Weight to give to daily part of thresholds." alt="" coords="735,1575,878,1615"/>
+<area shape="poly" id="edge49_Node000001_Node000040" title=" " alt="" coords="1060,892,1046,1037,1018,1238,998,1340,975,1433,947,1510,931,1540,915,1563,898,1577,879,1586,877,1582,895,1573,911,1560,927,1538,942,1508,970,1432,993,1339,1013,1237,1041,1037,1055,892"/>
+<area shape="rect" id="Node000041" href="$classfs_1_1sim_1_1Settings.html#ac1298187c48b4dd16199d76ffe3ff355" title="Weight to give to hourly part of thresholds." alt="" coords="731,1640,882,1681"/>
+<area shape="poly" id="edge50_Node000001_Node000041" title=" " alt="" coords="1061,893,1049,1049,1022,1269,1003,1382,979,1485,950,1570,933,1603,915,1629,900,1641,884,1650,881,1645,897,1637,911,1625,928,1600,945,1568,973,1484,997,1381,1017,1269,1043,1049,1056,892"/>
+<area shape="rect" id="Node000042" href="$classfs_1_1sim_1_1Settings.html#a5eb741525d8e657e35316370600ac70c" title="Weight to give to Scenario part of thresholds." alt="" coords="724,1705,889,1746"/>
+<area shape="poly" id="edge51_Node000001_Node000042" title=" " alt="" coords="1062,893,1051,1061,1026,1301,1007,1424,982,1537,952,1630,934,1666,915,1694,891,1712,888,1708,911,1690,930,1663,947,1628,977,1535,1002,1423,1021,1300,1046,1061,1056,892"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Environment.html#a465c5203756477d966333f81f2083263" title="Load from rasters." alt="" coords="487,152,628,193"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="731,209,628,189,629,184,732,204"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="236,224,415,249"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="731,227,416,236,415,231,731,221"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Model.html#afc26e7431fa1893a95806a49155a2f01" title="Set constant weather." alt="" coords="472,102,644,128"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="731,206,699,191,684,178,674,166,665,154,651,143,624,131,627,126,654,138,669,150,679,163,688,174,702,186,733,201"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1EnvironmentInfo.html#a5098f4a784df0f769720822292827a13" title="Load the full Environment using the given FuelLookup to determine fuels." alt="" coords="244,152,407,193"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="472,175,408,175,408,170,472,170"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,310,188,336"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="276,257,134,312,132,307,274,252"/>
+<area shape="poly" id="edge13_Node000012_Node000009" title=" " alt="" coords="283,465,114,338,117,334,286,461"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1sim_1_1Model.html#aeeb5862f056d72f47bf108b9072ae716" title="Add statistics for completed iterations." alt="" coords="494,332,621,373"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="701,383,621,368,622,362,702,378"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,340,414,365"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="478,355,415,355,415,350,478,350"/>
+<area shape="poly" id="edge17_Node000015_Node000009" title=" " alt="" coords="220,342,188,337,189,332,221,336"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="257,688,394,729"/>
+<area shape="poly" id="edge19_Node000016_Node000017" title=" " alt="" coords="501,801,366,732,368,727,504,797"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="35,688,158,729"/>
+<area shape="poly" id="edge20_Node000017_Node000018" title=" " alt="" coords="242,711,158,711,158,706,242,706"/>
+<area shape="poly" id="edge23_Node000019_Node000009" title=" " alt="" coords="464,297,188,319,188,313,463,292"/>
+<area shape="poly" id="edge22_Node000019_Node000015" title=" " alt="" coords="469,315,375,341,373,336,468,309"/>
+<area shape="rect" id="Node000021" href="$classfs_1_1sim_1_1Scenario.html#a23238d09c03a661ab7218ace4e174988" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="476,623,640,663"/>
+<area shape="poly" id="edge25_Node000020_Node000021" title=" " alt="" coords="731,648,640,647,640,642,731,643"/>
+<area shape="poly" id="edge26_Node000021_Node000017" title=" " alt="" coords="469,671,395,692,393,687,468,665"/>
+<area shape="poly" id="edge28_Node000022_Node000021" title=" " alt="" coords="718,606,641,625,639,620,717,601"/>
+<area shape="poly" id="edge30_Node000023_Node000017" title=" " alt="" coords="482,711,394,711,394,706,482,706"/>
+<area shape="poly" id="edge36_Node000026_Node000015" title=" " alt="" coords="728,472,669,471,602,466,531,455,462,438,427,423,393,404,342,368,345,364,396,399,429,418,464,432,532,450,602,461,669,466,728,467"/>
+<area shape="rect" id="Node000027" href="$classfs_1_1sim_1_1Model.html#a92e99adaad982ea2370de44f5a606903" title="Create an Iteration by initializing Scenarios." alt="" coords="463,397,652,422"/>
+<area shape="poly" id="edge34_Node000026_Node000027" title=" " alt="" coords="728,452,616,426,617,421,729,447"/>
+<area shape="rect" id="Node000028" href="$classfs_1_1sim_1_1Scenario.html#a07d16e1850fc7f31f6b94d6d45ff50e2" title="Constructor." alt="" coords="496,497,619,538"/>
+<area shape="poly" id="edge37_Node000026_Node000028" title=" " alt="" coords="729,485,620,508,619,503,728,480"/>
+<area shape="poly" id="edge35_Node000027_Node000015" title=" " alt="" coords="487,395,380,368,381,363,488,390"/>
+<area shape="rect" id="Node000031" href="$classfs_1_1sim_1_1ProbabilityMap.html#a63b2a4721a321d83ec9c499e463bf98a" title="Save total, low, moderate, and high maps, and output information to log." alt="" coords="482,987,633,1027"/>
+<area shape="poly" id="edge40_Node000030_Node000031" title=" " alt="" coords="731,1010,633,1010,633,1004,731,1004"/>
+</map>

@@ -1,5 +1,0 @@
-<map id="fs::data::GridData::saveToFile" name="fs::data::GridData::saveToFile">
-<area shape="rect" id="Node000001" title="Save GridMap contents to file based on settings." alt="" coords="195,5,315,46"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Environment.html#a2bcff0befd162a744bf46c64830afb45" title="Load from rasters." alt="" coords="5,5,147,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,28,147,28,147,23,179,23"/>
-</map>

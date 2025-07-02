@@ -1,6 +1,0 @@
-<map id="fs::sim::Settings::setForceNoGreenup" name="fs::sim::Settings::setForceNoGreenup">
-<area shape="rect" id="Node000001" title="Whether or not to force no greenup for all fires." alt="" coords="5,29,144,70"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="192,29,394,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,47,176,47,176,52,144,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="252,29,250,19,256,10,271,5,293,3,316,5,331,11,328,16,315,10,293,8,272,10,259,15,255,21,257,28"/>
-</map>

@@ -135,9 +135,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab5d4523bee882f812453e56e06e563d4" id="r_ab5d4523bee882f812453e56e06e563d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfs_1_1sim_1_1Iteration.html">Iteration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5d4523bee882f812453e56e06e563d4">operator=</a> (<a class="el" href="classfs_1_1sim_1_1Iteration.html">Iteration</a> &amp;&amp;rhs)=default</td></tr>
 <tr class="memdesc:ab5d4523bee882f812453e56e06e563d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <br /></td></tr>
 <tr class="separator:ab5d4523bee882f812453e56e06e563d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad62fa38e558795a8d21693276aab14c6" id="r_ad62fa38e558795a8d21693276aab14c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfs_1_1sim_1_1Iteration.html">Iteration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad62fa38e558795a8d21693276aab14c6">reset_with_new_start</a> (const shared_ptr&lt; <a class="el" href="classfs_1_1topo_1_1Cell.html">topo::Cell</a> &gt; &amp;start_cell)</td></tr>
-<tr class="memdesc:ad62fa38e558795a8d21693276aab14c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign start Cell and create new thresholds for use in each <a class="el" href="classfs_1_1sim_1_1Scenario.html" title="A single Scenario in an Iteration using a specific FireWeather stream.">Scenario</a>.  <br /></td></tr>
-<tr class="separator:ad62fa38e558795a8d21693276aab14c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadcf04d032b366a93490ce9077dba87e" id="r_aadcf04d032b366a93490ce9077dba87e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfs_1_1sim_1_1Iteration.html">Iteration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aadcf04d032b366a93490ce9077dba87e">reset</a> (mt19937 *mt_extinction, mt19937 *mt_spread)</td></tr>
 <tr class="memdesc:aadcf04d032b366a93490ce9077dba87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new thresholds for use in each <a class="el" href="classfs_1_1sim_1_1Scenario.html" title="A single Scenario in an Iteration using a specific FireWeather stream.">Scenario</a>.  <br /></td></tr>
 <tr class="separator:aadcf04d032b366a93490ce9077dba87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -460,45 +457,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>cancelled_</b> = fals
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>This </dd></dl>
-
-</div>
-</div>
-<a id="ad62fa38e558795a8d21693276aab14c6" name="ad62fa38e558795a8d21693276aab14c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad62fa38e558795a8d21693276aab14c6">&#9670;&#160;</a></span>reset_with_new_start()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classfs_1_1sim_1_1Iteration.html">Iteration</a> * fs::sim::Iteration::reset_with_new_start </td>
-          <td>(</td>
-          <td class="paramtype">const shared_ptr&lt; <a class="el" href="classfs_1_1topo_1_1Cell.html">topo::Cell</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>start_cell</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Assign start Cell and create new thresholds for use in each <a class="el" href="classfs_1_1sim_1_1Scenario.html" title="A single Scenario in an Iteration using a specific FireWeather stream.">Scenario</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">start_cell</td><td>Cell to start ignition in </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>This </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classfs_1_1sim_1_1Iteration_ad62fa38e558795a8d21693276aab14c6_cgraph.png" border="0" usemap="#aclassfs_1_1sim_1_1Iteration_ad62fa38e558795a8d21693276aab14c6_cgraph" alt=""/></div>
-<map name="aclassfs_1_1sim_1_1Iteration_ad62fa38e558795a8d21693276aab14c6_cgraph" id="aclassfs_1_1sim_1_1Iteration_ad62fa38e558795a8d21693276aab14c6_cgraph">
-<area shape="rect" title="Assign start Cell and create new thresholds for use in each Scenario." alt="" coords="5,29,157,70"/>
-<area shape="rect" href="classfs_1_1sim_1_1Settings.html#af568150489afe7210633273920d2dee6" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="205,29,324,70"/>
-<area shape="poly" title=" " alt="" coords="157,47,189,47,189,52,157,52"/>
-<area shape="rect" href="classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="372,29,574,70"/>
-<area shape="poly" title=" " alt="" coords="324,47,356,47,356,52,324,52"/>
-<area shape="poly" title=" " alt="" coords="434,29,432,19,438,10,452,5,473,3,496,5,509,11,507,16,494,10,473,8,453,10,441,15,437,20,439,28"/>
-</map>
-</div>
 
 </div>
 </div>

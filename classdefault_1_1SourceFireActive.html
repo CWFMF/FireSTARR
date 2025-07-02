@@ -152,7 +152,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:abce811bb82b298b8c31b3760c36799d8" id="r_abce811bb82b298b8c31b3760c36799d8"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abce811bb82b298b8c31b3760c36799d8">_source_features</a></td></tr>
 <tr class="separator:abce811bb82b298b8c31b3760c36799d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9bd1330317bea53e78cef7a6fe5dbd8" id="r_af9bd1330317bea53e78cef7a6fe5dbd8"><td class="memItemLeft" align="right" valign="top"><a id="af9bd1330317bea53e78cef7a6fe5dbd8" name="af9bd1330317bea53e78cef7a6fe5dbd8"></a>
-list&#160;</td><td class="memItemRight" valign="bottom"><b>_source_fires</b> = [s(self._dir_out) for s in find_sources(SourceFire, private_first=False)]</td></tr>
+list&#160;</td><td class="memItemRight" valign="bottom"><b>_source_fires</b> = []</td></tr>
 <tr class="separator:af9bd1330317bea53e78cef7a6fe5dbd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -177,10 +177,6 @@ list&#160;</td><td class="memItemRight" valign="bottom"><b>_source_fires</b> = [
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=  [</div>
 <div class="line">            SourceFeatureM3(self._dir_out, self._origin),</div>
-<div class="line">        ] + [</div>
-<div class="line">            <span class="comment"># want private sources last so they override public ones</span></div>
-<div class="line">            s(self._dir_out)</div>
-<div class="line">            <span class="keywordflow">for</span> s <span class="keywordflow">in</span> find_sources(SourceFeature, private_first=<span class="keyword">False</span>)</div>
 <div class="line">        ]</div>
 </div><!-- fragment -->
 </div>

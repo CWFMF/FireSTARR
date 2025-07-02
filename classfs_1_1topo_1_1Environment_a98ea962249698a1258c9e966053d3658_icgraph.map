@@ -1,15 +1,9 @@
 <map id="fs::topo::Environment::columns" name="fs::topo::Environment::columns">
-<area shape="rect" id="Node000001" title="Number of columns in grid." alt="" coords="681,60,823,101"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a790a039a605714aa85ec90770f2b8d0f" title="Number of columns in extent." alt="" coords="468,14,623,40"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,61,597,43,599,38,667,56"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#a5e2e6a1f866bc3174532386c80dc798e" title="Find all Cell(s) that can burn in entire Environment." alt="" coords="457,68,633,93"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="666,83,634,83,634,78,666,78"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1Environment.html#a5ec129459b3c3a8781391d6e8b6c68fc" title="Creates a map of areas that are not burnable either because of fuel or the initial perimeter." alt="" coords="472,117,618,158"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="667,107,619,120,618,115,666,101"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ac9497c482a10e80cd1c32706669a7cd5" title="Number of columns." alt="" coords="261,5,384,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="452,29,384,29,384,23,452,24"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="236,70,409,96"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="442,84,409,85,409,79,442,79"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,70,188,96"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="220,86,188,86,188,80,220,80"/>
+<area shape="rect" id="Node000001" title="Number of columns in grid." alt="" coords="379,35,520,75"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a790a039a605714aa85ec90770f2b8d0f" title="Number of columns in extent." alt="" coords="176,13,331,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,45,331,40,331,35,364,39"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Environment.html#a5ec129459b3c3a8781391d6e8b6c68fc" title="Creates a map of areas that are not burnable either because of fuel or the initial perimeter." alt="" coords="181,63,326,103"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="364,70,327,75,326,70,363,65"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ac9497c482a10e80cd1c32706669a7cd5" title="Number of columns." alt="" coords="5,5,128,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="160,28,128,28,128,23,160,23"/>
 </map>

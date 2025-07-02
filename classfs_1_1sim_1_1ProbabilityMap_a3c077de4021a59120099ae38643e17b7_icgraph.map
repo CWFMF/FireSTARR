@@ -1,5 +1,10 @@
 <map id="fs::sim::ProbabilityMap::deleteInterim" name="fs::sim::ProbabilityMap::deleteInterim">
-<area shape="rect" id="Node000001" title=" " alt="" coords="236,5,386,46"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,188,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,28,188,28,188,23,220,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="715,23,866,64"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#ac6dfb7d9c3c81e60b39dbcbea4660e36" title=" " alt="" coords="462,31,667,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="700,46,668,46,668,41,700,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,5,414,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="446,34,414,30,415,25,447,28"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,31,188,56"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="447,46,188,46,188,41,447,41"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="221,32,188,36,188,31,220,27"/>
 </map>

@@ -1,12 +1,9 @@
 <map id="fs::sim::Model::isOverSimulationCountLimit" name="fs::sim::Model::isOverSimulationCountLimit">
-<area shape="rect" id="Node000001" title="Whether or not simulation is over max simulation count." alt="" coords="681,35,887,75"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a86991422a0f1e2bc74a8ec720159051c" title="Add statistics for completed iterations." alt="" coords="484,5,611,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,43,611,36,612,31,666,38"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Model.html#af4e00616af598062f3263ceb068cd70b" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="462,70,633,96"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="666,72,634,75,633,70,665,66"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,42,414,68"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="469,39,415,46,414,41,468,33"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,42,188,68"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,58,188,58,188,52,220,52"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="446,73,414,69,415,64,447,68"/>
+<area shape="rect" id="Node000001" title="Whether or not simulation is over max simulation count." alt="" coords="681,5,887,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#af4e00616af598062f3263ceb068cd70b" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="462,13,633,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,28,634,28,634,23,666,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,13,414,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="447,28,414,28,414,23,447,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,188,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,28,188,28,188,23,220,23"/>
 </map>

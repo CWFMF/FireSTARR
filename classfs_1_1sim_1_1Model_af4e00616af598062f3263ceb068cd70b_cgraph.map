@@ -1,12 +1,7 @@
 <map id="fs::sim::Model::shouldStop" name="fs::sim::Model::shouldStop">
-<area shape="rect" id="Node000001" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="5,63,177,88"/>
+<area shape="rect" id="Node000001" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="5,35,177,60"/>
 <area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#afb723de95ba41a68a2f9fbe0d6431ab1" title="Whether or not simulation has been running longer than maximum duration." alt="" coords="237,5,418,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,59,256,33,257,38,148,65"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,34,221,29,222,34,177,40"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a6102c99e3a4d0fe766fe4b8069139e09" title="Whether or not simulation is over max simulation count." alt="" coords="225,55,430,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,73,209,73,209,78,177,78"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Settings.html#af568150489afe7210633273920d2dee6" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="268,120,387,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,86,253,118,252,123,139,91"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="478,120,680,161"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="387,138,462,138,462,144,387,144"/>
-<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="532,121,530,110,537,101,554,96,579,94,606,96,622,102,620,107,605,101,579,99,555,101,540,106,535,112,537,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,55,210,59,209,64,176,60"/>
 </map>

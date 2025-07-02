@@ -1,8 +1,0 @@
-<map id="fs::sim::Iteration::reset_with_new_start" name="fs::sim::Iteration::reset_with_new_start">
-<area shape="rect" id="Node000001" title="Assign start Cell and create new thresholds for use in each Scenario." alt="" coords="5,29,157,70"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Settings.html#af568150489afe7210633273920d2dee6" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="205,29,324,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,47,189,47,189,52,157,52"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="372,29,574,70"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="324,47,356,47,356,52,324,52"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="434,29,432,19,438,10,452,5,473,3,496,5,509,11,507,16,494,10,473,8,453,10,441,15,437,20,439,28"/>
-</map>

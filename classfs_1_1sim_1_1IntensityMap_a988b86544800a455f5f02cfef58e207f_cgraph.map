@@ -1,9 +1,0 @@
-<map id="fs::sim::IntensityMap::burn" name="fs::sim::IntensityMap::burn">
-<area shape="rect" id="Node000001" title="Update Location with specified values." alt="" coords="5,39,145,79"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1Direction.html#ac5caf8fa7f5209a75db2846ec545958e" title="Direction as degrees, where 0 is North and values increase clockwise." alt="" coords="193,5,310,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,43,177,37,178,42,145,48"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="193,71,310,111"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="145,69,179,75,178,80,144,74"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="358,13,511,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="310,23,343,23,343,28,310,28"/>
-</map>

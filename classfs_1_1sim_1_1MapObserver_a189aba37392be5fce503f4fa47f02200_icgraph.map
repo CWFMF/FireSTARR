@@ -1,5 +1,0 @@
-<map id="fs::sim::MapObserver::getValue" name="fs::sim::MapObserver::getValue">
-<area shape="rect" id="Node000001" title="Function that returns the value we care about regarding the Event." alt="" coords="197,5,340,46"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1MapObserver.html#a2db16785a5a13e994825d1f663506026" title="Handle given event." alt="" coords="5,5,149,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,28,149,28,149,23,181,23"/>
-</map>

@@ -1,0 +1,11 @@
+<map id="fs::sim::ProbabilityMap::saveTotalCount" name="fs::sim::ProbabilityMap::saveTotalCount">
+<area shape="rect" id="Node000001" title="Save map representing all intensities occurrence." alt="" coords="5,39,156,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1ProbabilityMap.html#a861581234f33032003d653ecb7dc0c19" title="Save probability file and record filename if interim." alt="" coords="204,39,355,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,56,188,56,188,62,156,62"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1ProbabilityMap.html#a736a24beaea7e9e41de2789b77169262" title="Make note of any interim files for later deletion." alt="" coords="403,5,553,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="355,44,388,38,389,43,356,49"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridMap.html#a5cce0c602b1221ab1a70df63d7ac81d5" title="Save GridMap contents to .asc file as probability." alt="" coords="406,71,551,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="356,69,390,74,390,79,355,74"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1data_1_1GridData.html#a3b0edb0d283bb069ef9df135c855286b" title=" " alt="" coords="601,63,754,119"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="551,88,586,88,586,94,551,94"/>
+</map>

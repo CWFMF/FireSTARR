@@ -1,19 +1,9 @@
 <map id="fs::fuel::FuelGrass::baseMultiplier" name="fs::fuel::FuelGrass::baseMultiplier">
-<area shape="rect" id="Node000001" title="Calculate base rate of spread multiplier." alt="" coords="5,76,131,117"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelGrass.html#ad8db5191a91447367bc069bcfc2431f6" title="Grass curing." alt="" coords="179,76,304,117"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,94,163,94,163,100,131,100"/>
+<area shape="rect" id="Node000001" title="Calculate base rate of spread multiplier." alt="" coords="5,23,131,64"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1fuel_1_1FuelGrass.html#ad8db5191a91447367bc069bcfc2431f6" title="Grass curing." alt="" coords="179,23,304,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,41,163,41,163,46,131,46"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="352,5,505,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="280,73,351,40,366,34,368,39,353,45,282,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="304,32,337,28,337,33,305,38"/>
 <area shape="rect" id="Node000004" href="$classfs_1_1wx_1_1FwiWeather.html#afba176eda60e611c21e3e0eea3b915ee" title="Drought Code." alt="" coords="354,55,503,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="304,84,339,79,339,84,305,90"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Settings.html#a1fbff261366a34e26554959e7a29258d" title="Whether or not to force static grass curing value for all fires." alt="" coords="368,104,489,145"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="305,104,353,111,352,116,304,109"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Settings.html#a6990d41a2d6c27686460fc6b3fbaccba" title="Static curing value." alt="" coords="369,170,488,210"/>
-<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="280,115,353,154,366,161,363,165,351,159,277,120"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="553,104,756,145"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="490,122,538,122,538,128,490,128"/>
-<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="612,104,610,95,617,85,632,80,655,78,679,80,693,86,691,91,678,85,654,83,633,85,620,90,615,96,617,103"/>
-<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="488,170,567,147,568,152,489,176"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1SettingsImplementation.html#a011f3f4d3854b721373979a89ae06d41" title="Static curing value." alt="" coords="553,170,756,210"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="489,188,538,188,538,193,489,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="305,49,339,53,339,59,304,54"/>
 </map>

@@ -1,21 +1,17 @@
 <map id="fs::sim::Event::cell" name="fs::sim::Event::cell">
-<area shape="rect" id="Node000001" title="Cell Event takes place in." alt="" coords="427,168,551,193"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695" title="Burn cell that Event takes place in." alt="" coords="213,45,360,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="465,158,426,120,378,86,350,74,352,69,380,81,430,116,468,154"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="14,12,137,53"/>
-<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="475,155,460,125,439,91,411,59,378,35,348,23,318,15,253,8,192,11,138,20,137,15,191,6,254,3,318,9,350,18,380,30,415,55,443,88,465,122,480,152"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1MapObserver.html#a2db16785a5a13e994825d1f663506026" title="Handle given event." alt="" coords="215,95,358,136"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="432,165,351,139,353,134,433,160"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Event.html#a15f1af75515a053616325e7495b6577b" title="Make fire spread event." alt="" coords="207,160,366,201"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="411,183,366,183,366,178,411,178"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Event.html#ae42d4a7801ec3f0639e02198bb3e2d6b" title="Make fire spread event." alt="" coords="207,226,366,266"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="433,201,353,227,351,222,432,196"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Event.html#aa2c222f728c2e985a546d3ba5a80eb62" title="Make new fire event." alt="" coords="194,290,379,316"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="468,207,430,245,380,280,352,292,350,287,378,276,426,241,465,203"/>
-<area shape="rect" id="Node000009" href="$structfs_1_1sim_1_1EventCompare.html#a21d6a11f53f0e62f15a5feb78eabe7e5" title="Defines ordering on Events." alt="" coords="211,340,362,381"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="477,208,439,269,412,302,381,331,362,342,359,337,377,326,408,299,435,266,473,206"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,50,137,43,138,37,197,45"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,170,146,196"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="209,79,195,86,163,106,134,129,91,172,87,168,130,125,160,101,192,81,207,74"/>
-<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="208,287,192,280,161,261,132,239,88,199,91,195,135,235,164,257,195,276,210,282"/>
+<area shape="rect" id="Node000001" title="Cell Event takes place in." alt="" coords="427,96,551,121"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695" title="Burn cell that Event takes place in." alt="" coords="213,38,360,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="428,93,378,79,336,67,337,62,380,74,429,88"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="14,5,137,46"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="464,86,426,54,403,39,378,28,316,14,251,9,190,11,137,17,137,12,190,6,251,4,316,9,380,23,405,35,429,50,467,82"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Event.html#a238692c759a349e8f85b6e1a865d991c" title="Make fire spread event." alt="" coords="207,88,366,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="411,111,366,111,366,106,411,106"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Event.html#aa2c222f728c2e985a546d3ba5a80eb62" title="Make new fire event." alt="" coords="194,153,379,178"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="429,129,380,143,337,155,336,150,378,138,428,123"/>
+<area shape="rect" id="Node000007" href="$structfs_1_1sim_1_1EventCompare.html#a21d6a11f53f0e62f15a5feb78eabe7e5" title="Defines ordering on Events." alt="" coords="211,203,362,243"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="464,134,426,164,380,193,356,205,354,200,378,189,423,160,461,129"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,43,137,36,138,30,197,38"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,98,146,124"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="222,71,194,79,122,100,120,95,193,74,221,66"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="219,151,127,127,129,122,220,146"/>
 </map>

@@ -137,9 +137,9 @@ None&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, d
 <tr class="memitem:a61eeb33e20c18adb10f7a60069c151f8" id="r_a61eeb33e20c18adb10f7a60069c151f8"><td class="memItemLeft" align="right" valign="top"><a id="a61eeb33e20c18adb10f7a60069c151f8" name="a61eeb33e20c18adb10f7a60069c151f8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>check_rasters</b> (self, remove=False)</td></tr>
 <tr class="separator:a61eeb33e20c18adb10f7a60069c151f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1c58d5ca3a29331c7a718eb49547a46" id="r_ae1c58d5ca3a29331c7a718eb49547a46"><td class="memItemLeft" align="right" valign="top"><a id="ae1c58d5ca3a29331c7a718eb49547a46" name="ae1c58d5ca3a29331c7a718eb49547a46"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>check_and_publish</b> (self, ignore_incomplete_okay=True, run_incomplete=False, no_publish=None, force_copy=False, force=False, no_wait=True)</td></tr>
-<tr class="separator:ae1c58d5ca3a29331c7a718eb49547a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a6414021c5f25f79145c7bcbbac1f76" id="r_a9a6414021c5f25f79145c7bcbbac1f76"><td class="memItemLeft" align="right" valign="top"><a id="a9a6414021c5f25f79145c7bcbbac1f76" name="a9a6414021c5f25f79145c7bcbbac1f76"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>check_and_publish</b> (self, ignore_incomplete_okay=True, run_incomplete=False, no_publish=None, force_copy=False, force=False, no_wait=True, require_all=False)</td></tr>
+<tr class="separator:a9a6414021c5f25f79145c7bcbbac1f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7c54aa3be10598b1307089609331052" id="r_ac7c54aa3be10598b1307089609331052"><td class="memItemLeft" align="right" valign="top"><a id="ac7c54aa3be10598b1307089609331052" name="ac7c54aa3be10598b1307089609331052"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (self)</td></tr>
 <tr class="separator:ac7c54aa3be10598b1307089609331052"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +149,9 @@ None&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, d
 <tr class="memitem:a44b004d7cb8ea5cd735b352af4983281" id="r_a44b004d7cb8ea5cd735b352af4983281"><td class="memItemLeft" align="right" valign="top"><a id="a44b004d7cb8ea5cd735b352af4983281" name="a44b004d7cb8ea5cd735b352af4983281"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>run_until_successful</b> (self, no_retry=False)</td></tr>
 <tr class="separator:a44b004d7cb8ea5cd735b352af4983281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a6b83c4c076890d0dec93f9d45feca" id="r_a82a6b83c4c076890d0dec93f9d45feca"><td class="memItemLeft" align="right" valign="top"><a id="a82a6b83c4c076890d0dec93f9d45feca" name="a82a6b83c4c076890d0dec93f9d45feca"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>save_fires</b> (self, df_fires, save_to)</td></tr>
+<tr class="separator:a82a6b83c4c076890d0dec93f9d45feca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88915ab78caf08e2b36b8af13328f85a" id="r_a88915ab78caf08e2b36b8af13328f85a"><td class="memItemLeft" align="right" valign="top"><a id="a88915ab78caf08e2b36b8af13328f85a" name="a88915ab78caf08e2b36b8af13328f85a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>prep_fires</b> (self, force=False)</td></tr>
 <tr class="separator:a88915ab78caf08e2b36b8af13328f85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,6 +255,9 @@ str&#160;</td><td class="memItemRight" valign="bottom"><b>_id</b> = self._start_
 <tr class="memitem:a8fb6f528e77b135419199243d5446be9" id="r_a8fb6f528e77b135419199243d5446be9"><td class="memItemLeft" align="right" valign="top"><a id="a8fb6f528e77b135419199243d5446be9" name="a8fb6f528e77b135419199243d5446be9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>_file_fires</b> = vector_path(self._dir_out, &quot;df_fires_prioritized&quot;)</td></tr>
 <tr class="separator:a8fb6f528e77b135419199243d5446be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae372f6bce94db9626d11e6ac60596283" id="r_ae372f6bce94db9626d11e6ac60596283"><td class="memItemLeft" align="right" valign="top"><a id="ae372f6bce94db9626d11e6ac60596283" name="ae372f6bce94db9626d11e6ac60596283"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>_num_fires_initial</b> = None</td></tr>
+<tr class="separator:ae372f6bce94db9626d11e6ac60596283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2d25f8f70eaed8c243d8b72789073b4" id="r_ac2d25f8f70eaed8c243d8b72789073b4"><td class="memItemLeft" align="right" valign="top"><a id="ac2d25f8f70eaed8c243d8b72789073b4" name="ac2d25f8f70eaed8c243d8b72789073b4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>_file_rundata</b> = os.path.join(self._dir_out, &quot;run.json&quot;)</td></tr>
 <tr class="separator:ac2d25f8f70eaed8c243d8b72789073b4"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -1,7 +1,5 @@
 <map id="fs::sim::Scenario::simulation" name="fs::sim::Scenario::simulation">
-<area shape="rect" id="Node000001" title="Simulation number." alt="" coords="194,27,316,68"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,5,146,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,38,146,32,146,27,179,32"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#a777ea3d3ce1ebc7835f3ffb7c2987006" title="Tell Observers to save their data for the given time." alt="" coords="14,55,137,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,62,137,69,136,63,178,57"/>
+<area shape="rect" id="Node000001" title="Simulation number." alt="" coords="194,5,316,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="5,13,146,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,28,146,28,146,23,178,23"/>
 </map>

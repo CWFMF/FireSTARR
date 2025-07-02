@@ -1,12 +1,8 @@
 <map id="fs::sim::Model::yesterday" name="fs::sim::Model::yesterday">
-<area shape="rect" id="Node000001" title=" " alt="" coords="463,56,624,82"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="463,31,624,56"/>
 <area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#a640a430eb845364460c49bbcbd327bd8" title="Read weather used for Scenarios." alt="" coords="236,5,415,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="470,55,383,34,384,29,471,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="447,35,415,31,416,26,448,30"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,31,188,56"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="447,66,188,51,188,46,448,61"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="257,106,394,146"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="478,89,395,111,393,106,477,84"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="447,46,188,46,188,41,447,41"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,32,188,36,188,31,220,27"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="35,106,158,146"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="242,129,158,129,158,124,242,124"/>
 </map>

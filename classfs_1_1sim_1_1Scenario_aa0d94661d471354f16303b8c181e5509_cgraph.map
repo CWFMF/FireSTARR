@@ -1,24 +1,19 @@
 <map id="fs::sim::Scenario::survives" name="fs::sim::Scenario::survives">
-<area shape="rect" id="Node000001" title="Whether or not the fire survives the conditions." alt="" coords="5,138,128,178"/>
+<area shape="rect" id="Node000001" title="Whether or not the fire survives the conditions." alt="" coords="5,104,128,145"/>
 <area shape="rect" id="Node000002" href="$classfs_1_1wx_1_1FireWeather.html#af0136dacf50a3e2bc2fdeacaf18358e3" title="Get FwiWeather for given time." alt="" coords="176,5,324,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,136,119,88,145,62,174,40,182,35,185,40,177,44,148,66,123,92,84,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,102,127,70,174,40,185,35,187,40,177,44,130,75,92,106"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="179,55,321,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="97,135,174,90,190,84,192,89,177,95,100,140"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Settings.html#abd91f560536d7b3ff1d9b039c7f3e584" title="Whether or not to run deterministically (100% chance of spread &amp; survival)" alt="" coords="190,104,310,145"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="128,144,175,136,176,141,128,150"/>
-<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Scenario.html#af376de0c464fcfb3cbc7caa2217e25d1" title="Get extinction threshold for given time." alt="" coords="183,170,316,210"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="128,166,168,173,168,179,128,171"/>
-<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Cell.html#aac6eb5373fb309601c140ba56856555e" title="Fuel." alt="" coords="176,235,324,260"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="100,177,177,220,192,226,190,231,174,225,98,181"/>
-<area shape="rect" id="Node000011" href="$classfs_1_1wx_1_1FwiWeather.html#adc1319967ef8b2cd3e1b329d25a16dbb" title="Moisture content (%) based on Dmc." alt="" coords="185,284,314,325"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="85,177,124,223,177,271,183,274,180,279,174,275,120,227,81,181"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="410,43,536,68"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="321,61,394,57,394,62,322,66"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="622,35,764,76"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="537,53,607,53,607,58,537,58"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="812,43,974,68"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="764,53,796,53,796,58,764,58"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="372,116,574,157"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="310,125,357,128,357,133,310,131"/>
-<area shape="poly" id="edge8_Node000008_Node000008" title=" " alt="" coords="432,116,430,107,436,97,451,92,473,90,497,92,511,98,509,103,496,97,473,95,452,97,440,102,435,108,437,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="127,103,191,83,193,88,129,108"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#af376de0c464fcfb3cbc7caa2217e25d1" title="Get extinction threshold for given time." alt="" coords="183,104,316,145"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="128,122,168,122,168,128,128,128"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1topo_1_1Cell.html#aac6eb5373fb309601c140ba56856555e" title="Fuel." alt="" coords="176,169,324,195"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="129,141,193,162,191,167,127,146"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1wx_1_1FwiWeather.html#adc1319967ef8b2cd3e1b329d25a16dbb" title="Moisture content (%) based on Dmc." alt="" coords="185,219,314,260"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="93,144,131,174,177,205,185,210,182,214,174,210,128,179,90,148"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="372,55,498,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="321,65,356,65,356,70,321,70"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="546,47,688,88"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="499,65,531,65,531,70,499,70"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="736,55,898,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="688,65,720,65,720,70,688,70"/>
 </map>

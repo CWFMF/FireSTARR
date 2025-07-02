@@ -1,11 +1,7 @@
 <map id="fs::sim::IntensityMap::ignite" name="fs::sim::IntensityMap::ignite">
-<area shape="rect" id="Node000001" title="Mark given location as burned." alt="" coords="5,39,145,79"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityMap.html#a988b86544800a455f5f02cfef58e207f" title="Update Location with specified values." alt="" coords="193,39,332,79"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,56,177,56,177,62,145,62"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1wx_1_1Direction.html#ac5caf8fa7f5209a75db2846ec545958e" title="Direction as degrees, where 0 is North and values increase clockwise." alt="" coords="380,5,497,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="332,43,364,37,365,42,333,48"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="380,71,497,111"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="333,69,366,75,365,80,332,74"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1Index.html#a3359cb0ef022a8f50fe514a11bc814af" title="Returns value as a MathSize." alt="" coords="545,13,699,38"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="498,23,530,23,530,28,498,28"/>
+<area shape="rect" id="Node000001" title="Mark given location as burned." alt="" coords="5,5,145,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IntensityMap.html#a0d1494426d7365b507dc4a7660066670" title="Update Location with specified values." alt="" coords="193,5,332,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,23,177,23,177,28,145,28"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="380,5,496,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="333,23,365,23,365,28,333,28"/>
 </map>

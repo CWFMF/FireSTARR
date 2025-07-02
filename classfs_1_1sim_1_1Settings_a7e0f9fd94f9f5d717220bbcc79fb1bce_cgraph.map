@@ -1,6 +1,0 @@
-<map id="fs::sim::Settings::setSaveIndividual" name="fs::sim::Settings::setSaveIndividual">
-<area shape="rect" id="Node000001" title="Set whether or not to save individual grids." alt="" coords="5,29,130,70"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="178,29,380,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,47,162,47,162,52,130,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="239,29,237,19,243,10,258,5,279,3,302,5,315,11,313,16,300,10,279,8,259,10,247,15,242,20,244,28"/>
-</map>

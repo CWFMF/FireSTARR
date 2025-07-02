@@ -1,117 +1,114 @@
 <map id="fs::sim::Scenario::evaluate" name="fs::sim::Scenario::evaluate">
-<area shape="rect" id="Node000001" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,1371,128,1412"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695" title="Burn cell that Event takes place in." alt="" coords="198,221,346,247"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,1370,107,1104,173,703,223,446,262,262,267,263,228,448,178,704,113,1104,73,1371"/>
+<area shape="rect" id="Node000001" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,1043,128,1084"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#ad62c648b92fbbfcf20935a8db766b695" title="Burn cell that Event takes place in." alt="" coords="198,107,346,132"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,1042,102,791,133,606,173,418,217,264,258,146,263,148,222,265,178,419,139,607,107,791,73,1043"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Event.html#a42d6f9837174b92c9a46d4bd63b6cb2c" title="Cell Event takes place in." alt="" coords="438,5,563,31"/>
-<area shape="poly" id="edge14_Node000001_Node000003" title=" " alt="" coords="66,1370,76,1140,98,772,113,582,130,412,150,282,161,236,173,208,199,174,228,144,262,117,297,94,369,58,434,34,436,39,372,63,300,99,265,121,232,148,203,177,178,210,167,238,156,283,135,413,118,582,103,772,81,1140,71,1371"/>
-<area shape="rect" id="Node000013" href="$classfs_1_1sim_1_1Scenario.html#a7a028da06f577a91ddec2d45988fa2e4" title="End the simulation." alt="" coords="211,1338,333,1378"/>
-<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="128,1379,195,1368,196,1373,129,1384"/>
-<area shape="rect" id="Node000014" href="$classfs_1_1sim_1_1Scenario.html#a86df553a65867046b7d8d8d293c33885" title="Model this Scenario is running in." alt="" coords="673,1288,796,1329"/>
-<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="92,1368,130,1344,175,1324,250,1315,380,1310,658,1306,658,1312,381,1316,250,1321,176,1329,132,1348,95,1373"/>
-<area shape="rect" id="Node000015" href="$classfs_1_1fuel_1_1FuelType.html#a569db30b7eff537bebb1cdedf3ddc66a" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="213,1403,331,1444"/>
-<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="129,1398,198,1409,197,1415,128,1404"/>
-<area shape="rect" id="Node000017" href="$classfs_1_1sim_1_1Scenario.html#aa1519c27ccb980be82acf9f99d77f3f9" title="Tell Observers to save their data with base file name." alt="" coords="211,1468,333,1509"/>
-<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="100,1410,177,1453,197,1462,195,1467,174,1458,98,1415"/>
-<area shape="rect" id="Node000018" href="$classfs_1_1sim_1_1Scenario.html#ab99dbad9bc998585797d60243233f40b" title="Save state of Scenario at given time." alt="" coords="211,1534,333,1574"/>
-<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="82,1411,121,1465,147,1494,177,1519,198,1530,195,1535,174,1523,143,1497,117,1468,78,1414"/>
-<area shape="rect" id="Node000020" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="204,830,340,870"/>
-<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="73,1370,255,884,260,886,78,1372"/>
-<area shape="rect" id="Node000051" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="440,600,562,641"/>
-<area shape="poly" id="edge62_Node000001_Node000051" title=" " alt="" coords="67,1370,78,1259,100,1095,114,1010,132,931,151,864,173,817,198,784,227,755,292,706,361,669,424,642,426,647,363,674,295,711,230,759,202,788,178,820,156,866,137,932,120,1011,105,1096,84,1259,72,1371"/>
-<area shape="rect" id="Node000059" href="$classfs_1_1sim_1_1Event.html#a332cd1735d53b667d8e48acdce68801b" title="Time of Event (decimal days)" alt="" coords="207,1599,336,1624"/>
-<area shape="poly" id="edge63_Node000001_Node000059" title=" " alt="" coords="76,1411,88,1449,109,1496,139,1544,157,1565,177,1584,194,1594,192,1599,174,1588,153,1569,134,1547,104,1498,84,1451,71,1413"/>
-<area shape="rect" id="Node000060" href="$classfs_1_1sim_1_1Event.html#a329935ed3d54baaf68032553da414455" title="Duration that Event Cell has been burning (decimal days)" alt="" coords="176,1648,368,1674"/>
-<area shape="poly" id="edge64_Node000001_Node000060" title=" " alt="" coords="73,1412,83,1458,102,1519,133,1582,153,1610,177,1635,181,1638,178,1642,174,1639,149,1614,128,1584,97,1521,78,1460,68,1413"/>
-<area shape="rect" id="Node000061" href="$classfs_1_1sim_1_1Event.html#a4ea570cf4fd8ead8f8f08cf5c77ec3db" title="Type of Event." alt="" coords="208,1697,336,1723"/>
-<area shape="poly" id="edge65_Node000001_Node000061" title=" " alt="" coords="72,1412,78,1467,95,1540,109,1580,127,1618,149,1653,177,1684,194,1695,191,1700,174,1688,145,1657,122,1621,104,1582,90,1542,73,1468,66,1413"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="283,219,366,118,387,81,397,65,414,48,435,35,438,40,418,52,401,68,392,84,370,121,287,222"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="442,320,559,361"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="298,245,417,306,429,312,427,317,415,311,295,250"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="676,248,793,289"/>
-<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="279,219,299,191,330,154,369,119,415,92,462,73,504,64,524,65,544,69,587,92,603,108,612,125,615,162,616,199,622,216,635,234,663,252,660,256,632,237,618,219,611,200,609,162,606,127,599,111,584,96,542,74,523,70,504,70,464,79,417,97,372,123,334,158,304,194,284,222"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Event.html#ad11499e89a4df128d86f460c1cd42487" title="Burn Intensity (kW/m)" alt="" coords="424,107,577,132"/>
-<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="290,218,344,181,415,142,432,135,434,140,417,147,347,186,293,223"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Scenario.html#ab02ff5e0c425fd10edd755b622b0541b" title="Notify IObservers that a Cell has burned." alt="" coords="440,156,562,197"/>
-<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="326,218,424,193,425,198,327,223"/>
-<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Event.html#adb6d6b97ae63e01f9f5afbbb48f41c19" title="Head fire spread direction." alt="" coords="440,221,561,247"/>
-<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="346,232,424,232,424,237,346,237"/>
-<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Event.html#aed1c87fb0b88bee303cedf853eaee916" title="Head fire rate of spread (m/min)" alt="" coords="440,271,562,296"/>
-<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="336,245,425,265,424,270,334,250"/>
-<area shape="rect" id="Node000011" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="429,385,572,411"/>
-<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="285,246,337,306,375,340,417,371,430,377,427,382,415,375,372,345,334,309,281,249"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="558,320,661,289,662,294,560,326"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="676,183,793,224"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="558,322,584,307,599,289,607,272,615,253,632,235,660,219,663,223,635,239,619,256,612,274,603,292,587,311,561,327"/>
-<area shape="poly" id="edge12_Node000011_Node000005" title=" " alt="" coords="562,382,584,371,599,354,607,337,615,318,632,300,660,284,663,289,635,304,620,321,612,339,604,357,587,375,565,387"/>
-<area shape="rect" id="Node000012" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="676,314,793,354"/>
-<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="550,382,661,351,662,357,551,387"/>
-<area shape="rect" id="Node000016" href="$classfs_1_1fuel_1_1FuelType.html#affd57b5caf743abec81b2aef2b9a1164" title="Name of the fuel." alt="" coords="442,1403,560,1444"/>
-<area shape="poly" id="edge18_Node000015_Node000016" title=" " alt="" coords="331,1421,426,1421,426,1426,331,1426"/>
-<area shape="rect" id="Node000019" href="$classfs_1_1util_1_1SafeVector.html#adcf51f00ae81e65e39fa3d6aa4ac177f" title="Add a value to the SafeVector." alt="" coords="438,1534,564,1574"/>
-<area shape="poly" id="edge21_Node000018_Node000019" title=" " alt="" coords="333,1552,422,1552,422,1557,333,1557"/>
-<area shape="poly" id="edge28_Node000020_Node000004" title=" " alt="" coords="271,829,276,746,283,689,295,625,313,558,338,491,371,427,414,371,427,360,431,364,418,375,376,430,343,493,318,559,300,626,288,690,281,747,276,830"/>
-<area shape="poly" id="edge29_Node000020_Node000005" title=" " alt="" coords="272,829,282,761,304,665,323,613,347,562,377,514,414,472,436,456,458,449,500,446,542,444,563,436,584,422,596,407,602,393,607,363,612,332,619,316,632,300,660,282,663,286,635,304,623,319,617,333,612,363,607,394,600,410,587,425,565,441,543,449,501,451,459,454,439,461,418,476,381,517,351,565,328,615,310,667,287,762,277,830"/>
-<area shape="poly" id="edge48_Node000020_Node000011" title=" " alt="" coords="272,829,280,755,301,649,320,590,344,532,375,477,414,428,429,416,433,420,418,432,379,480,349,534,325,592,307,650,285,756,277,830"/>
-<area shape="rect" id="Node000021" href="$classfs_1_1sim_1_1Scenario.html#a7bcdd23ef3fdd25a9518748e42801f00" title="Whether or not Location with given hash has burned already." alt="" coords="440,486,562,526"/>
-<area shape="poly" id="edge23_Node000020_Node000021" title=" " alt="" coords="275,829,290,774,317,698,358,616,384,578,414,543,426,533,429,537,418,547,388,581,362,619,322,700,295,775,280,830"/>
-<area shape="rect" id="Node000022" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="663,379,806,404"/>
-<area shape="poly" id="edge24_Node000020_Node000022" title=" " alt="" coords="276,829,292,779,320,714,360,646,385,614,414,587,437,572,460,565,502,562,542,559,563,551,584,536,596,522,602,507,606,477,611,446,618,430,632,415,648,404,651,408,635,419,623,433,616,447,612,478,607,509,600,525,587,540,565,556,544,564,502,568,461,570,440,577,418,591,389,618,364,649,324,716,297,781,281,830"/>
-<area shape="rect" id="Node000026" href="$classfs_1_1sim_1_1Scenario.html#a340fdab57e1e7f5a1889ce96c85c1978" title="Cell width and height (m)" alt="" coords="440,976,562,1017"/>
-<area shape="poly" id="edge26_Node000020_Node000026" title=" " alt="" coords="299,869,352,911,417,956,438,967,435,972,415,960,349,915,296,873"/>
-<area shape="rect" id="Node000030" href="$classfs_1_1sim_1_1Scenario.html#aa93a089e23519cf54f84127286b997ea" title="Whether or not the given Location is surrounded by cells that are burnt." alt="" coords="440,1042,562,1082"/>
-<area shape="poly" id="edge30_Node000020_Node000030" title=" " alt="" coords="287,869,338,945,375,988,418,1027,427,1033,424,1037,414,1031,371,992,334,948,282,872"/>
-<area shape="rect" id="Node000031" href="$classfs_1_1topo_1_1Cell.html#a5efd06ae637b3091bee2bb0fab4ff907" title="A key defining Slope, Aspect, and Fuel, used for determining Cells that spread the same." alt="" coords="442,1107,559,1132"/>
-<area shape="poly" id="edge31_Node000020_Node000031" title=" " alt="" coords="282,870,299,916,327,976,366,1039,391,1067,418,1092,429,1100,426,1104,414,1096,387,1071,362,1042,322,979,294,918,277,872"/>
-<area shape="rect" id="Node000032" href="$classfs_1_1sim_1_1Event.html#ae25f2074b64b4ace0b42a32e681be5b0" title="Make fire spread event." alt="" coords="422,1156,580,1197"/>
-<area shape="poly" id="edge32_Node000020_Node000032" title=" " alt="" coords="280,870,295,924,322,997,362,1075,388,1111,418,1143,420,1145,417,1149,414,1147,384,1114,358,1078,317,999,290,926,275,872"/>
-<area shape="rect" id="Node000033" href="$classfs_1_1sim_1_1Settings.html#a0bb44f24d4b6ad7c184daeff50325694" title="Maximum distance that the fire is allowed to spread in one step (# of cells)" alt="" coords="416,731,585,772"/>
-<area shape="poly" id="edge33_Node000020_Node000033" title=" " alt="" coords="316,827,415,782,431,776,433,781,417,787,318,832"/>
-<area shape="rect" id="Node000036" href="$classfs_1_1sim_1_1Scenario.html#a23238d09c03a661ab7218ace4e174988" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="418,796,583,837"/>
-<area shape="poly" id="edge37_Node000020_Node000036" title=" " alt="" coords="340,838,402,828,403,834,341,843"/>
-<area shape="rect" id="Node000046" href="$classfs_1_1sim_1_1Settings.html#a4e8b2a2029db0cd36f28b0e304dae8de" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="441,862,560,902"/>
-<area shape="poly" id="edge43_Node000020_Node000046" title=" " alt="" coords="341,857,426,869,425,874,340,862"/>
-<area shape="rect" id="Node000048" href="$classfs_1_1sim_1_1Scenario.html#a4fa7bd7009cda5175599ca8ee966f787" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="432,1221,569,1247"/>
-<area shape="poly" id="edge46_Node000020_Node000048" title=" " alt="" coords="278,871,288,936,312,1026,330,1075,354,1123,383,1168,418,1207,423,1211,419,1215,414,1211,378,1171,349,1126,325,1077,307,1028,283,937,273,872"/>
-<area shape="rect" id="Node000050" href="$classfs_1_1sim_1_1Settings.html#af568150489afe7210633273920d2dee6" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="675,1150,794,1190"/>
-<area shape="poly" id="edge49_Node000020_Node000050" title=" " alt="" coords="317,869,417,912,466,923,508,926,547,935,567,945,587,963,603,985,611,1007,612,1050,613,1093,620,1114,635,1135,662,1153,659,1158,631,1139,615,1116,608,1094,607,1051,606,1008,599,987,583,967,564,950,545,940,507,931,465,928,415,917,315,873"/>
-<area shape="poly" id="edge51_Node000020_Node000051" title=" " alt="" coords="291,828,328,788,366,739,379,715,387,694,396,673,414,652,424,645,427,649,418,656,400,676,392,696,384,717,370,742,332,791,295,831"/>
-<area shape="rect" id="Node000057" href="$classfs_1_1sim_1_1Scenario.html#a16d00c5a35b4ea00d95e187f62bc8c20" title="FwiWeather for given time." alt="" coords="440,666,562,706"/>
-<area shape="poly" id="edge59_Node000020_Node000057" title=" " alt="" coords="289,828,342,774,377,744,415,717,425,711,427,716,417,722,380,748,346,778,293,831"/>
-<area shape="rect" id="Node000058" href="$classfs_1_1sim_1_1Model.html#a74d9d4d9cfe4cef59b3911e3a1cd92ed" title=" " alt="" coords="420,1271,581,1296"/>
-<area shape="poly" id="edge61_Node000020_Node000058" title=" " alt="" coords="277,871,284,944,305,1048,323,1105,347,1160,379,1212,418,1258,420,1260,417,1264,414,1261,374,1215,343,1163,318,1107,300,1050,279,945,271,871"/>
-<area shape="rect" id="Node000023" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="922,379,1048,404"/>
-<area shape="poly" id="edge25_Node000022_Node000023" title=" " alt="" coords="806,389,906,389,906,394,806,394"/>
-<area shape="rect" id="Node000027" href="$classfs_1_1sim_1_1Model.html#aeecdae3285e099b10b422592385e818b" title="Cell width and height (m)" alt="" coords="659,1215,810,1240"/>
-<area shape="poly" id="edge27_Node000026_Node000027" title=" " alt="" coords="564,1011,587,1028,603,1051,610,1074,611,1117,612,1160,619,1180,635,1200,646,1209,643,1213,631,1204,615,1183,607,1161,605,1118,605,1075,598,1053,583,1032,561,1015"/>
-<area shape="rect" id="Node000034" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="884,871,1086,912"/>
-<area shape="poly" id="edge34_Node000033_Node000034" title=" " alt="" coords="586,736,643,733,707,733,773,742,837,760,874,779,908,804,960,857,956,861,904,808,871,784,835,765,772,747,706,739,643,738,586,742"/>
-<area shape="rect" id="Node000035" href="$classfs_1_1sim_1_1SettingsImplementation.html#aacede0a46e4df8e6cfe02facb5f6555b" title="Maximum distance that the fire is allowed to spread in one step (# of cells)" alt="" coords="633,774,836,814"/>
-<area shape="poly" id="edge36_Node000033_Node000035" title=" " alt="" coords="586,764,618,770,617,776,585,770"/>
-<area shape="poly" id="edge35_Node000034_Node000034" title=" " alt="" coords="938,871,936,861,943,852,960,847,985,845,1012,847,1028,853,1026,858,1011,852,985,850,961,852,946,857,941,862,943,870"/>
-<area shape="rect" id="Node000037" href="$classfs_1_1sim_1_1Scenario.html#afcd2048a5e49aa2f51f1258152190b86" title="Whether or not time is after sunrise and before sunset." alt="" coords="673,970,796,1010"/>
-<area shape="poly" id="edge38_Node000036_Node000037" title=" " alt="" coords="570,836,587,848,599,862,606,876,612,903,617,930,624,942,635,955,660,971,658,976,632,959,620,945,612,931,606,904,601,878,594,865,584,852,567,840"/>
-<area shape="rect" id="Node000042" href="$classfs_1_1sim_1_1Settings.html#adba2725a33dc64c2339196fec6894b74" title="Minimum Fine Fuel Moisture Code required for spread during the day." alt="" coords="675,839,794,880"/>
-<area shape="poly" id="edge39_Node000036_Node000042" title=" " alt="" coords="583,829,660,843,659,849,582,834"/>
-<area shape="rect" id="Node000044" href="$classfs_1_1sim_1_1Settings.html#a27c7d1cfd50db3593af559db376343d3" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="660,904,809,945"/>
-<area shape="poly" id="edge41_Node000036_Node000044" title=" " alt="" coords="563,835,587,848,611,869,635,889,647,896,645,900,632,894,607,873,584,852,560,840"/>
-<area shape="poly" id="edge40_Node000042_Node000034" title=" " alt="" coords="795,864,869,874,868,879,794,870"/>
-<area shape="poly" id="edge42_Node000044_Node000034" title=" " alt="" coords="809,912,868,904,869,910,809,918"/>
-<area shape="poly" id="edge44_Node000046_Node000034" title=" " alt="" coords="563,901,587,919,598,933,604,947,609,974,615,999,623,1010,635,1020,686,1044,709,1049,731,1049,779,1040,835,1020,871,1001,905,976,957,922,961,926,908,980,874,1005,837,1025,780,1045,732,1055,708,1054,684,1049,632,1024,619,1013,611,1001,604,975,599,949,594,936,583,923,559,905"/>
-<area shape="rect" id="Node000047" href="$classfs_1_1sim_1_1SettingsImplementation.html#ac1ee476cef8821442df5dff60f766f0c" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="633,1084,836,1125"/>
-<area shape="poly" id="edge45_Node000046_Node000047" title=" " alt="" coords="562,900,587,919,601,938,608,957,611,994,615,1029,622,1047,635,1064,646,1074,643,1078,631,1068,617,1049,610,1030,606,994,603,959,596,941,583,923,559,904"/>
-<area shape="poly" id="edge47_Node000048_Node000014" title=" " alt="" coords="551,1245,586,1256,661,1280,659,1285,585,1261,549,1250"/>
-<area shape="poly" id="edge50_Node000050_Node000034" title=" " alt="" coords="794,1156,815,1147,834,1135,859,1112,882,1086,920,1029,949,973,969,926,974,928,954,975,925,1032,886,1089,863,1116,837,1139,817,1152,796,1161"/>
-<area shape="poly" id="edge53_Node000051_Node000022" title=" " alt="" coords="561,598,583,580,597,559,603,539,605,498,607,456,615,435,631,415,647,403,651,408,635,419,620,438,612,458,610,498,609,540,602,562,587,584,564,603"/>
-<area shape="rect" id="Node000052" href="$classfs_1_1wx_1_1FireWeather.html#af0136dacf50a3e2bc2fdeacaf18358e3" title="Get FwiWeather for given time." alt="" coords="661,673,808,699"/>
-<area shape="poly" id="edge52_Node000051_Node000052" title=" " alt="" coords="563,637,634,658,664,666,663,672,633,663,561,642"/>
-<area shape="rect" id="Node000053" href="$classfs_1_1sim_1_1Settings.html#abd91f560536d7b3ff1d9b039c7f3e584" title="Whether or not to run deterministically (100% chance of spread &amp; survival)" alt="" coords="675,428,794,469"/>
-<area shape="poly" id="edge54_Node000051_Node000053" title=" " alt="" coords="559,598,583,580,600,555,606,531,613,506,632,480,659,463,662,468,635,484,618,508,611,532,605,558,587,584,562,602"/>
-<area shape="rect" id="Node000054" href="$classfs_1_1sim_1_1Scenario.html#af376de0c464fcfb3cbc7caa2217e25d1" title="Get extinction threshold for given time." alt="" coords="668,494,801,534"/>
-<area shape="poly" id="edge56_Node000051_Node000054" title=" " alt="" coords="550,598,584,580,607,561,632,544,652,535,654,540,635,548,611,566,587,584,553,602"/>
-<area shape="rect" id="Node000055" href="$classfs_1_1topo_1_1Cell.html#aac6eb5373fb309601c140ba56856555e" title="Fuel." alt="" coords="660,559,809,584"/>
-<area shape="poly" id="edge57_Node000051_Node000055" title=" " alt="" coords="562,605,655,586,656,591,563,611"/>
-<area shape="rect" id="Node000056" href="$classfs_1_1wx_1_1FwiWeather.html#adc1319967ef8b2cd3e1b329d25a16dbb" title="Moisture content (%) based on Dmc." alt="" coords="670,608,799,649"/>
-<area shape="poly" id="edge58_Node000051_Node000056" title=" " alt="" coords="562,620,654,623,654,629,562,626"/>
-<area shape="poly" id="edge55_Node000053_Node000034" title=" " alt="" coords="796,456,818,466,837,480,875,524,905,573,929,625,948,678,973,778,983,855,978,856,967,779,943,680,924,627,900,575,870,527,834,484,815,471,794,461"/>
-<area shape="poly" id="edge60_Node000057_Node000052" title=" " alt="" coords="562,684,645,684,645,689,562,689"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="66,1043,76,848,97,546,112,391,130,254,150,150,161,114,174,93,199,69,229,50,260,35,294,25,362,13,423,10,424,16,362,18,295,30,262,40,231,55,203,73,178,96,166,117,155,151,135,255,117,392,103,546,81,849,71,1043"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Scenario.html#a7a028da06f577a91ddec2d45988fa2e4" title="End the simulation." alt="" coords="211,1043,333,1084"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="128,1061,195,1061,195,1066,128,1066"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Scenario.html#a86df553a65867046b7d8d8d293c33885" title="Model this Scenario is running in." alt="" coords="673,1026,796,1066"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="126,1040,175,1029,308,1017,441,1017,561,1024,658,1033,658,1039,561,1029,440,1022,308,1023,176,1034,128,1045"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1fuel_1_1FuelType.html#a569db30b7eff537bebb1cdedf3ddc66a" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="213,1108,331,1149"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="129,1080,199,1103,197,1108,127,1085"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1sim_1_1Scenario.html#ab99dbad9bc998585797d60243233f40b" title="Save state of Scenario at given time." alt="" coords="211,1174,333,1214"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="88,1082,127,1121,177,1159,198,1169,195,1174,174,1163,123,1125,84,1086"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="204,600,340,641"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="75,1042,252,654,257,656,80,1044"/>
+<area shape="rect" id="Node000045" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="440,290,562,330"/>
+<area shape="poly" id="edge59_Node000001_Node000045" title=" " alt="" coords="66,1042,72,965,88,849,102,784,120,716,144,650,173,588,224,504,274,446,334,397,415,341,424,335,427,340,417,346,337,401,277,450,228,507,178,590,149,652,125,718,107,785,93,850,77,965,71,1043"/>
+<area shape="rect" id="Node000051" href="$classfs_1_1sim_1_1Event.html#a332cd1735d53b667d8e48acdce68801b" title="Time of Event (decimal days)" alt="" coords="207,1239,336,1264"/>
+<area shape="poly" id="edge60_Node000001_Node000051" title=" " alt="" coords="78,1083,92,1114,114,1153,142,1191,177,1224,194,1234,191,1238,174,1228,138,1195,109,1156,88,1117,73,1085"/>
+<area shape="rect" id="Node000052" href="$classfs_1_1sim_1_1Event.html#a329935ed3d54baaf68032553da414455" title="Duration that Event Cell has been burning (decimal days)" alt="" coords="176,1288,368,1314"/>
+<area shape="poly" id="edge61_Node000001_Node000052" title=" " alt="" coords="75,1083,86,1124,106,1176,136,1230,155,1254,177,1275,182,1278,179,1282,174,1279,151,1257,132,1233,101,1179,81,1126,70,1085"/>
+<area shape="rect" id="Node000053" href="$classfs_1_1sim_1_1Event.html#a4ea570cf4fd8ead8f8f08cf5c77ec3db" title="Type of Event." alt="" coords="208,1337,336,1363"/>
+<area shape="poly" id="edge62_Node000001_Node000053" title=" " alt="" coords="73,1084,81,1133,99,1198,113,1233,130,1266,152,1297,177,1324,195,1335,192,1340,174,1328,148,1301,126,1269,108,1235,94,1200,76,1134,67,1085"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="298,104,415,48,447,34,449,39,417,53,300,108"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1topo_1_1Position.html#ada62d5fbdbfe32fc2500f3b36fec723d" title="Column." alt="" coords="442,156,559,197"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="327,130,428,156,427,161,326,136"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1topo_1_1Position.html#ac5aea7392f0427357ee98dc422906996" title="Hash derived from row and column." alt="" coords="676,26,793,66"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="346,104,416,92,661,54,661,59,416,97,347,109"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1topo_1_1Position.html#a338a0debc9fe434e80755f5cc24f84a6" title="Row." alt="" coords="429,107,572,132"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="346,117,413,117,413,122,346,122"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="558,157,584,143,599,127,607,111,615,94,632,77,660,62,663,66,635,82,620,97,612,113,603,130,587,147,561,162"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1topo_1_1Position.html#a2cf1561870713770225acea107aa99bc" title="Column." alt="" coords="676,156,793,197"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="559,174,661,174,661,180,559,180"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="544,104,661,66,662,71,545,109"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1topo_1_1Position.html#af4f58ab5d8d20556d1da7e1ee6d43348" title="Row from hash." alt="" coords="676,91,793,132"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="573,114,661,111,661,117,573,120"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1fuel_1_1FuelType.html#affd57b5caf743abec81b2aef2b9a1164" title="Name of the fuel." alt="" coords="442,1108,560,1149"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="331,1126,426,1126,426,1132,331,1132"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1util_1_1SafeVector.html#adcf51f00ae81e65e39fa3d6aa4ac177f" title="Add a value to the SafeVector." alt="" coords="438,1174,564,1214"/>
+<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="333,1192,422,1192,422,1197,333,1197"/>
+<area shape="poly" id="edge26_Node000015_Node000004" title=" " alt="" coords="277,599,326,460,366,368,414,277,440,240,467,207,471,210,444,243,418,280,371,370,331,462,282,601"/>
+<area shape="poly" id="edge50_Node000015_Node000007" title=" " alt="" coords="270,600,274,517,281,459,292,394,310,327,335,261,370,198,414,143,418,139,422,143,418,147,374,201,340,263,315,329,298,395,286,459,279,517,276,600"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1sim_1_1Scenario.html#a7bcdd23ef3fdd25a9518748e42801f00" title="Whether or not Location with given hash has burned already." alt="" coords="440,600,562,641"/>
+<area shape="poly" id="edge18_Node000015_Node000016" title=" " alt="" coords="340,618,424,618,424,624,340,624"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="663,401,806,427"/>
+<area shape="poly" id="edge19_Node000015_Node000017" title=" " alt="" coords="282,599,303,566,333,527,370,488,415,456,472,432,533,417,593,410,647,408,648,413,593,415,534,423,474,437,417,460,374,492,337,530,307,569,287,602"/>
+<area shape="rect" id="Node000021" href="$classfs_1_1sim_1_1Scenario.html#a340fdab57e1e7f5a1889ce96c85c1978" title="Cell width and height (m)" alt="" coords="440,796,562,837"/>
+<area shape="poly" id="edge23_Node000015_Node000021" title=" " alt="" coords="289,640,340,708,377,747,418,781,427,788,424,792,414,786,373,751,336,712,284,643"/>
+<area shape="rect" id="Node000025" href="$classfs_1_1sim_1_1Scenario.html#aa93a089e23519cf54f84127286b997ea" title="Whether or not the given Location is surrounded by cells that are burnt." alt="" coords="440,911,562,952"/>
+<area shape="poly" id="edge27_Node000015_Node000025" title=" " alt="" coords="281,641,296,692,324,761,364,834,389,868,418,898,427,905,424,909,414,901,385,871,359,837,319,763,291,694,276,642"/>
+<area shape="rect" id="Node000026" href="$classfs_1_1topo_1_1Cell.html#a5efd06ae637b3091bee2bb0fab4ff907" title="A key defining Slope, Aspect, and Fuel, used for determining Cells that spread the same." alt="" coords="442,976,559,1002"/>
+<area shape="poly" id="edge28_Node000015_Node000026" title=" " alt="" coords="278,641,290,704,314,790,332,836,355,882,384,924,418,962,430,970,426,974,414,965,379,928,351,885,327,839,309,792,284,705,273,642"/>
+<area shape="rect" id="Node000027" href="$classfs_1_1sim_1_1Event.html#ae25f2074b64b4ace0b42a32e681be5b0" title="Make fire spread event." alt="" coords="422,355,580,396"/>
+<area shape="poly" id="edge29_Node000015_Node000027" title=" " alt="" coords="280,599,301,560,330,511,369,459,414,412,429,402,432,406,418,416,373,462,335,514,305,563,285,601"/>
+<area shape="rect" id="Node000028" href="$classfs_1_1sim_1_1Settings.html#a0bb44f24d4b6ad7c184daeff50325694" title="Maximum distance that the fire is allowed to spread in one step (# of cells)" alt="" coords="416,535,585,576"/>
+<area shape="poly" id="edge30_Node000015_Node000028" title=" " alt="" coords="340,599,412,578,413,583,341,604"/>
+<area shape="rect" id="Node000031" href="$classfs_1_1sim_1_1Scenario.html#a23238d09c03a661ab7218ace4e174988" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="418,731,583,772"/>
+<area shape="poly" id="edge34_Node000015_Node000031" title=" " alt="" coords="302,640,354,677,417,716,430,722,427,727,415,720,351,682,298,644"/>
+<area shape="rect" id="Node000041" href="$classfs_1_1sim_1_1Settings.html#a4e8b2a2029db0cd36f28b0e304dae8de" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="441,666,560,706"/>
+<area shape="poly" id="edge44_Node000015_Node000041" title=" " alt="" coords="341,638,427,662,425,668,340,643"/>
+<area shape="rect" id="Node000043" href="$classfs_1_1sim_1_1Scenario.html#a4fa7bd7009cda5175599ca8ee966f787" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="432,861,569,887"/>
+<area shape="poly" id="edge47_Node000015_Node000043" title=" " alt="" coords="283,641,301,684,329,740,368,797,392,824,418,847,426,852,423,857,414,851,388,827,364,801,325,742,296,686,278,643"/>
+<area shape="poly" id="edge51_Node000015_Node000045" title=" " alt="" coords="284,598,322,535,366,454,378,422,384,395,393,369,414,342,424,333,428,337,418,345,398,371,389,396,383,424,370,457,327,537,289,601"/>
+<area shape="rect" id="Node000050" href="$classfs_1_1sim_1_1Scenario.html#a16d00c5a35b4ea00d95e187f62bc8c20" title="FwiWeather for given time." alt="" coords="440,470,562,510"/>
+<area shape="poly" id="edge57_Node000015_Node000050" title=" " alt="" coords="298,598,351,560,415,521,427,515,430,520,417,526,354,565,302,602"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="922,401,1048,427"/>
+<area shape="poly" id="edge20_Node000017_Node000018" title=" " alt="" coords="806,412,906,412,906,417,806,417"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1topo_1_1Environment.html#abff70ce914018d13e398fd1527d3faaf" title="Cell at given row and column." alt="" coords="1134,394,1275,434"/>
+<area shape="poly" id="edge21_Node000018_Node000019" title=" " alt="" coords="1048,412,1118,412,1118,417,1048,417"/>
+<area shape="rect" id="Node000020" href="$classfs_1_1data_1_1ConstantGrid.html#acc7f5f1a81782ecc7f9a4c019218f674" title="Value for grid at given Location." alt="" coords="1323,401,1486,427"/>
+<area shape="poly" id="edge22_Node000019_Node000020" title=" " alt="" coords="1276,412,1308,412,1308,417,1276,417"/>
+<area shape="rect" id="Node000022" href="$classfs_1_1sim_1_1Model.html#aeecdae3285e099b10b422592385e818b" title="Cell width and height (m)" alt="" coords="659,927,810,952"/>
+<area shape="poly" id="edge24_Node000021_Node000022" title=" " alt="" coords="564,833,587,847,603,864,611,881,619,897,635,912,645,918,643,923,632,916,615,900,606,883,599,867,584,851,561,838"/>
+<area shape="rect" id="Node000023" href="$classfs_1_1topo_1_1Environment.html#ac10a0b003f0e76c51e38e0b4be58983a" title="Cell width and height (m)" alt="" coords="914,992,1056,1033"/>
+<area shape="poly" id="edge25_Node000022_Node000023" title=" " alt="" coords="796,950,836,961,907,985,906,990,835,966,795,955"/>
+<area shape="rect" id="Node000029" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="884,636,1086,677"/>
+<area shape="poly" id="edge31_Node000028_Node000029" title=" " alt="" coords="586,571,870,630,869,635,585,576"/>
+<area shape="rect" id="Node000030" href="$classfs_1_1sim_1_1SettingsImplementation.html#aacede0a46e4df8e6cfe02facb5f6555b" title="Maximum distance that the fire is allowed to spread in one step (# of cells)" alt="" coords="633,500,836,541"/>
+<area shape="poly" id="edge33_Node000028_Node000030" title=" " alt="" coords="585,540,618,535,618,541,586,546"/>
+<area shape="poly" id="edge32_Node000029_Node000029" title=" " alt="" coords="943,636,941,627,948,617,963,612,985,610,1009,612,1023,618,1021,623,1007,617,985,615,964,617,951,622,946,628,948,635"/>
+<area shape="rect" id="Node000032" href="$classfs_1_1sim_1_1Scenario.html#afcd2048a5e49aa2f51f1258152190b86" title="Whether or not time is after sunrise and before sunset." alt="" coords="673,862,796,902"/>
+<area shape="poly" id="edge35_Node000031_Node000032" title=" " alt="" coords="566,770,587,783,603,799,611,816,620,832,635,847,660,861,657,865,632,851,615,835,607,818,599,803,584,787,564,775"/>
+<area shape="rect" id="Node000037" href="$classfs_1_1sim_1_1Settings.html#adba2725a33dc64c2339196fec6894b74" title="Minimum Fine Fuel Moisture Code required for spread during the day." alt="" coords="675,731,794,772"/>
+<area shape="poly" id="edge38_Node000031_Node000037" title=" " alt="" coords="583,749,659,749,659,754,583,754"/>
+<area shape="rect" id="Node000039" href="$classfs_1_1sim_1_1Settings.html#a27c7d1cfd50db3593af559db376343d3" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="660,796,809,837"/>
+<area shape="poly" id="edge41_Node000031_Node000039" title=" " alt="" coords="577,770,646,789,644,794,575,775"/>
+<area shape="rect" id="Node000033" href="$classfs_1_1sim_1_1Scenario.html#aa10a65317440b8a02761dd194dd033ad" title="Sunset time for given day." alt="" coords="924,862,1046,902"/>
+<area shape="poly" id="edge36_Node000032_Node000033" title=" " alt="" coords="796,880,908,880,908,885,796,885"/>
+<area shape="rect" id="Node000035" href="$classfs_1_1sim_1_1Scenario.html#a06bcec22a0aa50b28aae7ef54fa7f41a" title="Sunrise time for given day." alt="" coords="924,927,1046,968"/>
+<area shape="poly" id="edge37_Node000032_Node000035" title=" " alt="" coords="796,895,909,925,908,930,795,901"/>
+<area shape="poly" id="edge39_Node000037_Node000029" title=" " alt="" coords="794,730,835,716,921,681,923,686,837,721,796,735"/>
+<area shape="rect" id="Node000038" href="$classfs_1_1sim_1_1SettingsImplementation.html#a4455ed56197bf0dfac1442a1ad68af79" title="Minimum Fine Fuel Moisture Code required for spread during the day." alt="" coords="884,731,1086,772"/>
+<area shape="poly" id="edge40_Node000037_Node000038" title=" " alt="" coords="795,749,868,749,868,754,795,754"/>
+<area shape="poly" id="edge42_Node000039_Node000029" title=" " alt="" coords="808,796,834,781,850,766,858,751,867,735,882,718,929,683,932,687,885,721,871,738,863,754,854,770,837,786,811,800"/>
+<area shape="rect" id="Node000040" href="$classfs_1_1sim_1_1SettingsImplementation.html#a8545e60898a134c3fb8a1d4e6d5bbac9" title="Minimum Fine Fuel Moisture Code required for spread during the night." alt="" coords="884,796,1086,837"/>
+<area shape="poly" id="edge43_Node000039_Node000040" title=" " alt="" coords="809,814,868,814,868,820,809,820"/>
+<area shape="poly" id="edge45_Node000041_Node000029" title=" " alt="" coords="560,666,633,652,754,644,868,646,868,651,754,649,634,657,561,671"/>
+<area shape="rect" id="Node000042" href="$classfs_1_1sim_1_1SettingsImplementation.html#ac1ee476cef8821442df5dff60f766f0c" title="Minimum rate of spread before fire is considered to be spreading (m/min)" alt="" coords="633,666,836,706"/>
+<area shape="poly" id="edge46_Node000041_Node000042" title=" " alt="" coords="561,684,618,684,618,689,561,689"/>
+<area shape="poly" id="edge48_Node000043_Node000010" title=" " alt="" coords="568,885,587,897,600,912,607,927,612,956,617,985,623,999,635,1012,660,1028,657,1033,632,1016,619,1001,612,987,607,957,602,929,595,915,584,902,566,890"/>
+<area shape="rect" id="Node000044" href="$classfs_1_1sim_1_1Model.html#a8e55855af59dc784353618c10ada30cc" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="674,976,795,1002"/>
+<area shape="poly" id="edge49_Node000043_Node000044" title=" " alt="" coords="564,885,587,897,603,914,612,931,619,948,635,963,660,975,658,980,632,967,615,951,607,934,599,917,584,902,562,890"/>
+<area shape="poly" id="edge53_Node000045_Node000017" title=" " alt="" coords="563,329,587,341,602,353,611,365,620,376,635,387,650,394,647,398,632,391,617,380,607,368,598,357,584,346,561,333"/>
+<area shape="rect" id="Node000046" href="$classfs_1_1wx_1_1FireWeather.html#af0136dacf50a3e2bc2fdeacaf18358e3" title="Get FwiWeather for given time." alt="" coords="661,451,808,476"/>
+<area shape="poly" id="edge52_Node000045_Node000046" title=" " alt="" coords="564,326,587,342,605,367,611,392,617,415,624,427,635,437,648,446,645,450,632,442,620,430,613,418,606,393,600,369,583,345,561,330"/>
+<area shape="rect" id="Node000047" href="$classfs_1_1sim_1_1Scenario.html#af376de0c464fcfb3cbc7caa2217e25d1" title="Get extinction threshold for given time." alt="" coords="668,222,801,262"/>
+<area shape="poly" id="edge54_Node000045_Node000047" title=" " alt="" coords="561,290,652,263,653,268,563,295"/>
+<area shape="rect" id="Node000048" href="$classfs_1_1topo_1_1Cell.html#aac6eb5373fb309601c140ba56856555e" title="Fuel." alt="" coords="660,287,809,312"/>
+<area shape="poly" id="edge55_Node000045_Node000048" title=" " alt="" coords="562,305,645,301,645,306,562,310"/>
+<area shape="rect" id="Node000049" href="$classfs_1_1wx_1_1FwiWeather.html#adc1319967ef8b2cd3e1b329d25a16dbb" title="Moisture content (%) based on Dmc." alt="" coords="670,336,799,377"/>
+<area shape="poly" id="edge56_Node000045_Node000049" title=" " alt="" coords="563,320,655,338,654,344,562,325"/>
+<area shape="poly" id="edge58_Node000050_Node000046" title=" " alt="" coords="562,481,645,471,646,476,562,486"/>
 </map>

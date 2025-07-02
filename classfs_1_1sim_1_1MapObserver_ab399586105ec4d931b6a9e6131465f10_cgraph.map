@@ -1,5 +1,0 @@
-<map id="fs::sim::MapObserver::save" name="fs::sim::MapObserver::save">
-<area shape="rect" id="Node000001" title="Save observations." alt="" coords="5,5,149,46"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1IObserver.html#ae4f030e4b2416bfc64ef9bcd7e502aee" title="Make name to save file as." alt="" coords="197,5,319,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,23,181,23,181,28,149,28"/>
-</map>

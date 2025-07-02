@@ -1,27 +1,24 @@
 <map id="fs::sim::Model::cell" name="fs::sim::Model::cell">
-<area shape="rect" id="Node000001" title="Cell at the given row and column." alt="" coords="852,155,978,180"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="644,56,787,82"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="884,147,846,120,803,95,775,85,777,80,805,90,849,115,887,142"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#a631ba3f35815744c2b8ed85ff7c1118b" title="Get Cell for given Location." alt="" coords="644,105,787,131"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="844,153,770,134,771,129,846,148"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#a5e2e6a1f866bc3174532386c80dc798e" title="Find all Cell(s) that can burn in entire Environment." alt="" coords="627,155,804,180"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="836,170,804,170,804,165,836,165"/>
-<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="406,205,579,231"/>
-<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="848,187,804,195,687,209,580,217,580,212,687,204,803,190,847,182"/>
-<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Model.html#a42d70f2bb1be879ff1bb847667a4590e" title="Find Cell(s) that can burn closest to Location." alt="" coords="635,256,796,282"/>
-<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="884,192,805,239,760,258,758,253,802,234,882,187"/>
+<area shape="rect" id="Node000001" title="Cell at the given row and column." alt="" coords="837,131,963,156"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="637,56,779,82"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="858,126,788,95,757,85,758,80,790,90,860,121"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#a631ba3f35815744c2b8ed85ff7c1118b" title="Get Cell for given Location." alt="" coords="637,105,779,131"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="821,136,779,130,780,125,821,130"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#a42d70f2bb1be879ff1bb847667a4590e" title="Find Cell(s) that can burn closest to Location." alt="" coords="627,155,789,180"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="821,156,790,160,789,155,821,151"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="406,188,579,214"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="864,166,828,183,789,195,736,205,681,210,580,210,580,205,680,204,735,199,788,190,826,178,861,162"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="422,5,563,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="640,55,552,34,553,29,642,49"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="635,55,550,34,551,29,636,49"/>
 <area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="199,48,335,89"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="629,72,335,72,335,66,629,66"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="621,72,336,72,336,66,621,66"/>
 <area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="432,106,554,146"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="649,89,555,113,554,108,647,83"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="643,89,555,113,553,107,642,84"/>
 <area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,78,128,118"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="184,84,128,92,127,87,183,78"/>
 <area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="416,109,335,89,336,83,417,104"/>
 <area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="416,124,128,105,128,99,416,119"/>
-<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="642,187,553,207,552,202,640,182"/>
-<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="176,205,358,231"/>
-<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="391,221,358,221,358,216,391,216"/>
-<area shape="poly" id="edge13_Node000011_Node000009" title=" " alt="" coords="640,255,552,234,553,229,642,249"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="612,185,580,190,580,185,612,180"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="176,188,358,214"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="391,204,358,204,358,198,391,198"/>
 </map>

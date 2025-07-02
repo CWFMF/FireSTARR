@@ -9,8 +9,9 @@ var searchData=
   ['time_6',['time',['../classfs_1_1sim_1_1Event.html#a332cd1735d53b667d8e48acdce68801b',1,'fs::sim::Event::time()'],['../classfs_1_1sim_1_1SpreadInfo.html#acc043aa862abbd872501deca986310c1',1,'fs::sim::SpreadInfo::time()']]],
   ['timeatlocation_7',['timeAtLocation',['../classfs_1_1sim_1_1Event.html#a329935ed3d54baaf68032553da414455',1,'fs::sim::Event']]],
   ['timelimit_8',['timeLimit',['../classfs_1_1sim_1_1Model.html#aedf233c8b435b27fbd7cf0e40344d8df',1,'fs::sim::Model']]],
-  ['topohash_9',['topoHash',['../classfs_1_1topo_1_1Cell.html#a7ab6aff4b0567a5e3f06715c656c9e01',1,'fs::topo::Cell::topoHash(const Topo value) noexcept'],['../classfs_1_1topo_1_1Cell.html#a8a83df20744cc1e6831f5d04713d1b69',1,'fs::topo::Cell::topoHash() const noexcept']]],
-  ['total_5fsteps_10',['total_steps',['../classfs_1_1sim_1_1Scenario.html#a1591dabb8d78d41666981d06c61259c3',1,'fs::sim::Scenario']]],
-  ['try_5fremove_11',['try_remove',['../namespaceutil.html#a0a2effcb20c16a283e877a6414fe941f',1,'util']]],
-  ['type_12',['type',['../classfs_1_1sim_1_1Event.html#a4ea570cf4fd8ead8f8f08cf5c77ec3db',1,'fs::sim::Event']]]
+  ['timesincelastsave_9',['timeSinceLastSave',['../classfs_1_1sim_1_1Model.html#ae9a75421e01851589fa5b3051d22b655',1,'fs::sim::Model']]],
+  ['topohash_10',['topoHash',['../classfs_1_1topo_1_1Cell.html#a7ab6aff4b0567a5e3f06715c656c9e01',1,'fs::topo::Cell::topoHash(const Topo value) noexcept'],['../classfs_1_1topo_1_1Cell.html#a8a83df20744cc1e6831f5d04713d1b69',1,'fs::topo::Cell::topoHash() const noexcept']]],
+  ['total_5fsteps_11',['total_steps',['../classfs_1_1sim_1_1Scenario.html#a1591dabb8d78d41666981d06c61259c3',1,'fs::sim::Scenario']]],
+  ['try_5fremove_12',['try_remove',['../namespaceutil.html#a0a2effcb20c16a283e877a6414fe941f',1,'util']]],
+  ['type_13',['type',['../classfs_1_1sim_1_1Event.html#a4ea570cf4fd8ead8f8f08cf5c77ec3db',1,'fs::sim::Event']]]
 ];

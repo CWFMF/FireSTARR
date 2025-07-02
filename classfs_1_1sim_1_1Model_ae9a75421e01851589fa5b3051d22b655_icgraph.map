@@ -1,0 +1,11 @@
+<map id="fs::sim::Model::timeSinceLastSave" name="fs::sim::Model::timeSinceLastSave">
+<area shape="rect" id="Node000001" title="Time since last interim save." alt="" coords="715,23,880,64"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Model.html#acccbc032b55b4e1626f56b0fa5dbfca0" title="Run Iterations until confidence is reached." alt="" coords="236,5,414,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="699,41,414,26,415,20,700,36"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Model.html#ac6dfb7d9c3c81e60b39dbcbea4660e36" title=" " alt="" coords="462,56,667,82"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="700,57,668,60,667,55,700,51"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="5,31,188,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,32,188,36,188,31,220,27"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="485,55,388,34,390,29,486,50"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="446,65,188,51,188,46,447,60"/>
+</map>

@@ -1,8 +1,0 @@
-<map id="fs::sim::Settings::intensityMaxModerate" name="fs::sim::Settings::intensityMaxModerate">
-<area shape="rect" id="Node000001" title="The maximum fire intensity for the &#39;moderate&#39; range of intensity (kW/m)" alt="" coords="5,63,153,103"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="201,29,403,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,69,185,64,186,70,153,75"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1SettingsImplementation.html#a2a74cf4a5208635fd4e4fe5c6ba562c0" title="The maximum fire intensity for the &#39;moderate&#39; range of intensity (kW/m)" alt="" coords="201,95,403,135"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="153,91,186,96,185,101,153,96"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="260,29,258,19,265,10,279,5,302,3,326,5,340,11,338,16,325,10,302,8,281,10,268,15,263,21,265,28"/>
-</map>

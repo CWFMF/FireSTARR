@@ -6,6 +6,6 @@ var searchData=
   ['negb_3',['negB',['../classfs_1_1fuel_1_1StandardFuel.html#a7e97f4ee73038e50918caa0691120961',1,'fs::fuel::StandardFuel']]],
   ['nodatainput_4',['nodataInput',['../classfs_1_1data_1_1Grid.html#a1a282e0b9172d27d9940cbfea755010c',1,'fs::data::Grid']]],
   ['nodatavalue_5',['nodataValue',['../classfs_1_1data_1_1Grid.html#af3e3116be99d6fdd09722cf147c23b03',1,'fs::data::Grid']]],
-  ['notify_6',['notify',['../classfs_1_1sim_1_1Semaphore.html#ae793acfb80b2e3782d9b644d4024bbe9',1,'fs::sim::Semaphore::notify()'],['../classfs_1_1sim_1_1Scenario.html#ab02ff5e0c425fd10edd755b622b0541b',1,'fs::sim::Scenario::notify()']]],
+  ['notify_6',['notify',['../classfs_1_1sim_1_1Semaphore.html#ae793acfb80b2e3782d9b644d4024bbe9',1,'fs::sim::Semaphore']]],
   ['numsizes_7',['numSizes',['../classfs_1_1sim_1_1ProbabilityMap.html#aed20964eb4e34000d7a8e28da21a734c',1,'fs::sim::ProbabilityMap']]]
 ];

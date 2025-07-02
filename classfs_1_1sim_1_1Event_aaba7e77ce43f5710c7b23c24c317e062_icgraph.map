@@ -1,5 +1,0 @@
-<map id="fs::sim::Event::source" name="fs::sim::Event::source">
-<area shape="rect" id="Node000001" title="CellIndex for relative Cell that spread into from." alt="" coords="212,13,355,38"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Event.html#ae42d4a7801ec3f0639e02198bb3e2d6b" title="Make fire spread event." alt="" coords="5,5,164,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,28,164,28,164,23,196,23"/>
-</map>

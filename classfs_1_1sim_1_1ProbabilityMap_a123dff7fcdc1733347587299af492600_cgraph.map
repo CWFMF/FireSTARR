@@ -1,0 +1,15 @@
+<map id="fs::sim::ProbabilityMap::saveTotal" name="fs::sim::ProbabilityMap::saveTotal">
+<area shape="rect" id="Node000001" title="Save map representing all intensities." alt="" coords="5,71,156,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1Perimeter.html#ab0250ce44b8345528136e2bd6236018f" title="Map of all burned Locations." alt="" coords="217,5,342,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,68,201,48,203,53,145,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1ProbabilityMap.html#aed20964eb4e34000d7a8e28da21a734c" title="Number of sizes that have been added." alt="" coords="204,71,354,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,88,189,88,189,94,156,94"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1ProbabilityMap.html#a861581234f33032003d653ecb7dc0c19" title="Save probability file and record filename if interim." alt="" coords="204,136,355,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="145,109,202,128,200,133,144,114"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1ProbabilityMap.html#a736a24beaea7e9e41de2789b77169262" title="Make note of any interim files for later deletion." alt="" coords="403,103,553,143"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="355,141,388,135,389,141,356,146"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1data_1_1GridMap.html#a5cce0c602b1221ab1a70df63d7ac81d5" title="Save GridMap contents to .asc file as probability." alt="" coords="406,168,551,209"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="356,166,390,172,390,177,355,171"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1data_1_1GridData.html#a3b0edb0d283bb069ef9df135c855286b" title=" " alt="" coords="601,160,754,216"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="551,186,586,186,586,191,551,191"/>
+</map>

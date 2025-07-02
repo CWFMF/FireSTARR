@@ -1,43 +1,39 @@
 <map id="fs::topo::Environment::cell" name="fs::topo::Environment::cell">
-<area shape="rect" id="Node000001" title="Cell at given row and column." alt="" coords="1041,307,1182,348"/>
-<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1BurnedMap.html#ac3aba395a7db0dbd42578bd61570f8cf" title="Constructor." alt="" coords="855,98,990,138"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1092,294,1052,224,1024,186,991,152,976,141,979,137,995,148,1028,182,1057,221,1097,292"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="859,163,986,188"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1082,297,1042,253,991,210,958,191,961,187,995,205,1045,249,1086,293"/>
-<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Model.html#a5e2e6a1f866bc3174532386c80dc798e" title="Find all Cell(s) that can burn in entire Environment." alt="" coords="627,213,804,239"/>
-<area shape="poly" id="edge18_Node000001_Node000010" title=" " alt="" coords="1055,303,992,278,895,254,803,239,804,234,896,249,994,273,1057,298"/>
-<area shape="rect" id="Node000013" href="$classfs_1_1sim_1_1Model.html#a42d70f2bb1be879ff1bb847667a4590e" title="Find Cell(s) that can burn closest to Location." alt="" coords="635,263,796,288"/>
-<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="1025,311,993,305,890,292,796,283,797,278,891,287,993,300,1026,305"/>
-<area shape="rect" id="Node000014" href="$classfs_1_1sim_1_1Model.html#aaf883a24d2c44d2fc5e7cec0c8391dc0" title="Cell at the given Location." alt="" coords="859,315,986,340"/>
-<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="1026,330,986,330,986,325,1026,325"/>
-<area shape="rect" id="Node000015" href="$classfs_1_1topo_1_1Environment.html#aa4db63058221f4d45a2b7ce8e352e3fb" title="Combine rasters into ConstantGrid&lt;Cell, Topo&gt;" alt="" coords="852,364,993,405"/>
-<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="1029,355,993,366,991,361,1027,350"/>
-<area shape="rect" id="Node000016" href="$classfs_1_1topo_1_1Environment.html#a5da390627c38c30c50269bcb10b0f7fa" title="Cell at Location with given hash." alt="" coords="852,430,993,470"/>
-<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="1076,360,994,419,972,432,969,427,992,415,1073,356"/>
-<area shape="rect" id="Node000017" href="$classfs_1_1topo_1_1Perimeter.html#a058c31a8b0611493b076ce23c8cc0717" title="Create a Perimeter of the given size at the given Location." alt="" coords="860,495,985,536"/>
-<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="1094,362,1052,423,1025,455,995,484,976,497,973,492,991,480,1021,452,1048,420,1089,359"/>
-<area shape="rect" id="Node000018" href="$classfs_1_1topo_1_1Perimeter.html#ad44c584a5fe10ffc7a2ed93a0646f3f1" title="Initialize perimeter from a file." alt="" coords="860,560,985,601"/>
-<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="1102,363,1086,405,1063,454,1033,504,995,549,978,562,975,558,991,546,1028,501,1058,452,1081,403,1097,361"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="644,63,787,88"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="860,158,850,152,835,139,826,126,817,114,802,102,780,91,782,87,805,97,821,110,830,123,839,136,853,148,862,153"/>
-<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Scenario.html#a631ba3f35815744c2b8ed85ff7c1118b" title="Get Cell for given Location." alt="" coords="644,112,787,138"/>
-<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="851,161,770,141,772,136,853,156"/>
-<area shape="poly" id="edge11_Node000003_Node000010" title=" " alt="" coords="853,195,772,215,770,210,851,190"/>
-<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="406,213,579,239"/>
-<area shape="poly" id="edge16_Node000003_Node000011" title=" " alt="" coords="844,183,741,191,628,203,558,215,557,210,627,198,740,185,843,177"/>
-<area shape="poly" id="edge14_Node000003_Node000013" title=" " alt="" coords="893,200,853,228,805,254,776,265,774,260,803,249,850,223,890,196"/>
+<area shape="rect" id="Node000001" title="Cell at given row and column." alt="" coords="1026,279,1167,320"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1topo_1_1BurnedMap.html#ac3aba395a7db0dbd42578bd61570f8cf" title="Constructor." alt="" coords="840,91,975,132"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1074,267,1034,206,1007,174,976,146,960,135,963,130,980,141,1010,170,1038,203,1079,264"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Model.html#a14d0a74b3bf0a3e71c70fcfb53484c61" title="Cell at the given row and column." alt="" coords="844,156,970,182"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1062,270,1022,236,977,203,941,185,944,180,979,199,1025,232,1065,266"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1Model.html#a42d70f2bb1be879ff1bb847667a4590e" title="Find Cell(s) that can burn closest to Location." alt="" coords="627,207,789,232"/>
+<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="1045,274,1012,259,977,247,880,229,789,223,789,217,881,224,979,242,1014,254,1047,269"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1sim_1_1Model.html#aaf883a24d2c44d2fc5e7cec0c8391dc0" title="Cell at the given Location." alt="" coords="844,257,970,283"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="1010,289,970,283,971,277,1011,284"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1topo_1_1Environment.html#aa4db63058221f4d45a2b7ce8e352e3fb" title="Combine rasters into ConstantGrid&lt;Cell, Topo&gt;" alt="" coords="837,307,978,348"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="1011,315,979,320,978,314,1010,310"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1topo_1_1Environment.html#a5da390627c38c30c50269bcb10b0f7fa" title="Cell at Location with given hash." alt="" coords="837,372,978,413"/>
+<area shape="poly" id="edge18_Node000001_Node000015" title=" " alt="" coords="1043,330,979,362,954,374,952,369,977,357,1041,325"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1topo_1_1Perimeter.html#a058c31a8b0611493b076ce23c8cc0717" title="Create a Perimeter of the given size at the given Location." alt="" coords="845,438,970,478"/>
+<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="1073,334,1032,381,980,427,960,439,957,435,976,423,1028,377,1069,330"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1topo_1_1Perimeter.html#ad44c584a5fe10ffc7a2ed93a0646f3f1" title="Initialize perimeter from a file." alt="" coords="845,503,970,544"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="1084,335,1044,412,1014,454,980,492,962,505,959,500,976,488,1010,451,1039,410,1079,333"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#a56804f99331658ab2b47e40d60728451" title="Get Cell for given row and column." alt="" coords="637,56,779,82"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="845,151,835,146,820,132,811,119,802,107,787,95,766,85,768,80,790,91,806,103,815,116,824,129,838,141,847,147"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Scenario.html#a631ba3f35815744c2b8ed85ff7c1118b" title="Get Cell for given Location." alt="" coords="637,105,779,131"/>
+<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="839,154,761,134,762,129,840,149"/>
+<area shape="poly" id="edge11_Node000003_Node000010" title=" " alt="" coords="840,189,762,209,761,203,839,183"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Model.html#a5fd8447ddd83df3f13a00f23de2d0705" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="406,188,579,214"/>
+<area shape="poly" id="edge14_Node000003_Node000011" title=" " alt="" coords="829,177,580,197,580,191,829,172"/>
 <area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ab76b62f07f1f294f86eb67bc138ac8cf" title="Run the Scenario." alt="" coords="422,5,563,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="647,61,545,34,546,29,649,56"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="199,112,335,153"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="652,95,580,110,450,125,335,133,335,128,449,120,579,105,651,90"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="432,55,554,96"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="629,78,554,78,554,73,629,73"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,84,128,125"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="183,124,127,116,128,111,184,119"/>
-<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="417,97,336,118,335,113,416,92"/>
-<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="416,83,128,103,128,98,416,78"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="612,229,580,229,580,224,612,224"/>
-<area shape="rect" id="Node000012" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="176,213,358,239"/>
-<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="391,229,358,229,358,224,391,224"/>
-<area shape="poly" id="edge15_Node000013_Node000011" title=" " alt="" coords="639,261,554,242,555,237,640,256"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="635,55,550,34,551,29,636,49"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#ace42e9983a86d7b508cbdf9d6eb0bbf1" title="Schedule a fire spread Event." alt="" coords="199,48,335,89"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="621,72,336,72,336,66,621,66"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Scenario.html#aa0d94661d471354f16303b8c181e5509" title="Whether or not the fire survives the conditions." alt="" coords="432,106,554,146"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="643,89,555,113,553,107,642,84"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#ae7e3d30df7b9c3bafcf6a7736213d88c" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,78,128,118"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="184,84,128,92,127,87,183,78"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="416,109,335,89,336,83,417,104"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="416,124,128,105,128,99,416,119"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="611,214,580,211,580,206,612,208"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1sim_1_1Model.html#abba3cfe6442e94d76de9db6ed2eb6724" title="Run Scenarios initialized from given inputs." alt="" coords="176,188,358,214"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="391,204,358,204,358,198,391,198"/>
 </map>

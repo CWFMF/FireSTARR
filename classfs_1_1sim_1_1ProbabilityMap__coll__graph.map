@@ -1,24 +1,24 @@
 <map id="fs::sim::ProbabilityMap" name="fs::sim::ProbabilityMap">
-<area shape="rect" id="Node000001" title="Map of the percentage of simulations in which a Cell burned in each intensity category." alt="" coords="1074,133,1225,158"/>
+<area shape="rect" id="Node000001" title="Map of the percentage of simulations in which a Cell burned in each intensity category." alt="" coords="1074,126,1225,152"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,33,59,58"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,34,135,23,205,18,897,18,977,18,1011,25,1052,42,1081,62,1107,86,1142,131,1138,134,1103,90,1078,66,1049,47,1009,30,976,23,897,23,205,23,136,28,74,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,34,135,23,205,18,897,18,934,21,971,30,1039,59,1096,94,1135,124,1131,128,1093,99,1036,64,969,35,933,26,897,23,205,23,136,28,74,39"/>
 <area shape="rect" id="Node000006" href="$classfs_1_1data_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="145,60,268,85"/>
 <area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="74,50,83,51,145,61,144,66,82,57,73,55"/>
-<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1GridMap.html" title=" " alt="" coords="832,68,959,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="975,103,1090,130,1089,135,973,109"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="580,60,726,116"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="741,86,832,86,832,91,741,91"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1data_1_1GridMap.html" title=" " alt="" coords="832,61,959,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="975,97,1090,123,1089,128,973,102"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1data_1_1GridData.html" title=" " alt="" coords="580,58,726,114"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="741,82,832,80,832,85,741,87"/>
 <area shape="rect" id="Node000005" href="$classfs_1_1data_1_1Grid.html" title=" " alt="" coords="333,57,461,98"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="476,78,580,83,580,88,476,84"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="476,77,580,81,580,86,476,83"/>
 <area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="284,72,333,73,333,79,283,77"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="317,122,477,148"/>
-<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="486,116,579,99,580,104,487,121"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="829,133,962,158"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="978,143,1074,143,1074,148,978,148"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="868,182,924,208"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="939,185,1050,163,1084,156,1085,162,1051,169,940,190"/>
-<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Perimeter.html" title="Perimeter for an existing fire to initialize a simulation with." alt="" coords="833,232,958,257"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="964,224,1049,196,1125,157,1127,161,1051,200,966,229"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="574,232,732,257"/>
-<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="747,242,833,242,833,247,747,247"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="482,116,579,97,580,102,483,121"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="829,126,962,152"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="978,136,1074,136,1074,142,978,142"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="868,176,924,201"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="939,178,1050,157,1084,150,1085,155,1051,162,940,183"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1topo_1_1Perimeter.html" title="Perimeter for an existing fire to initialize a simulation with." alt="" coords="833,225,958,250"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="964,218,1049,189,1125,150,1127,155,1051,194,966,223"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="574,225,732,250"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="747,235,833,235,833,240,747,240"/>
 </map>

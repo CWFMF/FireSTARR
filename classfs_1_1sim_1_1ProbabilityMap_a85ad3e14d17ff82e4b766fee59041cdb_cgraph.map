@@ -1,0 +1,7 @@
+<map id="fs::sim::ProbabilityMap::saveSizes" name="fs::sim::ProbabilityMap::saveSizes">
+<area shape="rect" id="Node000001" title="Save list of sizes." alt="" coords="5,39,156,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1ProbabilityMap.html#a49129efbb55f0f18d1dcdaeff9900855" title="List of sizes of IntensityMaps that have been added." alt="" coords="204,5,354,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,44,188,38,189,43,156,49"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1ProbabilityMap.html#a736a24beaea7e9e41de2789b77169262" title="Make note of any interim files for later deletion." alt="" coords="204,71,354,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,68,189,74,188,79,155,74"/>
+</map>

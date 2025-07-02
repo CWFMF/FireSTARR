@@ -10,9 +10,14 @@ var searchData=
   ['intensity_5fmax_5f_7',['intensity_max_',['../classfs_1_1sim_1_1IntensityMap.html#a0427fc54106df453ccbb4483c5aea6f9',1,'fs::sim::IntensityMap']]],
   ['intensity_5fmax_5flow_5f_8',['intensity_max_low_',['../classfs_1_1sim_1_1SettingsImplementation.html#ab18c8440243df6c8df7f9aa427618719',1,'fs::sim::SettingsImplementation']]],
   ['intensity_5fmax_5fmoderate_5f_9',['intensity_max_moderate_',['../classfs_1_1sim_1_1SettingsImplementation.html#a3386dd99501eae7fc261203042ca3eca',1,'fs::sim::SettingsImplementation']]],
-  ['is_5fburned_5f_10',['is_burned_',['../classfs_1_1sim_1_1IntensityMap.html#abe6f850fb5138696ebf2fb8c6538730a',1,'fs::sim::IntensityMap']]],
-  ['is_5fout_5fof_5ftime_5f_11',['is_out_of_time_',['../classfs_1_1sim_1_1Model.html#a26fd0751509b9ded329e9ce221acee3e',1,'fs::sim::Model']]],
-  ['is_5fover_5fsimulation_5fcount_5f_12',['is_over_simulation_count_',['../classfs_1_1sim_1_1Model.html#aec7349f3a8f619ec75cd26e52fedc70c',1,'fs::sim::Model']]],
-  ['is_5foverridden_5f_13',['is_overridden_',['../classfs_1_1wx_1_1Startup.html#a38ed85b294f8340174cfb8b665d199c7',1,'fs::wx::Startup']]],
-  ['isi_5f_14',['isi_',['../classfs_1_1wx_1_1FwiWeather.html#a48bff795c8559aebc22dba3b7b6c046e',1,'fs::wx::FwiWeather']]]
+  ['interim_5fchanged_5f_10',['interim_changed_',['../classfs_1_1sim_1_1Model.html#a1e0b80a2a0786305bab80f0154f57255',1,'fs::sim::Model']]],
+  ['interim_5foutput_5finterval_5fseconds_5f_11',['interim_output_interval_seconds_',['../classfs_1_1sim_1_1SettingsImplementation.html#a6c9f9d5939da669183ad700f6666f436',1,'fs::sim::SettingsImplementation']]],
+  ['interim_5fsave_5finterval_5f_12',['interim_save_interval_',['../classfs_1_1sim_1_1Model.html#ada648333e6ef5b24301a019aace5d4c9',1,'fs::sim::Model']]],
+  ['is_5fbeing_5fcancelled_5f_13',['is_being_cancelled_',['../classfs_1_1sim_1_1Model.html#a49cea761dfd234bc0210be8478a82b2d',1,'fs::sim::Model']]],
+  ['is_5fburned_5f_14',['is_burned_',['../classfs_1_1sim_1_1IntensityMap.html#abe6f850fb5138696ebf2fb8c6538730a',1,'fs::sim::IntensityMap']]],
+  ['is_5fout_5fof_5ftime_5f_15',['is_out_of_time_',['../classfs_1_1sim_1_1Model.html#a26fd0751509b9ded329e9ce221acee3e',1,'fs::sim::Model']]],
+  ['is_5fover_5fsimulation_5fcount_5f_16',['is_over_simulation_count_',['../classfs_1_1sim_1_1Model.html#aec7349f3a8f619ec75cd26e52fedc70c',1,'fs::sim::Model']]],
+  ['is_5foverridden_5f_17',['is_overridden_',['../classfs_1_1wx_1_1Startup.html#a38ed85b294f8340174cfb8b665d199c7',1,'fs::wx::Startup']]],
+  ['isi_5f_18',['isi_',['../classfs_1_1wx_1_1FwiWeather.html#a48bff795c8559aebc22dba3b7b6c046e',1,'fs::wx::FwiWeather']]],
+  ['iterations_5fdone_5f_19',['iterations_done_',['../classfs_1_1sim_1_1Model.html#a98a288290e4f39eebeb01e7f47af4f32',1,'fs::sim::Model']]]
 ];

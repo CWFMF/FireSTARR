@@ -1,25 +1,18 @@
 <map id="fs::sim::TestScenario::TestScenario" name="fs::sim::TestScenario::TestScenario">
-<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,92,148,133"/>
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,63,148,103"/>
 <area shape="rect" id="Node000002" href="$classfs_1_1sim_1_1Scenario.html#a7bcdd23ef3fdd25a9518748e42801f00" title="Whether or not Location with given hash has burned already." alt="" coords="214,5,336,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,89,195,55,207,50,209,55,197,60,123,94"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,60,198,45,200,50,149,65"/>
 <area shape="rect" id="Node000003" href="$classfs_1_1sim_1_1Event.html#ae4a72196bd272130156729d6cd1182cb" title="Make simulation end event." alt="" coords="196,70,354,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,99,180,94,181,100,148,104"/>
-<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#a781fc0bd5dadbaa1ad3aaa2acb36f498" title="Register an IObserver that will be notified when Cells burn." alt="" coords="214,120,336,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="148,120,199,127,198,132,148,125"/>
-<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1Scenario.html#ab15673dbc91dfc9a3d1db7ec478612e6" title="Reset thresholds and set SafeVector to output results to." alt="" coords="214,185,336,226"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="119,131,197,170,211,176,208,181,195,175,116,136"/>
-<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1SpreadInfo.html#a0fde145c7a1458baf96bff0b8ad7d489" title="Determine rate of spread from probability of spread threshold." alt="" coords="402,99,591,139"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="328,182,427,143,429,148,330,187"/>
-<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Scenario.html#a9104e341e59de6817afb4082e5bb5680" title="Clear the Event list and all other data." alt="" coords="436,213,558,254"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="337,211,420,221,420,227,336,216"/>
-<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Model.html#a501df66bfcb537a7f868178939d5ec8e" title="Return a BurnedData so it can be used in the future." alt="" coords="639,156,829,197"/>
-<area shape="poly" id="edge12_Node000005_Node000008" title=" " alt="" coords="336,199,624,181,624,186,336,204"/>
-<area shape="rect" id="Node000011" href="$classfs_1_1sim_1_1Scenario.html#a86df553a65867046b7d8d8d293c33885" title="Model this Scenario is running in." alt="" coords="436,279,558,319"/>
-<area shape="poly" id="edge11_Node000005_Node000011" title=" " alt="" coords="318,224,403,263,422,271,420,276,401,268,316,229"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="558,216,632,198,633,203,559,221"/>
-<area shape="rect" id="Node000009" href="$classfs_1_1sim_1_1Settings.html#af568150489afe7210633273920d2dee6" title="Whether or not to run all Cell(s) that can burn in entire Environment." alt="" coords="674,221,794,262"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="559,233,659,236,659,242,558,238"/>
-<area shape="rect" id="Node000010" href="$classfs_1_1sim_1_1SettingsImplementation.html#a0b87be3950f50a45037043f22576b7eb" title="The singleton instance for this class." alt="" coords="877,221,1079,262"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="794,239,861,239,861,244,794,244"/>
-<area shape="poly" id="edge10_Node000010_Node000010" title=" " alt="" coords="932,221,930,211,937,202,953,197,978,195,1004,197,1020,203,1018,208,1003,202,978,200,955,202,940,207,935,213,937,220"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,80,180,80,180,86,148,86"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1sim_1_1Scenario.html#ab15673dbc91dfc9a3d1db7ec478612e6" title="Reset thresholds and set SafeVector to output results to." alt="" coords="214,120,336,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,101,200,116,198,121,147,106"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1sim_1_1SpreadInfo.html#a0fde145c7a1458baf96bff0b8ad7d489" title="Determine rate of spread from probability of spread threshold." alt="" coords="402,25,591,66"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="329,117,353,106,401,77,416,70,418,75,403,81,355,111,331,122"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1sim_1_1Scenario.html#a9104e341e59de6817afb4082e5bb5680" title="Clear the Event list and all other data." alt="" coords="436,91,558,131"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="336,130,420,118,420,124,337,135"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1sim_1_1Model.html#a501df66bfcb537a7f868178939d5ec8e" title="Return a BurnedData so it can be used in the future." alt="" coords="639,120,829,161"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="336,139,402,140,591,140,623,140,624,145,591,146,402,146,336,145"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1sim_1_1Scenario.html#a86df553a65867046b7d8d8d293c33885" title="Model this Scenario is running in." alt="" coords="436,205,558,246"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="331,159,428,197,427,202,329,164"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="559,116,624,124,624,129,558,121"/>
 </map>
