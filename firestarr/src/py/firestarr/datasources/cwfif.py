@@ -38,7 +38,7 @@ def make_cwfif_query(model, lat, lon, **kwargs):
     # HACK: needs member specified
     if model == "geps" and "member" not in kwargs.keys():
         kwargs["member"] = "all"
-    # lat=59&lon=-125&duration=999&model=all&format=csv&precision=2&latest=True
+    # lat=59&lon=-125&duration=999&model=all&format=csv&precision=2
     url = URL_CWFIF_WX + "&".join(
         [
             f"model={model}",
@@ -48,7 +48,6 @@ def make_cwfif_query(model, lat, lon, **kwargs):
             # f"duration=999",
             # f"format=csv",
             # f"precision=2",
-            # f"latest=True",
         ]
         + [f"{k}={v}" for k, v in kwargs.items()]
     )
@@ -117,7 +116,7 @@ def get_model_dir_uncached(model):
     lon = BOUNDS["longitude"]["mid"]
     # FIX: server isn't updating this, so use another method for now
     # url = make_cwfif_query(model, lat, lon, recent="True")
-    # https://app-cwfmf-api-cwfis-dev.wittyplant-59b495b3.canadacentral.azurecontainerapps.io/gribwx?model=geps&lat=52.2&lon=-116.0&timezone=UTC&duration=1&format=csv&precision=1&latest=True&member=1
+    # https://app-cwfmf-api-cwfis-dev.wittyplant-59b495b3.canadacentral.azurecontainerapps.io/gribwx?model=geps&lat=52.2&lon=-116.0&timezone=UTC&duration=1&format=csv&precision=1&member=1
     url = make_cwfif_query(
         model,
         lat,
@@ -161,7 +160,6 @@ def query_wx_ensembles_rounded(model, lat, lon):
         duration=400,
         format="csv",
         precision=1,
-        latest=True,
     )
     save_as = os.path.join(dir_model, make_filename(model, lat, lon, "csv"))
 
