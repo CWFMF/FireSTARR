@@ -74,8 +74,13 @@ def get_rounding():
 
 
 def fix_coords(lat, lon):
+    # HACK: clamp to limits in grib api until those are removed
+    MAX_LATITUDE = 69
+    MIN_LATITUDE = 41
+    MAX_LONGITUDE = -52
+    MIN_LONGITUDE = -141
     n = get_rounding()
-    return round(lat, n), round(lon, n)
+    return min(MAX_LATITUDE, max(MIN_LATITUDE, round(lat, n))), min(MAX_LONGITUDE, max(MIN_LONGITUDE, round(lon, n)))
 
 
 def fmt_rounded(x):
