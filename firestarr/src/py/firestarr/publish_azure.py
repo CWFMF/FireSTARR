@@ -21,6 +21,7 @@ from common import (
 AZURE_URL = None
 AZURE_TOKEN = None
 AZURE_CONTAINER = None
+AZURE_DIR_DATA = None
 
 
 def get_token():
@@ -36,14 +37,16 @@ def read_config():
     global AZURE_URL
     global AZURE_TOKEN
     global AZURE_CONTAINER
+    global AZURE_DIR_DATA
     try:
         AZURE_URL = CONFIG.get("AZURE_URL", "")
         AZURE_TOKEN = get_token()
         AZURE_CONTAINER = CONFIG.get("AZURE_CONTAINER", "")
+        AZURE_DIR_DATA = CONFIG.get("AZURE_DIR_DATA", "")
     except ValueError as ex:
         logging.error(ex)
         logging.warning("Unable to read azure config")
-    return np.all([x is not None and 0 < len(x) for x in [AZURE_URL, AZURE_TOKEN, AZURE_CONTAINER]])
+    return np.all([x is not None and 0 < len(x) for x in [AZURE_URL, AZURE_TOKEN, AZURE_CONTAINER, AZURE_DIR_DATA]])
 
 
 def get_blob_service_client():
@@ -139,7 +142,7 @@ def upload_dir(dir_run=None):
         # wait until we know we need it
         container = get_container()
     dir_sim_data = os.path.join(DIR_RUNS, run_name, "data")
-    dir_shp = "current_shp"
+    dir_shp = f"{AZURE_DIR_DATA}_shp"
     file_root = "df_fires_prioritized"
     files_group = [x for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
 
@@ -159,9 +162,9 @@ def upload_dir(dir_run=None):
         delete_after = [x for x in delete_after if x.name != name]
 
     # get old blobs for delete after
-    logging.info("Finding current blobs")
+    logging.info("Finding %s blobs" % AZURE_DIR_DATA)
     add_delete(f"{dir_shp}/{file_root}")
-    add_delete("current/firestarr")
+    add_delete(f"{AZURE_DIR_DATA}/firestarr")
 
     for f in files_group:
         upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
@@ -174,10 +177,11 @@ def upload_dir(dir_run=None):
         metadata["for_date"] = for_date.strftime(FMT_DATE_YMD)
         path = os.path.join(dir_combined, f)
         # HACK: just upload into archive too so we don't have to move later
-        upload(path, f"current/{f}")
-        # FIX: copy from container link instead of uploading multiple times
-        # upload into folder for this run, but don't keep multiple versions
-        upload(path, f"archive/{run_id}/{f}")
+        upload(path, f"{AZURE_DIR_DATA}/{f}")
+        if "test" not in AZURE_DIR_DATA:
+            # FIX: copy from container link instead of uploading multiple times
+            # upload into folder for this run, but don't keep multiple versions
+            upload(path, f"archive/{run_id}/{f}")
 
     # delete old blobs that weren't overwritten
     for f in delete_after:
