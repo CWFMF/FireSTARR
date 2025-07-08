@@ -8,10 +8,12 @@ if [ -z "${GEOSERVER_LAYER}" ] \
     || [ -z "${GEOSERVER_CREDENTIALS}" ] \
     || [ -z "${GEOSERVER_SERVER}" ] \
     || [ -z "${GEOSERVER_WORKSPACE_NAME}" ] \
-    || [ -z "${GEOSERVER_DIR_DATA}" ] \
+    || [ -z "${GEOSERVER_DIR_ROOT}" ] \
+    || [ -z "${AZURE_DIR_DATA}" ] \
     ; then
     echo Missing required configuration so not publishing
 else
+    GEOSERVER_DIR_DATA="${GEOSERVER_DIR_ROOT}/${AZURE_DIR_DATA}"
     if [ -z "${TMPDIR}" ]; then
         TMPDIR=/tmp
     fi

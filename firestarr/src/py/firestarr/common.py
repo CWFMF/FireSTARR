@@ -266,7 +266,7 @@ def read_config(force=False):
             "GEOSERVER_CREDENTIALS",
             "GEOSERVER_SERVER",
             "GEOSERVER_WORKSPACE",
-            "GEOSERVER_DIR_DATA",
+            "GEOSERVER_DIR_ROOT",
             "BATCH_ACCOUNT_NAME",
             "BATCH_ACCOUNT_KEY",
             "BATCH_POOL_ID",
