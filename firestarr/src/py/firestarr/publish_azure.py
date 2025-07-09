@@ -166,7 +166,8 @@ def upload_dir(dir_run=None):
     # get old blobs for delete after
     logging.info("Finding %s blobs" % AZURE_DIR_DATA)
     # add_delete(f"{dir_shp}/{file_root}")
-    add_delete(f"{AZURE_DIR_DATA}/{run_id}")
+    dir_dst = os.path.basename(dir_run)
+    add_delete(f"{AZURE_DIR_DATA}/{dir_dst}")
 
     blobs = {b.name: b for b in delete_after}
     for f in files_group:
@@ -177,7 +178,7 @@ def upload_dir(dir_run=None):
         metadata["for_date"] = for_date.strftime(FMT_DATE_YMD)
         for f in files:
             path = os.path.join(dir_src, d, f)
-            p = f"{run_id}/{d}/{f}"
+            p = f"{dir_dst}/{d}/{f}"
             print(f"{path} -> {AZURE_DIR_DATA}/{p}")
             # HACK: just upload into archive too so we don't have to move later
             upload(path, f"{AZURE_DIR_DATA}/{p}")
