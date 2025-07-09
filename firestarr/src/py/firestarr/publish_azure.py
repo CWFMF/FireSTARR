@@ -132,10 +132,10 @@ def upload_dir(dir_run=None):
     if container is None:
         # wait until we know we need it
         container = get_container()
-    # dir_sim_data = os.path.join(DIR_RUNS, run_name, "data")
-    # dir_shp = f"{AZURE_DIR_DATA}_shp"
-    # file_root = "df_fires_prioritized"
-    # files_group = [x for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
+    dir_sim_data = os.path.join(DIR_RUNS, run_name, "data")
+    dir_shp = f"{AZURE_DIR_DATA}_poly"
+    file_root = "df_fires_prioritized"
+    files_group = [x for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
 
     delete_after = []
 
@@ -165,8 +165,8 @@ def upload_dir(dir_run=None):
     add_delete(f"{AZURE_DIR_DATA}/{run_id}")
 
     blobs = {b.name: b for b in delete_after}
-    # for f in files_group:
-    #     upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
+    for f in files_group:
+        upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
 
     for d, files in files_by_dir.items():
         for_date = origin + datetime.timedelta(days=(days[d] - 1))
