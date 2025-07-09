@@ -261,7 +261,6 @@ def read_config(force=False):
             "AZURE_DIR_DATA",
             "AZURE_QUEUE_CONNECTION",
             "AZURE_QUEUE_NAME",
-            "GEOSERVER_LAYER",
             "GEOSERVER_COVERAGE",
             "GEOSERVER_CREDENTIALS",
             "GEOSERVER_SERVER",
@@ -277,6 +276,7 @@ def read_config(force=False):
             "STORAGE_KEY",
             "REGISTRY_USER_NAME",
             "REGISTRY_PASSWORD",
+            "RESOURCE_PREFIX",
         ] + OPTIONS_BOOL
         for opt in OPTIONS:
             CONFIG[opt] = ""

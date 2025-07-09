@@ -3,8 +3,7 @@ DIR=`dirname $(realpath "$0")`
 . /appl/data/config || . /appl/config
 echo "Publishing to geoserver ${GEOSERVER_SERVER}"
 
-if [ -z "${GEOSERVER_LAYER}" ] \
-    || [ -z "${GEOSERVER_COVERAGE}" ] \
+if [ -z "${GEOSERVER_COVERAGE}" ] \
     || [ -z "${GEOSERVER_CREDENTIALS}" ] \
     || [ -z "${GEOSERVER_SERVER}" ] \
     || [ -z "${GEOSERVER_WORKSPACE_NAME}" ] \
@@ -17,13 +16,17 @@ else
     if [ -z "${RUN_ID}" ]; then
         RUN_ID=`ls -1 /appl/data/sims/ | tail -1`
     fi
+    # RESOURCE_PREFIX is empty or 'test_'
+    GEOSERVER_COVERAGE="${RESOURCE_PREFIX}${GEOSERVER_COVERAGE}"
+    AZURE_DIR_DATA="${RESOURCE_PREFIX}${AZURE_DIR_DATA}"
+
     GEOSERVER_DIR_DATA="${GEOSERVER_DIR_ROOT}/${AZURE_DIR_DATA}/${RUN_ID}"
     if [ -z "${TMPDIR}" ]; then
         TMPDIR=/tmp
     fi
     GEOSERVER_EXTENSION=imagemosaic
     GEOSERVER_WORKSPACE=${GEOSERVER_SERVER}/workspaces/${GEOSERVER_WORKSPACE_NAME}
-    GEOSERVER_STORE=${GEOSERVER_WORKSPACE}/coveragestores/${GEOSERVER_LAYER}
+    GEOSERVER_STORE=${GEOSERVER_WORKSPACE}/coveragestores/${GEOSERVER_COVERAGE}
     TMP_COVERAGE=${TMPDIR}/${GEOSERVER_COVERAGE}.xml
     TAG=abstract
     echo "Publishing to ${GEOSERVER_STORE}"

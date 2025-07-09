@@ -46,7 +46,11 @@ def read_config():
     except ValueError as ex:
         logging.error(ex)
         logging.warning("Unable to read azure config")
-    return np.all([x is not None and 0 < len(x) for x in [AZURE_URL, AZURE_TOKEN, AZURE_CONTAINER, AZURE_DIR_DATA]])
+    if not np.all([x is not None and 0 < len(x) for x in [AZURE_URL, AZURE_TOKEN, AZURE_CONTAINER, AZURE_DIR_DATA]]):
+        return False
+    # prefix after so AZURE_DIR_DATA being empty is detected if RESOURCE_PREFIX isn't
+    AZURE_DIR_DATA = CONFIG.get("RESOURCE_PREFIX", "") + AZURE_DIR_DATA
+    return True
 
 
 def get_blob_service_client():
