@@ -76,6 +76,7 @@ _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
         version="latest",
     ),
     node_agent_sku_id="batch.node.ubuntu 22.04",
+    os_disk=batchmodels.OSDisk(managed_disk=batchmodels.ManagedDisk(storage_account_type="Standard_LRS")),
     container_configuration=batchmodels.ContainerConfiguration(
         type="dockerCompatible",
         container_image_names=[_CONTAINER_PY, _CONTAINER_BIN],
