@@ -116,19 +116,11 @@ def upload_dir(dir_run=None):
     date = as_datetime.strftime(FMT_DATE_YMD)
     push_datetime = datetime.datetime.now(datetime.UTC)
     container = None
-    dir_combined = os.path.join(dir_run, "combined")
-    files = listdir_sorted(dir_combined)
-    # HACK: ignore perim for now
-    # NOTE: fix this if extension ever changes, but prevent .tif.aux.xml files
-    files = [f for f in files if "perim" not in f and f.endswith(".tif")]
-
-    # assert ('perim.tif' in files)
-    def get_day(f):
-        i = f.rindex("_")
-        n = int(f[(f[:i].rindex("_") + 1) : i])
-        return n
-
-    days = {f: get_day(f) for f in files if f != "perim.tif"}
+    dir_src = os.path.join(dir_run, "initial")
+    dirs = listdir_sorted(dir_src)
+    files_by_dir = {d: listdir_sorted(os.path.join(dir_src, d)) for d in dirs}
+    origin = datetime.datetime.strptime(date, FMT_DATE_YMD).date()
+    days = {d: (pd.to_datetime(d).date() - origin).days + 1 for d in dirs}
     run_length = max(days.values())
     metadata = {
         "model": "firestarr",
@@ -137,56 +129,63 @@ def upload_dir(dir_run=None):
         "source": source,
         "origin_date": date,
     }
-    origin = datetime.datetime.strptime(date, FMT_DATE_YMD).date()
     if container is None:
         # wait until we know we need it
         container = get_container()
-    dir_sim_data = os.path.join(DIR_RUNS, run_name, "data")
-    dir_shp = f"{AZURE_DIR_DATA}_shp"
-    file_root = "df_fires_prioritized"
-    files_group = [x for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
+    # dir_sim_data = os.path.join(DIR_RUNS, run_name, "data")
+    # dir_shp = f"{AZURE_DIR_DATA}_shp"
+    # file_root = "df_fires_prioritized"
+    # files_group = [x for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
 
     delete_after = []
 
     def add_delete(match_start):
         nonlocal delete_after
-        blob_list = [x for x in container.list_blobs(name_starts_with=match_start)]
+        blob_list = [
+            x for x in container.list_blobs(name_starts_with=match_start, include="metadata") if x.name.endswith(".tif")
+        ]
         delete_after += blob_list
 
     def upload(path, name):
-        nonlocal delete_after
-        logging.info("Pushing %s", name)
-        with open(path, "rb") as data:
-            container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
-        # remove from list of files to delete if overwritten
-        delete_after = [x for x in delete_after if x.name != name]
+        nonlocal blobs
+        mtime_src = str(os.path.getmtime(path))
+        blob_dst = blobs.get(name, None)
+        mtime_dst = None if blob_dst is None else blob_dst.metadata.get("file_modified_time", None)
+        if mtime_src != mtime_dst:
+            logging.info("Pushing %s to %s" % (path, name))
+            with open(path, "rb") as data:
+                metadata["file_modified_time"] = mtime_src
+                container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
+        if blob_dst is not None:
+            del blobs[name]
 
     # get old blobs for delete after
     logging.info("Finding %s blobs" % AZURE_DIR_DATA)
-    add_delete(f"{dir_shp}/{file_root}")
-    add_delete(f"{AZURE_DIR_DATA}/firestarr")
+    # add_delete(f"{dir_shp}/{file_root}")
+    add_delete(f"{AZURE_DIR_DATA}/{run_id}")
 
-    for f in files_group:
-        upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
+    blobs = {b.name: b for b in delete_after}
+    # for f in files_group:
+    #     upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
 
-    for f in files:
-        if "perim.tif" == f:
-            for_date = origin
-        else:
-            for_date = origin + datetime.timedelta(days=(days[f] - 1))
+    for d, files in files_by_dir.items():
+        for_date = origin + datetime.timedelta(days=(days[d] - 1))
         metadata["for_date"] = for_date.strftime(FMT_DATE_YMD)
-        path = os.path.join(dir_combined, f)
-        # HACK: just upload into archive too so we don't have to move later
-        upload(path, f"{AZURE_DIR_DATA}/{f}")
-        if "test" not in AZURE_DIR_DATA:
-            # FIX: copy from container link instead of uploading multiple times
-            # upload into folder for this run, but don't keep multiple versions
-            upload(path, f"archive/{run_id}/{f}")
+        for f in files:
+            path = os.path.join(dir_src, d, f)
+            p = f"{run_id}/{d}/{f}"
+            print(f"{path} -> {AZURE_DIR_DATA}/{p}")
+            # HACK: just upload into archive too so we don't have to move later
+            upload(path, f"{AZURE_DIR_DATA}/{p}")
+            if "test" not in AZURE_DIR_DATA:
+                # FIX: copy from container link instead of uploading multiple times
+                # upload into folder for this run, but don't keep multiple versions
+                upload(path, f"archive/{p}")
 
     # delete old blobs that weren't overwritten
-    for f in delete_after:
-        logging.info("Removing %s", f.name)
-        container.delete_blob(f)
+    for name, b in blobs.items():
+        logging.info("Removing %s", name)
+        container.delete_blob(b)
 
 
 if "__main__" == __name__:

@@ -13,7 +13,11 @@ if [ -z "${GEOSERVER_LAYER}" ] \
     ; then
     echo Missing required configuration so not publishing
 else
-    GEOSERVER_DIR_DATA="${GEOSERVER_DIR_ROOT}/${AZURE_DIR_DATA}"
+    RUN_ID="$1"
+    if [ -z "${RUN_ID}" ]; then
+        RUN_ID=`ls -1 /appl/data/sims/ | tail -1`
+    fi
+    GEOSERVER_DIR_DATA="${GEOSERVER_DIR_ROOT}/${AZURE_DIR_DATA}/${RUN_ID}"
     if [ -z "${TMPDIR}" ]; then
         TMPDIR=/tmp
     fi
