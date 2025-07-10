@@ -31,10 +31,11 @@ else
     TAG=abstract
     echo "Publishing to ${GEOSERVER_STORE}"
 
-    # get rid of old granules
-    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE}/coverages/${COVERAGE}/index/granules.xml"
     # update to match azure mount
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPOST -H "Content-type: text/plain" --write-out %{http_code} -d "${GEOSERVER_DIR_DATA}" "${GEOSERVER_STORE}/external.${GEOSERVER_EXTENSION}"
+
+    # get rid of old granules
+    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE}/coverages/${COVERAGE}/index/granules.xml?filter=location%20not%20like%27%${RUN_ID}%%27"
 
     # extract timestamp from RUN_ID
     RUN_ID=`echo ${RUN_ID} | sed "s/.*_\([0-9]*\).*/\1/g"`
