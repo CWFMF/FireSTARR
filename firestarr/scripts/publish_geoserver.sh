@@ -36,8 +36,6 @@ else
     # update to match azure mount
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPOST -H "Content-type: text/plain" --write-out %{http_code} -d "${GEOSERVER_DIR_DATA}" "${GEOSERVER_STORE}/external.${GEOSERVER_EXTENSION}"
 
-    # get run id from name of files
-    RUN_ID=`curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XGET "${GEOSERVER_STORE}/coverages/${COVERAGE}/index/granules.xml" | grep .tif | tail -n 1 | sed "s/.*firestarr_\([0-9]*\)_.*\.tif.*/\1/g"`
     ABSTRACT="FireSTARR run from ${RUN_ID}"
     # replace tag
     curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XGET "${GEOSERVER_STORE}/coverages/${COVERAGE}" > ${TMP_COVERAGE}
