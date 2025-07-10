@@ -36,6 +36,8 @@ else
     # update to match azure mount
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPOST -H "Content-type: text/plain" --write-out %{http_code} -d "${GEOSERVER_DIR_DATA}" "${GEOSERVER_STORE}/external.${GEOSERVER_EXTENSION}"
 
+    # extract timestamp from RUN_ID
+    RUN_ID=`echo ${RUN_ID} | sed "s/.*_\([0-9]*\).*/\1/g"`
     ABSTRACT="FireSTARR run from ${RUN_ID}"
     # replace tag
     curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XGET "${GEOSERVER_STORE}/coverages/${COVERAGE}" > ${TMP_COVERAGE}
