@@ -180,12 +180,7 @@ def upload_dir(dir_run=None):
             path = os.path.join(dir_src, d, f)
             p = f"{dir_dst}/{d}/{f}"
             print(f"{path} -> {AZURE_DIR_DATA}/{p}")
-            # HACK: just upload into archive too so we don't have to move later
             upload(path, f"{AZURE_DIR_DATA}/{p}")
-            if "test" not in AZURE_DIR_DATA:
-                # FIX: copy from container link instead of uploading multiple times
-                # upload into folder for this run, but don't keep multiple versions
-                upload(path, f"archive/{p}")
 
     # delete old blobs that weren't overwritten
     for name, b in blobs.items():
