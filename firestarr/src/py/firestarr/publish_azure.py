@@ -69,7 +69,7 @@ def show_blobs(container):
     blob_list = [x for x in container.list_blobs()]
     # blob_list = container.list_blobs()
     for blob in blob_list:
-        print(f"{container.container_name}: {blob.name}")
+        logging.debug(f"{container.container_name}: {blob.name}")
 
 
 def find_latest():
@@ -179,7 +179,7 @@ def upload_dir(dir_run=None):
         for f in files:
             path = os.path.join(dir_src, d, f)
             p = f"{dir_dst}/{d}/{f}"
-            print(f"{path} -> {AZURE_DIR_DATA}/{p}")
+            logging.debug(f"{path} -> {AZURE_DIR_DATA}/{p}")
             upload(path, f"{AZURE_DIR_DATA}/{p}")
 
     # delete old blobs that weren't overwritten
