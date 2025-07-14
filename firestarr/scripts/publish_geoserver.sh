@@ -4,6 +4,7 @@ DIR=`dirname $(realpath "$0")`
 echo "Publishing to geoserver ${GEOSERVER_SERVER}"
 
 if [ -z "${GEOSERVER_COVERAGE}" ] \
+    || [ -z "${GEOSERVER_LAYER}" ] \
     || [ -z "${GEOSERVER_CREDENTIALS}" ] \
     || [ -z "${GEOSERVER_SERVER}" ] \
     || [ -z "${GEOSERVER_WORKSPACE_NAME}" ] \
@@ -18,6 +19,7 @@ else
     fi
     # RESOURCE_PREFIX is empty or 'test_'
     COVERAGE="${RESOURCE_PREFIX}${GEOSERVER_COVERAGE}"
+    LAYER="${RESOURCE_PREFIX}${GEOSERVER_LAYER}"
     DIR_DATA="${RESOURCE_PREFIX}${AZURE_DIR_DATA}"
 
     GEOSERVER_DIR_DATA="${GEOSERVER_DIR_ROOT}/${DIR_DATA}/${RUN_ID}"
@@ -27,7 +29,7 @@ else
     GEOSERVER_EXTENSION=imagemosaic
     GEOSERVER_WORKSPACE=${GEOSERVER_SERVER}/workspaces/${GEOSERVER_WORKSPACE_NAME}
     GEOSERVER_STORE=${GEOSERVER_WORKSPACE}/coveragestores/${COVERAGE}
-    TMP_COVERAGE=${TMPDIR}/${COVERAGE}.xml
+    TMP_LAYER=${TMPDIR}/${LAYER}.xml
     TAG=abstract
     echo "Publishing to ${GEOSERVER_STORE}"
 
@@ -41,17 +43,17 @@ else
     curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE}/coverages/${COVERAGE}/index/granules.xml?filter=location%20not%20like%27%${RUN_ID}%%27"
 
     # extract timestamp from RUN_ID
-    RUN_ID=`echo ${RUN_ID} | sed "s/.*_\([0-9]*\).*/\1/g"`
-    ABSTRACT="FireSTARR run from ${RUN_ID}"
+    RUN_TIME=`echo ${RUN_ID} | sed "s/.*_\([0-9]*\).*/\1/g"`
+    ABSTRACT="FireSTARR run from ${RUN_TIME}"
     # replace tag
-    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XGET "${GEOSERVER_STORE}/coverages/${COVERAGE}" > ${TMP_COVERAGE}
+    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XGET "${GEOSERVER_STORE}/coverages/${LAYER}" > ${TMP_LAYER}
     TAG_UPDATED="<${TAG}>${ABSTRACT}<\/${TAG}>"
     # if no tag then insert it after title
-    (grep "<${TAG}>" ${TMP_COVERAGE} > /dev/null && sed -i "s/<${TAG}>[^<]*<\/${TAG}>/${TAG_UPDATED}/g" ${TMP_COVERAGE}) || sed -i "s/\( *\)\(<title>.*\)/\1\2\n\1${TAG_UPDATED}/g" ${TMP_COVERAGE}
+    (grep "<${TAG}>" ${TMP_LAYER} > /dev/null && sed -i "s/<${TAG}>[^<]*<\/${TAG}>/${TAG_UPDATED}/g" ${TMP_LAYER}) || (sed -i "s/\( *\)\(<title>.*\)/\1\2\n\1${TAG_UPDATED}/g" ${TMP_LAYER})
     # upload with updated tag
-    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_COVERAGE} "${GEOSERVER_STORE}/coverages/${COVERAGE}"?calculate=nativebbox,latlonbbox,dimensions
+    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_LAYER} "${GEOSERVER_STORE}/coverages/${LAYER}"?calculate=nativebbox,latlonbbox,dimensions
     # not sure why this isn't picking up .tif band description
-    sed -i "s/GRAY_INDEX/probability/g" ${TMP_COVERAGE}
+    sed -i "s/GRAY_INDEX/probability/g" ${TMP_LAYER}
     # HACK: calculate sets band name to GRAY_INDEX so set again without calculate
-    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_COVERAGE} "${GEOSERVER_STORE}/coverages/${COVERAGE}"
+    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_LAYER} "${GEOSERVER_STORE}/coverages/${LAYER}"
 fi
