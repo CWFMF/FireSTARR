@@ -1,11 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,96,62,121"/>
-<area shape="rect" id="Node000001" href="$classgdal__merge__max_1_1file__info__max.html" title=" " alt="" coords="113,5,251,46"/>
-<area shape="poly" id="edge123_Node000000_Node000001" title=" " alt="" coords="64,84,108,55,130,44,132,49,111,60,66,88"/>
-<area shape="rect" id="Node000002" href="$classgis_1_1Extent.html" title=" " alt="" coords="143,70,220,96"/>
-<area shape="poly" id="edge124_Node000000_Node000002" title=" " alt="" coords="77,98,142,87,143,92,78,104"/>
-<area shape="rect" id="Node000003" href="$classrun_1_1Run.html" title=" " alt="" coords="149,120,214,145"/>
-<area shape="poly" id="edge125_Node000000_Node000003" title=" " alt="" coords="78,113,149,124,148,130,77,118"/>
-<area shape="rect" id="Node000004" href="$classsimulation_1_1Simulation.html" title=" " alt="" coords="110,169,254,194"/>
-<area shape="poly" id="edge126_Node000000_Node000004" title=" " alt="" coords="66,128,111,155,136,166,134,171,108,160,63,132"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,55,62,80"/>
+<area shape="rect" id="Node000001" href="$classgis_1_1Extent.html" title=" " alt="" coords="143,5,220,31"/>
+<area shape="poly" id="edge123_Node000000_Node000001" title=" " alt="" coords="76,51,142,28,144,33,77,56"/>
+<area shape="rect" id="Node000002" href="$classrun_1_1Run.html" title=" " alt="" coords="149,55,214,80"/>
+<area shape="poly" id="edge124_Node000000_Node000002" title=" " alt="" coords="77,65,149,65,149,70,77,70"/>
+<area shape="rect" id="Node000003" href="$classsimulation_1_1Simulation.html" title=" " alt="" coords="110,104,254,130"/>
+<area shape="poly" id="edge125_Node000000_Node000003" title=" " alt="" coords="77,79,142,101,140,106,75,84"/>
 </map>
