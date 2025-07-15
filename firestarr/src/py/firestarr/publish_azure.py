@@ -17,6 +17,7 @@ from common import (
     listdir_sorted,
     logging,
 )
+from sim_wrapper import TMP_SUFFIX
 
 AZURE_URL = None
 AZURE_TOKEN = None
@@ -144,6 +145,9 @@ def upload_dir(dir_run=None):
 
     delete_after = []
 
+    def remote_name(name):
+        return name.replace(TMP_SUFFIX, "")
+
     def add_delete(match_start):
         nonlocal delete_after
         blob_list = [
@@ -183,7 +187,7 @@ def upload_dir(dir_run=None):
         metadata["for_date"] = for_date.strftime(FMT_DATE_YMD)
         for f in files:
             path = os.path.join(dir_src, d, f)
-            p = f"{dir_dst}/{d}/{f}"
+            p = remote_name(f"{dir_dst}/{d}/{f}")
             logging.debug(f"{path} -> {AZURE_DIR_DATA}/{p}")
             if upload(path, f"{AZURE_DIR_DATA}/{p}"):
                 changed = True
