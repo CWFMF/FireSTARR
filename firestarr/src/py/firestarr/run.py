@@ -354,9 +354,10 @@ class Run(object):
             df_fire = gdf_from_file(file_sim) if os.path.isfile(file_sim) else None
             if changed is None:
                 is_ignored[dir_fire] = df_fire
-            elif changed:
-                any_change = True
-                is_changed[dir_fire] = changed
+            else:
+                any_change = any_change or changed
+                if changed:
+                    is_changed[dir_fire] = changed
                 is_interim[dir_fire] = interim
                 if df_fire is None:
                     is_incomplete[dir_fire] = df_fire
@@ -385,9 +386,6 @@ class Run(object):
                         is_complete[dir_fire] = df_fire
                 if dir_fire not in is_complete:
                     not_complete[dir_fire] = df_fire
-            else:
-                # if nothing changed then fire is complete
-                is_complete[dir_fire] = df_fire
         # publish before and after fixing things
         num_complete = len(is_complete)
         pct_done = 100.0 * float(num_complete) / float(num_fires)
