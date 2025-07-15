@@ -493,10 +493,12 @@ void Scenario::evaluate(const Event& event)
   const auto x = p.column() + CELL_CENTER;
   const auto y = p.row() + CELL_CENTER;
   const XYPos p0{x, y};
+#ifdef DEBUG_NEW_SPREAD
   check_pts(
     "evaluate()",
     points_.unique(),
     points_new_.unique());
+#endif
   switch (event.type())
   {
     case Event::FIRE_SPREAD:
@@ -509,7 +511,9 @@ void Scenario::evaluate(const Event& event)
       }
 #endif
       scheduleFireSpread(event);
+#ifdef DEBUG_NEW_SPREAD
       printf("*****************************************\n");
+#endif
       break;
     case Event::SAVE:
       saveStats(event.time());
@@ -953,6 +957,7 @@ void apply_offsets_spreadkey(
       return ROSOffset(
         Offset(p.x() * duration, p.y() * duration));
     });
+#ifdef DEBUG_NEW_SPREAD
   logging::debug("Calculated %ld offsets after duration %f", offsets_after_duration.size(), duration);
   logging::debug("pts_spreading has %ld items", pts_spreading.size());
   logging::debug("pts_spreading_new has %ld items", pts_spreading_new.size());
@@ -960,7 +965,7 @@ void apply_offsets_spreadkey(
     "pts_spreading old vs new",
     pts_spreading,
     pts_spreading_new);
-
+#endif
   size_t i = 0;
   for (auto& kv : pts_spreading)
   {
@@ -1054,9 +1059,11 @@ void apply_offsets_spreadkey(
           points.insert(
             scenario,
             p0);
+#ifdef DEBUG_NEW_SPREAD
           points_new.insert(
             *(scenario.unburnable_new_),
             p0);
+#endif
 #ifdef DEBUG_CELLPOINTS
           scenario.log_verbose("points is now %ld items", points.size());
 #ifdef DEBUG_NEW_SPREAD
@@ -1258,16 +1265,18 @@ void Scenario::scheduleFireSpread(const Event& event)
         if (ros >= ros_min)
         {
           max_ros_ = max(max_ros_, ros);
-// NOTE: shouldn't be Cell if we're looking up by just Location later
+          // NOTE: shouldn't be Cell if we're looking up by just Location later
 #ifdef DEBUG_NEW_SPREAD
           to_spread_new[key].emplace_back(hash_value, it->second.unique());
           points_new_.erase(hash_value);
 #endif
           to_spread[key].emplace_back(hash_value, std::move(it->second));
+#ifdef DEBUG_NEW_SPREAD
           check_pts(
             "emplace into to_spread",
             to_spread,
             to_spread_new);
+#endif
           it = points_.map_.erase(it);
 #ifdef DEBUG_CELLPOINTS
           auto& v = to_spread[key];
@@ -1292,14 +1301,18 @@ void Scenario::scheduleFireSpread(const Event& event)
             loc.row());
 #endif
         }
+#ifdef CELLPOINTS
         check_pts(
           "during making to_spread 1",
           to_spread,
           to_spread_new);
+#endif
+#ifdef DEBUG_NEW_SPREAD
         check_pts(
           "points during making to_spread 1",
           points_.unique(),
           points_new_.unique());
+#endif
 #ifdef DEBUG_NEW_SPREAD
         ++i;
 #endif
@@ -1314,10 +1327,12 @@ void Scenario::scheduleFireSpread(const Event& event)
     addEvent(Event::makeFireSpread(max_time));
     return;
   }
+#ifdef DEBUG_NEW_SPREAD
   check_pts(
     "after spread empty check",
     to_spread,
     to_spread_new);
+#endif
   // note("Max spread is %f, max_ros is %f",
   //      Settings::maximumSpreadDistance() * cellSize(),
   //      max_ros_);
@@ -1392,11 +1407,13 @@ void Scenario::scheduleFireSpread(const Event& event)
       // }
       return do_clear;
     });
+#ifdef DEBUG_NEW_SPREAD
   for (auto& p : points_new_.unique())
   {
     cell_pts_new.insert(*unburnable_new_, p);
   }
   points_new_ = cell_pts_new;
+#endif
   // if we move everything out of points_ we can parallelize this check?
 #ifdef DEBUG_NEW_SPREAD
   check_pts(
@@ -1455,8 +1472,10 @@ void Scenario::scheduleFireSpread(const Event& event)
         // just inserted false, so make sure unburnable gets updated
         // whether it went out or is surrounded just mark it as unburnable
         (*unburnable_)[for_cell.hash()] = true;
+#ifdef DEBUG_NEW_SPREAD
         points_new_.erase(for_cell.hash());
         (*unburnable_new_)[for_cell.hash()] = true;
+#endif
         // not swapping means these points get dropped
       }
     });
