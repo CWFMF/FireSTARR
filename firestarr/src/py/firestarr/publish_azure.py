@@ -105,6 +105,7 @@ def upload_static():
 
 
 def upload_dir(dir_run=None):
+    changed = False
     if not FLAG_IGNORE_PERIM_OUTPUTS:
         raise NotImplementedError("Need to deal with perimeters properly")
     if not read_config():
@@ -152,6 +153,7 @@ def upload_dir(dir_run=None):
 
     def upload(path, name):
         nonlocal blobs
+        changed = False
         mtime_src = str(os.path.getmtime(path))
         blob_dst = blobs.get(name, None)
         mtime_dst = None if blob_dst is None else blob_dst.metadata.get("file_modified_time", None)
@@ -160,8 +162,10 @@ def upload_dir(dir_run=None):
             with open(path, "rb") as data:
                 metadata["file_modified_time"] = mtime_src
                 container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
+                changed = True
         if blob_dst is not None:
             del blobs[name]
+        return changed
 
     # get old blobs for delete after
     logging.info("Finding %s blobs" % AZURE_DIR_DATA)
@@ -171,6 +175,7 @@ def upload_dir(dir_run=None):
 
     blobs = {b.name: b for b in delete_after}
     for f in files_group:
+        # NOTE: ignore if group changed
         upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
 
     for d, files in files_by_dir.items():
@@ -180,12 +185,15 @@ def upload_dir(dir_run=None):
             path = os.path.join(dir_src, d, f)
             p = f"{dir_dst}/{d}/{f}"
             logging.debug(f"{path} -> {AZURE_DIR_DATA}/{p}")
-            upload(path, f"{AZURE_DIR_DATA}/{p}")
+            if upload(path, f"{AZURE_DIR_DATA}/{p}"):
+                changed = True
 
     # delete old blobs that weren't overwritten
     for name, b in blobs.items():
         logging.info("Removing %s", name)
         container.delete_blob(b)
+
+    return changed
 
 
 if "__main__" == __name__:

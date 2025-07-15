@@ -42,10 +42,12 @@ def publish_all(
         if merge_only:
             logging.info("Stopping after merge for %s", dir_output)
             return
-        if changed or force or force_publish:
-            import publish_azure
+        # HACK: changed is checked in upload_dir so don't filter on that
+        # if changed or force or force_publish:
+        import publish_azure
 
-            publish_azure.upload_dir(dir_output)
+        changed = publish_azure.upload_dir(dir_output)
+        if changed:
             logging.info("Uploaded to azure")
             logging.info("Publishing to geoserver from %s", dir_output)
             # HACK: might be my imagination, but maybe there's a delay so wait a bit
