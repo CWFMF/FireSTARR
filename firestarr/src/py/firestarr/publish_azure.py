@@ -4,6 +4,7 @@ import urllib.parse
 
 import numpy as np
 import pandas as pd
+import tqdm_util
 from azure.storage.blob import BlobServiceClient, ExponentialRetry
 from common import (
     CONFIG,
@@ -120,7 +121,6 @@ def upload_dir(dir_run=None):
     source = run_name[: run_name.index("_")]
     as_datetime = pd.to_datetime(run_id)
     date = as_datetime.strftime(FMT_DATE_YMD)
-    push_datetime = datetime.datetime.now(datetime.UTC)
     container = None
     dir_src = os.path.join(dir_run, "initial")
     dirs = listdir_sorted(dir_src)
@@ -182,21 +182,31 @@ def upload_dir(dir_run=None):
         # NOTE: ignore if group changed
         upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{f}")
 
-    for d, files in files_by_dir.items():
+    def check_upload(x):
+        d, files = x
         for_date = origin + datetime.timedelta(days=(days[d] - 1))
         metadata["for_date"] = for_date.strftime(FMT_DATE_YMD)
+        r = []
         for f in files:
             path = os.path.join(dir_src, d, f)
             p = remote_name(f"{dir_dst}/{d}/{f}")
-            if upload(path, f"{AZURE_DIR_DATA}/{p}"):
-                changed = True
+            r.append((path, f"{AZURE_DIR_DATA}/{p}"))
+        return r
 
+    to_upload = np.concatenate(tqdm_util.apply(files_by_dir.items(), check_upload, desc="Finding blobs"))
+
+    def do_upload(x):
+        path, name = x
+        return upload(path, name)
+
+    is_changed = tqdm_util.apply(to_upload, do_upload, desc="Uploading to blob")
+    any_changed = np.any(is_changed)
     # delete old blobs that weren't overwritten
     for name, b in blobs.items():
         logging.debug("Removing %s", name)
         container.delete_blob(b)
     logging.info("Done pushing to azure")
-    return changed
+    return any_changed
 
 
 if "__main__" == __name__:

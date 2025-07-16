@@ -32,7 +32,7 @@ def publish_all(
     dir_output = find_latest_outputs(dir_output)
     # check_copy_interim(dir_output, include_interim)
     with locks_for(FILE_LOCK_PUBLISH):
-        changed = merge_dirs(
+        merge_dirs(
             dir_output,
             changed_only=changed_only,
             force=force,
