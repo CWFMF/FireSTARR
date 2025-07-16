@@ -33,6 +33,9 @@ else
     TAG=abstract
     echo "Publishing to ${GEOSERVER_STORE}"
 
+    # HACK: get rid of granules for interim fires in case they've finished and the files no longer exist
+    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE}/coverages/${LAYER}/index/granules.xml?filter=location%20like%27%__tmp__%%27"
+
     # update to match azure mount
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPOST -H "Content-type: text/plain" --write-out %{http_code} -d "${GEOSERVER_DIR_DATA}" "${GEOSERVER_STORE}/external.${GEOSERVER_EXTENSION}"
 
