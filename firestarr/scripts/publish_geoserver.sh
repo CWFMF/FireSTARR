@@ -37,7 +37,7 @@ else
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPOST -H "Content-type: text/plain" --write-out %{http_code} -d "${GEOSERVER_DIR_DATA}" "${GEOSERVER_STORE}/external.${GEOSERVER_EXTENSION}"
 
     # get rid of old granules
-    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE}/coverages/${LAYER}/index/granules.xml?filter=location%20not%20like%27%${RUN_ID}%%27"
+    curl -v -v -sS -u "${GEOSERVER_CREDENTIALS}" -XDELETE "${GEOSERVER_STORE}/coverages/${LAYER}/index/granules.xml?filter=location%20not%20like%27${GEOSERVER_DIR_DATA}%%27"
 
     # extract timestamp from RUN_ID
     RUN_TIME=`echo ${RUN_ID} | sed "s/.*_\([0-9]*\).*/\1/g"`
