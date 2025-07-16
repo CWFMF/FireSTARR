@@ -98,7 +98,7 @@ def upload_static():
         container.delete_blob(blob.name)
     # archive_current(container)
     for f in files_bounds:
-        logging.info("Pushing %s", f)
+        logging.debug("Pushing %s", f)
         path = os.path.join(dir_bounds, f)
         # HACK: just upload into archive too so we don't have to move later
         with open(path, "rb") as data:
@@ -162,7 +162,7 @@ def upload_dir(dir_run=None):
         blob_dst = blobs.get(name, None)
         mtime_dst = None if blob_dst is None else blob_dst.metadata.get("file_modified_time", None)
         if mtime_src != mtime_dst:
-            logging.info("Pushing %s to %s" % (path, name))
+            logging.debug("Pushing %s to %s" % (path, name))
             with open(path, "rb") as data:
                 metadata["file_modified_time"] = mtime_src
                 container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
@@ -188,15 +188,14 @@ def upload_dir(dir_run=None):
         for f in files:
             path = os.path.join(dir_src, d, f)
             p = remote_name(f"{dir_dst}/{d}/{f}")
-            logging.debug(f"{path} -> {AZURE_DIR_DATA}/{p}")
             if upload(path, f"{AZURE_DIR_DATA}/{p}"):
                 changed = True
 
     # delete old blobs that weren't overwritten
     for name, b in blobs.items():
-        logging.info("Removing %s", name)
+        logging.debug("Removing %s", name)
         container.delete_blob(b)
-
+    logging.info("Done pushing to azure")
     return changed
 
 
