@@ -53,5 +53,5 @@ else
     sed -i "s/GRAY_INDEX/probability/g" ${TMP_LAYER}
     # HACK: calculate sets band name to GRAY_INDEX so set again without calculate
     curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_LAYER} "${GEOSERVER_STORE}/coverages/${LAYER}"
-    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_LAYER} "${GEOSERVER_STORE}/coverages/${LAYER}?recalculate=overviews&async=true"
+    curl -v -u "${GEOSERVER_CREDENTIALS}" -XPUT -H "Content-type: text/xml" -d @${TMP_LAYER} "${GEOSERVER_STORE}/coverages/${LAYER}?recalculate=overviews"
 fi
