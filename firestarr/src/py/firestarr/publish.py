@@ -47,7 +47,7 @@ def publish_all(
         import publish_azure
 
         changed = publish_azure.upload_dir(dir_output)
-        if changed:
+        if force or changed:
             logging.info("Uploaded to azure")
             logging.info("Publishing to geoserver from %s", dir_output)
             # HACK: might be my imagination, but maybe there's a delay so wait a bit
