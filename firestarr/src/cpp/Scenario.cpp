@@ -326,8 +326,10 @@ int compare(const V& a, const V& b)
   const set<XYPos>& pts_old,
   const set<XYPos>& pts_new)
 {
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   show_points<XYPos, XYSize, std::set<XYPos>>(pts_old, "%s Old points are", msg.c_str());
   show_points<XYPos, XYSize, std::set<XYPos>>(pts_new, "%s New points are", msg.c_str());
+#endif
 #ifdef DEBUG_NEW_SPREAD
   logging::verbose(
     "Comparing %s %ld old points to %ld new points",
@@ -343,6 +345,8 @@ int compare(const V& a, const V& b)
       "Have %ld old points and %ld new points",
       pts_old.size(),
       pts_new.size());
+    show_points<XYPos, XYSize, std::set<XYPos>>(pts_old, "Old points for %s", msg.c_str());
+    show_points<XYPos, XYSize, std::set<XYPos>>(pts_new, "New points for %s", msg.c_str());
     return compare(n_old, n_new);
   }
   else

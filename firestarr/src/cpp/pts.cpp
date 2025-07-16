@@ -92,7 +92,17 @@ Pts::Pts(const BurnedData& unburnable, const XYPos p)
   {
     distances()[0] = INVALID_DISTANCE - 1;
   }
+  logging::check_equal(
+    canBurn(),
+    !unburnable[p.hash()],
+    "can burn");
   insert(p);
+  logging::check_equal(
+    canBurn()
+      ? 1
+      : 0,
+    unique().size(),
+    "Initial size");
   // if (!unburnable[p.hash()])
   // {
   //   XYSize integral;
@@ -207,7 +217,7 @@ Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
     "Pts::insert: (%f, %f) %s burn",
     p0.x(),
     p0.y(),
-    unburnable[p0.hash()] ? "can" : "cannot");
+    !unburnable[p0.hash()] ? "can" : "cannot");
   auto p = map_.try_emplace(
     p0.hash(),
     unburnable,
@@ -218,22 +228,35 @@ Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
     p0.x(),
     p0.y());
   auto& pts = p.first->second;
+  const set<XYPos> u0 = unique();
+  const auto n0 = u0.size();
+  show_points<XYPos, XYSize, std::set<XYPos>>(
+    u0,
+    "Pts: Adding (%f, %f) to %ld points",
+    p0.x(),
+    p0.y(),
+    n0);
+  // HACK: insert the same thing twice should do nothing?
   if (!p.second)
+  {
+    logging::info("already existed");
+  }
   {
     pts.insert(p0);
   }
-#ifdef DEBUG_CELLPOINTS
-  const auto n1 = size();
+  // #ifdef DEBUG_CELLPOINTS
   {
-    const set<XYPos> u = unique();
+    const auto n1 = size();
+    const set<XYPos> u1 = unique();
     show_points<XYPos, XYSize, std::set<XYPos>>(
-      u,
-      "Pts: Adding (%f, %f) gives %ld points",
+      u1,
+      "Pts: Adding (%f, %f) to %ld points gives %ld points",
       p0.x(),
       p0.y(),
+      n0,
       n1);
   }
-#endif
+  // #endif
   return pts;
 }
 set<XYPos> Pts::unique() const noexcept
@@ -241,11 +264,13 @@ set<XYPos> Pts::unique() const noexcept
   set<XYPos> r{};
   Location loc{cell_x_y_.hash()};
   add_unique(loc, r);
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   {
     show_points<XYPos, XYSize, std::set<XYPos>>(
       r,
       "Generated unique points as:");
   }
+#endif
   return r;
 }
 void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
@@ -258,34 +283,42 @@ void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
     loc.row(),
     cell_x_y_.y(),
     "Pts::add_unique: y");
-  // if any point is invalid then they all have to be
+// if any point is invalid then they all have to be
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(
     "Pts::add_unique: (%d, %d) %s burn",
     cell_x_y_.x(),
     cell_x_y_.y(),
     canBurn() ? "can" : "cannot");
+#endif
   if (canBurn())
   {
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
     logging::verbose(
       "Pts::add_unique: starting with %ld points",
       into.size());
+#endif
     const auto& pts = points();
     for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
     {
       const auto& p = pts[i];
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
       logging::verbose(
         "Pts::add_unique: (%f, %f) as %s",
         p.x(),
         p.y(),
         DIRECTION_NAMES[i]);
+#endif
       into.insert(
         {cell_x_y_.x(),
          cell_x_y_.y(),
          p.x(),
          p.y()});
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
       logging::verbose(
         "Pts::add_unique: now %ld points",
         into.size());
+#endif
     }
     // std::transform(
     //   points().cbegin(),

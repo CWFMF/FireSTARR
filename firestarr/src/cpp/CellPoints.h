@@ -219,9 +219,10 @@ static void show_points(
   va_start(args, format);
   // logging::output(logging::LOG_VERBOSE, format, &args);
   auto msg = fs::logging::format_log_message(
-    "VERBOSE",
+    "",
     format,
     &args);
+  printf(msg.c_str());
   va_end(args);
   const P& p = *(s.cbegin());
   const T& x = p.x();
@@ -233,7 +234,7 @@ static void show_points(
             std::numeric_limits<T>::is_integer)
             ? "(%d, %d)"
             : "(%f, %f)");
-  logging::output(logging::LOG_VERBOSE, "\n>>>>>>>>>>>>>>>>>>>>>>>>\n");
+  printf("\n>>>>>>>>>>>>>>>>>>>>>>>>\n");
   size_t i = 0;
   for (const auto& p : s)
   {
