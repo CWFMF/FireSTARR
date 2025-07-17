@@ -28,6 +28,7 @@ from azurebatch import (
 from common import (
     APP_NAME,
     CONFIG,
+    CREATION_OPTIONS,
     DEFAULT_SETTINGS_FILE,
     DIR_APP,
     DIR_DATA,
@@ -39,6 +40,7 @@ from common import (
     FILE_SIM_SCRIPT,
     FLAG_IGNORE_PERIM_OUTPUTS,
     FMT_FILE_SECOND,
+    FORMAT_OUTPUT,
     PREFERRED_SETTINGS_FILE,
     SECONDS_PER_HOUR,
     WANT_DATES,
@@ -55,8 +57,6 @@ from common import (
     start_process,
     try_remove,
 )
-from redundancy import call_safe
-
 from gis import (
     Rasterize,
     find_best_raster,
@@ -66,6 +66,7 @@ from gis import (
     save_geojson,
     save_point_file,
 )
+from redundancy import call_safe
 
 # set to "" if want intensity grids
 # NO_INTENSITY = "--no-intensity"
@@ -464,6 +465,8 @@ def copy_fire_outputs(dir_fire, dir_output, changed):
                 outputBounds=extent,
                 # HACK: if nodata is none then 0's should just show up as 0?
                 nodata=None,
+                format=FORMAT_OUTPUT,
+                options=CREATION_OPTIONS,
             )
             # HACK: set file time for projection from original
             mtime = os.path.getmtime(file_src)
