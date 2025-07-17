@@ -163,7 +163,7 @@ public:
   // void clear();
   //   const array_pts points() const;
   bool empty() const;
-#ifdef DEBUG_CELLPOINTS
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD)
   size_t size() const noexcept;
 #endif
   // DurationSize arrival_time_;
@@ -200,7 +200,7 @@ public:
     const XYPos p) noexcept;
   set<XYPos> unique() const noexcept;
   set<XYPos> unique(const HashSize hash_value) const noexcept;
-#ifdef DEBUG_CELLPOINTS
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD)
   size_t size() const noexcept;
 #endif
   // apply function to each CellPoints within and remove matches

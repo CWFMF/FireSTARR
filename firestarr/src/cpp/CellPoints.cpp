@@ -81,7 +81,7 @@ set<XYPos> CellPoints::unique() const noexcept
     return ret;
   }
 }
-#ifdef DEBUG_CELLPOINTS
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD)
 size_t CellPoints::size() const noexcept
 {
   return unique().size();
@@ -388,7 +388,7 @@ CellPoints& CellPointsMap::insert(
   const Scenario& scenario,
   const XYPos p) noexcept
 {
-#ifdef DEBUG_CELLPOINTS
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD)
   const auto n0 = size();
   logging::verbose("Adding (%f, %f) to %ld points", p.x(), p.y(), n0);
 #endif
@@ -405,6 +405,10 @@ CellPoints& CellPointsMap::insert(
 #ifdef DEBUG_CELLPOINTS
   const auto n1 = size();
   logging::verbose("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n1);
+#endif
+#ifdef DEBUG_NEW_SPREAD
+  const auto n2 = cell_pts.size();
+  logging::verbose("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n2);
 #endif
   return cell_pts;
 }
@@ -450,7 +454,7 @@ set<XYPos> CellPointsMap::unique(const HashSize hash_value) const noexcept
   }
   return r;
 }
-#ifdef DEBUG_CELLPOINTS
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD)
 size_t CellPointsMap::size() const noexcept
 {
   return unique().size();
