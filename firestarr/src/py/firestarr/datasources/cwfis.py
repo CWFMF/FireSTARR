@@ -25,13 +25,10 @@ from datasources.datatypes import (
     make_point,
     make_template_empty,
 )
-from model_data import DEFAULT_STATUS_IGNORE, URL_CWFIS_DOWNLOADS, make_query_geoserver
-from net import try_save_http
-
-from firestarr.src.py.firestarr.gis import CRS_OUTPUT
 from gis import (
     CRS_COMPARISON,
     CRS_LAMBERT_ATLAS,
+    CRS_OUTPUT,
     CRS_WGS84,
     KM_TO_M,
     gdf_from_file,
@@ -39,6 +36,8 @@ from gis import (
     make_empty_gdf,
     to_gdf,
 )
+from model_data import DEFAULT_STATUS_IGNORE, URL_CWFIS_DOWNLOADS, make_query_geoserver
+from net import try_save_http
 
 FLAG_DEBUG_PERIMETERS = False
 # HACK: so we can change just the value but it also requires FLAG_DEBUG
