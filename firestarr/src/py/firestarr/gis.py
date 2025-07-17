@@ -46,6 +46,7 @@ CRS_LAMBERT_ATLAS = 3978
 CRS_COMPARISON = CRS_LAMBERT_ATLAS
 CRS_NAD83 = 4269
 CRS_SIMINPUT = CRS_NAD83
+CRS_OUTPUT = f"EPSG:{CRS_WGS84}"
 VALID_GEOMETRY_EXTENSIONS = [f".{x}" for x in sorted(fiona.drvsupport.vector_driver_extensions().keys())]
 VECTOR_FILE_EXTENSION = "gpkg"
 
@@ -397,7 +398,7 @@ def project_raster(
     outputBounds=None,
     nodata=0,
     options=["COMPRESS=LZW", "TILED=YES"],
-    crs="EPSG:4326",
+    crs=CRS_OUTPUT,
     resolution=None,
     format=None,
 ):
