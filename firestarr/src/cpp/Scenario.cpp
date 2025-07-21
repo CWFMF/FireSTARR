@@ -1521,12 +1521,7 @@ void Scenario::scheduleFireSpread(const Event& event)
         && ((survives(new_time, for_cell, new_time - arrival_[hash_value])
              && !isSurrounded(hash_value))))
     {
-      // const auto r = for_cell.row();
-      // const auto c = for_cell.column();
-      // const Location loc{r, c};
-      // This is supposed to be ensuring the points are in the active points list?
-      // but isn't it just swapping the mapped entry with itself?
-      std::swap(points_.map_[hash_value], pts);
+      // keep points because they could go somewhere
       ++it;
     }
     else
@@ -1534,7 +1529,9 @@ void Scenario::scheduleFireSpread(const Event& event)
       // just inserted false, so make sure unburnable gets updated
       // whether it went out or is surrounded just mark it as unburnable
       (*unburnable_)[hash_value] = true;
-      it = points_.map_.erase(it);
+      // FIX: old behaviour is to not remove these
+      // it = points_.map_.erase(it);
+      ++it;
 #ifdef USE_NEW_SPREAD
       points_new_.erase(hash_value);
       (*unburnable_new_)[hash_value] = true;
