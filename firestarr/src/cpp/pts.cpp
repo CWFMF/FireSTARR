@@ -5,7 +5,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #include "pts.h"
-#ifdef DEBUG_NEW_SPREAD
+#ifdef USE_NEW_SPREAD
 #include "Log.h"
 #include "Location.h"
 #include "Scenario.h"
@@ -75,7 +75,7 @@ Pts::Pts()
   std::fill_n(
     &(distances()[0]),
     NUM_DIRECTIONS,
-    INVALID_DIRECTION);
+    INVALID_DISTANCE);
   std::fill_n(
     &(points()[0]),
     NUM_DIRECTIONS,
@@ -158,7 +158,7 @@ Pts& Pts::insert(const XYSize x,
     const auto x0 = static_cast<DistanceSize>(modf(x, &integral));
     const auto y0 = static_cast<DistanceSize>(modf(y, &integral));
     const InnerPos p0{x0, y0};
-    std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
+    // std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
     auto& dists = distances();
     auto& pts = points();
     for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
@@ -169,6 +169,7 @@ Pts& Pts::insert(const XYSize x,
       const auto d = dist_line(x0, x1) + dist_line(y0, y1);
       auto& p_d = dists[i];
       auto& p_p = pts[i];
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
       if (d < p_d)
       {
         logging::verbose(
@@ -181,6 +182,7 @@ Pts& Pts::insert(const XYSize x,
           p0.x(),
           p0.y());
       }
+#endif
       p_p = (d < p_d) ? p0 : p_p;
       p_d = (d < p_d) ? d : p_d;
     }
@@ -213,21 +215,26 @@ bool Pts::empty() const
 
 Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
 {
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(
     "Pts::insert: (%f, %f) %s burn",
     p0.x(),
     p0.y(),
     !unburnable[p0.hash()] ? "can" : "cannot");
+#endif
   auto p = map_.try_emplace(
     p0.hash(),
     unburnable,
     p0);
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(
     "Pts::insert: %s (%f, %f)",
     p.second ? "emplaced" : "inserting",
     p0.x(),
     p0.y());
+#endif
   auto& pts = p.first->second;
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   const set<XYPos> u0 = unique();
   const auto n0 = u0.size();
   show_points<XYPos, XYSize, std::set<XYPos>>(
@@ -236,15 +243,17 @@ Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
     p0.x(),
     p0.y(),
     n0);
+#endif
   // HACK: insert the same thing twice should do nothing?
+  // if (!p.second)
+  // {
+  //   logging::info("already existed");
+  // }
   if (!p.second)
-  {
-    logging::info("already existed");
-  }
   {
     pts.insert(p0);
   }
-  // #ifdef DEBUG_CELLPOINTS
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD_VERBOSE)
   {
     const auto n1 = size();
     const set<XYPos> u1 = unique();
@@ -256,7 +265,7 @@ Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
       n0,
       n1);
   }
-  // #endif
+#endif
   return pts;
 }
 set<XYPos> Pts::unique() const noexcept

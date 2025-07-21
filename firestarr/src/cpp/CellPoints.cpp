@@ -279,6 +279,7 @@ void insert_pt(
     const auto d = ((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1));
     auto& p_d = pts.distances()[i];
     auto& p_p = pts.points()[i];
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
     if (d < p_d)
     {
       logging::verbose(
@@ -287,6 +288,7 @@ void insert_pt(
         p0.x(),
         p0.y());
     }
+#endif
     p_p = (d < p_d) ? p0 : p_p;
     p_d = (d < p_d) ? d : p_d;
   }
@@ -398,9 +400,26 @@ CellPoints& CellPointsMap::insert(
   CellPoints& cell_pts = e.first->second;
   if (!e.second)
   {
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
+    show_points<XYPos, XYSize, std::set<XYPos>>(
+      cell_pts.unique(),
+      "Pts: Adding (%f, %f) to %ld points",
+      p.x(),
+      p.y(),
+      n0);
+#endif
     // FIX: should use max of whatever ROS has entered during this time and not just first ros
     // tried to add new CellPoints but already there
     cell_pts.insert(p);
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
+    show_points<XYPos, XYSize, std::set<XYPos>>(
+      cell_pts.unique(),
+      "Pts: Adding (%f, %f) to %ld points gives %ld points",
+      p.x(),
+      p.y(),
+      n0,
+      cell_pts.size());
+#endif
   }
 #ifdef DEBUG_CELLPOINTS
   const auto n1 = size();

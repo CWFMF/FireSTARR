@@ -14,9 +14,7 @@
 #include "InnerPos.h"
 #include "FireSpread.h"
 #include "CellPoints.h"
-#ifdef DEBUG_NEW_SPREAD
 #include "pts.h"
-#endif
 
 namespace fs::sim
 {
@@ -497,7 +495,7 @@ protected:
    * \brief Map of Cells to the PointSets within them
    */
   CellPointsMap points_;
-#ifdef DEBUG_NEW_SPREAD
+#ifdef USE_NEW_SPREAD
   PtMap points_new_;
 #endif
   /**
