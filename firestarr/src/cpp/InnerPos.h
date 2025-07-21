@@ -20,8 +20,7 @@ protected:
   static constexpr auto INVALID_Y = YMin - 1;
 public:
   constexpr BoundedPoint(const S& x, const S& y)
-    : first(x),
-      second(y)
+    : xy_(x, y)
   {
   }
   constexpr BoundedPoint(const class_type* p)
@@ -36,10 +35,9 @@ public:
     : BoundedPoint(XMin - 1, YMin - 1)
   {
   }
-  class_type& operator=(const class_type& rhs)
+  constexpr class_type& operator=(const class_type& rhs)
   {
-    first = rhs.first;
-    second = rhs.second;
+    xy_ = rhs.xy_;
     return *this;
   }
   /**
@@ -48,20 +46,20 @@ public:
   template <class T, class O>
   [[nodiscard]] constexpr T add(const O& o) const noexcept
   {
-    return static_cast<T>(class_type(first + o.first, second + o.second));
+    return static_cast<T>(class_type(xy_.first + o.xy_.first, xy_.second + o.xy_.second));
   }
   inline auto& x() const
   {
-    return first;
+    return xy_.first;
   }
   inline auto& y() const
   {
-    return second;
+    return xy_.second;
   }
   CONSTEXPR Location location() const
   {
     // HACK: Location is (row, column) and this is (x, y)
-    return {static_cast<Idx>(second), static_cast<Idx>(first)};
+    return {static_cast<Idx>(xy_.second), static_cast<Idx>(xy_.first)};
   }
   CONSTEXPR HashSize hash() const
   {
@@ -69,19 +67,14 @@ public:
   }
   bool operator<(const auto& rhs) const
   {
-    if (first == rhs.first)
-    {
-      return second < rhs.second;
-    }
-    return first < rhs.first;
+    return xy_ < rhs.xy_;
   }
   bool operator==(const auto& rhs) const
   {
-    return first == rhs.first && second == rhs.second;
+    return xy_ == rhs.xy_;
   }
 private:
-  S first;
-  S second;
+  pair<S, S> xy_;
 };
 /**
  * \brief Offset from a position
