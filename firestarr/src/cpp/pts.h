@@ -6,7 +6,7 @@
 
 #pragma once
 #include "stdafx.h"
-#define USE_NEW_SPREAD
+// #define USE_NEW_SPREAD
 #ifndef USE_NEW_SPREAD
 #undef DEBUG_NEW_SPREAD
 #undef DEBUG_NEW_SPREAD_CHECK

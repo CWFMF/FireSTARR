@@ -1480,7 +1480,7 @@ void Scenario::scheduleFireSpread(const Event& event)
   while (it != points_.map_.end())
   {
     auto& kv = *it;
-    CellPoints& pts = kv.second;
+    // CellPoints& pts = kv.second;
     const auto& hash_value = kv.first;
     const auto for_cell = cell(hash_value);
 #ifdef DEBUG_TEMPORARY
@@ -1526,12 +1526,20 @@ void Scenario::scheduleFireSpread(const Event& event)
     }
     else
     {
+#ifdef DEBUG_CELLPOINTS
+      logging::info(
+        "Removing %ld points because: cannot_spread=%d; does_survive=%d; is_surrounded=%d",
+        it->second.unique().size(),
+        cannotSpread(hash_value),
+        survives(new_time, for_cell, new_time - arrival_[hash_value]),
+        isSurrounded(hash_value));
+#endif
       // just inserted false, so make sure unburnable gets updated
       // whether it went out or is surrounded just mark it as unburnable
       (*unburnable_)[hash_value] = true;
       // FIX: old behaviour is to not remove these
-      // it = points_.map_.erase(it);
-      ++it;
+      it = points_.map_.erase(it);
+      // ++it;
 #ifdef USE_NEW_SPREAD
       points_new_.erase(hash_value);
       (*unburnable_new_)[hash_value] = true;
