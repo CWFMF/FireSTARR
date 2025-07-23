@@ -956,7 +956,7 @@ void apply_offsets_spreadkey(
 #ifdef USE_NEW_SPREAD
   PtMap& points_new,
 #endif
-#ifdef DEBUG_NEW_SPREAD
+#if defined(DEBUG_NEW_SPREAD) || !defined(USE_OLD_SPREAD)
   spreading_points_new::mapped_type& pts_spreading_new,
 #endif
 #ifdef USE_OLD_SPREAD
@@ -988,7 +988,9 @@ void apply_offsets_spreadkey(
     pts_spreading_new);
 #endif
   OffsetSet offsets_after_duration{};
+#ifdef DEBUG_CELLPOINTS
   logging::verbose("Applying %ld offsets", offsets.size());
+#endif
   // // offsets_after_duration.resize(offsets.size());
   // std::transform(
   //   offsets.cbegin(),
@@ -1009,8 +1011,9 @@ void apply_offsets_spreadkey(
       return ROSOffset(
         Offset(p.x() * duration, p.y() * duration));
     });
-  // #ifdef DEBUG_NEW_SPREAD_VERBOSE
+#ifdef DEBUG_CELLPOINTS
   logging::debug("Calculated %ld offsets after duration %f", offsets_after_duration.size(), duration);
+#endif
 #ifdef USE_OLD_SPREAD
   logging::debug("pts_spreading has %ld items", pts_spreading.size());
 #endif
@@ -1037,12 +1040,14 @@ void apply_offsets_spreadkey(
 #else
     auto& cell_pts = kv.second;
 #endif
+#ifdef DEBUG_NEW_SPREAD
     Location src{kv.first};
     const auto hash_value = src.hash();
     logging::check_equal(
       hash_value,
       kv.first,
       "key hash");
+#endif
     // auto cell_pts_new = points_new.map_.at(hash_value);
 #ifdef DEBUG_CELLPOINTS
     scenario.log_verbose(
@@ -1443,7 +1448,9 @@ void Scenario::scheduleFireSpread(const Event& event)
                            : max_duration);
   // note("Spreading for %f minutes", duration);
   const auto new_time = time + duration / DAY_MINUTES;
+#ifdef USE_OLD_SPREAD
   CellPointsMap cell_pts{};
+#endif
 #ifdef USE_NEW_SPREAD
   PtMap cell_pts_new{};
 #endif
@@ -1483,7 +1490,7 @@ void Scenario::scheduleFireSpread(const Event& event)
 #ifdef USE_NEW_SPREAD
       cell_pts_new,
 #endif
-#ifdef DEBUG_NEW_SPREAD
+#if defined(DEBUG_NEW_SPREAD) || !defined(USE_OLD_SPREAD)
       pts_spreading_new,
 #endif
 #ifdef USE_OLD_SPREAD

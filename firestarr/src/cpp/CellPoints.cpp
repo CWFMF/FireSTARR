@@ -5,6 +5,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 
 #include "CellPoints.h"
+#ifdef USE_OLD_SPREAD
 #include "Log.h"
 #include "Location.h"
 #include "IntensityMap.h"
@@ -481,3 +482,4 @@ size_t CellPointsMap::size() const noexcept
 }
 #endif
 }
+#endif

@@ -25,9 +25,10 @@ static const XYSize INVALID_XY_LOCATION = INVALID_XY_PAIR.second.x();
 static const InnerPos INVALID_INNER_POSITION{};
 static const pair<DistanceSize, InnerPos> INVALID_INNER_PAIR{INVALID_DISTANCE, {}};
 static const InnerSize INVALID_INNER_LOCATION = INVALID_INNER_PAIR.second.x();
+#ifdef USE_OLD_SPREAD
 static const SpreadData INVALID_SPREAD_DATA{
   INVALID_TIME};
-
+#endif
 using DISTANCE_PAIR = pair<DistanceSize, DistanceSize>;
 #define D_PTS(x, y) (DISTANCE_PAIR{static_cast<DistanceSize>(x), static_cast<DistanceSize>(y)})
 constexpr std::array<DISTANCE_PAIR, NUM_DIRECTIONS> POINTS_OUTER{
@@ -92,10 +93,12 @@ Pts::Pts(const IntensityMap& intensity_map, const XYPos p)
   {
     distances()[0] = INVALID_DISTANCE - 1;
   }
+#ifdef DEBUG_NEW_SPREAD
   logging::check_equal(
     canBurn(),
     !(*intensity_map.unburnable_)[p.hash()],
     "can burn");
+#endif
   insert(p);
 #ifdef DEBUG_NEW_SPREAD_CHECK
   logging::check_equal(
@@ -149,11 +152,13 @@ Pts& Pts::insert(const XYSize x,
       n0);
   }
 #endif
+#ifdef DEBUG_NEW_SPREAD
   logging::verbose(
     "Pts: (%d, %d) %s burn",
     cell_x_y_.x(),
     cell_x_y_.y(),
     canBurn() ? "can" : "cannot");
+#endif
   if (canBurn())
   {
     XYSize integral;
@@ -285,8 +290,14 @@ set<XYPos> Pts::unique() const noexcept
 #endif
   return r;
 }
-void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
+void Pts::add_unique(const Location&
+#ifdef DEBUG_NEW_SPREAD
+                       loc
+#endif
+                     ,
+                     set<XYPos>& into) const noexcept
 {
+#ifdef DEBUG_NEW_SPREAD
   logging::check_equal(
     loc.column(),
     cell_x_y_.x(),
@@ -295,6 +306,7 @@ void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
     loc.row(),
     cell_x_y_.y(),
     "Pts::add_unique: y");
+#endif
 // if any point is invalid then they all have to be
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(
@@ -343,9 +355,11 @@ void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
     //       p.x(),
     //       p.y()};
     //   });
+#ifdef DEBUG_NEW_SPREAD
     logging::check_fatal(
       0 == into.size(),
       "Pts::add_unique: Can burn but no points");
+#endif
     // logging::note(
     //   "Pts: Have %ld points",
     //   into.size());
@@ -366,10 +380,12 @@ void Pts::add_unique(const Location& loc, set<XYPos>& into) const noexcept
   //     return p;
   //   });
 }
+#ifdef DEBUG_NEW_SPREAD
 size_t Pts::size() const noexcept
 {
   return unique().size();
 }
+#endif
 set<XYPos> PtMap::unique(const HashSize hash_value) const noexcept
 {
   set<XYPos> r{};
@@ -378,10 +394,12 @@ set<XYPos> PtMap::unique(const HashSize hash_value) const noexcept
     if (kv.first == hash_value)
     {
       const auto& loc = Location{kv.first};
+#ifdef DEBUG_NEW_SPREAD
       logging::verbose(
         "PtMap::unique: Adding unique for cell (%d, %d)",
         loc.column(),
         loc.row());
+#endif
       auto& pts = kv.second;
       pts.add_unique(loc, r);
     }

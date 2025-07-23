@@ -6,6 +6,7 @@
 
 #pragma once
 #include "stdafx.h"
+#ifdef USE_OLD_SPREAD
 #include "InnerPos.h"
 #include "IntensityMap.h"
 
@@ -253,3 +254,4 @@ static void show_points(
   printf("\n<<<<<<<<<<<<<<<<<<<<<<<<<\n");
 }
 }
+#endif
