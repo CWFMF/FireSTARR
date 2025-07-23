@@ -663,10 +663,10 @@ void Scenario::saveStats(const DurationSize time) const
     points_new_.unique());
 #endif
   const auto& intensity =
-#ifdef USE_OLD_SPREAD
-    intensity_;
-#else
+#ifdef USE_NEW_SPREAD
     intensity_new_;
+#else
+    intensity_;
 #endif
   probabilities_->at(time)->addProbability(*intensity);
   if (time == last_save_)
