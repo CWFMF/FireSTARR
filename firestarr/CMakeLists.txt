@@ -12,6 +12,8 @@ if(WIN32)
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 endif()
 
+# set(ASAN_ARGS "-fsanitize=address;-fsanitize=undefined")
+
 # Enable Hot Reload for MSVC compilers if supported.
 if(POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
@@ -65,8 +67,8 @@ else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopt-info-vec-all")
     endif()
     add_compile_options(
-        "$<$<CONFIG:RELEASE>:-O3;>"
-        "$<$<CONFIG:DEBUG>:-O0;-fno-omit-frame-pointer;-g;>"
+        "$<$<CONFIG:RELEASE>:-O3;${ASAN_ARGS};>"
+        "$<$<CONFIG:DEBUG>:-O0;-fno-omit-frame-pointer;${ASAN_ARGS};-g;>"
     )
 endif()
 message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
@@ -123,6 +125,9 @@ if (WIN32)
 
     find_package(PROJ REQUIRED CONFIG)
     target_link_libraries(${PROJECT_NAME} PUBLIC geotiff tiff PROJ::proj)
+    if (ASAN_ARGS)
+        target_link_options(${PROJECT_NAME} BEFORE PUBLIC ${ASAN_ARGS})
+    endif()
 endif()
 
 add_custom_command(TARGET ${PROJECT_NAME}
