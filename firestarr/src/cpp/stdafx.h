@@ -239,19 +239,19 @@ static constexpr Idx TILE_WIDTH = min(MAX_COLUMNS, static_cast<Idx>(PREFERRED_TI
 /**
  * \brief Maximum aspect value (360 == 0)
  */
-static constexpr auto MAX_ASPECT = 359;
+static constexpr DirectionSize MAX_ASPECT = 359;
 /**
  * \brief Maximum slope that can be stored - this is used in the horizontal distance calculation
  */
-static constexpr auto MAX_SLOPE_FOR_DISTANCE = 500;
+static constexpr SlopeSize MAX_SLOPE_FOR_DISTANCE = 500;
 /**
  * \brief Invalid angle value
  */
-static constexpr auto INVALID_ANGLE = 361;
+static constexpr DirectionSize INVALID_ANGLE = 361;
 /**
  * \brief Invalid aspect value
  */
-static constexpr auto INVALID_ASPECT = INVALID_ANGLE;
+static constexpr auto INVALID_ASPECT = static_cast<AspectSize>(INVALID_ANGLE);
 /**
  * \brief Invalid grass curing value
  */
@@ -259,7 +259,7 @@ static constexpr MathSize INVALID_CURING = -1;
 /**
  * \brief Invalid slope value
  */
-static constexpr auto INVALID_SLOPE = 511;
+static constexpr SlopeSize INVALID_SLOPE = 511;
 /**
  * \brief Number of all possible fuels in simulation
  */

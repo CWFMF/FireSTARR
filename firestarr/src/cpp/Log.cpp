@@ -280,6 +280,20 @@ void check_equal(const char* lhs, const char* rhs, const char* name)
                        rhs,
                        lhs);
 }
+void check_equal(const bool lhs, const bool rhs, const char* name)
+#ifdef NDEBUG
+  noexcept
+#endif
+{
+  bool a = lhs ? true : false;
+  bool b = rhs ? true : false;
+  logging::check_fatal(
+    a != b,
+    "Expected %s to be %s but got %s",
+    name,
+    a ? "true" : "false",
+    b ? "true" : "false");
+}
 void SelfLogger::log_output(const int level, const char* format, ...) const noexcept
 {
   // FIX: better/any way to call this from other level-specific functions?

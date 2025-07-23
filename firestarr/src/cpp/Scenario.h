@@ -133,11 +133,6 @@ public:
                                 mt19937* mt_spread,
                                 util::SafeVector* final_sizes);
   /**
-   * \brief Burn cell that Event takes place in
-   * \param event Event with cell location
-   */
-  void burn(const Event& event);
-  /**
    * Mark as cancelled so it stops computing on next event.
    * \param Whether to log a warning about this being cancelled
    */
@@ -332,26 +327,6 @@ public:
    */
   [[nodiscard]] MathSize currentFireSize() const;
   /**
-   * \brief Whether or not a Cell can burn
-   * \param location Cell
-   * \return Whether or not a Cell can burn
-   */
-  // [[nodiscard]] bool canBurn(const HashSize hash_value) const;
-  [[nodiscard]] bool cannotSpread(const HashSize hash_value) const;
-  [[nodiscard]] bool hasNotBurned(const HashSize hash_value) const;
-  /**
-   * \brief Whether or not Cell with the given hash can burn
-   * \param hash Hash for Cell to check
-   * \return Whether or not Cell with the given hash can burn
-   */
-  [[nodiscard]] bool isUnburnable(const HashSize hash_value) const;
-  /**
-   * \brief Whether or not Location has burned already
-   * \param location Location to check
-   * \return Whether or not Location has burned already
-   */
-  [[nodiscard]] bool hasBurned(const HashSize hash_value) const;
-  /**
    * \brief Whether or not Location with given hash has burned already
    * \param hash Hash of Location to check
    * \return Whether or not Location with given hash has burned already
@@ -491,10 +466,12 @@ protected:
    * \brief Current time for this Scenario
    */
   DurationSize current_time_;
-  /**
-   * \brief Map of Cells to the PointSets within them
-   */
+/**
+ * \brief Map of Cells to the PointSets within them
+ */
+#ifdef USE_OLD_SPREAD
   CellPointsMap points_;
+#endif
 #ifdef USE_NEW_SPREAD
   PtMap points_new_;
 #endif
@@ -502,17 +479,19 @@ protected:
    * \brief Contains information on cells that are not burnable
    */
 public:
-  BurnedData* unburnable_;
-  BurnedData* unburnable_new_;
   /**
    * \brief Event scheduler used for ordering events
    */
   set<Event, EventCompare> scheduler_;
-  /**
-   * \brief Map of what intensity each cell has burned at
-   */
+/**
+ * \brief Map of what intensity each cell has burned at
+ */
+#ifdef USE_OLD_SPREAD
   unique_ptr<IntensityMap> intensity_;
+#endif
+#ifdef USE_NEW_SPREAD
   unique_ptr<IntensityMap> intensity_new_;
+#endif
   // /**
   //  * @brief Initial intensity map based off perimeter
   //  */
@@ -525,10 +504,10 @@ public:
    * \brief Calculated SpreadInfo for SpreadKey for current time
    */
   map<topo::SpreadKey, SpreadInfo> spread_info_{};
-  /**
-   * \brief Map of when Cell had first Point arrive in it
-   */
-  map<HashSize, DurationSize> arrival_{};
+  // /**
+  //  * \brief Map of when Cell had first Point arrive in it
+  //  */
+  // map<HashSize, DurationSize> arrival_{};
   /**
    * \brief Maximum rate of spread for current time
    */

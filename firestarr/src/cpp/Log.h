@@ -158,6 +158,11 @@ void check_equal(const char* lhs, const char* rhs, const char* name)
   noexcept
 #endif
   ;
+void check_equal(const bool lhs, const bool rhs, const char* name)
+#ifdef NDEBUG
+  noexcept
+#endif
+  ;
 /**
  * \brief Check if items are not equal and log and exit if true
  * \param lhs first value
@@ -174,11 +179,12 @@ void check_equal(const V& lhs, const V& rhs, const char* name)
     typeid(lhs) == typeid(size_t)
       ? "Expected %s to be %ld but got %ld"
       : "Expected %s to be %d but got %d";
-  logging::check_fatal(lhs != rhs,
-                       fmt,
-                       name,
-                       rhs,
-                       lhs);
+  logging::check_fatal(
+    lhs != rhs,
+    fmt,
+    name,
+    rhs,
+    lhs);
 }
 /**
  * \brief Log with FATAL level and exit

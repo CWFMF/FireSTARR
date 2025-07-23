@@ -9,6 +9,7 @@
 #include <bitset>
 #include "GridMap.h"
 #include "Location.h"
+#include "Event.h"
 namespace fs
 {
 namespace topo
@@ -96,12 +97,26 @@ public:
    * \param ros Rate of spread to check against maximu (m/min)
    * \param raz Spread azimuth for ros
    */
-  void burn(const HashSize hash_value);
+  void burn(const Event& event);
   /**
    * \brief Size of the fire represented by this
    * \return Size of the fire represented by this
    */
   [[nodiscard]] MathSize fireSize() const;
+  /**
+   * \brief Whether or not a Cell can burn
+   * \param location Cell
+   * \return Whether or not a Cell can burn
+   */
+  // [[nodiscard]] bool canBurn(const HashSize hash_value) const;
+  [[nodiscard]] bool cannotSpread(const HashSize hash_value) const;
+  [[nodiscard]] bool hasNotBurned(const HashSize hash_value) const;
+  /**
+   * \brief Whether or not Cell with the given hash can burn
+   * \param hash Hash for Cell to check
+   * \return Whether or not Cell with the given hash can burn
+   */
+  [[nodiscard]] bool isUnburnable(const HashSize hash_value) const;
   /**
    * \brief Iterator for underlying GridMap
    * \return Iterator for underlying GridMap
@@ -123,6 +138,13 @@ private:
    * \brief Map of intensity that cells have burned  at
    */
   unique_ptr<data::GridMap<IntensitySize>> intensity_max_;
+  /**
+   * \brief Map of when Cell had first Point arrive in it
+   */
+public:
+  BurnedData* unburnable_;
+  map<HashSize, DurationSize> arrival_;
+private:
   /**
    * \brief bitset denoting cells that can no longer burn
    */

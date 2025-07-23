@@ -24,7 +24,6 @@ public:
     return std::get<0>(*this);
   }
 };
-class Scenario;
 static constexpr size_t FURTHEST_N = 0;
 static constexpr size_t FURTHEST_NNE = 1;
 static constexpr size_t FURTHEST_NE = 2;
@@ -149,7 +148,7 @@ public:
     const bool can_burn,
     const CellPos& cell) noexcept;
   CellPoints(
-    const Scenario& scenario,
+    const IntensityMap& intensity_map,
     const XYPos p) noexcept;
   CellPoints(CellPoints&& rhs) noexcept = default;
   CellPoints(const CellPoints& rhs) noexcept = default;
@@ -184,19 +183,18 @@ public:
   // HashSize hash_uninit_;
 private:
   CellPoints(
-    const Scenario& scenario,
+    const IntensityMap& intensity_map,
     const CellPos& cell) noexcept;
 };
 
 using spreading_points = CellPoints::spreading_points;
-class Scenario;
 // map that merges items when try_emplace doesn't insert
 class CellPointsMap
 {
 public:
   CellPointsMap();
   CellPoints& insert(
-    const Scenario& scenario,
+    const IntensityMap& intensity_map,
     const XYPos p) noexcept;
   set<XYPos> unique() const noexcept;
   set<XYPos> unique(const HashSize hash_value) const noexcept;
@@ -225,9 +223,9 @@ static void show_points(
   printf(msg.c_str());
   va_end(args);
   const P& p = *(s.cbegin());
-  const T& x = p.x();
+  // const T& x = p.x();
   const auto fmt =
-    typeid(T) == typeid(size_t)
+    typeid(p.x()) == typeid(size_t)
       ? "(%ld, %ld)"
       : (
           (

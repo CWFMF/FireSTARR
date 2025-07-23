@@ -81,29 +81,30 @@ Pts::Pts()
     NUM_DIRECTIONS,
     INVALID_INNER_POSITION);
 }
-Pts::Pts(const BurnedData& unburnable, const XYPos p)
+Pts::Pts(const IntensityMap& intensity_map, const XYPos p)
   : Pts()
 {
   cell_x_y_ =
     {static_cast<Idx>(p.x()),
      static_cast<Idx>(p.y())};
   // HACK: assign value of first item if burnable
-  if (!unburnable[p.hash()])
+  if (!(*intensity_map.unburnable_)[p.hash()])
   {
     distances()[0] = INVALID_DISTANCE - 1;
   }
   logging::check_equal(
     canBurn(),
-    !unburnable[p.hash()],
+    !(*intensity_map.unburnable_)[p.hash()],
     "can burn");
   insert(p);
   logging::check_equal(
-    canBurn()
-      ? 1
-      : 0,
+    static_cast<size_t>(
+      canBurn()
+        ? 1
+        : 0),
     unique().size(),
     "Initial size");
-  // if (!unburnable[p.hash()])
+  // if (!intensity_map.unburnable_[p.hash()])
   // {
   //   XYSize integral;
   //   // need to calculate distances, but we know everything is the same point
@@ -213,18 +214,18 @@ bool Pts::empty() const
   return !canBurn();
 }
 
-Pts& PtMap::insert(const BurnedData& unburnable, const XYPos p0)
+Pts& PtMap::insert(const IntensityMap& intensity_map, const XYPos p0)
 {
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(
     "Pts::insert: (%f, %f) %s burn",
     p0.x(),
     p0.y(),
-    !unburnable[p0.hash()] ? "can" : "cannot");
+    !intensity_map.unburnable_[p0.hash()] ? "can" : "cannot");
 #endif
   auto p = map_.try_emplace(
     p0.hash(),
-    unburnable,
+    intensity_map,
     p0);
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(

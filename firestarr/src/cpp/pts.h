@@ -6,12 +6,6 @@
 
 #pragma once
 #include "stdafx.h"
-// #define USE_NEW_SPREAD
-#ifndef USE_NEW_SPREAD
-#undef DEBUG_NEW_SPREAD
-#undef DEBUG_NEW_SPREAD_CHECK
-#undef DEBUG_NEW_SPREAD_VERBOSE
-#endif
 #include "CellPoints.h"
 #include "InnerPos.h"
 #include "IntensityMap.h"
@@ -24,13 +18,13 @@ class Pts
 public:
   Pts();
   Pts(
-    const BurnedData& unburnable,
+    const IntensityMap& intensity_map,
     const XYPos p);
   Pts(
-    const BurnedData& unburnable,
+    const IntensityMap& intensity_map,
     const XYSize x,
     const XYSize y)
-    : Pts(unburnable, XYPos{x, y})
+    : Pts(intensity_map, XYPos{x, y})
   {
   }
   Pts& insert(const XYPos p0)
@@ -73,14 +67,14 @@ public:
   PtMap& operator=(const PtMap& rhs) noexcept = default;
   PtMap& operator=(PtMap&& rhs) noexcept = default;
   Pts& insert(
-    const BurnedData& unburnable,
+    const IntensityMap& intensity_map,
     const XYPos p0);
   Pts& insert(
-    const BurnedData& unburnable,
+    const IntensityMap& intensity_map,
     const XYSize x,
     const XYSize y)
   {
-    return insert(unburnable, XYPos{x, y});
+    return insert(intensity_map, XYPos{x, y});
   }
   set<XYPos> unique(const HashSize hash_value) const noexcept;
   set<XYPos> unique() const noexcept;
@@ -88,7 +82,7 @@ public:
   set<HashSize> keys() const noexcept;
   size_t size() const noexcept;
   size_t erase(const HashSize hash_value) noexcept;
-private:
+  // private:
   map<HashSize, Pts> map_;
 };
 }

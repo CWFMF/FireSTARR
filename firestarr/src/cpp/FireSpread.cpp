@@ -175,7 +175,7 @@ static topo::SpreadKey make_key(const SlopeSize slope,
   const auto s = topo::Cell::slope(key);
   const auto fuel = fuel::fuel_by_code(topo::Cell::fuelCode(key));
   logging::check_equal(s, slope, "slope");
-  logging::check_equal(a, (0 == slope ? 0 : aspect), "aspect");
+  logging::check_equal(a, (0 == slope ? static_cast<AspectSize>(0) : aspect), "aspect");
   logging::check_equal(fuel->name(), fuel_name, "fuel");
   return key;
 }

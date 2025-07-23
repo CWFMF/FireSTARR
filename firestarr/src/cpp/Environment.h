@@ -357,7 +357,7 @@ protected:
             else
             {
               logging::check_equal(cell.aspect(), a, "Cell aspect when slope is 0");
-              logging::check_equal(v.aspect(), 0, "Aspect when slope is 0");
+              logging::check_equal(v.aspect(), static_cast<AspectSize>(0), "Aspect when slope is 0");
             }
             logging::check_equal(v.fuelCode(), f, "Fuel");
             logging::check_equal(cell.fuelCode(), f, "Cell fuel");
