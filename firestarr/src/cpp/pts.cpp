@@ -97,6 +97,7 @@ Pts::Pts(const IntensityMap& intensity_map, const XYPos p)
     !(*intensity_map.unburnable_)[p.hash()],
     "can burn");
   insert(p);
+#ifdef DEBUG_NEW_SPREAD_CHECK
   logging::check_equal(
     static_cast<size_t>(
       canBurn()
@@ -104,6 +105,7 @@ Pts::Pts(const IntensityMap& intensity_map, const XYPos p)
         : 0),
     unique().size(),
     "Initial size");
+#endif
   // if (!intensity_map.unburnable_[p.hash()])
   // {
   //   XYSize integral;

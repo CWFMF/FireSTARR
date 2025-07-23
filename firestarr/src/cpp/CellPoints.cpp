@@ -27,10 +27,12 @@ static const SpreadData INVALID_SPREAD_DATA{
   INVALID_TIME};
 set<XYPos> CellPoints::unique() const noexcept
 {
+#ifdef DEBUG_NEW_SPREAD_CHECK
   logging::check_equal(
     static_cast<bool>(INVALID_DISTANCE != pts_.distances()[0]),
     can_burn_,
     "can_burn_");
+#endif
 #ifdef DEBUG_CELLPOINTS
   auto first_valid = (INVALID_DISTANCE != pts_.distances()[0]);
   logging::check_equal(
@@ -389,7 +391,7 @@ CellPoints& CellPointsMap::insert(
   const IntensityMap& intensity_map,
   const XYPos p) noexcept
 {
-#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD)
+#if defined(DEBUG_CELLPOINTS) || defined(DEBUG_NEW_SPREAD_VERBOSE)
   const auto n0 = size();
   logging::verbose("Adding (%f, %f) to %ld points", p.x(), p.y(), n0);
 #endif
@@ -424,7 +426,7 @@ CellPoints& CellPointsMap::insert(
   const auto n1 = size();
   logging::verbose("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n1);
 #endif
-#ifdef DEBUG_NEW_SPREAD
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   const auto n2 = cell_pts.size();
   logging::verbose("Adding (%f, %f) to %ld points gives %ld", p.x(), p.y(), n0, n2);
 #endif
