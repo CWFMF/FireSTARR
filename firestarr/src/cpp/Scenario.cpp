@@ -656,7 +656,7 @@ Scenario::Scenario(Model* model,
 }
 void Scenario::saveStats(const DurationSize time) const
 {
-#ifdef DEBUG_NEW_SPREAD
+#if defined(DEBUG_NEW_SPREAD) && defined(USE_OLD_SPREAD)
   check_pts(
     "saveStats()",
     points_.unique(),
@@ -965,8 +965,12 @@ void apply_offsets_spreadkey(
   const Scenario& scenario,
   const DurationSize& arrival_time,
   const DurationSize& duration,
-  const OffsetSet& offsets,
-  spreading_points::mapped_type& pts_spreading)
+  const OffsetSet& offsets
+#ifdef USE_OLD_SPREAD
+  ,
+  spreading_points::mapped_type& pts_spreading
+#endif
+)
 {
 // NOTE: really tried to do this in parallel, but not enough points
 // in a cell for it to work well
@@ -1005,11 +1009,15 @@ void apply_offsets_spreadkey(
       return ROSOffset(
         Offset(p.x() * duration, p.y() * duration));
     });
-#ifdef DEBUG_NEW_SPREAD
+  // #ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::debug("Calculated %ld offsets after duration %f", offsets_after_duration.size(), duration);
+#ifdef USE_OLD_SPREAD
   logging::debug("pts_spreading has %ld items", pts_spreading.size());
+#endif
+#ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::debug("pts_spreading_new has %ld items", pts_spreading_new.size());
 #endif
+// #endif
 #ifdef DEBUG_NEW_SPREAD_CHECK
   check_pts(
     "pts_spreading old vs new",
@@ -1017,10 +1025,18 @@ void apply_offsets_spreadkey(
     pts_spreading_new);
 #endif
   size_t i = 0;
+#ifdef USE_OLD_SPREAD
   for (auto& kv : pts_spreading)
+#else
+  for (auto& kv : pts_spreading_new)
+#endif
   {
     ++i;
+#ifdef USE_OLD_SPREAD
     CellPoints& cell_pts = std::get<1>(kv);
+#else
+    auto& cell_pts = kv.second;
+#endif
     Location src{kv.first};
     const auto hash_value = src.hash();
     logging::check_equal(
@@ -1045,8 +1061,12 @@ void apply_offsets_spreadkey(
 #endif
       continue;
     }
-    // auto& pts = cell_pts.pts_.points();
+// auto& pts = cell_pts.pts_.points();
+#ifdef USE_OLD_SPREAD
     auto pts = cell_pts.unique();
+#else
+    auto& pts = cell_pts;
+#endif
 #ifdef DEBUG_NEW_SPREAD_CHECK
     auto& pair_new = pts_spreading_new[i - 1];
     logging::check_equal(
@@ -1277,7 +1297,9 @@ void Scenario::scheduleFireSpread(const Event& event)
 #ifdef DEBUG_NEW_SPREAD
   log_info("Finding spreading points");
 #endif
+#ifdef USE_OLD_SPREAD
   spreading_points to_spread{};
+#endif
   // make block to prevent it being visible beyond use
   {
 // if we use an iterator this way we don't need to copy keys to erase things
@@ -1338,9 +1360,13 @@ void Scenario::scheduleFireSpread(const Event& event)
 #endif
 #ifdef USE_OLD_SPREAD
           it = points_.map_.erase(it);
+#ifdef USE_NW_SPREAD
           points_new_.erase(hash_value);
+#endif
 #else
+#ifdef USE_OLD_SPREAD
           points_.map_.erase(hash_value);
+#endif
           it = points_new_.map_.erase(it);
 #endif
 #ifdef DEBUG_NEW_SPREAD_CHECK
@@ -1391,7 +1417,11 @@ void Scenario::scheduleFireSpread(const Event& event)
     }
   }
   // if nothing in to_spread then nothing is spreading
+#ifdef USE_OLD_SPREAD
   if (to_spread.empty())
+#else
+  if (to_spread_new.empty())
+#endif
   {
     // if no spread then we left everything back in points_ still
     log_verbose("Waiting until %f", max_time);
@@ -1417,13 +1447,21 @@ void Scenario::scheduleFireSpread(const Event& event)
 #ifdef USE_NEW_SPREAD
   PtMap cell_pts_new{};
 #endif
+#ifdef USE_OLD_SPREAD
   for (spreading_points::value_type& kv0 : to_spread)
+#else
+  for (auto& kv0 : to_spread_new)
+#endif
   {
     auto& key = kv0.first;
     const auto& offsets = spread_info_[key].offsets();
+#ifdef USE_OLD_SPREAD
     spreading_points::mapped_type& pts = kv0.second;
 #ifdef DEBUG_NEW_SPREAD
     spreading_points_new::mapped_type& pts_spreading_new = to_spread_new[key];
+#endif
+#else
+    spreading_points_new::mapped_type& pts_spreading_new = kv0.second;
 #endif
 #ifdef DEBUG_NEW_SPREAD_CHECK
     check_pts(
@@ -1454,8 +1492,12 @@ void Scenario::scheduleFireSpread(const Event& event)
       *this,
       new_time,
       duration,
-      offsets,
-      pts);
+      offsets
+#ifdef USE_OLD_SPREAD
+      ,
+      pts
+#endif
+    );
     // for (XYPos& p : r)
     // {
     //   // cell_pts.insert(p.x(), p.y());
