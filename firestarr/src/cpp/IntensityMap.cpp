@@ -85,7 +85,7 @@ IntensityMap::IntensityMap(const IntensityMap& rhs)
   *intensity_max_ = *rhs.intensity_max_;
   arrival_ = rhs.arrival_;
   *unburnable_ = *rhs.unburnable_;
-  is_burned_ = rhs.is_burned_;
+  *is_burned_ = *rhs.is_burned_;
 }
 
 // IntensityMap::IntensityMap(IntensityMap&& rhs)
@@ -98,8 +98,8 @@ IntensityMap::IntensityMap(const IntensityMap& rhs)
 IntensityMap::~IntensityMap() noexcept
 {
   CacheIntensitySize.release_map(std::move(intensity_max_));
-  model_.releaseBurnedVector(is_burned_);
-  model_.releaseBurnedVector(unburnable_);
+  model_.releaseBurnedVector(std::move(is_burned_));
+  model_.releaseBurnedVector(std::move(unburnable_));
   is_burned_ = nullptr;
   intensity_max_ = nullptr;
   unburnable_ = nullptr;

@@ -1258,9 +1258,9 @@ void Scenario::scheduleFireSpread(const Event& event)
   const auto this_time = util::time_index(time);
   // const auto wx_time = Settings::surface() ? util::to_time(util::time_index(static_cast<Day>(time), 16)) : util::to_time(this_time);
   // const auto wx_time = util::to_time(this_time);
-  const auto wx =
+  const auto& wx =
     weather(time);
-  const auto wx_daily =
+  const auto& wx_daily =
     weather_daily(time);
   // note("time is %f", time);
   current_time_ = time;
@@ -1325,7 +1325,7 @@ void Scenario::scheduleFireSpread(const Event& event)
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
       log_info("Point %d", i);
 #endif
-      const HashSize& hash_value = it->first;
+      const HashSize hash_value = it->first;
       const Location loc{hash_value};
       const auto& for_cell = cell(hash_value);
       const auto key = for_cell.key();
@@ -1559,13 +1559,17 @@ void Scenario::scheduleFireSpread(const Event& event)
 #endif
 #ifdef USE_NEW_SPREAD
   {
-    // indent to keep keys local
-    auto keys = points_new_.keys();
-    for (auto hash_value : keys)
+    auto it = points_new_.map_.begin();
+    while (it != points_new_.map_.end())
     {
+      auto& hash_value = it->first;
       if ((*intensity_new_->unburnable_)[hash_value] || intensity_new_->isSurrounded(hash_value))
       {
-        points_new_.erase(hash_value);
+        it = points_new_.map_.erase(it);
+      }
+      else
+      {
+        ++it;
       }
     }
   }

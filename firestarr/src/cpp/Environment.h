@@ -248,7 +248,7 @@ public:
    * \brief Reset with known non-fuel cells
    * \param data BurnedData to reset
    */
-  void resetBurnedData(sim::BurnedData* data) const noexcept
+  void resetBurnedData(unique_ptr<sim::BurnedData>& data) const noexcept
   {
     // setting to {} probably makes a bitset of the same size on the stack?
     // *data = {};

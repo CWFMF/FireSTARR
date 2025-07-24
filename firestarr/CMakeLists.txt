@@ -67,7 +67,7 @@ else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopt-info-vec-all")
     endif()
     add_compile_options(
-        "$<$<CONFIG:RELEASE>:-O3;${ASAN_ARGS};>"
+        "$<$<CONFIG:RELEASE>:-O0;-fno-omit-frame-pointer;${ASAN_ARGS};-g;>"
         "$<$<CONFIG:DEBUG>:-O0;-fno-omit-frame-pointer;${ASAN_ARGS};-g;>"
     )
 endif()

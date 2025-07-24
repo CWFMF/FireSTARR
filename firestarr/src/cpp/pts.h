@@ -83,19 +83,13 @@ class Pts
 public:
   Pts();
   Pts(
-    const IntensityMap& intensity_map,
+    const bool can_burn,
     const XYPos p);
   Pts(
-    const IntensityMap& intensity_map,
+    const bool can_burn,
     const XYSize x,
-    const XYSize y)
-    : Pts(intensity_map, XYPos{x, y})
-  {
-  }
-  Pts& insert(const XYPos p0)
-  {
-    return insert(p0.x(), p0.y());
-  }
+    const XYSize y);
+  Pts& insert(const XYPos p0);
   Pts& insert(const XYSize x,
               const XYSize y);
   set<XYPos> unique() const noexcept;
@@ -106,23 +100,24 @@ public:
 #endif
   inline const array_dists& distances() const
   {
-    return std::get<0>(cell_pts_);
+    return distances_;
   }
   inline const array_pts& points() const
   {
-    return std::get<1>(cell_pts_);
+    return points_;
   }
   inline array_dists& distances()
   {
-    return std::get<0>(cell_pts_);
+    return distances_;
   }
   inline array_pts& points()
   {
-    return std::get<1>(cell_pts_);
+    return points_;
   }
   bool canBurn() const;
 private:
-  array_cellpts cell_pts_;
+  array_dists distances_;
+  array_pts points_;
   CellPos cell_x_y_;
 };
 class PtMap
@@ -139,10 +134,7 @@ public:
   Pts& insert(
     const IntensityMap& intensity_map,
     const XYSize x,
-    const XYSize y)
-  {
-    return insert(intensity_map, XYPos{x, y});
-  }
+    const XYSize y);
   set<XYPos> unique(const HashSize hash_value) const noexcept;
   set<XYPos> unique() const noexcept;
   void add_unique(set<XYPos>& into) const noexcept;

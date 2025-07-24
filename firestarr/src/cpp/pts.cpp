@@ -72,31 +72,41 @@ Pts::Pts()
   : cell_x_y_(INVALID_INDEX, INVALID_INDEX)
 {
   // // actually only need to set first value to denote empty
-  // distances()[0] = INVALID_DIRECTION;
+  // distances_[0] = INVALID_DIRECTION;
   std::fill_n(
-    &(distances()[0]),
+    &(distances_[0]),
     NUM_DIRECTIONS,
     INVALID_DISTANCE);
   std::fill_n(
-    &(points()[0]),
+    &(points_[0]),
     NUM_DIRECTIONS,
     INVALID_INNER_POSITION);
 }
-Pts::Pts(const IntensityMap& intensity_map, const XYPos p)
-  : Pts()
+Pts::Pts(const bool can_burn, const XYPos p)
+  : Pts(can_burn, p.x(), p.y())
 {
-  cell_x_y_ =
-    {static_cast<Idx>(p.x()),
-     static_cast<Idx>(p.y())};
+}
+Pts::Pts(const bool can_burn, const XYSize x, const XYSize y)
+  : cell_x_y_({static_cast<Idx>(x), static_cast<Idx>(y)})
+{
+  XYPos p{x, y};
+  std::fill_n(
+    &(distances_[0]),
+    NUM_DIRECTIONS,
+    INVALID_DISTANCE);
+  std::fill_n(
+    &(points_[0]),
+    NUM_DIRECTIONS,
+    INVALID_INNER_POSITION);
   // HACK: assign value of first item if burnable
-  if (!(*intensity_map.unburnable_)[p.hash()])
+  if (!can_burn)
   {
-    distances()[0] = INVALID_DISTANCE - 1;
+    distances_[0] = INVALID_DISTANCE - 1;
   }
 #ifdef DEBUG_NEW_SPREAD
   logging::check_equal(
     canBurn(),
-    !(*intensity_map.unburnable_)[p.hash()],
+    can_burn,
     "can burn");
 #endif
   insert(p);
@@ -116,26 +126,28 @@ Pts::Pts(const IntensityMap& intensity_map, const XYPos p)
   //   const auto x0 = static_cast<DistanceSize>(modf(p.x(), &integral));
   //   const auto y0 = static_cast<DistanceSize>(modf(p.y(), &integral));
   //   const InnerPos p0{x0, y0};
-  //   auto& pts = points();
-  //   auto& dists = distances();
-  //   std::fill_n(&(pts[0]), NUM_DIRECTIONS, p0);
+  //   std::fill_n(&(points_[0]), NUM_DIRECTIONS, p0);
   //   for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
   //   {
   //     const auto& p1 = POINTS_OUTER[i];
   //     const auto& x1 = p1.first;
   //     const auto& y1 = p1.second;
-  //     dists[i] = dist_line(x0, x1) + dist_line(y0, y1);
+  //     distances_[i] = dist_line(x0, x1) + dist_line(y0, y1);
   //   }
   // }
   // // else
   // // {
   // //   // actually only need to set first value
-  // //   distances()[0] = INVALID_DIRECTION;
+  // //   distances_[0] = INVALID_DIRECTION;
   // //   // std::fill_n(
-  // //   //   &(distances()[0]),
+  // //   //   &(distances_[0]),
   // //   //   NUM_DIRECTIONS,
   // //   //   INVALID_DIRECTION);
   // // }
+}
+Pts& Pts::insert(const XYPos p0)
+{
+  return insert(p0.x(), p0.y());
 }
 Pts& Pts::insert(const XYSize x,
                  const XYSize y)
@@ -166,17 +178,15 @@ Pts& Pts::insert(const XYSize x,
     const auto x0 = static_cast<DistanceSize>(modf(x, &integral));
     const auto y0 = static_cast<DistanceSize>(modf(y, &integral));
     const InnerPos p0{x0, y0};
-    // std::fill_n(&(points()[0]), NUM_DIRECTIONS, p0);
-    auto& dists = distances();
-    auto& pts = points();
+    // std::fill_n(&(points_[0]), NUM_DIRECTIONS, p0);
     for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
     {
       const auto& p1 = POINTS_OUTER[i];
       const auto& x1 = p1.first;
       const auto& y1 = p1.second;
       const auto d = dist_line(x0, x1) + dist_line(y0, y1);
-      auto& p_d = dists[i];
-      auto& p_p = pts[i];
+      auto& p_d = distances_[i];
+      auto& p_p = points_[i];
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
       if (d < p_d)
       {
@@ -212,12 +222,12 @@ Pts& Pts::insert(const XYSize x,
 }
 inline bool Pts::canBurn() const
 {
-  return (INVALID_DISTANCE != distances()[0]);
+  return (INVALID_DISTANCE != distances_[0]);
 }
 bool Pts::empty() const
 {
   // NOTE: if anything is invalid then everything must be
-  //   return (INVALID_DISTANCE == distances()[0]);
+  //   return (INVALID_DISTANCE == distances_[0]);
   return !canBurn();
 }
 
@@ -230,9 +240,10 @@ Pts& PtMap::insert(const IntensityMap& intensity_map, const XYPos p0)
     p0.y(),
     !intensity_map.unburnable_[p0.hash()] ? "can" : "cannot");
 #endif
+  auto can_burn = (*intensity_map.unburnable_)[p0.hash()];
   auto p = map_.try_emplace(
     p0.hash(),
-    intensity_map,
+    can_burn,
     p0);
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
   logging::verbose(
@@ -276,6 +287,11 @@ Pts& PtMap::insert(const IntensityMap& intensity_map, const XYPos p0)
 #endif
   return pts;
 }
+Pts& PtMap::insert(const IntensityMap& intensity_map, const XYSize x, const XYSize y)
+{
+  return insert(intensity_map, XYPos{x, y});
+}
+
 set<XYPos> Pts::unique() const noexcept
 {
   set<XYPos> r{};
@@ -322,10 +338,9 @@ void Pts::add_unique(const Location&
       "Pts::add_unique: starting with %ld points",
       into.size());
 #endif
-    const auto& pts = points();
     for (size_t i = 0; i < NUM_DIRECTIONS; ++i)
     {
-      const auto& p = pts[i];
+      const auto& p = points_[i];
 #ifdef DEBUG_NEW_SPREAD_VERBOSE
       logging::verbose(
         "Pts::add_unique: (%f, %f) as %s",
@@ -345,8 +360,8 @@ void Pts::add_unique(const Location&
 #endif
     }
     // std::transform(
-    //   points().cbegin(),
-    //   points().cend(),
+    //   points_.cbegin(),
+    //   points_.cend(),
     //   std::insert_iterator(into, end(into)),
     //   [this](auto& p) -> XYPos {
     //     return {
@@ -410,7 +425,8 @@ set<XYPos> PtMap::unique() const noexcept
 {
   set<XYPos> r{};
   add_unique(r);
-  return r;
+  // HACK: is local variable causing heap error?
+  return {r.cbegin(), r.cend()};
 }
 void PtMap::add_unique(set<XYPos>& into) const noexcept
 {

@@ -23,7 +23,7 @@ constexpr auto FMT_OUT = "%ld,%d-%02d-%02d %02d:%02d:%02d,%1.6f,%1.6f,%1.6f,%1.6
 constexpr MathSize PCT_CPU = 0.5;
 Semaphore Model::task_limiter{static_cast<int>(std::thread::hardware_concurrency())};
 // Semaphore Model::task_limiter{0};
-BurnedData* Model::getBurnedVector() const noexcept
+unique_ptr<BurnedData> Model::getBurnedVector() const noexcept
 {
   try
   {
@@ -33,15 +33,13 @@ BurnedData* Model::getBurnedVector() const noexcept
       // check again once we have the mutex
       if (!vectors_.empty())
       {
-        const auto v = std::move(vectors_.back()).release();
+        auto v = std::move(vectors_.back());
         vectors_.pop_back();
         // this is already reset before it was given back
         return v;
       }
     }
-    auto result = environment().makeBurnedData().release();
-    //    environment().resetBurnedData(result);
-    return result;
+    return environment().makeBurnedData();
   }
   catch (const std::exception& ex)
   {
@@ -49,17 +47,17 @@ BurnedData* Model::getBurnedVector() const noexcept
     std::terminate();
   }
 }
-void Model::releaseBurnedVector(BurnedData* has_burned) const noexcept
+void Model::releaseBurnedVector(unique_ptr<BurnedData> has_burned) const noexcept
 {
-  if (nullptr == has_burned)
-  {
-    return;
-  }
+  // if (nullptr == has_burned)
+  // {
+  //   return;
+  // }
   try
   {
     environment().resetBurnedData(has_burned);
     lock_guard<mutex> lock(vector_mutex_);
-    vectors_.push_back(unique_ptr<BurnedData>(has_burned));
+    vectors_.push_back(std::move(has_burned));
   }
   catch (const std::exception& ex)
   {
