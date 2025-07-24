@@ -56,7 +56,7 @@ FireWeather::FireWeather(
   const set<const fuel::FuelType*>& used_fuels,
   const Day min_date,
   const Day max_date,
-  shared_ptr<vector<const wx::FwiWeather*>> weather_by_hour_by_day)
+  shared_ptr<vector_type> weather_by_hour_by_day)
   : weather_by_hour_by_day_(weather_by_hour_by_day),
     survival_probability_(
       make_survival(used_fuels, min_date, max_date, *weather_by_hour_by_day).release()),

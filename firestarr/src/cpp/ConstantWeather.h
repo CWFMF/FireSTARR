@@ -8,7 +8,8 @@
 
 namespace fs::sim
 {
-static shared_ptr<vector<const wx::FwiWeather*>>
+using wx::FireWeather;
+static shared_ptr<FireWeather::vector_type>
   make_constant_weather(
     const wx::Dc& dc,
     const wx::Dmc& dmc,
@@ -19,7 +20,7 @@ static shared_ptr<vector<const wx::FwiWeather*>>
   static constexpr wx::RelativeHumidity RH(30.0);
   static constexpr wx::Precipitation PREC(0.0);
   const auto bui = wx::Bui(dmc, dc);
-  auto wx = make_shared<vector<const wx::FwiWeather*>>();
+  auto wx = make_shared<FireWeather::vector_type>();
   wx->resize(static_cast<size_t>(YEAR_HOURS));
   std::generate(wx->begin(),
                 wx->end(),

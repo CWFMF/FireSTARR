@@ -107,7 +107,7 @@ void Model::readWeather(const wx::FwiWeather& yesterday,
                         const MathSize latitude,
                         const string& filename)
 {
-  map<size_t, shared_ptr<vector<const wx::FwiWeather*>>> wx{};
+  map<size_t, shared_ptr<FireWeather::vector_type>> wx{};
   map<size_t, map<Day, wx::FwiWeather>> wx_daily{};
   map<Day, struct tm> dates{};
   Day min_date = numeric_limits<Day>::max();
@@ -164,7 +164,7 @@ void Model::readWeather(const wx::FwiWeather& yesterday,
         if (wx.find(cur) == wx.end())
         {
           logging::debug("Loading scenario %d...", cur);
-          wx.emplace(cur, make_shared<vector<const wx::FwiWeather*>>());
+          wx.emplace(cur, make_shared<FireWeather::vector_type>());
           prev_time = std::numeric_limits<time_t>::min();
           logging::check_fatal(wx_daily.find(cur) != wx_daily.end(),
                                "Somehow have daily weather for scenario %ld before hourly weather",

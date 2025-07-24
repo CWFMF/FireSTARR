@@ -28,6 +28,7 @@ using SurvivalMap = array<vector<float>, NUMBER_OF_FUELS>;
 class FireWeather
 {
 public:
+  using vector_type = vector<const wx::FwiWeather*>;
   /**
    * \brief Destructor
    */
@@ -96,7 +97,7 @@ public:
    * \brief Weather by hour by day
    * \return Weather by hour by day
    */
-  [[nodiscard]] const shared_ptr<vector<const wx::FwiWeather*>> getWeather()
+  [[nodiscard]] const shared_ptr<vector_type> getWeather()
   {
     return weather_by_hour_by_day_;
   }
@@ -111,12 +112,12 @@ public:
   FireWeather(const set<const fuel::FuelType*>& used_fuels,
               Day min_date,
               Day max_date,
-              shared_ptr<vector<const wx::FwiWeather*>> weather_by_hour_by_day);
+              shared_ptr<vector_type> weather_by_hour_by_day);
 private:
   /**
    * \brief FwiWeather by hour by Day
    */
-  const shared_ptr<vector<const wx::FwiWeather*>> weather_by_hour_by_day_;
+  const shared_ptr<vector_type> weather_by_hour_by_day_;
   /**
    * \brief Probability of survival for fuels fuel at each time
    */
