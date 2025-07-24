@@ -394,10 +394,10 @@ inline Ffmc ffmc_1100_low(const MathSize ln_x, const MathSize ln_x_sq) noexcept
   constexpr auto e = 0.356051255;
   return ffmc_from_moisture((a + c * ln_x + e * ln_x_sq) / (1 + b * ln_x + d * ln_x_sq));
 }
-static const FwiWeather* make_wx(const Speed& speed,
-                                 const FwiWeather& wx,
-                                 const Ffmc& ffmc,
-                                 const int hour)
+static FireWeather::wx_type make_wx(const Speed& speed,
+                                    const FwiWeather& wx,
+                                    const Ffmc& ffmc,
+                                    const int hour)
 {
   static sp_set<FwiWeather> all_weather{};
   // HACK: assign rain to noon only
@@ -410,27 +410,27 @@ static const FwiWeather* make_wx(const Speed& speed,
     wx.dmc(),
     wx.dc());
   // doesn't matter if was already there or just inserted
-  return wx_inserted.first->get();
+  return *wx_inserted.first;
 }
-static const FwiWeather* make_wx(const FwiWeather& wx_wind,
-                                 const FwiWeather& wx,
-                                 const Ffmc& ffmc,
-                                 const int hour)
+static FireWeather::wx_type make_wx(const FwiWeather& wx_wind,
+                                    const FwiWeather& wx,
+                                    const Ffmc& ffmc,
+                                    const int hour)
 {
   return make_wx(Speed(wx_wind.wind().speed().asValue() * wind_speed_adjustment(hour)),
                  wx,
                  ffmc,
                  hour);
 }
-static const FwiWeather* make_wx(const FwiWeather& wx, const Ffmc& ffmc, const int hour)
+static FireWeather::wx_type make_wx(const FwiWeather& wx, const Ffmc& ffmc, const int hour)
 {
   return make_wx(wx, wx, ffmc, hour);
 }
-shared_ptr<vector<const FwiWeather*>> make_vector(map<Day, FwiWeather> data)
+shared_ptr<FireWeather::vector_type> make_vector(map<Day, FwiWeather> data)
 {
   const auto min_date = data.begin()->first;
   const auto max_date = data.rbegin()->first;
-  auto r = make_shared<vector<const FwiWeather*>>((max_date - min_date + 2) * DAY_HOURS);
+  auto r = make_shared<FireWeather::vector_type>((max_date - min_date + 2) * DAY_HOURS);
   // HACK: just approximate last day
   for (const auto& kv : data)
   {

@@ -76,7 +76,7 @@ public:
     static_cast<void*>(reset(nullptr, nullptr, reinterpret_cast<util::SafeVector*>(&final_sizes_)));
   }
 };
-void showSpread(const SpreadInfo& spread, const wx::FwiWeather* w, const fuel::FuelType* fuel)
+void showSpread(const SpreadInfo& spread, FireWeather::wx_type w, const fuel::FuelType* fuel)
 {
   // column, (width, format)
   static const map<const char* const, std::pair<int, const char* const>> FMT{

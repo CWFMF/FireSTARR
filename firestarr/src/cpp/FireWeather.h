@@ -28,7 +28,8 @@ using SurvivalMap = array<vector<float>, NUMBER_OF_FUELS>;
 class FireWeather
 {
 public:
-  using vector_type = vector<const wx::FwiWeather*>;
+  using wx_type = shared_ptr<const FwiWeather>;
+  using vector_type = vector<wx_type>;
   /**
    * \brief Destructor
    */
@@ -51,7 +52,7 @@ public:
    * \param time Time to get weather for
    * \return FwiWeather for given time
    */
-  [[nodiscard]] const FwiWeather* at(const DurationSize time) const
+  [[nodiscard]] FireWeather::wx_type at(const DurationSize time) const
   {
 #ifdef DEBUG_FWI_WEATHER
     logging::check_fatal(time < 0 || time >= MAX_DAYS, "Invalid weather time %f", time);

@@ -21,7 +21,7 @@ static unique_ptr<SurvivalMap> make_survival(
   const set<const fuel::FuelType*>& used_fuels,
   const Day min_date,
   const Day max_date,
-  const vector<const FwiWeather*>& weather_by_hour_by_day)
+  const FireWeather::vector_type& weather_by_hour_by_day)
 {
   auto result = make_unique<SurvivalMap>();
   for (const auto& in_fuel : used_fuels)

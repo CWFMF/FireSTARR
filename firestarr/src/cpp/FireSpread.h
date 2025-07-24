@@ -5,14 +5,15 @@
 
 #pragma once
 #include "Cell.h"
-#include "FWI.h"
+#include "FireWeather.h"
 #include "Point.h"
 #include "Settings.h"
 #include "Util.h"
 #include "InnerPos.h"
 namespace fs::sim
 {
-
+using wx::FireWeather;
+using wx::FwiWeather;
 static constexpr int MAX_SPREAD_ANGLE = 5.0;
 static constexpr MathSize INVALID_ROS = -1.0;
 static constexpr MathSize INVALID_INTENSITY = -1.0;
@@ -38,7 +39,7 @@ public:
              DurationSize time,
              const topo::SpreadKey& key,
              int nd,
-             const wx::FwiWeather* weather);
+             FireWeather::wx_type weather);
   /**
    * \brief Calculate fire spread for time and place
    * \param scenario Scenario this is spreading in
@@ -51,8 +52,8 @@ public:
              DurationSize time,
              const topo::SpreadKey& key,
              int nd,
-             const wx::FwiWeather* weather,
-             const wx::FwiWeather* weather_daily);
+             FireWeather::wx_type weather,
+             FireWeather::wx_type weather_daily);
   CONSTEXPR SpreadInfo(SpreadInfo&& rhs) noexcept = default;
   SpreadInfo(const SpreadInfo& rhs) noexcept = default;
   CONSTEXPR SpreadInfo& operator=(SpreadInfo&& rhs) noexcept = default;
@@ -114,8 +115,9 @@ public:
    * \brief FwiWeather used for spread
    * \return FwiWeather used for spread
    */
-  [[nodiscard]] constexpr const wx::FwiWeather* weather() const
+  [[nodiscard]] constexpr const FwiWeather* weather() const
   {
+    // HACK: use pointer so constexpr works
     return weather_;
   }
   /**
@@ -275,7 +277,7 @@ public:
     const SlopeSize slope,
     const AspectSize aspect,
     const char* fuel_name,
-    const wx::FwiWeather* weather);
+    FireWeather::wx_type weather);
   SpreadInfo(
     const tm& start_date,
     const MathSize latitude,
@@ -284,7 +286,7 @@ public:
     const SlopeSize slope,
     const AspectSize aspect,
     const char* fuel_name,
-    const wx::FwiWeather* weather);
+    FireWeather::wx_type weather);
   MathSize crownFractionBurned() const
   {
     return cfb_;
@@ -316,20 +318,20 @@ private:
              const AspectSize aspect,
              const char* fuel_name,
              int nd,
-             const wx::FwiWeather* weather);
+             FireWeather::wx_type weather);
   SpreadInfo(DurationSize time,
              MathSize min_ros,
              MathSize cell_size,
              const topo::SpreadKey& key,
              int nd,
-             const wx::FwiWeather* weather);
+             FireWeather::wx_type weather);
   SpreadInfo(DurationSize time,
              MathSize min_ros,
              MathSize cell_size,
              const topo::SpreadKey& key,
              int nd,
-             const wx::FwiWeather* weather,
-             const wx::FwiWeather* weather_daily);
+             FireWeather::wx_type weather,
+             FireWeather::wx_type weather_daily);
   /**
    * Do initial spread calculations
    * \return Initial head ros calculation (-1 for none)
@@ -361,7 +363,7 @@ private:
   /**
    * \brief FwiWeather determining spread
    */
-  wx::FwiWeather const* weather_;
+  const wx::FwiWeather* weather_;
   /**
    * \brief Time that spread is occurring
    */
