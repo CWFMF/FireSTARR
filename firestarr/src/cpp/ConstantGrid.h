@@ -165,11 +165,13 @@ public:
    * \param convert Function taking int and nodata int value that returns T
    * \return ConstantGrid containing clipped data for TIFF
    */
-  [[nodiscard]] static ConstantGrid<T, V>* readTiff(const string& filename,
-                                                    TIFF* tif,
-                                                    GTIF* gtif,
-                                                    const topo::Point& point,
-                                                    std::function<T(V, V)> convert)
+  [[nodiscard]] static unique_ptr<ConstantGrid<T, V>>
+    readTiff(
+      const string& filename,
+      TIFF* tif,
+      GTIF* gtif,
+      const topo::Point& point,
+      std::function<T(V, V)> convert)
   {
     logging::info("Reading file %s", filename.c_str());
 #ifdef DEBUG_GRIDS
@@ -346,17 +348,18 @@ public:
                      grid_info.yllcorner());
     const auto num_rows = max_row - min_row + 1;
     const auto num_columns = max_column - min_column + 1;
-    auto result = new ConstantGrid<T, V>(grid_info.cellSize(),
-                                         num_rows,
-                                         num_columns,
-                                         nodata_input,
-                                         nodata_value,
-                                         new_xll,
-                                         new_yll,
-                                         new_xll + (static_cast<MathSize>(num_columns) + 1) * grid_info.cellSize(),
-                                         new_yll + (static_cast<MathSize>(num_rows) + 1) * grid_info.cellSize(),
-                                         string(grid_info.proj4()),
-                                         std::move(values));
+    auto result = make_unique<ConstantGrid<T, V>>(
+      grid_info.cellSize(),
+      num_rows,
+      num_columns,
+      nodata_input,
+      nodata_value,
+      new_xll,
+      new_yll,
+      new_xll + (static_cast<MathSize>(num_columns) + 1) * grid_info.cellSize(),
+      new_yll + (static_cast<MathSize>(num_rows) + 1) * grid_info.cellSize(),
+      string(grid_info.proj4()),
+      std::move(values));
     auto new_location = result->findCoordinates(point, false);
 #ifdef DEBUG_GRIDS
     logging::check_fatal(nullptr == new_location, "Invalid location after reading");
@@ -381,11 +384,13 @@ public:
    * \param convert Function taking V and nodata V value that returns T
    * \return ConstantGrid containing clipped data for TIFF
    */
-  [[nodiscard]] static ConstantGrid<T, V>* readTiff(const string& filename,
-                                                    const topo::Point& point,
-                                                    std::function<T(V, V)> convert)
+  [[nodiscard]] static unique_ptr<ConstantGrid<T, V>>
+    readTiff(
+      const string& filename,
+      const topo::Point& point,
+      std::function<T(V, V)> convert)
   {
-    return with_tiff<ConstantGrid<T, V>*>(
+    return with_tiff<unique_ptr<ConstantGrid<T, V>>>(
       filename,
       [&filename, &convert, &point](TIFF* tif, GTIF* gtif) { return readTiff(filename, tif, gtif, point, convert); });
   }
@@ -395,8 +400,10 @@ public:
    * \param point Point to center ConstantGrid on
    * \return ConstantGrid containing clipped data for TIFF
    */
-  [[nodiscard]] static ConstantGrid<T, T>* readTiff(const string& filename,
-                                                    const topo::Point& point)
+  [[nodiscard]] static unique_ptr<ConstantGrid<T, T>>
+    readTiff(
+      const string& filename,
+      const topo::Point& point)
   {
     return readTiff(filename, point, util::no_convert<T>);
   }
