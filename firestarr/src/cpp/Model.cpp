@@ -546,24 +546,24 @@ bool Model::isOverSimulationCountLimit() const noexcept
 {
   return is_over_simulation_count_;
 }
-ProbabilityMap* Model::makeProbabilityMap(const DurationSize time,
-                                          const DurationSize start_time) const
+shared_ptr<ProbabilityMap> Model::makeProbabilityMap(const DurationSize time,
+                                                     const DurationSize start_time) const
 {
   return env_->makeProbabilityMap(time,
                                   start_time);
 }
-static void show_probabilities(const map<ThresholdSize, ProbabilityMap*>& probabilities)
+static void show_probabilities(const map<ThresholdSize, shared_ptr<ProbabilityMap>>& probabilities)
 {
   for (const auto& kv : probabilities)
   {
     kv.second->show();
   }
 }
-map<DurationSize, ProbabilityMap*> make_prob_map(const Model& model,
-                                                 const vector<DurationSize>& saves,
-                                                 const DurationSize started)
+map<DurationSize, shared_ptr<ProbabilityMap>> make_prob_map(const Model& model,
+                                                            const vector<DurationSize>& saves,
+                                                            const DurationSize started)
 {
-  map<DurationSize, ProbabilityMap*> result{};
+  map<DurationSize, shared_ptr<ProbabilityMap>> result{};
   for (const auto& time : saves)
   {
     result.emplace(
@@ -663,7 +663,7 @@ size_t runs_required(const size_t i,
     runs_for_sizes);
   return left;
 }
-DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probabilities, const Day start_day, const bool is_interim)
+DurationSize Model::saveProbabilities(map<DurationSize, shared_ptr<ProbabilityMap>>& probabilities, const Day start_day, const bool is_interim)
 {
   lock_guard<mutex> lock(mutex_);
   auto final_time = numeric_limits<DurationSize>::min();
@@ -739,9 +739,9 @@ DurationSize Model::saveProbabilities(map<DurationSize, ProbabilityMap*>& probab
   }
   return final_time;
 }
-map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& start_point,
-                                                        const DurationSize start,
-                                                        const Day start_day)
+map<DurationSize, shared_ptr<ProbabilityMap>> Model::runIterations(const topo::StartPoint& start_point,
+                                                                   const DurationSize start,
+                                                                   const Day start_day)
 {
   auto last_date = start_day;
   for (const auto& i : Settings::outputDateOffsets())
@@ -776,7 +776,7 @@ map<DurationSize, ProbabilityMap*> Model::runIterations(const topo::StartPoint& 
   auto probabilities = make_prob_map(*this,
                                      saves,
                                      started);
-  vector<map<DurationSize, ProbabilityMap*>> all_probabilities{};
+  vector<map<DurationSize, shared_ptr<ProbabilityMap>>> all_probabilities{};
   all_probabilities.push_back(make_prob_map(*this,
                                             saves,
                                             started));
@@ -1094,10 +1094,6 @@ int Model::runScenarios(const string dir_out,
   // HACK: update last checked time to use in calculation
   model.last_checked_ = Clock::now();
   logging::note("Total simulation time was %ld seconds", model.runTime());
-  for (const auto& kv : probabilities)
-  {
-    delete kv.second;
-  }
   return 0;
 }
 #ifdef DEBUG_WEATHER

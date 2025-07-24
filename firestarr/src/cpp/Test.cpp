@@ -254,7 +254,7 @@ string run_test(const string base_directory,
                          model.nd(start_date),
                          w);
   showSpread(info, w, fuel);
-  map<DurationSize, ProbabilityMap*> probabilities{};
+  map<DurationSize, shared_ptr<ProbabilityMap>> probabilities{};
   logging::debug("Starting simulation");
   // NOTE: don't want to reset first because TestScenabuirio handles what that does
   scenario.run(&probabilities);

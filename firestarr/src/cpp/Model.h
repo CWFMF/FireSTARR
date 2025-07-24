@@ -315,8 +315,8 @@ public:
    * \param max_value Upper bound of 'high' intensity range
    * \return ProbabilityMap with the same extent as this
    */
-  [[nodiscard]] ProbabilityMap* makeProbabilityMap(DurationSize time,
-                                                   DurationSize start_time) const;
+  [[nodiscard]] shared_ptr<ProbabilityMap> makeProbabilityMap(DurationSize time,
+                                                              DurationSize start_time) const;
   ~Model() = default;
   /**
    * \brief Constructor
@@ -420,13 +420,13 @@ private:
    * \param start_day Start day for simulation
    * \return Map of times to ProbabilityMap for that time
    */
-  map<DurationSize, ProbabilityMap*> runIterations(const topo::StartPoint& start_point,
-                                                   DurationSize start,
-                                                   Day start_day);
+  map<DurationSize, shared_ptr<ProbabilityMap>> runIterations(const topo::StartPoint& start_point,
+                                                              DurationSize start,
+                                                              Day start_day);
   /**
    * Save probability rasters
    */
-  DurationSize saveProbabilities(map<DurationSize, ProbabilityMap*>& probabilities, const Day start_day, const bool is_interim);
+  DurationSize saveProbabilities(map<DurationSize, shared_ptr<ProbabilityMap>>& probabilities, const Day start_day, const bool is_interim);
   /**
    * \brief Find Cell(s) that can burn closest to Location
    * \param location Location to look for start Cells

@@ -35,13 +35,14 @@ Environment Environment::load(const string dir_out,
                      *unique_ptr<ElevationGrid>(elevation.get()),
                      point);
 }
-sim::ProbabilityMap* Environment::makeProbabilityMap(const DurationSize time,
-                                                     const DurationSize start_time) const
+shared_ptr<ProbabilityMap> Environment::makeProbabilityMap(const DurationSize time,
+                                                           const DurationSize start_time) const
 {
-  return new sim::ProbabilityMap(dir_out_,
-                                 time,
-                                 start_time,
-                                 *cells_);
+  return make_shared<sim::ProbabilityMap>(
+    dir_out_,
+    time,
+    start_time,
+    *cells_);
 }
 Environment Environment::loadEnvironment(const string dir_out,
                                          const string& path,

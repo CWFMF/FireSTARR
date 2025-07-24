@@ -34,12 +34,12 @@ ProbabilityMap::ProbabilityMap(const string dir_out,
     perimeter_(nullptr)
 {
 }
-ProbabilityMap* ProbabilityMap::copyEmpty() const
+shared_ptr<ProbabilityMap> ProbabilityMap::copyEmpty() const
 {
-  return new ProbabilityMap(dir_out_,
-                            time_,
-                            start_time_,
-                            all_);
+  return make_shared<ProbabilityMap>(dir_out_,
+                                     time_,
+                                     start_time_,
+                                     all_);
 }
 void ProbabilityMap::setPerimeter(const topo::Perimeter* const perimeter)
 {

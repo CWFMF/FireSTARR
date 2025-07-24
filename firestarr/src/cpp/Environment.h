@@ -16,6 +16,7 @@
 
 namespace fs::topo
 {
+using sim::ProbabilityMap;
 using FuelGrid = data::ConstantGrid<const fuel::FuelType*, FuelSize>;
 using ElevationGrid = data::ConstantGrid<ElevationSize>;
 using CellGrid = data::ConstantGrid<Cell, Topo>;
@@ -210,8 +211,10 @@ public:
    * \param max_value Upper bound of 'high' intensity range
    * \return ProbabilityMap with the same extent as this
    */
-  [[nodiscard]] sim::ProbabilityMap* makeProbabilityMap(DurationSize time,
-                                                        DurationSize start_time) const;
+  [[nodiscard]] shared_ptr<ProbabilityMap>
+    makeProbabilityMap(
+      DurationSize time,
+      DurationSize start_time) const;
   /**
    * \brief Create a GridMap<Other> covering this Environment
    * \tparam Other Type of GridMap
