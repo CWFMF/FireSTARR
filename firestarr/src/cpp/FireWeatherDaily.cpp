@@ -399,18 +399,18 @@ static const FwiWeather* make_wx(const Speed& speed,
                                  const Ffmc& ffmc,
                                  const int hour)
 {
-  static set<FwiWeather> all_weather{};
+  static sp_set<FwiWeather> all_weather{};
   // HACK: assign rain to noon only
-  const FwiWeather result(wx.temp(),
-                          wx.rh(),
-                          Wind(wx.wind().direction(), speed),
-                          12 == hour ? wx.prec() : Precipitation::Zero,
-                          ffmc,
-                          wx.dmc(),
-                          wx.dc());
-  const auto& wx_inserted = all_weather.insert(result);
+  auto wx_inserted = all_weather.sp_emplace(
+    wx.temp(),
+    wx.rh(),
+    Wind(wx.wind().direction(), speed),
+    12 == hour ? wx.prec() : Precipitation::Zero,
+    ffmc,
+    wx.dmc(),
+    wx.dc());
   // doesn't matter if was already there or just inserted
-  return &(*(wx_inserted.first));
+  return wx_inserted.first->get();
 }
 static const FwiWeather* make_wx(const FwiWeather& wx_wind,
                                  const FwiWeather& wx,
