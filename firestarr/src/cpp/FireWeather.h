@@ -120,7 +120,7 @@ private:
   /**
    * \brief Probability of survival for fuels fuel at each time
    */
-  const SurvivalMap* survival_probability_;
+  const shared_ptr<SurvivalMap> survival_probability_;
   /**
    * \brief Minimum date present in stream
    */
