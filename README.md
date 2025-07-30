@@ -1,3 +1,14 @@
+This is used to create containers for collecting & processing inputs/outputs of
+FireSTARR. The current workflow is to either run the containers locally or in Azure,
+and (optionally) publish the results to a geoserver WMS.
+
+For performance reasons, the version of FireSTARR used right now is stripped down to just
+the code required to create the burn probability maps that are published, and it does
+not contain many of the options from the version at https://github.com/CWFMF/FireSTARR/tree/575f6c064b12eae8716a221d25343398073f0c97z.
+
+Eventually things will be re-implemented in the submodule repo at
+https://github.com/cwmfmf/firestarr-cpp.
+
 # About FireSTARR
 
 ## Overview
