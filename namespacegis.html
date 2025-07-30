@@ -141,9 +141,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa05fd8415f71f7c499f0fccf7e1f038e" id="r_aa05fd8415f71f7c499f0fccf7e1f038e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa05fd8415f71f7c499f0fccf7e1f038e">find_best_raster</a> (lon, year=None, only_int_zones=False)</td></tr>
 <tr class="memdesc:aa05fd8415f71f7c499f0fccf7e1f038e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the raster with the closest meridian.  <br /></td></tr>
 <tr class="separator:aa05fd8415f71f7c499f0fccf7e1f038e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a871c1aa1fee299808006264eff5a0a77" id="r_a871c1aa1fee299808006264eff5a0a77"><td class="memItemLeft" align="right" valign="top"><a id="a871c1aa1fee299808006264eff5a0a77" name="a871c1aa1fee299808006264eff5a0a77"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>project_raster</b> (filename, output_raster=None, outputBounds=None, nodata=0, options=[&quot;COMPRESS=LZW&quot;, &quot;TILED=YES&quot;], crs=&quot;EPSG:4326&quot;, resolution=None, format=None)</td></tr>
-<tr class="separator:a871c1aa1fee299808006264eff5a0a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f7aeb5fada7624983da23e18a98b01f" id="r_a7f7aeb5fada7624983da23e18a98b01f"><td class="memItemLeft" align="right" valign="top"><a id="a7f7aeb5fada7624983da23e18a98b01f" name="a7f7aeb5fada7624983da23e18a98b01f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>project_raster</b> (filename, output_raster=None, outputBounds=None, nodata=0, options=[&quot;COMPRESS=LZW&quot;, &quot;TILED=YES&quot;], crs=CRS_OUTPUT, resolution=None, format=None)</td></tr>
+<tr class="separator:a7f7aeb5fada7624983da23e18a98b01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0418605b0f80a2cf9019652cfece6bb" id="r_ad0418605b0f80a2cf9019652cfece6bb"><td class="memItemLeft" align="right" valign="top"><a id="ad0418605b0f80a2cf9019652cfece6bb" name="ad0418605b0f80a2cf9019652cfece6bb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>save_geojson</b> (df, path)</td></tr>
 <tr class="separator:ad0418605b0f80a2cf9019652cfece6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,6 +209,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>CRS_NAD83</b> = 4269</
 <tr class="memitem:a499e376783449909708d4e70cfef0662" id="r_a499e376783449909708d4e70cfef0662"><td class="memItemLeft" align="right" valign="top"><a id="a499e376783449909708d4e70cfef0662" name="a499e376783449909708d4e70cfef0662"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>CRS_SIMINPUT</b> = CRS_NAD83</td></tr>
 <tr class="separator:a499e376783449909708d4e70cfef0662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a966deae5e5241bc3e1bcd9a22919a3eb" id="r_a966deae5e5241bc3e1bcd9a22919a3eb"><td class="memItemLeft" align="right" valign="top"><a id="a966deae5e5241bc3e1bcd9a22919a3eb" name="a966deae5e5241bc3e1bcd9a22919a3eb"></a>
+str&#160;</td><td class="memItemRight" valign="bottom"><b>CRS_OUTPUT</b> = f&quot;EPSG:{CRS_LAMBERT_ATLAS}&quot;</td></tr>
+<tr class="separator:a966deae5e5241bc3e1bcd9a22919a3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab195dcf58341a1aace69ab7a84ae45ee" id="r_ab195dcf58341a1aace69ab7a84ae45ee"><td class="memItemLeft" align="right" valign="top"><a id="ab195dcf58341a1aace69ab7a84ae45ee" name="ab195dcf58341a1aace69ab7a84ae45ee"></a>
 list&#160;</td><td class="memItemRight" valign="bottom"><b>VALID_GEOMETRY_EXTENSIONS</b> = [f&quot;.{x}&quot; for x in sorted(fiona.drvsupport.vector_driver_extensions().keys())]</td></tr>
 <tr class="separator:ab195dcf58341a1aace69ab7a84ae45ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
