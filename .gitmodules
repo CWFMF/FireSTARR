@@ -2,3 +2,6 @@
 	path = src/py/cffdrs-ng
 	url = https://github.com/jordan-evens/cffdrs-ng.git
 	branch = main
+[submodule "firestarr"]
+	path = firestarr
+	url = git@github.com:CWFMF/firestarr-cpp.git
