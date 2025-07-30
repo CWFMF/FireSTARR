@@ -165,10 +165,10 @@ ENV TMPDIR=/tmp
 WORKDIR /appl/firestarr
 COPY --chown=${USERNAME}:${USERNAME} ./config /appl/
 COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/firestarr/firestarr .
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/bounds.geojson /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} ./bounds.geojson /appl/
 COPY --chown=${USERNAME}:${USERNAME} ./firestarr/fuel.lut /appl/firestarr/
 COPY --chown=${USERNAME}:${USERNAME} ./firestarr/settings.ini /appl/firestarr/
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/scripts /appl/firestarr/scripts/
+COPY --chown=${USERNAME}:${USERNAME} ./scripts/ /appl/firestarr/scripts/
 COPY --chown=${USERNAME}:${USERNAME} ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
 WORKDIR /appl/firestarr/src/py/cffdrs-ng
 COPY --chown=${USERNAME}:${USERNAME} ./src/py/cffdrs-ng/NG_FWI.py .

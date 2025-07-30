@@ -7,8 +7,8 @@
 !**/src
 !firestarr/CMakeLists.txt
 !firestarr/fuel.lut
-!firestarr/bounds.geojson
-!firestarr/scripts/*.sh
+!bounds.geojson
+!**/scripts/*.sh
 !firestarr/settings.ini
 !./config
 

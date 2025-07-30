@@ -15,7 +15,7 @@ URL_CANADA = f"{SERVER_CENSUS}/2011/geo/bound-limit/files-fichiers/2016/lpr_000b
 URL_PARKS = "https://clss.nrcan-rncan.gc.ca/data-donnees/nplb_llpn/CLAB_CA_2023-09-08.zip"
 centroids_canada = None
 DIR_BOUNDS = os.path.join(DIR_GENERATED, "bounds")
-FILE_BOUNDS = "bounds.geojson"
+FILE_BOUNDS = "/appl/bounds.geojson"
 COLUMN_ENGLISH_NAME = "PRENAME"
 
 
