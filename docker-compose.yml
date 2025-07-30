@@ -17,6 +17,7 @@ services:
         target: /appl/config
       - data:/appl/data
       - sims:/appl/data/sims
+      - py:/appl/firestarr/src/py
       - type: bind
         source: ./gis
         target: /appl/gis
@@ -44,6 +45,7 @@ services:
         target: /appl/config
       - data:/appl/data
       - sims:/appl/data/sims
+      - py:/appl/firestarr/src/py
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
@@ -75,6 +77,7 @@ services:
         target: /appl/config
       - data:/appl/data
       - sims:/appl/data/sims
+      - py:/appl/firestarr/src/py
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
@@ -160,3 +163,9 @@ volumes:
       type: none
       o: bind
       device: ./sims
+  py:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./src/py

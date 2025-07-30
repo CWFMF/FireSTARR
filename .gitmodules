@@ -1,4 +1,4 @@
 [submodule "cffdrs-ng"]
-	path = firestarr/src/py/cffdrs-ng
+	path = src/py/cffdrs-ng
 	url = https://github.com/jordan-evens/cffdrs-ng.git
 	branch = main

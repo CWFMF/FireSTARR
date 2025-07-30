@@ -11,5 +11,6 @@
 !firestarr/scripts/*.sh
 !firestarr/settings.ini
 !./config
+!src
 
 **/__pycache__
