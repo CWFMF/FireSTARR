@@ -10,6 +10,7 @@ services:
         USER_ID: ${USER_ID}
       tags:
         - firestarr-setup-gis:${VERSION}
+    entrypoint: tail -f /dev/null
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
       - type: bind
@@ -24,50 +25,19 @@ services:
     env_file:
       - .env
 
-  firestarr-dev:
-    image: firestarr-dev
+  firestarr-app-dev:
+    image: firestarr-app-dev
     build:
       context: .
-      target: firestarr-dev
+      target: firestarr-app-dev
       dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - firestarr-dev:${VERSION}
-    security_opt:
-      - seccomp:unconfined
-    volumes:
-      - /etc/ssl/certs:/etc/ssl/certs
-      - type: bind
-        source: ./config
-        target: /appl/config
-      - data:/appl/data
-      - sims:/appl/data/sims
-      - py:/appl/firestarr/src/py
-      - type: bind
-        source: ./firestarr
-        target: /appl/firestarr
-    restart: on-failure
-    cap_add:
-      - SYS_PTRACE
-      - SYS_ADMIN
-    env_file:
-      - .env
-
-  firestarr-dev-svc:
-    image: firestarr-dev-svc
-    build:
-      context: .
-      target: firestarr-dev-svc
-      dockerfile: .docker/Dockerfile
-      args:
-        VERSION: ${VERSION}
-        USERNAME: ${USERNAME}
-        USER_ID: ${USER_ID}
-      tags:
-        - firestarr-dev-svc:${VERSION}
+        - firestarr-app-dev:${VERSION}
+    entrypoint: tail -f /dev/null
     security_opt:
       - seccomp:unconfined
     volumes:
@@ -106,26 +76,6 @@ services:
       - sims:/appl/data/sims
     env_file:
       - .env
-
-  firestarr-app-svc:
-    image: firestarr-app-svc
-    build:
-      context: .
-      target: firestarr-app-svc
-      dockerfile: .docker/Dockerfile
-      args:
-        VERSION: ${VERSION}
-        USERNAME: ${USERNAME}
-        USER_ID: ${USER_ID}
-      tags:
-        - firestarr-app-svc:${VERSION}
-    volumes:
-      - /etc/ssl/certs:/etc/ssl/certs
-      - data:/appl/data
-      - sims:/appl/data/sims
-    env_file:
-      - .env
-    restart: always
 
   firestarr:
     image: firestarr

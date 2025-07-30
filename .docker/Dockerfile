@@ -114,7 +114,7 @@ RUN apt-get update --fix-missing \
 USER ${USERNAME}
 
 
-FROM firestarr-app-gcc AS firestarr-dev
+FROM firestarr-app-gcc AS firestarr-app-dev
 ARG USERNAME
 ARG VERSION
 ENV VERSION=${VERSION}
@@ -122,26 +122,12 @@ ENV TMPDIR=/tmp
 WORKDIR /appl/firestarr/
 
 
-FROM firestarr-dev AS firestarr-dev-svc
-ARG USERNAME
-ARG VERSION
-ENV VERSION=${VERSION}
-ENV TMPDIR=/tmp
-# run as root so we can redirect to where docker logs will show progress
-COPY .docker/crontab /etc/crontab
-USER ${USERNAME}
-SHELL ["/bin/bash"]
-ENTRYPOINT ["sudo", "cron", "-f"]
-
-
-FROM firestarr-dev AS firestarr-setup-gis
+FROM firestarr-app-dev AS firestarr-setup-gis
 ARG USERNAME
 USER ${USERNAME}
 ENV TMPDIR=/tmp
 WORKDIR /appl/gis/
 RUN echo cd /appl/gis >> /home/${USERNAME}/.bashrc
-SHELL ["/bin/bash"]
-ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 
 FROM firestarr-app-base AS firestarr-prod-base-env
@@ -184,15 +170,3 @@ ENV TMPDIR=/tmp
 USER ${USERNAME}
 WORKDIR /appl/firestarr
 ENTRYPOINT [ "/appl/firestarr/scripts/publish_after.sh" ]
-
-FROM firestarr-app AS firestarr-app-svc
-ARG USERNAME
-ARG VERSION
-ENV VERSION=${VERSION}
-ENV TMPDIR=/tmp
-# run as root so we can redirect to where docker logs will show progress
-COPY .docker/crontab /etc/crontab
-RUN sed -i 's/CRONJOB_RUN=.*/CRONJOB_RUN=1/g' /appl/config
-WORKDIR /appl/firestarr
-USER ${USERNAME}
-ENTRYPOINT ["sudo", "cron", "-f"]
