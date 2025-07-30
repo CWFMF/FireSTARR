@@ -4,13 +4,14 @@
 !.docker/requirements*.txt
 !.docker/crontab
 !gis
-!firestarr/src
+!**/src
 !firestarr/CMakeLists.txt
 !firestarr/fuel.lut
 !firestarr/bounds.geojson
 !firestarr/scripts/*.sh
 !firestarr/settings.ini
 !./config
-!src
 
+**/src/py/**/*.sh
+**/src/**/.git*
 **/__pycache__

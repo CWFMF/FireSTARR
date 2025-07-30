@@ -166,7 +166,7 @@ COPY --chown=${USERNAME}:${USERNAME} ./firestarr/bounds.geojson /appl/firestarr/
 COPY --chown=${USERNAME}:${USERNAME} ./firestarr/fuel.lut /appl/firestarr/
 COPY --chown=${USERNAME}:${USERNAME} ./firestarr/settings.ini /appl/firestarr/
 COPY --chown=${USERNAME}:${USERNAME} ./firestarr/scripts /appl/firestarr/scripts/
-COPY --chown=${USERNAME}:${USERNAME} ./src/py/firestarr /appl/firestarr/src/py/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
 WORKDIR /appl/firestarr/src/py/cffdrs-ng
 COPY --chown=${USERNAME}:${USERNAME} ./src/py/cffdrs-ng/NG_FWI.py .
 COPY --chown=${USERNAME}:${USERNAME} ./src/py/cffdrs-ng/old_cffdrs.py .
