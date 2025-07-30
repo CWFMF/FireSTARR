@@ -48,9 +48,14 @@ services:
       - data:/appl/data
       - sims:/appl/data/sims
       - py:/appl/firestarr/src/py
+      - scripts:/appl/firestarr/scripts
+      - cppscripts:/appl/cppscripts
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
+      - type: bind
+        source: ./bounds.geojson
+        target: /appl/bounds.geojson
     restart: on-failure
     cap_add:
       - SYS_PTRACE
@@ -147,3 +152,15 @@ volumes:
       type: none
       o: bind
       device: ./src/py
+  cppscripts:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./firestarr/scripts
+  scripts:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./scripts
