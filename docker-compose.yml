@@ -98,6 +98,34 @@ services:
     env_file:
       - .env
 
+  firestarr-dev:
+    image: firestarr-dev
+    build:
+      context: .
+      target: firestarr-dev
+      dockerfile: .docker/Dockerfile
+      args:
+        VERSION: ${VERSION}
+        USERNAME: ${USERNAME}
+        USER_ID: ${USER_ID}
+      tags:
+        - firestarr-dev:${VERSION}
+    entrypoint: tail -f /dev/null
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /etc/ssl/certs:/etc/ssl/certs
+      - type: bind
+        source: ./firestarr
+        target: /appl/firestarr
+      - data:/appl/data
+      - sims:/appl/data/sims
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    env_file:
+      - .env
+
 volumes:
   data:
     # symlink to your actual directory if you don't want it in the project folder

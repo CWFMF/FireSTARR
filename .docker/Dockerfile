@@ -29,6 +29,21 @@ RUN apt-get update --fix-missing \
   cmake gcc g++ make
 
 
+FROM gcc-cmake-with-libs AS firestarr-dev
+ARG USERNAME
+ARG VERSION
+ENV VERSION=${VERSION}
+RUN apt-get update --fix-missing \
+  && apt-get install -y --no-install-recommends \
+  git time nano less \
+  libtiff-dev libgeotiff-dev \
+  gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf clang-format \
+  cmake gcc g++ make
+RUN git config --global core.editor "nano"
+WORKDIR /appl/firestarr
+USER ${USERNAME}
+
+
 FROM gcc-cmake-with-libs AS firestarr-build
 ARG USERNAME
 ARG VERSION
