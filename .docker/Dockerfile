@@ -147,7 +147,9 @@ ENTRYPOINT ["tail", "-f", "/dev/null"]
 FROM firestarr-app-base AS firestarr-prod-base-env
 ARG USERNAME
 USER root
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /home/user/.cache
+RUN find -type d -name __pycache__ / | xargs -tI {} rm -rf {}
 USER ${USERNAME}
 
 FROM scratch AS firestarr-prod-base
