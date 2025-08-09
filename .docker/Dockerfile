@@ -35,11 +35,12 @@ ARG VERSION
 ENV VERSION=${VERSION}
 RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
-  git time nano less \
+  git time nano less psmisc man \
   libtiff-dev libgeotiff-dev \
   gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf clang-format \
   cmake gcc g++ make
 RUN git config --global core.editor "nano"
+RUN git config --global core.autocrlf false
 WORKDIR /appl/firestarr
 USER ${USERNAME}
 

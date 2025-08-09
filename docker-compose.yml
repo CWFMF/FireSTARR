@@ -126,6 +126,7 @@ services:
       - data:/appl/data
       - sims:/appl/data/sims
     cap_add:
+      - PERFMON
       - SYS_PTRACE
       - SYS_ADMIN
     env_file:
