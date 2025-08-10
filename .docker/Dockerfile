@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim AS minimal-with-user
+FROM debian:trixie-slim AS minimal-with-user
 ARG USERNAME
 ARG USER_ID
 ENV TMPDIR=/tmp

@@ -9,7 +9,7 @@ services:
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - firestarr-setup-gis:${VERSION}
+        - firestarr-setup-gis:trixie-${VERSION}
     entrypoint: tail -f /dev/null
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
@@ -32,11 +32,11 @@ services:
       target: firestarr-app-dev
       dockerfile: .docker/Dockerfile
       args:
-        VERSION: ${VERSION}
+        VERSION: trixie-${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - firestarr-app-dev:${VERSION}
+        - firestarr-app-dev:trixie-${VERSION}
     entrypoint: tail -f /dev/null
     security_opt:
       - seccomp:unconfined
@@ -70,11 +70,11 @@ services:
       target: firestarr-app
       dockerfile: .docker/Dockerfile
       args:
-        VERSION: ${VERSION}
+        VERSION: trixie-${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - firestarr-app:${VERSION}
+        - firestarr-app:trixie-${VERSION}
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
       - data:/appl/data
@@ -89,11 +89,11 @@ services:
       target: firestarr
       dockerfile: .docker/Dockerfile
       args:
-        VERSION: ${VERSION}
+        VERSION: trixie-${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - firestarr:${VERSION}
+        - firestarr:trixie-${VERSION}
     volumes:
       - type: bind
         source: ./firestarr/settings.ini
@@ -110,11 +110,11 @@ services:
       target: firestarr-dev
       dockerfile: .docker/Dockerfile
       args:
-        VERSION: ${VERSION}
+        VERSION: trixie-${VERSION}
         USERNAME: ${USERNAME}
         USER_ID: ${USER_ID}
       tags:
-        - firestarr-dev:${VERSION}
+        - firestarr-dev:trixie-${VERSION}
     entrypoint: tail -f /dev/null
     security_opt:
       - seccomp:unconfined
