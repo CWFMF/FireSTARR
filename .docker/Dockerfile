@@ -38,7 +38,9 @@ RUN apt-get update --fix-missing \
   git time nano less psmisc man \
   libtiff-dev libgeotiff-dev \
   gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf clang-format \
-  cmake gcc g++ make
+  cmake gcc g++ make clang-tools clang-tidy
+COPY --chown=${USERNAME}:${USERNAME} .docker/inst_odbc.sh /appl/firestarr/
+RUN /appl/firestarr/inst_odbc.sh
 RUN git config --global core.editor "nano"
 RUN git config --global core.autocrlf false
 WORKDIR /appl/firestarr

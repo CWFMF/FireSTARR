@@ -3,6 +3,7 @@
 
 !.docker/requirements*.txt
 !.docker/crontab
+!.docker/inst_odbc.sh
 !gis
 !**/src
 !firestarr/CMakeLists.txt
