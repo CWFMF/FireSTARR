@@ -35,7 +35,8 @@ ARG VERSION
 ENV VERSION=${VERSION}
 RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
-  git time nano less psmisc man \
+  git time nano less psmisc man bc tmux \
+  google-perftools libgoogle-perftools-dev golang-github-google-pprof-dev \
   libtiff-dev libgeotiff-dev \
   gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf clang-format \
   cmake gcc g++ make clang-tools clang-tidy
@@ -90,7 +91,7 @@ USER root
 RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
   cron curl nano procps psmisc tar util-linux unzip wget zip p7zip-full rsync \
-  time nano bc ministat sysstat screen \
+  time nano bc ministat sysstat screen tmux \
   python3 gdal-bin python3-gdal python3-setuptools python3-pip python3-venv \
   && update-alternatives --install /usr/bin/python python /usr/bin/python3 10 \
   && python -c "from osgeo import gdal"

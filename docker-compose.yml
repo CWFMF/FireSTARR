@@ -125,6 +125,7 @@ services:
         target: /appl/firestarr
       - data:/appl/data
       - sims:/appl/data/sims
+    restart: always
     cap_add:
       - PERFMON
       - SYS_PTRACE
