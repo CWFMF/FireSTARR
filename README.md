@@ -14,11 +14,24 @@ It focuses on the generation of burn probabilities from replicated simulation of
 
 All covered works (e.g., copies of this work, derived works) must include a copy of the file (or an updated version of it) that details credits for work up to the time of the original open source release. That file is available [here](./ORIGIN.md).
 
-## Publications
+### Publications
 
-| Model         | Title                                                                                                                                                                            |
-|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| FireGUARD     | [History and overview of research and development for Ontario’s FireGUARD decision support system for appropriate response](https://pubs.cif-ifc.org/doi/10.5558/tfc2025-015)    |
-| WeatherSHIELD | [Assembling and Customizing Multiple Fire Weather Forecasts for Burn Probability and Other Fire Management Applications in Ontario, Canada](https://doi.org/10.3390/fire3020016) |
-| RamPART       | [Impacts of wildland fire effects on resources and assets through expert elicitation to support fire response decisions](https://doi.org/10.1071/WF18189)                        |
-| FireSTARR     | FireSTARR: a fast probabilistic forest fire growth model using approximate wavelet geometry (in progress)                                                                        |
+- FireGUARD: [*History and overview of research and development for Ontario’s FireGUARD decision support system for appropriate response*](https://pubs.cif-ifc.org/doi/10.5558/tfc2025-015)
+- WeatherSHIELD: [*Assembling and Customizing Multiple Fire Weather Forecasts for Burn Probability and Other Fire Management Applications in Ontario, Canada*](https://doi.org/10.3390/fire3020016)
+- RamPART:  [*Impacts of wildland fire effects on resources and assets through expert elicitation to support fire response decisions*](https://doi.org/10.1071/WF18189)
+- FireSTARR: *FireSTARR: a fast probabilistic forest fire growth model using approximate wavelet geometry* (in progress)
+
+
+### Technical Summaries
+- FireGUARD: [*Behind the FireGUARD – background & technical summary*](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp1.pdf)
+- WeatherSHIELD: [*Behind the WeatherSHIELD – background & technical summary*](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp2.pdf)
+
+
+
+### Fact Sheets
+- WeatherSHIELD: [*WeatherSHIELD: probabilistic fire weather forecasts*](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp3.pdf)
+- RamPART: [*RamPART: Fire Effects and Impacts for Risk Assessment in FireGUARD*](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp4.pdf)
+- FireSTARR: [*FireSTARR: burn probability mapping*](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp5.pdf)
+  - [Example – large fire from perimeter](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp6.pdf)
+  - [Example – 10 ha fire, with no perimeter](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp7.pdf)
+  - [Example – small fire from a point source ignition](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp8.pdf)
