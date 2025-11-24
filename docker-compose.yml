@@ -16,9 +16,9 @@ services:
       - type: bind
         source: ./config
         target: /appl/config
-      - data:/appl/data
-      - sims:/appl/data/sims
-      - py:/appl/firestarr/src/py
+      - ./data:/appl/data:z
+      - ./sims:/appl/data/sims:z
+      - ./src/py:/appl/firestarr/src/py:z
       - type: bind
         source: ./gis
         target: /appl/gis
@@ -45,11 +45,11 @@ services:
       - type: bind
         source: ./config
         target: /appl/config
-      - data:/appl/data
-      - sims:/appl/data/sims
-      - py:/appl/firestarr/src/py
-      - scripts:/appl/firestarr/scripts
-      - cppscripts:/appl/cppscripts
+      - ./data:/appl/data:z
+      - ./sims:/appl/data/sims:z
+      - ./src/py:/appl/firestarr/src/py:z
+      - ./scripts:/appl/firestarr/scripts:z
+      - ./firestarr/scripts:/appl/cppscripts:z
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
@@ -77,8 +77,8 @@ services:
         - firestarr-app:trixie-${VERSION}
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
-      - data:/appl/data
-      - sims:/appl/data/sims
+      - ./data:/appl/data:z
+      - ./sims:/appl/data/sims:z
     env_file:
       - .env
 
@@ -98,8 +98,8 @@ services:
       - type: bind
         source: ./firestarr/settings.ini
         target: /appl/firestarr/settings.ini
-      - data:/appl/data
-      - sims:/appl/data/sims
+      - ./data:/appl/data:z
+      - ./sims:/appl/data/sims:z
     env_file:
       - .env
 
@@ -123,8 +123,8 @@ services:
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
-      - data:/appl/data
-      - sims:/appl/data/sims
+      - ./data:/appl/data:z
+      - ./sims:/appl/data/sims:z
     restart: always
     cap_add:
       - PERFMON
@@ -132,37 +132,3 @@ services:
       - SYS_ADMIN
     env_file:
       - .env
-
-volumes:
-  data:
-    # symlink to your actual directory if you don't want it in the project folder
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./data
-  sims:
-    # symlink to your actual directory if you don't want it in the project folder
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./sims
-  py:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./src/py
-  cppscripts:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./firestarr/scripts
-  scripts:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./scripts
