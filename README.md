@@ -14,7 +14,7 @@ It focuses on the generation of burn probabilities from replicated simulation of
 
 All covered works (e.g., copies of this work, derived works) must include a copy of the file (or an updated version of it) that details credits for work up to the time of the original open source release. That file is available [here](./ORIGIN.md).
 
-### Publications
+## Publications
 
 - FireGUARD:
   - [*History and overview of research and development for Ontario’s FireGUARD decision support system for appropriate response*](https://pubs.cif-ifc.org/doi/10.5558/tfc2025-015)
@@ -32,3 +32,4 @@ All covered works (e.g., copies of this work, derived works) must include a copy
   - [Example – large fire from perimeter](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp6.pdf)
   - [Example – 10 ha fire, with no perimeter](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp7.pdf)
   - [Example – small fire from a point source ignition](https://pubs.cif-ifc.org/doi/suppl/10.5558/tfc2025-015/suppl_file/tfc2025-015supp8.pdf)
+
