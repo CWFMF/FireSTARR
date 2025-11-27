@@ -7,6 +7,7 @@
 !gis
 !**/src
 !firestarr/CMakeLists.txt
+!firestarr/.clang-*
 !firestarr/fuel.lut
 !bounds.geojson
 !**/scripts/*.sh

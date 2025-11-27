@@ -26,7 +26,7 @@ FROM minimal-with-libs AS gcc-cmake-with-libs
 RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
   libtiff-dev libgeotiff-dev \
-  cmake gcc g++ make
+  cmake gcc g++ make clang-tools clang-tidy clang-format
 
 
 FROM gcc-cmake-with-libs AS firestarr-dev
@@ -38,8 +38,8 @@ RUN apt-get update --fix-missing \
   git time nano less psmisc man bc tmux \
   google-perftools libgoogle-perftools-dev golang-github-google-pprof-dev \
   libtiff-dev libgeotiff-dev \
-  gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf clang-format \
-  cmake gcc g++ make clang-tools clang-tidy
+  gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf \
+  cmake gcc g++ make clang-tools clang-tidy clang-format
 COPY --chown=${USERNAME}:${USERNAME} .docker/inst_odbc.sh /appl/firestarr/
 RUN /appl/firestarr/inst_odbc.sh
 RUN git config --global core.editor "nano"
@@ -54,7 +54,7 @@ ARG VERSION
 ENV VERSION=${VERSION}
 WORKDIR /appl/firestarr
 COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/cpp src/cpp/
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/CMakeLists.txt .
+COPY --chown=${USERNAME}:${USERNAME} ./firestarr/CMakeLists.txt ./firestarr/.clang-* .
 USER ${USERNAME}
 RUN cmake -S . -B /appl/firestarr/build -D CMAKE_BUILD_TYPE=Release \
   && cmake --build /appl/firestarr/build --config Release --target all -j $(nproc)
