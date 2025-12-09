@@ -26,7 +26,7 @@ FROM minimal-with-libs AS gcc-cmake-with-libs
 RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
   libtiff-dev libgeotiff-dev \
-  cmake gcc g++ make clang-tools clang-tidy clang-format
+  cmake make clang clang-tools clang-tidy clang-format
 
 
 FROM gcc-cmake-with-libs AS firestarr-dev
@@ -39,7 +39,7 @@ RUN apt-get update --fix-missing \
   google-perftools libgoogle-perftools-dev golang-github-google-pprof-dev \
   libtiff-dev libgeotiff-dev \
   gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf \
-  cmake gcc g++ make clang-tools clang-tidy clang-format
+  cmake make clang clang-tools clang-tidy clang-format
 COPY --chown=${USERNAME}:${USERNAME} .docker/inst_odbc.sh /appl/firestarr/
 RUN /appl/firestarr/inst_odbc.sh
 RUN git config --global core.editor "nano"
@@ -129,7 +129,7 @@ RUN apt-get update --fix-missing \
   && apt-get install -y --no-install-recommends \
   libtiff-dev libgeotiff-dev \
   gdb valgrind libdwarf-dev libelf-dev libdw-dev linux-perf clang-format \
-  cmake gcc g++ make
+  cmake make
 USER ${USERNAME}
 
 
