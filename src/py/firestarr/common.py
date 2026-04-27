@@ -163,7 +163,7 @@ MINUTES_PER_HOUR = 60
 SECONDS_PER_MINUTE = 60
 SECONDS_PER_HOUR = MINUTES_PER_HOUR * SECONDS_PER_MINUTE
 
-DEFAULT_BOUNDS = "/appl/bounds.geojson"
+DEFAULT_BOUNDS = "bounds.geojson"
 
 FILE_LOCK_PUBLISH = os.path.join(DIR_OUTPUT, "publish")
 FILE_LOCK_PREPUBLISH = os.path.join(DIR_OUTPUT, "prepublish")
@@ -269,6 +269,14 @@ def read_config(force=False):
             "BATCH_ACCOUNT_NAME",
             "BATCH_ACCOUNT_KEY",
             "BATCH_POOL_ID",
+            "BATCH_TENANT_ID",
+            "BATCH_CLIENT_ID",
+            "BATCH_SECRET",
+            "BATCH_SUBNET",
+            "BATCH_MIN_NODES",
+            "BATCH_MAX_NODES",
+            "BATCH_VM_CORES",
+            "BATCH_MAX_CORES",
             "SPOTWX_API_KEY",
             "SPOTWX_API_LIMIT",
             "STORAGE_ACCOUNT_NAME",

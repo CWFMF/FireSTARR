@@ -7,6 +7,7 @@ import time
 import azure.batch as batch
 import azure.batch.batch_auth as batchauth
 import azure.batch.models as batchmodels
+import azure.common.credentials as batchcredentials
 import pandas as pd
 from azurebatch_helpers import (
     STANDARD_ERROR_FILE_NAME,
@@ -35,6 +36,11 @@ FILE_LOCK_BATCH_JOB = os.path.join(DIR_OUTPUT, "batch_job")
 _BATCH_ACCOUNT_NAME = CONFIG.get("BATCH_ACCOUNT_NAME")
 _BATCH_ACCOUNT_KEY = CONFIG.get("BATCH_ACCOUNT_KEY")
 _BATCH_POOL_ID = CONFIG.get("BATCH_POOL_ID")
+_BATCH_TENANT_ID = CONFIG.get("BATCH_TENANT_ID")
+_BATCH_CLIENT_ID = CONFIG.get("BATCH_CLIENT_ID")
+_BATCH_SECRET = CONFIG.get("BATCH_SECRET")
+_BATCH_SUBNET = CONFIG.get("BATCH_SUBNET")
+_BATCH_RESOURCE = "https://batch.core.windows.net/"
 
 _STORAGE_ACCOUNT_NAME = CONFIG.get("STORAGE_ACCOUNT_NAME")
 _STORAGE_KEY = CONFIG.get("STORAGE_KEY")
@@ -68,6 +74,21 @@ def get_container_registries():
     ]
 
 
+def get_network_configuration():
+    if not _BATCH_SUBNET:
+        raise RuntimeError("No value specified for BATCH_SUBNET")
+    return batch.models.NetworkConfiguration(
+        subnet_id=_BATCH_SUBNET,
+        dynamic_vnet_assignment_scope="none",
+        endpoint_configuration=None,
+        public_ip_address_configuration=batch.models.PublicIPAddressConfiguration(
+            provision="NoPublicIPAddresses",
+            ip_address_ids=None,
+        ),
+        enable_accelerated_networking=False,
+    )
+
+
 _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
     image_reference=batchmodels.ImageReference(
         publisher="microsoft-dsvm",
@@ -83,16 +104,18 @@ _VM_CONFIGURATION = batchmodels.VirtualMachineConfiguration(
         container_registries=get_container_registries(),
     ),
 )
-# _POOL_VM_SIZE = "STANDARD_F72S_V2"
-# _POOL_VM_SIZE = "STANDARD_F32S_V2"
-# only running 21 streams for now so don't use 32 cores
-_POOL_VM_SIZE = "STANDARD_F16S_V2"
-# # generally gets stuck on a few scenarios so scale way back until single-core performance improves for now
-# _POOL_VM_SIZE = "STANDARD_F8S_V2"
-# _POOL_VM_SIZE = "STANDARD_F4S_V2"
-_MIN_NODES = 0
-# _MIN_NODES = 1
-_MAX_NODES = 200
+
+_DEFAULT_MIN_NODES = 0
+_DEFAULT_MAX_NODES = 200
+_DEFAULT_VM_CORES = 16
+_DEFAULT_MAX_CORES = _DEFAULT_MAX_NODES * _DEFAULT_VM_CORES
+_VM_CORES = int(CONFIG.get("BATCH_VM_CORES") or _DEFAULT_VM_CORES)
+_MAX_CORES = int(CONFIG.get("BATCH_MAX_CORES") or _DEFAULT_MAX_CORES)
+# if BATCH_MAX_NODES not specified then calculate it
+_MAX_NODES = int(CONFIG.get("BATCH_MAX_NODES") or _MAX_CORES / _VM_CORES)
+_MIN_NODES = min(_MAX_NODES, int(CONFIG.get("BATCH_MIN_CORES") or _DEFAULT_MIN_NODES))
+
+_POOL_VM_SIZE = f"STANDARD_F{_VM_CORES}S_V2"
 _USE_LOW_PRIORITY = True
 
 
@@ -255,6 +278,8 @@ def create_container_pool(pool_id=_BATCH_POOL_ID, force=False, client=None):
         id=pool_id,
         virtual_machine_configuration=_VM_CONFIGURATION,
         vm_size=_POOL_VM_SIZE,
+        # targetNodeCommunicationMode="simplified",
+        network_configuration=get_network_configuration(),
         # target_dedicated_nodes=1,
         enable_auto_scale=True,
         auto_scale_formula=create_autoscale_formula(),
@@ -682,7 +707,9 @@ def wait_for_tasks_to_complete(job_id, client=None):
 
 
 def have_batch_config():
-    return _BATCH_ACCOUNT_NAME and _BATCH_ACCOUNT_KEY
+    return bool(
+        (_BATCH_ACCOUNT_NAME and _BATCH_ACCOUNT_KEY) or (_BATCH_TENANT_ID and _BATCH_CLIENT_ID and _BATCH_SECRET)
+    )
 
 
 def get_batch_client():
@@ -690,8 +717,24 @@ def get_batch_client():
     if not have_batch_config():
         return None
     if CLIENT is None:
+        have_key = bool(_BATCH_ACCOUNT_NAME and _BATCH_ACCOUNT_KEY)
+        have_tenant = bool(_BATCH_TENANT_ID and _BATCH_CLIENT_ID and _BATCH_SECRET)
+        credentials = None
+        if have_key:
+            if have_tenant:
+                logging.warning("Have BATCH_ACCOUNT_KEY and BATCH_TENANT_ID so ignoring BATCH_ACCOUNT_KEY")
+            else:
+                credentials = batchauth.SharedKeyCredentials(_BATCH_ACCOUNT_NAME, _BATCH_ACCOUNT_KEY)
+        if have_tenant:
+            if have_key:
+                logging.warning("Have BATCH_ACCOUNT_KEY and BATCH_TENANT_ID so using BATCH_TENANT_ID")
+                credentials = batchcredentials.ServicePrincipalCredentials(
+                    client_id=_BATCH_CLIENT_ID, secret=_BATCH_SECRET, tenant=_BATCH_TENANT_ID, resource=_BATCH_RESOURCE
+                )
+        if not credentials:
+            raise RuntimeError("No credentials for azure batch")
         CLIENT = batch.BatchServiceClient(
-            batchauth.SharedKeyCredentials(_BATCH_ACCOUNT_NAME, _BATCH_ACCOUNT_KEY),
+            credentials,
             batch_url=_BATCH_ACCOUNT_URL,
         )
         # HACK:
