@@ -44,41 +44,6 @@ WORKDIR /appl/firestarr
 USER ${USERNAME}
 
 
-FROM gcc-cmake-with-libs AS firestarr-build
-ARG USERNAME
-ARG VERSION
-ENV VERSION=${VERSION}
-WORKDIR /appl/firestarr
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/src/cpp src/cpp/
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/CMakeLists.txt .
-USER ${USERNAME}
-RUN cmake -S . -B /appl/firestarr/build -D CMAKE_BUILD_TYPE=Release \
-  && cmake --build /appl/firestarr/build --config Release --target all -j $(nproc)
-
-
-FROM minimal-with-libs AS firestarr-base-env
-ARG USERNAME
-ARG VERSION
-ENV VERSION=${VERSION}
-USER root
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# make a layer that's the environment for firestarr with scratch to clear out old layers
-FROM scratch AS firestarr-base
-COPY --from=firestarr-base-env / /
-
-# derive final image from base so updates to binary are small layers
-FROM firestarr-base AS firestarr
-ARG USERNAME
-USER ${USERNAME}
-WORKDIR /appl/firestarr
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/fuel.lut /appl/firestarr/
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/settings.ini /appl/firestarr/
-COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/firestarr/firestarr /appl/firestarr/
-USER ${USERNAME}
-RUN echo cd /appl/firestarr >> /home/${USERNAME}/.bashrc
-
-
 # saves more work to reuse python than it does to reuse gcc
 FROM minimal-with-libs AS py-gdal
 ARG USERNAME
@@ -164,10 +129,10 @@ ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
 WORKDIR /appl/firestarr
 COPY --chown=${USERNAME}:${USERNAME} ./config /appl/
-COPY --chown=${USERNAME}:${USERNAME} --from=firestarr-build /appl/firestarr/firestarr .
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr /appl/firestarr/firestarr .
 COPY --chown=${USERNAME}:${USERNAME} ./bounds.geojson /appl/
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/fuel.lut /appl/firestarr/
-COPY --chown=${USERNAME}:${USERNAME} ./firestarr/settings.ini /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr /appl/firestarr/fuel.lut /appl/firestarr/
+COPY --chown=${USERNAME}:${USERNAME} --from=firestarr /appl/firestarr/settings.ini /appl/firestarr/
 COPY --chown=${USERNAME}:${USERNAME} ./scripts/ /appl/firestarr/scripts/
 COPY --chown=${USERNAME}:${USERNAME} ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
 WORKDIR /appl/firestarr/src/py/cffdrs-ng

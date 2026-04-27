@@ -87,7 +87,7 @@ services:
     build:
       context: .
       target: firestarr
-      dockerfile: .docker/Dockerfile
+      dockerfile: firestarr/.docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -108,7 +108,7 @@ services:
     build:
       context: .
       target: firestarr-dev
-      dockerfile: .docker/Dockerfile
+      dockerfile: firestarr/.docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
