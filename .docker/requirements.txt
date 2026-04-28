@@ -8,13 +8,14 @@ fiona
 geopandas
 ipython
 multiprocess
-numpy<2
+numpy
 pandas
 psutil
 pyarrow
 pycrs
 pyogrio
 pyrate-limiter==2.10.0
+pytz
 rasterio
 requests
 scipy
