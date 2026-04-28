@@ -1,4 +1,6 @@
 RASTERS=FireSTARR_Dataset_2025_V1.1.zip
+# make sure submodules are initialized
+git submodule update --init
 # get rasters
 mkdir -p data
 mkdir -p data/sims
