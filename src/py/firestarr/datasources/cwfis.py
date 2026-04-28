@@ -217,13 +217,14 @@ class SourceFeatureM3(SourceFeature):
         # HACK: fallback in either direction
         # FIX: duplicated elsewhere
         tried_file = False
-        try:
-            if not CONFIG["PREFER_CWFIS_WMS"]:
-                tried_file = True
-                return self._source_file._get_features()
-        except Exception as ex:
-            logging.error("Unable to use file source for M3 data")
-            logging.error(ex)
+        # HACK: this doesn't work so just comment for now
+        # try:
+        #     if not CONFIG["PREFER_CWFIS_WMS"]:
+        #         tried_file = True
+        #         return self._source_file._get_features()
+        # except Exception as ex:
+        #     logging.error("Unable to use file source for M3 data")
+        #     logging.error(ex)
         try:
             return self._source_service._get_features()
         except Exception as ex:
