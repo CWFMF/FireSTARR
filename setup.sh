@@ -33,3 +33,4 @@ cp bounds.geojson firestarr/
 cp bounds.geojson data/
 docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cppscripts/build.sh'
 docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; source ../.venv/bin/activate; python src/py/firestarr/make_bounds.py'
+sed -i "s/\(RASTER_ROOT = \).*/\1\/appl\/data\/generated\/grid\/100m/" firestarr/settings.ini
