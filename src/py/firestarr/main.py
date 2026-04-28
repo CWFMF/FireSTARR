@@ -273,29 +273,33 @@ if __name__ == "__main__":
     logging.info("Called with args %s", str(sys.argv))
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
     if FROM_QUEUE:
-        msg, args = scan_queue()
-        logging.info("Queue triggered with message:\n%s\ngives arguments:\n%s", msg, args)
-        # HACK: double-check that we're using only `--` args for now
-        for a in args:
-            # HACK: should filter things out if they aren't valid args elsewhere
-            if not a.startswith("--"):
-                logging.fatal("Invalid argument given: %s", a)
-                raise ValueError("Invalid argument given: %s" % a)
-        # HACK: sketched out about this, but will let us tell things to re-run via queue
-        sys.argv.extend(args)
-        # allow other arguments but remove duplicates
-        QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
-        # HACK: if not using batch then wait for results
-        if assign_sim_batch():
-            logging.debug("Not waiting since running in batch")
-            QUEUE_ARGS.extend(["--no-wait"])
-        REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
-        for a in REMOVE_ARGS:
-            try:
-                sys.argv.remove(a)
-            except ValueError:
-                pass
-        sys.argv.extend(QUEUE_ARGS)
+        try:
+            msg, args = scan_queue()
+            logging.info("Queue triggered with message:\n%s\ngives arguments:\n%s", msg, args)
+            # HACK: double-check that we're using only `--` args for now
+            for a in args:
+                # HACK: should filter things out if they aren't valid args elsewhere
+                if not a.startswith("--"):
+                    logging.fatal("Invalid argument given: %s", a)
+                    raise ValueError("Invalid argument given: %s" % a)
+            # HACK: sketched out about this, but will let us tell things to re-run via queue
+            sys.argv.extend(args)
+            # allow other arguments but remove duplicates
+            QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
+            # HACK: if not using batch then wait for results
+            if assign_sim_batch():
+                logging.debug("Not waiting since running in batch")
+                QUEUE_ARGS.extend(["--no-wait"])
+            REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
+            for a in REMOVE_ARGS:
+                try:
+                    sys.argv.remove(a)
+                except ValueError:
+                    pass
+            sys.argv.extend(QUEUE_ARGS)
+        except Exception as ex:
+            logging.warning("Unable to scan queue:\n\t" + str(ex))
+            FROM_QUEUE = False
     args_orig = sys.argv[1:]
     # rely on argument parsing later
     while do_retry:
