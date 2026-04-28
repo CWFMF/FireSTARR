@@ -12,7 +12,8 @@ services:
     entrypoint: tail -f /dev/null
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
-      - data:/appl/data
+      - ./data_old:/appl/data
+      - ./firestarr/.vscode:/appl/firestarr/.vscode
     env_file:
       - .env
 

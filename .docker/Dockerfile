@@ -62,32 +62,10 @@ RUN apt-get update --fix-missing \
   curl zip unzip tar ca-certificates git
 # vcpkg says: Environment variable VCPKG_FORCE_SYSTEM_BINARIES must be set on arm, s390x, ppc64le and riscv platforms.
 ENV VCPKG_FORCE_SYSTEM_BINARIES=1
-ENV VCPKG_ROOT=/appl/vcpkg
+ENV VCPKG_ROOT=/appl/firestarr/vcpkg
 WORKDIR /appl
-RUN --mount=type=bind,source=./firestarr/vcpkg-configuration.json,target=./vcpkg-configuration.json \
-    --mount=type=bind,source=./firestarr/vcpkg.json,target=./vcpkg.json \
-  git clone -v https://github.com/microsoft/vcpkg.git \
-  && cd vcpkg \
-  && git checkout $(sed -n '/baseline/{s/.*\"\([^"]*\)",$/\1/g;p}' ../firestarr/vcpkg-configuration.json) \
-  && cd .. \
-  && vcpkg/bootstrap-vcpkg.sh -disableMetrics \
-  && cd firestarr \
-  && ../vcpkg/vcpkg install
-# RUN --mount=type=bind,source=./firestarr/cmake,target=./cmake \
-#     --mount=type=bind,source=./firestarr/CMakeLists.txt,target=./CMakeLists.txt \
-#     --mount=type=bind,source=./firestarr/CMakePresets.json,target=./CMakePresets.json \
-#     --mount=type=bind,source=./firestarr/.clang-format,target=./.clang-format \
-#     --mount=type=bind,source=./firestarr/.clang-tidy,target=./.clang-tidy \
-#     --mount=type=bind,source=./firestarr/.env,target=./.env \
-#     --mount=type=bind,source=./firestarr/src/cpp,target=./src/cpp \
-#     --mount=type=bind,source=./firestarr/test/data,target=./test/data \
-#     --mount=type=bind,source=./firestarr/test/input,target=./test/input \
-#     --mount=type=bind,source=./firestarr/fuel.lut,target=./fuel.lut \
-#     --mount=type=bind,source=./firestarr/settings.ini,target=./settings.ini \
-#     cmake --preset Release \
-#     && cmake --build --parallel --preset Release \
-#     && ctest --preset Release
-
+# don't actually build vcpkg since we don't want it outside the mounted directory at
+#   /appl/firestarr when using this for dev
 
 
 FROM firestarr-app-dev AS firestarr-setup-gis
