@@ -6,6 +6,7 @@ import sys
 import time
 import timeit
 
+import geopandas as gpd
 import numpy as np
 import pandas as pd
 import sim_wrapper
@@ -707,23 +708,31 @@ class Run(object):
             # HACK: to_gdf will convert these into points
             df_reset = df.reset_index().to_crs(CRS_COMPARISON)
             df_small = df_reset[df_reset["area"] < FIRE_SIZE_BOUNDS_LIMIT].set_index("fire_name")
+            cols = list(set(df_bounds.columns).union(df_reset.columns))
+            if 0 < len(df_small):
+                df_join_small = df_small[["geometry"]].sjoin(df_bounds)
+            else:
+                df_join_small = gpd.GeoDataFrame(data=None, columns=cols, crs=df_small.crs).set_index("fire_name")
             df_large = df_reset[df_reset["area"] >= FIRE_SIZE_BOUNDS_LIMIT].set_index("fire_name")
-            df_large.loc[:, "geometry"] = df_large.centroid
-            df_join_small = df_small[["geometry"]].sjoin(df_bounds)
-            df_join_centroids = df_large[["geometry"]].sjoin(df_bounds).drop(axis=1, columns=["geometry"])
-            df_join_large = df_join_centroids.join(df_fires)
-            df_join_large = df_join_large[df_join_small.columns]
+            if 0 < len(df_large):
+                df_large.loc[:, "geometry"] = df_large.centroid
+                df_join_centroids = df_large[["geometry"]].sjoin(df_bounds).drop(axis=1, columns=["geometry"])
+                df_join_large = df_join_centroids.join(df_fires)
+                df_join_large = df_join_large[df_join_small.columns]
+            else:
+                df_join_large = gpd.GeoDataFrame(data=None, columns=cols, crs=df_large.crs).set_index("fire_name")
             df_join = pd.concat([df_join_small, df_join_large])
             # only keep fires that are in bounds
             df = df.loc[np.unique(df_join.index)]
-            if "PRIORITY" in df_join.columns:
-                df_priority = df_join.sort_values(["PRIORITY"]).groupby("fire_name").first()
-                df["ID"] = df_priority.loc[df.index, "ID"]
-                df["PRIORITY"] = df_priority.loc[df.index, "PRIORITY"]
-            if "DURATION" in df_bounds.columns:
-                df["DURATION"] = (
-                    df_join.sort_values(["DURATION"], ascending=False).groupby("fire_name").first()["DURATION"]
-                )
+            if 0 < len(df_join):
+                if "PRIORITY" in df_join.columns:
+                    df_priority = df_join.sort_values(["PRIORITY"]).groupby("fire_name").first()
+                    df["ID"] = df_priority.loc[df.index, "ID"]
+                    df["PRIORITY"] = df_priority.loc[df.index, "PRIORITY"]
+                if "DURATION" in df_bounds.columns:
+                    df["DURATION"] = (
+                        df_join.sort_values(["DURATION"], ascending=False).groupby("fire_name").first()["DURATION"]
+                    )
         df["DURATION"] = np.min(list(zip([self._max_days] * len(df), df["DURATION"])), axis=1)
         df = df.sort_values(["PRIORITY", "ID", "DURATION", "area"])
         return df
