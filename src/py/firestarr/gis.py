@@ -582,6 +582,8 @@ def find_closest(df, lat, lon, crs=CRS_COMPARISON, fill_missing=False):
 
 
 def area_ha(df):
+    if 0 == len(df):
+        return None
     return np.round(df.to_crs(CRS_COMPARISON).area / HA_TO_MSQ, 2)
 
 
