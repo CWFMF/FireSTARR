@@ -305,7 +305,7 @@ def keep_trying_groups(fct, values, *args, **kwargs):
                     done = False
             remaining = unsuccessful
             if num_cur > 0 and num_cur == num_prev:
-                logging.error("Settled on having %ds results not working", num_cur)
+                logging.error("Settled on having %d results not working", num_cur)
                 break
             num_prev = num_cur
         except BrokenPipeError:
