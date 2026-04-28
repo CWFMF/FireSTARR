@@ -448,13 +448,19 @@ def split_line(line):
 def unzip(path, to_dir, match=None):
     if not os.path.exists(to_dir):
         os.mkdir(to_dir)
-    with zipfile.ZipFile(path, "r") as zip_ref:
-        if match is None:
-            names = zip_ref.namelist()
-            zip_ref.extractall(to_dir)
-        else:
-            names = [x for x in zip_ref.namelist() if match in x]
-            zip_ref.extractall(to_dir, names)
+    try:
+        with zipfile.ZipFile(path, "r") as zip_ref:
+            if match is None:
+                names = zip_ref.namelist()
+                zip_ref.extractall(to_dir)
+            else:
+                names = [x for x in zip_ref.namelist() if match in x]
+                zip_ref.extractall(to_dir, names)
+    except Exception as ex:
+        logging.warning(str(ex))
+        # HACK: python doesn't see some things as zip but 7z does
+        logging.warning("Trying to use 7zip to unzip {} when python failed", path)
+        run_process(["7za", "x", path], to_dir)
     return [os.path.join(to_dir, x) for x in names]
 
 
