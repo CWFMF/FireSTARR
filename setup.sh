@@ -35,5 +35,13 @@ cp bounds.geojson firestarr/
 cp bounds.geojson data/
 docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cppscripts/build.sh'
 docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; source ../.venv/bin/activate; python src/py/firestarr/make_bounds.py'
-sed -i "s/\(RASTER_ROOT = \).*/\1\/appl\/data\/generated\/grid\/100m/" firestarr/settings.ini
-docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --no-publish --no-retry'
+sed -i "s/^\(RASTER_ROOT = \).*/\1\/appl\/data\/generated\/grid\/100m/" firestarr/settings.ini
+# turn off multiple simulations per scenario for now
+sed -i "s/^\(MAXIMUM_SIMULATIONS = \).*/\10/" firestarr/settings.ini
+# sed -i "s/\(OUTPUT_DATE_OFFSETS = \).*/\1[1]/" firestarr/settings.ini
+# FIX: this should be a setting and not a constant
+sed -i "s/^\(MAX_NUM_DAYS = \).*/\11/" src/py/firestarr/common.py
+# create inputs
+docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --no-publish --no-retry --prepare-only'
+# actually run
+docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --resume --no-publish --no-retry'
