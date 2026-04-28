@@ -17,7 +17,6 @@ services:
         source: ./config
         target: /appl/config
       - data:/appl/data
-      - sims:/appl/data/sims
       - py:/appl/firestarr/src/py
       - type: bind
         source: ./gis
@@ -46,10 +45,9 @@ services:
         source: ./config
         target: /appl/config
       - data:/appl/data
-      - sims:/appl/data/sims
       - py:/appl/firestarr/src/py
       - scripts:/appl/firestarr/scripts
-      - cppscripts:/appl/cppscripts
+      - cppscripts:/appl/firestarr/cppscripts
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
@@ -78,7 +76,6 @@ services:
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
       - data:/appl/data
-      - sims:/appl/data/sims
     env_file:
       - .env
 
@@ -87,7 +84,7 @@ services:
     build:
       context: .
       target: firestarr
-      dockerfile: firestarr/.docker/Dockerfile
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -99,7 +96,6 @@ services:
         source: ./firestarr/settings.ini
         target: /appl/firestarr/settings.ini
       - data:/appl/data
-      - sims:/appl/data/sims
     env_file:
       - .env
 
@@ -108,7 +104,7 @@ services:
     build:
       context: .
       target: firestarr-dev
-      dockerfile: firestarr/.docker/Dockerfile
+      dockerfile: .docker/Dockerfile
       args:
         VERSION: ${VERSION}
         USERNAME: ${USERNAME}
@@ -124,7 +120,6 @@ services:
         source: ./firestarr
         target: /appl/firestarr
       - data:/appl/data
-      - sims:/appl/data/sims
     cap_add:
       - SYS_PTRACE
       - SYS_ADMIN
@@ -139,13 +134,6 @@ volumes:
       type: none
       o: bind
       device: ./data
-  sims:
-    # symlink to your actual directory if you don't want it in the project folder
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./sims
   py:
     driver: local
     driver_opts:
