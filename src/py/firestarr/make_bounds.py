@@ -138,6 +138,8 @@ def update_bounds(
 ):
     df_canada = get_features_canada(file_bounds=file_bounds, dir_out=DIR_BOUNDS).set_index(["EN"])
     crs_orig = df_canada.crs
+    # remove parks from canada shape
+    df_canada = df_canada[df_canada.ID != "PC"]
 
     df_parks = load_geometry_file(URL_PARKS)
     df_parks_all = df_parks.dissolve()[["geometry"]]
