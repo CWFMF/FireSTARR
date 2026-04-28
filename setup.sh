@@ -1,9 +1,23 @@
+RASTERS=FireSTARR_Dataset_2025_V1.1.zip
+# get rasters
 mkdir -p data
 mkdir -p data/sims
 mkdir -p data/download
-pushd data/download/
-wget -c https://fgmfiles.spyd.com/datasets/FireSTARR_Dataset_2025_V1.1.zip
+pushd data
+pushd download
+wget -c https://fgmfiles.spyd.com/datasets/${RASTERS}
+RASTERS=$(pwd)/${RASTERS}
 popd
+mkdir -p generated/grid/100m/default
+pushd generated/grid/100m/default
+# HACK: can't figure out how to use regex for extract files
+d=$(7za l "${RASTERS}" | grep default | head -n1 | sed "s/.* \([^ ]*\/default.*\)/\1/")
+7za e "${RASTERS}" "$d"
+# unzip makes an empty directory
+rmdir default
+popd
+popd
+# build containers
 pushd firestarr
 docker compose build firestarr
 docker compose build firestarr-dev
