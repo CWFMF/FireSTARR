@@ -107,7 +107,7 @@ COPY --from=firestarr-prod-base-env / /
 
 # derive final image from base so updates to binary are small layers
 FROM firestarr-prod-base AS firestarr-prod
-ARG VERSION9*
+ARG VERSION
 ENV VERSION=${VERSION}
 ENV TMPDIR=/tmp
 WORKDIR /appl/firestarr
