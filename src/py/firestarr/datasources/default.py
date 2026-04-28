@@ -4,6 +4,7 @@ from functools import cache
 
 import datasources.cwfif
 import datasources.spotwx
+import geopandas as gpd
 import numpy as np
 import pandas as pd
 from common import (
@@ -137,11 +138,16 @@ def assign_fires(
     df_status[["status", "status_rank"]] = df_first.loc[df_status.index][["status", "status_rank"]]
     # dissolve by fire_name but use max so highest lastdate stays
     df_dissolve = df_status.dissolve(by="fire_name", aggfunc="max").reset_index()
-    df_dissolve["datetime"] = pick_max(df_dissolve["datetime_left"], df_dissolve["datetime_right"])
-    # at this point we might have the same geometry for multiple fires, but that
-    # just means they'll all get replaced with it and then the group dissolve
-    # will take care of duplicates
-    df_matched = df_dissolve[["fire_name", "datetime", "status", "geometry"]]
+    cols_matched = ["fire_name", "datetime", "status", "geometry"]
+    if 0 < len(df_dissolve):
+        df_dissolve["datetime"] = pick_max(df_dissolve["datetime_left"], df_dissolve["datetime_right"])
+        # at this point we might have the same geometry for multiple fires, but that
+        # just means they'll all get replaced with it and then the group dissolve
+        # will take care of duplicates
+        df_matched = df_dissolve[cols_matched]
+    else:
+        # make a fake dataframe
+        df_matched = gpd.GeoDataFrame(data=None, columns=cols_matched, crs=CRS_WGS84)
     df_features = df_matched.reset_index(drop=True)
     df_features["area"] = area_ha(df_features)
     df_unmatched["area"] = area_ha(df_unmatched)
