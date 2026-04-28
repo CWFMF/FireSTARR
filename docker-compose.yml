@@ -1,4 +1,21 @@
 services:
+  firestarr-app-hotfix:
+    image: firestarr-app
+    build:
+      context: .
+      target: firestarr-app-hotfix
+      dockerfile: Dockerfile_hotfix
+      args:
+        VERSION: ${VERSION}
+      tags:
+        - firestarr-app:${VERSION}
+    entrypoint: tail -f /dev/null
+    volumes:
+      - /etc/ssl/certs:/etc/ssl/certs
+      - data:/appl/data
+    env_file:
+      - .env
+
   firestarr-setup-gis:
     image: firestarr-setup-gis
     build:

@@ -1,0 +1,5 @@
+FROM registrycwfisdev.azurecr.io/firestarr/firestarr-app:latest AS firestarr-app-hotfix
+ENV VERSION=0.9.6
+WORKDIR /appl/firestarr
+COPY ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
+RUN echo "This is a patch of v0.9.5.5 to fix errors with empty dataframes but not upgrade numpy or anything else" > /appl/firestarr/NOTE.md
