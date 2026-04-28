@@ -30,5 +30,6 @@ popd
 docker compose build firestarr-app-dev
 # build with this since it's mounting the ./firestarr directory at /appl/firestarr
 cp bounds.geojson firestarr/
+cp bounds.geojson data/
 docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cppscripts/build.sh'
-docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'python src/py/firestarr/make_bounds.geojson'
+docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; source ../.venv/bin/activate; python src/py/firestarr/make_bounds.py'
