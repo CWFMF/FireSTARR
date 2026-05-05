@@ -716,7 +716,7 @@ class Run(object):
             df_large = df_reset[df_reset["area"] >= FIRE_SIZE_BOUNDS_LIMIT].set_index("fire_name")
             if 0 < len(df_large):
                 df_large.loc[:, "geometry"] = df_large.centroid
-                df_join_centroids = df_large[["geometry"]].sjoin(df_bounds).drop(axis=1, columns=["geometry"])
+                df_join_centroids = df_large[["geometry"]].sjoin(df_bounds).drop("geometry", axis=1)
                 df_join_large = df_join_centroids.join(df_fires)
                 df_join_large = df_join_large[df_join_small.columns]
             else:
