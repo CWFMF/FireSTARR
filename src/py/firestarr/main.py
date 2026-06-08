@@ -278,6 +278,8 @@ if __name__ == "__main__":
         raise RuntimeError(f"Unable to locate simulation model settings file {FILE_APP_SETTINGS}")
     logging.info("Called with args %s", str(sys.argv))
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
+    QUEUE_ARGS = []
+    REMOVE_ARGS = ["--queue"]
     if FROM_QUEUE:
         try:
             msg, args = scan_queue()
@@ -292,21 +294,22 @@ if __name__ == "__main__":
                 # HACK: sketched out about this, but will let us tell things to re-run via queue
                 sys.argv.extend(args)
                 # allow other arguments but remove duplicates
-                QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
-                # HACK: if not using batch then wait for results
-                if assign_sim_batch():
-                    logging.debug("Not waiting since running in batch")
-                    QUEUE_ARGS.extend(["--no-wait"])
-                REMOVE_ARGS = QUEUE_ARGS + ["--queue"]
-                for a in REMOVE_ARGS:
-                    try:
-                        sys.argv.remove(a)
-                    except ValueError:
-                        pass
-                sys.argv.extend(QUEUE_ARGS)
+            QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
+            # HACK: if not using batch then wait for results
+            if assign_sim_batch():
+                logging.debug("Not waiting since running in batch")
+                QUEUE_ARGS.extend(["--no-wait"])
+            REMOVE_ARGS += QUEUE_ARGS
         except Exception as ex:
             logging.warning("Unable to scan queue:\n\t" + str(ex))
             FROM_QUEUE = False
+    # HACK: doing this in FROM_QUEUE isn't working so more here
+    for a in REMOVE_ARGS:
+        try:
+            sys.argv.remove(a)
+        except ValueError:
+            pass
+    sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     # rely on argument parsing later
     while do_retry:
