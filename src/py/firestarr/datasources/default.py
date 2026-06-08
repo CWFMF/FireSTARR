@@ -198,7 +198,7 @@ def find_sources_in_dir(class_type, dir_search="private"):
     return list(chain.from_iterable([find_sources_in_module(m, class_type) for m in modules]))
 
 
-def find_sources(class_type, private_first=False):
+def find_sources(class_type, private_first=True):
     private = find_sources_in_dir(class_type, "private")
     public = find_sources_in_dir(class_type, "public")
     # some sources
@@ -229,10 +229,10 @@ class SourceFireActive(SourceFire):
             self._source_features += [
                 # want private sources last so they override public ones
                 s(self._dir_out)
-                for s in find_sources(SourceFeature, private_first=False)
+                for s in find_sources(SourceFeature)
             ]
             # sources for features that area associated with specific fires
-            self._source_fires = [s(self._dir_out) for s in find_sources(SourceFire, private_first=False)]
+            self._source_fires = [s(self._dir_out) for s in find_sources(SourceFire)]
 
     @cache
     def _get_fires(self):
@@ -321,9 +321,7 @@ class SourceFwiBest(SourceFwi):
         super().__init__(bounds=None)
         self._dir_out = dir_out
         # want private sources first since it stops at first match
-        self._sources = [s(self._dir_out) for s in find_sources(SourceFwi, private_first=True)] + [
-            SourceFwiCwfis(self._dir_out)
-        ]
+        self._sources = [s(self._dir_out) for s in find_sources(SourceFwi)] + [SourceFwiCwfis(self._dir_out)]
 
     @cache
     def _get_fwi(self, lat, lon, date):
@@ -365,7 +363,7 @@ class SourceHourlyBest(SourceHourly):
         self._sources = [
             # want private sources first since it stops at first match
             s(self._dir_out)
-            for s in find_sources(SourceHourly, private_first=True)
+            for s in find_sources(SourceHourly)
         ] + [
             # need some default hourly weather source
             SourceHourlyEmpty()
