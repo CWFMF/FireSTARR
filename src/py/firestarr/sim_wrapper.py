@@ -593,8 +593,6 @@ def _run_fire_from_folder(
                 hour = start_time.hour
                 minute = start_time.minute
                 tz = start_time.tz.utcoffset(start_time).total_seconds() / SECONDS_PER_HOUR
-                # HACK: use actual offset for simulation but round for weather
-                data["utc_offset"] = tz
                 # HACK: I think there might be issues with forecasts being at
                 #           the half hour?
                 if math.floor(tz) != tz:
@@ -626,7 +624,6 @@ def _run_fire_from_folder(
                         f"--dmc {data['dmc_old']}",
                         f"--dc {data['dc_old']}",
                         f"--apcp_prev {data['apcp_prev']}",
-                        f"--tz {data['utc_offset']}",
                         "-v",
                         # "-v",
                         # "-v",
