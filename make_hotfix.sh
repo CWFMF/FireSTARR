@@ -11,6 +11,8 @@ git restore src/py/firestarr/common.py
 git restore -s ebd6cb405 src/py/firestarr/datasources/public/agency_on.py
 # go to version that doesn't use --tz
 git restore -s ebd6cb405 src/py/firestarr/sim_wrapper.py
+# include private datasources
+git clone git@github.com:jordan-evens/firestarr_datasources_private.git src/py/firestarr/datasources/private
 docker compose down firestarr-app-hotfix
 docker compose build --no-cache firestarr-app-hotfix
 docker compose up -d firestarr-app-hotfix
