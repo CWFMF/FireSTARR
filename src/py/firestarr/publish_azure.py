@@ -154,17 +154,21 @@ def upload_dir(dir_run=None):
     def upload(path, name):
         nonlocal blobs
         changed = False
-        mtime_src = str(os.path.getmtime(path))
-        blob_dst = blobs.get(name, None)
-        mtime_dst = None if blob_dst is None else blob_dst.metadata.get("file_modified_time", None)
-        if mtime_src != mtime_dst:
-            logging.debug("Pushing %s to %s" % (path, name))
-            with open(path, "rb") as data:
-                metadata["file_modified_time"] = mtime_src
-                container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
-                changed = True
-        if blob_dst is not None:
-            del blobs[name]
+        try:
+            mtime_src = str(os.path.getmtime(path))
+            blob_dst = blobs.get(name, None)
+            mtime_dst = None if blob_dst is None else blob_dst.metadata.get("file_modified_time", None)
+            if mtime_src != mtime_dst:
+                logging.debug("Pushing %s to %s" % (path, name))
+                with open(path, "rb") as data:
+                    metadata["file_modified_time"] = mtime_src
+                    container.upload_blob(name=name, data=data, metadata=metadata, overwrite=True)
+                    changed = True
+            if blob_dst is not None:
+                del blobs[name]
+        except FileNotFoundError:
+            # ignore since it's probably a temp file that disappeared
+            pass
         return changed
 
     # get old blobs for delete after
