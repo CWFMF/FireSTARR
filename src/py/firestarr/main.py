@@ -57,7 +57,6 @@ def run_main(args):
     global run_current
     global run_attempts
     global no_retry
-    global do_retry
     global is_published
     global needs_publish
     global is_current
@@ -75,7 +74,6 @@ def run_main(args):
     no_wait, args = check_arg("--no-wait", args)
     no_retry, args = check_arg("--no-retry", args)
     prepare_only, args = check_arg("--prepare-only", args)
-    do_retry = False if no_retry else True
     do_publish = False if no_publish else None
     do_merge = False if no_merge else None
     do_wait = not no_wait
@@ -163,7 +161,6 @@ def run_main(args):
         no_retry=no_retry)
     is_outdated = not is_current
     if prepare_only:
-        do_retry = False
         return True, df_final
     is_published = run_current._published_clean
     needs_publish = run_current.check_do_publish() and not is_published
