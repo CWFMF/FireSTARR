@@ -43,7 +43,6 @@ sys.path.append("/usr/local/bin")
 no_wait = None
 run_current = None
 run_attempts = 0
-do_retry = True
 is_current = None
 is_published = None
 needs_publish = None
@@ -347,12 +346,11 @@ if __name__ == "__main__":
                 requeue()
             sys.exit(-1)
     else:
-        while do_retry:
+        while True:
             # HACK: just do forever for now since running manually
             try:
                 should_stop, df_final = attempt_update(args_orig)
                 if should_stop:
-                    do_retry = False
                     break
             except KeyboardInterrupt as ex:
                 raise ex
