@@ -16,9 +16,9 @@ services:
         source: ./config
         target: /appl/config
       - ./data_old:/appl/data
-      - py:/appl/firestarr/src/py
-      - scripts:/appl/firestarr/scripts
-      - cppscripts:/appl/firestarr/cppscripts
+      - ./src/py:/appl/firestarr/src/py
+      - ./scripts:/appl/firestarr/scripts
+      - ./cppscripts:/appl/firestarr/cppscripts
       - type: bind
         source: ./firestarr
         target: /appl/firestarr
