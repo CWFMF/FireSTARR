@@ -43,7 +43,6 @@ sys.path.append("/usr/local/bin")
 no_wait = None
 run_current = None
 run_attempts = 0
-no_retry = False
 do_retry = True
 is_current = None
 is_published = None
@@ -56,7 +55,6 @@ def run_main(args):
     global no_wait
     global run_current
     global run_attempts
-    global no_retry
     global is_published
     global needs_publish
     global is_current
@@ -397,7 +395,7 @@ if __name__ == "__main__":
     except Exception as ex:
         logging.error(ex)
         logging.error(get_stack(ex))
-        if no_retry:
+        if no_retry_requested:
             logging.error("Stopping because of error")
             sys.exit(-1)
         logging.info("Trying again because of error")
