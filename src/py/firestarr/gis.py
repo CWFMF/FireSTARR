@@ -524,15 +524,15 @@ def gdf_to_file(df, dir, base=None):
         fct_save = df.to_file
 
         def save_gpkg(f):
-            # HACK: writing gpkg to azure mount is failing a lot so move after writing
-            # NOTE: having filename be different after moving was breaking geoserver so use basename
-            f_tmp = os.path.join(DIR_SYS_TMP, os.path.basename(f))
-            # df.to_file(f_tmp, driver="GPKG")
+            # # HACK: writing gpkg to azure mount is failing a lot so move after writing
+            # # NOTE: having filename be different after moving was breaking geoserver so use basename
+            # f_tmp = os.path.join(DIR_SYS_TMP, os.path.basename(f))
+            # # df.to_file(f_tmp, driver="GPKG")
             layer = os.path.splitext(os.path.basename(f))[0]
             # df.to_file(f_tmp, driver="GPKG", layer=layer)
-            df.to_file(f_tmp, driver="GPKG", layer=layer, encoding="utf-8")
-            # df.to_file(f_tmp, driver="GPKG", engine="fiona")
-            shutil.move(f_tmp, f)
+            df.to_file(f, driver="GPKG", layer=layer, encoding="utf-8")
+            # # df.to_file(f_tmp, driver="GPKG", engine="fiona")
+            # shutil.move(f_tmp, f)
             return f
 
         if "parquet" == VECTOR_FILE_EXTENSION:
