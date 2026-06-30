@@ -326,6 +326,7 @@ if __name__ == "__main__":
     sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     prepare_only_requested = "--prepare-only" in args_orig
+    no_retry_requested = "--no-retry" in args_orig
     # rely on argument parsing later
     while do_retry:
         # HACK: just do forever for now since running manually
@@ -343,7 +344,7 @@ if __name__ == "__main__":
         except Exception as ex:
             logging.error(ex)
             logging.error(get_stack(ex))
-            if no_retry:
+            if no_retry_requested:
                 logging.error("Stopping because of error")
                 if FROM_QUEUE:
                     logging.info("Requeuing")
