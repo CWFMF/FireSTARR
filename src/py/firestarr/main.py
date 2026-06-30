@@ -42,10 +42,6 @@ sys.path.append("/usr/local/bin")
 
 no_wait = None
 run_current = None
-run_attempts = 0
-is_current = None
-is_published = None
-needs_publish = None
 should_resume = None
 FROM_QUEUE = False
 
@@ -53,10 +49,6 @@ FROM_QUEUE = False
 def run_main(args):
     global no_wait
     global run_current
-    global run_attempts
-    global is_published
-    global needs_publish
-    global is_current
     global should_resume
 
     # HACK: just get some kind of parsing for right now
@@ -73,7 +65,6 @@ def run_main(args):
     prepare_only, args = check_arg("--prepare-only", args)
     do_publish = False if no_publish else None
     do_merge = False if no_merge else None
-    do_wait = not no_wait
 
     def check_resume():
         global ran_outdated
@@ -152,7 +143,6 @@ def run_main(args):
                 prepare_only=prepare_only,
                 no_wait=no_wait,
             )
-    run_attempts += 1
     # returns true if just finished current run
     is_current, df_final = run_current.run_until_successful_or_outdated(
         no_retry=no_retry)
