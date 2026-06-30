@@ -10,3 +10,6 @@
 **/output*
 **/.venv
 **/src/cpp/version.cpp
+**/data_old
+**compare_results
+**/.diff
