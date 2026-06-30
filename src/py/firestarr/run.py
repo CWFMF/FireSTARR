@@ -528,6 +528,12 @@ class Run(object):
         )
 
     def run_until_successful(self, no_retry=False):
+        if no_retry:
+            df_final, changed = self.process()
+            self.save_rundata()
+            logging.info("Finished simulation for %s", self._id)
+            self.remove_locks()
+            return df_final
         should_try = True
         is_successful = False
         while not is_successful and should_try:
