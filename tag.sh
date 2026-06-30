@@ -5,8 +5,8 @@ SRCS=(firestarr-app)
 # REPOS=(ghcr.io/jordan-evens/ registrycwfisdev.azurecr.io/firestarr/)
 # REPOS=(ghcr.io/jordan-evens/)
 REPOS=(registrycwfisdev.azurecr.io/firestarr/)
-BRANCH="dev"
-# BRANCH="latest"
+BRANCHES=(latest dev)
+# BRANCHES=(latest)
 
 echo ${GHCR_TOKEN}  | docker login ghcr.io -u jordan-evens --password-stdin
 az acr login --name registrycwfisdev || (az login && az acr login --name registrycwfisdev)
@@ -16,16 +16,22 @@ build_tag_and_push() {
     src=$1
     img="${src}:${VERSION}"
     repo=$2
-    docker compose build ${src}-hotfix
+    docker compose build --no-cache ${src}-hotfix
     set +e
     docker rmi ${repo}${img}
-    docker rmi ${repo}${src}:${BRANCH}
+    for branch in ${BRANCHES[*]}; do
+        docker rmi ${repo}${src}:${branch}
+    done
     set -e
     docker tag ${img} ${repo}${img}
-    docker tag ${img} ${repo}${src}:${BRANCH}
+    for branch in ${BRANCHES[*]}; do
+        docker tag ${img} ${repo}${src}:${branch}
+    done
     docker push ${repo}${src}
     docker push ${repo}${img}
-    docker push ${repo}${src}:${BRANCH}
+    for branch in ${BRANCHES[*]}; do
+        docker push ${repo}${src}:${branch}
+    done
 }
 
 for src in ${SRCS[*]}; do

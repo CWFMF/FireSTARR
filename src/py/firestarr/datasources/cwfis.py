@@ -281,6 +281,8 @@ class SourceFireCiffc(SourceFire):
                 }
             )
             gdf["fire_name"] = make_name_ciffc(gdf)
+            # change EX to OUT
+            gdf["status"] = gdf["status"].apply(lambda s: s if s != "EX" else "OUT")
             gdf = gdf.to_crs(CRS_WGS84)
             return clean_fires(gdf, self._year)
 
@@ -310,49 +312,6 @@ def clean_fires(gdf, year):
     df_pick.crs = df_dupes.crs
     gdf = pd.concat([gdf, df_pick])
     return gdf
-
-
-class SourceFireCiffcService(SourceFire):
-    TABLE_NAME = "ciffc:ytd_fires"
-
-    def __init__(self, dir_out, year, status_ignore=DEFAULT_STATUS_IGNORE) -> None:
-        super().__init__(bounds=None)
-        self._dir_out = dir_out
-        self._status_ignore = [] if status_ignore is None else status_ignore
-        self._year = year
-
-    @cache
-    def _get_fires(self):
-        save_as = f"{self._dir_out}/ciffc_current.json"
-        filter = (
-            " and ".join([f"\"field_stage_of_control_status\"<>'{status}'" for status in self._status_ignore]) or None
-        )
-
-        def do_parse(_):
-            gdf = gdf_from_file(_)
-            # HACK: ignore previous year fires
-            if CURRENT_YEAR_ONLY:
-                gdf = gdf.loc[gdf["field_situation_report_date"].apply(lambda x: x.year) == self._year]
-            gdf = gdf.rename(
-                columns={
-                    "field_status_date": "datetime",
-                    "field_stage_of_control_status": "status",
-                    "field_fire_size": "area",
-                }
-            )
-            return clean_fires(gdf, self._year)
-
-        return try_save_http(
-            make_query_geoserver(
-                self.TABLE_NAME,
-                filter=filter,
-                wfs_root=WFS_CIFFC,
-            ),
-            save_as,
-            False,
-            None,
-            do_parse,
-        )
 
 
 def select_fwi(lat, lon, df_wx, columns):
