@@ -327,30 +327,44 @@ if __name__ == "__main__":
     args_orig = sys.argv[1:]
     prepare_only_requested = "--prepare-only" in args_orig
     no_retry_requested = "--no-retry" in args_orig
-    # rely on argument parsing later
-    while do_retry:
-        # HACK: just do forever for now since running manually
+
+    def attempt_update(args_orig):
         logging.info("Attempting update")
         args = args_orig[:]
-        try:
-            # returns true if just finished current run
-            is_current, df_final = run_main(args)
-            if is_current:
-                do_retry = False
-                break
+        # returns true if the caller should stop retrying
+        should_stop, df_final = run_main(args)
+        if not should_stop:
             logging.info("Trying again because used old weather")
+        return should_stop, df_final
+
+    # rely on argument parsing later
+    if no_retry_requested:
+        try:
+            attempt_update(args_orig)
         except KeyboardInterrupt as ex:
             raise ex
         except Exception as ex:
             logging.error(ex)
             logging.error(get_stack(ex))
-            if no_retry_requested:
-                logging.error("Stopping because of error")
-                if FROM_QUEUE:
-                    logging.info("Requeuing")
-                    requeue()
-                sys.exit(-1)
-            logging.info("Trying again because of error")
+            logging.error("Stopping because of error")
+            if FROM_QUEUE:
+                logging.info("Requeuing")
+                requeue()
+            sys.exit(-1)
+    else:
+        while do_retry:
+            # HACK: just do forever for now since running manually
+            try:
+                should_stop, df_final = attempt_update(args_orig)
+                if should_stop:
+                    do_retry = False
+                    break
+            except KeyboardInterrupt as ex:
+                raise ex
+            except Exception as ex:
+                logging.error(ex)
+                logging.error(get_stack(ex))
+                logging.info("Trying again because of error")
     try:
         # do this first to kill the azure batch job if everything is done
         if prepare_only_requested:
