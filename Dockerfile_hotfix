@@ -1,6 +1,7 @@
 FROM registrycwfisdev.azurecr.io/firestarr/firestarr-app:0.9.5.5 AS firestarr-app-hotfix
-ENV VERSION=0.9.7
+ENV VERSION=0.9.8
 WORKDIR /appl/firestarr
 COPY ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
 RUN echo "v0.9.6 is a patch of v0.9.5.5 to fix errors with empty dataframes but not upgrade numpy or anything else" > /appl/firestarr/NOTE.md
 RUN echo "v0.9.7 adds ON specific datasources back" >> /appl/firestarr/NOTE.md
+RUN echo "v0.9.8 change SourceFireCiffc to use CWFIF WFS" >> /appl/firestarr/NOTE.md

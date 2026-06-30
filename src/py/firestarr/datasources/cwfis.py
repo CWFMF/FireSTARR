@@ -246,8 +246,13 @@ def make_name_ciffc(df):
     )
 
 
-class SourceFireDipService(SourceFire):
-    TABLE_NAME = "public:activefires"
+# HACK: replace with new WFS but use old field names to minimize changes for now
+class SourceFireCiffc(SourceFire):
+    CWFIF_WFS_ROOT = "https://geoserver.cwfif.nrcan.gc.ca/geoserver/wfs?service=WFS&version=2.0.1"
+    "&sortBy=agency_code+A,record_start+D"
+    "&CQL_FILTER=record_start<=now()%20AND%20record_end>now()"
+
+    TABLE_NAME = "public:cwfif_national_reportedfires"
 
     def __init__(self, dir_out, year, status_ignore=DEFAULT_STATUS_IGNORE) -> None:
         super().__init__(bounds=None)
@@ -260,25 +265,19 @@ class SourceFireDipService(SourceFire):
         save_as = f"{self._dir_out}/dip_current.json"
 
         filter = " and ".join(
-            [f"\"stage_of_control\"<>'{status}'" for status in self._status_ignore]
-            + [
-                "agency<>'ak'",
-                "agency<>'conus'",
-                f"startdate during {self._year}-01-01T00:00:00Z/P1Y",
-            ]
+            [f"\"stage_of_control_status\"<>'{status}'" for status in self._status_ignore]
+            + ["record_start<=now()", "record_end>now()"]
         )
 
         def do_parse(_):
             gdf = gdf_from_file(_)
-            # only get latest status for each fire
-            gdf = gdf.iloc[gdf.groupby(["firename"])["last_rep_date"].idxmax()]
             gdf = gdf.rename(
                 columns={
-                    "stage_of_control": "status",
-                    "firename": "field_agency_fire_id",
-                    "hectares": "area",
-                    "last_rep_date": "datetime",
-                    "agency": "field_agency_code",
+                    "stage_of_control_status": "status",
+                    "agency_fire_id": "field_agency_fire_id",
+                    "fire_size": "area",
+                    "status_date": "datetime",
+                    "agency_code": "field_agency_code",
                 }
             )
             gdf["fire_name"] = make_name_ciffc(gdf)
@@ -286,7 +285,7 @@ class SourceFireDipService(SourceFire):
             return clean_fires(gdf, self._year)
 
         return try_save_http(
-            make_query_geoserver(self.TABLE_NAME, filter=filter, crs=CRS_OUTPUT),
+            make_query_geoserver(self.TABLE_NAME, filter=filter, crs=CRS_OUTPUT, wfs_root=self.CWFIF_WFS_ROOT),
             save_as,
             False,
             None,
@@ -354,21 +353,6 @@ class SourceFireCiffcService(SourceFire):
             None,
             do_parse,
         )
-
-
-class SourceFireCiffc(SourceFire):
-    def __init__(self, dir_out, year, status_ignore=DEFAULT_STATUS_IGNORE) -> None:
-        super().__init__(bounds=None)
-        self._source_ciffc = SourceFireCiffcService(dir_out, year, status_ignore)
-        self._source_dip = SourceFireDipService(dir_out, year, status_ignore)
-
-    def _get_fires(self):
-        try:
-            return self._source_ciffc.get_fires()
-        except KeyboardInterrupt as ex:
-            raise ex
-        except Exception:
-            return self._source_dip.get_fires()
 
 
 def select_fwi(lat, lon, df_wx, columns):
