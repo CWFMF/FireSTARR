@@ -16,9 +16,7 @@ if __name__ == "__main__":
     no_merge, args = check_arg("--no-merge", args)
     do_force, args = check_arg("--force", args)
     # no_wait, args = check_arg("--no-wait", args)
-    # no_retry, args = check_arg("--no-retry", args)
     # prepare_only, args = check_arg("--prepare-only", args)
-    # do_retry = False if no_retry else True
     do_publish = False if no_publish else None
     do_merge = False if no_merge else None
     # do_wait = not no_wait
