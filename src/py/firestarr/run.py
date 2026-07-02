@@ -486,14 +486,14 @@ class Run(object):
             self.save_fires(df_final, self._file_fires)
         return df_final, changed
 
-    def run_until_successful_or_outdated(self, no_retry=False):
+    def run_until_successful_or_outdated(self):
         def is_current():
             dir_model = get_model_dir_uncached(WX_MODEL)
             modelrun = os.path.basename(dir_model)
             return modelrun == self._modelrun
 
         # HACK: thread is throwing errors so just actually wait for now
-        result = self.run_until_successful(no_retry=no_retry)
+        result = self.run_until_successful()
         return is_current(), result
         # p = None
         # try:
@@ -527,37 +527,8 @@ class Run(object):
             )
         )
 
-    def run_until_successful(self, no_retry=False):
-        if no_retry:
-            df_final, changed = self.process()
-            self.save_rundata()
-            logging.info("Finished simulation for %s", self._id)
-            self.remove_locks()
-            return df_final
-        should_try = True
-        is_successful = False
-        while not is_successful and should_try:
-            should_try = not no_retry
-            df_final, changed = self.process()
-            is_changed = not (not changed)
-            should_try = should_try and is_changed
-            # while changed is not None:
-            # False or None
-            while is_changed:
-                is_successful = self.check_and_publish()
-                if is_successful:
-                    # if supposed to publish must have if we succeeded
-                    self._published_clean = self.check_do_publish()
-                    break
-                was_running = False
-                while self.is_running():
-                    was_running = True
-                    logging.info("Waiting because still running")
-                    time.sleep(60)
-                if not was_running:
-                    # publish didn't work, but nothing is running, so retry running?
-                    logging.error(
-                        "Changes found when publishing, but nothing running so retry")
+    def run_until_successful(self):
+        df_final, changed = self.process()
         self.save_rundata()
         logging.info("Finished simulation for %s", self._id)
         self.remove_locks()

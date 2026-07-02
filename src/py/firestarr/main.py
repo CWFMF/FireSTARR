@@ -61,7 +61,6 @@ def run_main(args):
     no_publish, args = check_arg("--no-publish", args)
     no_merge, args = check_arg("--no-merge", args)
     no_wait, args = check_arg("--no-wait", args)
-    no_retry, args = check_arg("--no-retry", args)
     prepare_only, args = check_arg("--prepare-only", args)
     do_publish = False if no_publish else None
     do_merge = False if no_merge else None
@@ -144,8 +143,7 @@ def run_main(args):
                 no_wait=no_wait,
             )
     # returns true if just finished current run
-    is_current, df_final = run_current.run_until_successful_or_outdated(
-        no_retry=no_retry)
+    is_current, df_final = run_current.run_until_successful_or_outdated()
     is_outdated = not is_current
     if prepare_only:
         return True, df_final
@@ -153,15 +151,14 @@ def run_main(args):
     needs_publish = run_current.check_do_publish() and not is_published
     should_rerun = (not no_resume) and (is_outdated or needs_publish)
     logging.info(
-        "Run %s:\n\tis_outdated = %s, is_published = %s, should_rerun = %s, no_retry == %s",
+        "Run %s:\n\tis_outdated = %s, is_published = %s, should_rerun = %s",
         run_current._name,
         is_outdated,
         is_published,
         should_rerun,
-        no_retry,
     )
     # whether things should stop running
-    return no_retry or (not should_rerun), df_final
+    return True, df_final
 
 
 def clear_queue():
@@ -292,7 +289,7 @@ if __name__ == "__main__":
                 # HACK: sketched out about this, but will let us tell things to re-run via queue
                 sys.argv.extend(args)
                 # allow other arguments but remove duplicates
-            QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
+            QUEUE_ARGS = ["--no-publish", "--no-merge"]
             # HACK: if not using batch then wait for results
             if assign_sim_batch():
                 logging.debug("Not waiting since running in batch")
@@ -310,7 +307,6 @@ if __name__ == "__main__":
     sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
     prepare_only_requested = "--prepare-only" in args_orig
-    no_retry_requested = "--no-retry" in args_orig
 
     def attempt_update(args_orig):
         logging.info("Attempting update")
@@ -320,34 +316,18 @@ if __name__ == "__main__":
         if not should_stop:
             logging.info("Trying again because used old weather")
         return should_stop, df_final
-
-    # rely on argument parsing later
-    if no_retry_requested:
-        try:
-            attempt_update(args_orig)
-        except KeyboardInterrupt as ex:
-            raise ex
-        except Exception as ex:
-            logging.error(ex)
-            logging.error(get_stack(ex))
-            logging.error("Stopping because of error")
-            if FROM_QUEUE:
-                logging.info("Requeuing")
-                requeue()
-            sys.exit(-1)
-    else:
-        while True:
-            # HACK: just do forever for now since running manually
-            try:
-                should_stop, df_final = attempt_update(args_orig)
-                if should_stop:
-                    break
-            except KeyboardInterrupt as ex:
-                raise ex
-            except Exception as ex:
-                logging.error(ex)
-                logging.error(get_stack(ex))
-                logging.info("Trying again because of error")
+    try:
+        attempt_update(args_orig)
+    except KeyboardInterrupt as ex:
+        raise ex
+    except Exception as ex:
+        logging.error(ex)
+        logging.error(get_stack(ex))
+        logging.error("Stopping because of error")
+        if FROM_QUEUE:
+            logging.info("Requeuing")
+            requeue()
+        sys.exit(-1)
     try:
         # do this first to kill the azure batch job if everything is done
         if prepare_only_requested:
@@ -383,7 +363,5 @@ if __name__ == "__main__":
     except Exception as ex:
         logging.error(ex)
         logging.error(get_stack(ex))
-        if no_retry_requested:
-            logging.error("Stopping because of error")
-            sys.exit(-1)
         logging.info("Trying again because of error")
+        sys.exit(-1)
