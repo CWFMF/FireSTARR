@@ -5,10 +5,11 @@ SRCS=(firestarr-app)
 # REPOS=(ghcr.io/jordan-evens/ registrycwfisdev.azurecr.io/firestarr/)
 # REPOS=(ghcr.io/jordan-evens/)
 REPOS=(registrycwfisdev.azurecr.io/firestarr/)
-BRANCHES=(latest dev)
+# BRANCHES=(latest dev)
 # BRANCHES=(latest)
+BRANCHES=(dev)
 
-echo ${GHCR_TOKEN}  | docker login ghcr.io -u jordan-evens --password-stdin
+# echo ${GHCR_TOKEN}  | docker login ghcr.io -u jordan-evens --password-stdin
 az acr login --name registrycwfisdev || (az login && az acr login --name registrycwfisdev)
 build_tag_and_push() {
     echo $1

@@ -16,8 +16,8 @@
 docker compose down firestarr-app-hotfix
 docker compose build --no-cache firestarr-app-hotfix
 docker compose up -d firestarr-app-hotfix
-# docker compose run -it --entrypoint /bin/bash firestarr-app-hotfix -c 'cd /appl/firestarr/; scripts/force_run.sh --no-publish --no-retry --prepare-only'
+# docker compose run -it --entrypoint /bin/bash firestarr-app-hotfix -c 'cd /appl/firestarr/; scripts/force_run.sh --no-publish --prepare-only'
 # # actually run
-# # docker compose run -it --entrypoint /bin/bash firestarr-app-hotfix -c 'cd /appl/firestarr/; scripts/force_run.sh --resume --no-publish --no-retry'
+# # docker compose run -it --entrypoint /bin/bash firestarr-app-hotfix -c 'cd /appl/firestarr/; scripts/force_run.sh --resume --no-publish'
 # # revert so other container doesn't see the code we used for this one
 # git restore src

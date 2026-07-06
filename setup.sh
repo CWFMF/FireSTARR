@@ -42,6 +42,6 @@ sed -i "s/^\(MAXIMUM_SIMULATIONS = \).*/\10/" firestarr/settings.ini
 # FIX: this should be a setting and not a constant
 sed -i "s/^\(MAX_NUM_DAYS = \).*/\11/" src/py/firestarr/common.py
 # create inputs
-docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --no-publish --no-retry --prepare-only'
+docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --no-publish --prepare-only'
 # actually run
-docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --resume --no-publish --no-retry'
+docker compose run -it --entrypoint /bin/bash firestarr-app-dev -c 'cd /appl/firestarr/; scripts/force_run.sh --resume --no-publish'

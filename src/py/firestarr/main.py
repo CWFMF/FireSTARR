@@ -30,22 +30,18 @@ TEXT_MODEL_MSG = r"'model_name': '{}'"
 
 # NOTE: rotating log file doesn't help because this isn't continuously running
 LOG_MAIN = add_log_file(
-    os.path.join(DIR_LOG, f"firestarr_{datetime.date.today().strftime('%Y%m%d')}.log"),
+    os.path.join(
+        DIR_LOG, f"firestarr_{datetime.date.today().strftime('%Y%m%d')}.log"),
     level=DEFAULT_FILE_LOG_LEVEL,
 )
-logging.info("Starting FireSTARR version %s", os.environ.get("VERSION", "UNKNOWN"))
+logging.info("Starting FireSTARR version %s",
+             os.environ.get("VERSION", "UNKNOWN"))
 
 sys.path.append(os.path.dirname(sys.executable))
 sys.path.append("/usr/local/bin")
 
 no_wait = None
 run_current = None
-run_attempts = 0
-no_retry = False
-do_retry = True
-is_current = None
-is_published = None
-needs_publish = None
 should_resume = None
 FROM_QUEUE = False
 
@@ -53,12 +49,6 @@ FROM_QUEUE = False
 def run_main(args):
     global no_wait
     global run_current
-    global run_attempts
-    global no_retry
-    global do_retry
-    global is_published
-    global needs_publish
-    global is_current
     global should_resume
 
     # HACK: just get some kind of parsing for right now
@@ -71,12 +61,9 @@ def run_main(args):
     no_publish, args = check_arg("--no-publish", args)
     no_merge, args = check_arg("--no-merge", args)
     no_wait, args = check_arg("--no-wait", args)
-    no_retry, args = check_arg("--no-retry", args)
     prepare_only, args = check_arg("--prepare-only", args)
-    do_retry = False if no_retry else True
     do_publish = False if no_publish else None
     do_merge = False if no_merge else None
-    do_wait = not no_wait
 
     def check_resume():
         global ran_outdated
@@ -105,7 +92,8 @@ def run_main(args):
         return False
 
     should_resume = check_resume()
-    logging.info("Based on weather and previous run, should_resume == %s", should_resume)
+    logging.info(
+        "Based on weather and previous run, should_resume == %s", should_resume)
     # assume resuming if not waiting
     if no_resume and should_resume:
         logging.warning("Should resume but was told not to, so making new run")
@@ -154,26 +142,23 @@ def run_main(args):
                 prepare_only=prepare_only,
                 no_wait=no_wait,
             )
-    run_attempts += 1
     # returns true if just finished current run
-    is_current, df_final = run_current.run_until_successful_or_outdated(no_retry=no_retry)
+    is_current, df_final = run_current.run_until_successful_or_outdated()
     is_outdated = not is_current
     if prepare_only:
-        do_retry = False
         return True, df_final
     is_published = run_current._published_clean
     needs_publish = run_current.check_do_publish() and not is_published
     should_rerun = (not no_resume) and (is_outdated or needs_publish)
     logging.info(
-        "Run %s:\n\tis_outdated = %s, is_published = %s, should_rerun = %s, no_retry == %s",
+        "Run %s:\n\tis_outdated = %s, is_published = %s, should_rerun = %s",
         run_current._name,
         is_outdated,
         is_published,
         should_rerun,
-        no_retry,
     )
     # whether things should stop running
-    return no_retry or (not should_rerun), df_final
+    return True, df_final
 
 
 def clear_queue():
@@ -184,7 +169,8 @@ def clear_queue():
     if not (AZURE_QUEUE_CONNECTION and AZURE_QUEUE_NAME):
         logging.warning("No configured queue to clear")
         return
-    queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
+    queue_service_client = QueueServiceClient.from_connection_string(
+        AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     queue_client.clear_messages()
 
@@ -199,9 +185,11 @@ def scan_queue():
     if not (AZURE_QUEUE_CONNECTION and AZURE_QUEUE_NAME):
         logging.warning("No configured queue to scan")
         return None, args
-    queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
+    queue_service_client = QueueServiceClient.from_connection_string(
+        AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
-    response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
+    response = queue_client.receive_messages(
+        max_messages=1, visibility_timeout=60)
     msg_orig = None
     for msg in response:
         try:
@@ -224,7 +212,8 @@ def scan_queue():
                 if isinstance(args_given, str):
                     args_given = args_given.strip().split(" ")
                 if not isinstance(args_given, list):
-                    raise ValueError("Expected list of arguments but got %s", args_given)
+                    raise ValueError(
+                        "Expected list of arguments but got %s", args_given)
                 args_given = [x.strip() for x in args_given]
                 try:
                     for a in args_given:
@@ -239,7 +228,8 @@ def scan_queue():
             elif "model_name" in queue_msg.keys():
                 model = queue_msg["model_name"].lower()
                 if model in MODEL_TRIGGERS:
-                    logging.info("Starting new run because %s is updated" % model)
+                    logging.info(
+                        "Starting new run because %s is updated" % model)
                     args.extend(["--no-resume"])
             elif "msg" in queue_msg.keys():
                 logging.info("Triggered with message '%s'" % queue_msg["msg"])
@@ -259,7 +249,8 @@ def requeue():
 
     AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
     AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
-    queue_service_client = QueueServiceClient.from_connection_string(AZURE_QUEUE_CONNECTION)
+    queue_service_client = QueueServiceClient.from_connection_string(
+        AZURE_QUEUE_CONNECTION)
     queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
     # HACK: don't insert "recheck" message if there is any message in the queue already
     #       because that will trigger recheck already
@@ -267,15 +258,18 @@ def requeue():
         # HACK: if we tell it to resume then it'll not resetart with new weather
         #       until a message about it shows up
         queue_client.send_message('{"args": "--resume"}')
-    response = queue_client.receive_messages(max_messages=1, visibility_timeout=60)
+    response = queue_client.receive_messages(
+        max_messages=1, visibility_timeout=60)
     logging.info("Done requeue")
 
 
 if __name__ == "__main__":
     if not os.path.exists(FILE_APP_BINARY):
-        raise RuntimeError(f"Unable to locate simulation model binary file {FILE_APP_BINARY}")
+        raise RuntimeError(
+            f"Unable to locate simulation model binary file {FILE_APP_BINARY}")
     if not os.path.exists(FILE_APP_SETTINGS):
-        raise RuntimeError(f"Unable to locate simulation model settings file {FILE_APP_SETTINGS}")
+        raise RuntimeError(
+            f"Unable to locate simulation model settings file {FILE_APP_SETTINGS}")
     logging.info("Called with args %s", str(sys.argv))
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
     QUEUE_ARGS = []
@@ -284,7 +278,8 @@ if __name__ == "__main__":
         try:
             msg, args = scan_queue()
             if msg:
-                logging.info("Queue triggered with message:\n%s\ngives arguments:\n%s", msg, args)
+                logging.info(
+                    "Queue triggered with message:\n%s\ngives arguments:\n%s", msg, args)
                 # HACK: double-check that we're using only `--` args for now
                 for a in args:
                     # HACK: should filter things out if they aren't valid args elsewhere
@@ -294,7 +289,7 @@ if __name__ == "__main__":
                 # HACK: sketched out about this, but will let us tell things to re-run via queue
                 sys.argv.extend(args)
                 # allow other arguments but remove duplicates
-            QUEUE_ARGS = ["--no-publish", "--no-merge", "--no-retry"]
+            QUEUE_ARGS = ["--no-publish", "--no-merge"]
             # HACK: if not using batch then wait for results
             if assign_sim_batch():
                 logging.debug("Not waiting since running in batch")
@@ -311,39 +306,41 @@ if __name__ == "__main__":
             pass
     sys.argv.extend(QUEUE_ARGS)
     args_orig = sys.argv[1:]
-    # rely on argument parsing later
-    while do_retry:
-        # HACK: just do forever for now since running manually
+    prepare_only_requested = "--prepare-only" in args_orig
+
+    def attempt_update(args_orig):
         logging.info("Attempting update")
         args = args_orig[:]
-        try:
-            # returns true if just finished current run
-            is_current, df_final = run_main(args)
-            if is_current:
-                do_retry = False
-                break
+        # returns true if the caller should stop retrying
+        should_stop, df_final = run_main(args)
+        if not should_stop:
             logging.info("Trying again because used old weather")
-        except KeyboardInterrupt as ex:
-            raise ex
-        except Exception as ex:
-            logging.error(ex)
-            logging.error(get_stack(ex))
-            if no_retry:
-                logging.error("Stopping because of error")
-                if FROM_QUEUE:
-                    logging.info("Requeuing")
-                    requeue()
-                sys.exit(-1)
-            logging.info("Trying again because of error")
+        return should_stop, df_final
+    try:
+        attempt_update(args_orig)
+    except KeyboardInterrupt as ex:
+        raise ex
+    except Exception as ex:
+        logging.error(ex)
+        logging.error(get_stack(ex))
+        logging.error("Stopping because of error")
+        if FROM_QUEUE:
+            logging.info("Requeuing")
+            requeue()
+        sys.exit(-1)
     try:
         # do this first to kill the azure batch job if everything is done
-        if run_current.ran_all():
+        if prepare_only_requested:
+            logging.info(
+                "Prepare-only completed; simulations were prepared but not run")
+        elif run_current.ran_all():
             logging.info("Finished all simulations successfully")
         else:
             logging.info("Done but not all simulations have run")
             if FROM_QUEUE:
                 logging.info("Requeuing")
                 requeue()
+
         if FROM_QUEUE:
             # publish_all(
             #     run_current._dir_output,
@@ -351,7 +348,8 @@ if __name__ == "__main__":
             #     force=True,
             #     merge_only=False,
             # )
-            run_current = make_resume(do_publish=True, do_merge=True, no_wait=True)
+            run_current = make_resume(
+                do_publish=True, do_merge=True, no_wait=True)
             try:
                 # NOTE: was forcing to ensure publish, but try without
                 # run_current.check_and_publish(force=True)
@@ -365,7 +363,5 @@ if __name__ == "__main__":
     except Exception as ex:
         logging.error(ex)
         logging.error(get_stack(ex))
-        if no_retry:
-            logging.error("Stopping because of error")
-            sys.exit(-1)
         logging.info("Trying again because of error")
+        sys.exit(-1)

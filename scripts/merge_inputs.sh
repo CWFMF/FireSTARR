@@ -13,7 +13,7 @@ set -e
 
 echo "Checking that previous run completed and published successfully"
 # NOTE: don't use --resume because if it's old weather it needs to run from scratch
-(${DIR}/update.sh --no-publish --no-merge --no-retry --resume && ${DIR}/check_and_publish.sh)
+(${DIR}/update.sh --no-publish --no-merge --resume && ${DIR}/check_and_publish.sh)
 RESULT=$?
 if [ 0 -ne "${RESULT}" ]; then
  echo "Previous run didn't finish properly"
@@ -26,7 +26,7 @@ dir_last_runs="${DIR_RUNS}/${LAST_RUN}"
 
 # since previous run finished fine we can do this
 echo "Preparing new run to merge into"
-(${DIR}/update.sh --prepare-only --no-resume --no-retry)
+(${DIR}/update.sh --prepare-only --no-resume)
 # delay this so we can delete if failed
 RESULT=$?
 
@@ -85,14 +85,14 @@ else
     ln -sfn "`realpath ${dir_cur_sims} --relative-to=${DIR_SIMS}`" "${dir_common_sims}"
     ln -sfn "`realpath ${dir_cur_runs} --relative-to=${DIR_RUNS}`" "${dir_common_runs}"
     # if we call pointing at current directory it should make tasks there instead of using actual folder name
-    (${DIR}/update.sh --no-publish --no-merge --no-retry "${dir_common_runs}")
+    (${DIR}/update.sh --no-publish --no-merge "${dir_common_runs}")
     RESULT=$?
     if [ 0 -ne "${RESULT}" ]; then
         echo "Merged run didn't finish properly"
         exit ${RESULT}
     fi
     echo "Validating merged run in ${CUR_RUN}"
-    (${DIR}/update.sh --no-publish --no-merge --no-retry "${dir_common_runs}")
+    (${DIR}/update.sh --no-publish --no-merge "${dir_common_runs}")
     RESULT=$?
     if [ 0 -ne "${RESULT}" ]; then
         echo "Validating merged run"

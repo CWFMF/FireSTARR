@@ -116,9 +116,9 @@ def make_cwfif_parse(need_column, fct_parse=None, expected_value=None):
 
 def get_model_dir_uncached(model):
     model = model.lower()
-    # request middle of bounds since point shouldn't change model time
-    lat = BOUNDS["latitude"]["mid"]
-    lon = BOUNDS["longitude"]["mid"]
+    # HACK: pick a point we know is in Canada since gribwx won't return anything outside
+    lat = 50
+    lon = -100
     # FIX: server isn't updating this, so use another method for now
     # url = make_cwfif_query(model, lat, lon, recent="True")
     # https://app-cwfmf-api-cwfis-dev.wittyplant-59b495b3.canadacentral.azurecontainerapps.io/gribwx?model=geps&lat=52.2&lon=-116.0&timezone=UTC&duration=1&format=csv&precision=1&member=1
