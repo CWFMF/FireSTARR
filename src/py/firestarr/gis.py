@@ -287,7 +287,8 @@ def Rasterize(file_lyr, raster, reference, datatype=gdal.GDT_Byte, creation_opti
         # Write data to band 1
         band = output.GetRasterBand(1)
         band.SetNoDataValue(0)
-        gdal.RasterizeLayer(output, [1], lyr, burn_values=[burnVal])
+        # HACK: any cell that's touched should be burned so small polygons still do something
+        gdal.RasterizeLayer(output, [1], lyr, burn_values=[burnVal], options=["ALL_TOUCHED=TRUE"])
         # Close datasets
         del band
         del output
