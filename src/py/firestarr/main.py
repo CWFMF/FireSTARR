@@ -44,6 +44,9 @@ no_wait = None
 run_current = None
 should_resume = None
 FROM_QUEUE = False
+QUEUE_MESSAGE_RECEIVED = False
+QUEUE_RECOVERY_CLIENT = None
+QUEUE_RECOVERY_MESSAGE = None
 
 
 def run_main(args):
@@ -132,8 +135,8 @@ def run_main(args):
         else:
             logging.info("Starting new run")
             if FROM_QUEUE:
-                logging.info("Clearing queue since new run is starting")
-                clear_queue()
+                logging.info(
+                    "Queue-triggered run is starting; preserving queue messages")
             run_current = Run(
                 dir_fires=dir_arg,
                 max_days=max_days,
@@ -159,6 +162,82 @@ def run_main(args):
     )
     # whether things should stop running
     return True, df_final
+
+
+def queue_recovery_delay_seconds():
+    value = os.environ.get("AZURE_QUEUE_RECOVERY_DELAY_SECONDS")
+    if value is None:
+        value = CONFIG.get("AZURE_QUEUE_RECOVERY_DELAY_SECONDS", 6 * 60 * 60)
+    try:
+        return int(value)
+    except Exception:
+        logging.warning(
+            "Invalid AZURE_QUEUE_RECOVERY_DELAY_SECONDS=%s; using default",
+            value,
+        )
+        return 6 * 60 * 60
+
+
+def get_queue_client():
+    from azure.storage.queue import QueueServiceClient
+
+    azure_queue_connection = CONFIG.get("AZURE_QUEUE_CONNECTION")
+    azure_queue_name = CONFIG.get("AZURE_QUEUE_NAME")
+    if not (azure_queue_connection and azure_queue_name):
+        logging.warning("No configured queue")
+        return None
+
+    queue_service_client = QueueServiceClient.from_connection_string(
+        azure_queue_connection
+    )
+    return queue_service_client.get_queue_client(azure_queue_name)
+
+
+def add_queue_recovery_message():
+    global QUEUE_RECOVERY_CLIENT
+    global QUEUE_RECOVERY_MESSAGE
+
+    if QUEUE_RECOVERY_MESSAGE is not None:
+        logging.info("Queue recovery message already exists for this run")
+        return
+
+    queue_client = get_queue_client()
+    if queue_client is None:
+        logging.warning("Unable to add queue recovery message")
+        return
+
+    delay_seconds = queue_recovery_delay_seconds()
+    msg = '{"args": "--resume"}'
+
+    QUEUE_RECOVERY_MESSAGE = queue_client.send_message(
+        msg,
+        visibility_timeout=delay_seconds,
+    )
+    QUEUE_RECOVERY_CLIENT = queue_client
+
+    logging.info(
+        "Added queue recovery message with visibility delay %s seconds: %s",
+        delay_seconds,
+        msg,
+    )
+
+
+def delete_queue_recovery_message():
+    global QUEUE_RECOVERY_CLIENT
+    global QUEUE_RECOVERY_MESSAGE
+
+    if QUEUE_RECOVERY_CLIENT is None or QUEUE_RECOVERY_MESSAGE is None:
+        logging.info("No queue recovery message to delete")
+        return
+
+    QUEUE_RECOVERY_CLIENT.delete_message(
+        QUEUE_RECOVERY_MESSAGE.id,
+        QUEUE_RECOVERY_MESSAGE.pop_receipt,
+    )
+    logging.info("Deleted queue recovery message after successful run")
+
+    QUEUE_RECOVERY_MESSAGE = None
+    QUEUE_RECOVERY_CLIENT = None
 
 
 def clear_queue():
@@ -272,12 +351,14 @@ if __name__ == "__main__":
             f"Unable to locate simulation model settings file {FILE_APP_SETTINGS}")
     logging.info("Called with args %s", str(sys.argv))
     FROM_QUEUE = "--queue" in sys.argv or 1 == len(sys.argv)
+    QUEUE_MESSAGE_RECEIVED = False
     QUEUE_ARGS = []
     REMOVE_ARGS = ["--queue"]
     if FROM_QUEUE:
         try:
             msg, args = scan_queue()
             if msg:
+                QUEUE_MESSAGE_RECEIVED = True
                 logging.info(
                     "Queue triggered with message:\n%s\ngives arguments:\n%s", msg, args)
                 # HACK: double-check that we're using only `--` args for now
@@ -308,6 +389,10 @@ if __name__ == "__main__":
     args_orig = sys.argv[1:]
     prepare_only_requested = "--prepare-only" in args_orig
 
+    # if this came from queue, create hidden/delayed recovery message before firestarr run begins
+    if FROM_QUEUE and QUEUE_MESSAGE_RECEIVED:
+        add_queue_recovery_message()
+
     def attempt_update(args_orig):
         logging.info("Attempting update")
         args = args_orig[:]
@@ -325,21 +410,22 @@ if __name__ == "__main__":
         logging.error(get_stack(ex))
         logging.error("Stopping because of error")
         if FROM_QUEUE:
-            logging.info("Requeuing")
-            requeue()
+            logging.info("Leaving queue recovery message for retry")
         sys.exit(-1)
     try:
+        queue_run_complete = False
         # do this first to kill the azure batch job if everything is done
         if prepare_only_requested:
             logging.info(
                 "Prepare-only completed; simulations were prepared but not run")
+            queue_run_complete = True
         elif run_current.ran_all():
             logging.info("Finished all simulations successfully")
+            queue_run_complete = True
         else:
             logging.info("Done but not all simulations have run")
             if FROM_QUEUE:
-                logging.info("Requeuing")
-                requeue()
+                logging.info("Leaving queue recovery message for retry")
 
         if FROM_QUEUE:
             # publish_all(
@@ -358,10 +444,16 @@ if __name__ == "__main__":
                 if should_resume:
                     # there shouldn't be an error if we were resuming
                     logging.error(ex)
+
+        if FROM_QUEUE and queue_run_complete:
+            delete_queue_recovery_message()
+
     except KeyboardInterrupt as ex:
         raise ex
     except Exception as ex:
         logging.error(ex)
         logging.error(get_stack(ex))
         logging.info("Trying again because of error")
+        if FROM_QUEUE:
+            logging.info("Leaving queue recovery message for retry")
         sys.exit(-1)
