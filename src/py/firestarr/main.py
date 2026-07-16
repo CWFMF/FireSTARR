@@ -44,8 +44,6 @@ no_wait = None
 run_current = None
 should_resume = None
 FROM_QUEUE = False
-QUEUE_RECOVERY_CLIENT = None
-QUEUE_RECOVERY_MESSAGE = None
 
 
 def run_main(args):
@@ -163,22 +161,23 @@ def run_main(args):
     return True, df_final
 
 
-def delete_queue_recovery_message():
-    global QUEUE_RECOVERY_CLIENT
-    global QUEUE_RECOVERY_MESSAGE
-
-    if QUEUE_RECOVERY_CLIENT is None or QUEUE_RECOVERY_MESSAGE is None:
+def delete_queue_recovery_message(queue_recovery_message):
+    if queue_recovery_message is None:
         logging.info("No queue recovery message to delete")
         return
 
-    QUEUE_RECOVERY_CLIENT.delete_message(
-        QUEUE_RECOVERY_MESSAGE,
-        QUEUE_RECOVERY_MESSAGE.pop_receipt,
-    )
-    logging.info("Deleted queue recovery message after successful run")
+    from azure.storage.queue import QueueServiceClient
 
-    QUEUE_RECOVERY_MESSAGE = None
-    QUEUE_RECOVERY_CLIENT = None
+    AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
+    AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
+    queue_service_client = QueueServiceClient.from_connection_string(
+        AZURE_QUEUE_CONNECTION)
+    queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
+
+    msg_id, pop_receipt = queue_recovery_message
+    queue_client.delete_message(msg_id, pop_receipt)
+
+    logging.info("Deleted queue recovery message after successful run")
 
 
 def clear_queue():
@@ -265,9 +264,6 @@ def scan_queue():
 
 
 def requeue():
-    global QUEUE_RECOVERY_CLIENT
-    global QUEUE_RECOVERY_MESSAGE
-
     from azure.storage.queue import QueueClient, QueueServiceClient
 
     AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
@@ -281,16 +277,17 @@ def requeue():
         # HACK: if we tell it to resume then it'll not resetart with new weather
         #       until a message about it shows up
         queue_client.send_message('{"args": "--resume"}')
-    response = queue_client.receive_messages(
-        max_messages=1, visibility_timeout=60)
+        response = queue_client.receive_messages(
+            max_messages=1, visibility_timeout=60)
+        for msg in response:
+            logging.info("Done requeue")
+            return msg.id, msg.pop_receipt
 
-    for msg in response:
-        QUEUE_RECOVERY_CLIENT = queue_client
-        QUEUE_RECOVERY_MESSAGE = msg
-        logging.info("Done requeue")
-        return
+        logging.info("Done requeue; no recovery message was received")
+        return None
 
-    logging.info("Done requeue")
+    logging.info("Queue already has a message; not adding recovery message")
+    return None
 
 
 if __name__ == "__main__":
@@ -338,9 +335,12 @@ if __name__ == "__main__":
     args_orig = sys.argv[1:]
     prepare_only_requested = "--prepare-only" in args_orig
 
-    # if this came from queue, create hidden/delayed recovery message before firestarr run begins
+    # In queue mode, create/hide a recovery message before the FireSTARR run begins.
+    # If the run completes successfully, this message is deleted. If the container is
+    # killed or the run fails, it becomes visible again and triggers a resume.
+    queue_recovery_message = None
     if FROM_QUEUE:
-        requeue()
+        queue_recovery_message = requeue()
 
     def attempt_update(args_orig):
         logging.info("Attempting update")
@@ -395,7 +395,7 @@ if __name__ == "__main__":
                     logging.error(ex)
 
         if FROM_QUEUE and queue_run_complete:
-            delete_queue_recovery_message()
+            delete_queue_recovery_message(queue_recovery_message)
 
     except KeyboardInterrupt as ex:
         raise ex
