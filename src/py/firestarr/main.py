@@ -274,7 +274,7 @@ def requeue():
     # HACK: don't insert "recheck" message if there is any message in the queue already
     #       because that will trigger recheck already
     if 0 == len(queue_client.peek_messages()):
-        # HACK: if we tell it to resume then it'll not resetart with new weather
+        # HACK: if we tell it to resume then it'll not restart with new weather
         #       until a message about it shows up
         queue_client.send_message('{"args": "--resume"}')
         response = queue_client.receive_messages(
@@ -283,7 +283,7 @@ def requeue():
             logging.info("Done requeue")
             return msg.id, msg.pop_receipt
 
-        logging.info("Done requeue; no recovery message was received")
+        logging.error("Done requeue; no recovery message was received")
         return None
 
     logging.info("Queue already has a message; not adding recovery message")
