@@ -132,8 +132,8 @@ def run_main(args):
         else:
             logging.info("Starting new run")
             if FROM_QUEUE:
-                logging.info("Clearing queue since new run is starting")
-                clear_queue()
+                logging.info(
+                    "Queue-triggered run is starting; preserving queue messages")
             run_current = Run(
                 dir_fires=dir_arg,
                 max_days=max_days,
@@ -159,6 +159,25 @@ def run_main(args):
     )
     # whether things should stop running
     return True, df_final
+
+
+def delete_queue_recovery_message(queue_recovery_message):
+    if queue_recovery_message is None:
+        logging.info("No queue recovery message to delete")
+        return
+
+    from azure.storage.queue import QueueServiceClient
+
+    AZURE_QUEUE_CONNECTION = CONFIG.get("AZURE_QUEUE_CONNECTION")
+    AZURE_QUEUE_NAME = CONFIG.get("AZURE_QUEUE_NAME")
+    queue_service_client = QueueServiceClient.from_connection_string(
+        AZURE_QUEUE_CONNECTION)
+    queue_client = queue_service_client.get_queue_client(AZURE_QUEUE_NAME)
+
+    msg_id, pop_receipt = queue_recovery_message
+    queue_client.delete_message(msg_id, pop_receipt)
+
+    logging.info("Deleted queue recovery message after successful run")
 
 
 def clear_queue():
@@ -255,12 +274,20 @@ def requeue():
     # HACK: don't insert "recheck" message if there is any message in the queue already
     #       because that will trigger recheck already
     if 0 == len(queue_client.peek_messages()):
-        # HACK: if we tell it to resume then it'll not resetart with new weather
+        # HACK: if we tell it to resume then it'll not restart with new weather
         #       until a message about it shows up
         queue_client.send_message('{"args": "--resume"}')
-    response = queue_client.receive_messages(
-        max_messages=1, visibility_timeout=60)
-    logging.info("Done requeue")
+        response = queue_client.receive_messages(
+            max_messages=1, visibility_timeout=60)
+        for msg in response:
+            logging.info("Done requeue")
+            return msg.id, msg.pop_receipt
+
+        logging.error("Done requeue; no recovery message was received")
+        return None
+
+    logging.info("Queue already has a message; not adding recovery message")
+    return None
 
 
 if __name__ == "__main__":
@@ -308,6 +335,13 @@ if __name__ == "__main__":
     args_orig = sys.argv[1:]
     prepare_only_requested = "--prepare-only" in args_orig
 
+    # In queue mode, create/hide a recovery message before the FireSTARR run begins.
+    # If the run completes successfully, this message is deleted. If the container is
+    # killed or the run fails, it becomes visible again and triggers a resume.
+    queue_recovery_message = None
+    if FROM_QUEUE:
+        queue_recovery_message = requeue()
+
     def attempt_update(args_orig):
         logging.info("Attempting update")
         args = args_orig[:]
@@ -325,21 +359,22 @@ if __name__ == "__main__":
         logging.error(get_stack(ex))
         logging.error("Stopping because of error")
         if FROM_QUEUE:
-            logging.info("Requeuing")
-            requeue()
+            logging.info("Leaving queue recovery message for retry")
         sys.exit(-1)
     try:
+        queue_run_complete = False
         # do this first to kill the azure batch job if everything is done
         if prepare_only_requested:
             logging.info(
                 "Prepare-only completed; simulations were prepared but not run")
+            queue_run_complete = True
         elif run_current.ran_all():
             logging.info("Finished all simulations successfully")
+            queue_run_complete = True
         else:
             logging.info("Done but not all simulations have run")
             if FROM_QUEUE:
-                logging.info("Requeuing")
-                requeue()
+                logging.info("Leaving queue recovery message for retry")
 
         if FROM_QUEUE:
             # publish_all(
@@ -358,10 +393,16 @@ if __name__ == "__main__":
                 if should_resume:
                     # there shouldn't be an error if we were resuming
                     logging.error(ex)
+
+        if FROM_QUEUE and queue_run_complete:
+            delete_queue_recovery_message(queue_recovery_message)
+
     except KeyboardInterrupt as ex:
         raise ex
     except Exception as ex:
         logging.error(ex)
         logging.error(get_stack(ex))
         logging.info("Trying again because of error")
+        if FROM_QUEUE:
+            logging.info("Leaving queue recovery message for retry")
         sys.exit(-1)
