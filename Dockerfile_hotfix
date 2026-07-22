@@ -6,6 +6,9 @@ COPY ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
 COPY ./src/py/cffdrs-ng/NG_FWI.py /appl/firestarr/src/py/cffdrs-ng/
 COPY ./src/py/cffdrs-ng/old_cffdrs.py /appl/firestarr/src/py/cffdrs-ng/
 COPY ./src/py/cffdrs-ng/util.py /appl/firestarr/src/py/cffdrs-ng/
+COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/firestarr /appl/firestarr/
+COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/settings.ini /appl/firestarr/
+RUN ln -sf /appl/data/generated/grid/100m /appl/firestarr/grid
 RUN echo "v0.9.6 is a patch of v0.9.5.5 to fix errors with empty dataframes but not upgrade numpy or anything else" > /appl/firestarr/NOTE.md
 RUN echo "v0.9.7 adds ON specific datasources back" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.8 change SourceFireCiffc to use CWFIF WFS" >> /appl/firestarr/NOTE.md
@@ -17,3 +20,4 @@ RUN echo "v0.9.13 ensure submodule init to proper version on build container" >>
 RUN echo "v0.9.14 fix ffmc bounds/rounding issue in cffdrs code" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.15 add GROUP_DISTANCE_KM config option" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.16 parallelize weather retrieval more" >> /appl/firestarr/NOTE.md
+RUN echo "v0.9.17 copy correct firestarr binary into container" >> /appl/firestarr/NOTE.md
