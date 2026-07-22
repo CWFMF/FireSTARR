@@ -351,6 +351,7 @@ class Run(object):
         is_changed = {}
         is_incomplete = {}
         is_complete = {}
+        has_results = {}
         is_prepared = {}
         is_ignored = {}
         is_running = {}
@@ -374,9 +375,10 @@ class Run(object):
                 is_interim[dir_fire] = interim
                 if df_fire is None:
                     is_incomplete[dir_fire] = df_fire
-                elif was_running:
-                    is_running[dir_fire] = df_fire
                 else:
+                    # want to check if complete even if running since might have interim results
+                    if was_running:
+                        is_running[dir_fire] = df_fire
                     if 1 != len(df_fire):
                         raise RuntimeError(
                             f"Expected exactly one fire in file {file_sim}")
@@ -399,15 +401,16 @@ class Run(object):
                                 "Adding incomplete fire %s", dir_fire)
                             is_incomplete[dir_fire] = df_fire
                     else:
-                        is_complete[dir_fire] = df_fire
+                        has_results[dir_fire] = df_fire
+                        if not was_running:
+                            is_complete[dir_fire] = df_fire
                 if dir_fire not in is_complete:
                     not_complete[dir_fire] = df_fire
         # publish before and after fixing things
-        num_complete = len(is_complete)
-        pct_done = 100.0 * float(num_complete) / float(num_fires)
-        logging.info("%d of %d groups have at least started (%f%%)" %
-                     (num_complete, num_fires, pct_done))
-        # is_enough = num_fires == num_complete
+        num_results = len(has_results)
+        pct_done = 100.0 * float(num_results) / float(num_fires)
+        logging.info("%d of %d groups have at least started (%f%%)" % (num_results, num_fires, pct_done))
+        # is_enough = num_fires == num_results
         # HACK: have at least 95% with something since can't see to get everything working right now
         is_enough = pct_done >= 95
         merge_only = not (self.check_do_publish() and (
