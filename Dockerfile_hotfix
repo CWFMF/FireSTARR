@@ -8,7 +8,9 @@ COPY ./src/py/cffdrs-ng/old_cffdrs.py /appl/firestarr/src/py/cffdrs-ng/
 COPY ./src/py/cffdrs-ng/util.py /appl/firestarr/src/py/cffdrs-ng/
 COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/firestarr /appl/firestarr/
 COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/settings.ini /appl/firestarr/
-RUN ln -sf /appl/data/generated/grid/100m /appl/firestarr/grid
+RUN sed -i "s/RASTER_ROOT = .*/RASTER_ROOT = ..\/data\/generated\/grid\/100m/" /appl/firestarr/settings.ini
+RUN sed -i "s/MAXIMUM_TIME = .*/MAXIMUM_TIME = 36000/" /appl/firestarr/settings.ini
+RUN sed -i "s/INTERIM_OUTPUT_INTERVAL = .*/INTERIM_OUTPUT_INTERVAL = 300/" /appl/firestarr/settings.ini
 RUN echo "v0.9.6 is a patch of v0.9.5.5 to fix errors with empty dataframes but not upgrade numpy or anything else" > /appl/firestarr/NOTE.md
 RUN echo "v0.9.7 adds ON specific datasources back" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.8 change SourceFireCiffc to use CWFIF WFS" >> /appl/firestarr/NOTE.md
@@ -24,3 +26,4 @@ RUN echo "v0.9.17 copy correct firestarr binary into container" >> /appl/firesta
 RUN echo "v0.9.18 use full zone_easting_northing of centroid for group names" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.19 pass --no-intensity and --tz to sim" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.20 fix check for number of fires with results that was previously looking for completely finished fires" >> /appl/firestarr/NOTE.md
+RUN echo "v0.9.21 modify defaults for settings.ini" >> /appl/firestarr/NOTE.md
