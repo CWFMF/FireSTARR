@@ -22,3 +22,4 @@ RUN echo "v0.9.15 add GROUP_DISTANCE_KM config option" >> /appl/firestarr/NOTE.m
 RUN echo "v0.9.16 parallelize weather retrieval more" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.17 copy correct firestarr binary into container" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.18 use full zone_easting_northing of centroid for group names" >> /appl/firestarr/NOTE.md
+RUN echo "v0.9.19 pass --no-intensity and --tz to sim" >> /appl/firestarr/NOTE.md

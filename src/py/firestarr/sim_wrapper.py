@@ -69,8 +69,8 @@ from gis import (
 from redundancy import call_safe
 
 # set to "" if want intensity grids
-# NO_INTENSITY = "--no-intensity"
-NO_INTENSITY = ""
+NO_INTENSITY = "--no-intensity"
+# NO_INTENSITY = ""
 
 TMP_SUFFIX = "__tmp__"
 # tasks that have this in their logs are considered successful
@@ -624,6 +624,7 @@ def _run_fire_from_folder(
                         f"--dmc {data['dmc_old']}",
                         f"--dc {data['dc_old']}",
                         f"--apcp_prev {data['apcp_prev']}",
+                        f"--tz {tz}",
                         "-v",
                         # "-v",
                         # "-v",
