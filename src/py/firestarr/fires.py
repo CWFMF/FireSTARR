@@ -5,8 +5,7 @@ import numpy as np
 import pandas as pd
 import pyproj
 import tqdm_util
-from common import DEFAULT_GROUP_DISTANCE_KM, logging
-
+from common import CONFIG, logging
 from gis import (
     CRS_COMPARISON,
     CRS_SIMINPUT,
@@ -23,7 +22,7 @@ def separate_points(f):
     return pts, polys
 
 
-def group_fires_by_buffer(df_fires, group_distance_km=DEFAULT_GROUP_DISTANCE_KM):
+def group_fires_by_buffer(df_fires, group_distance_km):
     df_fires = df_fires.to_crs(CRS_COMPARISON)
     # buffer half distance because buffers will just touch at the original distance
     group_distance = group_distance_km * KM_TO_M / 2
@@ -49,7 +48,8 @@ def group_fires_by_buffer(df_fires, group_distance_km=DEFAULT_GROUP_DISTANCE_KM)
     return df_groups
 
 
-def group_fires_by_distance(df_fires, group_distance_km=DEFAULT_GROUP_DISTANCE_KM):
+# FIX: TODO: is this completely unused?
+def group_fires_by_distance(df_fires, group_distance_km):
     df_fires = df_fires.to_crs(CRS_COMPARISON)
     group_distance = group_distance_km * KM_TO_M
     crs = df_fires.crs
@@ -157,7 +157,10 @@ def name_groups(df):
     return df_groups
 
 
-def group_fires(df_fires, group_distance_km=DEFAULT_GROUP_DISTANCE_KM):
+def group_fires(df_fires, group_distance_km=None):
+    if group_distance_km is None:
+        group_distance_km = float(CONFIG["GROUP_DISTANCE_KM"])
+        logging.info("Using fire grouping distance of {}km".format(group_distance_km))
     df_groups = group_fires_by_buffer(df_fires, group_distance_km)
     return name_groups(df_groups)
 

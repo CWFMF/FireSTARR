@@ -41,6 +41,7 @@ FMT_FILE_SECOND = "%Y%m%d_%H%M_%S"
 # DEFAULT_GROUP_DISTANCE_KM = 60
 # also too big
 # DEFAULT_GROUP_DISTANCE_KM = 40
+# this is used as a default for a config option so we don't have to change the code directly and push a new image
 DEFAULT_GROUP_DISTANCE_KM = 20
 # MAX_NUM_DAYS = 3
 # MAX_NUM_DAYS = 7
@@ -266,6 +267,7 @@ def read_config(force=False):
             "GEOSERVER_SERVER",
             "GEOSERVER_WORKSPACE",
             "GEOSERVER_DIR_ROOT",
+            "GROUP_DISTANCE_KM",
             "BATCH_ACCOUNT_NAME",
             "BATCH_ACCOUNT_KEY",
             "BATCH_POOL_ID",
@@ -360,6 +362,19 @@ def read_config(force=False):
         for k in ["latitude", "longitude"]:
             high, low = BOUNDS[k]["max"], BOUNDS[k]["min"]
             BOUNDS[k]["mid"] = (high - low) / 2 + low
+        if not CONFIG["GROUP_DISTANCE_KM"]:
+            CONFIG["GROUP_DISTANCE_KM"] = str(DEFAULT_GROUP_DISTANCE_KM)
+        try:
+            CONFIG["GROUP_DISTANCE_KM"] = float(CONFIG["GROUP_DISTANCE_KM"])
+        except KeyboardInterrupt as ex:
+            raise ex
+        except Exception as ex:
+            logging.error(
+                "Unable to convert '{}' to km so using {}".format(
+                    CONFIG["GROUP_DISTANCE_KM"], DEFAULT_GROUP_DISTANCE_KM
+                )
+            )
+            CONFIG["GROUP_DISTANCE_KM"] = float(DEFAULT_GROUP_DISTANCE_KM)
 
 
 # HACK: need to do this every time file is loaded or else threads might get to it first

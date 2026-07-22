@@ -15,3 +15,4 @@ RUN echo "v0.9.11 burn any touched pixel into raster" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.12 queue recovery message" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.13 ensure submodule init to proper version on build container" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.14 fix ffmc bounds/rounding issue in cffdrs code" >> /appl/firestarr/NOTE.md
+RUN echo "v0.9.15 add GROUP_DISTANCE_KM config option" >> /appl/firestarr/NOTE.md
