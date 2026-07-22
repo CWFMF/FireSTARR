@@ -9,6 +9,9 @@ REPOS=(registrycwfisdev.azurecr.io/firestarr/)
 # BRANCHES=(latest)
 BRANCHES=(dev)
 
+# HACK: ensure correct submodule versions
+git submodule update --init
+
 # echo ${GHCR_TOKEN}  | docker login ghcr.io -u jordan-evens --password-stdin
 az acr login --name registrycwfisdev || (az login && az acr login --name registrycwfisdev)
 build_tag_and_push() {
