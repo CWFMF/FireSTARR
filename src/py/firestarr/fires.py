@@ -135,20 +135,18 @@ def name_groups(df):
     df_centroids = df_groups.loc[:]
     df_centroids["geometry"] = df_centroids.centroid
 
-    def find_zone_basemap(zone, lat, centroid_utm):
-        BM_MULT = 10000
-        easting = int((centroid_utm.x) // BM_MULT)
-        northing = int((centroid_utm.y) // BM_MULT)
-        basemap = easting * 1000 + northing
+    def find_zone_easting_northing(zone, lat, centroid_utm):
+        easting = int(centroid_utm.x)
+        northing = int(centroid_utm.y)
         n_or_s = "N" if lat >= 0 else "S"
-        return f"{zone:02d}{n_or_s}_{basemap:05d}"
+        return f"{zone:02d}{n_or_s}_{easting:06d}_{northing:07d}"
 
     for i, g in tqdm_util.apply(df_centroids.groupby(["zone"]), desc="Naming groups by zone"):
         wkt = g["wkt"].iloc[0]
         g_zone = g.to_crs(wkt)
         df_groups.loc[g_zone.index, "fire_name"] = tqdm_util.apply(
             g_zone,
-            lambda x: find_zone_basemap(x["zone"], x["lat"], x["geometry"]),
+            lambda x: find_zone_easting_northing(x["zone"], x["lat"], x["geometry"]),
             desc="Naming groups",
         )
     # it should be impossible for 2 groups to be in the same basemap
