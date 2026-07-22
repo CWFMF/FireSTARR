@@ -13,7 +13,10 @@ from redundancy import get_stack
 from tqdm.auto import tqdm
 
 MAX_ATTEMPTS = 1
-MAX_PROCESSES = multiprocess.cpu_count()
+# HACK: we know this is only being used in azure with a batch pool, so try
+#       to parallelize getting weather more instead of worrying about this
+#       being applied to number of simulations in container
+MAX_PROCESSES = multiprocess.cpu_count() * 5
 TQDM_DEPTH = multiprocess.Value("i", 0)
 DEFAULT_KEEP_ALL = True
 KEEP_LEVELS = 2

@@ -687,10 +687,12 @@ class Run(object):
             "Setting up simulation inputs for %d groups", len(df_fires))
         # for row_fire in tqdm(list_rows):
         #     do_fire(row_fire)
+        # HACK: don't limit how many fires can be prepared at once
         files_sim = keep_trying(
             do_fire,
             list_rows,
             desc="Preparing groups",
+            no_limit=True,
         )
         logging.info("Have %d groups prepared", len(files_sim))
         if FLAG_SAVE_PREPARED:
