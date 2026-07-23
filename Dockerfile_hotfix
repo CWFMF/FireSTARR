@@ -28,3 +28,4 @@ RUN echo "v0.9.19 pass --no-intensity and --tz to sim" >> /appl/firestarr/NOTE.m
 RUN echo "v0.9.20 fix check for number of fires with results that was previously looking for completely finished fires" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.21 modify defaults for settings.ini" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.22 reduce gribwx duration to 370 to hopefully avoid errors when members=all with no data at end" >> /appl/firestarr/NOTE.md
+RUN echo "v0.9.23 better handle cwfis_fwi file for today being missing" >> /appl/firestarr/NOTE.md

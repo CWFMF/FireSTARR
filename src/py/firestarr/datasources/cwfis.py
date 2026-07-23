@@ -14,6 +14,7 @@ from common import (
     DEFAULT_LAST_ACTIVE_SINCE_OFFSET,
     FLAG_DEBUG,
     FMT_DATE_YMD,
+    locks_for,
     logging,
     read_csv_safe,
     to_utc,
@@ -372,18 +373,30 @@ class SourceFwiCwfisDownload(SourceFwi):
 
         ymd = date.strftime(FMT_DATE_YMD)
         url = f"{URL_CWFIS_DOWNLOADS}/fwi_obs/current/cwfis_fwi_{ymd}.csv"
+        file_out = os.path.join(dir_out, os.path.basename(url))
+        file_checked = os.path.join(dir_out, f"{os.path.basename(url)}.checked")
         stns = cls._get_stns(dir_out)
         try:
             # HACK: catch 404 here so other functions don't cache values
-            return try_save_http(
-                url,
-                os.path.join(dir_out, os.path.basename(url)),
-                keep_existing=True,
-                fct_pre_save=None,
-                fct_post_save=do_parse,
-                check_code=True,
-            )
+            with locks_for(file_checked):
+                # if file_checked exists then either file we wanted exists or it isn't downloadable
+                if not os.path.exists(file_checked) or os.path.exists(file_out):
+                    result = try_save_http(
+                        url,
+                        file_out,
+                        keep_existing=True,
+                        fct_pre_save=None,
+                        fct_post_save=do_parse,
+                        check_code=True,
+                    )
+                    with open(file_checked, "w") as f:
+                        # just make an empty file
+                        f.close()
+                    return result
+                # file_checked exists but file_out doesn't
+                return None
         except HTTPError as ex:
+            # CHECK: it seems like this is not required?
             if 404 == ex.code:
                 logging.warning(ex)
                 return None
