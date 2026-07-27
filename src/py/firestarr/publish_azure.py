@@ -140,7 +140,7 @@ def upload_dir(dir_run=None):
     dir_sim_data = os.path.join(DIR_RUNS, run_name, "data")
     dir_shp = f"{AZURE_DIR_DATA}_poly"
     file_root = "df_fires_prioritized"
-    files_group = [x for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
+    files_group = [os.path.join(dir_sim_data, x) for x in listdir_sorted(dir_sim_data) if x.startswith(f"{file_root}.")]
 
     delete_after = []
 
@@ -173,7 +173,7 @@ def upload_dir(dir_run=None):
 
     # get old blobs for delete after
     logging.info("Finding %s blobs" % AZURE_DIR_DATA)
-    # add_delete(f"{dir_shp}/{file_root}")
+    add_delete(f"{dir_shp}/{file_root}")
     dir_dst = os.path.basename(dir_run)
     add_delete(f"{AZURE_DIR_DATA}/{dir_dst}")
 
