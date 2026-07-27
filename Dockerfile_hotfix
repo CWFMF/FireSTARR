@@ -6,8 +6,7 @@ COPY ./src/py/firestarr/ /appl/firestarr/src/py/firestarr/
 COPY ./src/py/cffdrs-ng/NG_FWI.py /appl/firestarr/src/py/cffdrs-ng/
 COPY ./src/py/cffdrs-ng/old_cffdrs.py /appl/firestarr/src/py/cffdrs-ng/
 COPY ./src/py/cffdrs-ng/util.py /appl/firestarr/src/py/cffdrs-ng/
-COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/firestarr /appl/firestarr/
-COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/settings.ini /appl/firestarr/
+COPY --chown=user:user --from=ghcr.io/cwfmf/firestarr-cpp/firestarr:unstable-latest /appl/firestarr/* /appl/firestarr/
 RUN sed -i "s/RASTER_ROOT = .*/RASTER_ROOT = ..\/data\/generated\/grid\/100m/" /appl/firestarr/settings.ini
 RUN sed -i "s/MAXIMUM_TIME = .*/MAXIMUM_TIME = 36000/" /appl/firestarr/settings.ini
 RUN sed -i "s/INTERIM_OUTPUT_INTERVAL = .*/INTERIM_OUTPUT_INTERVAL = 300/" /appl/firestarr/settings.ini
@@ -30,3 +29,4 @@ RUN echo "v0.9.21 modify defaults for settings.ini" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.22 reduce gribwx duration to 370 to hopefully avoid errors when members=all with no data at end" >> /appl/firestarr/NOTE.md
 RUN echo "v0.9.23 better handle cwfis_fwi file for today being missing" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.0 upload to firestarr groups layer in geoserver" >> /appl/firestarr/NOTE.md
+RUN echo "v1.0.1 fix missing proj.db in container" >> /appl/firestarr/NOTE.md
