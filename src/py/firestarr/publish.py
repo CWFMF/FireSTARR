@@ -28,25 +28,32 @@ def publish_all(
     force_project=False,
     force_publish=False,
     merge_only=False,
+    groups_only=False,
 ):
     dir_output = find_latest_outputs(dir_output)
     # check_copy_interim(dir_output, include_interim)
     with locks_for(FILE_LOCK_PUBLISH):
-        merge_dirs(
-            dir_output,
-            changed_only=changed_only,
-            force=force,
-            force_project=force_project,
-            create_zip=not merge_only,
-        )
+        import publish_azure
+
+        if not groups_only:
+            merge_dirs(
+                dir_output,
+                changed_only=changed_only,
+                force=force,
+                force_project=force_project,
+                create_zip=not merge_only,
+            )
         if merge_only:
             logging.info("Stopping after merge for %s", dir_output)
             return
         # HACK: changed is checked in upload_dir so don't filter on that
         # if changed or force or force_publish:
-        import publish_azure
 
-        changed = publish_azure.upload_dir(dir_output)
+        changed = publish_azure.upload_dir(dir_output, groups_only=groups_only)
+        if groups_only:
+            logging.info("Uploaded groups only")
+            return
+
         if force or changed:
             logging.info("Uploaded to azure")
             logging.info("Publishing to geoserver from %s", dir_output)

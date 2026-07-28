@@ -105,7 +105,7 @@ def upload_static():
             container.upload_blob(name=f"{dir_remote}/{f}", data=data, overwrite=True)
 
 
-def upload_dir(dir_run=None):
+def upload_dir(dir_run=None, groups_only=False):
     changed = False
     if not FLAG_IGNORE_PERIM_OUTPUTS:
         raise NotImplementedError("Need to deal with perimeters properly")
@@ -181,6 +181,10 @@ def upload_dir(dir_run=None):
     for f in files_group:
         # NOTE: ignore if group changed
         upload(os.path.join(dir_sim_data, f), f"{dir_shp}/{os.path.basename(f)}")
+
+    # HACK: upload only groups and then quit uploading
+    if groups_only:
+        return False
 
     def check_upload(x):
         d, files = x

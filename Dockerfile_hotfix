@@ -31,3 +31,4 @@ RUN echo "v0.9.23 better handle cwfis_fwi file for today being missing" >> /appl
 RUN echo "v1.0.0 upload to firestarr groups layer in geoserver" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.1 fix missing proj.db in container" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.2 fix uploading groups gpkg to wrong location" >> /appl/firestarr/NOTE.md
+RUN echo "v1.0.3 fix groups columns changing breaking layer" >> /appl/firestarr/NOTE.md
