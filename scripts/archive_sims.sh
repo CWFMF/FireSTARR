@@ -9,6 +9,11 @@ SUBDIR_COMMON="current"
 # override KEEP_UNARCHIVED if set in config
 . /appl/data/config || . /appl/config
 
+if [ -z "${KEEP_UNARCHIVED}" ]; then
+  # keep 1 day unarchived unless specifically set to another value
+  KEEP_UNARCHIVED=1
+fi
+
 # ensure 7za exists
 7za > /dev/null || (echo "7za not found" && exit -1)
 
@@ -45,8 +50,13 @@ function do_archive()
   RESULT=$?
   if [ 0 -ne "${RESULT}" ]; then
     echo "Failed to archive ${run}"
+  else
+    echo "Done archiving ${run}"
   fi
+  return ${RESULT}
 }
+
+REQUESTED="$1"
 
 pushd ${DIR_FROM_RUNS}
 # get rid of bkup folder in case old junk is in there
@@ -55,11 +65,20 @@ mkdir -p ${DIR_BKUP}
 rmdir * > /dev/null 2>&1
 set -e
 match_last=`ls -1 | grep -v "${SUBDIR_COMMON}" | tail -n1 | sed "s/.*\([0-9]\{8\}\)[0-9]\{4\}/\1/"`
-echo "Archiving everything except ${match_last}"
+if [ -z "${REQUESTED}" ]
+  echo "Archiving everything except ${match_last}"
+else
+  echo "Only archiving ${REQUESTED}"
+fi
 # also filter out anything for today since might be symlinking to it
 for run in `ls -1  | grep -v "${SUBDIR_COMMON}" | grep -v "${match_last}" | head -n-${KEEP_UNARCHIVED}`
 do
-  echo "${run}"
-  do_archive "${run}"
+  # if called with a specific value then only archive that run
+  if [ -z "${REQUESTED}" ] || [ "${REQUESTED}" == "${run}" ]; then
+    echo "Archiving ${run}"
+    do_archive "${run}"
+  else
+    echo "Skipping ${run}"
+  fi
 done
 popd

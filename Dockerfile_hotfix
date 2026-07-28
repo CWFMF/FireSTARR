@@ -32,3 +32,4 @@ RUN echo "v1.0.0 upload to firestarr groups layer in geoserver" >> /appl/firesta
 RUN echo "v1.0.1 fix missing proj.db in container" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.2 fix uploading groups gpkg to wrong location" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.3 fix groups columns changing breaking layer" >> /appl/firestarr/NOTE.md
+RUN echo "v1.0.4 make scripts/archive_sims.sh take optional argument for run to archive" >> /appl/firestarr/NOTE.md
