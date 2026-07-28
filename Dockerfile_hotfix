@@ -30,3 +30,4 @@ RUN echo "v0.9.22 reduce gribwx duration to 370 to hopefully avoid errors when m
 RUN echo "v0.9.23 better handle cwfis_fwi file for today being missing" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.0 upload to firestarr groups layer in geoserver" >> /appl/firestarr/NOTE.md
 RUN echo "v1.0.1 fix missing proj.db in container" >> /appl/firestarr/NOTE.md
+RUN echo "v1.0.2 fix uploading groups gpkg to wrong location" >> /appl/firestarr/NOTE.md
