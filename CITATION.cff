@@ -11,6 +11,8 @@ authors:
     family-names: Evens
     affiliation: Government of Canada
     orcid: 'https://orcid.org/0000-0002-7682-532X'
+  - name: Natural Resources Canada
+  - name: Government of Ontario
 repository-code: 'https://github.com/CWFMF/FireSTARR'
 repository: 'https://github.com/CWFMF/firestarr-cpp'
 abstract: >-
