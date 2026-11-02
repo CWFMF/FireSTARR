@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: >-
+  FireSTARR: Fire Simulation Through Approximate Rapid
+  Reiteration
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jordan
+    family-names: Evens
+    affiliation: Government of Canada
+    orcid: 'https://orcid.org/0000-0002-7682-532X'
+  - given-names: Den
+    family-names: Boychuk
+    affiliation: Government of Ontario
+    orcid: 'https://orcid.org/0000-0002-1791-4197'
+    website: 'https://www.researchgate.net/profile/Den-Boychuk'
+repository-code: 'https://github.com/CWFMF/FireSTARR'
+repository: 'https://github.com/CWFMF/firestarr-cpp'
+abstract: >-
+  FireSTARR is a fire growth model based on the Canadian
+  Forest Fire Danger Rating System and other fire research.
+license: AGPL-3.0-or-later
