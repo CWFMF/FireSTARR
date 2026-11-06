@@ -47,10 +47,10 @@ public:
   ProbabilityMap(
     const DurationSize time,
     const DurationSize start_time,
-    const int min_value,
-    const int low_max,
-    const int med_max,
-    const int max_value,
+    const IntensitySize min_value,
+    const IntensitySize low_max,
+    const IntensitySize med_max,
+    const IntensitySize max_value,
     const GridBase& grid_info,
     const shared_ptr<Perimeter> perimeter
   );

@@ -2,6 +2,7 @@
 #ifndef FS_LOG_H
 #define FS_LOG_H
 #include "stdafx.h"
+#include <concepts>
 #include <cstdlib>
 #include <exception>
 #include <format>
@@ -161,6 +162,40 @@ inline void check_equal(const bool lhs, const bool rhs, const char* name) DEBUG_
     lhs ? "true" : "false",
     rhs ? "true" : "false"
   );
+}
+template <typename T>
+inline void compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
+{
+  if (lhs != rhs)
+  {
+    logging::error("Expected {:s} to be {} but got {}", name, rhs, lhs);
+  }
+}
+template <typename T>
+concept HasValue = requires(const T& p) {
+  { p.value } -> std::convertible_to<fs::MathSize>;
+};
+template <class T>
+  requires HasValue<T>
+inline void compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
+{
+  compare_equal(lhs.value, rhs.value, name);
+}
+inline void compare_equal(const char* lhs, const char* rhs, const char* name) DEBUG_NOEXCEPT_OFF
+{
+  if (0 != strcmp(lhs, rhs))
+  {
+    logging::error("Expected {:s} to be {:s} but got {:s}", name, rhs, lhs);
+  }
+}
+inline void compare_equal(const bool lhs, const bool rhs, const char* name) DEBUG_NOEXCEPT_OFF
+{
+  if (lhs != rhs)
+  {
+    logging::error(
+      "Expected {:s} to be {:s} but got {:s}", name, lhs ? "true" : "false", rhs ? "true" : "false"
+    );
+  }
 }
 template <class V>
 inline void check_equal_verbose(

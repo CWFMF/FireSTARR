@@ -492,7 +492,7 @@ MainArgumentParser::MainArgumentParser(const int argc, const char* const argv[])
     register_setter<
       AspectSize>(settings.aspect, "--aspect", "Constant slope aspect/azimuth", false, &parse_value<AspectSize>);
     register_setter<size_t>(
-      [&](const auto v) { settings.static_curing = v; },
+      [&](const auto v) { settings.static_curing = static_cast<int>(v); },
       "--curing",
       "Specify static grass curing",
       false,
@@ -527,7 +527,7 @@ MainArgumentParser::MainArgumentParser(const int argc, const char* const argv[])
     register_setter<
       DurationSize>(settings.utc_offset, "--tz", "UTC offset (hours)", false, &parse_value<DurationSize>);
     register_setter<size_t>(
-      [&](const auto v) { settings.static_curing = v; },
+      [&](const auto v) { settings.static_curing = static_cast<int>(v); },
       "--curing",
       "Specify static grass curing",
       false,

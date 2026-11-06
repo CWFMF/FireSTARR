@@ -2,6 +2,7 @@
 #ifndef FS_GRID_H
 #define FS_GRID_H
 #include "stdafx.h"
+#include <cstdint>
 #include "Location.h"
 #include "Log.h"
 #include "Point.h"
@@ -423,7 +424,7 @@ protected:
       // bps,
       // SAMPLEFORMAT_IEEEFP,
       [&](const XYIdx& idx) { return static_cast<TiffDouble>(convert(this->at(idx))); },
-      no_data
+      static_cast<int>(no_data)
     );
   }
   template <class R>
@@ -447,10 +448,10 @@ protected:
       this->dataBounds(),
       dir,
       base_name,
-      bps,
+      static_cast<uint16_t>(bps),
       std::is_unsigned_v<R>,
       [&](const XYIdx& idx) { return static_cast<int>(convert(this->at(idx))); },
-      no_data
+      static_cast<int>(no_data)
     );
   }
 

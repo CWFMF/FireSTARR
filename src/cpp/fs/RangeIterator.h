@@ -41,7 +41,10 @@ public:
   RangeIterator& operator=(RangeIterator&& rhs) = default;
 
 public:
-  constexpr inline value_type operator*() const { return start_ + step_ * increment_; }
+  constexpr inline value_type operator*() const
+  {
+    return start_ + static_cast<value_type>(step_) * increment_;
+  }
 #ifndef DEBUG_ITERATOR
   constexpr
 #endif
@@ -183,12 +186,13 @@ public:
 private:
   constexpr RangeIterator(const RangeIterator* rhs, const T value)
     : start_(rhs->start_), end_(rhs->end_), increment_(rhs->increment_),
-      step_(static_cast<difference_type>((value - start_) / increment_)),
+      step_(static_cast<size_t>((static_cast<value_type>(value) - start_) / increment_)),
       inclusive_(rhs->inclusive_)
   { }
   value_type start_{};
   value_type end_{};
   value_type increment_{};
+  // CHECK: should be difference_type?
   size_t step_{0};
   bool inclusive_{};
 };

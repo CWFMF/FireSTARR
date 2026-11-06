@@ -54,7 +54,7 @@ BurnedMap::BurnedMap(const Grid<unsigned char, unsigned char>& perim_grid, const
       }
     }
   }
-  size_hectares_ = env.to_hectares(count);
+  size_hectares_ = static_cast<size_t>(env.to_hectares(static_cast<size_t>(count)));
 #ifdef DEBUG_GRIDS
   for (auto& kv : data)
   {
@@ -81,20 +81,22 @@ BurnedMap make_burned_map(const XYIdx& location, const size_t size, const Enviro
   auto perim_grid = env.makeMap<unsigned char>(0);
   // want to find cells in the area that fill up the size we're looking for
   size_t count = 0;
+  // CHECK: why is this not just a size_t?
   // convert into number of cells
-  const auto num_cells = size / (100.0 * 100.0 / (perim_grid.cellSize() * perim_grid.cellSize()));
+  const auto num_cells =
+    static_cast<MathSize>(size) / (100.0 * 100.0 / (perim_grid.cellSize() * perim_grid.cellSize()));
   auto max_distance = sqrt(num_cells / M_PI);
   perim_grid.set(location, 1);
   ++count;
   const auto& x_loc = location.x.value;
   const auto& y_loc = location.y.value;
   // HACK: assume fuel for origin matches the rest of the fire
-  while (num_cells > count)
+  while (num_cells > static_cast<MathSize>(count))
   {
     const auto range = static_cast<Idx>(ceil(max_distance));
-    for (auto x = -range; x <= range && num_cells > count; ++x)
+    for (auto x = -range; x <= range && num_cells > static_cast<MathSize>(count); ++x)
     {
-      for (auto y = -range; y <= range && num_cells > count; ++y)
+      for (auto y = -range; y <= range && num_cells > static_cast<MathSize>(count); ++y)
       {
         // look at any cell that's within the range
         if (sqrt(pow_int<2>(x) + pow_int<2>(y)) < max_distance)

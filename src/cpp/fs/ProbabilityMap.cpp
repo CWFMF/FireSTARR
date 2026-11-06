@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
+#include "stdafx.h"
 #include "ProbabilityMap.h"
 #include "GridMap.h"
 #include "IntensityMap.h"
@@ -18,10 +19,10 @@ ProbabilityMap::~ProbabilityMap()
 ProbabilityMap::ProbabilityMap(
   const DurationSize time,
   const DurationSize start_time,
-  const int min_value,
-  const int low_max,
-  const int med_max,
-  const int max_value,
+  const IntensitySize min_value,
+  const IntensitySize low_max,
+  const IntensitySize med_max,
+  const IntensitySize max_value,
   const GridBase& grid_info,
   const shared_ptr<Perimeter> perimeter
 )
@@ -205,7 +206,9 @@ void ProbabilityMap::deleteInterim()
   auto t = start_time;
   auto ticks = fix_utc(&t);
   const auto day = static_cast<int>(round(time));
-  ticks += (static_cast<size_t>(day) - t.tm_yday - 1) * DAY_SECONDS;
+  ticks += static_cast<time_t>(
+    (static_cast<size_t>(day) - static_cast<size_t>(t.tm_yday) - 1) * DAY_SECONDS
+  );
   if (!gmtime_r(&ticks, &t))
   {
     logging::fatal("Unable to convert time from {}", ticks);

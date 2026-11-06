@@ -35,7 +35,7 @@ public:
     // NOTE: won't drop threads if set lower but won't give out more until below limit
     limit_ = limit;
   }
-  size_t limit() { return limit_; }
+  size_t limit() { return static_cast<size_t>(limit_); }
   /**
    * \brief Notify something that's waiting so it can run
    */

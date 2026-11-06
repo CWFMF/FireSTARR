@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Model.h"
-#include "FBP.h"
 #include "FireWeather.h"
 #include "FWI.h"
+#include "Greenup.h"
 #include "Input.h"
 #include "Location.h"
 #include "Log.h"
@@ -177,13 +177,13 @@ void Model::readWeather(
           logging::check_fatal(
             seconds_diff != HOUR_SECONDS,
             "Expected sequential hours in weather input but rows are {:f} hours away from each other",
-            seconds_diff / static_cast<MathSize>(HOUR_SECONDS)
+            static_cast<MathSize>(seconds_diff) / static_cast<MathSize>(HOUR_SECONDS)
           );
         }
         prev_time = cur_time;
-        const auto for_time = (t.tm_yday - min_date) * DAY_HOURS + t.tm_hour;
+        const auto for_time = static_cast<size_t>((t.tm_yday - min_date) * DAY_HOURS + t.tm_hour);
         // HACK: can be up until rest of year since start date
-        const size_t new_size = (max_date - min_date + 1) * DAY_HOURS;
+        const auto new_size = static_cast<size_t>((max_date - min_date + 1) * DAY_HOURS);
         const auto old_size = s.size();
         if (old_size != new_size)
         {
@@ -276,9 +276,9 @@ void Model::findStarts(const XYIdx& location)
   const auto height = env_->height();
   while (starts_.empty() && (range < (MAX_WIDTH / 2)))
   {
-    for (Idx x = -range; x <= range; ++x)
+    for (Idx x = static_cast<Idx>(-range); x <= range; ++x)
     {
-      for (Idx y = -range; y <= range; ++y)
+      for (Idx y = static_cast<Idx>(-range); y <= range; ++y)
       {
         // make sure we only look at the outside of the box
         if (1 == range || abs(x) == range || abs(y) == range)
@@ -974,7 +974,7 @@ map<DurationSize, shared_ptr<ProbabilityMap>> Model::runIterations(
         saveProbabilities(all_probabilities[0], start_day, true);
       }
     }
-    const auto run_time_seconds = runTime().count();
+    const auto run_time_seconds = static_cast<size_t>(runTime().count());
     const auto time_left = settings.maximum_time_seconds - run_time_seconds;
     logging::debug(
       "Ending timer after {:d} seconds with {:d} seconds left", run_time_seconds, time_left
@@ -1128,11 +1128,12 @@ map<DurationSize, shared_ptr<ProbabilityMap>> Model::runIterations(
       {
         if (settings.is_surface())
         {
-          runs_left = ignitionScenarios() - iterations_done_;
+          runs_left = static_cast<int>(ignitionScenarios() - iterations_done_);
         }
         else
         {
-          runs_left = runs_required(iterations_done_, &all_sizes, &means, &pct, *this);
+          runs_left =
+            static_cast<int>(runs_required(iterations_done_, &all_sizes, &means, &pct, *this));
           logging::note("Need another {:d} iterations", runs_left);
         }
       }
@@ -1178,11 +1179,12 @@ map<DurationSize, shared_ptr<ProbabilityMap>> Model::runIterations(
         }
         if (settings.is_surface())
         {
-          runs_left = ignitionScenarios() - iterations_done_;
+          runs_left = static_cast<int>(ignitionScenarios() - iterations_done_);
         }
         else
         {
-          runs_left = runs_required(iterations_done_, &all_sizes, &means, &pct, *this);
+          runs_left =
+            static_cast<int>(runs_required(iterations_done_, &all_sizes, &means, &pct, *this));
           logging::note("Need another {:d} iterations", runs_left);
         }
       }
@@ -1279,7 +1281,8 @@ int Model::runScenarios(
   auto probabilities = model.runIterations(start_point, start, start_day);
   logging::note("Ran {:d} simulations", Scenario::completed());
   const auto run_time_seconds = model.runTime();
-  const size_t time_left = settings.maximum_time_seconds - run_time_seconds.count();
+  const size_t time_left =
+    settings.maximum_time_seconds - static_cast<size_t>(run_time_seconds.count());
   logging::debug(
     "Finished successfully after {:d} seconds with {:d} seconds left",
     run_time_seconds.count(),

@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
+#include "stdafx.h"
 #include "TimeUtil.h"
 #include "Log.h"
 #include "Util.h"
@@ -134,13 +135,13 @@ void month_and_day(
 {
   auto days = (is_leap_year(year) ? DAYS_IN_MONTH_LEAP : DAYS_IN_MONTH);
   *month = 1;
-  int days_left = day_of_year;
+  auto days_left = static_cast<int>(day_of_year);
   while (days[*month - 1] <= days_left)
   {
     days_left -= days[*month - 1];
     ++(*month);
   }
-  *day_of_month = days_left + 1;
+  *day_of_month = static_cast<size_t>(days_left) + 1;
 }
 bool is_leap_year(const YearSize year)
 {
@@ -156,10 +157,15 @@ bool is_leap_year(const YearSize year)
 }
 string make_timestamp(const YearSize year, const DurationSize time)
 {
-  size_t day = floor(time);
-  size_t hour = (time - day) * static_cast<DurationSize>(DAY_HOURS);
-  size_t minute =
-    round(((time - day) * static_cast<DurationSize>(DAY_HOURS) - hour) * HOUR_MINUTES);
+  auto day = static_cast<size_t>(floor(time));
+  auto hour = static_cast<size_t>(
+    (time - static_cast<DurationSize>(day)) * static_cast<DurationSize>(DAY_HOURS)
+  );
+  auto minute = static_cast<size_t>(round(
+    ((time - static_cast<DurationSize>(day)) * static_cast<DurationSize>(DAY_HOURS)
+     - static_cast<DurationSize>(hour))
+    * HOUR_MINUTES
+  ));
   if (60 == minute)
   {
     minute = 0;

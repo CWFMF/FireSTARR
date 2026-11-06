@@ -2,6 +2,7 @@
 #ifndef FS_GRIDMAP_H
 #define FS_GRIDMAP_H
 #include "stdafx.h"
+#include <cstdint>
 #include "Grid.h"
 #include "Location.h"
 namespace fs
@@ -57,7 +58,7 @@ public:
         width,
         height,
         no_data,
-        nodata,
+        static_cast<uint8_t>(nodata),
         xllcorner,
         yllcorner,
         xurcorner,
@@ -189,7 +190,7 @@ public:
     const R divisor
   ) const
   {
-    auto div = [=](T value) -> R { return static_cast<R>(value / divisor); };
+    auto div = [=](T value) -> R { return static_cast<R>(value) / divisor; };
     return this->template saveToFile<R>(dir, base_name, div);
   }
   /**
@@ -238,7 +239,7 @@ public:
     }
     logging::info(
       "Created edge for perimeter with length {:d} m",
-      static_cast<size_t>(this->cellSize() * edge.size())
+      static_cast<size_t>(this->cellSize() * static_cast<MathSize>(edge.size()))
     );
     return edge;
   }

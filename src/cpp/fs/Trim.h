@@ -7,8 +7,8 @@ namespace fs
 // remove leading and trailing spaces
 [[nodiscard]] inline string trim_copy(string s)
 {
-  int j = s.size() - 1;
-  while (j > 0 && ' ' == s.at(j))
+  auto j = static_cast<int>(s.size() - 1);
+  while (j > 0 && ' ' == s.at(static_cast<size_t>(j)))
   {
     --j;
   }
@@ -18,11 +18,11 @@ namespace fs
     return "";
   }
   int i = 0;
-  while (i < j && ' ' == s.at(i))
+  while (i < j && ' ' == s.at(static_cast<size_t>(i)))
   {
     ++i;
   }
-  return s.substr(i, j - i + 1);
+  return s.substr(static_cast<size_t>(i), static_cast<size_t>(j - i + 1));
 }
 }
 #endif

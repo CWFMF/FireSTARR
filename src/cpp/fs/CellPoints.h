@@ -75,7 +75,7 @@ static constexpr auto DIRECTION_ANGLES = []() {
   for (size_t i = 0; i < result.size(); ++i)
   {
     // divide circle into equal wedges
-    result[i] = angle * i;
+    result[i] = angle * static_cast<MathSize>(i);
   }
   return result;
 }();

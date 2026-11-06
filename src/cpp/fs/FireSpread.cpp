@@ -20,7 +20,7 @@ SlopeTableArray make_slope_table() noexcept
   SlopeTableArray result{};
   for (size_t i = 0; i <= MAX_SLOPE_FOR_FACTOR; ++i)
   {
-    result.at(i) = exp(3.533 * pow(i / 100.0, 1.2));
+    result.at(i) = exp(3.533 * pow(static_cast<MathSize>(i) / 100.0, 1.2));
   }
   constexpr auto MAX_SLOPE = MAX_SLOPE_FOR_FACTOR + 1;
   // anything >=70 is just 10
@@ -37,7 +37,7 @@ int calculate_nd_ref_for_point(const int elevation, const Point& point) noexcept
   const auto latn = elevation <= 0 ? (46.0 + 23.4 * exp(-0.0360 * (150 + point.longitude())))
                                    : (43.0 + 33.7 * exp(-0.0351 * (150 + point.longitude())));
   // add 0.5 to round by truncating
-  return static_cast<int>(truncl(
+  return static_cast<int>(trunc(
     0.5
     + (elevation <= 0 ? 151.0 * (point.latitude() / latn) : 142.1 * (point.latitude() / latn) + 0.0172 * elevation)
   ));
@@ -215,7 +215,7 @@ SpreadInfo::SpreadInfo(
       slope,
       aspect,
       fuel_name,
-      calculate_nd_for_point(start_date.tm_yday, elevation, start_point),
+      calculate_nd_for_point(static_cast<Day>(start_date.tm_yday), elevation, start_point),
       weather
     )
 { }

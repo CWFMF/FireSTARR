@@ -105,7 +105,7 @@ public:
   {
     logging::debug("Reading a raster where T = {:s}, V = {:s}", typeid(T).name(), typeid(V).name());
     auto grid = readTiffInt(filename, point);
-    const auto nodata_input = grid.nodataInput();
+    const auto nodata_input = static_cast<V>(grid.nodataInput());
     T nodata_value = convert(nodata_input, nodata_input);
     logging::check_fatal(
       convert(nodata_input, nodata_input) != nodata_value,
