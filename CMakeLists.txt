@@ -82,9 +82,15 @@ if (WIN32)
   # fatal error C1128: number of sections exceeded object file format limit: compile with /bigobj
   add_compile_options(
     "$<$<CONFIG:Debug>:/bigobj>")
+  add_compile_options(/fp:strict)
 else()
   if(CMAKE_VERBOSE_OPTIMIZATIONS)
     add_compile_options(-fopt-info-vec-all)
+  endif()
+  if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    add_compile_options(-fexcess-precision=standard -frounding-math)
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-ffp-model=strict)
   endif()
   add_compile_options(
     "$<$<CONFIG:Release,RelWithDebInfo>:-O3;>"
@@ -122,7 +128,7 @@ else()
 endif()
 
 if (WIN32)
-  add_compile_options(/permissive- /EHsc)
+  add_compile_options(/permissive- /EHsc /fp:strict)
   add_link_options(/NODEFAULTLIB:MSVCRT)
 # else()
 #   list(APPEND CMAKE_MODULE_PATH "/usr/lib/x86_64-linux-gnu/cmake")
