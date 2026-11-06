@@ -35,7 +35,7 @@ FileList read_directory(const string_view name, const string_view match, const b
 FileList find_rasters(const string_view dir, const YearSize year)
 {
   // HACK: read_directory() doesn't work if path doesn't end in '/'
-  const string path = string(dir) + (dir.ends_with("/") ? "" : "/");
+  const string path = string(dir) + (dir.ends_with('/') ? "" : "/");
   const string for_year = path + to_string(year) + "/";
   const string for_default = path + "default/";
   // use first existing folder of dir/year, dir/default, or dir in that order
@@ -125,7 +125,7 @@ string get_canonical_path(const char* const dir_root, string path)
   }
   else
 #endif
-    if (!path.starts_with("/"))
+    if (!path.starts_with('/'))
   {
     try
     {

@@ -282,7 +282,7 @@ ArgumentParser::ArgumentParser(
     while (i < arguments.size())
     {
       const string arg = arguments.at(i);
-      if (!arg.starts_with("-"))
+      if (!arg.starts_with('-'))
       {
         auto d = arg;
         replace(d.begin(), d.end(), '\\', '/');
@@ -300,7 +300,7 @@ ArgumentParser::ArgumentParser(
   logging::set_log_level(log_default);
   for (const auto& arg : arguments)
   {
-    if (arg.starts_with("-") && !arg.starts_with(("--")))
+    if (arg.starts_with('-') && !arg.starts_with(("--")))
     {
       // HACK: not quite right if somehow a positional arg could start with '-' and have letters
       // increment for each -v and decrement for each -q
@@ -346,7 +346,7 @@ Settings& ArgumentParser::parse_args()
   while (cur_arg_ < args.size())
   {
     const string arg = args.at(cur_arg_);
-    bool is_positional = !arg.starts_with("-");
+    bool is_positional = !arg.starts_with('-');
     if (!is_positional)
     {
       // check for single letter flags or '--'
@@ -624,7 +624,7 @@ Settings& MainArgumentParser::parse_args()
     return d;
   }();
   // if name starts with "/" then it's an absolute path, otherwise append to working directory
-  settings.log_file = (settings.log_file_name.starts_with("/") ? "" : settings.output_directory)
+  settings.log_file = (settings.log_file_name.starts_with('/') ? "" : settings.output_directory)
                     + settings.log_file_name;
   // HACK: ensure settings initialized before doing this
   // probabalistic surface is computationally impossible at this point
@@ -705,7 +705,7 @@ vector<string>& ArgumentParser::args_expanded()
       vector<std::string> args{};
       for (const auto& s : arguments_)
       {
-        if (s.starts_with("-") && !s.starts_with("--"))
+        if (s.starts_with('-') && !s.starts_with("--"))
         {
           // break anything starting with just one - into individual letters
           for (size_t i = 1; i < s.length(); ++i)
