@@ -89,14 +89,14 @@ MathSize InvalidFuel::criticalSurfaceIntensity(const SpreadInfo&) const
 }
 MathSize InvalidFuel::crownFractionBurned(MathSize, MathSize) const noexcept
 {
-  exit(logging::fatal("Invalid fuel type in fuel map"));
+  return logging::fatal("Invalid fuel type in fuel map");
 }
 MathSize InvalidFuel::probabilityPeat(MathSize) const noexcept
 {
-  exit(logging::fatal("Invalid fuel type in fuel map"));
+  return logging::fatal("Invalid fuel type in fuel map");
 }
 MathSize InvalidFuel::survivalProbability(const FwiWeather&) const noexcept
 {
-  exit(logging::fatal("Invalid fuel type in fuel map"));
+  return logging::fatal("Invalid fuel type in fuel map");
 }
 }
