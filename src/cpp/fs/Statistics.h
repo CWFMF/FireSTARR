@@ -108,14 +108,18 @@ public:
   template <class T>
   explicit Statistics(vector<T> values)
     // values should already be sorted
-    : n_(values.size()), min_(values.empty() ? std::numeric_limits<MathSize>::max() : values[0]),
-      max_(values.empty() ? std::numeric_limits<MathSize>::min() : values[n_ - 1]), mean_([&]() {
+    : n_(values.size()),
+#ifdef DEBUG_STATISTICS
+      min_(values.empty() ? std::numeric_limits<MathSize>::max() : values[0]),
+      max_(values.empty() ? std::numeric_limits<MathSize>::min() : values[n_ - 1]),
+      median_(values.empty() ? std::numeric_limits<MathSize>::min() : values[n_ / 2]),
+#endif
+      mean_([&]() {
         return std::accumulate(
                  values.begin(), values.end(), 0.0, [](const auto t, const auto x) { return t + x; }
                )
              / n_;
-      }()),
-      median_(values.empty() ? std::numeric_limits<MathSize>::min() : values[n_ / 2])
+      }())
   {
     if (values.empty())
     {
@@ -206,6 +210,7 @@ private:
    * \brief Number of values
    */
   size_t n_;
+#ifdef DEBUG_STATISTICS
   /**
    * \brief Minimum value
    */
@@ -215,13 +220,14 @@ private:
    */
   MathSize max_;
   /**
-   * \brief Mean (average) value
-   */
-  MathSize mean_;
-  /**
    * \brief Median value
    */
   MathSize median_;
+#endif
+  /**
+   * \brief Mean (average) value
+   */
+  MathSize mean_;
   /**
    * \brief Standard Deviation
    */
