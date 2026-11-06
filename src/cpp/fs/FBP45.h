@@ -178,11 +178,7 @@ protected:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept
-{
-  const auto bui = round_value(b);
-  return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
-}
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept;
 /**
  * \brief A fuel with jackpine as base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -220,11 +216,7 @@ public:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_pine(const MathSize b) noexcept
-{
-  const auto bui = round_value(b);
-  return 5.0 * pow(1.0 - exp(-0.0149 * bui), 2.48);
-}
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const MathSize b) noexcept;
 /**
  * \brief A fuel with pine as the base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -485,21 +477,13 @@ public:
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 80/81]
  */
-[[nodiscard]] static MathSize calculate_length_to_breadth_grass(const MathSize w) noexcept
-{
-  const auto ws = round_value(w);
-  return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
-}
+[[nodiscard]] MathSize calculate_length_to_breadth_grass(const MathSize w) noexcept;
 /**
  * \brief Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  * \param curing Grass fuel curing rate (%)
  * \return Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  */
-[[nodiscard]] static MathSize calculate_base_multiplier_curing(const MathSize c) noexcept
-{
-  const auto curing = round_value(c);
-  return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
-}
+[[nodiscard]] MathSize calculate_base_multiplier_curing(const MathSize c) noexcept;
 /**
  * \brief A grass fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
