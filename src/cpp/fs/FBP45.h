@@ -3,7 +3,6 @@
 #define FS_FBP45_H
 #include "stdafx.h"
 #include "Duff.h"
-#include "LookupTable.h"
 #include "Settings.h"
 #include "StandardFuel.h"
 #include "unstable.h"
@@ -37,18 +36,17 @@ static constexpr int START_GREENING = -43;
                           : static_cast<int>(52.5042 - 1.07324 * nd);
   return max(0, min(100, curing));
 }
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
+[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b
 ) noexcept
 {
+  const auto bui = round_value(b);
   return 5.0 * (1.0 - exp(-0.0115 * bui));
 }
-static const LookupTable<&calculate_surface_fuel_consumption_mixed_or_c2>
-  SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2{};
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_d1(const MathSize bui) noexcept
+[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0183 * bui));
 }
-static LookupTable<&calculate_surface_fuel_consumption_d1> SURFACE_FUEL_CONSUMPTION_D1{};
 /**
  * \brief A StandardFuel that is not made of multiple fuels.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -189,17 +187,11 @@ protected:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(const MathSize bui
-) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
 }
-/**
- * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
- * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
- */
-static LookupTable<&calculate_surface_fuel_consumption_jackpine> SURFACE_FUEL_CONSUMPTION_JACKPINE{
-};
 /**
  * \brief A fuel with jackpine as base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -229,7 +221,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return SURFACE_FUEL_CONSUMPTION_JACKPINE(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_jackpine(spread.weather->bui.value);
   }
 };
 /**
@@ -237,16 +229,11 @@ public:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_pine(const MathSize bui) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_pine(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 5.0 * pow(1.0 - exp(-0.0149 * bui), 2.48);
 }
-/**
- * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
- * \param bui Build-up Index
- * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
- */
-static LookupTable<&calculate_surface_fuel_consumption_pine> SURFACE_FUEL_CONSUMPTION_PINE{};
 /**
  * \brief A fuel with pine as the base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -276,7 +263,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return SURFACE_FUEL_CONSUMPTION_PINE(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_pine(spread.weather->bui.value);
   }
 };
 /**
@@ -305,7 +292,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return SURFACE_FUEL_CONSUMPTION_D1(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_d1(spread.weather->bui.value);
   }
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
@@ -372,7 +359,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather->bui.value);
   }
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
@@ -500,34 +487,28 @@ public:
     return this->ratioConifer()
            * FuelMixed<110, 282, 150, 50, RosMultiplier, RatioMixed, 108, 25, 50>::
                surfaceFuelConsumption(spread)
-         + this->ratioDeciduous() * SURFACE_FUEL_CONSUMPTION_D1(spread.weather->bui.value);
+         + this->ratioDeciduous()
+             * calculate_surface_fuel_consumption_d1(spread.weather->bui.value);
   }
 };
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 80/81]
  */
-[[nodiscard]] static MathSize calculate_length_to_breadth_grass(const MathSize ws) noexcept
+[[nodiscard]] static MathSize calculate_length_to_breadth_grass(const MathSize w) noexcept
 {
+  const auto ws = round_value(w);
   return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
 }
-/**
- * \brief Length to Breadth ratio [ST-X-3 eq 80/81]
- */
-static LookupTable<calculate_length_to_breadth_grass> LENGTH_TO_BREADTH_GRASS{};
 /**
  * \brief Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  * \param curing Grass fuel curing rate (%)
  * \return Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  */
-[[nodiscard]] static MathSize calculate_base_multiplier_curing(const MathSize curing) noexcept
+[[nodiscard]] static MathSize calculate_base_multiplier_curing(const MathSize c) noexcept
 {
+  const auto curing = round_value(c);
   return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
 }
-/**
- * \brief Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
- * \return Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
- */
-static LookupTable<&calculate_base_multiplier_curing> BASE_MULTIPLIER_CURING{};
 /**
  * \brief A grass fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -593,7 +574,7 @@ public:
    */
   [[nodiscard]] MathSize baseMultiplier(const int nd, const FwiWeather& wx) const noexcept
   {
-    return BASE_MULTIPLIER_CURING(grass_curing(nd, wx));
+    return calculate_base_multiplier_curing(grass_curing(nd, wx));
   }
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
@@ -630,7 +611,7 @@ public:
    */
   [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const noexcept override
   {
-    return LENGTH_TO_BREADTH_GRASS(ws);
+    return calculate_length_to_breadth_grass(ws);
   }
 
 public:

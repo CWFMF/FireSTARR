@@ -2,7 +2,6 @@
 #include "FireSpread.h"
 #include "FuelLookup.h"
 #include "FuelType.h"
-#include "LookupTable.h"
 #include "Scenario.h"
 #include "Settings.h"
 #include "SpreadAlgorithm.h"
@@ -47,16 +46,16 @@ int calculate_nd_for_point(const Day day, const int elevation, const Point& poin
 {
   return static_cast<int>(abs(day - calculate_nd_ref_for_point(elevation, point)));
 }
-static MathSize calculate_standard_back_isi_wsv(const MathSize v) noexcept
+static MathSize calculate_standard_back_isi_wsv(const MathSize value) noexcept
 {
+  const auto v = round_value(value);
   return 0.208 * exp(-0.05039 * v);
 }
-static const LookupTable<&calculate_standard_back_isi_wsv> STANDARD_BACK_ISI_WSV{};
-static MathSize calculate_standard_wsv(const MathSize v) noexcept
+static MathSize calculate_standard_wsv(const MathSize value) noexcept
 {
+  const auto v = round_value(value);
   return v < 40.0 ? exp(0.05039 * v) : 12.0 * (1.0 - exp(-0.0818 * (v - 28)));
 }
-static const LookupTable<&calculate_standard_wsv> STANDARD_WSV{};
 SpreadInfo::SpreadInfo(
   const Scenario& scenario,
   const DurationSize time,
@@ -113,7 +112,7 @@ MathSize SpreadInfo::initial(
     }
   }
   spread.raz_ = Direction{Radians{raz}};
-  const auto isi = isz * STANDARD_WSV(wsv);
+  const auto isi = isz * calculate_standard_wsv(wsv);
   // FIX: make this a member function so we don't need to preface head_ros_
   spread.head_ros_ = fuel->calculateRos(spread.nd(), weather, isi) * bui_eff;
   if (min_ros > spread.head_ros_)
@@ -323,7 +322,7 @@ SpreadInfo::SpreadInfo(
     }
   }
   logging::verbose("initial ros is {:f}", head_ros_);
-  const auto back_isi = ffmc_effect * STANDARD_BACK_ISI_WSV(wsv);
+  const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(wsv);
   auto back_ros = fuel->calculateRos(nd, *weather, back_isi) * bui_eff;
   if (is_crown_)
   {

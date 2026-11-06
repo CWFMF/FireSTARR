@@ -29,22 +29,18 @@ MathSize SimpleFuelD1::isfD1(
  * \param ffmc Fine SimpleFuel Moisture Code
  * \return Surface SimpleFuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c1(const MathSize ffmc) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c1(const MathSize f) noexcept
 {
+  const auto ffmc = round_value(f);
   return max(0.0, 0.75 + ((ffmc > 84) ? 0.75 : -0.75) * sqrt(1 - exp(-0.23 * abs(ffmc - 84))));
 }
-/**
- * \brief Surface SimpleFuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
- * \return Surface SimpleFuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
- */
-static LookupTable<&calculate_surface_fuel_consumption_c1> SURFACE_FUEL_CONSUMPTION_C1{};
 MathSize SimpleFuelC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return SURFACE_FUEL_CONSUMPTION_C1(spread.weather->ffmc.value);
+  return calculate_surface_fuel_consumption_c1(spread.weather->ffmc.value);
 }
 MathSize SimpleFuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather->bui.value);
 }
 MathSize SimpleFuelC6::finalRos(
   const SpreadInfo& spread,
@@ -62,42 +58,33 @@ MathSize SimpleFuelC6::finalRos(
  * \param ffmc Fine SimpleFuel Moisture Code
  * \return Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize ffmc
-) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize f) noexcept
 {
+  const auto ffmc = round_value(f);
   return (ffmc > 70) ? 2.0 * (1.0 - exp(-0.104 * (ffmc - 70.0))) : 0.0;
 }
 /**
- * \brief Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
- * \return Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
- */
-static LookupTable<&calculate_surface_fuel_consumption_c7_ffmc> SURFACE_FUEL_CONSUMPTION_C7_FFMC{};
-/**
  * \brief Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
  * \return Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_bui(const MathSize bui) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_bui(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0201 * bui));
 }
-/**
- * \brief Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
- * \return Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
- */
-static LookupTable<&calculate_surface_fuel_consumption_c7_bui> SURFACE_FUEL_CONSUMPTION_C7_BUI{};
 MathSize SimpleFuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return SURFACE_FUEL_CONSUMPTION_C7_FFMC(spread.weather->ffmc.value)
-       + SURFACE_FUEL_CONSUMPTION_C7_BUI(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
+       + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
 }
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_d2(const MathSize bui) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_d2(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return bui >= 80 ? 1.5 * (1.0 - exp(-0.0183 * bui)) : 0.0;
 }
-static LookupTable<&calculate_surface_fuel_consumption_d2> SURFACE_FUEL_CONSUMPTION_D2{};
 MathSize SimpleFuelD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return SURFACE_FUEL_CONSUMPTION_D2(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_d2(spread.weather->bui.value);
 }
 MathSize SimpleFuelD2::calculateRos(const int, const FwiWeather& wx, const MathSize isi)
   const noexcept
