@@ -36,17 +36,8 @@ static constexpr int START_GREENING = -43;
                           : static_cast<int>(52.5042 - 1.07324 * nd);
   return max(0, min(100, curing));
 }
-[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b
-) noexcept
-{
-  const auto bui = round_value(b);
-  return 5.0 * (1.0 - exp(-0.0115 * bui));
-}
-[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept
-{
-  const auto bui = round_value(b);
-  return 1.5 * (1.0 - exp(-0.0183 * bui));
-}
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept;
 /**
  * \brief A SimpleStandardFuel that is not made of multiple fuels.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
