@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Util.h"
 #define LOOKUP_TABLES_OFF 1
-// #undef LOOKUP_TABLES_OFF
+#undef LOOKUP_TABLES_OFF
 #ifndef LOOKUP_TABLES_OFF
 #include "Log.h"
 #endif
