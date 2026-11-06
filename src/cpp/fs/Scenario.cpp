@@ -576,13 +576,14 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
   return this;
 }
 CellPointsMap apply_offsets_spreadkey(
-  const BurnedData& unburnable,
+  const BurnedData&,
   const DurationSize& arrival_time,
   const DurationSize& duration,
   const OffsetSet& offsets,
   const spreading_points::mapped_type& cell_pts_map
 )
 {
+  // FIX: either use BurnedData& or don't pass it
   CellPointsMap result{};
   OffsetSet offsets_after_duration{};
   offsets_after_duration.resize(offsets.size());
