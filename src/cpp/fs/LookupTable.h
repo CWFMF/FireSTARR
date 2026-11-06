@@ -1,13 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_LOOKUP_TABLE_H
 #define FS_LOOKUP_TABLE_H
-#include "unstable.h"
-#define LOOKUP_TABLES_OFF 1
-#undef LOOKUP_TABLES_OFF
-#ifndef LOOKUP_TABLES_OFF
 #include "stdafx.h"
-#include "Log.h"
 #include "Util.h"
+#define LOOKUP_TABLES_OFF 1
+// #undef LOOKUP_TABLES_OFF
+#ifndef LOOKUP_TABLES_OFF
+#include "Log.h"
 #endif
 namespace fs
 {
@@ -21,6 +20,14 @@ namespace fs
 template <MathSize (*Fct)(const MathSize), int IndexDigits = 3, int Precision = 1>
 class LookupTable
 {
+  auto index_of(const MathSize value) const noexcept
+  {
+    return static_cast<size_t>(value * pow_int<Precision>(10));
+  }
+  auto value_for_index(const size_t index) const noexcept
+  {
+    return index / static_cast<MathSize>(pow_int<Precision>(10));
+  }
 #ifndef LOOKUP_TABLES_OFF
   /**
    * \brief Array with enough space for function called with specific number of digits and precision
@@ -30,10 +37,6 @@ class LookupTable
    * \brief Array of values from calling function
    */
   const ValuesArray values_;
-  auto index_of(const MathSize value) const noexcept
-  {
-    return static_cast<size_t>(value * pow_int<Precision>(10));
-  }
   /**
    * \brief Call function with range of values with given precision
    * \return Results of function with range of values with given precision
@@ -44,7 +47,7 @@ class LookupTable
     ValuesArray values{};
     for (size_t i = 0; i < values.size(); ++i)
     {
-      const auto value = i / static_cast<MathSize>(pow_int<Precision>(10));
+      const auto value = value_for_index(i);
       logging::check_equal(i, index_of(value), "index of LookupTable");
       values[i] = Fct(value);
     }
@@ -72,7 +75,10 @@ public:
 #ifndef LOOKUP_TABLES_OFF
     return values_.at(index_of(value));
 #else
-    return Fct(value);
+    // HACK: convert to what the value would be for the index so result is same without lookup
+    const auto i = index_of(value);
+    const auto v = value_for_index(i);
+    return Fct(v);
 #endif
   }
 };
