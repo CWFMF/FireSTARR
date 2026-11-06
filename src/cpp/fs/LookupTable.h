@@ -1,10 +1,14 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#ifndef FS_LOOKUPTABLE_H
-#define FS_LOOKUPTABLE_H
-#include "stdafx.h"
-#include "Util.h"
+#ifndef FS_LOOKUP_TABLE_H
+#define FS_LOOKUP_TABLE_H
+#include "unstable.h"
 #define LOOKUP_TABLES_OFF 1
 #undef LOOKUP_TABLES_OFF
+#ifndef LOOKUP_TABLES_OFF
+#include "stdafx.h"
+#include "Log.h"
+#include "Util.h"
+#endif
 namespace fs
 {
 /**
@@ -26,6 +30,10 @@ class LookupTable
    * \brief Array of values from calling function
    */
   const ValuesArray values_;
+  auto index_of(const MathSize value) const noexcept
+  {
+    return static_cast<size_t>(value * pow_int<Precision>(10));
+  }
   /**
    * \brief Call function with range of values with given precision
    * \return Results of function with range of values with given precision
@@ -37,6 +45,7 @@ class LookupTable
     for (size_t i = 0; i < values.size(); ++i)
     {
       const auto value = i / static_cast<MathSize>(pow_int<Precision>(10));
+      logging::check_equal(i, index_of(value), "index of LookupTable");
       values[i] = Fct(value);
     }
     return values;
@@ -60,7 +69,11 @@ public:
    */
   [[nodiscard]] constexpr MathSize operator()(const MathSize value) const
   {
-    return values_.at(static_cast<size_t>(value * pow_int<Precision>(10)));
+#ifndef LOOKUP_TABLES_OFF
+    return values_.at(index_of(value));
+#else
+    return Fct(value);
+#endif
   }
 };
 }
