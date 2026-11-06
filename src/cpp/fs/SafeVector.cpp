@@ -10,7 +10,7 @@ SafeVector& SafeVector::operator=(const SafeVector& rhs) noexcept
 {
   try
   {
-    lock_guard<mutex> lock(mutex_);
+    scoped_lock lock{mutex_};
     values_ = rhs.values_;
     return *this;
   }
@@ -23,7 +23,7 @@ SafeVector& SafeVector::operator=(SafeVector&& rhs) noexcept
 {
   try
   {
-    lock_guard<mutex> lock(mutex_);
+    scoped_lock lock{mutex_};
     values_ = std::move(rhs.values_);
     return *this;
   }
@@ -34,12 +34,12 @@ SafeVector& SafeVector::operator=(SafeVector&& rhs) noexcept
 }
 void SafeVector::addValue(const MathSize value)
 {
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   static_cast<void>(insert_sorted(&values_, value));
 }
 vector<MathSize> SafeVector::getValues() const
 {
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   return values_;
 }
 Statistics SafeVector::getStatistics() const { return Statistics{getValues()}; }

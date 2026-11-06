@@ -13,7 +13,7 @@ static mutex PATHS_INTERIM_MUTEX{};
 ProbabilityMap::~ProbabilityMap()
 {
   // make sure we don't delete if still locked
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
 }
 ProbabilityMap::ProbabilityMap(
   const DurationSize time,
@@ -42,9 +42,7 @@ void ProbabilityMap::addProbabilities(const ProbabilityMap& rhs)
   logging::check_fatal(rhs.low_max_ != low_max_, "Wrong low max value");
   logging::check_fatal(rhs.med_max_ != med_max_, "Wrong med max value");
 #endif
-  lock_guard<mutex> lock(mutex_);
-  // need to lock both maps
-  lock_guard<mutex> lock_rhs(rhs.mutex_);
+  scoped_lock lock{mutex_, rhs.mutex_};
   if (settings.save_intensity)
   {
     for (auto&& kv : rhs.low_.data)
@@ -73,7 +71,7 @@ void ProbabilityMap::addProbability(const IntensityMap& for_time)
 {
   // HACK: resolve once and fail if not set already
   static const auto& settings = fs::settings::instance();
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   std::for_each(for_time.cbegin(), for_time.cend(), [this](auto&& kv) {
     const auto k = kv.first;
     const auto v = kv.second;
@@ -106,7 +104,7 @@ Statistics ProbabilityMap::getStatistics() const { return Statistics{getSizes()}
 size_t ProbabilityMap::numSizes() const noexcept { return sizes_.size(); }
 void ProbabilityMap::show() const
 {
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   // even if we only ran the actuals we'll still have multiple scenarios
   // with different randomThreshold values
   const auto day = static_cast<int>(time - floor(start_time));
@@ -129,7 +127,7 @@ void ProbabilityMap::show() const
   {
     return files;
   }
-  lock_guard<mutex> lock_interim(PATHS_INTERIM_MUTEX);
+  scoped_lock lock_interim{PATHS_INTERIM_MUTEX};
   for (const auto& filename : files)
   {
     logging::verbose("Recording {:s} as interim", filename);
@@ -175,7 +173,7 @@ string make_string(const char* name, const tm& t, const int day)
 };
 void ProbabilityMap::deleteInterim()
 {
-  lock_guard<mutex> lock_interim(PATHS_INTERIM_MUTEX);
+  scoped_lock lock_interim{PATHS_INTERIM_MUTEX};
   for (const auto& path : PATHS_INTERIM)
   {
     logging::debug("Removing interim file {:s}", path);
@@ -201,7 +199,7 @@ void ProbabilityMap::deleteInterim()
 {
   // HACK: resolve once and fail if not set already
   static const auto& settings = fs::settings::instance();
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   FileList files{};
   const auto is_interim = processed != processing_status;
   auto t = start_time;
@@ -366,7 +364,7 @@ FileList ProbabilityMap::saveLow(
 }
 void ProbabilityMap::reset()
 {
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   all_.clear();
   low_.clear();
   med_.clear();

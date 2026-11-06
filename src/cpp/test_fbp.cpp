@@ -34,7 +34,7 @@ public:
   TestResults& operator=(TestResults&& rhs) noexcept = delete;
   void add(std::future<int>&& f) noexcept
   {
-    std::scoped_lock lock(mutex_);
+    scoped_lock lock(mutex_);
     logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
     results_.push_back(std::move(f));
   };
@@ -45,7 +45,7 @@ public:
   };
   void add(TestResults&& rhs) noexcept
   {
-    std::scoped_lock lock(mutex_, rhs.mutex_);
+    scoped_lock lock(mutex_, rhs.mutex_);
     logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
     if (rhs.finalized_)
     {
@@ -75,7 +75,7 @@ public:
 private:
   int calculate_value() noexcept
   {
-    std::scoped_lock lock(mutex_);
+    scoped_lock lock(mutex_);
     if (!finalized_)
     {
       for (auto& result : results_)

@@ -53,13 +53,13 @@ void IntensityMap::applyPerimeter(const Perimeter& perimeter) noexcept
 bool IntensityMap::canBurn(const XYIdx& location) const { return !hasBurned(location); }
 bool IntensityMap::hasBurned(const XYIdx& location) const
 {
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   return is_burned_.at(location);
 }
 bool IntensityMap::isSurrounded(const XYIdx& location) const
 {
   // implement here so we can just lock once
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   // FIX: same logic as makeEdge()
   const auto [x0, y0] = hash_to_xy_value(location);
   const auto min_y = static_cast<Idx>(max(y0 - 1, 0));
@@ -89,7 +89,7 @@ void IntensityMap::burn(
 {
   // HACK: resolve once and fail if not set already
   static auto& settings = fs::settings::instance();
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   if (!is_burned_.at(location))
   {
     intensity_max_.set(location, intensity);
@@ -130,7 +130,7 @@ FileList IntensityMap::save(const string_view dir, const string_view base_name) 
   {
     return FileList{};
   }
-  lock_guard<mutex> lock(mutex_);
+  scoped_lock lock{mutex_};
   const auto name_intensity = string(base_name) + "_intensity";
   const auto name_ros = string(base_name) + "_ros";
   const auto name_raz = string(base_name) + "_raz";
