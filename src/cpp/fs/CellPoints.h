@@ -14,7 +14,7 @@ namespace fs
 {
 using fs::Direction;
 // Type used for storing distances within cells
-using DistanceSize = double;
+using DistanceSize = _Float64;
 struct SpreadData
 {
   DurationSize time{INVALID_TIME};

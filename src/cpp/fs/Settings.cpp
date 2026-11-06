@@ -413,7 +413,7 @@ string Settings::create(const pushd& dir) const
   };
   auto put = [&](const string& key, const string& comment, const auto& value) {
     // FIX: use original string instead of parsed and stringified input so nothing can change
-    static constexpr auto MAX_PRECISION = std::numeric_limits<double>::digits10 + 1;
+    static constexpr auto MAX_PRECISION = std::numeric_limits<_Float64>::digits10 + 1;
     // make sure we don't lose precision or results will differ when run with settings file
     add_comment(" " + comment);
     buffer << key << " = " << std::setprecision(MAX_PRECISION) << value << "\n";

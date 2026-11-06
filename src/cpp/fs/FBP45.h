@@ -6,6 +6,7 @@
 #include "LookupTable.h"
 #include "Settings.h"
 #include "StandardFuel.h"
+#include "unstable.h"
 #ifdef DEBUG_FUEL_VARIABLE
 #include "Log.h"
 #endif
@@ -605,7 +606,7 @@ public:
   {
     const auto mu = baseMultiplier(spread.nd(), *spread.weather);
     // prevent divide by 0
-    const auto mu_not_zero = max(0.001, mu);
+    const auto mu_not_zero = max(static_cast<MathSize>(0.001), mu);
     return this->limitIsf(mu_not_zero, calculateRos(mu, isi) * spread.slopeFactor());
   }
   /**

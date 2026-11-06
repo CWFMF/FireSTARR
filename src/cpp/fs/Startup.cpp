@@ -1,12 +1,13 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Startup.h"
+#include "unstable.h"
 namespace fs
 {
 Startup::Startup(
   string station,
   const tm& generated,
   const Point& point,
-  const double distance_from,
+  const MathSize distance_from,
   const Ffmc& ffmc,
   const Dmc& dmc,
   const Dc& dc,

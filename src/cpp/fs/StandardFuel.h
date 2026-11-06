@@ -5,6 +5,7 @@
 #include "FuelType.h"
 #include "LogValue.h"
 #include "LookupTable.h"
+#include "unstable.h"
 namespace fs
 {
 /**
@@ -150,9 +151,12 @@ public:
   [[nodiscard]] MathSize limitIsf(const MathSize mu, const MathSize rsf) const noexcept
   {
     return (1.0 / negB())
-         * log(
-             max(SLOPE_LIMIT_ISI, (rsf > 0.0) ? (1.0 - pow((rsf / (mu * a())), (1.0 / c()))) : 1.0)
-         );
+         * log(max(
+           SLOPE_LIMIT_ISI,
+           static_cast<MathSize>(
+             (rsf > static_cast<MathSize>(0.0)) ? (1.0 - pow((rsf / (mu * a())), (1.0 / c()))) : 1.0
+           )
+         ));
   }
   /**
    * \brief Critical Surface Fire Intensity (CSI) [ST-X-3 eq 56]

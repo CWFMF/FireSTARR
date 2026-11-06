@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "LogPoints.h"
 #include "Log.h"
+#include "unstable.h"
 #define LOG_POINTS_RELATIVE
 // #undef LOG_POINTS_RELATIVE
 #define LOG_POINTS_CELL
@@ -102,8 +103,8 @@ void LogPoints::log_unchecked(
     static_cast<Idx>(x),
     static_cast<Idx>(y),
 #endif
-    static_cast<double>(p_x),
-    static_cast<double>(p_y)
+    static_cast<_Float64>(p_x),
+    static_cast<_Float64>(p_y)
   );
 }
 bool LogPoints::isLogging() const noexcept { return log_points_.is_open(); }

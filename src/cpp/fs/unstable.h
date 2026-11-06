@@ -2,24 +2,41 @@
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
 #define _USE_MATH_DEFINES
+#include <cfloat>
 #include <cmath>
 // HACK: M_PI not showing up on Windows
-#include <cfloat>
+#ifndef M_PI
 #include <math.h>
+#endif
 namespace fs
 {
-/**
- * \brief Type used for math operations
- */
-// use first type that's 64-bit
-#if FLT_DIG > 6
-using MathSize = float;
-#elif DBL_DIG > 6
-using MathSize = double;
+// fixed-size float types aren't defined until C++23
+#ifndef _Float32
+#if __STDCPP_FLOAT32_T__
+#define _Float32 float32_t
+#elif 24 == FLT_MANT_DIG
+#define _Float32 float
+#elif 24 == DBL_MANT_DIG
+#define _Float32 double
 #else
-using MathSize = long double;
+#define _Float32 long double
 #endif
-static_assert(8 == sizeof(MathSize), "64-bit required for MathSize");
+#endif
+#ifndef _Float64
+#if __STDCPP_FLOAT64_T__
+#define _Float64 float64_t
+#elif 53 == FLT_MANT_DIG
+#define _Float64 float
+#elif 53 == DBL_MANT_DIG
+#define _Float64 double
+#else
+#define _Float64 long double
+#endif
+#endif
+static_assert(4 == sizeof(_Float32), "Could not determine 32-bit float type");
+static_assert(8 == sizeof(_Float64), "Could not determine 64-bit float type");
+// Type used for math operations
+using MathSize = _Float64;
 // HACK: override these so unstable code doesn't change results of functions
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;

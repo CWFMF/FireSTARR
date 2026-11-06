@@ -207,7 +207,7 @@ CellGrid Environment::makeCells(const FuelGrid& fuel, const ElevationGrid& eleva
               ((dem[6] + dem[7] + dem[7] + dem[8]) - (dem[0] + dem[1] + dem[1] + dem[2]))
               / elevation.cellSize();
             const MathSize key = (dx * dx + dy * dy);
-            auto slope_pct = static_cast<float>(100 * (sqrt(key) / 8.0));
+            auto slope_pct = static_cast<_Float32>(100 * (sqrt(key) / 8.0));
             s = min(
               static_cast<SlopeSize>(MAX_SLOPE_FOR_DISTANCE),
               static_cast<SlopeSize>(round(static_cast<MathSize>(slope_pct)))

@@ -11,6 +11,9 @@ namespace fs
 {
 using namespace logging;
 using NodataIntType = int64_t;
+// NOTE: use types specifically for libtiff
+using TiffFloat = float;
+using TiffDouble = double;
 string create_file_name(
   const string_view dir,
   const string_view base_name,
@@ -124,7 +127,7 @@ public:
     const string_view base_name,
     // const uint16_t bits_per_sample,
     // const uint16_t sample_format,
-    std::function<double(const XYIdx&)> value_at,
+    std::function<TiffDouble(const XYIdx&)> value_at,
     const int nodata_as_int
   ) const;
 
@@ -419,7 +422,7 @@ protected:
       base_name,
       // bps,
       // SAMPLEFORMAT_IEEEFP,
-      [&](const XYIdx& idx) { return static_cast<double>(convert(this->at(idx))); },
+      [&](const XYIdx& idx) { return static_cast<TiffDouble>(convert(this->at(idx))); },
       no_data
     );
   }

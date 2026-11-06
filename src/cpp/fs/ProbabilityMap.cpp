@@ -322,8 +322,8 @@ void ProbabilityMap::deleteInterim()
       with_perim.data[loc] = max(static_cast<size_t>(1), with_perim.data[loc]) * processing_status;
     }
   }
-  return saveToProbabilityFile<float>(
-    with_perim, output_directory, base_name, static_cast<float>(numSizes()), processing_status
+  return saveToProbabilityFile<_Float32>(
+    with_perim, output_directory, base_name, static_cast<_Float32>(numSizes()), processing_status
   );
 }
 [[nodiscard]] FileList ProbabilityMap::saveTotalCount(
@@ -340,8 +340,8 @@ FileList ProbabilityMap::saveHigh(
   const ProcessingStatus processing_status
 ) const
 {
-  return saveToProbabilityFile<float>(
-    high_, output_directory, base_name, static_cast<float>(numSizes()), processing_status
+  return saveToProbabilityFile<_Float32>(
+    high_, output_directory, base_name, static_cast<_Float32>(numSizes()), processing_status
   );
 }
 FileList ProbabilityMap::saveModerate(
@@ -350,8 +350,8 @@ FileList ProbabilityMap::saveModerate(
   const ProcessingStatus processing_status
 ) const
 {
-  return saveToProbabilityFile<float>(
-    med_, output_directory, base_name, static_cast<float>(numSizes()), processing_status
+  return saveToProbabilityFile<_Float32>(
+    med_, output_directory, base_name, static_cast<_Float32>(numSizes()), processing_status
   );
 }
 FileList ProbabilityMap::saveLow(
@@ -360,8 +360,8 @@ FileList ProbabilityMap::saveLow(
   const ProcessingStatus processing_status
 ) const
 {
-  return saveToProbabilityFile<float>(
-    low_, output_directory, base_name, static_cast<float>(numSizes()), processing_status
+  return saveToProbabilityFile<_Float32>(
+    low_, output_directory, base_name, static_cast<_Float32>(numSizes()), processing_status
   );
 }
 void ProbabilityMap::reset()

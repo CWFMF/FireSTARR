@@ -33,14 +33,14 @@ void make_threshold(
   const ThresholdSize threshold_scenario_weight,
   const ThresholdSize threshold_daily_weight,
   const ThresholdSize threshold_hourly_weight,
-  ThresholdSize (*convert)(double value) = same
+  ThresholdSize (*convert)(_Float64 value) = same
 );
 void make_threshold(
   vector<ThresholdSize>* thresholds,
   mt19937_64* mt,
   const Day start_day,
   const Day last_date,
-  ThresholdSize (*convert)(double value) = same
+  ThresholdSize (*convert)(_Float64 value) = same
 );
 std::seed_seq make_seed(
   const char* name,

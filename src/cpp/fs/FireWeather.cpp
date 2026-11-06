@@ -575,7 +575,7 @@ static SurvivalMap make_survival(
     const auto code = FuelType::safeCode(in_fuel);
     if (nullptr != in_fuel && INVALID_FUEL_CODE != code)
     {
-      auto by_fuel = vector<float>{};
+      auto by_fuel = vector<_Float32>{};
       by_fuel.resize((static_cast<size_t>(max_date) - min_date + 2) * DAY_HOURS);
       // calculate the entire stream for this fuel
       for (auto day = min_date; day <= max_date; ++day)
@@ -585,7 +585,7 @@ static SurvivalMap make_survival(
           const auto wx = weather_by_hour_by_day.at(time_index(day, h, min_date));
           const auto i = time_index(day, h, min_date);
           by_fuel.at(i) =
-            static_cast<float>(nullptr != wx ? (in_fuel->survivalProbability(*wx)) : 0.0);
+            static_cast<_Float32>(nullptr != wx ? (in_fuel->survivalProbability(*wx)) : 0.0);
         }
       }
       result.at(code) = std::move(by_fuel);

@@ -180,19 +180,19 @@ using IntensitySize = uint32_t;
 /**
  * \brief Type used for storing locations within cells
  */
-using InnerSize = double;
+using InnerSize = _Float64;
 /**
  * \brief Type used for storing locations in environment
  */
-using XYSize = double;
+using XYSize = _Float64;
 /**
  * \brief Type used for probability thresholds
  */
-using ThresholdSize = double;
+using ThresholdSize = _Float64;
 /**
  * \brief Type used for storing locations within cells
  */
-using DurationSize = double;
+using DurationSize = _Float64;
 constexpr DurationSize INVALID_TIME = -1;
 constexpr auto NO_INTENSITY = static_cast<IntensitySize>(0);
 using ROSSize = MathSize;
@@ -269,7 +269,7 @@ static constexpr int YEAR_HOURS = MAX_DAYS * DAY_HOURS;
 /**
  * \brief Array of results of a function for all possible integer percent slopes
  */
-using SlopeTableArray = array<double, INVALID_SLOPE + 1>;
+using SlopeTableArray = array<_Float64, INVALID_SLOPE + 1>;
 /**
  * \brief Size of an angle in degrees
  */
@@ -277,7 +277,7 @@ using DegreesSize = uint16_t;
 /**
  * \brief Array of results of a function for all possible integer angles in degrees
  */
-using AngleTableArray = array<double, 361>;
+using AngleTableArray = array<_Float64, 361>;
 /**
  * \brief Size to use for representing sub-coordinates for location within a Cell
  */

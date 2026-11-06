@@ -165,7 +165,7 @@ public:
    * \brief Calculate foliar moisture
    * \return Calculated foliar moisture
    */
-  [[nodiscard]] static double foliarMoisture(int nd)
+  [[nodiscard]] static _Float64 foliarMoisture(int nd)
   {
     nd = abs(nd);
     // don't need to check  `&& nd < 50` in second part because of reordering
@@ -177,7 +177,7 @@ public:
    * \brief Calculate foliar moisture
    * \return Calculated foliar moisture
    */
-  [[nodiscard]] double foliarMoisture() const { return foliarMoisture(nd_); }
+  [[nodiscard]] _Float64 foliarMoisture() const { return foliarMoisture(nd_); }
   /**
    * \brief Whether or not there is no spread for given conditions
    * \return Whether or not there is no spread for given conditions
