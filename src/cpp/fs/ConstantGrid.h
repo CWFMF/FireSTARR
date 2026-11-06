@@ -184,9 +184,12 @@ private:
 #endif
   }
 };
+namespace fuel
+{
 class FuelType;
+}
+using FuelGrid = ConstantGrid<const fuel::FuelType*, FuelSize>;
 class Cell;
-using FuelGrid = ConstantGrid<const FuelType*, FuelSize>;
 using ElevationGrid = ConstantGrid<ElevationSize>;
 using CellGrid = ConstantGrid<Cell, SpreadKey>;
 }

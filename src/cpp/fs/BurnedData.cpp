@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "BurnedData.h"
-#include "FuelLookup.h"
 namespace fs
 {
+using fs::fuel::fuel_by_code;
 BurnedData::BurnedData(const CellGrid& cells) noexcept
   : data_{from_grid(cells, [](const auto& v) { return fuel_by_code(v.fuelCode()); })},
     cell_size_{cells.cellSize()}, unburnable_(data_->count()), height_{cells.height()},

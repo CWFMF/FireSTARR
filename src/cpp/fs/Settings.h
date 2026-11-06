@@ -3,9 +3,7 @@
 #define FS_SETTINGS_H
 #include "stdafx.h"
 #include "FuelLookup.h"
-namespace fs
-{
-namespace settings
+namespace fs::settings
 {
 class Settings;
 Settings& instance() noexcept;
@@ -62,6 +60,7 @@ enum class Mode
   Test,
   Surface
 };
+using namespace fuel;
 /**
  * \brief Reads and provides access to settings for the simulation.
  */
@@ -224,6 +223,5 @@ private:
   // unparsed and found settings
   std::pair<string_map<string>, string_map<string>> settings_;
 };
-}
 }
 #endif

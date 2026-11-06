@@ -6,6 +6,8 @@
 #include "Util.h"
 namespace fs
 {
+using fs::fuel::fire_intensity;
+using fs::fuel::ROSOffset;
 HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const SlopeSize slope)
 {
   // do everything we can to avoid calling trig functions unnecessarily

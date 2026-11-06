@@ -140,13 +140,16 @@ add_subdirectory(${DIR_SRC_COMMON})
 
 foreach(bin ${PROJECT_NAME} test_duff test_fwi test_fbp test_rng)
   message("Adding binary for ${bin}")
+  set(DIR_SRC_TEST ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/${bin})
+  file(GLOB FILES_TEST_CPP ${DIR_SRC_TEST}/*.cpp)
   # include file with main() for each bin
-  add_executable(${bin} ${DIR_SRC}/${bin}.cpp ${FILE_VERSION_CPP})
+  add_executable(${bin} ${DIR_SRC}/${bin}.cpp ${FILE_VERSION_CPP} ${FILES_TEST_CPP})
+
 # FIX: wrap anything new that might be breaking windows workflow
 if(LINUX)
-  target_include_directories(${bin} PRIVATE ${DIR_SRC_COMMON} ${DIR_SRC})
+  target_include_directories(${bin} PRIVATE ${DIR_SRC_COMMON} ${DIR_SRC} ${DIR_SRC_TEST})
 else()
-  target_include_directories(${bin} PUBLIC ${DIR_SRC_COMMON} ${DIR_SRC})
+  target_include_directories(${bin} PUBLIC ${DIR_SRC_COMMON} ${DIR_SRC} ${DIR_SRC_TEST})
 endif()
   target_link_libraries(${bin} PUBLIC fs)
 # FIX: wrap anything new that might be breaking windows workflow

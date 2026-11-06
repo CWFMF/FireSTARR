@@ -250,17 +250,39 @@ SpreadInfo::SpreadInfo(
   const ptr<const FwiWeather> weather,
   const ptr<const FwiWeather> weather_daily
 )
+  : SpreadInfo{
+      fuel_by_code(Cell::fuelCode(key)),
+      time,
+      min_ros,
+      cell_size,
+      key,
+      nd,
+      weather,
+      weather_daily
+    }
+{ }
+SpreadInfo::SpreadInfo(
+  const FuelType* fuel_original,
+  const DurationSize time,
+  const MathSize min_ros,
+  const MathSize cell_size,
+  const SpreadKey& key,
+  const int nd,
+  const ptr<const FwiWeather> weather,
+  const ptr<const FwiWeather> weather_daily
+)
   : offsets_({}), max_intensity_(INVALID_INTENSITY), key_(key), weather(weather), time_(time),
     head_ros_(INVALID_ROS), cfb_(-1), cfc_(-1), tfc_(-1), sfc_(-1), is_crown_(false),
     raz_(fs::Direction::Invalid()), nd_(nd)
 {
   // HACK: use weather_daily to figure out probability of spread but hourly for ROS
   const auto slope_azimuth = Cell::aspect(key_);
-  const auto fuel = fuel_by_code(Cell::fuelCode(key_));
-  if (is_null_fuel(fuel))
+  if (is_null_fuel(fuel_original))
   {
     return;
   }
+  // HACK: resolve to specific type here - lose original type but only care about this nd value
+  const auto fuel = fuel_original->find_fuel_by_season(nd);
   const auto has_no_slope = 0 == percentSlope();
   MathSize heading_sin = 0;
   MathSize heading_cos = 0;
@@ -329,7 +351,8 @@ SpreadInfo::SpreadInfo(
     back_ros = fuel->finalRos(*this, back_isi, fuel->crownFractionBurned(back_ros, rso), back_ros);
   }
   tfc_ = sfc_;
-  // don't need to re-evaluate if crown with new head_ros_ because it would only go up if is_crown_
+  // don't need to re-evaluate if crown with new head_ros_ because it would only go up if
+  // is_crown_
   if (fuel->canCrown() && is_crown_)
   {
     // wouldn't be crowning if ros is 0 so that's why this is in an else

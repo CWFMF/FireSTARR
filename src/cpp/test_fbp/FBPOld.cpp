@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "FBP45.h"
+#include "FBPOld.h"
 #include "unstable.h"
-namespace fs
+namespace fs::fuelold
 {
 MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b) noexcept
 {
@@ -33,8 +33,11 @@ MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept
   const auto bui = round_value(b);
   return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
 }
-MathSize FuelD1::isfD1(const SpreadInfo& spread, const MathSize ros_multiplier, const MathSize isi)
-  const noexcept
+MathSize FuelOldD1::isfD1(
+  const SpreadInfo& spread,
+  const MathSize ros_multiplier,
+  const MathSize isi
+) const noexcept
 {
   return limitIsf(
     ros_multiplier,
@@ -51,15 +54,15 @@ MathSize FuelD1::isfD1(const SpreadInfo& spread, const MathSize ros_multiplier, 
   const auto ffmc = round_value(f);
   return max(0.0, 0.75 + ((ffmc > 84) ? 0.75 : -0.75) * sqrt(1 - exp(-0.23 * abs(ffmc - 84))));
 }
-MathSize FuelC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_c1(spread.weather->ffmc.value);
 }
-MathSize FuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather->bui.value);
 }
-MathSize FuelC6::finalRos(
+MathSize FuelOldC6::finalRos(
   const SpreadInfo& spread,
   const MathSize isi,
   const MathSize cfb,
@@ -89,7 +92,7 @@ MathSize FuelC6::finalRos(
   const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0201 * bui));
 }
-MathSize FuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
        + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
@@ -99,11 +102,11 @@ MathSize FuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
   const auto bui = round_value(b);
   return bui >= 80 ? 1.5 * (1.0 - exp(-0.0183 * bui)) : 0.0;
 }
-MathSize FuelD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_d2(spread.weather->bui.value);
 }
-MathSize FuelD2::calculateRos(const int, const FwiWeather& wx, const MathSize isi) const noexcept
+MathSize FuelOldD2::calculateRos(const int, const FwiWeather& wx, const MathSize isi) const noexcept
 {
   return (wx.bui.value >= 80) ? rosBasic(isi) : 0.0;
 }

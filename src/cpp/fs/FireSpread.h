@@ -9,15 +9,21 @@
 #include "Weather.h"
 namespace fs
 {
+namespace fuel
+{
 struct ROSOffset
 {
   IntensitySize intensity;
   ROSSize ros;
   Direction raz;
   Offset offset;
+  auto operator<=>(const ROSOffset& rhs) const noexcept = default;
 };
 using OffsetSet = vector<ROSOffset>;
 class FuelType;
+}
+using fs::fuel::FuelType;
+using fs::fuel::OffsetSet;
 static constexpr MathSize MAX_SPREAD_ANGLE = 5.0;
 static constexpr MathSize INVALID_ROS = -1.0;
 static constexpr MathSize INVALID_INTENSITY = -1.0;
@@ -261,6 +267,21 @@ private:
     const ptr<const FwiWeather> weather,
     const ptr<const FwiWeather> weather_daily
   );
+
+public:
+  // HACK: for testing fuels
+  SpreadInfo(
+    const FuelType* fuel_original,
+    DurationSize time,
+    MathSize min_ros,
+    MathSize cell_size,
+    const SpreadKey& key,
+    int nd,
+    const ptr<const FwiWeather> weather,
+    const ptr<const FwiWeather> weather_daily
+  );
+
+private:
   /**
    * Do initial spread calculations
    * \return Initial head ros calculation (-1 for none)

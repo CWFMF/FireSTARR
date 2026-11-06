@@ -2,14 +2,10 @@
 #ifndef FS_FUELLOOKUP_H
 #define FS_FUELLOOKUP_H
 #include "stdafx.h"
-#include "Cell.h"
-#include "FireWeather.h"
 #include "FuelType.h"
-#include "Util.h"
-namespace fs
+namespace fs::fuel
 {
 class FuelLookupImpl;
-string simplify_fuel_name(const string_view fuel);
 /**
  * \brief Provides ability to look up a fuel type based on name or code.
  */
@@ -112,7 +108,7 @@ private:
  */
 [[nodiscard]] constexpr bool is_null_fuel(const Cell& cell)
 {
-  return is_null_fuel(fuel_by_code(cell.fuelCode()));
+  return fs::fuel::is_null_fuel(fuel_by_code(cell.fuelCode()));
 }
 class LazyFuelLookup : public LazyPath
 {
