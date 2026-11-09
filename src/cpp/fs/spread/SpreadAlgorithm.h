@@ -13,11 +13,11 @@ public:
   virtual ~SpreadAlgorithm() = default;
   [[nodiscard]] virtual OffsetSet calculate_offsets(
     HorizontalAdjustment correction_factor,
-    MathSize tfc,
+    const RoundedValue tfc,
     const Radians& head_raz,
-    MathSize head_ros,
-    MathSize back_ros,
-    MathSize length_to_breadth
+    const RoundedValue head_ros,
+    const RoundedValue back_ros,
+    const RoundedValue length_to_breadth
   ) const noexcept = 0;
 };
 class BaseSpreadAlgorithm : public SpreadAlgorithm
@@ -38,11 +38,11 @@ public:
   using BaseSpreadAlgorithm::BaseSpreadAlgorithm;
   [[nodiscard]] OffsetSet calculate_offsets(
     HorizontalAdjustment correction_factor,
-    MathSize tfc,
+    const RoundedValue tfc,
     const Radians& head_raz,
-    MathSize head_ros,
-    MathSize back_ros,
-    MathSize length_to_breadth
+    const RoundedValue head_ros,
+    const RoundedValue back_ros,
+    const RoundedValue length_to_breadth
   ) const noexcept override;
 };
 class WidestEllipseAlgorithm : public BaseSpreadAlgorithm
@@ -51,11 +51,11 @@ public:
   using BaseSpreadAlgorithm::BaseSpreadAlgorithm;
   [[nodiscard]] OffsetSet calculate_offsets(
     HorizontalAdjustment correction_factor,
-    MathSize tfc,
+    const RoundedValue tfc,
     const Radians& head_raz,
-    MathSize head_ros,
-    MathSize back_ros,
-    MathSize length_to_breadth
+    const RoundedValue head_ros,
+    const RoundedValue back_ros,
+    const RoundedValue length_to_breadth
   ) const noexcept override;
 };
 }

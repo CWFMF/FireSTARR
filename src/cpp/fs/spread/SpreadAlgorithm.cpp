@@ -44,11 +44,11 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
 }
 [[nodiscard]] OffsetSet OriginalSpreadAlgorithm::calculate_offsets(
   HorizontalAdjustment correction_factor,
-  MathSize tfc,
+  const RoundedValue tfc,
   const Radians& head_raz,
-  MathSize head_ros,
-  MathSize back_ros,
-  MathSize length_to_breadth
+  const RoundedValue head_ros,
+  const RoundedValue back_ros,
+  const RoundedValue length_to_breadth
 ) const noexcept
 {
   OffsetSet offsets{};
@@ -146,11 +146,11 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
 }
 [[nodiscard]] OffsetSet WidestEllipseAlgorithm::calculate_offsets(
   const HorizontalAdjustment correction_factor,
-  const MathSize tfc,
+  const RoundedValue tfc,
   const Radians& head_raz,
-  const MathSize head_ros,
-  const MathSize back_ros,
-  const MathSize length_to_breadth
+  const RoundedValue head_ros,
+  const RoundedValue back_ros,
+  const RoundedValue length_to_breadth
 ) const noexcept
 {
   OffsetSet offsets{};
@@ -273,7 +273,7 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
   }
   cur_x -= (step_x / 2.0);
   step_x *= length_to_breadth;
-  Radians max_angle{Radians::D_180() - (length_to_breadth * step_max)};
+  Radians max_angle{Radians::D_180() - (as_value(length_to_breadth) * step_max)};
   MathSize min_x = cos(max_angle);
   while (added && cur_x >= min_x)
   {
@@ -302,7 +302,9 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
 #ifdef DEBUG_POINTS
   if (head_ros >= min_ros_)
   {
-    logging::check_fatal(offsets.empty(), "Empty when ros of {:f} >= {:f}", head_ros, min_ros_);
+    logging::check_fatal(
+      offsets.empty(), "Empty when ros of {:f} >= {:f}", as_value(head_ros), min_ros_
+    );
   }
 #endif
   return offsets;
