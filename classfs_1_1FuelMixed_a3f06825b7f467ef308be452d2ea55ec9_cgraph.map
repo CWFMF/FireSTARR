@@ -1,0 +1,15 @@
+<map id="fs::FuelMixed::calculateIsf" name="fs::FuelMixed::calculateIsf">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 42]." alt="" coords="5,137,176,163"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelMixed.html#aa3e84b9acc89db7a706fd3837cbc0742" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="258,29,392,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,135,157,99,223,64,242,57,244,62,225,69,160,104,110,139"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1StandardFuel.html#a175186d3f8692ae1255cdb514a53b84e" title=" " alt="" coords="224,79,426,150"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="176,134,208,129,208,135,177,140"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1FuelMixed.html#a0638437ab1f4ed1108cde8ed008a3da5" title="Percent Conifer (% / 100)" alt="" coords="240,173,410,199"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="177,161,225,168,225,173,176,166"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1FuelMixed.html#a8465a5f726197957b4182bfef267ae1e" title="Percent Deciduous (% / 100)" alt="" coords="230,223,420,248"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="118,161,166,185,225,209,245,216,244,221,223,214,164,190,115,166"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelD1.html#a1305d315ec45f3434bac8a79718c2b66" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="503,5,618,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="391,33,487,23,488,28,392,38"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelMixed.html#aa0fe999384057bbbafdec126466165a5" title="Rate of spread multiplier [ST&#45;X&#45;3 eq 27/28, GLC&#45;X&#45;10 eq 29/30]." alt="" coords="474,55,647,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="392,47,459,54,458,59,391,52"/>
+</map>

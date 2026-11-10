@@ -1,0 +1,35 @@
+<map id="fs::Scenario::run" name="fs::Scenario::run">
+<area shape="rect" id="Node000001" title="Run the Scenario." alt="" coords="5,301,119,327"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#abd1349f3fe2e41d3dd0f99b7c8ca2ff6" title="Add an Event to the queue." alt="" coords="183,5,332,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,301,68,252,84,182,97,144,115,106,137,71,165,40,168,37,172,41,169,44,141,74,120,108,102,146,89,183,73,253,67,301"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#ad9066fea710cae46c67dd8fac14e0f44" title="Burn cell that Event takes place in." alt="" coords="198,55,318,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="63,300,72,259,91,202,121,142,141,114,165,89,182,79,185,83,168,94,145,117,125,144,95,204,77,261,68,301"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Scenario.html#a9099e3d7076009d17e9a02a31ceac6f6" title="Whether or not a Cell can burn." alt="" coords="186,104,330,130"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="65,300,77,267,97,224,126,178,165,139,171,135,174,139,168,143,131,181,102,226,82,269,70,302"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Scenario.html#a247b5d6625df51b7dd4f2e9f440cc624" title="Number of Scenarios that have completed running." alt="" coords="180,153,336,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="68,300,105,245,133,214,165,188,173,183,176,188,168,192,136,218,109,249,73,303"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1Scenario.html#a371b8dfb89b34814e629c87e171c8c16" title="Number of Scenarios that have been initialized." alt="" coords="194,203,322,228"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="76,299,115,268,165,237,179,231,181,236,168,242,118,272,79,303"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1Scenario.html#a0779e2439f60823b40078d6089783211" title="Current fire size (ha)" alt="" coords="167,252,349,278"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="115,298,188,280,190,285,117,303"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1Model.html#a9228498e8e1ce234dba9b8a8176a1e49" title="Environment simulation is occurring in." alt="" coords="183,301,333,327"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="119,312,167,312,167,317,119,317"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1Scenario.html#afc5ac565c71bcfaebdeeb449f0e6659c" title="Evaluate next Event in the queue." alt="" coords="172,351,344,392"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="109,325,172,344,171,349,108,330"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1Scenario.html#a091ceb50b736a98e7f89fa8a153ac30e" title="Model this Scenario is running in." alt="" coords="193,416,323,442"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="77,325,115,363,140,383,168,401,182,408,180,413,165,406,137,388,111,367,73,329"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1Scenario.html#ace6daef0af09bfbffcde3f1dfa608eaa" title="Whether or not this Scenario has run already." alt="" coords="201,465,314,491"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="72,326,107,387,134,422,168,452,188,462,185,467,165,456,131,426,102,390,67,329"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1Model.html#aa2801812d44604f840665e64a15c7acb" title="Duration that model has run for." alt="" coords="195,515,321,540"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="69,327,80,362,100,409,129,459,147,482,168,501,182,510,179,514,165,506,143,485,125,462,95,412,75,364,64,328"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1Model.html#af47948048e80fd4bf8f8e9d9f6fc7562" title="How many Scenarios are in each Iteration." alt="" coords="177,564,339,590"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="68,327,76,370,93,431,123,496,144,525,168,551,172,553,168,558,165,555,140,529,119,498,88,433,71,371,62,328"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1Scenario.html#a110c5ed3abfd42658b8eafad4616ec37" title="Simulation number." alt="" coords="181,613,335,639"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="67,327,72,378,87,452,100,492,118,532,140,568,169,600,172,603,168,607,165,604,136,572,113,534,95,494,82,453,67,379,61,328"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Scenario.html#a80ef1120888229a039b5a7a1ea87d355" title="Notify IObservers that a Cell has burned." alt="" coords="423,55,549,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="318,65,407,65,407,70,318,70"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1Model.html#ac5e3c382a608e1a3748366aead3dfe40" title="Time that execution started." alt="" coords="409,515,563,540"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="321,525,393,525,393,530,321,530"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1Model.html#ae35564ce5b49cf7e49a7dc061b46aaa1" title="How many ignition scenarios are being used." alt="" coords="397,564,575,590"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="339,574,381,574,381,580,339,580"/>
+</map>

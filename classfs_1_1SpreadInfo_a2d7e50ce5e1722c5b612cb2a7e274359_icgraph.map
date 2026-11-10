@@ -1,0 +1,5 @@
+<map id="fs::SpreadInfo::percentSlope" name="fs::SpreadInfo::percentSlope">
+<area shape="rect" id="Node000001" title="Slope used for spread (%)" alt="" coords="229,5,412,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1SpreadInfo.html#a55ce2d69f59831cf33c1425ebb2846e6" title="Slope factor calculated from percent slope." alt="" coords="5,5,181,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,21,181,21,181,16,213,16"/>
+</map>

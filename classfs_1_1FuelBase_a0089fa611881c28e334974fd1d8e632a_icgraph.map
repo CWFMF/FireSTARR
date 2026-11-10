@@ -1,0 +1,5 @@
+<map id="fs::FuelBase::duffDmcType" name="fs::FuelBase::duffDmcType">
+<area shape="rect" id="Node000001" title="Type of duff deeper underground." alt="" coords="258,5,433,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelBase.html#a902904e5d3f6be0f58a63795c8a83161" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="5,5,210,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,21,210,21,210,16,242,16"/>
+</map>

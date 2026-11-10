@@ -1,0 +1,7 @@
+<map id="fs::FuelBase::probabilityPeat" name="fs::FuelBase::probabilityPeat">
+<area shape="rect" id="Node000001" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="5,31,190,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelBase.html#ad6237979ac52006195c36061a8e1a6b0" title="Duff Bulk Density (kg/m^3) [Anderson table 1]." alt="" coords="253,5,419,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,31,237,26,238,31,191,36"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelBase.html#ac66791c748ae14a221145d253bb9041e" title="Inorganic Percent (% / 100) [Anderson table 1]." alt="" coords="238,55,434,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,50,222,53,222,59,190,55"/>
+</map>

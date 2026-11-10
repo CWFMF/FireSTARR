@@ -1,0 +1,9 @@
+<map id="fs::FuelType::calculateIsf" name="fs::FuelType::calculateIsf">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41/42]." alt="" coords="237,63,401,88"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a1ae4c088e775ea10cc6c2fa4a048ea8e" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,5,189,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,61,149,34,150,29,252,56"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7699bd14d07f06682576c62d1cc423c1" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="14,55,180,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,78,180,78,180,73,221,73"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1SpreadInfo.html#a5cff69158dd4b2e140a888b114eab5e5" title=" " alt="" coords="28,120,166,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="252,95,150,122,149,117,251,90"/>
+</map>

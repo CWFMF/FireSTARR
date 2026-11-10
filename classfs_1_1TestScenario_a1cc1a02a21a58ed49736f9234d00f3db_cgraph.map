@@ -1,0 +1,13 @@
+<map id="fs::TestScenario::TestScenario" name="fs::TestScenario::TestScenario">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,55,204,80"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#abd1349f3fe2e41d3dd0f99b7c8ca2ff6" title="Add an Event to the queue." alt="" coords="273,5,422,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,51,265,32,266,37,172,57"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a22d3c780774874d48b520b98b90bf094" title="Register an IObserver that will be notified when Cells burn." alt="" coords="252,55,443,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,65,236,65,236,70,204,70"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Scenario.html#ae5de18e266b781ce4a0adfacc26e049d" title="Reset thresholds and set SafeVector to output results to." alt="" coords="285,104,410,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,78,270,99,269,104,171,84"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Scenario.html#ae4e0b754d306e5e01d310d70499d3c74" title="Clear the Event list and all other data." alt="" coords="494,79,618,104"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="410,107,479,98,480,103,410,112"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Scenario.html#a091ceb50b736a98e7f89fa8a153ac30e" title="Model this Scenario is running in." alt="" coords="491,128,621,154"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="410,121,476,129,475,134,410,127"/>
+</map>

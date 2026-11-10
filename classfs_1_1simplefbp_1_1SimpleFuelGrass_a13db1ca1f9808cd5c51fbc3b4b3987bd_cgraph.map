@@ -1,0 +1,13 @@
+<map id="fs::simplefbp::SimpleFuelGrass::calculateIsf" name="fs::simplefbp::SimpleFuelGrass::calculateIsf">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,51,171,92"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html#a5806c0ceb2fe1d515eaf035141c88048" title="Calculate base rate of spread multiplier." alt="" coords="471,11,636,52"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,48,169,28,218,13,279,5,342,3,456,12,456,17,341,8,280,10,219,18,171,33,128,53"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html#a822edaf6209f8c69a26da931eeb9ad08" title="Calculate rate of spread (m/min)" alt="" coords="238,51,404,92"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,69,223,69,223,74,171,74"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#a8732627856ca8bccc07b380bd46540ca" title=" " alt="" coords="219,116,423,187"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="150,90,205,109,203,114,148,95"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html#a61643933e28310df338c7933fe10b63e" title="Grass curing." alt="" coords="684,11,850,52"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="636,29,669,29,669,34,636,34"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="404,55,455,46,456,51,404,60"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="277,51,275,41,282,32,297,27,321,25,346,27,361,33,359,38,345,32,321,30,299,32,285,37,280,43,282,50"/>
+</map>

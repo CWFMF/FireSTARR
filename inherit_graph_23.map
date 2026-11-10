@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classfs_1_1IObserver.html" title="Interface for observers that get notified when cells burn so they can track things." alt="" coords="5,108,101,133"/>
+<area shape="rect" id="Node000001" href="$classfs_1_1MapObserver.html" title=" " alt="" coords="157,5,332,46"/>
+<area shape="poly" id="edge155_Node000000_Node000001" title=" " alt="" coords="83,96,147,57,176,44,178,49,150,61,85,101"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1MapObserver.html" title=" " alt="" coords="156,71,332,111"/>
+<area shape="poly" id="edge157_Node000000_Node000003" title=" " alt="" coords="116,108,155,102,156,107,116,113"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1MapObserver.html" title=" " alt="" coords="149,136,340,161"/>
+<area shape="poly" id="edge159_Node000000_Node000005" title=" " alt="" coords="116,127,153,132,152,138,115,132"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1MapObserver.html" title="An IObserver that tracks notification data using a GridMap." alt="" coords="171,185,318,210"/>
+<area shape="poly" id="edge161_Node000000_Node000007" title=" " alt="" coords="88,139,150,171,181,182,180,187,148,176,85,144"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1ArrivalObserver.html" title="Tracks when fire initially arrives in a Cell." alt="" coords="394,13,522,38"/>
+<area shape="poly" id="edge156_Node000001_Node000002" title=" " alt="" coords="347,23,393,23,393,28,347,28"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1IntensityObserver.html" title="Tracks the intensity that Cells burn at." alt="" coords="388,78,528,104"/>
+<area shape="poly" id="edge158_Node000003_Node000004" title=" " alt="" coords="348,88,388,88,388,94,348,94"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1SourceObserver.html" title="Tracks source Cell that fire arrived in Cell from." alt="" coords="392,136,524,161"/>
+<area shape="poly" id="edge160_Node000005_Node000006" title=" " alt="" coords="355,146,391,146,391,151,355,151"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="fs::settings::MainArgumentParser" name="fs::settings::MainArgumentParser">
+<area shape="rect" id="Node000001" title=" " alt="" coords="50,304,224,345"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1settings_1_1SettingsArgumentParser.html" title=" " alt="" coords="40,214,234,255"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,270,140,304,134,304,134,270"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1settings_1_1ArgumentParser.html" title=" " alt="" coords="45,139,229,165"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="140,180,140,214,134,214,134,180"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,5,117,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="57,46,54,80,57,98,64,114,77,127,93,136,90,141,73,131,60,116,52,99,49,80,52,45"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="188,5,241,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="213,47,204,81,187,117,161,140,157,136,183,113,199,80,208,45"/>
+</map>

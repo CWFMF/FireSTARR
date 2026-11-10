@@ -1,0 +1,13 @@
+<map id="fs::Scenario::minimumFfmcForSpread" name="fs::Scenario::minimumFfmcForSpread">
+<area shape="rect" id="Node000001" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="5,23,184,64"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#aaf390169d26675690092d00b31848398" title="Whether or not time is after sunrise and before sunset." alt="" coords="232,31,381,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,41,217,41,217,46,184,46"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a81e76a41aea240d0893f7808b7c65288" title="Sunset time for given day." alt="" coords="432,5,569,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,31,417,26,417,32,382,36"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Scenario.html#a33beb7c3a132dec92a091ce0090062ac" title="Sunrise time for given day." alt="" coords="429,55,572,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="382,50,414,54,413,59,381,55"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1StartPoint.html#a4186d5f11dda07ae89551d256b238de2" title="Sunset time." alt="" coords="623,5,768,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="570,16,608,16,608,21,570,21"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1StartPoint.html#a30062745d004ee29f623e20af2f04899" title="Sunrise time." alt="" coords="620,55,771,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="572,65,605,65,605,70,572,70"/>
+</map>

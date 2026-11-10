@@ -1,0 +1,11 @@
+<map id="fs::XYIdx" name="fs::XYIdx">
+<area shape="rect" id="Node000001" title=" " alt="" coords="316,86,390,112"/>
+<area shape="rect" id="Node000002" href="$structfs_1_1XIdx.html" title=" " alt="" coords="195,38,259,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,67,318,83,316,88,273,72"/>
+<area shape="rect" id="Node000003" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,5,146,76"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="161,44,195,46,194,52,161,49"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1YIdx.html" title=" " alt="" coords="195,110,259,136"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="275,120,292,117,317,110,318,115,293,122,275,125"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,100,146,171"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="161,126,194,123,195,128,161,131"/>
+</map>

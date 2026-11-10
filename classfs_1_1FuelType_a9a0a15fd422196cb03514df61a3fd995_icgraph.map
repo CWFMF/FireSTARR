@@ -1,0 +1,9 @@
+<map id="fs::FuelType::finalRos" name="fs::FuelType::finalRos">
+<area shape="rect" id="Node000001" title="Final rate of spread (m/min)" alt="" coords="219,63,362,88"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a30fee08f383766ac7d8c10eb15098f65" title="Final rate of spread (m/min)" alt="" coords="7,5,169,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,60,135,34,137,29,229,55"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a5062da35a0a3bd165a08e1423ed33894" title="Final rate of spread (m/min)" alt="" coords="5,55,171,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,78,171,78,171,73,203,73"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1SpreadInfo.html#a5cff69158dd4b2e140a888b114eab5e5" title=" " alt="" coords="19,120,157,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="229,96,137,122,135,117,227,91"/>
+</map>

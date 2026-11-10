@@ -1,0 +1,15 @@
+<map id="fs::BurnedMap" name="fs::BurnedMap">
+<area shape="rect" id="Node000001" title="A map of locations which have burned in a Scenario. Use this class so that we can filter by fuel cell..." alt="" coords="156,468,260,493"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1GridMap.html" title=" " alt="" coords="133,378,284,418"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,434,211,467,206,467,206,434"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1GridData.html" title=" " alt="" coords="106,273,310,328"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="211,344,211,378,206,378,206,344"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Grid.html" title=" " alt="" coords="5,169,153,210"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,218,178,270,174,274,112,222"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="33,94,125,120"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="82,135,82,169,76,169,76,135"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="52,5,106,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="82,47,82,94,76,94,76,47"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="177,169,328,210"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="241,225,222,273,217,271,236,223"/>
+</map>

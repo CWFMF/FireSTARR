@@ -1,0 +1,9 @@
+<map id="fs::Model::scenarioCount" name="fs::Model::scenarioCount">
+<area shape="rect" id="Node000001" title="How many Scenarios are in each Iteration." alt="" coords="569,5,732,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#a3ac49eccdb45f3f07c80171b844b6355" title="Run the Scenario." alt="" coords="408,5,521,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="554,21,522,21,522,16,554,16"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#a29e52825f7ce67a8b91539bbc1923522" title="Run Iterations until confidence is reached." alt="" coords="209,5,360,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="392,21,360,21,360,16,392,16"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,5,161,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="193,21,161,21,161,16,193,16"/>
+</map>

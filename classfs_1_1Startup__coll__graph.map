@@ -1,0 +1,23 @@
+<map id="fs::Startup" name="fs::Startup">
+<area shape="rect" id="Node000001" title="Startup values to initialize a weather stream calculation with." alt="" coords="484,128,565,154"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="292,5,345,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="361,23,411,38,462,64,495,95,518,126,513,129,491,99,459,68,409,43,359,28"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Point.html" title="A geographic location in lat/long coordinates." alt="" coords="284,55,352,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="368,75,414,87,461,104,503,125,501,130,459,109,412,92,367,80"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1Ffmc.html" title="Fine Fuel Moisture Code value." alt="" coords="284,104,352,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="368,120,484,134,483,139,367,125"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1StrictType.html" title=" " alt="" coords="35,104,184,130"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="200,114,284,114,284,120,200,120"/>
+<area shape="rect" id="Node000006" href="$structfs_1_1Dmc.html" title="Duff Moisture Code value." alt="" coords="286,153,351,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="366,160,460,151,483,147,484,152,461,156,367,166"/>
+<area shape="rect" id="Node000007" href="$structfs_1_1StrictType.html" title=" " alt="" coords="36,153,183,179"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="198,164,285,164,285,169,198,169"/>
+<area shape="rect" id="Node000008" href="$structfs_1_1Dc.html" title="Drought Code value." alt="" coords="291,203,345,228"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="360,207,408,196,459,179,505,152,507,156,461,184,410,201,361,212"/>
+<area shape="rect" id="Node000009" href="$structfs_1_1StrictType.html" title=" " alt="" coords="42,203,177,228"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="193,213,291,213,291,218,193,218"/>
+<area shape="rect" id="Node000010" href="$structfs_1_1Precipitation.html" title=" " alt="" coords="263,256,373,282"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="388,252,424,238,459,219,492,186,514,153,518,156,496,189,462,223,427,243,389,257"/>
+<area shape="rect" id="Node000011" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,252,214,293"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="229,268,263,267,263,273,229,273"/>
+</map>

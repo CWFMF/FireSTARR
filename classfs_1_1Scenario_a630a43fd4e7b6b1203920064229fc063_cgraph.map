@@ -1,0 +1,25 @@
+<map id="fs::Scenario::evaluate" name="fs::Scenario::evaluate">
+<area shape="rect" id="Node000001" title="Take whatever steps are necessary to process the given Event." alt="" coords="5,179,150,204"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#ad9066fea710cae46c67dd8fac14e0f44" title="Burn cell that Event takes place in." alt="" coords="229,5,350,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,177,124,111,157,73,196,40,213,31,216,36,199,44,161,77,129,114,88,180"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Scenario.html#aee1ac6332d4c9d34d7fa42f57887f45c" title="End the simulation." alt="" coords="201,55,378,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="89,176,134,133,164,110,196,89,208,84,211,88,199,94,167,114,137,137,93,180"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Scenario.html#a091ceb50b736a98e7f89fa8a153ac30e" title="Model this Scenario is running in." alt="" coords="224,104,354,130"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="106,176,197,138,217,132,218,137,199,143,108,181"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1FuelType.html#a8b00ee1adb47bc16141f47d127b2fbc6" title="Convert FuelType to its name, or 0 if nullptr." alt="" coords="211,153,368,179"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="150,180,195,175,196,180,151,185"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1Scenario.html#ac0be473151a75fd00e535231bac8e803" title="Tell Observers to save their data with base file name." alt="" coords="198,203,381,228"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="151,197,182,201,182,206,150,202"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1Scenario.html#a57b645ce2e70b09d68f93c48317b933f" title="Save state of Scenario at given time." alt="" coords="212,252,366,278"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="109,203,199,238,219,245,218,250,197,243,107,207"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1Scenario.html#a65a0c8bfbb4aef3737c5080b0f4b9ce3" title="Schedule a fire spread Event." alt="" coords="205,302,374,342"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="93,203,138,244,199,288,208,293,206,297,196,292,135,248,90,207"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1Scenario.html#afbd1574b6eb813b0d80f36d72d554d7e" title="Whether or not the fire survives the conditions." alt="" coords="217,367,362,392"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="87,204,103,234,127,275,160,316,199,352,208,358,206,362,196,356,156,320,123,278,98,237,82,206"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a80ef1120888229a039b5a7a1ea87d355" title="Notify IObservers that a Cell has burned." alt="" coords="441,5,567,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="350,16,425,16,425,21,350,21"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1FuelType.html#a8a87eb09f463bc0f710e3cc012d43ef2" title="Name of the fuel." alt="" coords="440,153,569,179"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="368,164,424,164,424,169,368,169"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1Scenario.html#a32f00a32e2bf862a7b579e985bbe4612" title="Get extinction threshold for given time." alt="" coords="429,359,579,400"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="362,377,414,377,414,382,362,382"/>
+</map>

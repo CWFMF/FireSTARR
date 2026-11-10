@@ -1,0 +1,11 @@
+<map id="fs::StandardFuel&lt; A, B, C, Bui0, Cbh, Cfl, BulkDensity, InorganicPercent, DuffDepth &gt;" name="fs::StandardFuel&lt; A, B, C, Bui0, Cbh, Cfl, BulkDensity, InorganicPercent, DuffDepth &gt;">
+<area shape="rect" id="Node000001" title="A FuelBase made of a standard fuel type." alt="" coords="132,213,335,283"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelBase.html" title="Base class for all FuelTypes." alt="" coords="8,109,206,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,158,198,210,194,214,137,162"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,5,97,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="66,44,99,107,95,110,62,46"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1duff_1_1Duff.html" title="A specific type of Duff layer, and the associated smouldering coefficients." alt="" coords="120,5,208,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="153,46,120,110,115,107,149,44"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1LogValue.html" title="A result of calling log(x) for some value of x, pre&#45;calculated at compile time." alt="" coords="230,116,323,142"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="269,158,249,213,244,212,264,156"/>
+</map>

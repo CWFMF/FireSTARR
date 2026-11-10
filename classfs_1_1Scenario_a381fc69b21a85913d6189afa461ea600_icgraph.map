@@ -1,0 +1,5 @@
+<map id="fs::Scenario::total_steps" name="fs::Scenario::total_steps">
+<area shape="rect" id="Node000001" title="Total number of spread events for all Scenarios." alt="" coords="209,5,329,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,161,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,28,161,28,161,23,193,23"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="fs::FuelBase::dmcRatio" name="fs::FuelBase::dmcRatio">
+<area shape="rect" id="Node000001" title="What fraction of the duff layer should use DMC to determine moisture." alt="" coords="460,31,614,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelBase.html#a5769521806d58488c24dbb2bd5f4013c" title="What fraction of the duff layer should use FFMC to determine moisture." alt="" coords="258,5,412,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,35,412,30,412,25,445,29"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelBase.html#a902904e5d3f6be0f58a63795c8a83161" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="5,31,210,56"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="444,46,210,46,210,41,444,41"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="243,31,211,35,210,29,242,26"/>
+</map>

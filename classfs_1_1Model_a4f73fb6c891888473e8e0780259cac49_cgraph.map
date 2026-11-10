@@ -1,0 +1,7 @@
+<map id="fs::Model::shouldStop" name="fs::Model::shouldStop">
+<area shape="rect" id="Node000001" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="5,35,150,60"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#ae09cf47e6cc9e9faa6de004e693317bb" title="Whether or not simulation has been running longer than maximum duration." alt="" coords="210,5,364,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,35,194,28,195,34,150,40"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#a37fd0357f6b977e6d3bed64fd97c3777" title="Whether or not simulation is over max simulation count." alt="" coords="198,55,376,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,54,183,59,182,64,150,60"/>
+</map>

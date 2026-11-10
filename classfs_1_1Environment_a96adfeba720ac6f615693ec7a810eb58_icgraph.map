@@ -1,0 +1,7 @@
+<map id="fs::Environment::cellSize" name="fs::Environment::cellSize">
+<area shape="rect" id="Node000001" title="Cell width and height (m)" alt="" coords="366,5,527,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#a63426ef9d4fb4e99e84a071956b7ea23" title="Cell width and height (m)" alt="" coords="194,5,318,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="350,21,318,21,318,16,350,16"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a2373483a77537885445ea3e9594795eb" title="Cell width and height (m)" alt="" coords="5,5,146,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="178,21,146,21,146,16,178,16"/>
+</map>

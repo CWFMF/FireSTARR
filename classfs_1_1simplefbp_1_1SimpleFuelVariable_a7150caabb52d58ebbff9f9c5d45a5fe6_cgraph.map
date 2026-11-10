@@ -1,0 +1,7 @@
+<map id="fs::simplefbp::SimpleFuelVariable::surfaceFuelConsumption" name="fs::simplefbp::SimpleFuelVariable::surfaceFuelConsumption">
+<area shape="rect" id="Node000001" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="5,27,224,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1SpreadInfo.html#aac5d1cc89631a602bb6560a00a7ee514" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="294,5,415,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,31,278,25,279,30,224,37"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html#a61c026c96f85b3410e8ad09474364357" title="Surface fuel consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="272,55,437,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,58,256,61,256,67,224,63"/>
+</map>

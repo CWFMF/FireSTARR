@@ -1,0 +1,13 @@
+<map id="fs::Scenario::notify" name="fs::Scenario::notify">
+<area shape="rect" id="Node000001" title="Notify IObservers that a Cell has burned." alt="" coords="769,31,895,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#ad9066fea710cae46c67dd8fac14e0f44" title="Burn cell that Event takes place in." alt="" coords="600,31,721,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="753,46,721,46,721,41,753,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a630a43fd4e7b6b1203920064229fc063" title="Take whatever steps are necessary to process the given Event." alt="" coords="408,5,552,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="585,36,552,31,553,26,586,30"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Scenario.html#a3ac49eccdb45f3f07c80171b844b6355" title="Run the Scenario." alt="" coords="424,55,537,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="585,56,538,63,537,57,585,51"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Model.html#a29e52825f7ce67a8b91539bbc1923522" title="Run Iterations until confidence is reached." alt="" coords="209,55,360,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="408,70,360,70,360,65,408,65"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,55,161,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="193,70,161,70,161,65,193,65"/>
+</map>

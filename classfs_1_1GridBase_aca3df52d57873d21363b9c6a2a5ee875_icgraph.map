@@ -1,0 +1,31 @@
+<map id="fs::GridBase::cellSize" name="fs::GridBase::cellSize">
+<area shape="rect" id="Node000001" title="Cell size used for GridBase." alt="" coords="1071,129,1214,155"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1BurnedMap.html#a08df8be2aa629236b944b32089253aad" title="Constructor." alt="" coords="841,5,1017,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1118,120,1075,81,1022,45,996,34,998,29,1024,40,1079,77,1121,116"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Environment.html#a96adfeba720ac6f615693ec7a810eb58" title="Cell width and height (m)" alt="" coords="848,55,1010,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1099,125,1022,94,987,83,988,78,1024,89,1101,120"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1GridMap.html#abfc55c492a70111824a541e8c1eae89f" title="Calculate area for cells that have a value (ha)" alt="" coords="861,104,996,130"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1055,135,997,127,997,122,1056,129"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1Environment.html#a69cbac109f919775a5b4ae77abe9bf16" title="Combine rasters into CellGrid." alt="" coords="840,153,1018,179"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1055,155,1018,159,1018,154,1055,149"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1GridMap.html#a316ac56bde0d7c0f7fddd64cf24c237b" title="Make a list of all Locations that are on the edge of cells with a value." alt="" coords="852,203,1006,228"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1100,164,1024,194,988,205,987,199,1022,189,1098,159"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1GridData.html#a5792abe741a198be52c02efb5af484b8" title="Save GridMap contents to .asc file." alt="" coords="835,252,1023,278"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1121,168,1078,207,1024,243,998,254,996,249,1022,238,1075,203,1117,164"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Model.html#a63426ef9d4fb4e99e84a071956b7ea23" title="Cell width and height (m)" alt="" coords="645,55,769,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="832,70,770,70,770,65,832,65"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Scenario.html#a2373483a77537885445ea3e9594795eb" title="Cell width and height (m)" alt="" coords="430,55,570,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="629,70,570,70,570,65,629,65"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1GridData.html#ac2d46c1ef9efeb413aa450ad4742f8ab" title="Save GridMap contents to file based on settings." alt="" coords="627,244,787,285"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="819,268,787,268,787,262,819,262"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1GridData.html#ad0c4b1ea1cdc168a8cd16d19a099193f" title="Save GridMap contents to file based on settings." alt="" coords="420,244,579,285"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="612,268,580,268,580,262,612,262"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1GridData.html#a0799ed7920b056bf835aaff1e6445782" title="Save GridMap contents to file based on settings." alt="" coords="213,252,372,278"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="405,268,372,268,372,262,405,262"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1IntensityMap.html#aef2456427b7f7f2b4ce83cc36fe03d1c" title="Save contents to file." alt="" coords="12,203,158,228"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="220,250,142,232,143,226,221,245"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1GridData.html#a4f98c9c8f2a249675747d7cfd42af438" title="Save GridMap contents to file based on settings." alt="" coords="5,252,165,278"/>
+<area shape="poly" id="edge13_Node000012_Node000014" title=" " alt="" coords="197,268,165,268,165,262,197,262"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1GridData.html#a54599b0e0589a762b21eee42287c6023" title="Save GridMap contents to file based on settings." alt="" coords="5,301,165,327"/>
+<area shape="poly" id="edge14_Node000012_Node000015" title=" " alt="" coords="221,284,143,303,142,298,220,279"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="fs::FuelVariable::crownConsumption" name="fs::FuelVariable::crownConsumption">
+<area shape="rect" id="Node000001" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66]." alt="" coords="5,5,233,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#a8527d8d12edcb488e92a5cd2c7541d5e" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66]." alt="" coords="281,5,489,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="233,16,265,16,265,21,233,21"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="fs::BurnedMap::BurnedMap" name="fs::BurnedMap::BurnedMap">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,129,182,155"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1GridBase.html#aca3df52d57873d21363b9c6a2a5ee875" title="Cell size used for GridBase." alt="" coords="231,5,374,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,127,159,85,228,40,239,35,241,40,231,44,162,89,111,131"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Grid.html#a8605c5242ed00d17a7cc5c8c3f2ac859" title="Value representing no data." alt="" coords="233,55,373,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,126,229,89,245,83,247,88,231,94,131,131"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1GridBase.html#a3e760c2fe79748e3d05118166a19ada1" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="240,104,366,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="182,129,224,124,224,129,182,134"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1GridMap.html#acb21cd7a316f922c01653a4f5e56cad3" title="Set value at Location." alt="" coords="247,153,358,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="182,150,232,155,232,161,182,155"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1GridBase.html#a413af00fa9b93941a1ccfde3524168ec" title="Lower left corner X coordinate in metres." alt="" coords="230,203,376,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="132,153,231,189,248,195,246,200,229,194,130,158"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1GridBase.html#a7d550f88cd0efa4c4fe5a18d203f7819" title="Lower left corner Y coordinate in metres." alt="" coords="230,252,376,278"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="111,153,162,195,231,239,241,243,239,248,228,243,159,199,108,157"/>
+</map>

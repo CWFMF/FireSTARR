@@ -1,0 +1,7 @@
+<map id="fs::simplefbp::SimpleFuelVariable::crownFractionBurned" name="fs::simplefbp::SimpleFuelVariable::crownFractionBurned">
+<area shape="rect" id="Node000001" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="5,39,203,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#a7edd831228952ff9447b3173d1bea894" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="251,5,430,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,42,235,38,236,43,203,48"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7ed47a71fead5cbb92b60c81b468ee96" title="Fuel to use before green&#45;up." alt="" coords="258,71,423,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,70,243,75,242,80,203,75"/>
+</map>

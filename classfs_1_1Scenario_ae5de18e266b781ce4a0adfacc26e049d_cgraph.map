@@ -1,0 +1,7 @@
+<map id="fs::Scenario::reset" name="fs::Scenario::reset">
+<area shape="rect" id="Node000001" title="Reset thresholds and set SafeVector to output results to." alt="" coords="5,31,130,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#ae4e0b754d306e5e01d310d70499d3c74" title="Clear the Event list and all other data." alt="" coords="181,5,304,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,32,166,27,166,32,131,37"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a091ceb50b736a98e7f89fa8a153ac30e" title="Model this Scenario is running in." alt="" coords="178,55,308,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,49,163,54,162,59,130,55"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="fs::simplefbp::SimpleFuelVariable::calculateRos" name="fs::simplefbp::SimpleFuelVariable::calculateRos">
+<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="5,5,171,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#ad800b29b267c5861ce2228d610ab7b9e" title="Calculate rate of spread (m/min)" alt="" coords="219,13,391,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,23,203,23,203,28,171,28"/>
+</map>

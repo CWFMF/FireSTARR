@@ -1,0 +1,10 @@
+<map id="fs::Cell::slope" name="fs::Cell::slope">
+<area shape="rect" id="Node000001" title="Slope (degrees)" alt="" coords="460,31,557,56"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="541,18,530,12,509,9,489,11,478,16,476,21,481,29,477,32,471,22,475,12,487,6,509,4,531,7,543,13"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Cell.html#a238807ac2be665ede7232cccf1d7236f" title="Hash attributes into a SpreadKey value." alt="" coords="262,5,378,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="444,38,379,29,379,23,445,32"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1SpreadInfo.html#a2d7e50ce5e1722c5b612cb2a7e274359" title="Slope used for spread (%)" alt="" coords="229,55,412,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="445,54,413,58,412,53,444,49"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1SpreadInfo.html#a55ce2d69f59831cf33c1425ebb2846e6" title="Slope factor calculated from percent slope." alt="" coords="5,55,181,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="213,70,181,70,181,65,213,65"/>
+</map>

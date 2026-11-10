@@ -1,0 +1,9 @@
+<map id="fs::FuelVariable::spring" name="fs::FuelVariable::spring">
+<area shape="rect" id="Node000001" title="Fuel to use before green&#45;up." alt="" coords="255,70,406,96"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a3dbacf11442d154f634518a3583bc501" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="7,5,205,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,68,188,49,189,44,263,63"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelVariable.html#a2603d27631ef0994eabd0dfee26a12db" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="5,70,207,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,86,207,86,207,80,239,80"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelVariable.html#a5ee69bbdaeba08607b436be41814775f" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="25,120,187,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="263,103,188,122,187,117,262,98"/>
+</map>

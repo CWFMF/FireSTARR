@@ -1,0 +1,5 @@
+<map id="fs::Model::makeProbabilityMap" name="fs::Model::makeProbabilityMap">
+<area shape="rect" id="Node000001" title="Create a ProbabilityMap with the same extent as this." alt="" coords="5,5,202,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Environment.html#ab3a2021295a339c085265516c46bb65a" title="Make a ProbabilityMap that covers this Environment." alt="" coords="250,5,483,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,16,234,16,234,21,202,21"/>
+</map>

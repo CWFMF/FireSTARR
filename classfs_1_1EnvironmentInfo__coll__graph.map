@@ -1,0 +1,8 @@
+<map id="fs::EnvironmentInfo" name="fs::EnvironmentInfo">
+<area shape="rect" id="Node000001" title="Information regarding an Environment, such as grids to read and location." alt="" coords="5,202,138,228"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="127,96,219,122"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,135,85,204,81,200,149,131"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="18,5,72,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="41,46,36,83,38,124,51,167,67,201,63,203,46,169,33,124,31,83,36,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="76,38,157,93,154,98,73,42"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="fs::GridBase::proj4" name="fs::GridBase::proj4">
+<area shape="rect" id="Node000001" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="231,80,357,106"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1BurnedMap.html#a08df8be2aa629236b944b32089253aad" title="Constructor." alt="" coords="6,5,182,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="252,75,182,45,149,34,151,29,184,40,255,70"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Environment.html#a69cbac109f919775a5b4ae77abe9bf16" title="Combine rasters into CellGrid." alt="" coords="5,55,183,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,86,183,81,184,76,215,80"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Environment.html#ae4c6d46bcea5840b2bb940a73a76f27b" title="UTM projection that this uses." alt="" coords="22,104,166,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,105,167,111,166,106,215,100"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1EnvironmentInfo.html#ac1170a74e5d0f5534be641fe029b45ec" title="UTM projection that this uses." alt="" coords="28,154,160,194"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="251,115,184,145,155,156,153,151,182,140,249,110"/>
+</map>

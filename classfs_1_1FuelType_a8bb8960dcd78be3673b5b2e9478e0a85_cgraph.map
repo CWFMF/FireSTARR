@@ -1,0 +1,5 @@
+<map id="fs::FuelType::safeCode" name="fs::FuelType::safeCode">
+<area shape="rect" id="Node000001" title="Convert FuelType to its code, or 0 if nullptr." alt="" coords="5,5,158,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#a09b0dffff25dee0b6e615ce18af97d4f" title="Code for this fuel type." alt="" coords="206,5,331,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,16,190,16,190,21,158,21"/>
+</map>

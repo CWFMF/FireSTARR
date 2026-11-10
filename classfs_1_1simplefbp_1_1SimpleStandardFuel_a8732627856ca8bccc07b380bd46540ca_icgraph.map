@@ -1,0 +1,5 @@
+<map id="fs::simplefbp::SimpleStandardFuel::limitIsf" name="fs::simplefbp::SimpleStandardFuel::limitIsf">
+<area shape="rect" id="Node000001" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="219,5,411,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelNonMixed.html#a74754f823495efdf6ea4f515cfab1276" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,5,171,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,28,171,28,171,23,203,23"/>
+</map>

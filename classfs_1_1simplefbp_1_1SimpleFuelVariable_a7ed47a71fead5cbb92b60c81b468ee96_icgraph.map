@@ -1,0 +1,9 @@
+<map id="fs::simplefbp::SimpleFuelVariable::spring" name="fs::simplefbp::SimpleFuelVariable::spring">
+<area shape="rect" id="Node000001" title="Fuel to use before green&#45;up." alt="" coords="251,71,416,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a97d9f50bb00f97503505108f9ee6535c" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="5,5,203,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,69,177,49,179,44,246,63"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#ab818caed0030317582c0763ad012bcb8" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="21,71,187,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,94,187,94,187,88,235,88"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7cb8cf6ec4806e7bb094e2d386553af4" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="14,136,194,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,119,179,138,177,133,245,113"/>
+</map>

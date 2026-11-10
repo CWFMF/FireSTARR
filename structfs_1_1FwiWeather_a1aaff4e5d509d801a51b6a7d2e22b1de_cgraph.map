@@ -1,0 +1,5 @@
+<map id="fs::FwiWeather::mcFfmc" name="fs::FwiWeather::mcFfmc">
+<area shape="rect" id="Node000001" title="Moisture content (ratio) based on Ffmc." alt="" coords="5,5,167,31"/>
+<area shape="rect" id="Node000002" href="$structfs_1_1FwiWeather.html#a9f6d1df3b30644ea1d531e25df7b89a1" title="Moisture content (%) based on Ffmc." alt="" coords="215,5,396,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,16,199,16,199,21,167,21"/>
+</map>

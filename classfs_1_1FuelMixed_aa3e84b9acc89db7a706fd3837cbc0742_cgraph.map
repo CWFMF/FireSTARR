@@ -1,0 +1,7 @@
+<map id="fs::FuelMixed::isfD1" name="fs::FuelMixed::isfD1">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="5,31,139,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelD1.html#a1305d315ec45f3434bac8a79718c2b66" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="216,5,331,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,32,200,25,201,30,139,38"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelMixed.html#aa0fe999384057bbbafdec126466165a5" title="Rate of spread multiplier [ST&#45;X&#45;3 eq 27/28, GLC&#45;X&#45;10 eq 29/30]." alt="" coords="187,55,360,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,49,172,53,171,58,139,54"/>
+</map>

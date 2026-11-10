@@ -1,0 +1,5 @@
+<map id="fs::Model::findStarts" name="fs::Model::findStarts">
+<area shape="rect" id="Node000001" title="Find Cell(s) that can burn closest to Location." alt="" coords="5,5,140,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#ae35564ce5b49cf7e49a7dc061b46aaa1" title="How many ignition scenarios are being used." alt="" coords="188,5,366,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,16,172,16,172,21,140,21"/>
+</map>

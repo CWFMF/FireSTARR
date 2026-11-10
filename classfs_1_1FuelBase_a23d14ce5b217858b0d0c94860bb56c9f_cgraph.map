@@ -1,0 +1,5 @@
+<map id="fs::FuelBase::dmcRatio" name="fs::FuelBase::dmcRatio">
+<area shape="rect" id="Node000001" title="What fraction of the duff layer should use DMC to determine moisture." alt="" coords="5,5,160,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelBase.html#ac2818fa65794eb01c9c664761fcd1671" title="DuffDepth Depth of Duff layer (cm) [Anderson table 1]." alt="" coords="208,5,362,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,16,192,16,192,21,160,21"/>
+</map>

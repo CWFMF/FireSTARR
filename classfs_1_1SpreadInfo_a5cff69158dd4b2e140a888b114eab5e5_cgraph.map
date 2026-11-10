@@ -1,0 +1,15 @@
+<map id="fs::SpreadInfo::initial" name="fs::SpreadInfo::initial">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,141,143,167"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#affb33f6c4b978daa403e8b1379ded67d" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41/42]." alt="" coords="198,5,362,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,139,126,91,156,63,189,40,199,35,201,40,192,44,159,67,129,94,87,143"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html#ad800b29b267c5861ce2228d610ab7b9e" title="Calculate rate of spread (m/min)" alt="" coords="194,55,366,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="96,138,139,114,190,90,210,83,212,88,192,95,141,119,99,143"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelType.html#a7edd831228952ff9447b3173d1bea894" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="191,104,370,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="143,142,175,137,176,142,144,147"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1FuelType.html#a9a0a15fd422196cb03514df61a3fd995" title="Final rate of spread (m/min)" alt="" coords="209,169,352,195"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="144,161,194,168,193,173,143,166"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1SpreadInfo.html#aac5d1cc89631a602bb6560a00a7ee514" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="220,219,341,244"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="102,165,192,205,210,211,208,216,190,210,100,170"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1FuelType.html#a61c026c96f85b3410e8ad09474364357" title="Surface fuel consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="198,268,363,309"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="89,166,132,209,161,233,192,255,200,259,198,264,189,259,158,237,129,213,85,170"/>
+</map>

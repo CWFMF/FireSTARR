@@ -1,0 +1,7 @@
+<map id="fs::testing::FuelCompareOptions" name="fs::testing::FuelCompareOptions">
+<area shape="rect" id="Node000001" title=" " alt="" coords="40,109,200,150"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,99,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,43,110,107,106,110,65,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="123,5,256,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="182,47,162,86,143,110,139,107,158,84,178,44"/>
+</map>

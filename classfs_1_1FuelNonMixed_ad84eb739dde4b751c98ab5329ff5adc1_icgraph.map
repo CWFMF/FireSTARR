@@ -1,0 +1,5 @@
+<map id="fs::FuelNonMixed::calculateRos" name="fs::FuelNonMixed::calculateRos">
+<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="248,5,450,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelNonMixed.html#afcf750d0232313ed8e6a3d14fa446e64" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,5,200,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,21,200,21,200,16,232,16"/>
+</map>

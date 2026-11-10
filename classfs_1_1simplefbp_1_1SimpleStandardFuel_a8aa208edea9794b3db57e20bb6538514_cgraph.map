@@ -1,0 +1,5 @@
+<map id="fs::simplefbp::SimpleStandardFuel::crownConsumption" name="fs::simplefbp::SimpleStandardFuel::crownConsumption">
+<area shape="rect" id="Node000001" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66]." alt="" coords="5,5,198,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#ac42bcb33751114426ad3aee508fcd38d" title="Crown fuel load (kg/m^2) [ST&#45;X&#45;3 table 8]." alt="" coords="246,5,438,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,23,230,23,230,28,198,28"/>
+</map>

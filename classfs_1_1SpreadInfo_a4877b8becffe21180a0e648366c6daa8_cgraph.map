@@ -1,0 +1,5 @@
+<map id="fs::SpreadInfo::foliarMoisture" name="fs::SpreadInfo::foliarMoisture">
+<area shape="rect" id="Node000001" title="Calculate foliar moisture." alt="" coords="5,5,191,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1SpreadInfo.html#aac5d1cc89631a602bb6560a00a7ee514" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="239,5,360,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,16,223,16,223,21,191,21"/>
+</map>

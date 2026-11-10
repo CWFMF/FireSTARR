@@ -1,0 +1,9 @@
+<map id="fs::simplefbp::SimpleStandardFuel::rosBasic" name="fs::simplefbp::SimpleStandardFuel::rosBasic">
+<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="432,39,624,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelMixed.html#a10a46b627dbbb0899614d99a96f979a7" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="219,5,384,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="417,45,384,40,385,35,417,40"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelNonMixed.html#a1fbd687e8b259e4d72cf4db04f4d2457" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="219,71,384,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="417,77,385,82,384,77,417,72"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelNonMixed.html#a74754f823495efdf6ea4f515cfab1276" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,71,171,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="203,94,171,94,171,88,203,88"/>
+</map>

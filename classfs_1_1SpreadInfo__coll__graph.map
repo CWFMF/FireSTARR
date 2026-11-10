@@ -1,0 +1,11 @@
+<map id="fs::SpreadInfo" name="fs::SpreadInfo">
+<area shape="rect" id="Node000001" title="Information regarding spread within a Cell for a specific Scenario and time." alt="" coords="99,184,201,210"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,95,55,121"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="50,131,78,158,120,181,117,186,75,162,47,135"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="79,95,221,121"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,137,153,184,147,184,147,137"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1Direction.html" title=" " alt="" coords="245,95,335,121"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,132,171,186,168,181,256,127"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1StrictType.html" title=" " alt="" coords="204,5,376,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="293,61,293,95,287,95,287,61"/>
+</map>

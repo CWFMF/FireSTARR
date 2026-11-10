@@ -1,0 +1,9 @@
+<map id="fs::Environment::loadEnvironment" name="fs::Environment::loadEnvironment">
+<area shape="rect" id="Node000001" title="Load from rasters in folder that have same projection as Perimeter." alt="" coords="5,35,218,60"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Environment.html#a3a4e7eb5c586654cca4036a729673c4d" title="Elevation of the origin Point." alt="" coords="266,5,434,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,32,250,28,250,33,219,37"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1EnvironmentInfo.html#a3592b2cdb1c7836ce5b11cde08b8f778" title="Load EnvironmentInfo from given rasters." alt="" coords="284,55,416,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,57,268,63,268,69,218,63"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1EnvironmentInfo.html#a1293315b5662fed02338339b57eef046" title="Construct from given rasters." alt="" coords="482,55,614,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="416,73,467,73,467,78,416,78"/>
+</map>

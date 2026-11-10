@@ -1,0 +1,5 @@
+<map id="fs::Scenario::burn" name="fs::Scenario::burn">
+<area shape="rect" id="Node000001" title="Burn cell that Event takes place in." alt="" coords="5,5,126,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#a80ef1120888229a039b5a7a1ea87d355" title="Notify IObservers that a Cell has burned." alt="" coords="174,5,300,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,16,158,16,158,21,126,21"/>
+</map>

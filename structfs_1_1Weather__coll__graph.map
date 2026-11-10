@@ -1,0 +1,25 @@
+<map id="fs::Weather" name="fs::Weather">
+<area shape="rect" id="Node000001" title="Collection of weather indices used for calculating FwiWeather." alt="" coords="799,110,885,136"/>
+<area shape="rect" id="Node000002" href="$structfs_1_1Temperature.html" title=" " alt="" coords="555,24,666,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="682,51,776,83,821,107,819,112,774,88,680,56"/>
+<area shape="rect" id="Node000003" href="$structfs_1_1StrictType.html" title=" " alt="" coords="246,5,431,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="446,27,554,31,554,37,446,33"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1RelativeHumidity.html" title=" " alt="" coords="542,82,679,108"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="694,102,798,115,798,120,694,108"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1StrictType.html" title=" " alt="" coords="254,71,423,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="438,90,542,91,542,97,438,95"/>
+<area shape="rect" id="Node000006" href="$structfs_1_1Wind.html" title="Wind with a Speed and Direction." alt="" coords="577,136,644,161"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="660,148,715,147,774,141,802,134,804,139,775,146,715,152,660,153"/>
+<area shape="rect" id="Node000007" href="$structfs_1_1Speed.html" title=" " alt="" coords="300,136,376,161"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="392,146,576,146,576,151,392,151"/>
+<area shape="rect" id="Node000008" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,120,185,161"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="200,141,300,144,300,150,200,146"/>
+<area shape="rect" id="Node000009" href="$structfs_1_1Direction.html" title=" " alt="" coords="294,185,383,210"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="398,186,518,166,576,154,577,159,519,171,399,192"/>
+<area shape="rect" id="Node000010" href="$structfs_1_1StrictType.html" title=" " alt="" coords="9,185,181,226"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="197,200,293,196,293,202,197,205"/>
+<area shape="rect" id="Node000011" href="$structfs_1_1Precipitation.html" title=" " alt="" coords="555,213,666,238"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="677,205,725,189,773,168,823,134,826,139,776,172,727,194,679,210"/>
+<area shape="rect" id="Node000012" href="$structfs_1_1StrictType.html" title=" " alt="" coords="234,235,442,275"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="458,239,555,229,555,234,458,245"/>
+</map>

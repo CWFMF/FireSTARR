@@ -1,0 +1,9 @@
+<map id="fs::Scenario::evaluateNextEvent" name="fs::Scenario::evaluateNextEvent">
+<area shape="rect" id="Node000001" title="Evaluate next Event in the queue." alt="" coords="569,5,741,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#a3ac49eccdb45f3f07c80171b844b6355" title="Run the Scenario." alt="" coords="408,13,521,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="554,28,522,28,522,23,554,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#a29e52825f7ce67a8b91539bbc1923522" title="Run Iterations until confidence is reached." alt="" coords="209,13,360,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="392,28,360,28,360,23,392,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,161,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="193,28,161,28,161,23,193,23"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fs::FireWeather" name="fs::FireWeather">
+<area shape="rect" id="Node000001" title="A stream of weather that gets used by a Scenario every Iteration." alt="" coords="109,109,218,135"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,138,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,61,75,84,90,98,110,108,108,113,87,103,70,86,63,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="166,5,348,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="246,62,229,87,213,101,195,111,192,106,210,96,226,83,242,59"/>
+</map>

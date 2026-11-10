@@ -1,0 +1,17 @@
+<map id="fs::simplefbp::SimpleFuelM2&lt; PercentConifer &gt;" name="fs::simplefbp::SimpleFuelM2&lt; PercentConifer &gt;">
+<area shape="rect" id="Node000001" title="FBP fuel type M&#45;2." alt="" coords="1295,71,1460,112"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelMixedWood.html" title=" " alt="" coords="1035,71,1246,112"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1261,89,1295,89,1295,94,1261,94"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelMixed.html" title=" " alt="" coords="812,56,986,127"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1001,89,1035,89,1035,94,1001,94"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html" title=" " alt="" coords="560,56,762,127"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="778,89,811,89,811,94,778,94"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html" title="Base class for all FuelTypes." alt="" coords="231,16,471,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="487,62,560,73,559,78,486,67"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,5,120,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="136,22,231,30,230,36,135,27"/>
+<area shape="rect" id="Node000007" href="$structfs_1_1duff_1_1Duff.html" title="A specific type of Duff layer, and the associated smouldering coefficients." alt="" coords="18,56,107,82"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="122,67,206,63,230,60,230,66,207,68,122,72"/>
+<area shape="rect" id="Node000008" href="$structfs_1_1LogValue.html" title="A result of calling log(x) for some value of x, pre&#45;calculated at compile time." alt="" coords="304,96,398,122"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="413,103,560,94,560,100,413,108"/>
+</map>

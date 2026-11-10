@@ -1,0 +1,9 @@
+<map id="fs::Environment::load" name="fs::Environment::load">
+<area shape="rect" id="Node000001" title="Load from rasters." alt="" coords="5,55,146,80"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Environment.html#a3a4e7eb5c586654cca4036a729673c4d" title="Elevation of the origin Point." alt="" coords="204,5,372,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,51,214,32,215,38,135,57"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Environment.html#a57ea9c719ca694da72bc1b02985e1023" title="Construct from cells and elevation." alt="" coords="194,55,382,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,65,178,65,178,70,146,70"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1ConstantGrid.html#ab8aac0855a4e41a9fd240f7ee8cb4766" title="Read a section of a TIFF into a ConstantGrid." alt="" coords="206,104,370,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,78,215,97,214,103,134,84"/>
+</map>

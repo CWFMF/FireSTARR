@@ -1,0 +1,11 @@
+<map id="fs::simplefbp::SimpleFuelSlash::surfaceFuelConsumption" name="fs::simplefbp::SimpleFuelSlash::surfaceFuelConsumption">
+<area shape="rect" id="Node000001" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 25]." alt="" coords="5,104,210,145"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelSlash.html#a026deabba61d0b1fe1b7c8b37a2b9f45" title="Forest Floor Consumption parameter a [ST&#45;X&#45;3 eq 19/21/23]." alt="" coords="258,5,423,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,101,257,57,272,50,274,55,259,61,157,106"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelSlash.html#ae680248bfa7ef45d236edf72d8183277" title="Forest Floor Consumption parameter b [ST&#45;X&#45;3 eq 19/21/23]." alt="" coords="258,71,423,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,107,241,102,242,108,211,112"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelSlash.html#abb425b47b57363a1ecf82d0b5f141187" title="Woody Fuel Consumption parameter a [ST&#45;X&#45;3 eq 20/22/24]." alt="" coords="258,136,423,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="210,136,242,140,241,145,210,141"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleFuelSlash.html#a239a2fc752090a081361d797297eb794" title="Woody Fuel Consumption parameter b [ST&#45;X&#45;3 eq 20/22/24]." alt="" coords="258,201,423,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="158,143,259,186,275,193,273,198,257,191,156,148"/>
+</map>

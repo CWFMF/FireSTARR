@@ -1,0 +1,5 @@
+<map id="fs::FuelType::safeCode" name="fs::FuelType::safeCode">
+<area shape="rect" id="Node000001" title="Convert FuelType to its code, or 0 if nullptr." alt="" coords="231,5,383,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Environment.html#a69cbac109f919775a5b4ae77abe9bf16" title="Combine rasters into CellGrid." alt="" coords="5,5,183,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,21,183,21,183,16,215,16"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="fs::StandardFuel::rosBasic" name="fs::StandardFuel::rosBasic">
+<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="5,55,178,80"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1StandardFuel.html#acac627f25151b43767a1217fbaf49896" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="237,5,366,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,51,228,33,229,38,150,57"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1StandardFuel.html#a13081c26a52036adcb099a96abf0bf8c" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="237,55,366,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,65,222,65,222,70,178,70"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1StandardFuel.html#a58e6f2c83fcbc79b20dcd84968153735" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="226,104,377,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,78,229,97,228,102,149,84"/>
+</map>

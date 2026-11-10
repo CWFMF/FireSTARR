@@ -1,0 +1,7 @@
+<map id="fs::simplefbp::SimpleFuelBase&lt; BulkDensity, InorganicPercent, DuffDepth &gt;" name="fs::simplefbp::SimpleFuelBase&lt; BulkDensity, InorganicPercent, DuffDepth &gt;">
+<area shape="rect" id="Node000001" title="Base class for all FuelTypes." alt="" coords="5,109,246,165"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="6,5,120,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,44,113,107,109,110,74,46"/>
+<area shape="rect" id="Node000003" href="$structfs_1_1duff_1_1Duff.html" title="A specific type of Duff layer, and the associated smouldering coefficients." alt="" coords="144,5,232,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,46,142,110,138,107,172,44"/>
+</map>

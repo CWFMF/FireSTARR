@@ -1,0 +1,5 @@
+<map id="fs::simplefbp::SimpleFuelSlash::ffcB" name="fs::simplefbp::SimpleFuelSlash::ffcB">
+<area shape="rect" id="Node000001" title="Forest Floor Consumption parameter b [ST&#45;X&#45;3 eq 19/21/23]." alt="" coords="258,5,423,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelSlash.html#a5faad18f6f4e822a8297266d1331df43" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 25]." alt="" coords="5,5,210,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,28,210,28,210,23,242,23"/>
+</map>

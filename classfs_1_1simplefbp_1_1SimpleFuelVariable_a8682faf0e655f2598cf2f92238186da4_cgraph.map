@@ -1,0 +1,5 @@
+<map id="fs::simplefbp::SimpleFuelVariable::cbh" name="fs::simplefbp::SimpleFuelVariable::cbh">
+<area shape="rect" id="Node000001" title="Crown base height (m) [ST&#45;X&#45;3 table 8]." alt="" coords="5,5,171,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#ae2cb8b671ba718cb692311ab636a5ebd" title="Crown base height (m) [ST&#45;X&#45;3 table 8]." alt="" coords="219,13,337,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,23,203,23,203,28,171,28"/>
+</map>

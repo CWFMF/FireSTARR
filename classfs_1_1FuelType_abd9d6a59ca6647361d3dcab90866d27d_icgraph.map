@@ -1,0 +1,7 @@
+<map id="fs::FuelType::grass_curing" name="fs::FuelType::grass_curing">
+<area shape="rect" id="Node000001" title="Grass curing." alt="" coords="219,39,348,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a428ab71df27934a0f103815b03cb388d" title="Grass curing." alt="" coords="14,5,162,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,48,162,41,163,36,204,43"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a296f2b076b57c7a5c5d09222dd91e20d" title="Grass curing." alt="" coords="5,71,171,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,75,172,80,171,75,203,69"/>
+</map>

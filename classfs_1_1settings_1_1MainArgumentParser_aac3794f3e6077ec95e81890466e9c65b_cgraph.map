@@ -1,0 +1,9 @@
+<map id="fs::settings::MainArgumentParser::parse_args" name="fs::settings::MainArgumentParser::parse_args">
+<area shape="rect" id="Node000001" title="Parse arguments that were given to constructor." alt="" coords="5,71,180,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1settings_1_1ArgumentParser.html#a65b43b7ecb6b651448b09b1b679e67ed" title="Get next positional argument." alt="" coords="233,5,417,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,68,234,48,236,53,168,73"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1settings_1_1ArgumentParser.html#a721acb3723184077280fd15cc644efa9" title="If any more positional arguments are available." alt="" coords="233,71,417,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,88,217,88,217,94,180,94"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1settings_1_1SettingsArgumentParser.html#a9e56359b4216025e7975465643c97d9d" title="Parse arguments that were given to constructor." alt="" coords="228,136,422,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="168,109,236,129,234,134,166,114"/>
+</map>

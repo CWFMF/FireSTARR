@@ -1,0 +1,9 @@
+<map id="fs::ROSOffset" name="fs::ROSOffset">
+<area shape="rect" id="Node000001" title=" " alt="" coords="158,199,260,225"/>
+<area shape="rect" id="Node000002" href="$structfs_1_1Direction.html" title=" " alt="" coords="47,103,136,128"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,136,195,196,192,201,117,140"/>
+<area shape="rect" id="Node000003" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,5,178,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,62,94,102,89,102,89,62"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1BoundedPoint.html" title=" " alt="" coords="160,95,338,136"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="237,151,216,200,211,198,232,149"/>
+</map>

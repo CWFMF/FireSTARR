@@ -1,0 +1,5 @@
+<map id="fs::FuelVariable::cfl" name="fs::FuelVariable::cfl">
+<area shape="rect" id="Node000001" title="Crown fuel load (kg/m^2) [ST&#45;X&#45;3 table 8]." alt="" coords="5,5,135,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#a3763c98245408268bbc2127687173727" title="Crown fuel load (kg/m^2) [ST&#45;X&#45;3 table 8]." alt="" coords="183,5,293,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,16,167,16,167,21,135,21"/>
+</map>

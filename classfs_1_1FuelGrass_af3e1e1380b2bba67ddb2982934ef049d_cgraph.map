@@ -1,0 +1,13 @@
+<map id="fs::FuelGrass::calculateIsf" name="fs::FuelGrass::calculateIsf">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,51,177,77"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelGrass.html#a870f6aef49a73c74a783b04e118f638f" title="Calculate base rate of spread multiplier." alt="" coords="477,14,661,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,48,167,28,224,12,285,5,348,3,463,9,463,14,348,8,286,10,225,18,169,33,120,53"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelGrass.html#a5b1b3907860d3eeaa6924921202f2c0d" title="Calculate rate of spread (m/min)" alt="" coords="237,51,416,77"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,62,221,62,221,67,177,67"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1StandardFuel.html#a175186d3f8692ae1255cdb514a53b84e" title=" " alt="" coords="225,101,429,172"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="136,75,210,98,209,103,135,80"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelGrass.html#a56f36ac02ff409232e56582164c4c449" title="Grass curing." alt="" coords="709,7,846,47"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="662,24,694,24,694,30,662,30"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="414,48,466,40,467,45,415,53"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="288,53,280,43,285,33,301,27,327,25,356,27,370,34,368,39,354,33,327,30,302,32,288,37,285,42,292,49"/>
+</map>

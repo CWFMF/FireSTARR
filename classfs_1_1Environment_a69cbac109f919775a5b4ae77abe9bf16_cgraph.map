@@ -1,0 +1,27 @@
+<map id="fs::Environment::makeCells" name="fs::Environment::makeCells">
+<area shape="rect" id="Node000001" title="Combine rasters into CellGrid." alt="" coords="5,252,183,278"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Cell.html#a1b78c40cdf9d839779f87d52b340d16f" title="Aspect (degrees)" alt="" coords="262,5,368,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,251,112,210,139,153,178,92,202,64,229,40,246,30,249,35,232,44,206,68,182,95,144,155,117,212,102,252"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1GridBase.html#aca3df52d57873d21363b9c6a2a5ee875" title="Cell size used for GridBase." alt="" coords="243,55,386,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,250,118,218,146,174,184,129,229,89,236,85,239,90,232,94,188,132,150,177,122,221,104,253"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Environment.html#a3a4e7eb5c586654cca4036a729673c4d" title="Elevation of the origin Point." alt="" coords="231,104,399,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="104,250,154,196,190,165,229,139,239,134,242,138,232,143,193,169,158,200,108,253"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Cell.html#ae888a2cb9bdbb0b23bbaf1a99a5eb593" title="Fuel." alt="" coords="256,153,374,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="115,249,166,219,230,188,245,182,247,187,232,193,169,224,118,254"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1GridBase.html#a3e760c2fe79748e3d05118166a19ada1" title="Proj4 string defining coordinate system for this grid. Must be a UTM projection." alt="" coords="252,203,378,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="154,249,239,230,240,235,156,254"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1FuelType.html#a8bb8960dcd78be3673b5b2e9478e0a85" title="Convert FuelType to its code, or 0 if nullptr." alt="" coords="239,252,391,278"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="183,262,223,262,223,268,183,268"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1Cell.html#a7e328e732f1f96b9fcd86c055c6f598f" title="Slope (degrees)" alt="" coords="266,301,364,327"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="156,276,252,297,250,303,154,281"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1GridBase.html#a413af00fa9b93941a1ccfde3524168ec" title="Lower left corner X coordinate in metres." alt="" coords="242,351,388,376"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="118,276,169,306,232,337,247,343,245,348,230,342,166,311,115,281"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1GridBase.html#a55003591471179b97dd845cb71e19bc9" title="Upper right corner X coordinate in metres." alt="" coords="239,400,390,426"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="108,276,158,330,193,360,232,387,242,391,239,396,229,391,190,365,154,334,104,280"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1GridBase.html#a7d550f88cd0efa4c4fe5a18d203f7819" title="Lower left corner Y coordinate in metres." alt="" coords="242,449,388,475"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="104,277,122,309,150,352,188,397,232,436,239,440,236,445,229,440,184,401,146,355,118,312,100,279"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1GridBase.html#aa0e94027c1fe2afac82cb64b790d520c" title="Upper right corner Y coordinate in metres." alt="" coords="239,499,390,524"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="102,277,117,318,144,374,182,434,206,462,232,485,238,489,235,493,229,490,202,465,178,437,139,377,112,320,97,279"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1FuelType.html#a09b0dffff25dee0b6e615ce18af97d4f" title="Code for this fuel type." alt="" coords="447,252,572,278"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="392,262,432,262,432,268,392,268"/>
+</map>

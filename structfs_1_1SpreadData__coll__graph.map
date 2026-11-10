@@ -1,0 +1,7 @@
+<map id="fs::SpreadData" name="fs::SpreadData">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,199,145,225"/>
+<area shape="rect" id="Node000002" href="$structfs_1_1Direction.html" title=" " alt="" coords="47,95,136,121"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,137,94,199,89,199,89,137"/>
+<area shape="rect" id="Node000003" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,5,178,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,61,94,95,89,95,89,61"/>
+</map>

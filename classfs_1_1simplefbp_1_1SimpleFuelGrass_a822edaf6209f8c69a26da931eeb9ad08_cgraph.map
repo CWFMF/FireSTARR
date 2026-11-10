@@ -1,0 +1,8 @@
+<map id="fs::simplefbp::SimpleFuelGrass::calculateRos" name="fs::simplefbp::SimpleFuelGrass::calculateRos">
+<area shape="rect" id="Node000001" title="Calculate rate of spread (m/min)" alt="" coords="5,29,171,70"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="48,29,46,19,52,10,67,5,88,3,111,5,125,11,123,16,110,10,88,8,68,10,55,15,51,20,53,28"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html#a5806c0ceb2fe1d515eaf035141c88048" title="Calculate base rate of spread multiplier." alt="" coords="219,29,384,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,47,203,47,203,52,171,52"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html#a61643933e28310df338c7933fe10b63e" title="Grass curing." alt="" coords="432,29,597,70"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="384,47,416,47,416,52,384,52"/>
+</map>

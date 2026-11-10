@@ -1,0 +1,9 @@
+<map id="fs::FuelType::surfaceFuelConsumption" name="fs::FuelType::surfaceFuelConsumption">
+<area shape="rect" id="Node000001" title="Surface fuel consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="272,55,437,96"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1SpreadInfo.html#a5cff69158dd4b2e140a888b114eab5e5" title=" " alt="" coords="46,5,183,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,54,223,46,173,34,174,29,224,41,257,49"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelVariable.html#a706de6dca1021beec4351aabffe39ad2" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="35,55,194,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,78,195,78,195,73,257,73"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7150caabb52d58ebbff9f9c5d45a5fe6" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="5,120,224,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="264,103,193,122,191,117,262,98"/>
+</map>

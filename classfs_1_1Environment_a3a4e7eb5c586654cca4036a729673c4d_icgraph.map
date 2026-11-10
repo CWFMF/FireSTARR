@@ -1,0 +1,13 @@
+<map id="fs::Environment::elevation" name="fs::Environment::elevation">
+<area shape="rect" id="Node000001" title="Elevation of the origin Point." alt="" coords="469,68,637,93"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Environment.html#aa6bf41b514b6abe0687c1810e1aa835b" title="Load from rasters." alt="" coords="245,14,385,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,66,375,43,376,38,478,61"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Environment.html#a83f566ebc553a66f6b1718fce44c148d" title="Load from rasters in folder that have same projection as Perimeter." alt="" coords="209,68,421,93"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="454,83,422,83,422,78,454,78"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Environment.html#a69cbac109f919775a5b4ae77abe9bf16" title="Combine rasters into CellGrid." alt="" coords="226,117,404,142"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="473,100,381,119,380,114,472,94"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1EnvironmentInfo.html#a6813b5f1a646fc63a716798ce789ffb7" title="Load the full Environment." alt="" coords="17,5,149,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="229,29,150,29,150,23,229,24"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,70,161,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="193,84,161,85,161,79,193,79"/>
+</map>

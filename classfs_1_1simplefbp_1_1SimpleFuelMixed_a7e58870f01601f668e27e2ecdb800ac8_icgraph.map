@@ -1,0 +1,9 @@
+<map id="fs::simplefbp::SimpleFuelMixed::rosMultiplier" name="fs::simplefbp::SimpleFuelMixed::rosMultiplier">
+<area shape="rect" id="Node000001" title="Rate of spread multiplier [ST&#45;X&#45;3 eq 27/28, GLC&#45;X&#45;10 eq 29/30]." alt="" coords="432,39,597,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelMixed.html#a10a46b627dbbb0899614d99a96f979a7" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="219,5,384,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="416,46,384,41,385,36,417,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelMixed.html#a532bb4c2dee90d5bff24a56542e52be9" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="219,71,384,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="417,76,385,81,384,76,416,71"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelMixed.html#a64f30531cc5953ddb4bad03419064577" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 42]." alt="" coords="5,71,171,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="203,94,171,94,171,88,203,88"/>
+</map>

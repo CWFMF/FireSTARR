@@ -1,0 +1,13 @@
+<map id="fs::FuelMixed&lt; A, B, C, Bui0, RosMultiplier, PercentMixed, BulkDensity, InorganicPercent, DuffDepth &gt;" name="fs::FuelMixed&lt; A, B, C, Bui0, RosMultiplier, PercentMixed, BulkDensity, InorganicPercent, DuffDepth &gt;">
+<area shape="rect" id="Node000001" title="A mixedwood fuel type." alt="" coords="746,48,943,119"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1StandardFuel.html" title=" " alt="" coords="494,48,696,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="712,81,745,81,745,86,712,86"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelBase.html" title="Base class for all FuelTypes." alt="" coords="208,23,405,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="421,57,494,67,493,72,420,62"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,5,97,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="112,21,208,31,207,36,112,27"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1duff_1_1Duff.html" title="A specific type of Duff layer, and the associated smouldering coefficients." alt="" coords="7,56,95,82"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="111,67,183,63,207,60,208,65,184,68,111,72"/>
+<area shape="rect" id="Node000006" href="$structfs_1_1LogValue.html" title="A result of calling log(x) for some value of x, pre&#45;calculated at compile time." alt="" coords="260,88,353,114"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="368,94,493,87,494,92,369,100"/>
+</map>

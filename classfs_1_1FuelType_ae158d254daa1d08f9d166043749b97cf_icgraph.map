@@ -1,0 +1,7 @@
+<map id="fs::FuelType::survivalProbability" name="fs::FuelType::survivalProbability">
+<area shape="rect" id="Node000001" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="233,46,435,72"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a5ee69bbdaeba08607b436be41814775f" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="14,5,176,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,46,176,40,177,34,223,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7cb8cf6ec4806e7bb094e2d386553af4" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="5,71,185,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,77,186,82,185,76,218,72"/>
+</map>

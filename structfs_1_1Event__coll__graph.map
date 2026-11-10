@@ -1,0 +1,19 @@
+<map id="fs::Event" name="fs::Event">
+<area shape="rect" id="Node000001" title="A specific Event scheduled in a specific Scenario." alt="" coords="632,116,703,142"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Cell.html" title="A Position with a Slope, Aspect, and Fuel." alt="" coords="439,66,499,92"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="515,85,608,106,632,113,630,118,607,111,514,90"/>
+<area shape="rect" id="Node000003" href="$structfs_1_1XYIdx.html" title=" " alt="" coords="432,116,506,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="521,126,632,126,632,131,521,131"/>
+<area shape="rect" id="Node000004" href="$structfs_1_1XIdx.html" title=" " alt="" coords="249,40,313,66"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="329,69,436,113,434,118,327,74"/>
+<area shape="rect" id="Node000005" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,5,146,76"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="161,43,249,48,249,53,161,48"/>
+<area shape="rect" id="Node000006" href="$structfs_1_1YIdx.html" title=" " alt="" coords="249,116,313,142"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="329,126,432,126,432,131,329,131"/>
+<area shape="rect" id="Node000007" href="$structfs_1_1StrictType.html" title=" " alt="" coords="5,100,146,171"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="161,130,249,127,249,132,161,135"/>
+<area shape="rect" id="Node000008" href="$structfs_1_1Direction.html" title=" " alt="" coords="424,169,514,195"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="528,167,607,146,630,139,632,144,608,152,529,172"/>
+<area shape="rect" id="Node000009" href="$structfs_1_1StrictType.html" title=" " alt="" coords="195,166,367,206"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="383,181,424,180,424,186,383,187"/>
+</map>

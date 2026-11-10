@@ -1,0 +1,9 @@
+<map id="fs::FuelType::crownFractionBurned" name="fs::FuelType::crownFractionBurned">
+<area shape="rect" id="Node000001" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="252,71,431,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a3dbacf11442d154f634518a3583bc501" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="5,5,204,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,69,180,49,182,44,252,64"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a97d9f50bb00f97503505108f9ee6535c" title="Crown Fraction Burned (CFB) [ST&#45;X&#45;3 eq 58]." alt="" coords="6,71,203,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,94,204,94,204,88,236,88"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1SpreadInfo.html#a5cff69158dd4b2e140a888b114eab5e5" title=" " alt="" coords="36,136,173,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,118,161,137,160,132,240,113"/>
+</map>

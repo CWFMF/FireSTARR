@@ -1,0 +1,21 @@
+<map id="fs::Environment" name="fs::Environment">
+<area shape="rect" id="Node000001" title="The area that a Model is run for, with Fuel, Slope, and Aspect grids." alt="" coords="211,495,321,521"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,376,167,417"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,426,143,448,172,469,225,492,223,497,169,473,140,453,114,430"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1ConstantGrid.html" title=" " alt="" coords="190,376,342,417"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,433,269,495,263,495,263,433"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1GridData.html" title=" " alt="" coords="197,271,335,327"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="269,342,269,376,263,376,263,342"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Grid.html" title=" " alt="" coords="96,183,273,208"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="206,219,246,269,242,272,202,222"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="89,94,182,120"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="152,132,180,181,176,184,147,134"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="109,5,162,31"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="138,47,138,94,133,94,133,47"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1Cell.html" title="A Position with a Slope, Aspect, and Fuel." alt="" coords="205,94,266,120"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="223,134,194,184,189,181,218,132"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="297,183,398,208"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="330,222,290,272,286,269,326,219"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1BurnedData.html" title=" " alt="" coords="366,384,472,410"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="392,421,285,497,282,492,388,417"/>
+</map>

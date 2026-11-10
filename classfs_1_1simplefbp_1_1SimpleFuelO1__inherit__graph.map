@@ -1,0 +1,7 @@
+<map id="fs::simplefbp::SimpleFuelO1" name="fs::simplefbp::SimpleFuelO1">
+<area shape="rect" id="Node000001" title="FBP fuel type O&#45;1." alt="" coords="5,183,188,208"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html" title=" " alt="" coords="9,79,184,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,150,99,182,94,182,94,150"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="39,5,154,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,47,99,78,94,78,94,47"/>
+</map>

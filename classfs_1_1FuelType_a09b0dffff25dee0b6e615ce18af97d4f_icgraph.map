@@ -1,0 +1,9 @@
+<map id="fs::FuelType::code" name="fs::FuelType::code">
+<area shape="rect" id="Node000001" title="Code for this fuel type." alt="" coords="431,42,556,68"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelLookupImpl.html#a8d51e5d22e222e98ac600244d2f270bb" title="Look up the original grid code for a FuelType." alt="" coords="241,5,372,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,45,372,39,373,33,416,40"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html#a8bb8960dcd78be3673b5b2e9478e0a85" title="Convert FuelType to its code, or 0 if nullptr." alt="" coords="231,70,383,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="416,69,384,74,383,69,415,64"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Environment.html#a69cbac109f919775a5b4ae77abe9bf16" title="Combine rasters into CellGrid." alt="" coords="5,70,183,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="215,86,183,86,183,80,215,80"/>
+</map>

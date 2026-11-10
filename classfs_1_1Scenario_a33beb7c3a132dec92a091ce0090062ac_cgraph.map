@@ -1,0 +1,5 @@
+<map id="fs::Scenario::dayStart" name="fs::Scenario::dayStart">
+<area shape="rect" id="Node000001" title="Sunrise time for given day." alt="" coords="5,5,149,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1StartPoint.html#a30062745d004ee29f623e20af2f04899" title="Sunrise time." alt="" coords="197,5,347,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,16,181,16,181,21,149,21"/>
+</map>

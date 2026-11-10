@@ -1,0 +1,23 @@
+<map id="fs::SpreadInfo::nd" name="fs::SpreadInfo::nd">
+<area shape="rect" id="Node000001" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="272,280,393,306"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a1ae4c088e775ea10cc6c2fa4a048ea8e" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="23,5,206,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,265,315,217,296,157,266,97,246,69,222,46,203,34,206,29,225,41,250,66,270,94,301,155,320,216,330,264"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7699bd14d07f06682576c62d1cc423c1" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="32,55,197,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="320,266,306,231,285,189,257,147,222,111,196,96,199,91,225,107,261,144,290,186,311,229,325,264"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelVariable.html#aaa79dff62a2779d2633eda9578506c72" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="37,120,192,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="312,269,274,221,250,197,222,176,191,161,193,156,225,172,253,193,278,218,316,265"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a1c5f8b9090ce10b453e150e938ab692d" title="Critical Surface Fire Intensity (CSI) [ST&#45;X&#45;3 eq 56]." alt="" coords="11,186,218,226"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="293,275,223,241,192,230,193,224,225,236,296,270"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1FuelVariable.html#a30fee08f383766ac7d8c10eb15098f65" title="Final rate of spread (m/min)" alt="" coords="33,251,196,276"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="256,285,196,277,196,272,256,280"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a5062da35a0a3bd165a08e1423ed33894" title="Final rate of spread (m/min)" alt="" coords="32,300,197,341"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="257,305,198,313,197,308,256,300"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1SpreadInfo.html#a4877b8becffe21180a0e648366c6daa8" title="Calculate foliar moisture." alt="" coords="22,365,207,391"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="300,316,265,337,225,355,187,367,185,362,223,350,262,332,297,312"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1SpreadInfo.html#a5cff69158dd4b2e140a888b114eab5e5" title=" " alt="" coords="46,415,183,440"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="315,320,277,365,252,387,225,406,185,421,183,416,222,401,249,383,273,361,311,317"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1FuelVariable.html#a706de6dca1021beec4351aabffe39ad2" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="35,464,194,505"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="322,322,286,388,258,424,225,455,196,471,193,466,222,451,254,421,281,386,317,319"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a7150caabb52d58ebbff9f9c5d45a5fe6" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 9&#45;25]." alt="" coords="5,530,224,570"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="328,321,316,365,296,418,266,472,247,497,225,519,206,532,203,527,222,515,243,493,262,469,291,416,311,363,323,320"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="fs::Statistics::mean" name="fs::Statistics::mean">
+<area shape="rect" id="Node000001" title="Mean (average) value." alt="" coords="440,31,571,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Statistics.html#aabf36ba16675725d02ec10f99271ac91" title="Estimate how many more runs are required to achieve desired confidence." alt="" coords="217,5,392,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="424,36,392,32,393,27,425,31"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Statistics.html#a30ab563c38a33e50427a7b0f7d81abf6" title="Calculate Student&#39;s T value." alt="" coords="226,55,383,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="425,56,384,61,383,55,424,50"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Statistics.html#af2f2e9a3ab98e559217c48c932bc8829" title="Whether or not we have less than the relative error and can be confident in the results." alt="" coords="5,55,169,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="210,70,169,70,169,65,210,65"/>
+</map>

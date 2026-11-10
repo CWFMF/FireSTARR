@@ -1,0 +1,7 @@
+<map id="fs::Model::year" name="fs::Model::year">
+<area shape="rect" id="Node000001" title="What year the weather is for." alt="" coords="209,31,312,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,5,161,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,37,161,32,161,27,193,31"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a55bc1eb81857586b15c1eceb4ff1fb84" title="Constructor." alt="" coords="10,55,156,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,55,157,60,156,55,192,50"/>
+</map>

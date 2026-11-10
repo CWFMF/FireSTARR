@@ -1,0 +1,7 @@
+<map id="fs::FuelD1::isfD1" name="fs::FuelD1::isfD1">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="405,5,520,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelMixed.html#aa3e84b9acc89db7a706fd3837cbc0742" title="Calculate ISI with slope influence and zero wind (ISF) for D&#45;1 [ST&#45;X&#45;3 eq 41]." alt="" coords="224,5,357,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="389,21,358,21,358,16,389,16"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelMixed.html#a3f06825b7f467ef308be452d2ea55ec9" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 42]." alt="" coords="5,5,176,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="208,21,176,21,176,16,208,16"/>
+</map>

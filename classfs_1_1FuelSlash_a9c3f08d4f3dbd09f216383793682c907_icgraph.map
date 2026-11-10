@@ -1,0 +1,5 @@
+<map id="fs::FuelSlash::ffcA" name="fs::FuelSlash::ffcA">
+<area shape="rect" id="Node000001" title="Forest Floor Consumption parameter a [ST&#45;X&#45;3 eq 19/21/23]." alt="" coords="224,13,349,38"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelSlash.html#a8df38300b750da5126d8ff79cefb728d" title="Surface Fuel Consumption (SFC) (kg/m^2) [ST&#45;X&#45;3 eq 25]." alt="" coords="5,5,176,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,28,176,28,176,23,208,23"/>
+</map>

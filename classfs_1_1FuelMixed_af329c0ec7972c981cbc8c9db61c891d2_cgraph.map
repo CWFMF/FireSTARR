@@ -1,0 +1,9 @@
+<map id="fs::FuelMixed::crownConsumption" name="fs::FuelMixed::crownConsumption">
+<area shape="rect" id="Node000001" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66, pg 38]." alt="" coords="5,31,220,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1StandardFuel.html#a436ec26d1794af1b1312237556143423" title="Crown Fuel Consumption (CFC) (kg/m^2) [ST&#45;X&#45;3 eq 66]." alt="" coords="268,5,500,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,31,252,28,252,33,220,36"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelMixed.html#a0638437ab1f4ed1108cde8ed008a3da5" title="Percent Conifer (% / 100)" alt="" coords="299,55,468,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="220,50,284,56,284,61,220,56"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1StandardFuel.html#af56c261c3dc9294da119782771469ce4" title="Crown fuel load (kg/m^2) [ST&#45;X&#45;3 table 8]." alt="" coords="548,5,682,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="501,16,533,16,533,21,501,21"/>
+</map>

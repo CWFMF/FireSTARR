@@ -1,0 +1,5 @@
+<map id="fs::simplefbp::SimpleFuelGrass::baseMultiplier" name="fs::simplefbp::SimpleFuelGrass::baseMultiplier">
+<area shape="rect" id="Node000001" title="Calculate base rate of spread multiplier." alt="" coords="5,5,171,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html#a61643933e28310df338c7933fe10b63e" title="Grass curing." alt="" coords="219,5,384,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,23,203,23,203,28,171,28"/>
+</map>

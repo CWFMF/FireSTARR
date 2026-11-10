@@ -1,0 +1,9 @@
+<map id="fs::EnvironmentInfo::EnvironmentInfo" name="fs::EnvironmentInfo::EnvironmentInfo">
+<area shape="rect" id="Node000001" title="Construct from given rasters." alt="" coords="649,5,782,46"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1EnvironmentInfo.html#a3592b2cdb1c7836ce5b11cde08b8f778" title="Load EnvironmentInfo from given rasters." alt="" coords="469,5,601,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="634,28,602,28,602,23,634,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Environment.html#a83f566ebc553a66f6b1718fce44c148d" title="Load from rasters in folder that have same projection as Perimeter." alt="" coords="209,13,421,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="453,28,421,28,421,23,453,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,13,161,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="193,28,161,28,161,23,193,23"/>
+</map>

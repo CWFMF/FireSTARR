@@ -1,0 +1,7 @@
+<map id="fs::FuelVariable::calculateIsf" name="fs::FuelVariable::calculateIsf">
+<area shape="rect" id="Node000001" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,31,189,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelType.html#affb33f6c4b978daa403e8b1379ded67d" title="Calculate ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41/42]." alt="" coords="237,5,401,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,30,221,27,221,32,189,36"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1SpreadInfo.html#aac5d1cc89631a602bb6560a00a7ee514" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="258,55,380,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,51,243,57,243,62,188,56"/>
+</map>

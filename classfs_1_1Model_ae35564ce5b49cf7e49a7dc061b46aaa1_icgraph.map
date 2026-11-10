@@ -1,0 +1,21 @@
+<map id="fs::Model::ignitionScenarios" name="fs::Model::ignitionScenarios">
+<area shape="rect" id="Node000001" title="How many ignition scenarios are being used." alt="" coords="813,107,991,132"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#aa3a0a1cf5790cd5b81b9c8d06098c255" title="Find all Cell(s) that can burn in entire Environment." alt="" coords="609,5,758,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="861,101,764,53,719,34,722,29,766,48,864,96"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#aaa1ff208050791d9400694364175ebd2" title="Make starts based on desired point and where nearest combustible cells are." alt="" coords="408,69,554,95"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="823,106,764,97,654,88,555,85,555,80,655,83,765,92,824,101"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Model.html#a97e8c1a963d0fd93ac913a03cab50219" title="Find Cell(s) that can burn closest to Location." alt="" coords="616,107,751,132"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="797,122,751,122,751,117,797,117"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Model.html#a29e52825f7ce67a8b91539bbc1923522" title="Run Iterations until confidence is reached." alt="" coords="209,157,360,183"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="823,138,765,147,655,158,545,165,361,172,361,167,545,160,655,153,764,142,823,133"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1Model.html#af47948048e80fd4bf8f8e9d9f6fc7562" title="How many Scenarios are in each Iteration." alt="" coords="602,208,765,234"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="864,143,766,191,722,210,719,205,764,186,861,138"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="627,39,525,71,523,66,625,34"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,132,161,158"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="393,99,162,135,161,130,393,93"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="600,107,554,98,555,93,601,102"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="193,161,161,157,162,152,194,156"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1Scenario.html#a3ac49eccdb45f3f07c80171b844b6355" title="Run the Scenario." alt="" coords="424,208,538,234"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="587,224,538,224,538,218,587,218"/>
+<area shape="poly" id="edge11_Node000008_Node000006" title=" " alt="" coords="413,206,336,186,338,181,414,201"/>
+</map>

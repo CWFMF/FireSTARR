@@ -1,0 +1,5 @@
+<map id="fs::Perimeter" name="fs::Perimeter">
+<area shape="rect" id="Node000001" title="Perimeter for an existing fire to initialize a simulation with." alt="" coords="14,109,109,135"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,118,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,47,64,109,59,109,59,47"/>
+</map>

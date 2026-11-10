@@ -1,0 +1,7 @@
+<map id="fs::FuelType::probabilityPeat" name="fs::FuelType::probabilityPeat">
+<area shape="rect" id="Node000001" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="255,35,437,60"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#a2603d27631ef0994eabd0dfee26a12db" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="5,5,207,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,37,207,33,208,28,240,32"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#ab818caed0030317582c0763ad012bcb8" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="23,55,189,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,63,190,68,189,63,239,57"/>
+</map>

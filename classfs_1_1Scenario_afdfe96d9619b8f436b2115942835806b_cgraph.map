@@ -1,0 +1,7 @@
+<map id="fs::Scenario::saveObservers" name="fs::Scenario::saveObservers">
+<area shape="rect" id="Node000001" title="Tell Observers to save their data for the given time." alt="" coords="5,31,189,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#ac0be473151a75fd00e535231bac8e803" title="Tell Observers to save their data with base file name." alt="" coords="237,5,420,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,31,221,27,221,33,189,36"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#a110c5ed3abfd42658b8eafad4616ec37" title="Simulation number." alt="" coords="251,55,406,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,50,236,55,235,61,188,56"/>
+</map>

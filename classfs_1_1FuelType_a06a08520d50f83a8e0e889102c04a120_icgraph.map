@@ -1,0 +1,7 @@
+<map id="fs::FuelType::lengthToBreadth" name="fs::FuelType::lengthToBreadth">
+<area shape="rect" id="Node000001" title="Length to Breadth ratio [ST&#45;X&#45;3 eq 79]." alt="" coords="223,46,415,72"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#adca8fd0ec1140cb8a9bb0c5750b39bd3" title="Length to Breadth ratio [ST&#45;X&#45;3 eq 79]." alt="" coords="14,5,166,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,46,166,39,166,34,211,41"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a67952946997f238df4309500517f38a6" title="Length to Breadth ratio [ST&#45;X&#45;3 eq 79]." alt="" coords="5,71,175,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,77,175,82,175,77,207,72"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fs::Scenario::Scenario" name="fs::Scenario::Scenario">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,31,152,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#a091ceb50b736a98e7f89fa8a153ac30e" title="Model this Scenario is running in." alt="" coords="200,5,330,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,31,184,26,185,32,152,36"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#af54ffa2328ee3c44c54a792b25c74752" title="What year the weather is for." alt="" coords="213,55,316,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,50,198,56,197,62,152,56"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="fs::BurnedData::fireSize" name="fs::BurnedData::fireSize">
+<area shape="rect" id="Node000001" title="Calculate area for cells that have a value (ha)" alt="" coords="214,5,368,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1IntensityMap.html#aa8f110fedbe62d7c3fc51ec0e38de1af" title="Size of the fire represented by this." alt="" coords="5,5,166,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,21,166,21,166,16,198,16"/>
+</map>

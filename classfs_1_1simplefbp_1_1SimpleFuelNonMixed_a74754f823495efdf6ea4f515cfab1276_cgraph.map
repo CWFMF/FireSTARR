@@ -1,0 +1,18 @@
+<map id="fs::simplefbp::SimpleFuelNonMixed::calculateIsf" name="fs::simplefbp::SimpleFuelNonMixed::calculateIsf">
+<area shape="rect" id="Node000001" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,72,171,113"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelNonMixed.html#a1fbd687e8b259e4d72cf4db04f4d2457" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="219,41,384,82"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,78,203,73,203,78,171,83"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#a8732627856ca8bccc07b380bd46540ca" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="432,104,624,145"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="171,96,417,114,416,119,171,101"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#af041283f57af74b85949b72468a8d6eb" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="432,39,624,79"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="384,58,416,58,416,63,384,63"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#ac973130e53d42219b83e44be2ea14602" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="672,5,865,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="624,43,656,39,657,44,625,48"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#abda4f7aad7217ffb78697f58f7216cd4" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="672,71,865,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="625,69,657,73,656,79,624,74"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#ab969c370f3a2e0f65381485a56ee9f59" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="672,136,865,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="596,77,626,90,650,105,674,121,689,127,687,132,671,125,647,110,623,95,594,82"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="595,101,623,89,647,73,671,57,686,50,688,55,674,61,650,77,626,93,597,106"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="624,108,656,104,657,109,625,114"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="625,135,657,139,656,144,624,140"/>
+</map>

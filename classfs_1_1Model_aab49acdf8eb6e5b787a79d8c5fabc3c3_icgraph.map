@@ -1,0 +1,8 @@
+<map id="fs::Model::yesterday" name="fs::Model::yesterday">
+<area shape="rect" id="Node000001" title=" " alt="" coords="409,31,543,56"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#aee46ea4949bff07fa6a160000b95f762" title="Read weather used for Scenarios." alt="" coords="209,5,361,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="394,35,361,31,362,26,394,30"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#aeb3d2b69d5f8d605690c3d0c27873ab6" title="Run Scenarios initialized from given inputs." alt="" coords="5,31,161,56"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="394,46,161,46,161,41,394,41"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="194,32,161,36,161,31,193,27"/>
+</map>

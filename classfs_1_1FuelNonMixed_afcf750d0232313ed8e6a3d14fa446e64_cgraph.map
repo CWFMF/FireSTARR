@@ -1,0 +1,18 @@
+<map id="fs::FuelNonMixed::calculateIsf" name="fs::FuelNonMixed::calculateIsf">
+<area shape="rect" id="Node000001" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,55,200,80"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelNonMixed.html#ad84eb739dde4b751c98ab5329ff5adc1" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="248,29,450,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,55,232,52,232,57,200,60"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1StandardFuel.html#a175186d3f8692ae1255cdb514a53b84e" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="504,80,664,106"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="200,70,489,85,488,91,200,75"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1StandardFuel.html#a5a0b2a848eaa30d6aeef46d487409d94" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="498,31,670,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="451,40,482,40,482,46,451,45"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1StandardFuel.html#acac627f25151b43767a1217fbaf49896" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="730,5,858,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="671,30,714,25,715,30,671,36"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1StandardFuel.html#a13081c26a52036adcb099a96abf0bf8c" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="730,55,858,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="671,51,715,56,714,61,671,56"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1StandardFuel.html#a58e6f2c83fcbc79b20dcd84968153735" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="718,104,870,130"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="640,54,671,65,719,90,733,96,731,101,717,95,669,70,639,59"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="639,77,669,66,693,53,717,40,731,34,733,39,719,45,696,58,671,71,641,82"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="664,81,714,74,715,80,665,86"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="665,99,703,104,703,109,664,105"/>
+</map>

@@ -1,0 +1,25 @@
+<map id="fs::simplefbp::SimpleFuelO1" name="fs::simplefbp::SimpleFuelO1">
+<area shape="rect" id="Node000001" title="FBP fuel type O&#45;1." alt="" coords="1536,50,1719,76"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html" title=" " alt="" coords="1313,35,1487,90"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1503,60,1536,60,1536,65,1503,65"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,10,120,36"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,13,237,6,349,3,1113,3,1165,5,1217,12,1313,33,1311,39,1217,18,1165,11,1113,8,350,8,237,11,136,19"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html" title="Base class for all FuelTypes." alt="" coords="231,52,471,108"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="136,34,231,54,230,59,135,40"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelO1A.html" title="FBP fuel type O&#45;1a." alt="" coords="1016,50,1208,76"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="1223,60,1312,60,1312,65,1223,65"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html" title=" " alt="" coords="802,42,967,83"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="983,60,1016,60,1016,65,983,65"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html" title=" " alt="" coords="560,57,752,127"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="767,75,801,71,802,76,768,80"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1simplefbp_1_1SimpleFuelGrass.html" title=" " alt="" coords="802,108,967,148"/>
+<area shape="poly" id="edge12_Node000011_Node000006" title=" " alt="" coords="768,107,802,112,801,118,767,112"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="487,83,560,86,559,91,486,88"/>
+<area shape="rect" id="Node000008" href="$structfs_1_1duff_1_1Duff.html" title="A specific type of Duff layer, and the associated smouldering coefficients." alt="" coords="18,76,107,102"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="122,86,207,85,230,84,230,89,207,90,122,92"/>
+<area shape="rect" id="Node000009" href="$structfs_1_1LogValue.html" title="A result of calling log(x) for some value of x, pre&#45;calculated at compile time." alt="" coords="304,132,398,158"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="412,132,559,106,560,111,413,137"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1simplefbp_1_1SimpleFuelO1B.html" title="FBP fuel type O&#45;1b." alt="" coords="1016,103,1208,129"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="1200,97,1312,76,1313,81,1201,102"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="983,120,1016,118,1016,124,983,125"/>
+</map>

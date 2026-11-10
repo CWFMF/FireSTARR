@@ -1,0 +1,7 @@
+<map id="fs::simplefbp::SimpleFuelM1M2&lt; PercentConifer &gt;" name="fs::simplefbp::SimpleFuelM1M2&lt; PercentConifer &gt;">
+<area shape="rect" id="Node000001" title="FBP fuel type M&#45;1/M&#45;2." alt="" coords="435,20,600,61"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html" title=" " alt="" coords="168,5,387,76"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="403,38,435,38,435,43,403,43"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,28,120,54"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,38,167,38,167,43,135,43"/>
+</map>

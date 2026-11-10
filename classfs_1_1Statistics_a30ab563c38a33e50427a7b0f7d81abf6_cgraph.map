@@ -1,0 +1,9 @@
+<map id="fs::Statistics::studentsT" name="fs::Statistics::studentsT">
+<area shape="rect" id="Node000001" title="Calculate Student&#39;s T value." alt="" coords="5,55,163,80"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Statistics.html#a1d6b1ee405e9d0038f0f4dad6d4268c5" title="Mean (average) value." alt="" coords="241,5,372,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,51,230,32,231,38,146,57"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Statistics.html#a0d5a6d518a6e743d572e1901b0af245d" title="Number of data points in the set." alt="" coords="254,55,360,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,65,238,65,238,70,163,70"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Statistics.html#a08e02487f465ae8f82041655fc650cbe" title="Sample Variance." alt="" coords="211,104,403,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="146,78,231,97,230,103,145,84"/>
+</map>

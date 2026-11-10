@@ -1,0 +1,5 @@
+<map id="fs::GridMap::fireSize" name="fs::GridMap::fireSize">
+<area shape="rect" id="Node000001" title="Calculate area for cells that have a value (ha)" alt="" coords="5,5,141,31"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1GridBase.html#aca3df52d57873d21363b9c6a2a5ee875" title="Cell size used for GridBase." alt="" coords="189,5,332,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,16,173,16,173,21,141,21"/>
+</map>

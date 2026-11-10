@@ -1,0 +1,14 @@
+<map id="fs::simplefbp::SimpleStandardFuel::negB" name="fs::simplefbp::SimpleStandardFuel::negB">
+<area shape="rect" id="Node000001" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="672,39,865,79"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#a8732627856ca8bccc07b380bd46540ca" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="432,5,624,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="656,46,624,42,625,36,657,41"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#af041283f57af74b85949b72468a8d6eb" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="432,71,624,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="657,76,625,81,624,76,656,71"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelNonMixed.html#a74754f823495efdf6ea4f515cfab1276" title="ISI with slope influence and zero wind (ISF) [ST&#45;X&#45;3 eq 41]." alt="" coords="5,67,171,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="417,32,320,40,219,54,156,69,155,63,218,48,320,35,416,27"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleFuelMixed.html#a10a46b627dbbb0899614d99a96f979a7" title="Calculate rate of spread (m/min) [ST&#45;X&#45;3 27/28, GLC&#45;X&#45;10 29/31]." alt="" coords="219,63,384,103"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="416,90,384,89,385,83,417,84"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1simplefbp_1_1SimpleFuelNonMixed.html#a1fbd687e8b259e4d72cf4db04f4d2457" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="219,128,384,169"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="431,118,385,130,384,125,430,113"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="213,126,161,111,162,105,214,121"/>
+</map>

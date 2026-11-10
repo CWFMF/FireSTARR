@@ -1,0 +1,7 @@
+<map id="fs::FuelM3M4&lt; PercentDeadFir &gt;" name="fs::FuelM3M4&lt; PercentDeadFir &gt;">
+<area shape="rect" id="Node000001" title="FBP fuel type M&#45;3/M&#45;4." alt="" coords="5,183,191,223"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html" title=" " alt="" coords="6,79,190,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,150,101,182,95,182,95,150"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="52,5,144,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,47,101,78,95,78,95,47"/>
+</map>

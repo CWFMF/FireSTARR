@@ -1,0 +1,7 @@
+<map id="fs::FuelType::cbh" name="fs::FuelType::cbh">
+<area shape="rect" id="Node000001" title="Crown base height (m) [ST&#45;X&#45;3 table 8]." alt="" coords="219,35,337,60"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1FuelVariable.html#afdf57b8f722f68d3ee7fa12e763abcb7" title="Crown base height (m) [ST&#45;X&#45;3 table 8]." alt="" coords="19,5,157,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,39,157,31,158,26,204,33"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelVariable.html#a8682faf0e655f2598cf2f92238186da4" title="Crown base height (m) [ST&#45;X&#45;3 table 8]." alt="" coords="5,55,171,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,61,172,66,171,61,203,56"/>
+</map>

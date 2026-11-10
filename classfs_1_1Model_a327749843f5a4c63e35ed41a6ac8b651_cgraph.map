@@ -1,0 +1,15 @@
+<map id="fs::Model::add_statistics" name="fs::Model::add_statistics">
+<area shape="rect" id="Node000001" title="Add statistics for completed iterations." alt="" coords="5,145,166,170"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#a8ddcf38f5a280157f9b21032b78dda5a" title="How many active simulations are still needed." alt="" coords="215,5,398,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,142,147,100,212,55,222,50,224,55,215,60,150,105,102,146"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1SafeVector.html#ae3434aa956ed58ab637da0cb76394d03" title="Get a vector with the stored values." alt="" coords="223,70,390,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="116,142,213,104,234,98,236,103,215,110,118,147"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Model.html#ad775aecf7b0c0a92b57d1165bfbee797" title="Initial fire size at start of scenario." alt="" coords="237,120,376,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="166,146,221,139,222,145,167,151"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Model.html#ae09cf47e6cc9e9faa6de004e693317bb" title="Whether or not simulation has been running longer than maximum duration." alt="" coords="230,169,383,194"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="167,164,215,169,214,174,166,169"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Model.html#a37fd0357f6b977e6d3bed64fd97c3777" title="Whether or not simulation is over max simulation count." alt="" coords="217,219,396,259"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="121,168,215,205,231,211,229,216,213,209,119,173"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1Model.html#a77bd68de4918fc99617fe742522c7c87" title="Whether or not simulation is under min simulation count." alt="" coords="214,284,399,325"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="100,169,148,217,180,244,215,269,226,275,223,279,212,273,177,249,144,221,97,173"/>
+</map>

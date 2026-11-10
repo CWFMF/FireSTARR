@@ -1,0 +1,26 @@
+<map id="fs::settings::Settings" name="fs::settings::Settings">
+<area shape="rect" id="Node000001" title="Reads and provides access to settings for the simulation." alt="" coords="947,178,1086,204"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="46,204,100,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,213,947,190,947,196,115,218"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1LazyPath.html" title=" " alt="" coords="371,49,463,75"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="110,193,226,128,312,83,369,67,371,72,314,88,228,133,112,198"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1settings_1_1OutputDateOffsets.html" title=" " alt="" coords="339,253,495,294"/>
+<area shape="poly" id="edge10_Node000008_Node000002" title=" " alt="" coords="115,231,165,247,255,262,339,269,338,274,254,267,164,253,113,236"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="478,51,569,46,684,49,745,56,807,68,868,86,925,111,971,144,1005,176,1002,180,968,148,922,116,866,91,806,73,745,61,684,54,570,51,479,57"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1LazyFuelLookup.html" title=" " alt="" coords="675,98,808,124"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="479,68,637,92,675,98,674,103,637,98,478,73"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,49,141,75"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="157,59,370,59,370,64,157,64"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1settings_1_1StaticCuring.html" title=" " alt="" coords="661,153,822,179"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="838,172,947,182,947,187,838,177"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="822,125,924,152,985,175,983,180,923,158,821,130"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="323,98,511,124"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="526,108,674,108,674,114,526,114"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="511,276,599,276,703,271,814,258,923,232,959,218,991,202,993,207,961,223,924,238,815,263,704,276,599,282,511,281"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="26,284,120,309"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="135,296,209,296,288,293,338,286,339,292,289,298,209,302,135,301"/>
+<area shape="rect" id="Node000010" href="$structfs_1_1Precipitation.html" title=" " alt="" coords="686,321,797,347"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="812,331,868,323,896,315,922,302,951,280,975,253,1006,203,1011,206,979,256,954,284,925,307,898,320,869,328,813,337"/>
+<area shape="rect" id="Node000011" href="$structfs_1_1StrictType.html" title=" " alt="" coords="313,319,521,359"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="536,334,686,332,686,337,536,340"/>
+</map>

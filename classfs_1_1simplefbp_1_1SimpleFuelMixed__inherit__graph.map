@@ -1,0 +1,9 @@
+<map id="fs::simplefbp::SimpleFuelMixed&lt; A, B, C, Bui0, RosMultiplier, PercentMixed, BulkDensity, InorganicPercent, DuffDepth &gt;" name="fs::simplefbp::SimpleFuelMixed&lt; A, B, C, Bui0, RosMultiplier, PercentMixed, BulkDensity, InorganicPercent, DuffDepth &gt;">
+<area shape="rect" id="Node000001" title="A mixedwood fuel type." alt="" coords="706,5,995,76"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html" title=" " alt="" coords="456,5,658,76"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="674,38,706,38,706,43,674,43"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html" title="Base class for all FuelTypes." alt="" coords="168,13,408,68"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="424,38,455,38,455,43,424,43"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1FuelType.html" title="An FBP fuel type." alt="" coords="5,28,120,54"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="135,38,167,38,167,43,135,43"/>
+</map>

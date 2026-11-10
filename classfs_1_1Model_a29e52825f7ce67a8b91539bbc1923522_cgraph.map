@@ -1,0 +1,70 @@
+<map id="fs::Model::runIterations" name="fs::Model::runIterations">
+<area shape="rect" id="Node000001" title="Run Iterations until confidence is reached." alt="" coords="5,421,157,447"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Model.html#a327749843f5a4c63e35ed41a6ac8b651" title="Add statistics for completed iterations." alt="" coords="214,185,374,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,420,99,383,124,333,159,279,203,231,227,215,230,220,206,235,163,282,129,335,104,385,89,422"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1Model.html#ae09cf47e6cc9e9faa6de004e693317bb" title="Whether or not simulation has been running longer than maximum duration." alt="" coords="447,300,600,326"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="92,419,137,374,168,350,204,332,261,315,320,305,378,301,431,302,431,307,378,307,321,310,262,320,206,337,171,355,140,378,95,423"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1Model.html#ae35564ce5b49cf7e49a7dc061b46aaa1" title="How many ignition scenarios are being used." alt="" coords="664,529,843,555"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="157,432,617,433,652,449,684,471,733,516,729,520,680,475,649,454,616,438,157,437"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1Model.html#ad4866e57f382b5c98d3f69d6aeef5771" title="Time between generating interim outputs (s)" alt="" coords="206,347,382,372"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="111,418,204,381,224,375,225,380,206,386,113,423"/>
+<area shape="rect" id="Node000011" href="$classfs_1_1Model.html#acb5e3100c3ec4287f03f8d0e0ffe9031" title="Create an Iteration by initializing Scenarios." alt="" coords="213,396,375,422"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="157,423,197,418,198,423,157,428"/>
+<area shape="rect" id="Node000012" href="$classfs_1_1Scenario.html#a3ac49eccdb45f3f07c80171b844b6355" title="Run the Scenario." alt="" coords="237,735,350,760"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="94,446,277,720,273,723,89,449"/>
+<area shape="rect" id="Node000024" href="$classfs_1_1Model.html#aa2801812d44604f840665e64a15c7acb" title="Duration that model has run for." alt="" coords="460,1056,587,1082"/>
+<area shape="poly" id="edge29_Node000001_Node000024" title=" " alt="" coords="88,446,102,500,126,582,162,678,207,772,257,860,300,927,324,956,352,984,432,1043,447,1050,445,1055,430,1047,349,988,320,959,295,930,252,862,202,774,157,680,121,584,96,502,83,448"/>
+<area shape="rect" id="Node000028" href="$classfs_1_1Model.html#aa777c10e8b2e251eeeef17f6ff7247c2" title=" " alt="" coords="205,1061,383,1087"/>
+<area shape="poly" id="edge30_Node000001_Node000028" title=" " alt="" coords="88,447,128,626,163,757,207,891,245,977,280,1046,275,1049,240,979,202,892,158,759,123,627,82,448"/>
+<area shape="rect" id="Node000031" href="$classfs_1_1Model.html#a4f73fb6c891888473e8e0780259cac49" title="Whether or not simulation has exceeded any limits that mean it should stop." alt="" coords="222,245,366,271"/>
+<area shape="poly" id="edge33_Node000001_Node000031" title=" " alt="" coords="88,420,132,357,165,320,203,288,227,275,229,280,206,292,169,324,136,361,92,423"/>
+<area shape="rect" id="Node000032" href="$classfs_1_1Model.html#a207813301a9f005e29a1b47a8e47b531" title="Maximum amount of time simulation can run for before being stopped." alt="" coords="227,1111,360,1136"/>
+<area shape="poly" id="edge36_Node000001_Node000032" title=" " alt="" coords="86,447,93,571,113,767,129,871,150,966,176,1045,190,1075,207,1098,215,1105,212,1109,203,1101,186,1078,171,1047,145,968,124,872,108,768,88,571,80,448"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Model.html#a8ddcf38f5a280157f9b21032b78dda5a" title="How many active simulations are still needed." alt="" coords="432,120,615,161"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="348,182,424,163,425,168,349,187"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1SafeVector.html#ae3434aa956ed58ab637da0cb76394d03" title="Get a vector with the stored values." alt="" coords="440,185,607,211"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="375,196,424,196,424,201,375,201"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1Model.html#ad775aecf7b0c0a92b57d1165bfbee797" title="Initial fire size at start of scenario." alt="" coords="454,5,593,31"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="301,184,349,116,386,76,430,41,441,35,443,40,432,46,390,79,353,119,305,187"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="342,209,385,231,400,245,409,259,418,273,433,285,443,291,441,296,429,290,414,276,404,262,396,249,381,235,340,214"/>
+<area shape="rect" id="Node000007" href="$classfs_1_1Model.html#a37fd0357f6b977e6d3bed64fd97c3777" title="Whether or not simulation is over max simulation count." alt="" coords="434,235,613,276"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="349,209,425,228,424,233,348,214"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1Model.html#a77bd68de4918fc99617fe742522c7c87" title="Whether or not simulation is under min simulation count." alt="" coords="431,55,616,96"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="311,183,363,146,430,106,444,100,446,105,432,111,366,151,314,187"/>
+<area shape="rect" id="Node000013" href="$classfs_1_1Scenario.html#abd1349f3fe2e41d3dd0f99b7c8ca2ff6" title="Add an Event to the queue." alt="" coords="449,760,598,786"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="351,751,434,760,433,766,350,756"/>
+<area shape="rect" id="Node000014" href="$classfs_1_1Scenario.html#ad9066fea710cae46c67dd8fac14e0f44" title="Burn cell that Event takes place in." alt="" coords="464,809,584,835"/>
+<area shape="poly" id="edge14_Node000012_Node000014" title=" " alt="" coords="329,758,432,796,454,802,452,807,430,801,327,763"/>
+<area shape="rect" id="Node000016" href="$classfs_1_1Scenario.html#a9099e3d7076009d17e9a02a31ceac6f6" title="Whether or not a Cell can burn." alt="" coords="452,859,595,884"/>
+<area shape="poly" id="edge16_Node000012_Node000016" title=" " alt="" coords="311,759,362,801,396,825,432,845,446,851,444,856,430,850,393,829,359,806,308,763"/>
+<area shape="rect" id="Node000017" href="$classfs_1_1Scenario.html#a247b5d6625df51b7dd4f2e9f440cc624" title="Number of Scenarios that have completed running." alt="" coords="446,908,601,934"/>
+<area shape="poly" id="edge17_Node000012_Node000017" title=" " alt="" coords="308,759,369,832,404,870,433,895,441,899,439,904,429,899,400,874,365,836,303,762"/>
+<area shape="rect" id="Node000018" href="$classfs_1_1Scenario.html#a371b8dfb89b34814e629c87e171c8c16" title="Number of Scenarios that have been initialized." alt="" coords="460,957,587,983"/>
+<area shape="poly" id="edge18_Node000012_Node000018" title=" " alt="" coords="309,759,345,799,385,853,399,880,406,903,414,924,433,944,447,953,444,958,429,948,410,926,401,905,394,882,381,856,341,803,305,762"/>
+<area shape="rect" id="Node000019" href="$classfs_1_1Scenario.html#a0779e2439f60823b40078d6089783211" title="Current fire size (ha)" alt="" coords="432,1007,615,1032"/>
+<area shape="poly" id="edge19_Node000012_Node000019" title=" " alt="" coords="311,759,347,799,385,853,395,874,400,894,404,929,410,962,419,977,433,994,435,996,432,1000,429,997,414,980,405,963,398,930,395,895,390,876,381,855,343,802,307,763"/>
+<area shape="rect" id="Node000020" href="$classfs_1_1Model.html#a9228498e8e1ce234dba9b8a8176a1e49" title="Environment simulation is occurring in." alt="" coords="448,448,599,474"/>
+<area shape="poly" id="edge20_Node000012_Node000020" title=" " alt="" coords="296,734,309,686,334,619,374,547,399,513,429,484,437,479,440,483,433,488,403,517,378,549,339,621,314,688,301,735"/>
+<area shape="rect" id="Node000021" href="$classfs_1_1Scenario.html#afc5ac565c71bcfaebdeeb449f0e6659c" title="Evaluate next Event in the queue." alt="" coords="438,498,609,538"/>
+<area shape="poly" id="edge21_Node000012_Node000021" title=" " alt="" coords="298,733,316,697,344,647,382,594,429,548,434,545,437,549,433,552,386,598,348,650,320,699,303,735"/>
+<area shape="rect" id="Node000022" href="$classfs_1_1Scenario.html#a091ceb50b736a98e7f89fa8a153ac30e" title="Model this Scenario is running in." alt="" coords="458,563,589,588"/>
+<area shape="poly" id="edge22_Node000012_Node000022" title=" " alt="" coords="301,732,350,668,387,630,430,597,443,590,445,595,432,602,390,634,354,671,306,736"/>
+<area shape="rect" id="Node000023" href="$classfs_1_1Scenario.html#ace6daef0af09bfbffcde3f1dfa608eaa" title="Whether or not this Scenario has run already." alt="" coords="467,612,580,638"/>
+<area shape="poly" id="edge23_Node000012_Node000023" title=" " alt="" coords="308,732,359,690,393,667,430,646,451,638,453,643,432,651,396,671,362,694,311,736"/>
+<area shape="poly" id="edge24_Node000012_Node000024" title=" " alt="" coords="311,759,348,798,368,825,385,853,396,881,401,908,401,955,402,978,406,999,415,1021,433,1043,448,1054,445,1058,429,1047,411,1023,401,1001,397,978,396,955,396,908,391,883,381,855,364,828,344,802,307,762"/>
+<area shape="rect" id="Node000026" href="$classfs_1_1Model.html#af47948048e80fd4bf8f8e9d9f6fc7562" title="How many Scenarios are in each Iteration." alt="" coords="442,661,605,687"/>
+<area shape="poly" id="edge26_Node000012_Node000026" title=" " alt="" coords="329,732,430,696,453,689,454,694,432,701,330,737"/>
+<area shape="rect" id="Node000027" href="$classfs_1_1Scenario.html#a110c5ed3abfd42658b8eafad4616ec37" title="Simulation number." alt="" coords="446,711,601,736"/>
+<area shape="poly" id="edge28_Node000012_Node000027" title=" " alt="" coords="350,739,430,731,431,736,351,744"/>
+<area shape="rect" id="Node000015" href="$classfs_1_1Scenario.html#a80ef1120888229a039b5a7a1ea87d355" title="Notify IObservers that a Cell has burned." alt="" coords="690,809,817,835"/>
+<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="584,820,675,820,675,825,584,825"/>
+<area shape="rect" id="Node000025" href="$classfs_1_1Model.html#ac5e3c382a608e1a3748366aead3dfe40" title="Time that execution started." alt="" coords="676,1056,831,1082"/>
+<area shape="poly" id="edge25_Node000024_Node000025" title=" " alt="" coords="587,1066,661,1066,661,1072,587,1072"/>
+<area shape="poly" id="edge27_Node000026_Node000009" title=" " alt="" coords="589,658,615,648,647,629,678,607,727,564,730,568,681,611,650,633,618,653,591,663"/>
+<area shape="rect" id="Node000029" href="$classfs_1_1ProbabilityMap.html#af1a2c5c83ff91a9afd1d0d1c4c44a233" title=" " alt="" coords="462,1106,585,1146"/>
+<area shape="poly" id="edge31_Node000028_Node000029" title=" " alt="" coords="354,1085,447,1106,446,1111,353,1090"/>
+<area shape="rect" id="Node000030" href="$classfs_1_1Model.html#a93cb48d0034e1d924a2866a3dbdc81dc" title="Difference between date and the date of minimum foliar moisture content." alt="" coords="477,1171,570,1196"/>
+<area shape="poly" id="edge32_Node000028_Node000030" title=" " alt="" coords="363,1085,385,1096,401,1111,409,1127,418,1142,432,1156,463,1170,461,1175,430,1160,413,1145,405,1129,396,1114,381,1100,361,1090"/>
+<area shape="poly" id="edge34_Node000031_Node000006" title=" " alt="" coords="351,269,453,293,451,299,350,274"/>
+<area shape="poly" id="edge35_Node000031_Node000007" title=" " alt="" coords="366,255,419,254,419,259,366,260"/>
+</map>

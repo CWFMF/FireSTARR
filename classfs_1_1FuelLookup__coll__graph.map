@@ -1,0 +1,7 @@
+<map id="fs::FuelLookup" name="fs::FuelLookup">
+<area shape="rect" id="Node000001" title="Provides ability to look up a fuel type based on name or code." alt="" coords="143,109,250,135"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,185,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,55,185,107,182,111,125,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="208,5,387,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="267,59,211,111,207,107,264,55"/>
+</map>

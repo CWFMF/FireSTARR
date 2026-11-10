@@ -1,0 +1,11 @@
+<map id="fs::simplefbp::SimpleFuelNonMixed::calculateRos" name="fs::simplefbp::SimpleFuelNonMixed::calculateRos">
+<area shape="rect" id="Node000001" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="5,71,171,111"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#af041283f57af74b85949b72468a8d6eb" title="Initial rate of spread (m/min) [ST&#45;X&#45;3 eq 26]." alt="" coords="219,71,411,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,88,203,88,203,94,171,94"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#ac973130e53d42219b83e44be2ea14602" title="Rate of spread parameter a [ST&#45;X&#45;3 table 6]." alt="" coords="459,5,651,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="391,68,462,48,464,53,393,73"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#abda4f7aad7217ffb78697f58f7216cd4" title="Rate of spread parameter c [ST&#45;X&#45;3 table 6]." alt="" coords="459,71,651,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="411,88,443,88,443,94,411,94"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleStandardFuel.html#ab969c370f3a2e0f65381485a56ee9f59" title="Negative of rate of spread parameter b [ST&#45;X&#45;3 table 6]." alt="" coords="459,136,651,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="393,109,464,129,462,134,391,114"/>
+</map>

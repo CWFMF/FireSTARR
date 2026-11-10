@@ -1,0 +1,22 @@
+<map id="fs::simplefbp::SimpleFuelBase::survivalProbability" name="fs::simplefbp::SimpleFuelBase::survivalProbability">
+<area shape="rect" id="Node000001" title="Survival probability calculated using probability of ony survival based on multiple formulae." alt="" coords="5,134,171,174"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#a4d6b90688904f8e5eb8c4e09734ce131" title="What fraction of the duff layer should use DMC to determine moisture." alt="" coords="432,72,597,113"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,132,119,104,146,73,179,43,218,21,263,6,300,3,338,9,385,21,432,38,473,61,471,66,430,43,383,26,337,14,300,9,264,11,220,26,182,48,150,77,123,108,104,135"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#afee8e67fa1bcfb73089189e126404d3f" title="Type of duff deeper underground." alt="" coords="219,35,384,76"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="127,131,218,86,232,80,234,85,220,91,130,136"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#adaefa4f474d885291c27f9d9ee8cc06d" title="Type of duff near the surface." alt="" coords="219,100,384,141"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="170,138,203,133,203,139,171,144"/>
+<area shape="rect" id="Node000006" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#a0ecdfc39538f3ff00bb8a5f2202ddc16" title="What fraction of the duff layer should use FFMC to determine moisture." alt="" coords="219,166,384,206"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="171,164,203,169,203,174,170,169"/>
+<area shape="rect" id="Node000007" href="$structfs_1_1duff_1_1Duff.html#a7971c8ffe9bdd410077cbfa2472a2134" title="Probability of survival (% / 100) [eq Ig&#45;1]." alt="" coords="225,231,378,272"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="131,172,220,216,234,222,232,227,218,220,129,177"/>
+<area shape="rect" id="Node000008" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#add4f557a40dbe6903f6339cca218d292" title="Calculate probability of burning [Anderson eq 1]." alt="" coords="219,296,384,337"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="108,173,155,226,186,255,220,281,229,286,226,291,217,286,183,259,151,230,104,177"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#ae395f87649ee373bb42d334c219c8e1c" title="DuffDepth Depth of Duff layer (cm) [Anderson table 1]." alt="" coords="645,72,811,113"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="597,90,630,90,630,95,597,95"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="354,163,383,150,455,117,457,122,385,155,356,167"/>
+<area shape="rect" id="Node000009" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#a1a3c3cfe92e98345857f0c0bc6784fbe" title="Duff Bulk Density (kg/m^3) [Anderson table 1]." alt="" coords="432,231,597,272"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="369,293,430,274,432,279,371,298"/>
+<area shape="rect" id="Node000010" href="$classfs_1_1simplefbp_1_1SimpleFuelBase.html#a8ca65c2863503ba832b5cd072176dcb4" title="Inorganic Percent (% / 100) [Anderson table 1]." alt="" coords="432,296,597,337"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="384,314,416,314,416,319,384,319"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="fs::StartPoint::dayEnd" name="fs::StartPoint::dayEnd">
+<area shape="rect" id="Node000001" title="Sunset time." alt="" coords="614,13,759,38"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1Scenario.html#a81e76a41aea240d0893f7808b7c65288" title="Sunset time for given day." alt="" coords="429,13,566,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="598,28,567,28,567,23,598,23"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1Scenario.html#aaf390169d26675690092d00b31848398" title="Whether or not time is after sunrise and before sunset." alt="" coords="232,13,381,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="414,28,381,28,381,23,414,23"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Scenario.html#a5e142f84454fb06f196b724d521f8a44" title="Minimum Fine Fuel Moisture Code for spread to be possible." alt="" coords="5,5,184,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="216,28,184,28,184,23,216,23"/>
+</map>

@@ -1,0 +1,21 @@
+<map id="fs::ProbabilityMap" name="fs::ProbabilityMap">
+<area shape="rect" id="Node000001" title="Map of the percentage of simulations in which a Cell burned in each intensity category." alt="" coords="333,496,456,522"/>
+<area shape="rect" id="Node000002" href="$classfs_1_1GridMap.html" title=" " alt="" coords="101,363,245,388"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,396,255,432,317,470,366,493,363,498,314,475,252,436,200,400"/>
+<area shape="rect" id="Node000003" href="$classfs_1_1GridData.html" title=" " alt="" coords="95,258,251,313"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,329,176,362,170,362,170,329"/>
+<area shape="rect" id="Node000004" href="$classfs_1_1Grid.html" title=" " alt="" coords="5,169,165,195"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="107,205,151,255,147,259,103,208"/>
+<area shape="rect" id="Node000005" href="$classfs_1_1GridBase.html" title="The base class with information for a grid of data with geographic coordinates." alt="" coords="39,94,131,120"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="88,135,88,169,82,169,82,135"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="58,5,112,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="88,47,88,94,82,94,82,47"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="189,169,333,195"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="243,208,199,259,195,255,239,205"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="269,363,402,388"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="350,402,391,495,386,497,345,404"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="426,363,482,388"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="451,404,440,438,425,474,407,498,403,495,420,471,435,436,446,402"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="507,363,684,388"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="579,402,543,439,497,475,443,498,441,493,494,470,540,435,575,398"/>
+</map>
