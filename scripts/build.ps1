@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $DIR = pwd
-$REPO = "firestarr-cpp"
+$REPO = "firestarr"
 $BRANCH = "unstable"
 
 $VSWHERE = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe"

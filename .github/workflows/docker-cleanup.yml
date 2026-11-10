@@ -7,7 +7,7 @@ on:
         default: false
         type: bool
       packages:
-        default: 'firestarr-cpp/cache,firestarr-cpp/firestarr'
+        default: 'firestarr/cache,firestarr/firestarr'
         type: string
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       contents: read
       packages: write
     env:
-      DEFAULT_PACKAGES: 'firestarr-cpp/cache,firestarr-cpp/firestarr'
+      DEFAULT_PACKAGES: 'firestarr/cache,firestarr/firestarr'
       DEFAULT_DRY_RUN: false
     steps:
       - uses: actions/checkout@v6

@@ -17,7 +17,6 @@ authors:
     orcid: 'https://orcid.org/0000-0002-1791-4197'
     website: 'https://www.researchgate.net/profile/Den-Boychuk'
 repository-code: 'https://github.com/CWFMF/FireSTARR'
-repository: 'https://github.com/CWFMF/firestarr-cpp'
 abstract: >-
   FireSTARR is a fire growth model based on the Canadian
   Forest Fire Danger Rating System and other fire research.
