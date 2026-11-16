@@ -226,3 +226,46 @@ jobs:
         type=semver,pattern={{major}}.{{minor}},prefix=,suffix=-minimal,enable=${{ needs.build-docker-image.outputs.is-tagged }}
         type=raw,value=minimal,prefix=,suffix=,enable=${{ needs.build-docker-image.outputs.is-tagged }}
         type=raw,value=minimal-latest,prefix=,suffix=,enable=${{ needs.build-docker-image.outputs.is-tagged }}
+
+
+  compare:
+    needs: [build-docker-image]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      # if '-' in tag then it's -alpha or similar
+      IS_LATEST: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-') }}
+      # should just be !env.IS_LATEST but can't figure out syntax
+      IS_PRERELEASE: ${{ !startsWith(github.ref, 'refs/tags/v') || contains(github.ref, '-') }}
+      TAG: ${{ github.ref_name }}${{ case ( !startsWith(github.ref, 'refs/tags/v') || contains(github.ref, '-'), '-latest', '' ) }}
+
+    steps:
+      # need checkout to delete release
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          submodules: true
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: test-outputs-*
+          path: ${{ github.workspace }}/compare
+          merge-multiple: true
+          skip-decompress: true
+
+      - name: List artifacts
+        run: |
+          echo "=== All artifacts ==="
+          find . -type f \( -name "*.tar.gz" -o -name "*.zip" \)
+
+      - name: Compare artifacts
+        shell: bash
+        run: |
+          chown +x ${{ github.workspace }}/compare
+          cd ${{ github.workspace }}/compare
+          . ${{ github.workspace }}/repo/cmp_outputs.sh
+          ls -lh *.diff
+          [[ "$(cat *.diff | wc -l)" -eq "0" ]] && echo "Comparison worked"

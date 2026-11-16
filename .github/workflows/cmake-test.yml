@@ -259,7 +259,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           pattern: test-outputs-*
-          path: ./compare
+          path: ${{ github.workspace }}/compare
           merge-multiple: true
           skip-decompress: true
 
@@ -271,7 +271,8 @@ jobs:
       - name: Compare artifacts
         shell: bash
         run: |
-          cd compare
-          ../repo/cmp_outputs.sh
+          chown +x ${{ github.workspace }}/compare
+          cd ${{ github.workspace }}/compare
+          . ${{ github.workspace }}/repo/cmp_outputs.sh
           ls -lh *.diff
-          [[ "$(cat *.dif | wc -l)" -eq "0" ]] && echo "Comparison worked"
+          [[ "$(cat *.diff | wc -l)" -eq "0" ]] && echo "Comparison worked"
