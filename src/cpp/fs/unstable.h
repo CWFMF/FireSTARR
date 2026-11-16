@@ -279,6 +279,14 @@ struct RoundedIntensity : private PreciseValue<IntensityDigits, IntensityMax>
   using PreciseValue::operator double;
   using PreciseValue::operator=;
 };
+// HACK: don't want RoundedIntensity to be convertible to PreciseValue
+struct OutputValue : private PreciseValue<RoundedDigits, RoundedMax>
+{
+  using PreciseValue::PreciseValue;
+  using PreciseValue::value;
+  using PreciseValue::operator double;
+  using PreciseValue::operator=;
+};
 using LookupValue = PreciseValue<LookupDigits, LookupMax>;
 // HACK: override these so unstable code doesn't change results of functions
 // in debug vs release version

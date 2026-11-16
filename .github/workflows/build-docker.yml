@@ -273,7 +273,7 @@ jobs:
       - name: Compare artifacts
         shell: bash
         run: |
-          chown +x ${{ github.workspace }}/compare
+          chmod +x ${{ github.workspace }}/compare
           cd ${{ github.workspace }}/compare
           . ${{ github.workspace }}/repo/cmp_outputs.sh
           ls -lh *.diff
