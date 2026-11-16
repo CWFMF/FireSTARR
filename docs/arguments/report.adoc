@@ -1,0 +1,11 @@
+// log.adoc
+[[arg-log]]
+=== --log
+
+Write execution logs to file.
+
+[cols="1,3"]
+|===
+|Type |Flag
+|Default |Disabled
+|===
