@@ -2,7 +2,7 @@
 #include "unstable.h"
 #include <cfenv>
 #define USE_FP_ENV 1
-// #undef USE_FP_ENV
+#undef USE_FP_ENV
 namespace fs
 {
 MathSize cos(const MathSize angle) noexcept { return static_cast<MathSize>(std::cos(angle)); }
