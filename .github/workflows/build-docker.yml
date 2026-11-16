@@ -40,7 +40,7 @@ jobs:
       fail-fast: false
       matrix:
         # no point in more than base image supports
-        platform: [amd64, arm64, ppc64le, riscv64, s390x, 386, arm/v5, arm/v7]
+        platform: [amd64, arm64, ppc64le, riscv64, s390x, i386, arm/v5, arm/v7]
     env:
       REGISTRY: 'ghcr.io'
       # since package-name is 'cache' if this isn't tagged or one of main/dev/unstable, we can run the whole process to test still
