@@ -4,11 +4,12 @@ FireSTARR is a wildfire simulation and burn probability modelling system designe
 
 ## Table of Contents
 
-- [Documentation](#documentation)
-- [Usage](#usage)
-  - [Basic Help Printout](#basic-help-printout)
-  - [Example Use](#example-use)
-- [Additional Documentation](#additional-documentation)
+- [FireSTARR](#firestarr)
+  - [Table of Contents](#table-of-contents)
+  - [Documentation](#documentation)
+    - [Additional Resources](#additional-resources)
+  - [Usage](#usage)
+    - [General Syntax](#general-syntax)
 
 ## Documentation
 
