@@ -12,7 +12,7 @@ void make_threshold(
   const ThresholdSize scenario_weight,
   const ThresholdSize daily_weight,
   const ThresholdSize hourly_weight,
-  ThresholdSize (*convert)(double value)
+  ThresholdSize (*convert)(_Float64 value)
 )
 {
   const auto total_weight = scenario_weight + daily_weight + hourly_weight;
@@ -50,7 +50,7 @@ void make_threshold(
   mt19937_64* mt,
   const Day start_day,
   const Day last_date,
-  ThresholdSize (*convert)(double value)
+  ThresholdSize (*convert)(_Float64 value)
 )
 {   // HACK: resolve once and fail if not set already
   static const auto& settings = fs::settings::instance();
@@ -87,12 +87,10 @@ std::seed_seq make_seed(
   // keeps anyway. At precision 8 the product needs up to 11 digits, so on a
   // 32-bit target the old direct cast to size_t was out-of-range and therefore
   // undefined behaviour; wasm saturates, giving different random streams.
-  const auto lat = static_cast<uint32_t>(
-    static_cast<uint64_t>(abs(start_point.latitude()) * pow(10, precision))
-  );
-  const auto lon = static_cast<uint32_t>(
-    static_cast<uint64_t>(abs(start_point.longitude()) * pow(10, precision))
-  );
+  const auto lat =
+    static_cast<uint32_t>(static_cast<uint64_t>(abs(start_point.latitude()) * pow(10, precision)));
+  const auto lon =
+    static_cast<uint32_t>(static_cast<uint64_t>(abs(start_point.longitude()) * pow(10, precision)));
   logging::debug("lat/long {} converted to ({:d}, {:d})", start_point, lat, lon);
   const auto d = static_cast<size_t>(start_day);
   logging::info(
@@ -109,11 +107,6 @@ std::seed_seq make_seed(
   const size_t use_salt = base_salt + salt;
   // seed_seq keeps each value mod 2^32 anyway; truncate explicitly so 32- and
   // 64-bit agree.
-  return std::seed_seq{
-    static_cast<uint32_t>(use_salt),
-    static_cast<uint32_t>(d),
-    lat,
-    lon
-  };
+  return std::seed_seq{static_cast<uint32_t>(use_salt), static_cast<uint32_t>(d), lat, lon};
 }
 }

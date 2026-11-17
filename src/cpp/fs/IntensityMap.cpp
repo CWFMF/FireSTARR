@@ -138,7 +138,7 @@ FileList IntensityMap::save(const string_view dir, const string_view base_name) 
   auto files = intensity_max_.saveToFile(dir, name_intensity);
   // // HACK: writing a double to a tiff seems to not work?
   // double is way too much precision for outputs
-  files.append_range(rate_of_spread_at_max_->saveToFile<float>(dir, name_ros));
+  files.append_range(rate_of_spread_at_max_->saveToFile<_Float32>(dir, name_ros));
   files.append_range(direction_of_spread_at_max_->saveToFile(dir, name_raz));
   return files;
 }

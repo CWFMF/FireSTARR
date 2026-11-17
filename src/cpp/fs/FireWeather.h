@@ -7,7 +7,7 @@ namespace fs
 {
 class FuelType;
 // use an array instead of a map since number of values is so small and access should be faster
-using SurvivalMap = array<vector<float>, NUMBER_OF_FUELS>;
+using SurvivalMap = array<vector<_Float32>, NUMBER_OF_FUELS>;
 /**
  * \brief A stream of weather that gets used by a Scenario every Iteration.
  */

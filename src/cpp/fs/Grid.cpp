@@ -103,10 +103,10 @@ string saveToTiffFile(
   auto tif = geotiff.tiff();
   auto gtif = geotiff.gtif();
   logging::check_fatal(!gtif, "Cannot open file {:s} as a GEOTIFF", filename);
-  const double xul = xll;
-  const double yul = grid.yllcorner() + (grid.cellSize() * max_y);
-  double tiePoints[6] = {0.0, 0.0, 0.0, xul, yul, 0.0};
-  double pixelScale[3] = {grid.cellSize(), grid.cellSize(), 0.0};
+  const TiffDouble xul = xll;
+  const TiffDouble yul = grid.yllcorner() + (grid.cellSize() * max_y);
+  TiffDouble tiePoints[6] = {0.0, 0.0, 0.0, xul, yul, 0.0};
+  TiffDouble pixelScale[3] = {grid.cellSize(), grid.cellSize(), 0.0};
   // make sure to use floating point if values are
   TIFFSetField(tif, TIFFTAG_SAMPLEFORMAT, sample_format);
   // FIX: was using double, and that usually doesn't make sense, but sometime it might?
@@ -307,14 +307,14 @@ string GridBase::saveToTiffFileFloat(
   const string_view base_name,
   // const uint16_t bits_per_sample,
   // const uint16_t sample_format,
-  std::function<double(const XYIdx&)> value_at,
+  std::function<TiffDouble(const XYIdx&)> value_at,
   const int nodata_as_int
 ) const
 {
-  // HACK: use whatever hardware does for float for now
-  constexpr auto bits_per_sample = 8 * sizeof(float);
+  // HACK: use whatever hardware does for TiffFloat for now
+  constexpr auto bits_per_sample = 8 * sizeof(TiffFloat);
   constexpr auto sample_format = SAMPLEFORMAT_IEEEFP;
-  return saveToTiffFile<float>(
+  return saveToTiffFile<TiffFloat>(
     *this,
     width,
     height,
@@ -323,7 +323,7 @@ string GridBase::saveToTiffFileFloat(
     base_name,
     bits_per_sample,
     sample_format,
-    [&](const XYIdx& idx) { return static_cast<float>(value_at(idx)); },
+    [&](const XYIdx& idx) { return static_cast<TiffFloat>(value_at(idx)); },
     nodata_as_int
   );
 }
@@ -566,15 +566,15 @@ void write_ascii_header(
     uint32_t height;
     TIFFGetField(tif, TIFFTAG_IMAGEWIDTH, &width);
     TIFFGetField(tif, TIFFTAG_IMAGELENGTH, &height);
-    double x = 0.0;
-    double y = height;
+    TiffDouble x = 0.0;
+    TiffDouble y = height;
     logging::check_fatal(
       !GTIFImageToPCS(gtif, &x, &y), "Unable to translate image to PCS coordinates."
     );
     const auto yllcorner = y;
     const auto xllcorner = x;
     logging::debug("Lower left for header is ({:f}, {:f})", xllcorner, yllcorner);
-    double adf_coefficient[6] = {0};
+    TiffDouble adf_coefficient[6] = {0};
     x = 0.5;
     y = 0.5;
     logging::check_fatal(

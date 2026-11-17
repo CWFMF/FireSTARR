@@ -96,7 +96,7 @@ MathSize SpreadInfo::initial(
         28.0 - log(1.0 - min(0.999 * 2.496 * ffmc_effect, isf1) / (2.496 * ffmc_effect)) / 0.0818;
     }
     const auto heading =
-      Radians::from_degrees(static_cast<double>(Cell::aspect(spread.key_))).to_heading();
+      Radians::from_degrees(static_cast<_Float64>(Cell::aspect(spread.key_))).to_heading();
     // FIX: ignore heading arguments for now since it was changing results
     std::ignore = heading_sin;
     std::ignore = heading_cos;
