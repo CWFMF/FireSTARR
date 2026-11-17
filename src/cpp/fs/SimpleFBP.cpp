@@ -13,6 +13,16 @@
 namespace fs::simplefbp
 {
 using settings::Settings;
+MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b) noexcept
+{
+  const auto bui = round_value(b);
+  return 5.0 * (1.0 - exp(-0.0115 * bui));
+}
+MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept
+{
+  const auto bui = round_value(b);
+  return 1.5 * (1.0 - exp(-0.0183 * bui));
+}
 MathSize SimpleFuelD1::isfD1(
   const SpreadInfo& spread,
   const MathSize ros_multiplier,
