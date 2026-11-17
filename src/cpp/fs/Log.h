@@ -120,8 +120,6 @@ inline int fatal(const std::exception& ex) DEBUG_NOEXCEPT_OFF
   throw ex;
 #else
   exit(EXIT_FAILURE);
-  // HACK: to satisfy return type
-  return EXIT_FAILURE;
 #endif
 }
 template <typename... Args>
