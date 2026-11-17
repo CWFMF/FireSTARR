@@ -56,13 +56,21 @@ ofstream* out_file() noexcept
 mutex mutex_{};
 ostream* output_{pre_file_log()};
 // HACK: rely on error handler being set when log is opened
-void handle_tiff_error(const char* module, const char* fmt, va_list args)
+void handle_tiff_error(const char* module, const char* const fmt, va_list args)
 {
   const string tmp;
   stringstream iss(tmp);
   // HACK: just use a static size instead of trying to determine
   char buffer[1024]{0};
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#endif
+  // NOLINTNEXTLINE
   vsnprintf(buffer, std::size(buffer), fmt, args);
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
   if (module && 0 < strlen(module))
   {
     iss << module << ": ";
