@@ -37,6 +37,13 @@ static_assert(4 == sizeof(_Float32), "Could not determine 32-bit float type");
 static_assert(8 == sizeof(_Float64), "Could not determine 64-bit float type");
 // Type used for math operations
 using MathSize = _Float64;
+constexpr MathSize round_value(const MathSize value) noexcept
+{
+  // HACK: use for replicating old LookupTable rounding
+  const auto i = static_cast<size_t>(value * 10);
+  const auto v = i / static_cast<MathSize>(10);
+  return v;
+}
 // HACK: override these so unstable code doesn't change results of functions
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;

@@ -3,7 +3,6 @@
 #define FS_SIMPLE_STANDARDFUEL
 #include "stdafx.h"
 #include "LogValue.h"
-#include "LookupTable.h"
 #include "SimpleFuelType.h"
 namespace fs::simplefbp
 {
@@ -16,44 +15,32 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  * \param fmc Foliar Moisture Content (FMC)
  * \return Standard foliar moisture effect (FME) based on FMC [ST-X-3 eq 61]
  */
-[[nodiscard]] static MathSize calculate_standard_foliar_moisture_fmc(const MathSize fmc) noexcept
+[[nodiscard]] static MathSize calculate_standard_foliar_moisture_fmc(const MathSize f) noexcept
 {
+  const auto fmc = round_value(f);
   return pow_int<4>(1.5 - 0.00275 * fmc) / (460.0 + 25.9 * fmc) / 0.778 * 1000.0;
 }
-/**
- * \brief Standard foliar moisture effect (FME) based on FMC [ST-X-3 eq 61]
- */
-static const LookupTable<&calculate_standard_foliar_moisture_fmc> STANDARD_FOLIAR_MOISTURE_FMC{};
 /**
  * \brief Crown fire spread rate (m/min) / Foliar Moisture Effect (RSC / (FME / FME_avg)) [ST-X-3 eq
  * 64]
  * \param isi Initial Spread Index
  * \return RSC / (FME / FME_avg) [ST-X-3 eq 64]
  */
-[[nodiscard]] static MathSize calculate_standard_foliar_moisture_isi(const MathSize isi) noexcept
+[[nodiscard]] static MathSize calculate_standard_foliar_moisture_isi(const MathSize i) noexcept
 {
+  const auto isi = round_value(i);
   return 60.0 * (1.0 - exp(-0.0497 * isi));
 }
-/**
- * \brief Crown fire spread rate (m/min) / Foliar Moisture Effect (RSC / (FME / FME_avg)) [ST-X-3 eq
- * 64]
- * \return RSC / (FME / FME_avg) [ST-X-3 eq 64]
- */
-static const LookupTable<&calculate_standard_foliar_moisture_isi> STANDARD_FOLIAR_MOISTURE_ISI{};
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 79]
  * \param ws Wind Speed (km/h)
  * \return Length to Breadth ratio [ST-X-3 eq 79]
  */
-[[nodiscard]] static MathSize calculate_standard_length_to_breadth(const MathSize ws) noexcept
+[[nodiscard]] static MathSize calculate_standard_length_to_breadth(const MathSize w) noexcept
 {
+  const auto ws = round_value(w);
   return 1.0 + 8.729 * pow(1.0 - exp(-0.030 * ws), 2.155);
 }
-/**
- * \brief Length to Breadth ratio [ST-X-3 eq 79]
- * \return Length to Breadth ratio [ST-X-3 eq 79]
- */
-static const LookupTable<&calculate_standard_length_to_breadth> STANDARD_LENGTH_TO_BREADTH{};
 /**
  * \brief A SimpleFuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -170,7 +157,7 @@ public:
    */
   [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const noexcept override
   {
-    return STANDARD_LENGTH_TO_BREADTH(ws);
+    return calculate_standard_length_to_breadth(ws);
   }
   /**
    * \brief Final rate of spread (m/min)
@@ -243,7 +230,8 @@ public:
     const MathSize fmc
   ) noexcept
   {
-    return STANDARD_FOLIAR_MOISTURE_ISI(isi) * STANDARD_FOLIAR_MOISTURE_FMC(fmc);
+    return calculate_standard_foliar_moisture_isi(isi)
+         * calculate_standard_foliar_moisture_fmc(fmc);
   }
   [[nodiscard]] constexpr MathSize logQ() const noexcept { return log_q_.value; }
 
