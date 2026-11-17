@@ -94,6 +94,7 @@ RUN --mount=type=bind,source=./vcpkg.json,target=./vcpkg.json \
     --mount=type=bind,source=./src/cpp,target=./src/cpp \
     --mount=type=bind,source=./test/data,target=./test/data \
     --mount=type=bind,source=./test/input,target=./test/input \
+    --mount=type=bind,rw=true,source=./test/output,target=./test/output \
     --mount=type=bind,source=./fuel.lut,target=./fuel.lut \
     --mount=type=bind,source=./settings.ini,target=./settings.ini \
     --mount=type=bind,source=./README.md,target=./README.md \
