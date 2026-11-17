@@ -11,7 +11,7 @@ namespace fs
 struct LogValue
 {
   MathSize value{0};
-  auto operator<=>(const LogValue& rhs) const = default;
+  std::partial_ordering operator<=>(const LogValue& rhs) const = default;
 };
 static constexpr LogValue LOG_0_70{-0.35667494393873245};
 static constexpr LogValue LOG_0_75{-0.2876820724517809};
