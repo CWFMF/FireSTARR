@@ -22,7 +22,11 @@ struct Direction : public StrictType<Direction, units::CompassDegrees>
 {
   using StrictType::StrictType;
   static consteval Direction Zero() { return Direction{0.0}; };
-  static consteval Direction Invalid() { return Direction{-1.0}; };
+  static consteval Direction Invalid()
+  {
+    // NOTE: uint so -1 doesn't work
+    return Direction{std::numeric_limits<DegreesSize>::max()};
+  };
   constexpr Direction(const Degrees& degrees) : StrictType{degrees.value} { }
   constexpr Direction(const Radians& radians) : Direction{radians.asDegrees()} { }
   [[nodiscard]] constexpr MathSize asRadians() const
