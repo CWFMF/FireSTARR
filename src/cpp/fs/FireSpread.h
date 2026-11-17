@@ -31,7 +31,7 @@ class Scenario;
 /**
  * \brief Possible results of an attempt to spread.
  */
-enum SpreadResult
+enum class SpreadResult
 {
   SPREAD_TOO_SLOW,
   SPREAD_IMPOSSIBLE,
