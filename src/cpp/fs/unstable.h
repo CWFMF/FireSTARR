@@ -128,12 +128,12 @@ class PreciseValue
 {
   static inline MathSize round_value(const MathSize value)
   {
-    // // HACK: exclude special values
-    // if (!std::isfinite(value) || (std::numeric_limits<MathSize>::max() == value)
-    //     || (std::numeric_limits<MathSize>::min() == value))
-    // {
-    //   return value;
-    // }
+    // HACK: exclude special values
+    if (!std::isfinite(value) || (std::numeric_limits<MathSize>::max() == value)
+        || (std::numeric_limits<MathSize>::min() == value))
+    {
+      return value;
+    }
     static constexpr int64_t RoundBy{pow_int<RoundByDigits>(static_cast<int64_t>(10))};
     static_assert(0 == RoundBy % 10);
     static_assert(10 <= RoundBy);
