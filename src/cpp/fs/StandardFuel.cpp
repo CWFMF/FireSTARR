@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "StandardFuel.h"
-namespace fs
+namespace fs::fuel
 {
 MathSize calculate_standard_foliar_moisture_fmc(const MathSize f) noexcept
 {

@@ -16,7 +16,7 @@ _Tp do_transform_reduce(
   // to help compiler determine type
   using _ForwardIterator = decltype(container.begin());
   return std::transform_reduce(
-#ifndef __APPLE__
+#if !defined(__APPLE__) || !defined(__clang__)
     // apple clang doesn't support this?
     std::execution::par_unseq,
 #endif

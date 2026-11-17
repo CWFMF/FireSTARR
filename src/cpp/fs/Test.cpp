@@ -13,6 +13,7 @@
 #include "Util.h"
 namespace fs
 {
+using fs::fuel::FuelLookup;
 using settings::Settings;
 /**
  * \brief An Environment with no elevation and the same value in every Cell.

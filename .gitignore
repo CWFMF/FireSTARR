@@ -17,3 +17,5 @@ test_fbp
 test_fwi
 **/*.zip
 **/*.exe
+!test/output/reference
+!src/**

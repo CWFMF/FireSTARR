@@ -237,7 +237,7 @@ static constexpr FuelCodeSize INVALID_FUEL_CODE = 0;
 /**
  * \brief Number of all possible fuels in simulation
  */
-static constexpr auto NUMBER_OF_FUELS = 141;
+static constexpr size_t NUMBER_OF_FUELS = 141;
 /**
  * \brief Number of hours in a day
  */

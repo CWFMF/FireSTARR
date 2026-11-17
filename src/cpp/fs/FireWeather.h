@@ -5,7 +5,11 @@
 #include "FWI.h"
 namespace fs
 {
+namespace fuel
+{
 class FuelType;
+}
+using namespace fuel;
 // use an array instead of a map since number of values is so small and access should be faster
 using SurvivalMap = array<vector<_Float32>, NUMBER_OF_FUELS>;
 /**
