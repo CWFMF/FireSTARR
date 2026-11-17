@@ -124,7 +124,7 @@ void ProbabilityMap::show() const
   const ProcessingStatus processing_status
 ) const
 {
-  if (processed == processing_status)
+  if (ProcessingStatus::processed == processing_status)
   {
     return files;
   }
@@ -202,7 +202,7 @@ void ProbabilityMap::deleteInterim()
   static const auto& settings = fs::settings::instance();
   scoped_lock lock{mutex_};
   FileList files{};
-  const auto is_interim = processed != processing_status;
+  const auto is_interim = ProcessingStatus::processed != processing_status;
   auto t = start_time;
   auto ticks = fix_utc(&t);
   const auto day = static_cast<int>(round(time));
@@ -320,7 +320,8 @@ void ProbabilityMap::deleteInterim()
     for (auto loc : perimeter_->burned)
     {
       // multiply initial perimeter cells so that probability shows processing status
-      with_perim.data[loc] = max(static_cast<size_t>(1), with_perim.data[loc]) * processing_status;
+      with_perim.data[loc] =
+        max(static_cast<size_t>(1), with_perim.data[loc]) * static_cast<size_t>(processing_status);
     }
   }
   return saveToProbabilityFile<_Float32>(

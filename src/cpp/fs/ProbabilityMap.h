@@ -14,7 +14,7 @@ using settings::Settings;
  * \brief The code to burn into probability maps where the perimeter is to represent the status of
  * the sims
  */
-enum ProcessingStatus : size_t
+enum class ProcessingStatus : size_t
 {
   unprocessed = 2,
   processing = 3,

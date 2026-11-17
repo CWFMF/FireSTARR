@@ -781,12 +781,15 @@ DurationSize Model::saveProbabilities(
 {
   auto final_time = numeric_limits<DurationSize>::min();
   const ProcessingStatus processing_status =
-    !is_interim ? processed : (0 == scenarios_done_ ? unprocessed : processing);
-  if ((processing_status == processing) && (scenarios_last_save_ == scenarios_done_))
+    !is_interim
+      ? ProcessingStatus::processed
+      : (0 == scenarios_done_ ? ProcessingStatus::unprocessed : ProcessingStatus::processing);
+  if ((processing_status == ProcessingStatus::processing)
+      && (scenarios_last_save_ == scenarios_done_))
   {
     logging::error("No change since last call to saveProbabilities");
   }
-  else if ((processing_status != processing) || should_output_interim_)
+  else if ((processing_status != ProcessingStatus::processing) || should_output_interim_)
   {
     // HACK: use max as "never saved" and replace with 0 on first save
     if (is_being_cancelled_)
@@ -814,7 +817,7 @@ DurationSize Model::saveProbabilities(
       const auto time = prob->time;
       final_time = max(final_time, time);
       std::ignore = prob->saveAll(outputDirectory(), this->start_time_, time, processing_status);
-      if (processing_status == processed)
+      if (processing_status == ProcessingStatus::processed)
       {
         if (should_log(logging::level::note))
         {
