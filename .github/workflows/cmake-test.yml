@@ -21,7 +21,7 @@ jobs:
         variant: [Release]
         include:
           - os: macos
-            os-version: 15
+            os-version: 26
             target-os: osx
           # HACK: latest doesn't work with -arm
           - os: ubuntu
@@ -141,7 +141,12 @@ jobs:
         ctest --output-on-failure --preset ${{ matrix.variant }}
 
     - name: Test basic run
-      run: ./firestarr dir_test 2024-06-03 58.81228184403946 -122.9117103995713 01:00 --ffmc 89.9 --dmc 59.5 --dc 450.9 --apcp_prev 0 -v --wx ./test/input/10N_50651/firestarr_10N_50651_wx.csv --output_date_offsets [1] --tz -5 --raster-root ./test/input/10N_50651/ --perim ./test/input/10N_50651/10N_50651.tif
+      run: |
+        rm test/output/reference/*
+        ./firestarr test/output/reference 2024-06-03 58.81228184403946 -122.9117103995713 01:00 --ffmc 89.9 --dmc 59.5 --dc 450.9 --apcp_prev 0 -v --wx ./test/input/10N_50651/firestarr_10N_50651_wx.csv --output_date_offsets [1,2,3] --tz -5 --raster-root ./test/input/10N_50651/ --perim ./test/input/10N_50651/10N_50651.tif -i --ascii
+        rm test/output/reference/*.ini
+        rm test/output/reference/*.log
+        git diff --name-status test/output/reference && echo "Reference check worked"
 
     - name: Test timezone consistency
       if: ${{ matrix.os != 'windows' }}
@@ -154,6 +159,15 @@ jobs:
       if: ${{ matrix.os == 'ubuntu' }}
       run: (! ./firestarr test/output/bad_projection 2023-10-03 58.81228184403946 -122.9117103995713 12:00 --ffmc 93.52 --dmc 18 --dc 409 --apcp_prev 0 --log logfile.txt --no-probability --deterministic -v -i -s --raster-root test/input/bad_projection --perim test/input/bad_projection/perim.tif --wx test/input/bad_projection/wx.csv --output_date_offsets "[1,2,3]" --tz -7)
 
+    - name: Upload test outputs artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: test-outputs-${{ env.RELEASE_ARCHIVE }}
+        path: test/output/reference
+        archive: true
+        compression-level: 9
+        retention-days: 30
+
     # rename so we can upload without archiving again
     - run: |
         mv build/firestarr${{ env.ARCHIVE_FORMAT }} build/${{ env.RELEASE_ARCHIVE }}${{ env.ARCHIVE_FORMAT }}
@@ -162,6 +176,7 @@ jobs:
       if: ${{ matrix.variant == 'Release' }}
       uses: actions/upload-artifact@v7
       with:
+        name: 'release-archive'
         path: build/${{ env.RELEASE_ARCHIVE }}${{ env.ARCHIVE_FORMAT }}
         archive: false
         retention-days: 30
@@ -196,6 +211,7 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v8
         with:
+          name: 'release-archive'
           skip-decompress: true
 
       - name: List artifacts
@@ -218,3 +234,45 @@ jobs:
           files: |
             ./firestarr*/*.tar.gz
             ./firestarr*/*.zip
+
+  compare:
+    needs: [cmake-test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      # if '-' in tag then it's -alpha or similar
+      IS_LATEST: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-') }}
+      # should just be !env.IS_LATEST but can't figure out syntax
+      IS_PRERELEASE: ${{ !startsWith(github.ref, 'refs/tags/v') || contains(github.ref, '-') }}
+      TAG: ${{ github.ref_name }}${{ case ( !startsWith(github.ref, 'refs/tags/v') || contains(github.ref, '-'), '-latest', '' ) }}
+
+    steps:
+      # need checkout to delete release
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          submodules: true
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: test-outputs-*
+          path: ${{ github.workspace }}/compare
+          merge-multiple: true
+          skip-decompress: true
+
+      - name: List artifacts
+        run: |
+          echo "=== All artifacts ==="
+          find . -type f \( -name "*.tar.gz" -o -name "*.zip" \)
+
+      - name: Compare artifacts
+        shell: bash
+        run: |
+          chmod +x ${{ github.workspace }}/compare
+          cd ${{ github.workspace }}/compare
+          . ${{ github.workspace }}/repo/cmp_outputs.sh
+          ls -lh *.diff
+          [[ "$(cat *.diff | wc -l)" -eq "0" ]] && echo "Comparison worked"
