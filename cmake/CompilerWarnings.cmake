@@ -80,6 +80,7 @@ set(GCC_WARNINGS
     -Wduplicated-branches # warn if if / else branches have duplicated code
     -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
     -Wsuggest-override # warn if an overridden member function is not marked 'override' or 'final'
+    -Wno-psabi # don't warn about abi changes between GCC versions
 )
 
 set(CUDA_WARNINGS
