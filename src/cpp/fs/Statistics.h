@@ -118,7 +118,7 @@ public:
         return std::accumulate(
                  values.begin(), values.end(), 0.0, [](const auto t, const auto x) { return t + x; }
                )
-             / n_;
+             / static_cast<MathSize>(n_);
       }())
   {
     if (values.empty())
@@ -130,7 +130,10 @@ public:
     {
       const auto pos = std::min(
         n_ - 1,
-        static_cast<size_t>(truncl((static_cast<MathSize>(i) / (percentiles_.size() - 1)) * n_))
+        static_cast<size_t>(trunc(
+          (static_cast<MathSize>(i) / static_cast<MathSize>(percentiles_.size() - 1))
+          * static_cast<MathSize>(n_)
+        ))
       );
       percentiles_[i] = values[pos];
     }
@@ -140,9 +143,10 @@ public:
       0.0,
       [this](const MathSize t, const MathSize x) { return t + pow_int<2>(x - mean_); }
     );
-    standard_deviation_ = sqrt(total / n_);
+    standard_deviation_ = sqrt(total / static_cast<MathSize>(n_));
     // HACK: variance is "infinite" if only one value?
-    sample_variance_ = (1 >= n_ ? std::numeric_limits<MathSize>::max() : (total / (n_ - 1)));
+    sample_variance_ =
+      (1 >= n_ ? std::numeric_limits<MathSize>::max() : (total / static_cast<MathSize>(n_ - 1)));
 #ifdef DEBUG_STATISTICS
     logging::check_equal(min_, percentiles_[0], "min");
     logging::check_equal(max_, percentiles_[100], "max");
@@ -155,8 +159,8 @@ public:
    */
   [[nodiscard]] MathSize studentsT() const noexcept
   {
-    const auto result =
-      T_VALUES[std::min(T_VALUES.size(), n()) - 1] * sqrt(sampleVariance() / n()) / abs(mean());
+    const auto result = T_VALUES[std::min(T_VALUES.size(), n()) - 1]
+                      * sqrt(sampleVariance() / static_cast<MathSize>(n())) / abs(mean());
     return result;
   }
   /**
@@ -193,7 +197,8 @@ public:
   {
     const auto re = relative_error / (1 + relative_error);
     const std::function<MathSize(size_t)> fct = [&](const size_t i) noexcept {
-      return T_VALUES[std::min(T_VALUES.size(), i) - 1] * sqrt(sampleVariance() / i) / abs(mean());
+      return T_VALUES[std::min(T_VALUES.size(), i) - 1]
+           * sqrt(sampleVariance() / static_cast<MathSize>(i)) / abs(mean());
     };
     const auto cur_runs = n();
     return binary_find_checked(cur_runs, 10 * cur_runs, re, fct) - cur_runs;
@@ -205,7 +210,10 @@ private:
    * \param z Z value to calculate for
    * \return Confidence Interval
    */
-  [[nodiscard]] MathSize confidenceInterval(const MathSize z) const { return z * mean_ / sqrt(n_); }
+  [[nodiscard]] MathSize confidenceInterval(const MathSize z) const
+  {
+    return z * mean_ / sqrt(static_cast<MathSize>(n_));
+  }
   /**
    * \brief Number of values
    */

@@ -55,8 +55,8 @@ int value_at_int(void* const buf, const FullIdx offset)
     "Coordinates before reading are ({:d}, {:d} => {:f}, {:f})",
     coordinates->x,
     coordinates->y,
-    coordinates->x + coordinates->x_sub / 1000.0,
-    coordinates->y + coordinates->y_sub / 1000.0
+    static_cast<MathSize>(coordinates->x) + coordinates->x_sub / 1000.0,
+    static_cast<MathSize>(coordinates->y) + coordinates->y_sub / 1000.0
   );
   auto min_x = max(
     static_cast<FullIdx>(0),
@@ -220,7 +220,7 @@ int value_at_int(void* const buf, const FullIdx offset)
             const auto actual_x = ((w - min_x) + x);
             if (actual_x >= 0 && actual_x < MAX_HEIGHT)
             {
-              const auto cur_hash = actual_y * MAX_WIDTH + actual_x;
+              const auto cur_hash = static_cast<size_t>(actual_y * MAX_WIDTH + actual_x);
               // auto cur = *(static_cast<int*>(buf) + offset);
               auto cur = value_at(buf, offset);
 #ifdef DEBUG_GRIDS

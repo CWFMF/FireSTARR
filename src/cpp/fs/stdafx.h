@@ -117,7 +117,7 @@ using YearSize = int;
 /**
  * \brief Difference minimum for MathSizes to be considered the same
  */
-static const MathSize COMPARE_LIMIT = 1.0E-20f;
+static constexpr auto COMPARE_LIMIT = static_cast<MathSize>(1.0E-20);
 /**
  * \brief Size of the hash of a Cell
  */

@@ -478,7 +478,7 @@ vector<ptr<const FwiWeather>> make_vector(map<Day, FwiWeather> data)
     // use first day's weather for min date instead of all 0's
     const auto& wx = (day == min_date ? data.at(day + 1) : data.at(day));
     // make sure we use tomorrow for the wind after midnight
-    const auto& wx_wind = data.at(static_cast<size_t>(day + 1));
+    const auto& wx_wind = data.at(static_cast<Day>(day) + 1);
     const auto x = wx.mcFfmcPct();
     const auto ln_x = log(x);
     const auto ln_x_sq = ln_x * ln_x;
@@ -673,6 +673,8 @@ ptr<const FwiWeather> FireWeather::at(const DurationSize time) const
 ThresholdSize FireWeather::survivalProbability(const DurationSize time, const FuelCodeSize& in_fuel)
   const
 {
-  return survival_probability_.at(in_fuel).at(time_index(time, min_date_));
+  // FIX: stored as _Float32 but used as ThresholdSize
+  return static_cast<ThresholdSize>(survival_probability_.at(in_fuel).at(time_index(time, min_date_)
+  ));
 }
 }

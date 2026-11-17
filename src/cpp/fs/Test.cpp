@@ -166,7 +166,7 @@ string run_test(
   // logging::debug("Concurrent test limit is {:d}", num_concurrent.limit());
   logging::note("Running test for {:s}", output_directory);
   static const StartPoint ForPoint(settings.latitude.value(), settings.longitude.value());
-  const auto start_date = settings.start_date.value().tm_yday;
+  const auto start_date = static_cast<Day>(settings.start_date.value().tm_yday);
   const auto end_date = start_date + static_cast<DurationSize>(num_hours) / DAY_HOURS;
   make_directory_recursive(output_directory);
   const auto fuel = lookup.bySimplifiedName(simplify_fuel_name(fuel_name));

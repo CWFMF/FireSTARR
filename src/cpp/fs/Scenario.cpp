@@ -110,7 +110,7 @@ Scenario* Scenario::reset_with_new_start(const XYIdx& start_xy, ptr<SafeVector> 
   {
     // want a global count of how many times this scenario ran
     scoped_lock lk{MUTEX_SIM_COUNTS};
-    simulation_ = ++SIM_COUNTS[id_];
+    simulation_ = static_cast<int64_t>(++SIM_COUNTS[id_]);
   }
   return this;
 }
@@ -163,7 +163,7 @@ Scenario* Scenario::reset(
   {
     // want a global count of how many times this scenario ran
     scoped_lock lock{MUTEX_SIM_COUNTS};
-    simulation_ = ++SIM_COUNTS[id_];
+    simulation_ = static_cast<int64_t>(++SIM_COUNTS[id_]);
   }
   return this;
 }
@@ -517,9 +517,10 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
   {
     if (settings.is_surface())
     {
-      const auto ratio_done = static_cast<MathSize>(completed) / count;
+      const auto ratio_done = static_cast<MathSize>(completed) / static_cast<MathSize>(count);
       const auto s = model_->runTime().count();
-      const auto r = static_cast<size_t>(s / ratio_done) - s;
+      const auto r =
+        static_cast<size_t>(static_cast<MathSize>(s) / ratio_done) - static_cast<size_t>(s);
       std::ignore = logging::output_no_check(
         log_level,
         "{:s} [{:d} of {:d}] ({:0.2f}%) <{:d} : {:d} remaining> Completed with final size {:0.1f} ha",

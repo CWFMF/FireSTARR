@@ -237,11 +237,11 @@ Settings::Settings(const string dir_binary, const string dir_root) noexcept
     offset_sunrise = stod(get_value(settings_, "OFFSET_SUNRISE"));
     offset_sunset = stod(get_value(settings_, "OFFSET_SUNSET"));
     confidence_level = stod(get_value(settings_, "CONFIDENCE_LEVEL"));
-    maximum_time_seconds = stol(get_value(settings_, "MAXIMUM_TIME"));
-    interim_output_interval_seconds = stol(get_value(settings_, "INTERIM_OUTPUT_INTERVAL"));
-    minimum_simulation_count = stol(get_value(settings_, "MINIMUM_SIMULATIONS"));
-    minimum_active_simulation_count = stol(get_value(settings_, "MINIMUM_ACTIVE_SIMULATIONS"));
-    maximum_simulation_count = stol(get_value(settings_, "MAXIMUM_SIMULATIONS"));
+    maximum_time_seconds = stoul(get_value(settings_, "MAXIMUM_TIME"));
+    interim_output_interval_seconds = stoul(get_value(settings_, "INTERIM_OUTPUT_INTERVAL"));
+    minimum_simulation_count = stoul(get_value(settings_, "MINIMUM_SIMULATIONS"));
+    minimum_active_simulation_count = stoul(get_value(settings_, "MINIMUM_ACTIVE_SIMULATIONS"));
+    maximum_simulation_count = stoul(get_value(settings_, "MAXIMUM_SIMULATIONS"));
     threshold_scenario_weight = stod(get_value(settings_, "THRESHOLD_SCENARIO_WEIGHT"));
     threshold_daily_weight = stod(get_value(settings_, "THRESHOLD_DAILY_WEIGHT"));
     threshold_hourly_weight = stod(get_value(settings_, "THRESHOLD_HOURLY_WEIGHT"));

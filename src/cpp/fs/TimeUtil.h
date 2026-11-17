@@ -50,7 +50,7 @@ template <typename T>
 template <typename T>
 [[nodiscard]] size_t time_index(const T day, const int hour) noexcept
 {
-  return static_cast<size_t>(day) * DAY_HOURS + hour;
+  return static_cast<size_t>(day) * DAY_HOURS + static_cast<size_t>(hour);
 }
 /**
  * \brief Convert day and hour into time index since min_date

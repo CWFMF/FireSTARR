@@ -32,7 +32,7 @@ void make_threshold(
       {
         // subtract from 1.0 because we want weight to make things more likely not less
         // ensure we stay between 0 and 1
-        thresholds->at((i - start_day) * DAY_HOURS + h) = convert(max(
+        thresholds->at((i - start_day) * DAY_HOURS + static_cast<size_t>(h)) = convert(max(
           0.0,
           min(
             1.0,

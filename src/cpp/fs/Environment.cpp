@@ -108,8 +108,8 @@ Environment Environment::loadEnvironment(
         "Coordinates before reading are ({:d}, {:d} => {:f}, {:f})",
         x,
         y,
-        x + coordinates->x_sub / 1000.0,
-        y + coordinates->y_sub / 1000.0
+        static_cast<MathSize>(x) + coordinates->x_sub / 1000.0,
+        static_cast<MathSize>(y) + coordinates->y_sub / 1000.0
       );
       // if it's not in the raster then this is not an option
       // FIX: are these +/-1 because of counting the cell itself and starting from 0?
@@ -353,7 +353,7 @@ MathSize Environment::to_hectares(const size_t num_cells) const
   // we know that every cell is square, so figure out how many cells per ha
   const MathSize hectares_per_width = (this->cellSize() / 100.0);
   const MathSize hectares_per_cell = hectares_per_width * hectares_per_width;
-  return num_cells * hectares_per_cell;
+  return static_cast<MathSize>(num_cells) * hectares_per_cell;
 }
 Environment::Environment(
   unique_ptr<FuelGrid> fuel_grid,

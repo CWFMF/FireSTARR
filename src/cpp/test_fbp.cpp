@@ -179,7 +179,7 @@ auto compare_spread(
   // HACK: use less options for things with nd values (just grass?)
   const auto dmc_values = options.nd_values.size() > 1 ? DMC_SMALL_RANGE : DMC_RANGE;
   static auto it = [&]() {
-    vector<std::tuple<int, MathSize, MathSize, MathSize, short, short>> results{};
+    vector<std::tuple<int, MathSize, MathSize, MathSize, SlopeSize, AspectSize>> results{};
     for (auto nd : options.nd_values)
     {
       logging::extensive("nd {:d}", nd);
@@ -231,7 +231,7 @@ auto compare_spread(
       ++count_comparisons;
       logging::extensive("aspect {:d}", aspect);
       // HACK: this constructor ignores fuel part of this
-      const auto key = Cell::key(Cell::hashCell(slope, aspect, 0));
+      const auto key = Cell::key(Cell::hashCell(slope, aspect, static_cast<FuelCodeSize>(0)));
       const SpreadInfo spread_a{a, TIME, MIN_ROS, CELL_SIZE, key, nd, &weather, &weather};
       const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, &weather, &weather};
       const auto offsets_a = spread_a.offsets();
@@ -306,6 +306,46 @@ auto compare_spread(
             nd,
             slope,
             aspect
+          );
+          logging::compare_equal(
+            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
+          );
+          logging::compare_equal(spread_a.maxIntensity(), spread_b.maxIntensity(), "maxIntensity");
+          logging::compare_equal(
+            spread_a.isNotSpreading(), spread_b.isNotSpreading(), "isNotSpreading"
+          );
+          logging::compare_equal(spread_a.nd(), spread_b.nd(), "nd");
+          logging::compare_equal(spread_a.time(), spread_b.time(), "time");
+          logging::compare_equal(
+            spread_a.lengthToBreadth(), spread_b.lengthToBreadth(), "lengthToBreadth"
+          );
+          logging::compare_equal(spread_a.percentSlope(), spread_b.percentSlope(), "percentSlope");
+          logging::compare_equal(spread_a.slopeAzimuth(), spread_b.slopeAzimuth(), "slopeAzimuth");
+          logging::compare_equal(spread_a.headRos(), spread_b.headRos(), "headRos");
+          logging::compare_equal(
+            spread_a.headDirection(), spread_b.headDirection(), "headDirection"
+          );
+          logging::compare_equal(spread_a.slopeFactor(), spread_b.slopeFactor(), "slopeFactor");
+          logging::compare_equal(
+            spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture"
+          );
+          logging::compare_equal(spread_a.isInvalid(), spread_b.isInvalid(), "isInvalid");
+          logging::compare_equal(
+            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
+          );
+          logging::compare_equal(
+            spread_a.crownFuelConsumption(), spread_b.crownFuelConsumption(), "crownFuelConsumption"
+          );
+          logging::compare_equal(
+            spread_a.fireDescription(), spread_b.fireDescription(), "fireDescription"
+          );
+          logging::compare_equal(
+            spread_a.surfaceFuelConsumption(),
+            spread_b.surfaceFuelConsumption(),
+            "surfaceFuelConsumption"
+          );
+          logging::compare_equal(
+            spread_a.totalFuelConsumption(), spread_b.totalFuelConsumption(), "totalFuelConsumption"
           );
           if (std::weak_ordering::less == cmp_pt)
           {
@@ -586,7 +626,7 @@ vector<int> find_nd_values()
       for (auto elevation : elevations)
       {
         const Point pt{latitude, longitude};
-        const auto nd_ref = calculate_nd_ref_for_point(elevation, pt);
+        const auto nd_ref = calculate_nd_ref_for_point(static_cast<int>(elevation), pt);
         nd_ref_values.emplace(nd_ref);
         logging::verbose(
           "now have {:d} values for nd: {}, {:0.100g} gives nd_ref {:d}",

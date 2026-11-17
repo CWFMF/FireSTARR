@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "stdafx.h"
 #include "Grid.h"
+#include <cstdint>
 #include <geo_normalize.h>
 #include <tiffio.h>
 #include <xtiffio.h>
@@ -31,8 +32,8 @@ string saveToTiffFile(
 {
   // https://gdal.org/en/stable/drivers/raster/gtiff.html
   // tile width/height must be divisible by 16
-  uint32_t tileWidth = min(static_cast<int>(ceil(width / 16.0) * 16), 256);
-  uint32_t tileHeight = min(static_cast<int>(ceil(height / 16.0) * 16), 256);
+  auto tileWidth = static_cast<uint32_t>(min(static_cast<int>(ceil(width / 16.0) * 16), 256));
+  auto tileHeight = static_cast<uint32_t>(min(static_cast<int>(ceil(height / 16.0) * 16), 256));
   auto [min_x, min_y, max_x, max_y] = bounds;
   // auto min_x = std::get<0>(bounds);
   // auto min_y = std::get<1>(bounds);
@@ -75,8 +76,12 @@ string saveToTiffFile(
   );
 #endif
   logging::extensive("({:d}, {:d}) => ({:d}, {:d})", min_x, min_y, max_x, max_y);
-  logging::check_fatal((max_x - min_x) % tileWidth != 0, "Invalid start and end x");
-  logging::check_fatal((max_y - min_y) % tileHeight != 0, "Invalid start and end y");
+  logging::check_fatal(
+    static_cast<uint32_t>(max_x - min_x) % tileWidth != 0, "Invalid start and end x"
+  );
+  logging::check_fatal(
+    static_cast<uint32_t>(max_y - min_y) % tileHeight != 0, "Invalid start and end y"
+  );
   logging::extensive("Lower left corner is ({:d}, {:d})", min_x, min_y);
   logging::extensive("Upper right corner is ({:d}, {:d})", max_x, max_y);
   const MathSize xll = grid.xllcorner() + min_x * grid.cellSize();
@@ -136,7 +141,7 @@ string saveToTiffFile(
   TIFFSetField(tif, TIFFTAG_GEOTIEPOINTS, 6, tiePoints);
   TIFFSetField(tif, TIFFTAG_GEOPIXELSCALE, 3, pixelScale);
   size_t tileSize = tileWidth * tileHeight;
-  const auto buf_size = tileSize * sizeof(R);
+  const auto buf_size = static_cast<tmsize_t>(tileSize * sizeof(R));
   logging::extensive("{:s} has buffer size {:d}", base_name, buf_size);
   // HACK: using R means size changes on different cpu types
   auto buf = static_cast<R*>(_TIFFmalloc(buf_size));
@@ -151,8 +156,11 @@ string saveToTiffFile(
       {
         for (uint32_t y1 = 0; y1 < tileHeight; ++y1)
         {
-          const Idx y2 = static_cast<Idx>(max_y) - (y0 + y1 + 1);
-          const Idx x2 = static_cast<Idx>(min_x) + x0 + x1;
+          // FIX: did this to for sure not change behaviour, but sort this out
+          const auto y2 =
+            static_cast<Idx>(static_cast<uint32_t>(static_cast<Idx>(max_y)) - (y0 + y1 + 1));
+          const auto x2 =
+            static_cast<Idx>(static_cast<uint32_t>(static_cast<Idx>(min_x)) + x0 + x1);
           const XYIdx idx{x2, y2};
           // might be out of bounds if not divisible by number of tiles
           if (!(height <= y2 || 0 > y2 || width <= x2 || 0 > x2))
@@ -208,7 +216,7 @@ string GridBase::saveToTiffFileInt(
         dir,
         base_name,
         bits_per_sample,
-        sample_format,
+        static_cast<uint16_t>(sample_format),
         [&](const XYIdx& idx) { return static_cast<uint8_t>(value_at(idx)); },
         nodata_as_int
       );
@@ -223,7 +231,7 @@ string GridBase::saveToTiffFileInt(
         dir,
         base_name,
         bits_per_sample,
-        sample_format,
+        static_cast<uint16_t>(sample_format),
         [&](const XYIdx& idx) { return static_cast<uint16_t>(value_at(idx)); },
         nodata_as_int
       );
@@ -238,7 +246,7 @@ string GridBase::saveToTiffFileInt(
         dir,
         base_name,
         bits_per_sample,
-        sample_format,
+        static_cast<uint16_t>(sample_format),
         [&](const XYIdx& idx) { return static_cast<uint32_t>(value_at(idx)); },
         nodata_as_int
       );
@@ -257,7 +265,7 @@ string GridBase::saveToTiffFileInt(
         dir,
         base_name,
         bits_per_sample,
-        sample_format,
+        static_cast<uint16_t>(sample_format),
         [&](const XYIdx& idx) { return static_cast<int8_t>(value_at(idx)); },
         nodata_as_int
       );
@@ -272,7 +280,7 @@ string GridBase::saveToTiffFileInt(
         dir,
         base_name,
         bits_per_sample,
-        sample_format,
+        static_cast<uint16_t>(sample_format),
         [&](const XYIdx& idx) { return static_cast<int16_t>(value_at(idx)); },
         nodata_as_int
       );
@@ -287,7 +295,7 @@ string GridBase::saveToTiffFileInt(
         dir,
         base_name,
         bits_per_sample,
-        sample_format,
+        static_cast<uint16_t>(sample_format),
         [&](const XYIdx& idx) { return static_cast<int32_t>(value_at(idx)); },
         nodata_as_int
       );
@@ -534,8 +542,8 @@ std::optional<FullCoordinates> GridBase::findFullCoordinates(const Point& point,
     );
     return {};
   }
-  const auto sub_x = static_cast<SubSize>((actual_x - x1) * 1000);
-  const auto sub_y = static_cast<SubSize>((actual_y - y1) * 1000);
+  const auto sub_x = static_cast<SubSize>((actual_x - static_cast<MathSize>(x1)) * 1000);
+  const auto sub_y = static_cast<SubSize>((actual_y - static_cast<MathSize>(y1)) * 1000);
   return FullCoordinates{static_cast<FullIdx>(x1), static_cast<FullIdx>(y1), sub_x, sub_y};
 }
 void write_ascii_header(
