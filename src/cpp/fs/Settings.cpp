@@ -11,7 +11,7 @@ static mutex MUTEX{};
 unique_ptr<Settings> INSTANCE{nullptr};
 Settings& instance() noexcept
 {
-  std::lock_guard<mutex> lock{MUTEX};
+  scoped_lock lock{MUTEX};
   static const bool not_initialized = nullptr == INSTANCE;
   if (not_initialized)
   {
@@ -146,7 +146,7 @@ const string Settings::getRoot() const noexcept { return dir_root_; }
 const string Settings::getBinaryDirectory() const noexcept { return dir_binary_; }
 void Settings::setRoot(const string dir_binary, const string dir_root) noexcept
 {
-  std::lock_guard<mutex> lock{MUTEX};
+  scoped_lock lock{MUTEX};
   logging::check_fatal(nullptr != INSTANCE, "Settings already initialized from file");
   INSTANCE = make_unique<Settings>(dir_binary, dir_root.empty() ? "." : dir_root);
 }
