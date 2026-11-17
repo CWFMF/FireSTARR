@@ -281,7 +281,7 @@ CellGrid Environment::makeCells(const FuelGrid& fuel, const ElevationGrid& eleva
     fuel.yllcorner(),
     fuel.xurcorner(),
     fuel.yurcorner(),
-    string(fuel.proj4()),
+    fuel.proj4(),
     std::move(values)
   );
 }

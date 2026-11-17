@@ -603,7 +603,7 @@ void write_ascii_header(
     auto proj4 = string(proj4_char.get());
     const auto xurcorner = xllcorner + cell_width * width;
     const auto yurcorner = yllcorner + cell_width * height;
-    return {cell_width, xllcorner, yllcorner, xurcorner, yurcorner, string(proj4)};
+    return {cell_width, xllcorner, yllcorner, xurcorner, yurcorner, proj4};
   }
   throw runtime_error("Cannot read TIFF header");
 }
