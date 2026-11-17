@@ -188,7 +188,8 @@ using XYSize = _Float64;
 /**
  * \brief Type used for probability thresholds
  */
-using ThresholdSize = _Float64;
+// FIX: not properly differentiated, so have to be the same type right now
+using ThresholdSize = MathSize;
 /**
  * \brief Type used for storing locations within cells
  */
