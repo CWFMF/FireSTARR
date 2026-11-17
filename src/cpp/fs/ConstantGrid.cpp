@@ -264,7 +264,7 @@ int value_at_int(void* const buf, const FullIdx offset)
     new_yll,
     new_xll + (static_cast<MathSize>(width_calc) + 1) * grid_info.cellSize(),
     new_yll + (static_cast<MathSize>(height_calc) + 1) * grid_info.cellSize(),
-    string(grid_info.proj4()),
+    grid_info.proj4(),
     std::move(values)
   };
   auto new_location = result.findCoordinates(point, false);
