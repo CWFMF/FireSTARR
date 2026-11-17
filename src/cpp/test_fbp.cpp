@@ -87,6 +87,7 @@ private:
           return_value_ = cmp;
         }
       }
+      logging::debug("Have {:d} results", results_.size());
       finalized_ = true;
       results_.clear();
     }
@@ -160,7 +161,7 @@ auto compare_spread(
     // offsets are in fraction of a cell per minute
     const auto offset{o.offset};
     cout << std::format(
-      " ({:d} kW/m; {:0.6f} m/min @{:03d} == ({:g}, {:g}))\n",
+      " ({:d} kW/m; {:0.100g} m/min @{:03d} == ({:0.100g}, {:0.100g}))\n",
       intensity,
       ros,
       direction.asDegreesSize(),
@@ -184,16 +185,16 @@ auto compare_spread(
       logging::extensive("nd {:d}", nd);
       for (auto ffmc : FFMC_RANGE)
       {
-        logging::extensive("ffmc {:f}", ffmc);
+        logging::extensive("ffmc {:0.100g}", ffmc);
         for (auto dmc : dmc_values)
         {
-          logging::extensive("dmc {:f}", dmc);
+          logging::extensive("dmc {:0.100g}", dmc);
           // for (auto bui : options.bui_values)
           {
             for (auto dc : options.dc_values)
             // for (auto dc : range(0.0, std::ranges::max(options.dc_values), 17.0))
             {
-              logging::extensive("dc {:f}", dc);
+              logging::extensive("dc {:0.100g}", dc);
               for (auto slope : slopes)
               {
                 logging::extensive("slope {:d}", slope);
@@ -238,7 +239,7 @@ auto compare_spread(
       const auto head_ros = spread_a.headRos();
       static constexpr MathSize ROS_MINIMAL{1.0};
       logging::verbose(
-        "compare_spread() [{:d}] {:s}spreading for ffmc:{:f}; dmc:{:f}; dc:{:f}; nd:{:d}; slope:{:d}; aspect: {:d}",
+        "compare_spread() [{:d}] {:s}spreading for ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
         count_comparisons,
         spread_a.isNotSpreading() ? "not "
         : head_ros < ROS_MINIMAL  ? "minimal "
@@ -255,7 +256,7 @@ auto compare_spread(
       if (offsets_a.size() != offsets_b.size())
       {
         logging::error(
-          "compare_spread() size failed for name: {:s}; ffmc:{:f}; dmc:{:f}; dc:{:f}; nd:{:d}; slope:{:d}; aspect: {:d}",
+          "compare_spread() size failed for name: {:s}; ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
           name.c_str(),
           ffmc,
           dmc,
@@ -297,7 +298,7 @@ auto compare_spread(
           show_offset(pt_b);
           cout << "\n";
           logging::error(
-            "compare_spread() pt failed for name: {:s}; ffmc:{:f}; dmc:{:f}; dc:{:f}; nd:{:d}; slope:{:d}; aspect: {:d}",
+            "compare_spread() pt failed for name: {:s}; ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
             name.c_str(),
             ffmc,
             dmc,
@@ -322,7 +323,7 @@ auto compare_spread(
       {
         cout << "]\n";
       }
-      logging::debug("compare_spread() == 0 with {:d} comparisons", count_comparisons);
+      logging::verbose("compare_spread() == 0 with {:d} comparisons", count_comparisons);
       return 0;
     }
   );
@@ -421,7 +422,7 @@ auto compare_fuel_basic(
     {
       for (auto bui : options.bui_values)
       {
-        // logging::verbose("bui {:f}", bui);
+        // logging::verbose("bui {:0.100g}", bui);
         // for (auto dc : range(0.0, 2000.0, 7.0))
         for (auto dc : options.dc_values)
         {
@@ -442,7 +443,7 @@ auto compare_fuel_basic(
       auto& [nd_binding, bui, dc] = v;
       // HACK: avoid 'reference to local binding 'nd' declared in enclosing lambda expression'
       auto nd = nd_binding;
-      // logging::verbose("dc {:f}", dc);
+      // logging::verbose("dc {:0.100g}", dc);
       const FwiWeather wx{
         Weather::Zero(), Ffmc::Zero(), Dmc::Zero(), Dc{dc}, Isi::Zero(), Bui{bui}, Fwi::Zero()
       };
@@ -588,7 +589,7 @@ vector<int> find_nd_values()
         const auto nd_ref = calculate_nd_ref_for_point(elevation, pt);
         nd_ref_values.emplace(nd_ref);
         logging::verbose(
-          "now have {:d} values for nd: {}, {:g} gives nd_ref {:d}",
+          "now have {:d} values for nd: {}, {:0.100g} gives nd_ref {:d}",
           nd_ref_values.size(),
           pt,
           elevation,
