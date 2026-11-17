@@ -23,6 +23,26 @@ MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept
   const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0183 * bui));
 }
+MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept
+{
+  const auto bui = round_value(b);
+  return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
+}
+MathSize calculate_surface_fuel_consumption_pine(const MathSize b) noexcept
+{
+  const auto bui = round_value(b);
+  return 5.0 * pow(1.0 - exp(-0.0149 * bui), 2.48);
+}
+MathSize calculate_length_to_breadth_grass(const MathSize w) noexcept
+{
+  const auto ws = round_value(w);
+  return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
+}
+MathSize calculate_base_multiplier_curing(const MathSize c) noexcept
+{
+  const auto curing = round_value(c);
+  return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
+}
 MathSize SimpleFuelD1::isfD1(
   const SpreadInfo& spread,
   const MathSize ros_multiplier,
@@ -39,7 +59,7 @@ MathSize SimpleFuelD1::isfD1(
  * \param ffmc Fine SimpleFuel Moisture Code
  * \return Surface SimpleFuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c1(const MathSize f) noexcept
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_c1(const MathSize f) noexcept
 {
   const auto ffmc = round_value(f);
   return max(0.0, 0.75 + ((ffmc > 84) ? 0.75 : -0.75) * sqrt(1 - exp(-0.23 * abs(ffmc - 84))));
@@ -68,7 +88,7 @@ MathSize SimpleFuelC6::finalRos(
  * \param ffmc Fine SimpleFuel Moisture Code
  * \return Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize f) noexcept
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize f) noexcept
 {
   const auto ffmc = round_value(f);
   return (ffmc > 70) ? 2.0 * (1.0 - exp(-0.104 * (ffmc - 70.0))) : 0.0;
@@ -77,7 +97,7 @@ MathSize SimpleFuelC6::finalRos(
  * \brief Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
  * \return Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_bui(const MathSize b) noexcept
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_c7_bui(const MathSize b) noexcept
 {
   const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0201 * bui));
@@ -87,7 +107,7 @@ MathSize SimpleFuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const no
   return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
        + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
 }
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_d2(const MathSize b) noexcept
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_d2(const MathSize b) noexcept
 {
   const auto bui = round_value(b);
   return bui >= 80 ? 1.5 * (1.0 - exp(-0.0183 * bui)) : 0.0;
