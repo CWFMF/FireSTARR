@@ -112,10 +112,12 @@ template <size_t N, class T>
        : N % 2 == 0 ? pow_int<N / 2, T>(base) * pow_int<N / 2, T>(base)
                     : base * pow_int<(N - 1) / 2, T>(base) * pow_int<(N - 1) / 2, T>(base);
 }
+template <size_t N = 1>
 constexpr MathSize round_value(const MathSize value) noexcept
 {
-  const auto i = static_cast<std::uint64_t>(value * 10);
-  const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(10);
+  constexpr uint64_t base = pow_int<N>(10);
+  const auto i = static_cast<std::uint64_t>(value * base);
+  const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(base);
   return v;
 }
 // HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
