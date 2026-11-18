@@ -567,7 +567,9 @@ public:
     return this->template saveToFile<R>(
       dir,
       base_name,
-      [&](T value) -> R { return static_cast<R>(as_value(RoundedValue{convert(value)})); },
+      [&](T value) -> R {
+        return static_cast<R>(as_value(RoundedValue{static_cast<MathSize>(convert(value))}));
+      },
       static_cast<R>(this->nodataInput())
     );
   }
