@@ -35,7 +35,7 @@ DurationSize do_spread(
     const auto ros = origin.headRos();
     if (ros >= ros_min)
     {
-      max_ros = max(max_ros, ros);
+      max_ros = max(as_value(max_ros), as_value(ros));
       // NOTE: shouldn't be Cell if we're looking up by just Location later
       to_spread[key].emplace_back(std::move(*it_cells));
       it_cells = lhs.erase(it_cells);
