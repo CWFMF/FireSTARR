@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "fs/stdafx.h"
+#include <cfenv>
 #include <future>
 #include <mutex>
 #include "fs/data/RangeIterator.h"
@@ -76,7 +77,7 @@ public:
   }
 
 private:
-  int calculate_value() noexcept
+  int calculate_value()
   {
     scoped_lock lock(mutex_);
     if (!finalized_)
@@ -885,10 +886,13 @@ int test_fbp(const int argc, const char* const argv[])
 }
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   using namespace fs::settings;
   constexpr auto fct_main = fs::testing::test_fbp;
   static const Usage USAGE_TEST{"Run tests and exit", ""};
   SettingsArgumentParser parser{USAGE_TEST, argc, argv, PositionalArgumentsRequired::NotRequired};
   parser.parse_args();
-  exit(fct_main(argc, argv));
+  const auto result = fct_main(argc, argv);
+  fs::logging::note("Completed all tests and got code {}", result);
+  exit(result);
 }

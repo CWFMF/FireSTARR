@@ -1,8 +1,10 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
+#include <cfenv>
 #include "fs/sim/ArgumentParser.h"
 #include "test/test.h"
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   using namespace fs::settings;
   constexpr auto fct_main = fs::testing::test_duff;
   static const Usage USAGE_TEST{"Run tests and exit", ""};

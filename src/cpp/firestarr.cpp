@@ -6,6 +6,7 @@
  * FireSTARR is a probabilistic fire growth model.
  */
 #include "fs/stdafx.h"
+#include <cfenv>
 #include "fs/log/Log.h"
 #include "fs/sim/ArgumentParser.h"
 #include "fs/sim/Model.h"
@@ -40,6 +41,7 @@ using fs::ThresholdSize;
 using fs::Wind;
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   using namespace fs::settings;
   logging::note("FireSTARR {:s}\n", SPECIFIC_REVISION);
   MainArgumentParser parser{argc, argv};
@@ -146,6 +148,7 @@ int main(const int argc, const char* const argv[])
 // HACK: keep everything else out of std namepace
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   // HACK: want to be able to do tests without changing source files but can't find a nice way
   constexpr auto fct_main = fs::main;
   exit(fct_main(argc, argv));

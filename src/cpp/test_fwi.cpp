@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
+#include <cfenv>
 #include "fs/log/Log.h"
 #include "fs/sim/ArgumentParser.h"
 #include "fs/unstable.h"
@@ -239,6 +240,7 @@ int test_fwi(const int argc, const char* const argv[])
 }
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   using namespace fs::settings;
   constexpr auto fct_main = fs::testing::test_fwi;
   static const Usage USAGE_TEST{"Run tests and exit", ""};

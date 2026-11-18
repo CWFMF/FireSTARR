@@ -1,6 +1,15 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#include <cfenv>
+#include <stdexcept>
+#define CHECK_ROUNDING 1
+// #undef CHECK_ROUNDING
+#define DEBUG_ROUNDING 1
+#undef DEBUG_ROUNDING
+#if defined(DEBUG_ROUNDING) || defined(CHECK_ROUNDING)
+#include <cinttypes>
+#endif
 #include <cstdint>
 #include <limits>
 #define _USE_MATH_DEFINES
@@ -10,6 +19,11 @@
 #ifndef M_PI
 #include <math.h>
 #endif
+inline void setfperrors()
+{
+  // FE_INEXACT happens in stoa()
+  feenableexcept(FE_DIVBYZERO | FE_UNDERFLOW | FE_OVERFLOW | FE_INVALID);
+}
 namespace fs
 {
 // fixed-size float types aren't defined until C++23
