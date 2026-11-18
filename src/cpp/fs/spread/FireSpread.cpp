@@ -145,7 +145,7 @@ static SpreadKey make_key(const SlopeSize slope, const AspectSize aspect, const 
   logging::check_equal(fuel->name(), fuel_name, "fuel");
   return key;
 }
-[[nodiscard]] MathSize SpreadInfo::calculateRosFromThreshold(const ThresholdSize threshold)
+[[nodiscard]] ThresholdSize SpreadInfo::calculateRosFromThreshold(const ThresholdSize threshold)
 {
   // for some reason it returns -nan instead of nan if it's 1, so return this instead
   if (1.0 == threshold)

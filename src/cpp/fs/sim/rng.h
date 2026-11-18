@@ -22,11 +22,7 @@ namespace fs::rng
  * - extinction
  * - spread events
  */
-template <class V>
-constexpr V same(const V value) noexcept
-{
-  return value;
-}
+constexpr ThresholdSize same(const ThresholdSize value) noexcept { return value; }
 void make_threshold(
   vector<ThresholdSize>* thresholds,
   mt19937_64* mt,
@@ -35,14 +31,14 @@ void make_threshold(
   const ThresholdSize threshold_scenario_weight,
   const ThresholdSize threshold_daily_weight,
   const ThresholdSize threshold_hourly_weight,
-  ThresholdSize (*convert)(_Float64 value) = same
+  ThresholdSize (*convert)(ThresholdSize value) = same
 );
 void make_threshold(
   vector<ThresholdSize>* thresholds,
   mt19937_64* mt,
   const Day start_day,
   const Day last_date,
-  ThresholdSize (*convert)(_Float64 value) = same
+  ThresholdSize (*convert)(ThresholdSize value) = same
 );
 std::seed_seq make_seed(
   const char* name,

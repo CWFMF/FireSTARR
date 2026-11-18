@@ -4,6 +4,7 @@
 #include "fs/sim/ArgumentParser.h"
 #include "fs/sim/rng.h"
 #include "fs/sim/StartPoint.h"
+#include "fs/unstable.h"
 namespace fs::testing
 {
 int test_rng(const int argc, const char* const argv[])
@@ -24,9 +25,16 @@ int test_rng(const int argc, const char* const argv[])
   // HACK: save some values of a random number stream so we can make sure all chips match
   const auto num = (static_cast<size_t>(last_day) - start_day + 2) * DAY_HOURS;
   thresholds.resize(num);
-  make_threshold(&thresholds, &mt_spread, start_day, last_day, 1.0, 1.0, 1.0, [](_Float64 value) {
-    return trunc(value * 1000000);
-  });
+  make_threshold(
+    &thresholds,
+    &mt_spread,
+    start_day,
+    last_day,
+    1.0,
+    1.0,
+    1.0,
+    [](ThresholdSize value) { return trunc(value * 1000000); }
+  );
   // generated from:
   std::ostringstream buffer{};
   buffer << "vector<ThresholdSize> expected{";
