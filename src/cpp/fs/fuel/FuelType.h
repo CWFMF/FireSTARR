@@ -30,7 +30,7 @@ static constexpr MathSize DEFAULT_GRASS_FUEL_LOAD = 0.35;
  * \param ros Rate of spread (m/min)
  * \return Fire Intensity (kW/m) [ST-X-3 eq 69]
  */
-[[nodiscard]] MathSize fire_intensity(const RoundedValue& fc, const RoundedValue& ros);
+[[nodiscard]] RoundedIntensity fire_intensity(const RoundedValue& fc, const RoundedValue& ros);
 /**
  * \brief An FBP fuel type.
  */
@@ -59,7 +59,10 @@ public:
    * \param csi Critical Surface Fire Intensity (CSI) (kW/m) [ST-X-3 eq 56]
    * \return Critical rate of spread (m/min)
    */
-  [[nodiscard]] static MathSize criticalRos(const RoundedValue& sfc, const RoundedIntensity& csi);
+  [[nodiscard]] static RoundedValue criticalRos(
+    const RoundedValue& sfc,
+    const RoundedIntensity& csi
+  );
   /**
    * \brief Whether or not this is a crown fire
    * \param csi Critical Surface Fire Intensity (CSI) (kW/m) [ST-X-3 eq 56]

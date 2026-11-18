@@ -41,7 +41,7 @@ string simplify_fuel_name(const string_view fuel)
   }
   return simple_fuel_name;
 }
-MathSize fire_intensity(const RoundedValue& fc, const RoundedValue& ros)
+RoundedIntensity fire_intensity(const RoundedValue& fc, const RoundedValue& ros)
 {
   return 300.0 * fc * ros;
 }
@@ -53,9 +53,12 @@ MathSize fire_intensity(const RoundedValue& fc, const RoundedValue& ros)
 {
   return nullptr == fuel ? "NULL" : fuel->name();
 }
-[[nodiscard]] MathSize FuelType::criticalRos(const RoundedValue& sfc, const RoundedIntensity& csi)
+[[nodiscard]] RoundedValue FuelType::criticalRos(
+  const RoundedValue& sfc,
+  const RoundedIntensity& csi
+)
 {
-  return sfc > 0 ? csi / (300.0 * sfc) : 0.0;
+  return sfc > 0 ? as_value(csi) / (300.0 * as_value(sfc)) : 0.0;
 }
 [[nodiscard]] bool FuelType::isCrown(const RoundedIntensity& csi, const RoundedIntensity& sfi)
 {

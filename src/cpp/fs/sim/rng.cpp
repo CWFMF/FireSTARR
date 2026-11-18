@@ -12,7 +12,7 @@ void make_threshold(
   const ThresholdSize scenario_weight,
   const ThresholdSize daily_weight,
   const ThresholdSize hourly_weight,
-  ThresholdSize (*convert)(_Float64 value)
+  ThresholdSize (*convert)(MathSize value)
 )
 {
   const auto total_weight = scenario_weight + daily_weight + hourly_weight;
@@ -50,7 +50,7 @@ void make_threshold(
   mt19937_64* mt,
   const Day start_day,
   const Day last_date,
-  ThresholdSize (*convert)(_Float64 value)
+  ThresholdSize (*convert)(MathSize value)
 )
 {   // HACK: resolve once and fail if not set already
   static const auto& settings = fs::settings::instance();

@@ -47,34 +47,34 @@ int calculate_nd_for_point(const Day day, const int elevation, const Point& poin
 {
   return static_cast<int>(abs(day - calculate_nd_ref_for_point(elevation, point)));
 }
-MathSize calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept
+RoundedValue calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept
 {
   const auto v = round_value(v_);
   return 0.208 * exp(-0.05039 * v);
 }
-MathSize calculate_standard_wsv(const LookupValue& v_) noexcept
+RoundedValue calculate_standard_wsv(const LookupValue& v_) noexcept
 {
   const auto v = round_value(v_);
   return v < 40.0 ? exp(0.05039 * v) : 12.0 * (1.0 - exp(-0.0818 * (v - 28)));
 }
-MathSize SpreadInfo::initial(
+RoundedValue SpreadInfo::initial(
   SpreadInfo& spread,
   const FwiWeather& weather,
-  MathSize& ffmc_effect,
-  MathSize& wsv,
-  MathSize& rso,
+  RoundedValue& ffmc_effect,
+  RoundedValue& wsv,
+  RoundedValue& rso,
   const FuelType* const fuel,
   bool has_no_slope,
-  MathSize heading_sin,
-  MathSize heading_cos,
-  MathSize bui_eff,
-  MathSize min_ros,
-  MathSize critical_surface_intensity
+  RoundedValue heading_sin,
+  RoundedValue heading_cos,
+  RoundedValue bui_eff,
+  RoundedValue min_ros,
+  RoundedIntensity critical_surface_intensity
 )
 {
   ffmc_effect = spread.weather.ffmcEffect();
   // needs to be non-const so that we can update if slopeEffect changes direction
-  MathSize raz = spread.weather.wind().heading();
+  auto raz = spread.weather.wind().heading();
   const auto isz = 0.208 * ffmc_effect;
   wsv = spread.weather.wind().speed.value;
   if (!has_no_slope)
@@ -104,7 +104,7 @@ MathSize SpreadInfo::initial(
     }
   }
   spread.raz_ = Direction{Radians{raz}};
-  const auto isi = isz * calculate_standard_wsv(wsv);
+  const auto isi = isz * calculate_standard_wsv(as_value(wsv));
   // FIX: make this a member function so we don't need to preface head_ros_
   spread.head_ros_ = fuel->calculateRos(spread.nd(), weather, isi) * bui_eff;
   if (min_ros > spread.head_ros_)
@@ -114,9 +114,11 @@ MathSize SpreadInfo::initial(
   else
   {
     spread.sfc_ = fuel->surfaceFuelConsumption(spread);
-    rso = FuelType::criticalRos(spread.sfc_, critical_surface_intensity);
+    auto sfc = spread.sfc_;
+    auto csi = critical_surface_intensity;
+    rso = FuelType::criticalRos(sfc, csi);
     const auto sfi = fire_intensity(spread.sfc_, spread.head_ros_);
-    spread.is_crown_ = FuelType::isCrown(critical_surface_intensity, sfi);
+    spread.is_crown_ = FuelType::isCrown(csi, sfi);
     if (spread.is_crown_)
     {
       spread.head_ros_ = fuel->finalRos(
@@ -183,17 +185,17 @@ static SpreadKey make_key(const SlopeSize slope, const AspectSize aspect, const 
    */
   return 25.0 / 4.0 * log(-(exp(41.0 / 25.0) * threshold) / (threshold - 1));
 }
-[[nodiscard]] MathSize SpreadInfo::maxIntensity() const noexcept { return max_intensity_; }
+[[nodiscard]] RoundedIntensity SpreadInfo::maxIntensity() const noexcept { return max_intensity_; }
 [[nodiscard]] const OffsetSet& SpreadInfo::offsets() const { return offsets_; }
 [[nodiscard]] bool SpreadInfo::isNotSpreading() const { return isInvalid(); }
 [[nodiscard]] int SpreadInfo::nd() const { return nd_; }
 [[nodiscard]] DurationSize SpreadInfo::time() const { return time_; }
-[[nodiscard]] MathSize SpreadInfo::lengthToBreadth() const { return l_b_; }
+[[nodiscard]] RoundedValue SpreadInfo::lengthToBreadth() const { return l_b_; }
 [[nodiscard]] SlopeSize SpreadInfo::percentSlope() const { return Cell::slope(key_); }
 [[nodiscard]] AspectSize SpreadInfo::slopeAzimuth() const { return Cell::aspect(key_); }
-[[nodiscard]] MathSize SpreadInfo::headRos() const { return head_ros_; }
+[[nodiscard]] RoundedValue SpreadInfo::headRos() const { return head_ros_; }
 [[nodiscard]] Direction SpreadInfo::headDirection() const { return raz_; }
-[[nodiscard]] MathSize SpreadInfo::slopeFactor() const
+[[nodiscard]] RoundedValue SpreadInfo::slopeFactor() const
 {
   // HACK: slope can be infinite, but anything > 60 is the same as 60
   // we already capped the percent slope when making the Cells
@@ -252,15 +254,15 @@ SpreadInfo::SpreadInfo(
       weather
     )
 { }
-MathSize SpreadInfo::crownFractionBurned() const { return cfb_; }
-MathSize SpreadInfo::crownFuelConsumption() const { return cfc_; }
+RoundedValue SpreadInfo::crownFractionBurned() const { return cfb_; }
+RoundedValue SpreadInfo::crownFuelConsumption() const { return cfc_; }
 char SpreadInfo::fireDescription() const { return cfb_ >= 0.9 ? 'C' : (cfb_ < 0.1 ? 'S' : 'I'); }
-MathSize SpreadInfo::surfaceFuelConsumption() const { return sfc_; }
-MathSize SpreadInfo::totalFuelConsumption() const { return tfc_; }
+RoundedValue SpreadInfo::surfaceFuelConsumption() const { return sfc_; }
+RoundedValue SpreadInfo::totalFuelConsumption() const { return tfc_; }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
-  const MathSize min_ros,
-  const MathSize cell_size,
+  const RoundedValue min_ros,
+  const RoundedValue cell_size,
   const SlopeSize slope,
   const AspectSize aspect,
   const char* fuel_name,
@@ -271,8 +273,8 @@ SpreadInfo::SpreadInfo(
 { }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
-  const MathSize min_ros,
-  const MathSize cell_size,
+  const RoundedValue min_ros,
+  const RoundedValue cell_size,
   const SpreadKey& key,
   const int nd,
   const FwiWeather weather
@@ -281,8 +283,8 @@ SpreadInfo::SpreadInfo(
 { }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
-  const MathSize min_ros,
-  const MathSize cell_size,
+  const RoundedValue min_ros,
+  const RoundedValue cell_size,
   const SpreadKey& key,
   const int nd,
   const FwiWeather weather,
@@ -302,8 +304,8 @@ SpreadInfo::SpreadInfo(
 SpreadInfo::SpreadInfo(
   const FuelType* fuel_original,
   const DurationSize time,
-  const MathSize min_ros,
-  const MathSize cell_size,
+  const RoundedValue min_ros,
+  const RoundedValue cell_size,
   const SpreadKey& key,
   const int nd,
   const FwiWeather weather,
@@ -322,22 +324,22 @@ SpreadInfo::SpreadInfo(
   // HACK: resolve to specific type here - lose original type but only care about this nd value
   const auto fuel = fuel_original->find_fuel_by_season(nd);
   const auto has_no_slope = 0 == percentSlope();
-  MathSize heading_sin = 0;
-  MathSize heading_cos = 0;
-  if (!has_no_slope)
-  {
+  auto [heading_sin, heading_cos] = [&]() noexcept -> std::pair<MathSize, MathSize> {
+    if (has_no_slope)
+    {
+      return {0, 0};
+    }
     const auto heading = Radians::from_aspect(slope_azimuth).to_heading();
-    heading_sin = sin(heading);
-    heading_cos = cos(heading);
-  }
+    return {sin(heading), cos(heading)};
+  }();
   // HACK: only use BUI from hourly weather for both calculations
   const auto _bui = weather.bui().value;
   const auto bui_eff = fuel->buiEffect(_bui);
   // FIX: gets calculated when not necessary sometimes
   const auto critical_surface_intensity = fuel->criticalSurfaceIntensity(*this);
-  MathSize ffmc_effect;
-  MathSize wsv;
-  MathSize rso;
+  RoundedValue ffmc_effect;
+  RoundedValue wsv;
+  RoundedValue rso;
   if (min_ros > SpreadInfo::initial(
         *this,
         weather_daily,
@@ -382,7 +384,7 @@ SpreadInfo::SpreadInfo(
     }
   }
   logging::verbose("initial ros is {:f}", as_value(head_ros_));
-  const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(wsv);
+  const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(as_value(wsv));
   auto back_ros = fuel->calculateRos(nd, weather, back_isi) * bui_eff;
   if (is_crown_)
   {

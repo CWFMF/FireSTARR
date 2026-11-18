@@ -106,16 +106,16 @@ void showSpread(const SpreadInfo& spread, const FwiWeather w, const FuelType* fu
   const auto simple_fuel = simplify_fuel_name(fuel->name());
   add_value("FUEL", std::format("{:>7s}", simple_fuel));
   add_value("GC", std::format("{:3.0g}", fuel->grass_curing(spread.nd(), w)));
-  add_value("L:B", std::format("{:5.2f}", spread.lengthToBreadth()));
+  add_value("L:B", std::format("{:5.2f}", as_value(spread.lengthToBreadth())));
   add_value("CBH", std::format("{:4.1f}", fuel->cbh()));
-  add_value("CFB", std::format("{:6.3f}", spread.crownFractionBurned()));
-  add_value("CFC", std::format("{:6.3f}", spread.crownFuelConsumption()));
+  add_value("CFB", std::format("{:6.3f}", as_value(spread.crownFractionBurned())));
+  add_value("CFC", std::format("{:6.3f}", as_value(spread.crownFuelConsumption())));
   add_value("FD", std::format("{:2c}", spread.fireDescription()));
-  add_value("HFI", std::format("{:6d}", static_cast<size_t>(spread.maxIntensity())));
+  add_value("HFI", std::format("{:6d}", static_cast<size_t>(as_value(spread.maxIntensity()))));
   add_value("RAZ", std::format("{:3d}", spread.headDirection().asDegreesSize()));
-  add_value("ROS", std::format("{:6.4g}", spread.headRos()));
-  add_value("SFC", std::format("{:6.4g}", spread.surfaceFuelConsumption()));
-  add_value("TFC", std::format("{:6.4g}", spread.totalFuelConsumption()));
+  add_value("ROS", std::format("{:6.4g}", as_value(spread.headRos())));
+  add_value("SFC", std::format("{:6.4g}", as_value(spread.surfaceFuelConsumption())));
+  add_value("TFC", std::format("{:6.4g}", as_value(spread.totalFuelConsumption())));
   cout << std::format("Calculated spread is:\n{:s}\n{:s}\n", line_header.str(), line_data.str());
 }
 string generate_test_name(
@@ -208,7 +208,9 @@ string run_test(
   scenario.run(&probabilities);
   logging::note("Saving results for {:s} in {:s}", test_name, output_directory);
   std::ignore = scenario.saveObservers(output_directory, test_name);
-  logging::note("Final Size: {:0.0f}, ROS: {:0.2f}", scenario.currentFireSize(), info.headRos());
+  logging::note(
+    "Final Size: {:0.0f}, ROS: {:0.2f}", scenario.currentFireSize(), as_value(info.headRos())
+  );
   return string(output_directory);
 }
 string run_test_ignore_existing(

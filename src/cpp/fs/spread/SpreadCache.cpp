@@ -35,7 +35,7 @@ MathSize SpreadCache::maxIntensity(const SpreadKey& key) const noexcept
 {
   auto seek_spread = spread_info_.find(key);
   const auto max_intensity =
-    (spread_info_.end() == seek_spread) ? 0 : seek_spread->second.maxIntensity();
+    (spread_info_.end() == seek_spread) ? RoundedIntensity{0} : seek_spread->second.maxIntensity();
   return max_intensity;
 }
 const OffsetSet& SpreadCache::offsets(const SpreadKey& key) const noexcept

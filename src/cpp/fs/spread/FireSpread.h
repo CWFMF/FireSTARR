@@ -46,9 +46,9 @@ class FuelType;
 }
 using fs::fuel::FuelType;
 using fs::fuel::OffsetSet;
-static constexpr MathSize MAX_SPREAD_ANGLE = 5.0;
-static constexpr MathSize INVALID_ROS = -1.0;
-static constexpr MathSize INVALID_INTENSITY = -1.0;
+static constexpr MathConstantSize MAX_SPREAD_ANGLE = 5.0;
+static constexpr MathConstantSize INVALID_ROS = -1.0;
+static const RoundedIntensity INVALID_INTENSITY{-1.0};
 /**
  * \brief Possible results of an attempt to spread.
  */
@@ -86,7 +86,7 @@ public:
    * \brief Maximum intensity in any direction for spread (kW/m)
    * \return Maximum intensity in any direction for spread (kW/m)
    */
-  [[nodiscard]] MathSize maxIntensity() const noexcept;
+  [[nodiscard]] RoundedIntensity maxIntensity() const noexcept;
   /**
    * \brief Offsets from origin point that represent spread under these conditions
    * \return Offsets from origin point that represent spread under these conditions
@@ -111,7 +111,7 @@ public:
    * \brief Length to breadth ratio used for spread
    * \return Length to breadth ratio used for spread
    */
-  [[nodiscard]] MathSize lengthToBreadth() const;
+  [[nodiscard]] RoundedValue lengthToBreadth() const;
   /**
    * \brief Slope used for spread (%)
    * \return Slope used for spread (%)
@@ -126,7 +126,7 @@ public:
    * \brief Head fire rate of spread (m/min)
    * \return Head fire rate of spread (m/min)
    */
-  [[nodiscard]] MathSize headRos() const;
+  [[nodiscard]] RoundedValue headRos() const;
   /**
    * \brief Head fire spread direction
    * \return Head fire spread direction
@@ -136,7 +136,7 @@ public:
    * \brief Slope factor calculated from percent slope
    * \return Slope factor calculated from percent slope
    */
-  [[nodiscard]] MathSize slopeFactor() const;
+  [[nodiscard]] RoundedValue slopeFactor() const;
   /**
    * \brief Calculate foliar moisture
    * \return Calculated foliar moisture
@@ -174,19 +174,19 @@ public:
     const char* fuel_name,
     const FwiWeather weather
   );
-  MathSize crownFractionBurned() const;
-  MathSize crownFuelConsumption() const;
+  RoundedValue crownFractionBurned() const;
+  RoundedValue crownFuelConsumption() const;
   char fireDescription() const;
-  MathSize surfaceFuelConsumption() const;
-  MathSize totalFuelConsumption() const;
+  RoundedValue surfaceFuelConsumption() const;
+  RoundedValue totalFuelConsumption() const;
 
 private:
   // HACK: have private constructor so is_spreading() can short-circuit the calculation,
   // but nothing else can get a partially constructed SpreadInfo object
   SpreadInfo(
     DurationSize time,
-    MathSize min_ros,
-    MathSize cell_size,
+    RoundedValue min_ros,
+    RoundedValue cell_size,
     const SlopeSize slope,
     const AspectSize aspect,
     const char* fuel_name,
@@ -195,8 +195,8 @@ private:
   );
   SpreadInfo(
     DurationSize time,
-    MathSize min_ros,
-    MathSize cell_size,
+    RoundedValue min_ros,
+    RoundedValue cell_size,
     const SpreadKey& key,
     int nd,
     const FwiWeather weather
@@ -205,8 +205,8 @@ private:
 public:
   SpreadInfo(
     DurationSize time,
-    MathSize min_ros,
-    MathSize cell_size,
+    RoundedValue min_ros,
+    RoundedValue cell_size,
     const SpreadKey& key,
     int nd,
     const FwiWeather weather,
@@ -218,8 +218,8 @@ public:
   SpreadInfo(
     const FuelType* fuel_original,
     DurationSize time,
-    MathSize min_ros,
-    MathSize cell_size,
+    RoundedValue min_ros,
+    RoundedValue cell_size,
     const SpreadKey& key,
     int nd,
     const FwiWeather weather,
@@ -231,19 +231,19 @@ private:
    * Do initial spread calculations
    * \return Initial head ros calculation (-1 for none)
    */
-  static MathSize initial(
+  static RoundedValue initial(
     SpreadInfo& spread,
     const FwiWeather& weather,
-    MathSize& ffmc_effect,
-    MathSize& wsv,
-    MathSize& rso,
+    RoundedValue& ffmc_effect,
+    RoundedValue& wsv,
+    RoundedValue& rso,
     const FuelType* const fuel,
     bool has_no_slope,
-    MathSize heading_sin,
-    MathSize heading_cos,
-    MathSize bui_eff,
-    MathSize min_ros,
-    MathSize critical_surface_intensity
+    RoundedValue heading_sin,
+    RoundedValue heading_cos,
+    RoundedValue bui_eff,
+    RoundedValue min_ros,
+    RoundedIntensity critical_surface_intensity
   );
   /**
    * \brief Offsets from origin point that represent spread under these conditions

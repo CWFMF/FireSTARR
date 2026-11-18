@@ -422,13 +422,9 @@ auto compare_fuel_basic(
   // check_equal(a.isValid(), b.isValid(), "isValid");
   check_equal(FuelType::safeCode(&a), FuelType::safeCode(&b), "safeCode");
   check_equal(FuelType::safeName(&a), FuelType::safeName(&b), "safeName");
-  // static constexpr MathSize criticalRos(const MathSize sfc, const MathSize csi)
-  // static constexpr bool isCrown(const MathSize csi, const MathSize sfi)
   check_equal(a.cfl(), b.cfl(), "cfl");
   check_equal(a.canCrown(), b.canCrown(), "canCrown");
-  // MathSize grass_curing(const int, const FwiWeather&) const
   check_equal(a.cbh(), b.cbh(), "cbh");
-  // MathSize crownFractionBurned(MathSize rss, MathSize rso) const noexcept
   check_range(
     "probabilityPeat()",
     "mc_fraction",

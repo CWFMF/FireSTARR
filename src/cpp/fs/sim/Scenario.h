@@ -447,7 +447,7 @@ protected:
   /**
    * \brief Maximum rate of spread for current time
    */
-  MathSize max_ros_;
+  RoundedValue max_ros_;
   /**
    * \brief Cell that the Scenario starts from if no Perimeter
    */
