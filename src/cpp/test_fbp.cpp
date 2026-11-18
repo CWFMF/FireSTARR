@@ -158,11 +158,11 @@ auto compare_spread(
   static const vector<AspectSize> aspects{0, 15, 25, 35, 45, 55};
   // duration is in minutes
   auto show_offset = [=](const ROSOffset& o) {
-    const auto intensity{o.intensity};
-    const auto ros{o.ros};
-    const auto direction{o.raz};
+    const auto intensity{o.intensity()};
+    const auto ros{o.ros()};
+    const auto direction{o.raz()};
     // offsets are in fraction of a cell per minute
-    const auto offset{o.offset};
+    const auto offset{o.offset()};
     cout << std::format(
       " ({:d} kW/m; {:0.100g} m/min @{:03d} == ({:0.100g}, {:0.100g}))\n",
       intensity,

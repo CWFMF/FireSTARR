@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "../stdafx.h"
 #include "StartPoint.h"
-#include <fenv.h>
 #include "../unstable.h"
 #include "Settings.h"
 namespace fs

@@ -11,13 +11,35 @@ namespace fs
 {
 namespace fuel
 {
-struct ROSOffset
+// use class to enforce rounding
+class ROSOffset
 {
-  IntensitySize intensity;
-  ROSSize ros;
-  Direction raz;
-  Offset offset;
+  IntensitySize intensity_{};
+  ROSSize ros_{};
+  Direction raz_{};
+  Offset offset_{};
+
+public:
+  ROSOffset() noexcept = default;
+  ROSOffset(
+    const IntensitySize intensity,
+    const ROSSize ros,
+    const Direction raz,
+    const Offset offset
+  ) noexcept
+    : intensity_{intensity}, ros_{as_value(RoundedValue{ros})},
+      raz_{Direction{Radians{RoundedValue{raz.asRadians()}}}},
+      offset_{as_value(RoundedValue{offset.x}), as_value(RoundedValue{offset.y})}
+  { }
+  ROSOffset(const ROSOffset& rhs) noexcept = default;
+  ROSOffset(ROSOffset&& rhs) noexcept = default;
+  ROSOffset& operator=(const ROSOffset& rhs) noexcept = default;
+  ROSOffset& operator=(ROSOffset&& rhs) noexcept = default;
   auto operator<=>(const ROSOffset& rhs) const noexcept = default;
+  IntensitySize intensity() const noexcept { return intensity_; }
+  const ROSSize& ros() const noexcept { return ros_; }
+  const Direction& raz() const noexcept { return raz_; }
+  const Offset& offset() const noexcept { return offset_; }
 };
 using OffsetSet = vector<ROSOffset>;
 class FuelType;

@@ -75,7 +75,7 @@ DurationSize do_spread(
       offsets_after_duration.begin(),
       [&](const ROSOffset& r) {
         return ROSOffset{
-          r.intensity, r.ros, r.raz, Offset{r.offset.x * duration, r.offset.y * duration}
+          r.intensity(), r.ros(), r.raz(), Offset{r.offset().x * duration, r.offset().y * duration}
         };
       }
     );
@@ -91,9 +91,11 @@ DurationSize do_spread(
         {
           for (const ROSOffset& r : offsets_after_duration)
           {
-            const XYPos pt_new{XPos{r.offset.x + pt.x.value}, YPos{r.offset.y + pt.y.value}};
+            const XYPos pt_new{XPos{r.offset().x + pt.x.value}, YPos{r.offset().y + pt.y.value}};
             cell_pts_cur.insert(
-              pt, SpreadData{new_time, r.intensity, r.ros, r.raz, Direction{Degrees{dir}}}, pt_new
+              pt,
+              SpreadData{new_time, r.intensity(), r.ros(), r.raz(), Direction{Degrees{dir}}},
+              pt_new
             );
           }
         }
