@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
-#include <cfenv>
 #include <stdexcept>
 #define CHECK_ROUNDING 1
 // #undef CHECK_ROUNDING
@@ -19,11 +18,7 @@
 #ifndef M_PI
 #include <math.h>
 #endif
-inline void setfperrors()
-{
-  // FE_INEXACT happens in stoa()
-  feenableexcept(FE_DIVBYZERO | FE_UNDERFLOW | FE_OVERFLOW | FE_INVALID);
-}
+void setfperrors();
 namespace fs
 {
 // fixed-size float types aren't defined until C++23
@@ -134,5 +129,6 @@ using LookupValue = MathSize;
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;
 MathSize sin(const MathSize angle) noexcept;
+MathSize acos(const MathSize angle) noexcept;
 }
 #endif
