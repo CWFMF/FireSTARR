@@ -104,7 +104,8 @@ string saveToTiffFile(
     tileWidth
   );
   const auto filename = create_file_name(dir, base_name, "tif");
-  GeoTiff geotiff{filename, "w"};
+  // force little-endian TIFFs
+  GeoTiff geotiff{filename, "wl"};
   auto tif = geotiff.tiff();
   auto gtif = geotiff.gtif();
   logging::check_fatal(!gtif, "Cannot open file {:s} as a GEOTIFF", filename);
