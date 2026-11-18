@@ -2,9 +2,11 @@
 #include "../stdafx.h"
 #include "SpreadAlgorithm.h"
 #include "../fuel/FuelType.h"
-#include "../log/Log.h"
 #include "../util/Util.h"
 #include "FireSpread.h"
+#ifdef DEBUG_POINTS
+#include "../log/Log.h"
+#endif
 namespace fs
 {
 using fs::fuel::fire_intensity;

@@ -98,7 +98,7 @@ private:
  * \param cell Cell to check
  * \return Whether or not there is no fuel in the Cell
  */
-[[nodiscard]] constexpr bool is_null_fuel(const FuelType* fuel)
+[[nodiscard]] inline bool is_null_fuel(const FuelType* fuel)
 {
   return INVALID_FUEL_CODE == FuelType::safeCode(fuel);
 }
@@ -107,7 +107,7 @@ private:
  * \param cell Cell to check
  * \return Whether or not there is no fuel in the Cell
  */
-[[nodiscard]] constexpr bool is_null_fuel(const Cell& cell)
+[[nodiscard]] inline bool is_null_fuel(const Cell& cell)
 {
   return fs::fuel::is_null_fuel(fuel_by_code(cell.fuelCode()));
 }
