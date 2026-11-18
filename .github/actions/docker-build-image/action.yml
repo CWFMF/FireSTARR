@@ -39,6 +39,9 @@ outputs:
   local:
     description: "Local image"
     value: ${{ steps.output.outputs.local }}
+  platform:
+    description: "Platform"
+    value: ${{ steps.output.outputs.platform }}
 
 runs:
   using: "composite"
@@ -180,3 +183,4 @@ runs:
         echo "local=${{ inputs.target }}" >> $GITHUB_OUTPUT
         echo "package=${{ env.PACKAGE }}" >> $GITHUB_OUTPUT
         echo "cached=${{ env.CACHED }}" >> $GITHUB_OUTPUT
+        echo "platform=linux/${{ inputs.platform }}" >> $GITHUB_OUTPUT
