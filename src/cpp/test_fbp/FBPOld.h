@@ -197,7 +197,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_jackpine(spread.weather.bui().value);
+    return calculate_surface_fuel_consumption_jackpine(as_value(spread.weather.bui()));
   }
 };
 /**
@@ -229,7 +229,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_pine(spread.weather.bui().value);
+    return calculate_surface_fuel_consumption_pine(as_value(spread.weather.bui()));
   }
 };
 /**
@@ -258,7 +258,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
+    return calculate_surface_fuel_consumption_d1(as_value(spread.weather.bui()));
   }
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
@@ -328,7 +328,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
+    return calculate_surface_fuel_consumption_mixed_or_c2(as_value(spread.weather.bui()));
   }
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
@@ -459,7 +459,7 @@ public:
            * FuelOldMixed<110, 282, 150, 50, RosMultiplier, RatioMixed, 108, 25, 50>::
                surfaceFuelConsumption(spread)
          + this->ratioDeciduous()
-             * calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
+             * calculate_surface_fuel_consumption_d1(as_value(spread.weather.bui()));
   }
 };
 /**
@@ -534,7 +534,7 @@ public:
     {
       return settings.static_curing.value();
     }
-    const auto is_drought = wx.dc().value > 500;
+    const auto is_drought = as_value(wx.dc()) > 500;
     return is_drought ? 100 : fuel::calculate_grass_curing(nd);
   }
   /**
@@ -992,8 +992,8 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return ffcA() * (1.0 - exp(ffcB() * spread.weather.bui().value))
-         + wfcA() * (1.0 - exp(wfcB() * spread.weather.bui().value));
+    return ffcA() * (1.0 - exp(ffcB() * as_value(spread.weather.bui())))
+         + wfcA() * (1.0 - exp(wfcB() * as_value(spread.weather.bui())));
   }
 
 private:
