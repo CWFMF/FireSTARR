@@ -424,10 +424,7 @@ protected:
       base_name,
       // bps,
       // SAMPLEFORMAT_IEEEFP,
-      [&](const XYIdx& idx) {
-        // HACK: convert to RoundedValue to force precision
-        return static_cast<TiffDouble>(RoundedValue{convert(this->at(idx))});
-      },
+      [&](const XYIdx& idx) { return static_cast<TiffDouble>(convert(this->at(idx))); },
       static_cast<int>(no_data)
     );
   }
@@ -565,6 +562,22 @@ public:
     const string_view base_name,
     std::function<R(T value)> convert
   ) const
+    requires(std::is_floating_point_v<R>)
+  {
+    return this->template saveToFile<R>(
+      dir,
+      base_name,
+      [&](T value) -> R { return static_cast<R>(as_value(RoundedValue{convert(value)})); },
+      static_cast<R>(this->nodataInput())
+    );
+  }
+  template <class R>
+  [[nodiscard]] FileList saveToFile(
+    const string_view dir,
+    const string_view base_name,
+    std::function<R(T value)> convert
+  ) const
+    requires(std::is_integral_v<R>)
   {
     return this->template saveToFile<R>(
       dir, base_name, convert, static_cast<R>(this->nodataInput())
