@@ -1,19 +1,21 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
+#include "fs/stdafx.h"
 #include <future>
 #include <mutex>
-#include "FireSpread.h"
-#include "fs/ArgumentParser.h"
-#include "fs/FBP.h"
-#include "fs/FuelLookup.h"
-#include "fs/FuelType.h"
-#include "fs/Log.h"
-#include "fs/RangeIterator.h"
-#include "fs/stdafx.h"
+#include "fs/data/RangeIterator.h"
+#include "fs/fuel/FireBehaviourPrediction.h"
+#include "fs/fuel/FuelLookup.h"
+#include "fs/fuel/FuelType.h"
+#include "fs/log/Log.h"
+#include "fs/sim/ArgumentParser.h"
+#include "fs/spread/FireSpread.h"
+#include "test/test.h"
 #include "test_fbp/FBPOld.h"
 #include "test_fbp/FuelOldLookup.h"
 namespace fs::testing
 {
-// FIX: this was used to compare to the old template version, but doesn't work now
+// FIX: this was used to compare t
+// o the old template version, but doesn't work now
 //      left for reference for now so idea could be used for more tests
 using fs::fuel::FuelType;
 using fs::fuel::ROSOffset;
@@ -22,6 +24,7 @@ using namespace fs::fuelold;
 using fs::fuel::FuelLookup;
 using fs::fuel::FuelType;
 using fs::fuel::FuelVariable;
+using fs::fuel::ROSOffset;
 using fs::fuel::StandardFuel;
 using TestResult = std::future<int>;
 class TestResults
@@ -232,8 +235,8 @@ auto compare_spread(
       logging::extensive("aspect {:d}", aspect);
       // HACK: this constructor ignores fuel part of this
       const auto key = Cell::key(Cell::hashCell(slope, aspect, static_cast<FuelCodeSize>(0)));
-      const SpreadInfo spread_a{a, TIME, MIN_ROS, CELL_SIZE, key, nd, &weather, &weather};
-      const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, &weather, &weather};
+      const SpreadInfo spread_a{a, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
+      const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
       const auto offsets_a = spread_a.offsets();
       const auto offsets_b = spread_b.offsets();
       const auto head_ros = spread_a.headRos();
@@ -451,7 +454,7 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_CFB
   );
-  // MathSize calculateRos(int nd, const FwiWeather& wx, MathSize isi) const
+  // MathSize calculateRos(int nd, const FwiWeather& wx, const ____RoundedValue____& isi) const
   // need to check breakpoints
   // - BUI 80 (D2)
   // - DC 500 (O1)
@@ -500,7 +503,7 @@ auto compare_fuel_basic(
       );
     }
   );
-  // MathSize calculateIsf(const SpreadInfo& spread, MathSize isi)
+  // MathSize calculateIsf(const SpreadInfo& spread, const ____RoundedValue____& isi)
   // MathSize surfaceFuelConsumption(const SpreadInfo& spread) const
   check_range(
     "lengthToBreadth()",
@@ -510,8 +513,8 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_WIND_SPEED
   );
-  // MathSize finalRos(const SpreadInfo& spread, MathSize isi, MathSize cfb, MathSize rss) const
-  // MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const
+  // MathSize finalRos(const SpreadInfo& spread, const ____RoundedValue____& isi, MathSize cfb,
+  // MathSize rss) const MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const
   // check_equal(a.name(), b.name(), "name");
   // check_equal(a.code(), b.code(), "code");
   // return 0;
@@ -563,8 +566,8 @@ auto compare_fuel(
   check_equal(a.a(), b.a(), "a");
   check_equal(a.negB(), b.negB(), "negB");
   check_equal(a.c(), b.c(), "c");
-  // static constexpr MathSize crownRateOfSpread(const MathSize isi, const MathSize fmc)
-  // noexcept
+  // static constexpr MathSize crownRateOfSpread(const ____RoundedValue____& isi, const MathSize
+  // fmc) noexcept
   check_equal(a.logQ(), b.logQ(), "logQ");
   return 0;
 }

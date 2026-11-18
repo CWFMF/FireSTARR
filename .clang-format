@@ -71,14 +71,16 @@ ReflowComments: true
 # SeparateDefinitionBlocks: Always
 SortIncludes: CaseInsensitive
 IncludeCategories:
-  - Regex: '^("|<)stdafx\.h(pp)?("|>)'
+  - Regex: '^("|<).*stdafx\.h(pp)?("|>)'
     Priority: -1
   - Regex: '^<[^\.]*>' # Core includes
     Priority: 1
   - Regex: '^<.*>' # System includes
     Priority: 2
+  - Regex: '".*\/.*"' # Project-specific includes in other folders
+    Priority: 4
   - Regex: '".*"' # Project-specific includes
-    Priority: 3
+    Priority: 5
 SortUsingDeclarations: true
 SpaceAfterTemplateKeyword: true
 SpaceInEmptyBlock: true

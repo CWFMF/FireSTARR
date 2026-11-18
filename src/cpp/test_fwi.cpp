@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "fs/ArgumentParser.h"
-#include "fs/FWI.h"
-#include "fs/FwiReference.h"
-#include "fs/Log.h"
+#include "fs/log/Log.h"
+#include "fs/sim/ArgumentParser.h"
 #include "fs/unstable.h"
-#include "fs/Util.h"
-#include "fs/Weather.h"
+#include "fs/util/Util.h"
+#include "fs/wx/FwiReference.h"
+#include "fs/wx/WeatherIndices.h"
+#include "test_fwi/FwiOld.h"
 namespace fs::testing
 {
 // https://publications.gc.ca/collections/collection_2016/rncan-nrcan/Fo133-1-424-eng.pdf
@@ -87,23 +87,23 @@ int test_fwi_file(
     RelativeHumidity rhum_{rhum};
     Speed wind_{wind};
     Precipitation prcp_{prcp};
-    auto ffmc{FFMCcalc(temp_, rhum_, wind_, prcp_, ffmc0)};
-    Ffmc ffmc_{temp_, rhum_, wind_, prcp_, ffmc0_};
+    auto ffmc{fwireference::FFMCcalc(temp_, rhum_, wind_, prcp_, ffmc0)};
+    auto ffmc_{fwiold::FFMCcalc(temp_, rhum_, wind_, prcp_, ffmc0_)};
     logging::check_tolerance(EPSILON, ffmc.value, ffmc_.value, "ffmc");
-    auto dmc{DMCcalc(temp_, rhum_, prcp_, dmc0_, month_, latitude_)};
-    Dmc dmc_{temp_, rhum_, prcp_, dmc0_, month, latitude};
+    auto dmc{fwireference::DMCcalc(temp_, rhum_, prcp_, dmc0_, month_, latitude_)};
+    auto dmc_{fwiold::DMCcalc(temp_, rhum_, prcp_, dmc0_, month, latitude)};
     logging::check_tolerance(EPSILON, dmc.value, dmc_.value, "dmc");
-    auto dc{DCcalc(temp_, prcp_, dc0_, month_, latitude_)};
-    Dc dc_{temp_, prcp_, dc0_, month, latitude};
+    auto dc{fwireference::DCcalc(temp_, prcp_, dc0_, month_, latitude_)};
+    auto dc_{fwiold::DCcalc(temp_, prcp_, dc0_, month, latitude)};
     logging::check_tolerance(EPSILON, dc.value, dc_.value, "dc");
-    auto isi{ISIcalc(ffmc, wind_)};
-    Isi isi_{wind_, ffmc_};
+    auto isi{fwireference::ISIcalc(wind_, ffmc)};
+    auto isi_{fwiold::ISIcalc(wind_, ffmc_)};
     logging::check_tolerance(EPSILON, isi.value, isi_.value, "isi");
-    auto bui{BUIcalc(dmc, dc)};
-    Bui bui_{dmc_, dc_};
+    auto bui{fwireference::BUIcalc(dmc, dc)};
+    auto bui_{fwiold::BUIcalc(dmc_, dc_)};
     logging::check_tolerance(EPSILON, bui.value, bui_.value, "bui");
-    auto fwi{FWIcalc(isi, bui)};
-    Fwi fwi_{isi_, bui_};
+    auto fwi{fwireference::FWIcalc(isi, bui)};
+    auto fwi_{fwiold::FWIcalc(isi_, bui_)};
     logging::check_tolerance(EPSILON, fwi.value, fwi_.value, "fwi");
     ffmc0 = ffmc;
     dmc0 = dmc;

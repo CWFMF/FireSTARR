@@ -1,8 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_STANDARD_FUEL_OLD_H
 #define FS_STANDARD_FUEL_OLD_H
-#include "../fs/LogValue.h"
-#include "../fs/stdafx.h"
+#include "../fs/util/LogValue.h"
 #include "FuelTypeOld.h"
 namespace fs::fuelold
 {
@@ -15,20 +14,20 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  * \param fmc Foliar Moisture Content (FMC)
  * \return Standard foliar moisture effect (FME) based on FMC [ST-X-3 eq 61]
  */
-[[nodiscard]] MathSize calculate_standard_foliar_moisture_fmc(const MathSize f) noexcept;
+[[nodiscard]] MathSize calculate_standard_foliar_moisture_fmc(const LookupValue& fmc) noexcept;
 /**
  * \brief Crown fire spread rate (m/min) / Foliar Moisture Effect (RSC / (FME / FME_avg)) [ST-X-3 eq
  * 64]
  * \param isi Initial Spread Index
  * \return RSC / (FME / FME_avg) [ST-X-3 eq 64]
  */
-[[nodiscard]] MathSize calculate_standard_foliar_moisture_isi(const MathSize i) noexcept;
+[[nodiscard]] MathSize calculate_standard_foliar_moisture_isi(const LookupValue& isi) noexcept;
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 79]
  * \param ws Wind Speed (km/h)
  * \return Length to Breadth ratio [ST-X-3 eq 79]
  */
-[[nodiscard]] MathSize calculate_standard_length_to_breadth(const MathSize w) noexcept;
+[[nodiscard]] MathSize calculate_standard_length_to_breadth(const LookupValue& ws) noexcept;
 /**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -106,7 +105,7 @@ public:
    * \param isi Initial Spread Index
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
-  [[nodiscard]] MathSize rosBasic(const MathSize isi) const noexcept
+  [[nodiscard]] MathSize rosBasic(const RoundedValue& isi) const noexcept
   {
     return a() * pow(1.0 - exp(negB() * isi), c());
   }
@@ -115,14 +114,14 @@ public:
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    */
-  MathSize crownConsumption(const MathSize cfb) const noexcept override { return cfl() * cfb; }
+  MathSize crownConsumption(const RoundedValue& cfb) const noexcept override { return cfl() * cfb; }
   /**
    * \brief ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    * \param mu Multiplier
    * \param rsf Slope-adjusted zero wind rate of spread (RSF) [ST-X-3 eq 40]
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize limitIsf(const MathSize mu, const MathSize rsf) const noexcept
+  [[nodiscard]] MathSize limitIsf(const RoundedValue& mu, const RoundedValue& rsf) const noexcept
   {
     return (1.0 / negB())
          * log(
@@ -143,17 +142,21 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 79]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const noexcept override
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override
   {
-    return calculate_standard_length_to_breadth(ws);
+    return calculate_standard_length_to_breadth(as_value(ws));
   }
   /**
    * \brief Final rate of spread (m/min)
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
-  MathSize finalRos(const SpreadInfo&, MathSize, MathSize, const MathSize rss)
-    const noexcept override
+  MathSize finalRos(
+    const SpreadInfo&,
+    const RoundedValue&,
+    const RoundedValue&,
+    const RoundedValue& rss
+  ) const noexcept override
   {
     return rss;
   }
@@ -162,7 +165,7 @@ public:
    * \param bui Build-up Index
    * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    */
-  [[nodiscard]] MathSize buiEffect(const MathSize bui) const noexcept override
+  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const noexcept override
   {
     return (0 < bui) ? exp(50.0 * log_q_.value * ((1.0 / bui) - (1.0 / bui0()))) : 1.0;
   }
@@ -214,12 +217,13 @@ public:
    * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
    */
   [[nodiscard]] static constexpr MathSize crownRateOfSpread(
-    const MathSize isi,
-    const MathSize fmc
+    const RoundedValue& isi,
+    const RoundedValue& fmc
   ) noexcept
   {
-    return calculate_standard_foliar_moisture_isi(isi)
-         * calculate_standard_foliar_moisture_fmc(fmc);
+    // HACK: convert back to double to instantiate as LookupValue
+    return calculate_standard_foliar_moisture_isi(as_value(isi))
+         * calculate_standard_foliar_moisture_fmc(as_value(fmc));
   }
   [[nodiscard]] constexpr MathSize logQ() const noexcept { return log_q_.value; }
 

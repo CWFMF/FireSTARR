@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_FUEL_TYPE_OLD_H
 #define FS_FUEL_TYPE_OLD_H
-#include "../fs/Duff.h"
-#include "../fs/FuelType.h"
 #include "../fs/stdafx.h"
-#include "../fs/Survival.h"
+#include "../fs/fuel/Duff.h"
+#include "../fs/fuel/FuelType.h"
+#include "../fs/fuel/Survival.h"
 namespace fs::fuelold
 {
 using fs::duff::Duff;
@@ -55,7 +55,7 @@ public:
    * \param rso Critical surface fire spread rate (RSO) [ST-X-3 eq 57]
    * \return Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    */
-  [[nodiscard]] MathSize crownFractionBurned(const MathSize rss, const MathSize rso)
+  [[nodiscard]] MathSize crownFractionBurned(const RoundedValue& rss, const RoundedValue& rso)
     const noexcept override
   {
     // can't burn crown if it doesn't exist
@@ -66,7 +66,8 @@ public:
    * \param mc_fraction moisture content (% / 100)
    * \return Calculate probability of burning [Anderson eq 1]
    */
-  [[nodiscard]] ThresholdSize probabilityPeat(const MathSize mc_fraction) const noexcept override
+  [[nodiscard]] ThresholdSize probabilityPeat(const RoundedValue& mc_fraction
+  ) const noexcept override
   {
     return probability_peat(bulkDensity(), inorganicPercent(), mc_fraction);
   }

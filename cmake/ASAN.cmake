@@ -20,7 +20,6 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
       -fno-omit-frame-pointer
       -fno-ipa-icf
       -fno-optimize-sibling-calls)
-    # message("${ASAN_ARGS}")
-    add_compile_options(${ASAN_ARGS})
+    message("ASAN_ARGS = ${ASAN_ARGS}")
   endif()
 endif()

@@ -4,7 +4,6 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(DIR_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp)
-set(DIR_SRC_COMMON ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/fs)
 
 if(NOT DEFINED CPU_TUNE_ONLY)
   set(CPU_TUNE_ONLY TRUE)
@@ -107,15 +106,8 @@ message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
 
 include(cmake/Version.cmake)
 
-set(FILE_UNSTABLE_CPP ${DIR_SRC_COMMON}/unstable.cpp)
-set_source_files_properties(${FILE_UNSTABLE_CPP} PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS_RELEASE}")
-
 if(NOT ASAN_ARGS)
-  file(GLOB FILES_CPP ${DIR_SRC}/*.cpp)
-  file(GLOB FILES_H ${DIR_SRC}/*.h)
-  file(GLOB FILES_CPP_COMMON ${DIR_SRC_COMMON}/*.cpp)
-  file(GLOB FILES_H_COMMON ${DIR_SRC_COMMON}/*.h)
-  set(FILES_FORMAT ${FILES_CPP} ${FILES_H} ${FILES_CPP_COMMON} ${FILES_H_COMMON})
+  file(GLOB_RECURSE FILES_FORMAT ${DIR_SRC} *.h *.cpp)
   include(cmake/TidyFormat.cmake)
 endif()
 
@@ -136,25 +128,36 @@ endif()
 
 enable_testing()
 
-add_subdirectory(${DIR_SRC_COMMON})
+add_subdirectory(${DIR_SRC}/fs)
 
 foreach(bin ${PROJECT_NAME} test_duff test_fwi test_fbp test_rng)
   message("Adding binary for ${bin}")
   set(DIR_SRC_TEST ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/${bin})
   file(GLOB FILES_TEST_CPP ${DIR_SRC_TEST}/*.cpp)
+  # HACK: put actual tests in test folder but use same loop for main binary
+  if(${bin} MATCHES "^test_*")
+      # include test folder for common code
+      set(
+        DIR_SRC_TEST_COMMON
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/test
+      )
+    file(GLOB FILES_TEST_COMMON_CPP ${DIR_SRC_TEST_COMMON}/*.cpp)
+    set(FILES_TEST_CPP ${FILES_TEST_CPP} ${FILES_TEST_COMMON_CPP})
+  endif()
   # include file with main() for each bin
   add_executable(${bin} ${DIR_SRC}/${bin}.cpp ${FILE_VERSION_CPP} ${FILES_TEST_CPP})
 
 # FIX: wrap anything new that might be breaking windows workflow
 if(LINUX)
-  target_include_directories(${bin} PRIVATE ${DIR_SRC_COMMON} ${DIR_SRC} ${DIR_SRC_TEST})
+  target_include_directories(${bin} PRIVATE ${DIR_SRC} ${DIR_SRC_TEST})
 else()
-  target_include_directories(${bin} PUBLIC ${DIR_SRC_COMMON} ${DIR_SRC} ${DIR_SRC_TEST})
+  target_include_directories(${bin} PUBLIC ${DIR_SRC} ${DIR_SRC_TEST})
 endif()
   target_link_libraries(${bin} PUBLIC fs)
 # FIX: wrap anything new that might be breaking windows workflow
 if(LINUX)
   if(ASAN_ARGS)
+    add_compile_options(${ASAN_ARGS})
     target_link_options(${bin} BEFORE PUBLIC ${ASAN_ARGS})
   else()
     target_link_options(${bin} BEFORE PRIVATE ${ASAN_ARGS})

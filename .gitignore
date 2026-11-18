@@ -17,5 +17,10 @@ test_fbp
 test_fwi
 **/*.zip
 **/*.exe
+data
+grid
+sims
+proj.db
+VERSION
 !test/output/reference
 !src/**

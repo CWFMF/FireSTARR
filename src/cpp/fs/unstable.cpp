@@ -4,4 +4,5 @@ namespace fs
 {
 MathSize cos(const MathSize angle) noexcept { return static_cast<MathSize>(std::cos(angle)); }
 MathSize sin(const MathSize angle) noexcept { return static_cast<MathSize>(std::sin(angle)); }
+MathSize acos(const MathSize angle) noexcept { return static_cast<MathSize>(std::acos(angle)); }
 }
