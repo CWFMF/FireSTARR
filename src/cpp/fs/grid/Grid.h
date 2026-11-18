@@ -424,7 +424,10 @@ protected:
       base_name,
       // bps,
       // SAMPLEFORMAT_IEEEFP,
-      [&](const XYIdx& idx) { return static_cast<TiffDouble>(convert(this->at(idx))); },
+      [&](const XYIdx& idx) {
+        // HACK: convert to RoundedValue to force precision
+        return static_cast<TiffDouble>(RoundedValue{convert(this->at(idx))});
+      },
       static_cast<int>(no_data)
     );
   }
