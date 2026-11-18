@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "fs/stdafx.h"
+#include <compare>
 #include <future>
 #include <mutex>
 #include "fs/data/RangeIterator.h"
@@ -291,7 +292,30 @@ auto compare_spread(
         {
           show_offset(pt_a);
         }
-        if (auto cmp_pt = pt_a <=> pt_b; 0 != cmp_pt)
+        auto cmp_pt = std::partial_ordering::equivalent;
+        // HACK: do these in reverse so the last thing assigned is the result
+        if (auto cmp_sub = pt_a.offset() <=> pt_b.offset(); 0 != cmp_sub)
+        {
+          logging::compare_equal(pt_a.offset().x, pt_b.offset().x, "offset.x");
+          logging::compare_equal(pt_a.offset().y, pt_b.offset().y, "offset.y");
+          cmp_pt = cmp_sub;
+        }
+        if (auto cmp_sub = pt_a.raz() <=> pt_b.raz(); 0 != cmp_sub)
+        {
+          logging::compare_equal(pt_a.raz(), pt_b.raz(), "raz");
+          cmp_pt = cmp_sub;
+        }
+        if (auto cmp_sub = pt_a.ros() <=> pt_b.ros(); 0 != cmp_sub)
+        {
+          logging::compare_equal(pt_a.ros(), pt_b.ros(), "ros");
+          cmp_pt = cmp_sub;
+        }
+        if (auto cmp_sub = pt_a.intensity() <=> pt_b.intensity(); 0 != cmp_sub)
+        {
+          logging::compare_equal(pt_a.intensity(), pt_b.intensity(), "intensity");
+          cmp_pt = cmp_sub;
+        }
+        if (auto cmp_overall = pt_a <=> pt_b; 0 != cmp_overall)
         {
           if (!show_offsets)
           {
