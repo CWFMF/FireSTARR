@@ -193,7 +193,7 @@ void Scenario::evaluate(const Event& event)
     const auto& x = p0.x;
     const auto& y = p0.y;
     const auto for_cell = model_->cell(event.xy);
-    points_log_.log(step_, STAGE_NEW, event.time, x.value, y.value);
+    points_log_.log(step_, STAGE_NEW, event.time, as_value(x), as_value(y));
     // HACK: don't do this in constructor because scenario creates this in its constructor
     // HACK: insert point as originating from itself
     points_.insert(
@@ -208,8 +208,8 @@ void Scenario::evaluate(const Event& event)
     logging::verbose(
       "{:s} Starting fire at point ({:f}, {:f}) in fuel type {:s} at time {:f}",
       log_prefix_,
-      x.value,
-      y.value,
+      as_value(x),
+      as_value(y),
       FuelType::safeName(check_fuel(for_cell)),
       event.time
     );
@@ -223,8 +223,8 @@ void Scenario::evaluate(const Event& event)
           "{:s} Didn't survive ignition in {:s} with weather {:f}, {:f}",
           log_prefix_,
           FuelType::safeName(check_fuel(for_cell)),
-          wx.ffmc().value,
-          wx.dmc().value
+          as_value(wx.ffmc()),
+          as_value(wx.dmc())
         );
       }
       // HACK: we still want the fire to have existed, so set the intensity of the origin
@@ -508,7 +508,7 @@ Scenario* Scenario::run(map<DurationSize, shared_ptr<ProbabilityMap>>* probabili
       const auto& x = p0.x;
       const auto& y = p0.y;
       // log_verbose(*this, "Adding point ({:d}, {:d})",
-      logging::extensive("{:s} Adding point ({:f}, {:f})", log_prefix_, x.value, y.value);
+      logging::extensive("{:s} Adding point ({:f}, {:f})", log_prefix_, as_value(x), as_value(y));
       points_.insert(
         p0,
         SpreadData{start_time_, NO_INTENSITY, NO_ROS, Direction::Invalid(), Direction::Invalid()},
@@ -625,7 +625,7 @@ void Scenario::scheduleFireSpread(const Event& event)
   const auto max_duration = (next_time - time) * DAY_MINUTES;
   const auto max_time = time + max_duration / DAY_MINUTES;
   // HACK: use the old ffmc for this check to be consistent with previous version
-  if (wx_daily.ffmc().value < minimumFfmcForSpread(time))
+  if (as_value(wx_daily.ffmc()) < minimumFfmcForSpread(time))
   {
     addEvent(Event{.time = max_time, .type = Event::Type::FireSpread});
     logging::extensive("{:s} Waiting until {:f} because of FFMC", log_prefix_, max_time);

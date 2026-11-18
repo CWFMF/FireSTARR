@@ -76,7 +76,7 @@ RoundedValue SpreadInfo::initial(
   // needs to be non-const so that we can update if slopeEffect changes direction
   auto raz = spread.weather.wind().heading();
   const auto isz = 0.208 * ffmc_effect;
-  wsv = spread.weather.wind().speed.value;
+  wsv = as_value(spread.weather.wind().speed);
   if (!has_no_slope)
   {
     const auto isf1 = fuel->calculateIsf(spread, isz);
@@ -100,7 +100,7 @@ RoundedValue SpreadInfo::initial(
     raz = (0 == wsv) ? 0 : acos(wsv_y / wsv);
     if (wsv_x < 0)
     {
-      raz = Radians::D_360().value - raz;
+      raz = as_value(Radians::D_360()) - raz;
     }
   }
   spread.raz_ = Direction{Radians{raz}};
@@ -333,7 +333,7 @@ SpreadInfo::SpreadInfo(
     return {sin(heading), cos(heading)};
   }();
   // HACK: only use BUI from hourly weather for both calculations
-  const auto _bui = weather.bui().value;
+  const auto _bui = as_value(weather.bui());
   const auto bui_eff = fuel->buiEffect(_bui);
   // FIX: gets calculated when not necessary sometimes
   const auto critical_surface_intensity = fuel->criticalSurfaceIntensity(*this);

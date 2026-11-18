@@ -402,7 +402,7 @@ bool GridBase::validate(const Point& point) const
   // TODO: refactor this to avoid duplicated code
   bool invalid{false};
   const auto xy = from_lat_long(this->proj4_, point);
-  logging::debug("Coordinates {} converted to ({:f}, {:f})", point, xy.x.value, xy.y.value);
+  logging::debug("Coordinates {} converted to ({:f}, {:f})", point, as_value(xy.x), as_value(xy.y));
   // find positions and lat/long translations for checking bounds
   const XPos x_left{xllcorner_};
   const XPos x_mid{(xllcorner_ + xurcorner_) / 2.0};
@@ -469,9 +469,9 @@ bool GridBase::validate(const Point& point) const
   // FIX: UTM grids are ~5% but they get clipped to MAX_HEIGHT and should compare clipped bounds
   constexpr MathSize MAX_DISTORTION_PERCENT{10};
   // do North-South distance along edges
-  const auto dist_center{(y_top - y_bottom).value * cell_km};
-  const auto dist_left{(corner_xy_nw.y - corner_xy_sw.y).value * cell_km};
-  const auto dist_right{(corner_xy_ne.y - corner_xy_se.y).value * cell_km};
+  const auto dist_center{as_value(y_top - y_bottom) * cell_km};
+  const auto dist_left{as_value(corner_xy_nw.y - corner_xy_sw.y) * cell_km};
+  const auto dist_right{as_value(corner_xy_ne.y - corner_xy_se.y) * cell_km};
   const auto pct_left = (dist_left / dist_center) * 100;
   const auto pct_center = (dist_center / dist_center) * 100;
   assert(100.0 == pct_center);
@@ -515,7 +515,7 @@ std::optional<FullCoordinates> GridBase::findFullCoordinates(const Point& point,
   const
 {
   const auto xy = from_lat_long(this->proj4_, point);
-  logging::debug("Coordinates {} converted to ({:f}, {:f})", point, xy.x.value, xy.y.value);
+  logging::debug("Coordinates {} converted to ({:f}, {:f})", point, as_value(xy.x), as_value(xy.y));
   // find positions and lat/long translations for checking bounds
   const XPos x_left{xllcorner_};
   const XPos x_mid{(xllcorner_ + xurcorner_) / 2.0};
@@ -525,10 +525,10 @@ std::optional<FullCoordinates> GridBase::findFullCoordinates(const Point& point,
   const YPos y_top{yurcorner_};
   logging::verbose("Lower left is ({:f}, {:f})", this->xllcorner_, this->yllcorner_);
   // convert coordinates into cell position
-  const auto actual_x = (xy.x.value - this->xllcorner_) / this->cell_size_;
+  const auto actual_x = (as_value(xy.x) - this->xllcorner_) / this->cell_size_;
   // these are already flipped across the y-axis on reading, so it's the same as for x now
-  auto actual_y = (!flipped) ? (xy.y.value - this->yllcorner_) / this->cell_size_
-                             : (yurcorner_ - xy.y.value) / cell_size_;
+  auto actual_y = (!flipped) ? (as_value(xy.y) - this->yllcorner_) / this->cell_size_
+                             : (yurcorner_ - as_value(xy.y)) / cell_size_;
   const auto x1 = static_cast<FullIdx>(actual_x);
   const auto y1 = static_cast<FullIdx>(round(actual_y - 0.5));
   if (0 > x1 || x1 >= calculateWidth() || 0 > y1 || y1 >= calculateHeight())

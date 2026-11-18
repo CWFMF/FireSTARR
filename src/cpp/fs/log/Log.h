@@ -169,15 +169,11 @@ inline void compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEX
     logging::error("Expected {:s} to be {} but got {}", name, rhs, lhs);
   }
 }
-template <typename T>
-concept HasValue = requires(const T& p) {
-  { p.value } -> std::convertible_to<fs::MathSize>;
-};
 template <class T>
   requires HasValue<T>
 inline void compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
 {
-  compare_equal(lhs.value, rhs.value, name);
+  compare_equal(as_value(lhs), as_value(rhs), name);
 }
 inline void compare_equal(const char* lhs, const char* rhs, const char* name) DEBUG_NOEXCEPT_OFF
 {

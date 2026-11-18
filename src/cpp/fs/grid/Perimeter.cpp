@@ -88,8 +88,8 @@ BurnedMap make_burned_map(const XYIdx& location, const size_t size, const Enviro
   auto max_distance = sqrt(num_cells / M_PI);
   perim_grid.set(location, 1);
   ++count;
-  const auto& x_loc = location.x.value;
-  const auto& y_loc = location.y.value;
+  const auto& x_loc = as_value(location.x);
+  const auto& y_loc = as_value(location.y);
   // HACK: assume fuel for origin matches the rest of the fire
   while (num_cells > static_cast<MathSize>(count))
   {

@@ -26,7 +26,7 @@ static T fix_degrees(T value) noexcept
 }
 static Degrees fix_degrees(const Degrees& degrees) noexcept
 {
-  return Degrees{fix_degrees(degrees.value)};
+  return Degrees{fix_degrees(as_value(degrees))};
 }
 template <typename T>
 static T fix_hours(T value) noexcept
@@ -53,9 +53,9 @@ static std::pair<DurationSize, DurationSize> sunrise_sunset(
       m + 1.916 * sin(Radians::from_degrees(m)) + 0.020 * sin(Radians::from_degrees(2 * m))
       + 282.634
     );
-    auto ra =
+    auto ra = as_value(
       fix_degrees(Radians{atan(0.91764 * tan(Radians{Radians::from_degrees(l)}))}.asDegrees())
-        .value;
+    );
     const auto l_quadrant = floor(l / 90) * 90;
     const auto ra_quadrant = floor(ra / 90) * 90;
     ra += l_quadrant - ra_quadrant;
@@ -64,7 +64,7 @@ static std::pair<DurationSize, DurationSize> sunrise_sunset(
     const auto cos_dec = cos(asin(sin_dec));
     const auto cos_h = (cos(Zenith) - sin_dec * sin(Radians::from_degrees(latitude)))
                      / (cos_dec * cos(Radians::from_degrees(latitude)));
-    MathSize h = Radians{acos(cos_h)}.asDegrees().value;
+    MathSize h = as_value(Radians{acos(cos_h)}.asDegrees());
     if (cos_h > 1)
     {
       // sun never rises

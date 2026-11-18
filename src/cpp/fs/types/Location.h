@@ -40,7 +40,7 @@ struct XIdx : public StrictType<XIdx, units::Unitless, Idx, std::numeric_limits<
 struct YIdx : public StrictType<YIdx, units::Unitless, Idx, std::numeric_limits<Idx>::max()>
 {
   using StrictType::StrictType;
-  explicit constexpr YIdx(const YPos& y) : YIdx(static_cast<Idx>(y.value)) { }
+  explicit constexpr YIdx(const YPos& y) : YIdx(static_cast<Idx>(as_value(y))) { }
   auto operator<=>(const YIdx& rhs) const = default;
 };
 // HACK: don't actually have bounds for now

@@ -55,7 +55,7 @@ ThresholdSize survival_probability(
   const auto prob_ffmc_saturated = duff_ffmc_type.probabilityOfSurvival(McFfmcSaturated * 100);
   const auto prob_ffmc_zero = duff_ffmc_type.probabilityOfSurvival(McDmc);
   const auto prob_ffmc_weighted = (prob_ffmc - prob_ffmc_saturated) / prob_ffmc_zero;
-  const auto term_otway = exp(-3.11 + 0.12 * wx.dmc().value);
+  const auto term_otway = exp(-3.11 + 0.12 * as_value(wx.dmc()));
   const auto prob_otway = term_otway / (1 + term_otway);
   const auto mc_pct = wx.mcDmcPct() * dmc_ratio + wx.mcFfmcPct() * ffmc_ratio;
   const auto prob_weight_ffmc = duff_ffmc_type.probabilityOfSurvival(mc_pct);

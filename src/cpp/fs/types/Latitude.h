@@ -9,9 +9,9 @@ struct Latitude
 {
   MathSize value{};
   std::partial_ordering operator<=>(const Latitude& rhs) const = default;
-  Latitude operator-(const Latitude& rhs) const { return {value - rhs.value}; }
+  Latitude operator-(const Latitude& rhs) const { return {value - as_value(rhs)}; }
   Latitude operator-() const { return {-value}; }
 };
-static inline Latitude abs(const Latitude& rhs) { return {std::abs(rhs.value)}; }
+static inline Latitude abs(const Latitude& rhs) { return {std::abs(as_value(rhs))}; }
 }
 #endif

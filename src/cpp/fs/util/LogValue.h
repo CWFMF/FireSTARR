@@ -29,11 +29,21 @@ static constexpr LogValue LOG_0_80_CALC{log(0.8)};
 static constexpr LogValue LOG_0_85_CALC{log(0.85)};
 static constexpr LogValue LOG_0_90_CALC{log(0.9)};
 static constexpr LogValue LOG_1_00_CALC{log(1.0)};
-static_assert(abs((LOG_0_70.value - LOG_0_70_CALC.value)) < numeric_limits<MathSize>::epsilon());
-static_assert(abs((LOG_0_75.value - LOG_0_75_CALC.value)) < numeric_limits<MathSize>::epsilon());
-static_assert(abs((LOG_0_80.value - LOG_0_80_CALC.value)) < numeric_limits<MathSize>::epsilon());
-static_assert(abs((LOG_0_90.value - LOG_0_90_CALC.value)) < numeric_limits<MathSize>::epsilon());
-static_assert(abs((LOG_1_00.value - LOG_1_00_CALC.value)) < numeric_limits<MathSize>::epsilon());
+static_assert(
+  abs((as_value(LOG_0_70) - as_value(LOG_0_70_CALC))) < numeric_limits<MathSize>::epsilon()
+);
+static_assert(
+  abs((as_value(LOG_0_75) - as_value(LOG_0_75_CALC))) < numeric_limits<MathSize>::epsilon()
+);
+static_assert(
+  abs((as_value(LOG_0_80) - as_value(LOG_0_80_CALC))) < numeric_limits<MathSize>::epsilon()
+);
+static_assert(
+  abs((as_value(LOG_0_90) - as_value(LOG_0_90_CALC))) < numeric_limits<MathSize>::epsilon()
+);
+static_assert(
+  abs((as_value(LOG_1_00) - as_value(LOG_1_00_CALC))) < numeric_limits<MathSize>::epsilon()
+);
 #endif
 #endif
 }

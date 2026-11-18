@@ -110,7 +110,7 @@ void Model::readWeather(
     );
     auto prev = &yesterday;
     // HACK: adding to original object if we don't do this?
-    auto apcp_24h = yesterday.prec().value;
+    auto apcp_24h = as_value(yesterday.prec());
     while (getline(in, str))
     {
       istringstream iss(str);
@@ -144,9 +144,9 @@ void Model::readWeather(
           wx_daily.emplace(cur, map<Day, FwiWeather>());
           prev = &yesterday;
           logging::extensive(
-            "Resetting new scenario precip to {:f} from {:f}", yesterday.prec().value, apcp_24h
+            "Resetting new scenario precip to {:f} from {:f}", as_value(yesterday.prec()), apcp_24h
           );
-          apcp_24h = yesterday.prec().value;
+          apcp_24h = as_value(yesterday.prec());
         }
         auto& s = wx.at(cur);
         struct tm t{};
@@ -188,11 +188,11 @@ void Model::readWeather(
         FwiWeather w{read_fwi_weather(&iss, &str)};
         s.at(for_time) = w;
         logging::check_fatal(
-          0 > w.prec().value, "Hourly weather precip {:f} is negative", w.prec().value
+          0 > as_value(w.prec()), "Hourly weather precip {:f} is negative", as_value(w.prec())
         );
-        apcp_24h += w.prec().value;
+        apcp_24h += as_value(w.prec());
         logging::extensive(
-          "Adding {:f} to precip results in accumulation of {:f}", w.prec().value, apcp_24h
+          "Adding {:f} to precip results in accumulation of {:f}", as_value(w.prec()), apcp_24h
         );
         if (12 == t.tm_hour)
         {
@@ -229,17 +229,17 @@ void Model::readWeather(
           t.tm_hour,
           t.tm_min,
           t.tm_sec,
-          w.prec().value,
-          w.temperature.value,
-          w.rh.value,
-          w.wind.speed.value,
-          w.wind.direction.value,
-          w.ffmc.value,
-          w.dmc.value,
-          w.dc.value,
-          w.isi.value,
-          w.bui.value,
-          w.fwi.value
+          as_value(w.prec()),
+          as_value(w.temperature),
+          as_value(w.rh),
+          as_value(w.wind.speed),
+          as_value(w.wind.direction),
+          as_value(w.ffmc),
+          as_value(w.dmc),
+          as_value(w.dc),
+          as_value(w.isi),
+          as_value(w.bui),
+          as_value(w.fwi)
         );
         logging::debug(fmt_line.c_str());
         out << fmt_line << "\r\n";
@@ -288,10 +288,10 @@ void Model::findStarts(const XYIdx& location)
           // is this going to work if negative?
           // const auto xy = location + XIdx{x} + YIdx{y};
           const XIdx x1{x_loc + XIdx{x}};
-          if (0 <= x1.value && x1.value < width)
+          if (0 <= as_value(x1) && as_value(x1) < width)
           {
             const YIdx y1{y_loc + YIdx{y}};
-            if (0 <= y1.value && y1.value < height)
+            if (0 <= as_value(y1) && as_value(y1) < height)
             {
               const XYIdx xy{x1, y1};
               const auto for_cell = env_->cell(xy);
@@ -1348,17 +1348,17 @@ void Model::outputWeather(map<size_t, FireWeather>& weather, const char* file_na
           static_cast<uint8_t>(hour - day * DAY_HOURS),
           0,
           0,
-          w->prec().value,
-          w->temperature.value,
-          w->rh.value,
-          w->wind.speed.value,
-          w->wind.direction.value,
-          w->ffmc.value,
-          w->dmc.value,
-          w->dc.value,
-          w->isi.value,
-          w->bui.value,
-          w->fwi.value
+          as_value(w->prec()),
+          as_value(w->temperature),
+          as_value(w->rh),
+          as_value(w->wind.speed),
+          as_value(w->wind.direction),
+          as_value(w->ffmc),
+          as_value(w->dmc),
+          as_value(w->dc),
+          as_value(w->isi),
+          as_value(w->bui),
+          as_value(w->fwi)
         );
         out << fmt_line << "\r\n";
         SlopeSize SLOPE_MAX = MAX_SLOPE_FOR_DISTANCE;
@@ -1399,17 +1399,17 @@ void Model::outputWeather(map<size_t, FireWeather>& weather, const char* file_na
                 static_cast<uint8_t>(hour - day * DAY_HOURS),
                 0,
                 0,
-                w->prec().value,
-                w->temperature().value,
-                w->rh().value,
-                w->wind().speed.value,
-                w->wind().direction.value,
-                w->ffmc().value,
-                w->dmc().value,
-                w->dc().value,
-                w->isi().value,
-                w->bui().value,
-                w->fwi().value,
+                as_value(w->prec()),
+                as_value(w->temperature()),
+                as_value(w->rh()),
+                as_value(w->wind().speed),
+                as_value(w->wind().direction),
+                as_value(w->ffmc()),
+                as_value(w->dmc()),
+                as_value(w->dc()),
+                as_value(w->isi()),
+                as_value(w->bui()),
+                as_value(w->fwi()),
                 spread.crownFractionBurned(),
                 spread.crownFuelConsumption(),
                 spread.fireDescription(),

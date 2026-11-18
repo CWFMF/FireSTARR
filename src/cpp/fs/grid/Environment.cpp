@@ -216,7 +216,7 @@ CellGrid Environment::makeCells(const FuelGrid& fuel, const ElevationGrid& eleva
             MathSize aspect_azimuth = 0.0;
             if (s > 0 && (dx != 0 || dy != 0))
             {
-              aspect_azimuth = Radians{atan2(dy, -dx)}.asDegrees().value;
+              aspect_azimuth = as_value(Radians{atan2(dy, -dx)}.asDegrees());
               // NOTE: need to change this out of 'math' direction into 'real' direction (i.e. N
               // is 0, not E)
               aspect_azimuth =
@@ -310,7 +310,8 @@ Environment::Environment(
 Cell Environment::offset(const Event& event, const Idx x, const Idx y) const
 {
   const auto& p = event.xy;
-  // return cell(XYIdx{static_cast<Idx>(p.x().value + x), static_cast<Idx>(p.y().value + y)});
+  // return cell(XYIdx{static_cast<Idx>(as_value(p.x()) + x), static_cast<Idx>(as_value(p.y()) +
+  // y)});
   return cell(p + XIdx{x} + YIdx{y});
 }
 void Environment::saveToFile(const string_view output_directory) const

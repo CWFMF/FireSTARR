@@ -90,7 +90,7 @@ int main(const int argc, const char* const argv[])
     }
     if (!settings.is_test())
     {
-      const StartPoint start_point(settings.latitude.value(), settings.longitude.value());
+      const StartPoint start_point(as_value(settings.latitude), as_value(settings.longitude));
       // HACK: ISI for yesterday really doesn't matter so just use any wind
       // HACK: it's basically wrong to assign this precip to yesterday's object,
       // but don't want to add another argument right now

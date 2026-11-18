@@ -140,8 +140,8 @@ fs::Point to_lat_long(const string_view proj4, const fs::XYPos xy)
   // Given that we have used proj_normalize_for_visualization(), the order
   // of coordinates is longitude, latitude, and values are expressed in
   // degrees.
-  logging::verbose("proj_coord({:f}, {:f}, 0, 0)", xy.x.value, xy.y.value);
-  const PJ_COORD a = proj_coord(xy.x.value, xy.y.value, 0, 0);
+  logging::verbose("proj_coord({:f}, {:f}, 0, 0)", as_value(xy.x), as_value(xy.y));
+  const PJ_COORD a = proj_coord(as_value(xy.x), as_value(xy.y), 0, 0);
   // transform to  geographical
   const PJ_COORD b = proj_trans(P, PJ_FWD, a);
   // Point is (lat, lon)
@@ -207,19 +207,20 @@ Degrees find_north_south_deviation(const string_view proj4, const Point& p0)
   logging::verbose(
     "Finding deviation between [{} => ({:f}, {:f})] and [{} => ({:f}, {:f})]",
     p0,
-    grid0.x.value,
-    grid0.y.value,
+    as_value(grid0.x),
+    as_value(grid0.y),
     p1,
-    grid1.x.value,
-    grid1.y.value
+    as_value(grid1.x),
+    as_value(grid1.y)
   );
   // angle is going to be how far off North we are
   // -90 to convert from math direction
   auto deviation =
     Radians::D_090().asDegrees()
-    - Radians{atan2(grid1.y.value - grid0.y.value, grid1.x.value - grid0.x.value)}.asDegrees();
+    - Radians{atan2(as_value(grid1.y) - as_value(grid0.y), as_value(grid1.x) - as_value(grid0.x))}
+        .asDegrees();
   logging::verbose(
-    "Deviation for {} to {} with proj4 '{:s}' is {:f} degrees", p0, p1, proj4, deviation.value
+    "Deviation for {} to {} with proj4 '{:s}' is {:f} degrees", p0, p1, proj4, as_value(deviation)
   );
   return deviation;
 };
@@ -230,7 +231,7 @@ bool check_deviation(
   const MathSize max_deviation
 )
 {
-  auto deviation = find_north_south_deviation(proj4, p).value;
+  auto deviation = as_value(find_north_south_deviation(proj4, p));
   if (abs(deviation) > max_deviation)
   {
     logging::error(

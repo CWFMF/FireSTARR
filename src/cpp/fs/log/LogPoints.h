@@ -31,7 +31,7 @@ public:
     {
       for (const auto& p : points)
       {
-        log_unchecked(step, stage, time, p.x.value, p.y.value);
+        log_unchecked(step, stage, time, as_value(p.x), as_value(p.y));
       }
     }
   }

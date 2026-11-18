@@ -123,7 +123,7 @@ MathSize StandardFuel::finalRos(
 }
 [[nodiscard]] MathSize StandardFuel::buiEffect(const RoundedValue& bui) const noexcept
 {
-  return (0 < bui) ? exp(50.0 * log_q_.value * ((1.0 / bui) - (1.0 / bui0()))) : 1.0;
+  return (0 < bui) ? exp(50.0 * as_value(log_q_) * ((1.0 / bui) - (1.0 / bui0()))) : 1.0;
 }
 [[nodiscard]] MathSize StandardFuel::bui0() const noexcept { return bui0_; }
 [[nodiscard]] MathSize StandardFuel::cbh() const { return cbh_; }
@@ -144,5 +144,5 @@ MathSize StandardFuel::finalRos(
   return calculate_standard_foliar_moisture_isi(as_value(isi))
        * calculate_standard_foliar_moisture_fmc(as_value(fmc));
 }
-[[nodiscard]] MathSize StandardFuel::logQ() const noexcept { return log_q_.value; }
+[[nodiscard]] MathSize StandardFuel::logQ() const noexcept { return as_value(log_q_); }
 }

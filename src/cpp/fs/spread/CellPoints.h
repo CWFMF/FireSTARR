@@ -71,7 +71,7 @@ static constexpr CompassArray<CellIndex> DIRECTION_MASKS{
 // use direction distance towards compass point as tie-breaker when ros is the same
 static constexpr auto DIRECTION_ANGLES = []() {
   CompassArray<Direction> result{};
-  constexpr auto angle = Degrees{Radians::D_360().asDegrees().value / result.size()};
+  constexpr auto angle = Degrees{as_value(Radians::D_360().asDegrees()) / result.size()};
   for (size_t i = 0; i < result.size(); ++i)
   {
     // divide circle into equal wedges
@@ -153,8 +153,8 @@ private:
   ) noexcept
   {
     return distance(
-      static_cast<DistanceSize>(xy.x.value - cell_x_y.x.value),
-      static_cast<DistanceSize>(xy.y.value - cell_x_y.y.value),
+      static_cast<DistanceSize>(as_value(xy.x) - as_value(cell_x_y.x)),
+      static_cast<DistanceSize>(as_value(xy.y) - as_value(cell_x_y.y)),
       x1,
       y1
     );
@@ -166,8 +166,8 @@ private:
   ) noexcept
   {
     return distance(
-      static_cast<DistanceSize>(xy.x.value - cell_x_y.x.value),
-      static_cast<DistanceSize>(xy.y.value - cell_x_y.y.value),
+      static_cast<DistanceSize>(as_value(xy.x) - as_value(cell_x_y.x)),
+      static_cast<DistanceSize>(as_value(xy.y) - as_value(cell_x_y.y)),
       POINTS_OUTER[i].first,
       POINTS_OUTER[i].second
     );
@@ -255,8 +255,8 @@ private:
     // since digits aren't wasted on cell
     const auto& cell_x_y = cell_pts.cell_x_y_;
     auto& directions = cell_pts.directions;
-    const DistanceSize x0{static_cast<DistanceSize>(xy.x.value - cell_x_y.x_value())};
-    const DistanceSize y0{static_cast<DistanceSize>(xy.y.value - cell_x_y.y_value())};
+    const DistanceSize x0{static_cast<DistanceSize>(as_value(xy.x) - cell_x_y.x_value())};
+    const DistanceSize y0{static_cast<DistanceSize>(as_value(xy.y) - cell_x_y.y_value())};
     // CHECK: FIX: is this initializing everything to false or just one element?
     CompassArray<bool> closer{};
     std::fill(closer.begin(), closer.end(), false);
@@ -338,7 +338,7 @@ private:
     std::ranges::fill(points, XYPos::Invalid());
     if (should_save())
     {
-      std::ranges::fill(directions, INVALID_DIRECTION.value);
+      std::ranges::fill(directions, as_value(INVALID_DIRECTION));
     }
 #ifdef DEBUG_CELLPOINTS
     logging::note("CellPoints is size {:d} after creation and should be empty", size());
@@ -454,7 +454,7 @@ public:
   set<XYPos> unique() const noexcept
   {
     // if any point is invalid then they all have to be
-    if (XPos::Invalid().value == points[0].x.value)
+    if (as_value(XPos::Invalid()) == as_value(points[0].x))
     {
       return {};
     }
@@ -477,7 +477,7 @@ public:
   bool empty() const
   {
     // NOTE: if anything is invalid then everything must be
-    return (XPos::Invalid().value == points[0].x.value);
+    return (as_value(XPos::Invalid()) == as_value(points[0].x));
   }
   auto point_directions() const noexcept
   {

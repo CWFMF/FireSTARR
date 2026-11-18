@@ -241,7 +241,7 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
   // size_t num_angles = 0;
   MathSize widest_x = cos(widest);
   Radians step_max{STEP_MAX / pow(length_to_breadth, 0.5)};
-  while (added && cur_x > (STEP_MAX / 4.0).value)
+  while (added && cur_x > as_value(STEP_MAX / 4.0))
   {
     // ++num_angles;
     theta = min(Radians{acos(cur_x)}, last_theta + step_max);

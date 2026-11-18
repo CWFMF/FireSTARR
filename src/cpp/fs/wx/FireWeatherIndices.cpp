@@ -81,7 +81,7 @@ Isi check_isi(
 {
   const Isi isi{value};
 #ifdef CHECK_CALCULATION
-  const auto cmp = Isi(wind, ffmc).value;
+  const auto cmp = as_value(Isi(wind, ffmc));
 #endif
 #else
 {
@@ -91,9 +91,13 @@ Isi check_isi(
 #endif
 #endif
 #ifdef CHECK_CALCULATION
-  logging::check_fatal(abs(isi.value - cmp) >= CHECK_EPSILON, [&]() {
+  logging::check_fatal(abs(as_value(isi) - cmp) >= CHECK_EPSILON, [&]() {
     return std::format(
-      "ISI is incorrect {:f}, {:f} => {:f} not {:f}", wind.value, ffmc.value, isi.value, cmp
+      "ISI is incorrect {:f}, {:f} => {:f} not {:f}",
+      as_value(wind),
+      as_value(ffmc),
+      as_value(isi),
+      cmp
     );
   });
 #endif
@@ -119,7 +123,7 @@ Bui check_bui(
 {
   const Bui bui{value};
 #ifdef CHECK_CALCULATION
-  const auto cmp = calculate_bui(dmc, dc).value;
+  const auto cmp = as_value(calculate_bui(dmc, dc));
 #endif
 #else
 {
@@ -129,9 +133,13 @@ Bui check_bui(
 #endif
 #endif
 #ifdef CHECK_CALCULATION
-  logging::check_fatal(abs(bui.value - cmp) >= CHECK_EPSILON, [&]() {
+  logging::check_fatal(abs(as_value(bui) - cmp) >= CHECK_EPSILON, [&]() {
     return std::format(
-      "BUI is incorrect {:f}, {:f} => {:f} not {:f}", dmc.value, dc.value, bui.value, cmp
+      "BUI is incorrect {:f}, {:f} => {:f} not {:f}",
+      as_value(dmc),
+      as_value(dc),
+      as_value(bui),
+      cmp
     );
   });
 #endif
@@ -157,7 +165,7 @@ Fwi check_fwi(
 {
   const Fwi fwi{value};
 #ifdef CHECK_CALCULATION
-  const auto cmp = calculate_fwi(isi, bui).value;
+  const auto cmp = as_value(calculate_fwi(isi, bui));
 #endif
 #else
 {
@@ -167,9 +175,13 @@ Fwi check_fwi(
 #endif
 #endif
 #ifdef CHECK_CALCULATION
-  logging::check_fatal(abs(fwi.value - cmp) >= CHECK_EPSILON, [&]() {
+  logging::check_fatal(abs(as_value(fwi) - cmp) >= CHECK_EPSILON, [&]() {
     return std::format(
-      "FWI is incorrect {:f}, {:f} => {:f} not {:f}", isi.value, bui.value, fwi.value, cmp
+      "FWI is incorrect {:f}, {:f} => {:f} not {:f}",
+      as_value(isi),
+      as_value(bui),
+      as_value(fwi),
+      cmp
     );
   });
 #endif

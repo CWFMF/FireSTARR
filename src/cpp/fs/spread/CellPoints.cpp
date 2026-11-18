@@ -16,8 +16,8 @@ void CellPoints::insert_basic(
     spread_arrival = spread_current;
   }
   const auto& cell_x_y = cell_pts.cell_x_y_;
-  const DistanceSize x0{static_cast<DistanceSize>(xy.x.value - cell_x_y.x.value)};
-  const DistanceSize y0{static_cast<DistanceSize>(xy.y.value - cell_x_y.y.value)};
+  const DistanceSize x0{static_cast<DistanceSize>(as_value(xy.x) - as_value(cell_x_y.x))};
+  const DistanceSize y0{static_cast<DistanceSize>(as_value(xy.y) - as_value(cell_x_y.y))};
   // CHECK: FIX: is this initializing everything to false or just one element?
   for (size_t i = 0; i < cell_pts.distances.size(); ++i)
   {

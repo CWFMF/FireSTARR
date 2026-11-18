@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#include <concepts>
 #include <stdexcept>
 #define CHECK_ROUNDING 1
 // #undef CHECK_ROUNDING
@@ -46,8 +47,6 @@ namespace fs
 #endif
 static_assert(4 == sizeof(_Float32), "Could not determine 32-bit float type");
 static_assert(8 == sizeof(_Float64), "Could not determine 64-bit float type");
-// Type used for math operations
-using MathSize = _Float64;
 // Type used for math operations
 using MathSize = _Float64;
 using MathConstantSize = _Float64;

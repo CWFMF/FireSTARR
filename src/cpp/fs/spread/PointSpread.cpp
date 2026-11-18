@@ -91,7 +91,9 @@ DurationSize do_spread(
         {
           for (const ROSOffset& r : offsets_after_duration)
           {
-            const XYPos pt_new{XPos{r.offset().x + pt.x.value}, YPos{r.offset().y + pt.y.value}};
+            const XYPos pt_new{
+              XPos{r.offset().x + as_value(pt.x)}, YPos{r.offset().y + as_value(pt.y)}
+            };
             cell_pts_cur.insert(
               pt,
               SpreadData{new_time, r.intensity(), r.ros(), r.raz(), Direction{Degrees{dir}}},

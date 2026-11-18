@@ -90,17 +90,17 @@ void showSpread(const SpreadInfo& spread, const FwiWeather w, const FuelType* fu
     line_data << " " << value;
     line_header << std::format(" {:>{}s}", col, value.size());
   };
-  add_value("PREC", std::format("{:5.2f}", w.prec().value));
-  add_value("TEMP", std::format("{:5.1f}", w.temperature().value));
-  add_value("RH", std::format("{:3g}", w.rh().value));
-  add_value("WS", std::format("{:5.1f}", w.wind().speed.value));
-  add_value("WD", std::format("{:3g}", w.wind().direction.value));
-  add_value("FFMC", std::format("{:5.1f}", w.ffmc().value));
-  add_value("DMC", std::format("{:5.1f}", w.dmc().value));
-  add_value("DC", std::format("{:5g}", w.dc().value));
-  add_value("ISI", std::format("{:5.1f}", w.isi().value));
-  add_value("BUI", std::format("{:5.1f}", w.bui().value));
-  add_value("FWI", std::format("{:5.1f}", w.fwi().value));
+  add_value("PREC", std::format("{:5.2f}", as_value(w.prec())));
+  add_value("TEMP", std::format("{:5.1f}", as_value(w.temperature())));
+  add_value("RH", std::format("{:3g}", as_value(w.rh())));
+  add_value("WS", std::format("{:5.1f}", as_value(w.wind().speed)));
+  add_value("WD", std::format("{:3g}", as_value(w.wind().direction)));
+  add_value("FFMC", std::format("{:5.1f}", as_value(w.ffmc())));
+  add_value("DMC", std::format("{:5.1f}", as_value(w.dmc())));
+  add_value("DC", std::format("{:5g}", as_value(w.dc())));
+  add_value("ISI", std::format("{:5.1f}", as_value(w.isi())));
+  add_value("BUI", std::format("{:5.1f}", as_value(w.bui())));
+  add_value("FWI", std::format("{:5.1f}", as_value(w.fwi())));
   add_value("GS", std::format("{:3d}", spread.percentSlope()));
   add_value("SAZ", std::format("{:3d}", spread.slopeAzimuth()));
   const auto simple_fuel = simplify_fuel_name(fuel->name());
@@ -132,7 +132,7 @@ string generate_test_name(
     slope,
     aspect,
     wind.direction.asDegrees(),
-    wind.speed.value
+    as_value(wind.speed)
   );
 };
 string run_test(
@@ -354,7 +354,7 @@ int test(Settings& settings)
       }
       else
       {
-        wind_directions.emplace_back(static_cast<int>(wind_direction.value));
+        wind_directions.emplace_back(static_cast<int>(as_value(wind_direction)));
       }
       auto wind_speeds = vector<int>();
       if (!settings.wind_speed.has_value())
@@ -366,7 +366,7 @@ int test(Settings& settings)
       }
       else
       {
-        wind_speeds.emplace_back(static_cast<int>(wind_speed.value));
+        wind_speeds.emplace_back(static_cast<int>(as_value(wind_speed)));
       }
       size_t values = 1;
       values *= fuel_names.size();
@@ -444,11 +444,11 @@ int test(Settings& settings)
         "Running tests with constant inputs for {:f} hours:\n\tFBP Fuel:\t\t{:s}\n\tFFMC:\t\t\t{:f}\n\tDMC:\t\t\t{:f}\n\tDC:\t\t\t{:f}\n\tWind Speed:\t\t{:f}\n\tWind Direction:\t\t{:f}\n\tSlope:\t\t\t{:d}\n\tAspect:\t\t\t{:d}\n",
         hours,
         fuel,
-        ffmc.value,
-        dmc.value,
-        dc.value,
-        wind_speed.value,
-        wind_direction.value,
+        as_value(ffmc),
+        as_value(dmc),
+        as_value(dc),
+        as_value(wind_speed),
+        as_value(wind_direction),
         slope,
         aspect
       );

@@ -650,8 +650,8 @@ FwiWeather Settings::get_weather() const
       Temperature::Zero(),
       RelativeHumidity::Zero(),
       Wind{
-        Speed{wind_speed.value_or(Speed::Invalid().value)},
-        Direction{Degrees{wind_direction.value_or(Direction::Invalid().value)}}
+        Speed{wind_speed.value_or(as_value(Speed::Invalid()))},
+        Direction{Degrees{wind_direction.value_or(as_value(Direction::Invalid()))}}
       },
       {apcp_prev}
     },

@@ -413,7 +413,9 @@ static FwiWeather make_wx(
   const int hour
 )
 {
-  return make_wx(Speed(wx_wind.wind().speed.value * wind_speed_adjustment(hour)), wx, ffmc, hour);
+  return make_wx(
+    Speed(as_value(wx_wind.wind().speed) * wind_speed_adjustment(hour)), wx, ffmc, hour
+  );
 }
 static FwiWeather make_wx(const FwiWeather& wx, const Ffmc& ffmc, const int hour)
 {
@@ -477,10 +479,10 @@ vector<FwiWeather> make_vector(map<Day, FwiWeather> data)
     const auto at_1100_high = ffmc_1100_high(ln_x, ln_x_sq);
     const auto at_1100_med = ffmc_1100_med(x);
     const auto at_1100_low = ffmc_1100_low(ln_x, ln_x_sq);
-    const auto for1200 = at_1200.value;
-    const auto for1100_high = at_1100_high.value;
-    const auto for1100_med = at_1100_med.value;
-    const auto for1100_low = at_1100_low.value;
+    const auto for1200 = as_value(at_1200);
+    const auto for1100_high = as_value(at_1100_high);
+    const auto for1100_med = as_value(at_1100_med);
+    const auto for1100_low = as_value(at_1100_low);
     const auto diff_high = abs(for1200 - for1100_high);
     const auto diff_med = abs(for1200 - for1100_med);
     const auto diff_low = abs(for1200 - for1100_low);
@@ -520,12 +522,12 @@ vector<FwiWeather> make_vector(map<Day, FwiWeather> data)
   {
     // use first day's weather for min date instead of all 0's
     const auto& wx = (day == min_date ? data.at(day + 1) : data.at(day));
-    const auto ffmc_at_0600 = r.at(time_index(day + 1, 6, min_date)).ffmc().value;
-    const auto ffmc_at_2000 = r.at(time_index(day, 20, min_date)).ffmc().value;
+    const auto ffmc_at_0600 = as_value(r.at(time_index(day + 1, 6, min_date)).ffmc());
+    const auto ffmc_at_2000 = as_value(r.at(time_index(day, 20, min_date)).ffmc());
     // need linear interpolation between 2000 and 0600
     const auto ffmc_slope = (ffmc_at_0600 - ffmc_at_2000) / 10.0;
-    const auto wind_at_0600 = r.at(time_index(day + 1, 6, min_date)).wind().speed.value;
-    const auto wind_at_2000 = r.at(time_index(day, 20, min_date)).wind().speed.value;
+    const auto wind_at_0600 = as_value(r.at(time_index(day + 1, 6, min_date)).wind().speed);
+    const auto wind_at_2000 = as_value(r.at(time_index(day, 20, min_date)).wind().speed);
     // need linear interpolation between 2000 and 0600
     const auto wind_slope = (wind_at_0600 - wind_at_2000) / 10.0;
     const auto add_wx = [&](const Day day_offset, const int hour, const int offset) {

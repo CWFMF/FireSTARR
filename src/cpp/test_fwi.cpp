@@ -89,22 +89,22 @@ int test_fwi_file(
     Precipitation prcp_{prcp};
     auto ffmc{fwireference::FFMCcalc(temp_, rhum_, wind_, prcp_, ffmc0)};
     auto ffmc_{fwiold::FFMCcalc(temp_, rhum_, wind_, prcp_, ffmc0_)};
-    logging::check_tolerance(EPSILON, ffmc.value, ffmc_.value, "ffmc");
+    logging::check_tolerance(EPSILON, as_value(ffmc), as_value(ffmc_), "ffmc");
     auto dmc{fwireference::DMCcalc(temp_, rhum_, prcp_, dmc0_, month_, latitude_)};
     auto dmc_{fwiold::DMCcalc(temp_, rhum_, prcp_, dmc0_, month, latitude)};
-    logging::check_tolerance(EPSILON, dmc.value, dmc_.value, "dmc");
+    logging::check_tolerance(EPSILON, as_value(dmc), as_value(dmc_), "dmc");
     auto dc{fwireference::DCcalc(temp_, prcp_, dc0_, month_, latitude_)};
     auto dc_{fwiold::DCcalc(temp_, prcp_, dc0_, month, latitude)};
-    logging::check_tolerance(EPSILON, dc.value, dc_.value, "dc");
+    logging::check_tolerance(EPSILON, as_value(dc), as_value(dc_), "dc");
     auto isi{fwireference::ISIcalc(wind_, ffmc)};
     auto isi_{fwiold::ISIcalc(wind_, ffmc_)};
-    logging::check_tolerance(EPSILON, isi.value, isi_.value, "isi");
+    logging::check_tolerance(EPSILON, as_value(isi), as_value(isi_), "isi");
     auto bui{fwireference::BUIcalc(dmc, dc)};
     auto bui_{fwiold::BUIcalc(dmc_, dc_)};
-    logging::check_tolerance(EPSILON, bui.value, bui_.value, "bui");
+    logging::check_tolerance(EPSILON, as_value(bui), as_value(bui_), "bui");
     auto fwi{fwireference::FWIcalc(isi, bui)};
     auto fwi_{fwiold::FWIcalc(isi_, bui_)};
-    logging::check_tolerance(EPSILON, fwi.value, fwi_.value, "fwi");
+    logging::check_tolerance(EPSILON, as_value(fwi), as_value(fwi_), "fwi");
     ffmc0 = ffmc;
     dmc0 = dmc;
     dc0 = dc;
@@ -113,23 +113,23 @@ int test_fwi_file(
     dc0_ = dc_;
     logging::verbose(
       "{:0.1f} {:0.1f} {:0.1f} {:0.1f} {:0.1f} {:0.1f}",
-      ffmc.value,
-      dmc.value,
-      dc.value,
-      isi.value,
-      bui.value,
-      fwi.value
+      as_value(ffmc),
+      as_value(dmc),
+      as_value(dc),
+      as_value(isi),
+      as_value(bui),
+      as_value(fwi)
     );
     if (nullptr != file_out)
     {
       outputFile << std::format(
         "{:0.1f} {:0.1f} {:0.1f} {:0.1f} {:0.1f} {:0.1f}",
-        ffmc.value,
-        dmc.value,
-        dc.value,
-        isi.value,
-        bui.value,
-        fwi.value
+        as_value(ffmc),
+        as_value(dmc),
+        as_value(dc),
+        as_value(isi),
+        as_value(bui),
+        as_value(fwi)
       ) << endl;
       // outputFile << ffmc << ' ' << dmc << ' ' << dc << ' ' << isi << ' ' << bui << ' ' << fwi <<
       // endl;

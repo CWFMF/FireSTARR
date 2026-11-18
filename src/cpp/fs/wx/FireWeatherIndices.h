@@ -63,7 +63,7 @@ struct Dmc : public StrictType<Dmc>
     const Precipitation prec,
     const Dmc dmc_previous,
     const int month,
-    const MathSize latitude = DEFAULT_LATITUDE.value
+    const MathSize latitude = as_value(DEFAULT_LATITUDE)
   ) noexcept;
 };
 /**
@@ -92,7 +92,7 @@ struct Dc : public StrictType<Dc>
     const Precipitation prec,
     const Dc dc_previous,
     const int month,
-    const MathSize latitude = DEFAULT_LATITUDE.value
+    const MathSize latitude = as_value(DEFAULT_LATITUDE)
   ) noexcept;
 };
 /**

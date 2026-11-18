@@ -64,17 +64,17 @@ struct StrictType
   constexpr StrictType(const T& rhs) noexcept = default;
   T& operator=(T&& rhs) noexcept = default;
   T& operator=(const T& rhs) noexcept = default;
-  constexpr auto operator==(const T& rhs) const { return value == rhs.value; }
-  constexpr auto operator<=>(const T& rhs) const { return value <=> rhs.value; }
+  constexpr auto operator==(const T& rhs) const { return value == as_value(rhs); }
+  constexpr auto operator<=>(const T& rhs) const { return value <=> as_value(rhs); }
   [[nodiscard]] constexpr ConcreteType operator+(const T& rhs) const noexcept
   {
     // HACK: avoid narrowing conversion warning
-    return ConcreteType{static_cast<ValueType>(value + rhs.value)};
+    return ConcreteType{static_cast<ValueType>(value + as_value(rhs))};
   }
   [[nodiscard]] constexpr ConcreteType operator-(const T& rhs) const noexcept
   {
     // HACK: avoid narrowing conversion warning
-    return ConcreteType{static_cast<ValueType>(value - rhs.value)};
+    return ConcreteType{static_cast<ValueType>(value - as_value(rhs))};
   }
   // NOTE: should dividing by same type remove units?
   [[nodiscard]] constexpr ConcreteType operator*(const ValueType& rhs) const noexcept
@@ -87,22 +87,22 @@ struct StrictType
   }
   constexpr T& operator+=(const T& rhs) noexcept
   {
-    value += rhs.value;
+    value += as_value(rhs);
     return *this;
   }
   constexpr T& operator-=(const T& rhs) noexcept
   {
-    value -= rhs.value;
+    value -= as_value(rhs);
     return *this;
   }
   constexpr T& operator*=(const T& rhs) noexcept
   {
-    value *= rhs.value;
+    value *= as_value(rhs);
     return *this;
   }
   constexpr T& operator/=(const T& rhs) noexcept
   {
-    value /= rhs.value;
+    value /= as_value(rhs);
     return *this;
   }
   operator string() noexcept { return string(value); }
@@ -113,14 +113,14 @@ template <class ConcreteType, units::UnitType Units, class ValueType, int Invali
   const StrictType<ConcreteType, Units, ValueType, InvalidValue>& lhs
 ) noexcept
 {
-  return ConcreteType{rhs * lhs.value};
+  return ConcreteType{rhs * as_value(lhs)};
 }
 template <class ConcreteType, units::UnitType Units, class ValueType, int InvalidValue>
 [[nodiscard]] constexpr ConcreteType abs(
   const StrictType<ConcreteType, Units, ValueType, InvalidValue>& lhs
 ) noexcept
 {
-  return ConcreteType{abs(lhs.value)};
+  return ConcreteType{abs(as_value(lhs))};
 }
 // NOTE: dividing non-units by units makes no sense?
 // template <class ConcreteType, units::UnitType Units, class ValueType, int InvalidValue>
@@ -129,7 +129,7 @@ template <class ConcreteType, units::UnitType Units, class ValueType, int Invali
 //   const StrictType<ConcreteType, Units, ValueType, InvalidValue>& lhs
 // ) noexcept
 // {
-//   return ConcreteType{rhs / lhs.value};
+//   return ConcreteType{rhs / as_value(lhs)};
 // }
 template <class ConcreteType, fs::units::UnitType Units, class ValueType, int InvalidValue>
 std::ostream& operator<<(
@@ -137,7 +137,7 @@ std::ostream& operator<<(
   const fs::StrictType<ConcreteType, Units, ValueType, InvalidValue>& v
 )
 {
-  os << v.value;
+  os << as_value(v);
   return os;
 }
 }
