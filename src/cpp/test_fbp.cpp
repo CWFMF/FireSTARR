@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "fs/stdafx.h"
-#include <cfenv>
 #include <future>
 #include <mutex>
 #include "fs/data/RangeIterator.h"
