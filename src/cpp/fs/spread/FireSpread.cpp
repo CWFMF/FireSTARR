@@ -47,28 +47,28 @@ int calculate_nd_for_point(const Day day, const int elevation, const Point& poin
 {
   return static_cast<int>(abs(day - calculate_nd_ref_for_point(elevation, point)));
 }
-RoundedValue calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept
+FBPValue calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept
 {
   const auto v = round_value(v_);
   return 0.208 * exp(-0.05039 * v);
 }
-RoundedValue calculate_standard_wsv(const LookupValue& v_) noexcept
+FBPValue calculate_standard_wsv(const LookupValue& v_) noexcept
 {
   const auto v = round_value(v_);
   return v < 40.0 ? exp(0.05039 * v) : 12.0 * (1.0 - exp(-0.0818 * (v - 28)));
 }
-RoundedValue SpreadInfo::initial(
+FBPValue SpreadInfo::initial(
   SpreadInfo& spread,
   const FwiWeather& weather,
-  RoundedValue& ffmc_effect,
-  RoundedValue& wsv,
-  RoundedValue& rso,
+  FBPValue& ffmc_effect,
+  FBPValue& wsv,
+  FBPValue& rso,
   const FuelType* const fuel,
   bool has_no_slope,
-  RoundedValue heading_sin,
-  RoundedValue heading_cos,
-  RoundedValue bui_eff,
-  RoundedValue min_ros,
+  FBPValue heading_sin,
+  FBPValue heading_cos,
+  FBPValue bui_eff,
+  FBPValue min_ros,
   RoundedIntensity critical_surface_intensity
 )
 {
@@ -190,12 +190,12 @@ static SpreadKey make_key(const SlopeSize slope, const AspectSize aspect, const 
 [[nodiscard]] bool SpreadInfo::isNotSpreading() const { return isInvalid(); }
 [[nodiscard]] int SpreadInfo::nd() const { return nd_; }
 [[nodiscard]] DurationSize SpreadInfo::time() const { return time_; }
-[[nodiscard]] RoundedValue SpreadInfo::lengthToBreadth() const { return l_b_; }
+[[nodiscard]] FBPValue SpreadInfo::lengthToBreadth() const { return l_b_; }
 [[nodiscard]] SlopeSize SpreadInfo::percentSlope() const { return Cell::slope(key_); }
 [[nodiscard]] AspectSize SpreadInfo::slopeAzimuth() const { return Cell::aspect(key_); }
-[[nodiscard]] RoundedValue SpreadInfo::headRos() const { return head_ros_; }
+[[nodiscard]] FBPValue SpreadInfo::headRos() const { return head_ros_; }
 [[nodiscard]] Direction SpreadInfo::headDirection() const { return raz_; }
-[[nodiscard]] RoundedValue SpreadInfo::slopeFactor() const
+[[nodiscard]] FBPValue SpreadInfo::slopeFactor() const
 {
   // HACK: slope can be infinite, but anything > 60 is the same as 60
   // we already capped the percent slope when making the Cells
@@ -254,15 +254,15 @@ SpreadInfo::SpreadInfo(
       weather
     )
 { }
-RoundedValue SpreadInfo::crownFractionBurned() const { return cfb_; }
-RoundedValue SpreadInfo::crownFuelConsumption() const { return cfc_; }
+FBPValue SpreadInfo::crownFractionBurned() const { return cfb_; }
+FBPValue SpreadInfo::crownFuelConsumption() const { return cfc_; }
 char SpreadInfo::fireDescription() const { return cfb_ >= 0.9 ? 'C' : (cfb_ < 0.1 ? 'S' : 'I'); }
-RoundedValue SpreadInfo::surfaceFuelConsumption() const { return sfc_; }
-RoundedValue SpreadInfo::totalFuelConsumption() const { return tfc_; }
+FBPValue SpreadInfo::surfaceFuelConsumption() const { return sfc_; }
+FBPValue SpreadInfo::totalFuelConsumption() const { return tfc_; }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
-  const RoundedValue min_ros,
-  const RoundedValue cell_size,
+  const FBPValue min_ros,
+  const FBPValue cell_size,
   const SlopeSize slope,
   const AspectSize aspect,
   const char* fuel_name,
@@ -273,8 +273,8 @@ SpreadInfo::SpreadInfo(
 { }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
-  const RoundedValue min_ros,
-  const RoundedValue cell_size,
+  const FBPValue min_ros,
+  const FBPValue cell_size,
   const SpreadKey& key,
   const int nd,
   const FwiWeather weather
@@ -283,8 +283,8 @@ SpreadInfo::SpreadInfo(
 { }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
-  const RoundedValue min_ros,
-  const RoundedValue cell_size,
+  const FBPValue min_ros,
+  const FBPValue cell_size,
   const SpreadKey& key,
   const int nd,
   const FwiWeather weather,
@@ -304,8 +304,8 @@ SpreadInfo::SpreadInfo(
 SpreadInfo::SpreadInfo(
   const FuelType* fuel_original,
   const DurationSize time,
-  const RoundedValue min_ros,
-  const RoundedValue cell_size,
+  const FBPValue min_ros,
+  const FBPValue cell_size,
   const SpreadKey& key,
   const int nd,
   const FwiWeather weather,
@@ -337,9 +337,9 @@ SpreadInfo::SpreadInfo(
   const auto bui_eff = fuel->buiEffect(_bui);
   // FIX: gets calculated when not necessary sometimes
   const auto critical_surface_intensity = fuel->criticalSurfaceIntensity(*this);
-  RoundedValue ffmc_effect;
-  RoundedValue wsv;
-  RoundedValue rso;
+  FBPValue ffmc_effect;
+  FBPValue wsv;
+  FBPValue rso;
   if (min_ros > SpreadInfo::initial(
         *this,
         weather_daily,
@@ -398,7 +398,7 @@ SpreadInfo::SpreadInfo(
     // wouldn't be crowning if ros is 0 so that's why this is in an else
     cfb_ = fuel->crownFractionBurned(head_ros_, rso);
     cfc_ = fuel->crownConsumption(cfb_);
-    tfc_ = RoundedValue{sfc_ + cfc_};
+    tfc_ = FBPValue{sfc_ + cfc_};
   }
   // max intensity should always be at the head
   max_intensity_ = fire_intensity(tfc_, head_ros_);
