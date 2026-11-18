@@ -15,7 +15,7 @@ namespace fuel
 class ROSOffset
 {
   IntensitySize intensity_{};
-  RoundedValue ros_{};
+  FBPValue ros_{};
   Direction raz_{};
   Offset offset_{};
 
@@ -23,14 +23,14 @@ public:
   ROSOffset() noexcept = default;
   ROSOffset(
     const IntensitySize intensity,
-    const RoundedValue ros,
+    const FBPValue ros,
     const Direction raz,
     const Offset offset
   ) noexcept
     // HACK: round ros again
     : intensity_{intensity}, ros_{as_value(ros)},
-      raz_{Direction{Radians{RoundedValue{raz.asRadians()}}}},
-      offset_{as_value(RoundedValue{offset.x}), as_value(RoundedValue{offset.y})}
+      raz_{Direction{Radians{FBPValue{raz.asRadians()}}}},
+      offset_{as_value(FBPValue{offset.x}), as_value(FBPValue{offset.y})}
   { }
   ROSOffset(const ROSOffset& rhs) noexcept = default;
   ROSOffset(ROSOffset&& rhs) noexcept = default;
@@ -38,7 +38,7 @@ public:
   ROSOffset& operator=(ROSOffset&& rhs) noexcept = default;
   auto operator<=>(const ROSOffset& rhs) const noexcept = default;
   IntensitySize intensity() const noexcept { return intensity_; }
-  const RoundedValue& ros() const noexcept { return ros_; }
+  const FBPValue& ros() const noexcept { return ros_; }
   const Direction& raz() const noexcept { return raz_; }
   const Offset& offset() const noexcept { return offset_; }
 };
@@ -52,8 +52,8 @@ static constexpr MathConstantSize INVALID_ROS = -1.0;
 static const RoundedIntensity INVALID_INTENSITY{-1.0};
 int calculate_nd_ref_for_point(const int elevation, const Point& point) noexcept;
 int calculate_nd_for_point(const Day day, const int elevation, const Point& point);
-RoundedValue calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept;
-RoundedValue calculate_standard_wsv(const LookupValue& v_) noexcept;
+FBPValue calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept;
+FBPValue calculate_standard_wsv(const LookupValue& v_) noexcept;
 /**
  * \brief Possible results of an attempt to spread.
  */
@@ -116,7 +116,7 @@ public:
    * \brief Length to breadth ratio used for spread
    * \return Length to breadth ratio used for spread
    */
-  [[nodiscard]] RoundedValue lengthToBreadth() const;
+  [[nodiscard]] FBPValue lengthToBreadth() const;
   /**
    * \brief Slope used for spread (%)
    * \return Slope used for spread (%)
@@ -131,7 +131,7 @@ public:
    * \brief Head fire rate of spread (m/min)
    * \return Head fire rate of spread (m/min)
    */
-  [[nodiscard]] RoundedValue headRos() const;
+  [[nodiscard]] FBPValue headRos() const;
   /**
    * \brief Head fire spread direction
    * \return Head fire spread direction
@@ -141,7 +141,7 @@ public:
    * \brief Slope factor calculated from percent slope
    * \return Slope factor calculated from percent slope
    */
-  [[nodiscard]] RoundedValue slopeFactor() const;
+  [[nodiscard]] FBPValue slopeFactor() const;
   /**
    * \brief Calculate foliar moisture
    * \return Calculated foliar moisture
@@ -179,19 +179,19 @@ public:
     const char* fuel_name,
     const FwiWeather weather
   );
-  RoundedValue crownFractionBurned() const;
-  RoundedValue crownFuelConsumption() const;
+  FBPValue crownFractionBurned() const;
+  FBPValue crownFuelConsumption() const;
   char fireDescription() const;
-  RoundedValue surfaceFuelConsumption() const;
-  RoundedValue totalFuelConsumption() const;
+  FBPValue surfaceFuelConsumption() const;
+  FBPValue totalFuelConsumption() const;
 
 private:
   // HACK: have private constructor so is_spreading() can short-circuit the calculation,
   // but nothing else can get a partially constructed SpreadInfo object
   SpreadInfo(
     DurationSize time,
-    RoundedValue min_ros,
-    RoundedValue cell_size,
+    FBPValue min_ros,
+    FBPValue cell_size,
     const SlopeSize slope,
     const AspectSize aspect,
     const char* fuel_name,
@@ -200,8 +200,8 @@ private:
   );
   SpreadInfo(
     DurationSize time,
-    RoundedValue min_ros,
-    RoundedValue cell_size,
+    FBPValue min_ros,
+    FBPValue cell_size,
     const SpreadKey& key,
     int nd,
     const FwiWeather weather
@@ -210,8 +210,8 @@ private:
 public:
   SpreadInfo(
     DurationSize time,
-    RoundedValue min_ros,
-    RoundedValue cell_size,
+    FBPValue min_ros,
+    FBPValue cell_size,
     const SpreadKey& key,
     int nd,
     const FwiWeather weather,
@@ -223,8 +223,8 @@ public:
   SpreadInfo(
     const FuelType* fuel_original,
     DurationSize time,
-    RoundedValue min_ros,
-    RoundedValue cell_size,
+    FBPValue min_ros,
+    FBPValue cell_size,
     const SpreadKey& key,
     int nd,
     const FwiWeather weather,
@@ -236,18 +236,18 @@ private:
    * Do initial spread calculations
    * \return Initial head ros calculation (-1 for none)
    */
-  static RoundedValue initial(
+  static FBPValue initial(
     SpreadInfo& spread,
     const FwiWeather& weather,
-    RoundedValue& ffmc_effect,
-    RoundedValue& wsv,
-    RoundedValue& rso,
+    FBPValue& ffmc_effect,
+    FBPValue& wsv,
+    FBPValue& rso,
     const FuelType* const fuel,
     bool has_no_slope,
-    RoundedValue heading_sin,
-    RoundedValue heading_cos,
-    RoundedValue bui_eff,
-    RoundedValue min_ros,
+    FBPValue heading_sin,
+    FBPValue heading_cos,
+    FBPValue bui_eff,
+    FBPValue min_ros,
     RoundedIntensity critical_surface_intensity
   );
   /**
@@ -274,15 +274,15 @@ private:
    * \brief Time that spread is occurring
    */
   DurationSize time_{-1};
-  RoundedValue l_b_{-1};
+  FBPValue l_b_{-1};
   /**
    * \brief Head fire rate of spread (m/min)
    */
-  RoundedValue head_ros_{INVALID_ROS};
-  RoundedValue cfb_{-1};
-  RoundedValue cfc_{-1};
-  RoundedValue tfc_{-1};
-  RoundedValue sfc_{-1};
+  FBPValue head_ros_{INVALID_ROS};
+  FBPValue cfb_{-1};
+  FBPValue cfc_{-1};
+  FBPValue tfc_{-1};
+  FBPValue sfc_{-1};
   bool is_crown_{false};
 
 public:

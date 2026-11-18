@@ -278,6 +278,7 @@ public:
   PreciseValue(const MathSize& v) noexcept : PreciseValue(v, true) { }
   constexpr operator double() const noexcept { return value; }
 };
+using FBPValue = PreciseValue<RoundedDigits, RoundedMax>;
 // using RoundedValue = PreciseValue<RoundedDigits, RoundedMax>;
 // // HACK: don't want RoundedIntensity to be convertible to PreciseValue
 // struct RoundedIntensity : private PreciseValue<IntensityDigits, IntensityMax>
