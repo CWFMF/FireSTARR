@@ -60,15 +60,15 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
     const auto ros_cell = ros / cell_size_;
     const auto intensity = static_cast<IntensitySize>(fire_intensity(tfc, ros));
     // spreading, so figure out offset from current point
-    offsets.push_back(ROSOffset{
+    offsets.emplace_back(
       intensity,
       ros,
-      direction.asDegrees(),
+      Direction{direction},
       Offset{
-        static_cast<XYSize>(ros_cell * sin(direction)),
-        static_cast<XYSize>(ros_cell * cos(direction))
+        static_cast<XYSize>(as_value(RoundedValue{ros_cell * sin(direction)})),
+        static_cast<XYSize>(as_value(RoundedValue{ros_cell * cos(direction)}))
       }
-    });
+    );
     return true;
   };
   // if not over spread threshold then don't spread
@@ -166,15 +166,15 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
     const auto ros_cell = ros / cell_size_;
     const auto intensity = static_cast<IntensitySize>(fire_intensity(tfc, ros));
     // spreading, so figure out offset from current point
-    offsets.push_back(ROSOffset{
+    offsets.emplace_back(
       intensity,
       ros,
       Direction{direction},
       Offset{
-        static_cast<XYSize>(ros_cell * sin(direction)),
-        static_cast<XYSize>(ros_cell * cos(direction))
+        static_cast<XYSize>(as_value(RoundedValue{ros_cell * sin(direction)})),
+        static_cast<XYSize>(as_value(RoundedValue{ros_cell * cos(direction)}))
       }
-    });
+    );
 #ifdef DEBUG_POINTS
     const auto s1 = offsets.size();
     logging::check_equal(s0 + 1, s1, "offsets.size()");

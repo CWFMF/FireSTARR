@@ -166,7 +166,7 @@ auto compare_spread(
     cout << std::format(
       " ({:d} kW/m; {:0.100g} m/min @{:03d} == ({:0.100g}, {:0.100g}))\n",
       intensity,
-      ros,
+      as_value(ros),
       direction.asDegreesSize(),
       offset.x * CELL_SIZE,
       offset.y * CELL_SIZE

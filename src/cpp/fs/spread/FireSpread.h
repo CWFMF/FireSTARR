@@ -15,7 +15,7 @@ namespace fuel
 class ROSOffset
 {
   IntensitySize intensity_{};
-  ROSSize ros_{};
+  RoundedValue ros_{};
   Direction raz_{};
   Offset offset_{};
 
@@ -23,7 +23,7 @@ public:
   ROSOffset() noexcept = default;
   ROSOffset(
     const IntensitySize intensity,
-    const ROSSize ros,
+    const RoundedValue ros,
     const Direction raz,
     const Offset offset
   ) noexcept
@@ -37,7 +37,7 @@ public:
   ROSOffset& operator=(ROSOffset&& rhs) noexcept = default;
   auto operator<=>(const ROSOffset& rhs) const noexcept = default;
   IntensitySize intensity() const noexcept { return intensity_; }
-  const ROSSize& ros() const noexcept { return ros_; }
+  const RoundedValue& ros() const noexcept { return ros_; }
   const Direction& raz() const noexcept { return raz_; }
   const Offset& offset() const noexcept { return offset_; }
 };
