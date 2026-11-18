@@ -4,6 +4,8 @@
 #include "../spread/FireSpread.h"
 #include "../unstable.h"
 #include "../wx/FireWeatherIndices.h"
+#include "Duff.h"
+#include "Survival.h"
 #ifdef DEBUG_FUEL_VARIABLE
 #include "../log/Log.h"
 #endif
@@ -60,6 +62,262 @@ MathSize calculate_length_to_breadth_grass(const LookupValue& ws_) noexcept
   const auto ws = round_value(ws_);
   return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
 }
+FuelNonMixed::FuelNonMixed(
+  const FuelCodeSize& code,
+  const char* name,
+  const bool can_crown,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& inorganic_percent,
+  const MathConstantSize& duff_depth,
+  const Duff* duff_ffmc,
+  const Duff* duff_dmc
+)
+  : StandardFuel(
+      code,
+      name,
+      can_crown,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      cbh,
+      cfl,
+      bulk_density,
+      inorganic_percent,
+      duff_depth,
+      duff_ffmc,
+      duff_dmc
+    )
+{ }
+FuelNonMixed::FuelNonMixed(
+  const FuelCodeSize& code,
+  const char* name,
+  const bool can_crown,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& inorganic_percent,
+  const MathConstantSize& duff_depth,
+  const Duff* duff
+)
+  : FuelNonMixed(
+      code,
+      name,
+      can_crown,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      cbh,
+      cfl,
+      bulk_density,
+      inorganic_percent,
+      duff_depth,
+      duff,
+      duff
+    )
+{ }
+[[nodiscard]] MathSize FuelNonMixed::calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
+  const noexcept
+{
+  return this->limitIsf(1.0, calculateRos(spread.nd(), spread.weather, isi) * spread.slopeFactor());
+}
+MathSize FuelNonMixed::calculateRos(const int, const FwiWeather&, const RoundedValue& isi)
+  const noexcept
+{
+  return this->rosBasic(isi);
+}
+FuelConifer::FuelConifer(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& inorganic_percent,
+  const MathConstantSize& duff_depth,
+  const Duff* duff_ffmc,
+  const Duff* duff_dmc
+)
+  : FuelNonMixed(
+      code,
+      name,
+      true,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      cbh,
+      cfl,
+      bulk_density,
+      inorganic_percent,
+      duff_depth,
+      duff_ffmc,
+      duff_dmc
+    )
+{ }
+FuelConifer::FuelConifer(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& inorganic_percent,
+  const MathConstantSize& duff_depth,
+  const Duff* duff
+)
+  : FuelConifer(
+      code,
+      name,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      cbh,
+      cfl,
+      bulk_density,
+      inorganic_percent,
+      duff_depth,
+      duff,
+      duff
+    )
+{ }
+FuelJackpine::FuelJackpine(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& duff_depth,
+  const Duff* duff_ffmc,
+  const Duff* duff_dmc
+)
+  : FuelConifer(
+      code,
+      name,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      cbh,
+      cfl,
+      bulk_density,
+      15,
+      duff_depth,
+      duff_ffmc,
+      duff_dmc
+    )
+{ }
+FuelJackpine::FuelJackpine(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& duff_depth,
+  const Duff* duff
+)
+  : FuelJackpine(code, name, log_q, a, b, c, bui0, cbh, cfl, bulk_density, duff_depth, duff, duff)
+{ }
+[[nodiscard]] MathSize FuelJackpine::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+{
+  return calculate_surface_fuel_consumption_jackpine(spread.weather.bui().value);
+}
+FuelPine::FuelPine(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& duff_depth,
+  const Duff* duff_ffmc,
+  const Duff* duff_dmc
+)
+  : FuelConifer(
+      code,
+      name,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      cbh,
+      cfl,
+      bulk_density,
+      15,
+      duff_depth,
+      duff_ffmc,
+      duff_dmc
+    )
+{ }
+FuelPine::FuelPine(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& cbh,
+  const MathConstantSize& cfl,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& duff_depth,
+  const Duff* duff
+)
+  : FuelPine(code, name, log_q, a, b, c, bui0, cbh, cfl, bulk_density, duff_depth, duff, duff)
+{ }
+[[nodiscard]] MathSize FuelPine::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+{
+  return calculate_surface_fuel_consumption_pine(spread.weather.bui().value);
+}
+FuelD1::FuelD1(const FuelCodeSize& code) noexcept
+  : FuelNonMixed(code, "D-1", false, LOG_0_90, 30, 232, 160, 32, 0, 0, 61, 59, 24, &duff::Peat)
+{ }
+[[nodiscard]] MathSize FuelD1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+{
+  return calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
+}
 MathSize FuelD1::isfD1(
   const SpreadInfo& spread,
   const RoundedValue& ros_multiplier,
@@ -71,14 +329,228 @@ MathSize FuelD1::isfD1(
     spread.slopeFactor() * (ros_multiplier * a()) * pow(1.0 - exp(negB() * isi), c())
   );
 }
+FuelMixed::FuelMixed(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& ros_multiplier,
+  const MathConstantSize& percent_mixed,
+  const MathConstantSize& bulk_density,
+  const MathConstantSize& inorganic_percent,
+  const MathConstantSize& duff_depth
+)
+  : StandardFuel(
+      code,
+      name,
+      true,
+      log_q,
+      a,
+      b,
+      c,
+      bui0,
+      6,
+      80,
+      bulk_density,
+      inorganic_percent,
+      duff_depth,
+      &duff::Peat,
+      &duff::Peat
+    ),
+    ros_multiplier_(ros_multiplier), percent_mixed_(percent_mixed)
+{ }
+[[nodiscard]] MathSize FuelMixed::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+{
+  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
+}
+[[nodiscard]] MathSize FuelMixed::crownConsumption(const RoundedValue& cfb) const noexcept
+{
+  return ratioConifer() * StandardFuel::crownConsumption(cfb);
+}
+[[nodiscard]] MathSize FuelMixed::calculateRos(
+  const int,
+  const FwiWeather&,
+  const RoundedValue& isi
+) const noexcept
+{
+  static const FuelD1 F{14};
+  return ratioConifer() * this->rosBasic(isi)
+       + rosMultiplier() * ratioDeciduous() * F.rosBasic(isi);
+}
+[[nodiscard]] MathSize FuelMixed::calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
+  const noexcept
+{
+  return ratioConifer() * this->limitIsf(1.0, spread.slopeFactor() * this->rosBasic(isi))
+       + ratioDeciduous() * isfD1(spread, isi);
+}
+[[nodiscard]] MathSize FuelMixed::percentMixed() const { return percent_mixed_; }
+[[nodiscard]] MathSize FuelMixed::ratioConifer() const { return percent_mixed_ / 100.0; }
+[[nodiscard]] MathSize FuelMixed::ratioDeciduous() const { return 1.0 - (percent_mixed_ / 100.0); }
+[[nodiscard]] MathSize FuelMixed::rosMultiplier() const { return ros_multiplier_ / 10.0; }
+[[nodiscard]] MathSize FuelMixed::isfD1(const SpreadInfo& spread, const RoundedValue& isi)
+  const noexcept
+{
+  static const FuelD1 F{14};
+  return F.isfD1(spread, rosMultiplier(), isi);
+}
+FuelMixedDead::FuelMixedDead(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& ros_multiplier,
+  const MathConstantSize& percent_dead_fir
+)
+  : FuelMixed(code, name, log_q, a, b, c, bui0, ros_multiplier, percent_dead_fir, 61, 15, 75)
+{ }
+FuelMixedWood::FuelMixedWood(
+  const FuelCodeSize& code,
+  const char* name,
+  const MathConstantSize& ros_multiplier,
+  const MathConstantSize& percent_mixed
+)
+  : FuelMixed(code, name, LOG_0_80, 110, 282, 150, 50, ros_multiplier, percent_mixed, 108, 25, 50)
+{ }
+[[nodiscard]] MathSize FuelMixedWood::surfaceFuelConsumption(const SpreadInfo& spread
+) const noexcept
+{
+  return this->ratioConifer() * FuelMixed::surfaceFuelConsumption(spread)
+       + this->ratioDeciduous() * calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
+}
+FuelGrass::FuelGrass(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c
+)
+  // HACK: grass assumes no duff (total duff depth == ffmc depth => dmc depth is 0)
+  : StandardFuel(
+      code,
+      name,
+      false,
+      log_q,
+      a,
+      b,
+      c,
+      1,
+      0,
+      0,
+      0,
+      0,
+      static_cast<int>(fs::survival::DUFF_FFMC_DEPTH * 10.0),
+      &duff::PeatMuck,
+      &duff::PeatMuck
+    )
+{ }
+[[nodiscard]] MathSize FuelGrass::surfaceFuelConsumption(const SpreadInfo&) const noexcept
+{
+  return DEFAULT_GRASS_FUEL_LOAD;
+}
+[[nodiscard]] MathSize FuelGrass::grass_curing(const int nd, const FwiWeather& wx) const
+{
+  // HACK: resolve once and fail if not set already
+  static const auto& settings = fs::settings::instance();
+  if (settings.static_curing.has_value())
+  {
+    return settings.static_curing.value();
+  }
+  const auto is_drought = wx.dc().value > 500;
+  return is_drought ? 100 : calculate_grass_curing(nd);
+}
+[[nodiscard]] MathSize FuelGrass::baseMultiplier(const int nd, const FwiWeather& wx) const noexcept
+{
+  return calculate_base_multiplier_curing(grass_curing(nd, wx));
+}
+[[nodiscard]] MathSize FuelGrass::calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
+  const noexcept
+{
+  const auto mu = baseMultiplier(spread.nd(), spread.weather);
+  // prevent divide by 0
+  const auto mu_not_zero = max(static_cast<MathSize>(0.001), mu);
+  return this->limitIsf(mu_not_zero, calculateRos(mu, isi) * spread.slopeFactor());
+}
+[[nodiscard]] MathSize FuelGrass::calculateRos(
+  const int nd,
+  const FwiWeather& wx,
+  const RoundedValue& isi
+) const noexcept
+{
+  return calculateRos(baseMultiplier(nd, wx), isi);
+}
+[[nodiscard]] MathSize FuelGrass::lengthToBreadth(const RoundedValue& ws) const noexcept
+{
+  return calculate_length_to_breadth_grass(as_value(ws));
+}
+[[nodiscard]] MathSize FuelGrass::calculateRos(
+  const RoundedValue& multiplier,
+  const RoundedValue& isi
+) const noexcept
+{
+  return multiplier * this->rosBasic(isi);
+}
+FuelC1::FuelC1(const FuelCodeSize& code) noexcept
+  : FuelConifer(
+      code,
+      "C-1",
+      LOG_0_90,
+      90,
+      649,
+      450,
+      72,
+      2,
+      75,
+      45,
+      5,
+      34,
+      &duff::Reindeer,
+      &duff::Peat
+    )
+{ }
 MathSize FuelC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_c1(spread.weather.ffmc().value);
 }
+FuelC2::FuelC2(const FuelCodeSize& code) noexcept
+  : FuelConifer(code, "C-2", LOG_0_70, 110, 282, 150, 64, 3, 80, 34, 0, 100, &duff::SphagnumUpper)
+{ }
 MathSize FuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
 }
+FuelC3::FuelC3(const FuelCodeSize& code) noexcept
+  : FuelJackpine(
+      code,
+      "C-3",
+      LOG_0_75,
+      110,
+      444,
+      300,
+      62,
+      8,
+      115,
+      20,
+      65,
+      &duff::FeatherMoss,
+      &duff::PineSeney
+    )
+{ }
+FuelC4::FuelC4(const FuelCodeSize& code) noexcept
+  : FuelJackpine(code, "C-4", LOG_0_80, 110, 293, 150, 66, 4, 120, 31, 62, &duff::PineSeney)
+{ }
+FuelC5::FuelC5(const FuelCodeSize& code) noexcept
+  : FuelPine(code, "C-5", LOG_0_80, 30, 697, 400, 56, 18, 120, 93, 46, &duff::PineSeney)
+{ }
+FuelC6::FuelC6(const FuelCodeSize& code) noexcept
+  : FuelPine(code, "C-6", LOG_0_80, 30, 800, 300, 62, 7, 180, 50, 50, &duff::PineSeney)
+{ }
 MathSize FuelC6::finalRos(
   const SpreadInfo& spread,
   const RoundedValue& isi,
@@ -90,11 +562,17 @@ MathSize FuelC6::finalRos(
   // using max with 0 is the same as ensuring rsc > rss
   return rss + cfb * max(0.0, rsc - rss);
 }
+FuelC7::FuelC7(const FuelCodeSize& code) noexcept
+  : FuelConifer(code, "C-7", LOG_0_85, 45, 305, 200, 106, 10, 50, 20, 15, 50, &duff::SprucePine)
+{ }
 MathSize FuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_c7_ffmc(spread.weather.ffmc().value)
        + calculate_surface_fuel_consumption_c7_bui(spread.weather.bui().value);
 }
+FuelD2::FuelD2(const FuelCodeSize& code) noexcept
+  : FuelNonMixed(code, "D-2", false, LOG_0_90, 6, 232, 160, 32, 0, 0, 61, 59, 24, &duff::Peat)
+{ }
 MathSize FuelD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_d2(spread.weather.bui().value);
@@ -103,6 +581,228 @@ MathSize FuelD2::calculateRos(const int, const FwiWeather& wx, const RoundedValu
   const noexcept
 {
   return (wx.bui().value >= 80) ? rosBasic(isi) : 0.0;
+}
+FuelM1::FuelM1(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_conifer)
+  : FuelMixedWood(code, name, 10, percent_conifer)
+{ }
+FuelM2::FuelM2(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_conifer)
+  : FuelMixedWood(code, name, 2, percent_conifer)
+{ }
+FuelM3::FuelM3(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_dead_fir)
+  : FuelMixedDead(code, name, LOG_0_80, 120, 572, 140, 50, 10, percent_dead_fir)
+{ }
+FuelM4::FuelM4(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_dead_fir)
+  : FuelMixedDead(code, name, LOG_0_80, 100, 404, 148, 50, 2, percent_dead_fir)
+{ }
+FuelO1A::FuelO1A(const FuelCodeSize& code) noexcept
+  : FuelGrass(code, "O-1a", LOG_1_00, 190, 310, 140)
+{ }
+MathSize compare_by_season(const FuelVariable& fuel, const function<MathSize(const FuelType&)>& fct)
+{
+  // HACK: no way to tell which is which, so let's assume they have to be the same??
+  // HACK: use a function so that DEBUG section doesn't get out of sync
+  const auto for_spring = fct(*fuel.spring());
+#ifdef DEBUG_FUEL_VARIABLE
+  const auto for_summer = fct(*fuel.summer());
+  logging::check_fatal(for_spring != for_summer, "Expected spring and summer cfb to be identical");
+#endif
+  return for_spring;
+}
+FuelO1B::FuelO1B(const FuelCodeSize& code) noexcept
+  : FuelGrass(code, "O-1b", LOG_1_00, 250, 350, 170)
+{ }
+FuelSlash::FuelSlash(
+  const FuelCodeSize& code,
+  const char* name,
+  const LogValue log_q,
+  const MathConstantSize& a,
+  const MathConstantSize& b,
+  const MathConstantSize& c,
+  const MathConstantSize& bui0,
+  const MathConstantSize& ffc_a,
+  const MathConstantSize& ffc_b,
+  const MathConstantSize& wfc_a,
+  const MathConstantSize& wfc_b,
+  const MathConstantSize& bulk_density,
+  const Duff* duff_ffmc,
+  const Duff* duff_dmc
+)
+  : FuelConifer(code, name, log_q, a, b, c, bui0, 0, 0, bulk_density, 15, 74, duff_ffmc, duff_dmc),
+    ffc_a_(ffc_a), ffc_b_(ffc_b), wfc_a_(wfc_a), wfc_b_(wfc_b)
+{ }
+[[nodiscard]] MathSize FuelSlash::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+{
+  return ffcA() * (1.0 - exp(ffcB() * spread.weather.bui().value))
+       + wfcA() * (1.0 - exp(wfcB() * spread.weather.bui().value));
+}
+[[nodiscard]] MathSize FuelSlash::ffcA() const { return ffc_a_; }
+[[nodiscard]] MathSize FuelSlash::ffcB() const { return ffc_b_ / 10000.0; }
+[[nodiscard]] MathSize FuelSlash::wfcA() const { return wfc_a_; }
+[[nodiscard]] MathSize FuelSlash::wfcB() const { return wfc_b_ / 10000.0; }
+FuelS1::FuelS1(const FuelCodeSize& code) noexcept
+  : FuelSlash(
+      code,
+      "S-1",
+      LOG_0_75,
+      75,
+      297,
+      130,
+      38,
+      4,
+      -250,
+      4,
+      -340,
+      78,
+      &duff::FeatherMoss,
+      &duff::PineSeney
+    )
+{ }
+FuelS2::FuelS2(const FuelCodeSize& code) noexcept
+  : FuelSlash(
+      code,
+      "S-2",
+      LOG_0_75,
+      40,
+      438,
+      170,
+      63,
+      10,
+      -130,
+      6,
+      -600,
+      132,
+      &duff::FeatherMoss,
+      &duff::WhiteSpruce
+    )
+{ }
+FuelS3::FuelS3(const FuelCodeSize& code) noexcept
+  : FuelSlash(
+      code,
+      "S-3",
+      LOG_0_75,
+      55,
+      829,
+      320,
+      31,
+      12,
+      -166,
+      20,
+      -210,
+      100,
+      &duff::FeatherMoss,
+      &duff::PineSeney
+    )
+{ }
+FuelVariable::FuelVariable(
+  const FuelCodeSize& code,
+  const char* name,
+  const FuelType* const spring,
+  const FuelType* const summer
+)
+  : FuelType(code, name, spring->canCrown()), spring_(spring), summer_(summer)
+{
+  assert(spring->canCrown() == summer->canCrown());
+}
+[[nodiscard]] bool FuelVariable::isValid() const { return true; }
+[[nodiscard]] MathSize FuelVariable::buiEffect(const RoundedValue& bui) const
+{
+  return compare_by_season(*this, [bui](const FuelType& fuel) { return fuel.buiEffect(bui); });
+}
+[[nodiscard]] MathSize FuelVariable::grass_curing(const int nd, const FwiWeather& wx) const
+{
+  return compare_by_season(*this, [&](const FuelType& fuel) { return fuel.grass_curing(nd, wx); });
+}
+[[nodiscard]] MathSize FuelVariable::cbh() const
+{
+  return compare_by_season(*this, [](const FuelType& fuel) { return fuel.cbh(); });
+}
+[[nodiscard]] MathSize FuelVariable::cfl() const
+{
+  return compare_by_season(*this, [](const FuelType& fuel) { return fuel.cfl(); });
+}
+[[nodiscard]] MathSize FuelVariable::crownConsumption(const RoundedValue& cfb) const
+{
+  return compare_by_season(*this, [cfb](const FuelType& fuel) {
+    return fuel.crownConsumption(cfb);
+  });
+}
+[[nodiscard]] MathSize FuelVariable::calculateRos(const int, const FwiWeather&, const RoundedValue&)
+  const
+{
+  throw runtime_error("FuelVariable not resolved to specific type");
+}
+[[nodiscard]] MathSize FuelVariable::calculateIsf(const SpreadInfo&, const RoundedValue&) const
+{
+  throw runtime_error("FuelVariable not resolved to specific type");
+}
+[[nodiscard]] MathSize FuelVariable::surfaceFuelConsumption(const SpreadInfo&) const
+{
+  throw runtime_error("FuelVariable not resolved to specific type");
+}
+[[nodiscard]] MathSize FuelVariable::lengthToBreadth(const RoundedValue& ws) const
+{
+  return compare_by_season(*this, [ws](const FuelType& fuel) { return fuel.lengthToBreadth(ws); });
+}
+[[nodiscard]] MathSize FuelVariable::
+  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&) const
+{
+  throw runtime_error("FuelVariable not resolved to specific type");
+}
+[[nodiscard]] MathSize FuelVariable::criticalSurfaceIntensity(const SpreadInfo&) const
+{
+  throw runtime_error("FuelVariable not resolved to specific type");
+}
+[[nodiscard]] MathSize FuelVariable::crownFractionBurned(
+  const RoundedValue& rss,
+  const RoundedValue& rso
+) const noexcept
+{
+  return spring()->crownFractionBurned(rss, rso);
+}
+[[nodiscard]] MathSize FuelVariable::probabilityPeat(const RoundedValue& mc_fraction) const noexcept
+{
+  return spring()->probabilityPeat(mc_fraction);
+}
+[[nodiscard]] MathSize FuelVariable::survivalProbability(const FwiWeather& wx) const noexcept
+{
+  return spring()->survivalProbability(wx);
+}
+[[nodiscard]] const FuelType* FuelVariable::spring() const noexcept { return spring_; }
+[[nodiscard]] const FuelType* FuelVariable::summer() const noexcept { return summer_; }
+FuelD1D2::FuelD1D2(const FuelCodeSize& code, const FuelD1* d1, const FuelD2* d2) noexcept
+  : FuelVariable(code, "D-1/D-2", d1, d2)
+{ }
+FuelM1M2::FuelM1M2(
+  const FuelCodeSize& code,
+  const char* name,
+  const FuelM1* m1,
+  const FuelM2* m2,
+  // HACK: to ensure they match for now
+  const MathConstantSize&
+#ifndef NDEBUG
+    percent_conifer
+#endif
+)
+  : FuelVariable(code, name, m1, m2)
+{
+  assert(m1->percentMixed() == m2->percentMixed());
+  assert(m1->percentMixed() == percent_conifer);
+}
+FuelM3M4::FuelM3M4(
+  const FuelCodeSize& code,
+  const char* name,
+  const FuelM3* m3,
+  const FuelM4* m4,
+  // HACK: to ensure they match for now
+  const MathConstantSize&
+#ifndef NDEBUG
+    percent_dead_fir
+#endif
+)
+  : FuelVariable(code, name, m3, m4)
+{
+  assert(m3->percentMixed() == m4->percentMixed());
+  assert(m3->percentMixed() == percent_dead_fir);
 }
 // FIX: ensure actual code use in compilation doesn't matter and don't need to be speicified
 // manually in sequence
@@ -268,15 +968,4 @@ const array<const FuelType*, NUMBER_OF_FUELS> Fuels{
   &M3_M4_70,  &M3_M4_75, &M3_M4_80, &M3_M4_85,  &M3_M4_90, &M3_M4_95, &M1_00,    &M2_00,
   &M1_M2_00,  &M3_00,    &M4_00,    &M3_M4_100, &O1,
 };
-MathSize compare_by_season(const FuelVariable& fuel, const function<MathSize(const FuelType&)>& fct)
-{
-  // HACK: no way to tell which is which, so let's assume they have to be the same??
-  // HACK: use a function so that DEBUG section doesn't get out of sync
-  const auto for_spring = fct(*fuel.spring());
-#ifdef DEBUG_FUEL_VARIABLE
-  const auto for_summer = fct(*fuel.summer());
-  logging::check_fatal(for_spring != for_summer, "Expected spring and summer cfb to be identical");
-#endif
-  return for_spring;
-}
 }

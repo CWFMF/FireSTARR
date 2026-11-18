@@ -53,7 +53,7 @@ public:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr StandardFuel(
+  StandardFuel(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -69,23 +69,7 @@ public:
     const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
-  ) noexcept
-    : FuelBase(
-        code,
-        name,
-        can_crown,
-        // FIX: change these to actual numbers when we get to derived class
-        bulk_density / 1000.0,
-        inorganic_percent / 100.0,
-        duff_depth / 10.0,
-        duff_ffmc,
-        duff_dmc
-      ),
-      log_q_(log_q), a_(a), b_(b), c_(c), bui0_(bui0), cbh_(cbh), cfl_(cfl)
-  {
-    assert(-negB() < 1);
-    assert(StandardFuel::c() < 10 && StandardFuel::c() > 1);
-  }
+  ) noexcept;
   /**
    * \brief Constructor
    * \param code Code to identify fuel with
@@ -94,7 +78,7 @@ public:
    * \param log_q Log value of q [ST-X-3 table 7]
    * \param duff Type of duff near the surface and deeper underground
    */
-  constexpr StandardFuel(
+  StandardFuel(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -109,25 +93,7 @@ public:
     const MathConstantSize& inorganic_percent,
     const MathConstantSize& duff_depth,
     const Duff* duff
-  ) noexcept
-    : StandardFuel(
-        code,
-        name,
-        can_crown,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        inorganic_percent,
-        duff_depth,
-        duff,
-        duff
-      )
-  { }
+  ) noexcept;
   StandardFuel(StandardFuel&& rhs) noexcept = delete;
   StandardFuel(const StandardFuel& rhs) noexcept = delete;
   StandardFuel& operator=(StandardFuel&& rhs) noexcept = delete;
@@ -137,50 +103,32 @@ public:
    * \param isi Initial Spread Index
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
-  [[nodiscard]] MathSize rosBasic(const RoundedValue& isi) const noexcept
-  {
-    return a() * pow(1.0 - exp(negB() * isi), c());
-  }
+  [[nodiscard]] MathSize rosBasic(const RoundedValue& isi) const noexcept;
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    */
-  MathSize crownConsumption(const RoundedValue& cfb) const noexcept override { return cfl() * cfb; }
+  MathSize crownConsumption(const RoundedValue& cfb) const noexcept override;
   /**
    * \brief ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    * \param mu Multiplier
    * \param rsf Slope-adjusted zero wind rate of spread (RSF) [ST-X-3 eq 40]
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize limitIsf(const RoundedValue& mu, const RoundedValue& rsf) const noexcept
-  {
-    return (1.0 / negB())
-         * log(max(
-           SLOPE_LIMIT_ISI,
-           static_cast<MathSize>(
-             (rsf > static_cast<MathSize>(0.0)) ? (1.0 - pow((rsf / (mu * a())), (1.0 / c()))) : 1.0
-           )
-         ));
-  }
+  [[nodiscard]] MathSize limitIsf(const RoundedValue& mu, const RoundedValue& rsf) const noexcept;
   /**
    * \brief Critical Surface Fire Intensity (CSI) [ST-X-3 eq 56]
    * \param spread SpreadInfo to use in calculation
    * \return Critical Surface Fire Intensity (CSI) [ST-X-3 eq 56]
    */
-  [[nodiscard]] MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const noexcept override
-  {
-    return 0.001 * pow(cbh(), 1.5) * pow(460.0 + 25.9 * spread.foliarMoisture(), 1.5);
-  }
+  [[nodiscard]] MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const noexcept override;
   /**
    * \brief Length to Breadth ratio [ST-X-3 eq 79]
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 79]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override
-  {
-    return calculate_standard_length_to_breadth(as_value(ws));
-  }
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override;
   /**
    * \brief Final rate of spread (m/min)
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
@@ -191,19 +139,13 @@ public:
     const RoundedValue&,
     const RoundedValue&,
     const RoundedValue& rss
-  ) const noexcept override
-  {
-    return rss;
-  }
+  ) const noexcept override;
   /**
    * \brief BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    * \param bui Build-up Index
    * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    */
-  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const noexcept override
-  {
-    return (0 < bui) ? exp(50.0 * log_q_.value * ((1.0 / bui) - (1.0 / bui0()))) : 1.0;
-  }
+  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const noexcept override;
 
 protected:
   ~StandardFuel() override = default;
@@ -213,36 +155,32 @@ public:
    * \brief Average Build-up Index for the fuel type [ST-X-3 table 7]
    * \return Average Build-up Index for the fuel type [ST-X-3 table 7]
    */
-  [[nodiscard]] constexpr MathSize bui0() const noexcept { return bui0_; }
+  [[nodiscard]] MathSize bui0() const noexcept;
   /**
    * \brief Crown base height (m) [ST-X-3 table 8]
    * \return Crown base height (m) [ST-X-3 table 8]
    */
-  [[nodiscard]] MathSize cbh() const override { return cbh_; }
+  [[nodiscard]] MathSize cbh() const override;
   /**
    * \brief Crown fuel load (kg/m^2) [ST-X-3 table 8]
    * \return Crown fuel load (kg/m^2) [ST-X-3 table 8]
    */
-  [[nodiscard]] MathSize cfl() const override { return cfl_ / 100.0; }
+  [[nodiscard]] MathSize cfl() const override;
   /**
    * \brief Rate of spread parameter a [ST-X-3 table 6]
    * \return Rate of spread parameter a [ST-X-3 table 6]
    */
-  [[nodiscard]] constexpr MathSize a() const noexcept { return a_; }
+  [[nodiscard]] MathSize a() const noexcept;
   /**
    * \brief Negative of rate of spread parameter b [ST-X-3 table 6]
    * \return Negative of rate of spread parameter b [ST-X-3 table 6]
    */
-  [[nodiscard]] constexpr MathSize negB() const noexcept
-  {
-    // the only places this gets used it gets negated so just store it that way
-    return -b_ / 10000.0;
-  }
+  [[nodiscard]] MathSize negB() const noexcept;
   /**
    * \brief Rate of spread parameter c [ST-X-3 table 6]
    * \return Rate of spread parameter c [ST-X-3 table 6]
    */
-  [[nodiscard]] constexpr MathSize c() const noexcept { return c_ / 100.0; }
+  [[nodiscard]] MathSize c() const noexcept;
 
 public:
   /**
@@ -254,13 +192,8 @@ public:
   [[nodiscard]] static MathSize crownRateOfSpread(
     const RoundedValue& isi,
     const RoundedValue& fmc
-  ) noexcept
-  {
-    // HACK: convert back to double to instantiate as LookupValue
-    return calculate_standard_foliar_moisture_isi(isi)
-         * calculate_standard_foliar_moisture_fmc(fmc);
-  }
-  [[nodiscard]] constexpr MathSize logQ() const noexcept { return log_q_.value; }
+  ) noexcept;
+  [[nodiscard]] MathSize logQ() const noexcept;
 
 private:
   /**

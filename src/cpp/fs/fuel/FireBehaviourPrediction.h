@@ -3,11 +3,9 @@
 #define FS_FBP_H
 #include "../stdafx.h"
 #include "../sim/Settings.h"
-#include "Duff.h"
 #include "FuelType.h"
 #include "Greenup.h"
 #include "StandardFuel.h"
-#include "Survival.h"
 namespace fs::fuel
 {
 using fs::fuel::calculate_grass_curing;
@@ -56,7 +54,7 @@ public:
   FuelNonMixed& operator=(FuelNonMixed&& rhs) noexcept = delete;
 
 protected:
-  constexpr FuelNonMixed(
+  FuelNonMixed(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -72,26 +70,8 @@ protected:
     const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
-  )
-    : StandardFuel(
-        code,
-        name,
-        can_crown,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        inorganic_percent,
-        duff_depth,
-        duff_ffmc,
-        duff_dmc
-      )
-  { }
-  constexpr FuelNonMixed(
+  );
+  FuelNonMixed(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -106,25 +86,7 @@ protected:
     const MathConstantSize& inorganic_percent,
     const MathConstantSize& duff_depth,
     const Duff* duff
-  )
-    : FuelNonMixed(
-        code,
-        name,
-        can_crown,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        inorganic_percent,
-        duff_depth,
-        duff,
-        duff
-      )
-  { }
+  );
 
 public:
   /**
@@ -134,22 +96,14 @@ public:
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
   [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
-    const noexcept override
-  {
-    return this->limitIsf(
-      1.0, calculateRos(spread.nd(), spread.weather, isi) * spread.slopeFactor()
-    );
-  }
+    const noexcept override;
   /**
    * \brief Initial rate of spread (m/min) [ST-X-3 eq 26]
    * \param isi Initial Spread Index
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
   MathSize calculateRos(const int, const FwiWeather&, const RoundedValue& isi)
-    const noexcept override
-  {
-    return this->rosBasic(isi);
-  }
+    const noexcept override;
 };
 /**
  * \brief A conifer fuel type.
@@ -182,7 +136,7 @@ protected:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr FuelConifer(
+  FuelConifer(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -197,25 +151,7 @@ protected:
     const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
-  )
-    : FuelNonMixed(
-        code,
-        name,
-        true,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        inorganic_percent,
-        duff_depth,
-        duff_ffmc,
-        duff_dmc
-      )
-  { }
+  );
   /**
    * \brief A conifer FBP fuel type
    * \param code Code to identify fuel with
@@ -223,7 +159,7 @@ protected:
    * \param log_q Log value of q [ST-X-3 table 7]
    * \param duff Type of duff near the surface and deeper underground
    */
-  constexpr FuelConifer(
+  FuelConifer(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -237,24 +173,7 @@ protected:
     const MathConstantSize& inorganic_percent,
     const MathConstantSize& duff_depth,
     const Duff* duff
-  )
-    : FuelConifer(
-        code,
-        name,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        inorganic_percent,
-        duff_depth,
-        duff,
-        duff
-      )
-  { }
+  );
 };
 /**
  * \brief A fuel with jackpine as base fuel type.
@@ -276,7 +195,7 @@ public:
   FuelJackpine(FuelJackpine&& rhs) noexcept = delete;
   FuelJackpine& operator=(const FuelJackpine& rhs) noexcept = delete;
   FuelJackpine& operator=(FuelJackpine&& rhs) noexcept = delete;
-  constexpr FuelJackpine(
+  FuelJackpine(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -290,25 +209,8 @@ public:
     const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
-  )
-    : FuelConifer(
-        code,
-        name,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        15,
-        duff_depth,
-        duff_ffmc,
-        duff_dmc
-      )
-  { }
-  constexpr FuelJackpine(
+  );
+  FuelJackpine(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -321,18 +223,13 @@ public:
     const MathConstantSize& bulk_density,
     const MathConstantSize& duff_depth,
     const Duff* duff
-  )
-    : FuelJackpine(code, name, log_q, a, b, c, bui0, cbh, cfl, bulk_density, duff_depth, duff, duff)
-  { }
+  );
   /**
    * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
    * \param spread SpreadInfo to use
    * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
-  {
-    return calculate_surface_fuel_consumption_jackpine(spread.weather.bui().value);
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override;
 };
 /**
  * \brief A fuel with pine as the base fuel type.
@@ -354,7 +251,7 @@ public:
   FuelPine(FuelPine&& rhs) noexcept = delete;
   FuelPine& operator=(const FuelPine& rhs) noexcept = delete;
   FuelPine& operator=(FuelPine&& rhs) noexcept = delete;
-  constexpr FuelPine(
+  FuelPine(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -368,25 +265,8 @@ public:
     const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
-  )
-    : FuelConifer(
-        code,
-        name,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        cbh,
-        cfl,
-        bulk_density,
-        15,
-        duff_depth,
-        duff_ffmc,
-        duff_dmc
-      )
-  { }
-  constexpr FuelPine(
+  );
+  FuelPine(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -399,18 +279,13 @@ public:
     const MathConstantSize& bulk_density,
     const MathConstantSize& duff_depth,
     const Duff* duff
-  )
-    : FuelPine(code, name, log_q, a, b, c, bui0, cbh, cfl, bulk_density, duff_depth, duff, duff)
-  { }
+  );
   /**
    * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
    * \param spread SpreadInfo to use
    * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
-  {
-    return calculate_surface_fuel_consumption_pine(spread.weather.bui().value);
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override;
 };
 /**
  * \brief FBP fuel type D-1.
@@ -428,18 +303,13 @@ public:
    * \brief FBP fuel type D-1
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelD1(const FuelCodeSize& code) noexcept
-    : FuelNonMixed(code, "D-1", false, LOG_0_90, 30, 232, 160, 32, 0, 0, 61, 59, 24, &duff::Peat)
-  { }
+  explicit FuelD1(const FuelCodeSize& code) noexcept;
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
-  {
-    return calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
@@ -483,7 +353,7 @@ public:
    * \param name Name of the fuel
    * \param log_q Log value of q [ST-X-3 table 7]
    */
-  constexpr FuelMixed(
+  FuelMixed(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -496,56 +366,26 @@ public:
     const MathConstantSize& bulk_density,
     const MathConstantSize& inorganic_percent,
     const MathConstantSize& duff_depth
-  )
-    : StandardFuel(
-        code,
-        name,
-        true,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        6,
-        80,
-        bulk_density,
-        inorganic_percent,
-        duff_depth,
-        &duff::Peat,
-        &duff::Peat
-      ),
-      ros_multiplier_(ros_multiplier), percent_mixed_(percent_mixed)
-  { }
+  );
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
-  {
-    return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override;
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
    */
-  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const noexcept override
-  {
-    return ratioConifer() * StandardFuel::crownConsumption(cfb);
-  }
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const noexcept override;
   /**
    * \brief Calculate rate of spread (m/min) [ST-X-3 27/28, GLC-X-10 29/31]
    * \param isi Initial Spread Index
    * \return Calculate rate of spread (m/min) [ST-X-3 27/28, GLC-X-10 29/31]
    */
   [[nodiscard]] MathSize calculateRos(const int, const FwiWeather&, const RoundedValue& isi)
-    const noexcept override
-  {
-    static const FuelD1 F{14};
-    return ratioConifer() * this->rosBasic(isi)
-         + rosMultiplier() * ratioDeciduous() * F.rosBasic(isi);
-  }
+    const noexcept override;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) [ST-X-3 eq 42]
    * \param spread SpreadInfo to use
@@ -553,44 +393,36 @@ public:
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 42]
    */
   [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
-    const noexcept override
-  {
-    return ratioConifer() * this->limitIsf(1.0, spread.slopeFactor() * this->rosBasic(isi))
-         + ratioDeciduous() * isfD1(spread, isi);
-  }
+    const noexcept override;
   /**
    * \brief Percent Mixed (%)
    * \return Percent Mixed (%)
    */
-  [[nodiscard]] constexpr MathSize percentMixed() const { return percent_mixed_; }
+  [[nodiscard]] MathSize percentMixed() const;
   /**
    * \brief Percent Conifer (% / 100)
    * \return Percent Conifer (% / 100)
    */
-  [[nodiscard]] constexpr MathSize ratioConifer() const { return percent_mixed_ / 100.0; }
+  [[nodiscard]] MathSize ratioConifer() const;
   /**
    * \brief Percent Deciduous (% / 100)
    * \return Percent Deciduous (% / 100)
    */
-  [[nodiscard]] constexpr MathSize ratioDeciduous() const { return 1.0 - (percent_mixed_ / 100.0); }
+  [[nodiscard]] MathSize ratioDeciduous() const;
 
 protected:
   /**
    * \brief Rate of spread multiplier [ST-X-3 eq 27/28, GLC-X-10 eq 29/30]
    * \return Rate of spread multiplier [ST-X-3 eq 27/28, GLC-X-10 eq 29/30]
    */
-  [[nodiscard]] constexpr MathSize rosMultiplier() const { return ros_multiplier_ / 10.0; }
+  [[nodiscard]] MathSize rosMultiplier() const;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize isfD1(const SpreadInfo& spread, const RoundedValue& isi) const noexcept
-  {
-    static const FuelD1 F{14};
-    return F.isfD1(spread, rosMultiplier(), isi);
-  }
+  [[nodiscard]] MathSize isfD1(const SpreadInfo& spread, const RoundedValue& isi) const noexcept;
 };
 /**
  * \brief A fuel made of dead fir and D1.
@@ -616,7 +448,7 @@ public:
    * \param name Name of the fuel
    * \param log_q Log value of q [ST-X-3 table 7]
    */
-  constexpr FuelMixedDead(
+  FuelMixedDead(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -626,9 +458,7 @@ public:
     const MathConstantSize& bui0,
     const MathConstantSize& ros_multiplier,
     const MathConstantSize& percent_dead_fir
-  )
-    : FuelMixed(code, name, log_q, a, b, c, bui0, ros_multiplier, percent_dead_fir, 61, 15, 75)
-  { }
+  );
 };
 /**
  * \brief A fuel composed of C2 and D1 mixed.
@@ -649,25 +479,18 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelMixedWood(
+  FuelMixedWood(
     const FuelCodeSize& code,
     const char* name,
     const MathConstantSize& ros_multiplier,
     const MathConstantSize& percent_mixed
-  )
-    : FuelMixed(code, name, LOG_0_80, 110, 282, 150, 50, ros_multiplier, percent_mixed, 108, 25, 50)
-  { }
+  );
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 17]
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 17]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
-  {
-    return this->ratioConifer() * FuelMixed::surfaceFuelConsumption(spread)
-         + this->ratioDeciduous()
-             * calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override;
 };
 /**
  * \brief A grass fuel type.
@@ -690,66 +513,31 @@ public:
    * \param name Name of the fuel
    * \param log_q Log value of q [ST-X-3 table 7]
    */
-  constexpr FuelGrass(
+  FuelGrass(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
     const MathConstantSize& a,
     const MathConstantSize& b,
     const MathConstantSize& c
-  )
-    // HACK: grass assumes no duff (total duff depth == ffmc depth => dmc depth is 0)
-    : StandardFuel(
-        code,
-        name,
-        false,
-        log_q,
-        a,
-        b,
-        c,
-        1,
-        0,
-        0,
-        0,
-        0,
-        static_cast<int>(fs::survival::DUFF_FFMC_DEPTH * 10.0),
-        &duff::PeatMuck,
-        &duff::PeatMuck
-      )
-  { }
+  );
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 pg 21]
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 pg 21]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo&) const noexcept override
-  {
-    return DEFAULT_GRASS_FUEL_LOAD;
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo&) const noexcept override;
   /**
    * \brief Grass curing
    * \return Grass curing (or -1 if invalid for this fuel type)
    */
-  [[nodiscard]] MathSize grass_curing(const int nd, const FwiWeather& wx) const override
-  {
-    // HACK: resolve once and fail if not set already
-    static const auto& settings = fs::settings::instance();
-    if (settings.static_curing.has_value())
-    {
-      return settings.static_curing.value();
-    }
-    const auto is_drought = wx.dc().value > 500;
-    return is_drought ? 100 : calculate_grass_curing(nd);
-  }
+  [[nodiscard]] MathSize grass_curing(const int nd, const FwiWeather& wx) const override;
   /**
    * \brief Calculate base rate of spread multiplier
    * \param nd Difference between date and the date of minimum foliar moisture content
    * \param wx FwiWeather to use for calculation
    * \return Base rate of spread multiplier
    */
-  [[nodiscard]] MathSize baseMultiplier(const int nd, const FwiWeather& wx) const noexcept
-  {
-    return calculate_base_multiplier_curing(grass_curing(nd, wx));
-  }
+  [[nodiscard]] MathSize baseMultiplier(const int nd, const FwiWeather& wx) const noexcept;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
@@ -757,13 +545,7 @@ public:
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
   [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
-    const noexcept override
-  {
-    const auto mu = baseMultiplier(spread.nd(), spread.weather);
-    // prevent divide by 0
-    const auto mu_not_zero = max(static_cast<MathSize>(0.001), mu);
-    return this->limitIsf(mu_not_zero, calculateRos(mu, isi) * spread.slopeFactor());
-  }
+    const noexcept override;
   /**
    * \brief Calculate rate of spread (m/min)
    * \param nd Difference between date and the date of minimum foliar moisture content
@@ -772,10 +554,7 @@ public:
    * \return Rate of spread (m/min)
    */
   [[nodiscard]] MathSize calculateRos(const int nd, const FwiWeather& wx, const RoundedValue& isi)
-    const noexcept override
-  {
-    return calculateRos(baseMultiplier(nd, wx), isi);
-  }
+    const noexcept override;
 
 public:
   /**
@@ -783,10 +562,7 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 80/81]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override
-  {
-    return calculate_length_to_breadth_grass(as_value(ws));
-  }
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override;
 
 public:
   /**
@@ -796,10 +572,7 @@ public:
    * \return Rate of spread (m/min)
    */
   [[nodiscard]] MathSize calculateRos(const RoundedValue& multiplier, const RoundedValue& isi)
-    const noexcept
-  {
-    return multiplier * this->rosBasic(isi);
-  }
+    const noexcept;
 };
 /**
  * \brief FBP fuel type C-1.
@@ -817,24 +590,7 @@ public:
    * \brief FBP fuel type C-1
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC1(const FuelCodeSize& code) noexcept
-    : FuelConifer(
-        code,
-        "C-1",
-        LOG_0_90,
-        90,
-        649,
-        450,
-        72,
-        2,
-        75,
-        45,
-        5,
-        34,
-        &duff::Reindeer,
-        &duff::Peat
-      )
-  { }
+  explicit FuelC1(const FuelCodeSize& code) noexcept;
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
    * \param spread SpreadInfo to use
@@ -858,9 +614,7 @@ public:
    * \brief FBP fuel type C-2
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC2(const FuelCodeSize& code) noexcept
-    : FuelConifer(code, "C-2", LOG_0_70, 110, 282, 150, 64, 3, 80, 34, 0, 100, &duff::SphagnumUpper)
-  { }
+  explicit FuelC2(const FuelCodeSize& code) noexcept;
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
    * \param spread SpreadInfo to use
@@ -884,23 +638,7 @@ public:
    * \brief FBP fuel type C-3
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC3(const FuelCodeSize& code) noexcept
-    : FuelJackpine(
-        code,
-        "C-3",
-        LOG_0_75,
-        110,
-        444,
-        300,
-        62,
-        8,
-        115,
-        20,
-        65,
-        &duff::FeatherMoss,
-        &duff::PineSeney
-      )
-  { }
+  explicit FuelC3(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief FBP fuel type C-4.
@@ -918,9 +656,7 @@ public:
    * \brief FBP fuel type C-4
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC4(const FuelCodeSize& code) noexcept
-    : FuelJackpine(code, "C-4", LOG_0_80, 110, 293, 150, 66, 4, 120, 31, 62, &duff::PineSeney)
-  { }
+  explicit FuelC4(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief FBP fuel type C-5.
@@ -938,9 +674,7 @@ public:
    * \brief FBP fuel type C-5
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC5(const FuelCodeSize& code) noexcept
-    : FuelPine(code, "C-5", LOG_0_80, 30, 697, 400, 56, 18, 120, 93, 46, &duff::PineSeney)
-  { }
+  explicit FuelC5(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief FBP fuel type C-6.
@@ -958,9 +692,7 @@ public:
    * \brief FBP fuel type C-6
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC6(const FuelCodeSize& code) noexcept
-    : FuelPine(code, "C-6", LOG_0_80, 30, 800, 300, 62, 7, 180, 50, 50, &duff::PineSeney)
-  { }
+  explicit FuelC6(const FuelCodeSize& code) noexcept;
 
 protected:
   /**
@@ -994,9 +726,7 @@ public:
    * \brief FBP fuel type C-7
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelC7(const FuelCodeSize& code) noexcept
-    : FuelConifer(code, "C-7", LOG_0_85, 45, 305, 200, 106, 10, 50, 20, 15, 50, &duff::SprucePine)
-  { }
+  explicit FuelC7(const FuelCodeSize& code) noexcept;
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 15]
    * \param spread SpreadInfo to use
@@ -1021,9 +751,7 @@ public:
    * \brief FBP fuel type D-2
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelD2(const FuelCodeSize& code) noexcept
-    : FuelNonMixed(code, "D-2", false, LOG_0_90, 6, 232, 160, 32, 0, 0, 61, 59, 24, &duff::Peat)
-  { }
+  explicit FuelD2(const FuelCodeSize& code) noexcept;
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2)
    * \param spread SpreadInfo to use
@@ -1058,13 +786,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM1(
-    const FuelCodeSize& code,
-    const char* name,
-    const MathConstantSize& percent_conifer
-  )
-    : FuelMixedWood(code, name, 10, percent_conifer)
-  { }
+  FuelM1(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_conifer);
 };
 /**
  * \brief FBP fuel type M-2.
@@ -1084,13 +806,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM2(
-    const FuelCodeSize& code,
-    const char* name,
-    const MathConstantSize& percent_conifer
-  )
-    : FuelMixedWood(code, name, 2, percent_conifer)
-  { }
+  FuelM2(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_conifer);
 };
 /**
  * \brief FBP fuel type M-3.
@@ -1110,13 +826,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM3(
-    const FuelCodeSize& code,
-    const char* name,
-    const MathConstantSize& percent_dead_fir
-  )
-    : FuelMixedDead(code, name, LOG_0_80, 120, 572, 140, 50, 10, percent_dead_fir)
-  { }
+  FuelM3(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_dead_fir);
 };
 /**
  * \brief FBP fuel type M-4.
@@ -1136,13 +846,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM4(
-    const FuelCodeSize& code,
-    const char* name,
-    const MathConstantSize& percent_dead_fir
-  )
-    : FuelMixedDead(code, name, LOG_0_80, 100, 404, 148, 50, 2, percent_dead_fir)
-  { }
+  FuelM4(const FuelCodeSize& code, const char* name, const MathConstantSize& percent_dead_fir);
 };
 /**
  * \brief FBP fuel type O-1a.
@@ -1160,9 +864,7 @@ public:
    * \brief FBP fuel type O-1a.
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelO1A(const FuelCodeSize& code) noexcept
-    : FuelGrass(code, "O-1a", LOG_1_00, 190, 310, 140)
-  { }
+  explicit FuelO1A(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief FBP fuel type O-1b.
@@ -1180,9 +882,7 @@ public:
    * \brief FBP fuel type O-1b.
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelO1B(const FuelCodeSize& code) noexcept
-    : FuelGrass(code, "O-1b", LOG_1_00, 250, 350, 170)
-  { }
+  explicit FuelO1B(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief A slash fuel type.
@@ -1218,7 +918,7 @@ public:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr FuelSlash(
+  FuelSlash(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -1233,57 +933,35 @@ public:
     const MathConstantSize& bulk_density,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
-  )
-    : FuelConifer(
-        code,
-        name,
-        log_q,
-        a,
-        b,
-        c,
-        bui0,
-        0,
-        0,
-        bulk_density,
-        15,
-        74,
-        duff_ffmc,
-        duff_dmc
-      ),
-      ffc_a_(ffc_a), ffc_b_(ffc_b), wfc_a_(wfc_a), wfc_b_(wfc_b)
-  { }
+  );
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
-  {
-    return ffcA() * (1.0 - exp(ffcB() * spread.weather.bui().value))
-         + wfcA() * (1.0 - exp(wfcB() * spread.weather.bui().value));
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override;
 
 private:
   /**
    * \brief Forest Floor Consumption parameter a [ST-X-3 eq 19/21/23]
    * \return Forest Floor Consumption parameter a [ST-X-3 eq 19/21/23]
    */
-  [[nodiscard]] constexpr MathSize ffcA() const { return ffc_a_; }
+  [[nodiscard]] MathSize ffcA() const;
   /**
    * \brief Forest Floor Consumption parameter b [ST-X-3 eq 19/21/23]
    * \return Forest Floor Consumption parameter b [ST-X-3 eq 19/21/23]
    */
-  [[nodiscard]] constexpr MathSize ffcB() const { return ffc_b_ / 10000.0; }
+  [[nodiscard]] MathSize ffcB() const;
   /**
    * \brief Woody Fuel Consumption parameter a [ST-X-3 eq 20/22/24]
    * \return Woody Fuel Consumption parameter a [ST-X-3 eq 20/22/24]
    */
-  [[nodiscard]] constexpr MathSize wfcA() const { return wfc_a_; }
+  [[nodiscard]] MathSize wfcA() const;
   /**
    * \brief Woody Fuel Consumption parameter b [ST-X-3 eq 20/22/24]
    * \return Woody Fuel Consumption parameter b [ST-X-3 eq 20/22/24]
    */
-  [[nodiscard]] constexpr MathSize wfcB() const { return wfc_b_ / 10000.0; }
+  [[nodiscard]] MathSize wfcB() const;
 };
 /**
  * \brief FBP fuel type S-1.
@@ -1301,24 +979,7 @@ public:
    * \brief FBP fuel type S-1
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelS1(const FuelCodeSize& code) noexcept
-    : FuelSlash(
-        code,
-        "S-1",
-        LOG_0_75,
-        75,
-        297,
-        130,
-        38,
-        4,
-        -250,
-        4,
-        -340,
-        78,
-        &duff::FeatherMoss,
-        &duff::PineSeney
-      )
-  { }
+  explicit FuelS1(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief FBP fuel type S-2.
@@ -1336,24 +997,7 @@ public:
    * \brief FBP fuel type S-2
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelS2(const FuelCodeSize& code) noexcept
-    : FuelSlash(
-        code,
-        "S-2",
-        LOG_0_75,
-        40,
-        438,
-        170,
-        63,
-        10,
-        -130,
-        6,
-        -600,
-        132,
-        &duff::FeatherMoss,
-        &duff::WhiteSpruce
-      )
-  { }
+  explicit FuelS2(const FuelCodeSize& code) noexcept;
 };
 /**
  * \brief FBP fuel type S-3.
@@ -1371,24 +1015,7 @@ public:
    * \brief FBP fuel type S-3
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelS3(const FuelCodeSize& code) noexcept
-    : FuelSlash(
-        code,
-        "S-3",
-        LOG_0_75,
-        55,
-        829,
-        320,
-        31,
-        12,
-        -166,
-        20,
-        -210,
-        100,
-        &duff::FeatherMoss,
-        &duff::PineSeney
-      )
-  { }
+  explicit FuelS3(const FuelCodeSize& code) noexcept;
 };
 class FuelVariable;
 [[nodiscard]] MathSize compare_by_season(
@@ -1412,16 +1039,12 @@ public:
    * \param spring Fuel type to use in the spring
    * \param summer Fuel type to use in the summer
    */
-  constexpr FuelVariable(
+  FuelVariable(
     const FuelCodeSize& code,
     const char* name,
     const FuelType* const spring,
     const FuelType* const summer
-  )
-    : FuelType(code, name, spring->canCrown()), spring_(spring), summer_(summer)
-  {
-    assert(spring->canCrown() == summer->canCrown());
-  }
+  );
   FuelVariable(FuelVariable&& rhs) noexcept = delete;
   FuelVariable(const FuelVariable& rhs) = delete;
   FuelVariable& operator=(FuelVariable&& rhs) noexcept = delete;
@@ -1429,53 +1052,34 @@ public:
   /**
    * \brief Is fuel a valid fuel type
    */
-  [[nodiscard]] bool isValid() const override { return true; }
+  [[nodiscard]] bool isValid() const override;
   /**
    * \brief BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    * \param bui Build-up Index
    * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    */
-  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const override
-  {
-    return compare_by_season(*this, [bui](const FuelType& fuel) { return fuel.buiEffect(bui); });
-  }
+  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const override;
   /**
    * \brief Grass curing
    * \return Grass curing (or -1 if invalid for this fuel type)
    */
-  [[nodiscard]] MathSize grass_curing(const int nd, const FwiWeather& wx) const override
-  {
-    return compare_by_season(*this, [&](const FuelType& fuel) {
-      return fuel.grass_curing(nd, wx);
-    });
-  }
+  [[nodiscard]] MathSize grass_curing(const int nd, const FwiWeather& wx) const override;
   /**
    * \brief Crown base height (m) [ST-X-3 table 8]
    * \return Crown base height (m) [ST-X-3 table 8]
    */
-  [[nodiscard]] MathSize cbh() const override
-  {
-    return compare_by_season(*this, [](const FuelType& fuel) { return fuel.cbh(); });
-  }
+  [[nodiscard]] MathSize cbh() const override;
   /**
    * \brief Crown fuel load (kg/m^2) [ST-X-3 table 8]
    * \return Crown fuel load (kg/m^2) [ST-X-3 table 8]
    */
-  [[nodiscard]] MathSize cfl() const override
-  {
-    return compare_by_season(*this, [](const FuelType& fuel) { return fuel.cfl(); });
-  }
+  [[nodiscard]] MathSize cfl() const override;
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    */
-  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const override
-  {
-    return compare_by_season(*this, [cfb](const FuelType& fuel) {
-      return fuel.crownConsumption(cfb);
-    });
-  }
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const override;
   /**
    * \brief Initial rate of spread (m/min) [ST-X-3 eq 26]
    * \param nd Difference between date and the date of minimum foliar moisture content
@@ -1484,40 +1088,26 @@ public:
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
   [[nodiscard]] MathSize calculateRos(const int, const FwiWeather&, const RoundedValue&)
-    const override
-  {
-    throw runtime_error("FuelVariable not resolved to specific type");
-  }
+    const override;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize calculateIsf(const SpreadInfo&, const RoundedValue&) const override
-  {
-    throw runtime_error("FuelVariable not resolved to specific type");
-  }
+  [[nodiscard]] MathSize calculateIsf(const SpreadInfo&, const RoundedValue&) const override;
   /**
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo&) const override
-  {
-    throw runtime_error("FuelVariable not resolved to specific type");
-  }
+  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo&) const override;
   /**
    * \brief Length to Breadth ratio [ST-X-3 eq 79]
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 79]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const override
-  {
-    return compare_by_season(*this, [ws](const FuelType& fuel) {
-      return fuel.lengthToBreadth(ws);
-    });
-  }
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const override;
   /**
    * \brief Final rate of spread (m/min)
    * \param spread SpreadInfo to use
@@ -1528,19 +1118,13 @@ public:
    */
   [[nodiscard]] MathSize
   finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
-    const override
-  {
-    throw runtime_error("FuelVariable not resolved to specific type");
-  }
+    const override;
   /**
    * \brief Critical Surface Fire Intensity (CSI) [ST-X-3 eq 56]
    * \param spread SpreadInfo to use in calculation
    * \return Critical Surface Fire Intensity (CSI) [ST-X-3 eq 56]
    */
-  [[nodiscard]] MathSize criticalSurfaceIntensity(const SpreadInfo&) const override
-  {
-    throw runtime_error("FuelVariable not resolved to specific type");
-  }
+  [[nodiscard]] MathSize criticalSurfaceIntensity(const SpreadInfo&) const override;
   /**
    * \brief Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
@@ -1548,39 +1132,30 @@ public:
    * \return Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    */
   [[nodiscard]] MathSize crownFractionBurned(const RoundedValue& rss, const RoundedValue& rso)
-    const noexcept override
-  {
-    return spring()->crownFractionBurned(rss, rso);
-  }
+    const noexcept override;
   /**
    * \brief Calculate probability of burning [Anderson eq 1]
    * \param mc_fraction moisture content (% / 100)
    * \return Calculate probability of burning [Anderson eq 1]
    */
-  [[nodiscard]] MathSize probabilityPeat(const RoundedValue& mc_fraction) const noexcept override
-  {
-    return spring()->probabilityPeat(mc_fraction);
-  }
+  [[nodiscard]] MathSize probabilityPeat(const RoundedValue& mc_fraction) const noexcept override;
   /**
    * \brief Survival probability calculated using probability of ony survival based on multiple
    * formulae
    * \param wx FwiWeather to calculate survival probability for
    * \return Chance of survival (% / 100)
    */
-  [[nodiscard]] MathSize survivalProbability(const FwiWeather& wx) const noexcept override
-  {
-    return spring()->survivalProbability(wx);
-  }
+  [[nodiscard]] MathSize survivalProbability(const FwiWeather& wx) const noexcept override;
   /**
    * \brief Fuel to use before green-up
    * \return Fuel to use before green-up
    */
-  [[nodiscard]] const FuelType* spring() const noexcept override { return spring_; }
+  [[nodiscard]] const FuelType* spring() const noexcept override;
   /**
    * \brief Fuel to use after green-up
    * \return Fuel to use after green-up
    */
-  [[nodiscard]] const FuelType* summer() const noexcept override { return summer_; }
+  [[nodiscard]] const FuelType* summer() const noexcept override;
 
 private:
   /**
@@ -1610,9 +1185,7 @@ public:
    * \param d1 D-1 fuel to use before green-up
    * \param d2 D-2 fuel to use after green-up
    */
-  constexpr FuelD1D2(const FuelCodeSize& code, const FuelD1* d1, const FuelD2* d2) noexcept
-    : FuelVariable(code, "D-1/D-2", d1, d2)
-  { }
+  FuelD1D2(const FuelCodeSize& code, const FuelD1* d1, const FuelD2* d2) noexcept;
 };
 /**
  * \brief FBP fuel type M-1/M-2.
@@ -1635,22 +1208,14 @@ public:
    * \param m1 M-1 fuel to use before green-up
    * \param m2 M-2 fuel to use after green-up
    */
-  constexpr FuelM1M2(
+  FuelM1M2(
     const FuelCodeSize& code,
     const char* name,
     const FuelM1* m1,
     const FuelM2* m2,
     // HACK: to ensure they match for now
-    const MathConstantSize&
-#ifndef NDEBUG
-      percent_conifer
-#endif
-  )
-    : FuelVariable(code, name, m1, m2)
-  {
-    assert(m1->percentMixed() == m2->percentMixed());
-    assert(m1->percentMixed() == percent_conifer);
-  }
+    const MathConstantSize& percent_conifer
+  );
 };
 /**
  * \brief FBP fuel type M-3/M-4.
@@ -1672,22 +1237,14 @@ public:
    * \param m3 M-3 fuel to use before green-up
    * \param m4 M-4 fuel to use after green-up
    */
-  constexpr FuelM3M4(
+  FuelM3M4(
     const FuelCodeSize& code,
     const char* name,
     const FuelM3* m3,
     const FuelM4* m4,
     // HACK: to ensure they match for now
-    const MathConstantSize&
-#ifndef NDEBUG
-      percent_dead_fir
-#endif
-  )
-    : FuelVariable(code, name, m3, m4)
-  {
-    assert(m3->percentMixed() == m4->percentMixed());
-    assert(m3->percentMixed() == percent_dead_fir);
-  }
+    const MathConstantSize& percent_dead_fir
+  );
 };
 extern const array<const FuelType*, NUMBER_OF_FUELS> Fuels;
 }
