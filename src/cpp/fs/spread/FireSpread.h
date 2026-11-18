@@ -23,14 +23,13 @@ public:
   ROSOffset() noexcept = default;
   ROSOffset(
     const IntensitySize intensity,
-    const RoundedValue ros,
+    const FBPValue ros,
     const Direction raz,
     const Offset offset
   ) noexcept
     // HACK: round ros again
-    : intensity_{intensity}, ros_{as_value(ros)},
-      raz_{Direction{Radians{RoundedValue{raz.asRadians()}}}},
-      offset_{as_value(RoundedValue{offset.x}), as_value(RoundedValue{offset.y})}
+    : intensity_{intensity}, ros_{ros}, raz_{Direction{Radians{FBPValue{raz.asRadians()}}}},
+      offset_{as_value(FBPValue{offset.x}), as_value(FBPValue{offset.y})}
   { }
   ROSOffset(const ROSOffset& rhs) noexcept = default;
   ROSOffset(ROSOffset&& rhs) noexcept = default;
