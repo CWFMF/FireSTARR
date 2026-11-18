@@ -19,8 +19,8 @@ OPTS="-DCPU_TUNE_ONLY=0 -DCPU_TARGET=native -DCMAKE_VERBOSE_OPTIMIZATIONS=1"
 [ ! -d "${DIR_PERF}" ] && mkdir -p "${DIR_PERF}"
 # don't make this an actual submodule because it's just this script that needs it
 [ ! -d "${DIR_FG}" ] && sudo apt install git && sudo git clone https://github.com/brendangregg/FlameGraph.git ${DIR_FG} && sudo chown -R ${USER}:${USER} ${DIR_FG}
-scripts/build.sh RelWithDebInfo ${OPTS}
-cp ${DIR_BUILD}/firestarr ${DIR_ROOT}/
+scripts/build.sh RelWithDebInfo all ${OPTS}
+cp ${DIR_BUILD}/firestarr ${DIR_BUILD}/test_* ${DIR_ROOT}/
 time sudo perf record -o ${FILE_PERF} -F ${FREQ} -g --call-graph=dwarf -- $* > ${DIR_PERF}/run.log
 sudo chown -R ${USER}:${USER} ${DIR_PERF}
 perf script -i ${FILE_PERF} | ${DIR_FG}/stackcollapse-perf.pl | ${DIR_FG}/flamegraph.pl > flame.html
