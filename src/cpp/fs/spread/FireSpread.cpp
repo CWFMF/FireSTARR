@@ -381,7 +381,7 @@ SpreadInfo::SpreadInfo(
       return;
     }
   }
-  logging::verbose("initial ros is {:f}", head_ros_);
+  logging::verbose("initial ros is {:f}", as_value(head_ros_));
   const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(wsv);
   auto back_ros = fuel->calculateRos(nd, weather, back_isi) * bui_eff;
   if (is_crown_)
@@ -396,7 +396,7 @@ SpreadInfo::SpreadInfo(
     // wouldn't be crowning if ros is 0 so that's why this is in an else
     cfb_ = fuel->crownFractionBurned(head_ros_, rso);
     cfc_ = fuel->crownConsumption(cfb_);
-    tfc_ += cfc_;
+    tfc_ = RoundedValue{sfc_ + cfc_};
   }
   // max intensity should always be at the head
   max_intensity_ = fire_intensity(tfc_, head_ros_);

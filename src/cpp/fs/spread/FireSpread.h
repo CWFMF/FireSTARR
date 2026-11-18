@@ -252,11 +252,11 @@ private:
   /**
    * \brief Maximum intensity in any direction for spread (kW/m)
    */
-  MathSize max_intensity_ = INVALID_INTENSITY;
+  RoundedIntensity max_intensity_{INVALID_INTENSITY};
   /**
    * \brief Attributes for Cell spread is occurring in
    */
-  SpreadKey key_ = 0;
+  SpreadKey key_{0};
 
 public:
   /**
@@ -268,17 +268,17 @@ private:
   /**
    * \brief Time that spread is occurring
    */
-  DurationSize time_ = -1;
-  MathSize l_b_ = -1;
+  DurationSize time_{-1};
+  RoundedValue l_b_{-1};
   /**
    * \brief Head fire rate of spread (m/min)
    */
-  MathSize head_ros_ = INVALID_ROS;
-  MathSize cfb_ = -1;
-  MathSize cfc_ = -1;
-  MathSize tfc_ = -1;
-  MathSize sfc_ = -1;
-  bool is_crown_ = false;
+  RoundedValue head_ros_{INVALID_ROS};
+  RoundedValue cfb_{-1};
+  RoundedValue cfc_{-1};
+  RoundedValue tfc_{-1};
+  RoundedValue sfc_{-1};
+  bool is_crown_{false};
 
 public:
   /**
@@ -290,7 +290,7 @@ private:
   /**
    * \brief Difference between date and the date of minimum foliar moisture content (from ST-X-3)
    */
-  int nd_ = -1;
+  int nd_{-1};
 };
 }
 #endif
