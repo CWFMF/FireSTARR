@@ -39,33 +39,33 @@ struct Duff
   /**
    * \brief Inorganic content, percentage oven dry weight
    */
-  MathSize ash{};
+  MathConstantSize ash{};
   /**
    * \brief Organic bulk density (kg/m^3)
    */
-  MathSize rho{};
+  MathConstantSize rho{};
   /**
    * \brief B_0 [table 2]
    */
-  MathSize b0{};
+  MathConstantSize b0{};
   /**
    * \brief B_1 [table 2]
    */
-  MathSize b1{};
+  MathConstantSize b1{};
   /**
    * \brief B_2 [table 2]
    */
-  MathSize b2{};
+  MathConstantSize b2{};
   /**
    * \brief B_3 [table 2]
    */
-  MathSize b3{};
+  MathConstantSize b3{};
   /**
    * \brief Probability of survival (% / 100) [eq Ig-1]
    * \param mc_pct Moisture content, percentage dry oven weight
    * \return Probability of survival (% / 100) [eq Ig-1]
    */
-  [[nodiscard]] ThresholdSize probabilityOfSurvival(const MathSize mc_pct) const noexcept
+  [[nodiscard]] ThresholdSize probabilityOfSurvival(const MathConstantSize mc_pct) const noexcept
   {
     /**
      * \brief Constant part of ignition probability equation [eq Ig-1]

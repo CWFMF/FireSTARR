@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_TEST_H
 #define FS_TEST_H
+#include <concepts>
 #include "../fs/log/Log.h"
 #include "../fs/unstable.h"
 namespace fs::testing
@@ -30,6 +31,26 @@ auto check_range(
     }
   );
 }
+template <typename T>
+concept IsValue = requires(const T& t) {
+  { t } -> std::convertible_to<MathSize>;
+};
+template <typename T>
+concept IsFunction = requires(const T& t) {
+  { t() } -> std::convertible_to<MathSize>;
+};
+template <class T>
+  requires IsValue<T>
+MathSize value_of(const T& t)
+{
+  return t;
+}
+template <class T>
+  requires IsFunction<T>
+MathSize value_of(const T& t)
+{
+  return t();
+}
 template <class TypeA, class TypeB>
 int compare_duff(
   const string name,
@@ -43,12 +64,12 @@ int compare_duff(
   // check %, so 1 decimal is fine
   static constexpr auto EPSILON = static_cast<MathSize>(1e-1);
   std::ignore = logging::output(log_level, "Checking {:s}", name);
-  logging::check_equal_verbose(logging::level::debug, a.ash, b.ash, "ash");
-  logging::check_equal_verbose(logging::level::debug, a.rho, b.rho, "rho");
-  logging::check_equal_verbose(logging::level::debug, a.b0, b.b0, "b0");
-  logging::check_equal_verbose(logging::level::debug, a.b1, b.b1, "b1");
-  logging::check_equal_verbose(logging::level::debug, a.b2, b.b2, "b2");
-  logging::check_equal_verbose(logging::level::debug, a.b3, b.b3, "b3");
+  logging::check_equal_verbose(logging::level::debug, value_of(a.ash), value_of(b.ash), "ash");
+  logging::check_equal_verbose(logging::level::debug, value_of(a.rho), value_of(b.rho), "rho");
+  logging::check_equal_verbose(logging::level::debug, value_of(a.b0), value_of(b.b0), "b0");
+  logging::check_equal_verbose(logging::level::debug, value_of(a.b1), value_of(b.b1), "b1");
+  logging::check_equal_verbose(logging::level::debug, value_of(a.b2), value_of(b.b2), "b2");
+  logging::check_equal_verbose(logging::level::debug, value_of(a.b3), value_of(b.b3), "b3");
   for (auto i = 0; i < RESOLUTION; ++i)
   {
     const MathSize mc = RANGE * i / RESOLUTION;

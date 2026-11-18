@@ -2,6 +2,7 @@
 #include "test.h"
 #include "../fs/fuel/Duff.h"
 #include "../fs/log/Log.h"
+#include "DuffOld.h"
 namespace fs::testing
 {
 // FIX: this was used to compare to the old template version, but doesn't work now
@@ -11,14 +12,14 @@ int test_duff(const int argc, const char* const argv[])
   std::ignore = argc;
   std::ignore = argv;
   logging::info("Testing Duff");
-  compare_duff("SphagnumUpper", duff::SphagnumUpper, duff::SphagnumUpper);
-  compare_duff("FeatherMoss", duff::FeatherMoss, duff::FeatherMoss);
-  compare_duff("Reindeer", duff::Reindeer, duff::Reindeer);
-  compare_duff("WhiteSpruce", duff::WhiteSpruce, duff::WhiteSpruce);
-  compare_duff("Peat", duff::Peat, duff::Peat);
-  compare_duff("PeatMuck", duff::PeatMuck, duff::PeatMuck);
-  compare_duff("PineSeney", duff::PineSeney, duff::PineSeney);
-  compare_duff("SprucePine", duff::SprucePine, duff::SprucePine);
+  compare_duff("SphagnumUpper", duff::SphagnumUpper, duffold::SphagnumUpper);
+  compare_duff("FeatherMoss", duff::FeatherMoss, duffold::FeatherMoss);
+  compare_duff("Reindeer", duff::Reindeer, duffold::Reindeer);
+  compare_duff("WhiteSpruce", duff::WhiteSpruce, duffold::WhiteSpruce);
+  compare_duff("Peat", duff::Peat, duffold::Peat);
+  compare_duff("PeatMuck", duff::PeatMuck, duffold::PeatMuck);
+  compare_duff("PineSeney", duff::PineSeney, duffold::PineSeney);
+  compare_duff("SprucePine", duff::SprucePine, duffold::SprucePine);
   return 0;
 }
 }
