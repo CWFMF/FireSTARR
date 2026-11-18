@@ -568,7 +568,7 @@ public:
       dir,
       base_name,
       [&](T value) -> R {
-        return static_cast<R>(as_value(RoundedValue{static_cast<MathSize>(convert(value))}));
+        return static_cast<R>(as_value(OutputValue{static_cast<MathSize>(convert(value))}));
       },
       static_cast<R>(this->nodataInput())
     );

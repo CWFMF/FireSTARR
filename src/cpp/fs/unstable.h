@@ -124,6 +124,8 @@ using RoundedValue = MathSize;
 using RoundedIntensity = MathSize;
 // HACK: things that used old LookupTable rounding
 using LookupValue = MathSize;
+// things getting written to outputs
+using OutputValue = MathSize;
 // HACK: override these so unstable code doesn't change results of functions
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;
