@@ -2,7 +2,6 @@
 #ifndef FS_FUEL_LOOKUP_H
 #define FS_FUEL_LOOKUP_H
 #include "../stdafx.h"
-#include "../log/Log.h"
 #include "FuelType.h"
 namespace fs::fuel
 {
@@ -80,70 +79,34 @@ private:
  * \param code Value to use for lookup
  * \return FuelType based on the given code
  */
-[[nodiscard]] constexpr const FuelType* fuel_by_code(const FuelCodeSize& code)
-{
-  return FuelLookup::Fuels.at(code);
-}
+[[nodiscard]] const FuelType* fuel_by_code(const FuelCodeSize& code);
 /**
  * \brief Get FuelType based on the given cell
  * \param cell Cell to retrieve FuelType for
  * \return FuelType based on the given cell
  */
-[[nodiscard]] constexpr const FuelType* check_fuel(const Cell& cell)
-{
-  return fuel_by_code(cell.fuelCode());
-}
+[[nodiscard]] const FuelType* check_fuel(const Cell& cell);
+const FuelType* check_fuel(const Cell& cell);
 /**
  * \brief Whether or not there is no fuel in the Cell
  * \param cell Cell to check
  * \return Whether or not there is no fuel in the Cell
  */
-[[nodiscard]] inline bool is_null_fuel(const FuelType* fuel)
-{
-  return INVALID_FUEL_CODE == FuelType::safeCode(fuel);
-}
+[[nodiscard]] bool is_null_fuel(const FuelType* fuel);
 /**
  * \brief Whether or not there is no fuel in the Cell
  * \param cell Cell to check
  * \return Whether or not there is no fuel in the Cell
  */
-[[nodiscard]] inline bool is_null_fuel(const Cell& cell)
-{
-  return fs::fuel::is_null_fuel(fuel_by_code(cell.fuelCode()));
-}
+[[nodiscard]] bool is_null_fuel(const Cell& cell);
 class LazyFuelLookup : public LazyPath
 {
 public:
   using LazyPath::LazyPath;
-  const FuelLookup& lookup() const
-  {
-    // HACK: pretend this is const because it only gets assigned once
-    if (nullptr == fuel_lookup_)
-    {
-      fuel_lookup_ = std::make_unique<FuelLookup>(canonical());
-      logging::check_fatal(nullptr == fuel_lookup_, "Fuel lookup table has not been loaded");
-    }
-    return *fuel_lookup_;
-  }
-  LazyFuelLookup& operator=(const LazyFuelLookup& rhs) noexcept
-  {
-    LazyPath::operator=(rhs);
-    fuel_lookup_ = nullptr;
-    return *this;
-  }
-  LazyFuelLookup& operator=(LazyFuelLookup&& rhs) noexcept
-  {
-    LazyPath::operator=(rhs);
-    fuel_lookup_ = std::move(rhs.fuel_lookup_);
-    rhs.fuel_lookup_ = nullptr;
-    return *this;
-  }
-  LazyFuelLookup& operator=(const string& path) noexcept
-  {
-    LazyPath::operator=(path);
-    fuel_lookup_ = nullptr;
-    return *this;
-  }
+  const FuelLookup& lookup() const;
+  LazyFuelLookup& operator=(const LazyFuelLookup& rhs) noexcept;
+  LazyFuelLookup& operator=(LazyFuelLookup&& rhs) noexcept;
+  LazyFuelLookup& operator=(const string& path) noexcept;
 
 protected:
   mutable unique_ptr<FuelLookup> fuel_lookup_{nullptr};

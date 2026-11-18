@@ -143,6 +143,72 @@ static SpreadKey make_key(const SlopeSize slope, const AspectSize aspect, const 
   logging::check_equal(fuel->name(), fuel_name, "fuel");
   return key;
 }
+[[nodiscard]] MathSize SpreadInfo::calculateRosFromThreshold(const ThresholdSize threshold)
+{
+  // for some reason it returns -nan instead of nan if it's 1, so return this instead
+  if (1.0 == threshold)
+  {
+    return std::numeric_limits<ThresholdSize>::infinity();
+  }
+  if (0.0 == threshold)
+  {
+    return 0.0;
+  }
+  /*! \page spread Probability of fire spread
+   *
+   * Probability of spread is converted into the ROS that would give it,
+   * and then when checked the fire burns if ROS > ROS_threshold
+   *
+   * 25.0 / 4.0 * log(-(exp(41.0 / 25.0) * threshold) / (threshold - 1));
+   * Should be the inverse of:
+   * 1 / (1 + exp(1.64 - 0.16 * ros));
+   *
+   * chance of spread      ros (m/min)
+   * ~16.2465%             0
+   * ~18.5427%             1
+   * ~23.8667%             3
+   * ~30.1535%             5
+   * ~49.0000%             10
+   * ~68.1354%             15
+   * ~82.6353%             20
+   * 90%                   23.9827
+   * 95%                   28.6527
+   * 98%                   34.5739
+   * 99%                   38.9695
+   *
+   * \section References
+   *
+   * Podur, Justin & Wotton, Mike. (2011). Defining fire spread event days for fire-growth
+   * modelling. International Journal of Wildland Fire. 20. 497-507. 10.1071/WF09001.
+   */
+  return 25.0 / 4.0 * log(-(exp(41.0 / 25.0) * threshold) / (threshold - 1));
+}
+[[nodiscard]] MathSize SpreadInfo::maxIntensity() const noexcept { return max_intensity_; }
+[[nodiscard]] const OffsetSet& SpreadInfo::offsets() const { return offsets_; }
+[[nodiscard]] bool SpreadInfo::isNotSpreading() const { return isInvalid(); }
+[[nodiscard]] int SpreadInfo::nd() const { return nd_; }
+[[nodiscard]] DurationSize SpreadInfo::time() const { return time_; }
+[[nodiscard]] MathSize SpreadInfo::lengthToBreadth() const { return l_b_; }
+[[nodiscard]] SlopeSize SpreadInfo::percentSlope() const { return Cell::slope(key_); }
+[[nodiscard]] AspectSize SpreadInfo::slopeAzimuth() const { return Cell::aspect(key_); }
+[[nodiscard]] MathSize SpreadInfo::headRos() const { return head_ros_; }
+[[nodiscard]] Direction SpreadInfo::headDirection() const { return raz_; }
+[[nodiscard]] MathSize SpreadInfo::slopeFactor() const
+{
+  // HACK: slope can be infinite, but anything > 60 is the same as 60
+  // we already capped the percent slope when making the Cells
+  return SlopeTable.at(percentSlope());
+}
+[[nodiscard]] _Float64 SpreadInfo::foliarMoisture(int nd)
+{
+  nd = abs(nd);
+  // don't need to check  `&& nd < 50` in second part because of reordering
+  return nd >= 50 ? 120.0
+       : nd >= 30 ? 32.9 + 3.17 * nd - 0.0288 * nd * nd
+                  : 85.0 + 0.0189 * nd * nd;
+}
+[[nodiscard]] _Float64 SpreadInfo::foliarMoisture() const { return foliarMoisture(nd_); }
+[[nodiscard]] bool SpreadInfo::isInvalid() const { return INVALID_ROS == head_ros_; }
 SpreadInfo::SpreadInfo(
   const YearSize year,
   const int month,
@@ -186,6 +252,11 @@ SpreadInfo::SpreadInfo(
       weather
     )
 { }
+MathSize SpreadInfo::crownFractionBurned() const { return cfb_; }
+MathSize SpreadInfo::crownFuelConsumption() const { return cfc_; }
+char SpreadInfo::fireDescription() const { return cfb_ >= 0.9 ? 'C' : (cfb_ < 0.1 ? 'S' : 'I'); }
+MathSize SpreadInfo::surfaceFuelConsumption() const { return sfc_; }
+MathSize SpreadInfo::totalFuelConsumption() const { return tfc_; }
 SpreadInfo::SpreadInfo(
   const DurationSize time,
   const MathSize min_ros,

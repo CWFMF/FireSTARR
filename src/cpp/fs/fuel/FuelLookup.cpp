@@ -632,4 +632,43 @@ const array<const FuelType*, NUMBER_OF_FUELS> FuelLookup::Fuels{
   &M3_M4_70,  &M3_M4_75, &M3_M4_80, &M3_M4_85,  &M3_M4_90, &M3_M4_95, &M1_00,    &M2_00,
   &M1_M2_00,  &M3_00,    &M4_00,    &M3_M4_100, &O1,
 };
+const FuelType* fuel_by_code(const FuelCodeSize& code) { return FuelLookup::Fuels.at(code); }
+const FuelType* check_fuel(const Cell& cell) { return fuel_by_code(cell.fuelCode()); }
+[[nodiscard]] bool is_null_fuel(const FuelType* fuel)
+{
+  return INVALID_FUEL_CODE == FuelType::safeCode(fuel);
+}
+[[nodiscard]] bool is_null_fuel(const Cell& cell)
+{
+  return fs::fuel::is_null_fuel(fuel_by_code(cell.fuelCode()));
+}
+const FuelLookup& LazyFuelLookup::lookup() const
+{
+  // HACK: pretend this is const because it only gets assigned once
+  if (nullptr == fuel_lookup_)
+  {
+    fuel_lookup_ = std::make_unique<FuelLookup>(canonical());
+    logging::check_fatal(nullptr == fuel_lookup_, "Fuel lookup table has not been loaded");
+  }
+  return *fuel_lookup_;
+}
+LazyFuelLookup& LazyFuelLookup::operator=(const LazyFuelLookup& rhs) noexcept
+{
+  LazyPath::operator=(rhs);
+  fuel_lookup_ = nullptr;
+  return *this;
+}
+LazyFuelLookup& LazyFuelLookup::operator=(LazyFuelLookup&& rhs) noexcept
+{
+  LazyPath::operator=(rhs);
+  fuel_lookup_ = std::move(rhs.fuel_lookup_);
+  rhs.fuel_lookup_ = nullptr;
+  return *this;
+}
+LazyFuelLookup& LazyFuelLookup::operator=(const string& path) noexcept
+{
+  LazyPath::operator=(path);
+  fuel_lookup_ = nullptr;
+  return *this;
+}
 }
