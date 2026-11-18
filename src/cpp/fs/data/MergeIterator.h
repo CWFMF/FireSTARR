@@ -7,7 +7,7 @@ namespace fs
 // mangled version of std::transform_reduce() that calls .begin() and .end()
 template <typename _ForwardIteratorSource, class _Tp, class _BinaryOperation, class _UnaryOperation>
 _Tp do_transform_reduce(
-  _ForwardIteratorSource&& container,
+  const _ForwardIteratorSource& container,
   _Tp __init,
   _BinaryOperation __binary_op,
   _UnaryOperation __unary_op
