@@ -142,6 +142,11 @@ MathSize InvalidFuel::survivalProbability(const FwiWeather&) const noexcept
 }
 [[nodiscard]] const FuelType* InvalidFuel::summer() const noexcept { return this; }
 [[nodiscard]] const FuelType* InvalidFuel::spring() const noexcept { return this; }
+[[nodiscard]] MathSize InvalidFuel::crownRateOfSpread(const RoundedValue&, const RoundedValue&)
+  const noexcept
+{
+  return logging::fatal("Invalid fuel type in fuel map");
+}
 FuelBase::FuelBase(
   const FuelCodeSize& code,
   const char* name,

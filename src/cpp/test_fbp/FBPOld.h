@@ -729,8 +729,6 @@ public:
   explicit constexpr FuelOldC6(const FuelCodeSize& code) noexcept
     : FuelOldPine(code, "C-6", LOG_0_80, &duff::PineSeney)
   { }
-
-protected:
   /**
    * \brief Final rate of spread (m/min)
    * \param spread SpreadInfo to use
@@ -1296,6 +1294,10 @@ public:
    * \return Fuel to use after green-up
    */
   [[nodiscard]] const FuelType* summer() const noexcept override { return summer_; }
+  MathSize crownRateOfSpread(const RoundedValue&, const RoundedValue&) const noexcept override
+  {
+    return logging::fatal("FuelVariable not resolved to specific type");
+  }
 
 private:
   /**

@@ -201,6 +201,14 @@ public:
   [[nodiscard]] virtual const FuelType* summer() const noexcept = 0;
   [[nodiscard]] virtual const FuelType* spring() const noexcept = 0;
   [[nodiscard]] const FuelType* find_fuel_by_season(const int nd) const noexcept;
+  /**
+   * \brief Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
+   * \param isi Initial Spread Index
+   * \param fmc Foliar Moisture Content
+   * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
+   */
+  [[nodiscard]] virtual MathSize crownRateOfSpread(const RoundedValue& isi, const RoundedValue& fmc)
+    const noexcept = 0;
 
 private:
   /**
@@ -313,6 +321,8 @@ public:
   [[nodiscard]] ThresholdSize survivalProbability(const FwiWeather&) const noexcept override;
   [[nodiscard]] const FuelType* summer() const noexcept override;
   [[nodiscard]] const FuelType* spring() const noexcept override;
+  [[nodiscard]] MathSize crownRateOfSpread(const RoundedValue& isi, const RoundedValue& fmc)
+    const noexcept override;
 };
 /**
  * \brief Base class for all FuelTypes.
