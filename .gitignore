@@ -8,9 +8,7 @@ vcpkg
 **/*log*
 **/build
 **/version.cpp
-**/test/10N_50651
 **/test/flamegraphs
-**/test/output
 firestarr
 test_duff
 test_fbp
@@ -22,5 +20,5 @@ grid
 sims
 proj.db
 VERSION
-!test/output/reference
-!src/**
+!src
+!test/output
