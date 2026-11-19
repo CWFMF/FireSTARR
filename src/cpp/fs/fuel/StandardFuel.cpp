@@ -138,7 +138,7 @@ MathSize StandardFuel::finalRos(
 [[nodiscard]] MathSize StandardFuel::crownRateOfSpread(
   const RoundedValue& isi,
   const RoundedValue& fmc
-) noexcept
+) const noexcept
 {
   // HACK: convert back to double to instantiate as LookupValue
   return calculate_standard_foliar_moisture_isi(as_value(isi))

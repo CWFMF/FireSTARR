@@ -189,10 +189,8 @@ public:
    * \param fmc Foliar Moisture Content
    * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
    */
-  [[nodiscard]] static MathSize crownRateOfSpread(
-    const RoundedValue& isi,
-    const RoundedValue& fmc
-  ) noexcept;
+  [[nodiscard]] MathSize crownRateOfSpread(const RoundedValue& isi, const RoundedValue& fmc)
+    const noexcept override;
   [[nodiscard]] MathSize logQ() const noexcept;
 
 private:

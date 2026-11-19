@@ -770,6 +770,10 @@ FuelVariable::FuelVariable(
 }
 [[nodiscard]] const FuelType* FuelVariable::spring() const noexcept { return spring_; }
 [[nodiscard]] const FuelType* FuelVariable::summer() const noexcept { return summer_; }
+MathSize FuelVariable::crownRateOfSpread(const RoundedValue&, const RoundedValue&) const noexcept
+{
+  return logging::fatal("FuelVariable not resolved to specific type");
+}
 FuelD1D2::FuelD1D2(const FuelCodeSize& code, const FuelD1* d1, const FuelD2* d2) noexcept
   : FuelVariable(code, "D-1/D-2", d1, d2)
 { }

@@ -693,8 +693,6 @@ public:
    * \param code Code to identify fuel with
    */
   explicit FuelC6(const FuelCodeSize& code) noexcept;
-
-protected:
   /**
    * \brief Final rate of spread (m/min)
    * \param spread SpreadInfo to use
@@ -1156,6 +1154,7 @@ public:
    * \return Fuel to use after green-up
    */
   [[nodiscard]] const FuelType* summer() const noexcept override;
+  MathSize crownRateOfSpread(const RoundedValue&, const RoundedValue&) const noexcept override;
 
 private:
   /**
