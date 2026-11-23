@@ -304,6 +304,9 @@ int compare_spread(
           auto fm_a = spread_a.foliarMoisture();
           auto fm_b = spread_b.foliarMoisture();
           cmp(r, fm_a, fm_b, "fm");
+          const auto rsc_a = a->crownRateOfSpread(as_value(weather.isi()), fm_a);
+          const auto rsc_b = b->crownRateOfSpread(as_value(weather.isi()), fm_b);
+          cmp(r, rsc_a, rsc_b, "rsc");
           back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_bui_eff_a);
           back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_bui_eff_b);
           cmp(r, back_ros_a, back_ros_b, "back_ros final");
