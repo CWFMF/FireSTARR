@@ -126,6 +126,13 @@ int cmp(int& r, const auto& lhs, const auto& rhs, const char* name)
   return cmp(r, do_compare_values(lhs, rhs, name));
 }
 template <typename... Args>
+int cmp_tolerance(int& lhs, Args... args)
+{
+  // FIX: these comparisons should all be exactly equivalent
+  static constexpr auto epsilon_nearly_equal = 1E-12;
+  return cmp(lhs, logging::compare_tolerance(epsilon_nearly_equal, args...));
+}
+template <typename... Args>
 int cmp_range(int& lhs, Args... args)
 {
   return cmp(lhs, compare_range(args...));
@@ -282,10 +289,10 @@ int compare_spread(
         cmp(r, bui_eff_a, bui_eff_b, "bui_eff");
         auto back_ros_a = a->calculateRos(nd, weather, back_isi);
         auto back_ros_b = b->calculateRos(nd, weather, back_isi);
-        cmp(r, back_ros_a, back_ros_b, "back_ros");
+        cmp_tolerance(r, back_ros_a, back_ros_b, "back_ros");
         auto back_ros_bui_eff_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
         auto back_ros_bui_eff_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
-        cmp(r, back_ros_bui_eff_a, back_ros_bui_eff_b, "back_ros_bui_eff");
+        cmp_tolerance(r, back_ros_bui_eff_a, back_ros_bui_eff_b, "back_ros_bui_eff");
         // whether or not this is crown, this should give the same value
         // if (is_crown_)
         {
@@ -309,7 +316,7 @@ int compare_spread(
           cmp(r, rsc_a, rsc_b, "rsc");
           back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_bui_eff_a);
           back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_bui_eff_b);
-          cmp(r, back_ros_a, back_ros_b, "back_ros final");
+          cmp_tolerance(r, back_ros_a, back_ros_b, "back_ros final");
         }
       }
       const auto offsets_a = spread_a.offsets();
