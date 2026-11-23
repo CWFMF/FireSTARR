@@ -50,6 +50,10 @@ using fs::fuel::OffsetSet;
 static constexpr MathConstantSize MAX_SPREAD_ANGLE = 5.0;
 static constexpr MathConstantSize INVALID_ROS = -1.0;
 static const RoundedIntensity INVALID_INTENSITY{-1.0};
+int calculate_nd_ref_for_point(const int elevation, const Point& point) noexcept;
+int calculate_nd_for_point(const Day day, const int elevation, const Point& point);
+RoundedValue calculate_standard_back_isi_wsv(const LookupValue& v_) noexcept;
+RoundedValue calculate_standard_wsv(const LookupValue& v_) noexcept;
 /**
  * \brief Possible results of an attempt to spread.
  */

@@ -249,6 +249,36 @@ auto compare_spread(
         b->crownRateOfSpread(as_value(weather.isi()), spread_b.foliarMoisture()),
         "crownRateOfSpread"
       );
+      {
+        // HACK: pull section out of SpreadInfo for test
+        const auto ffmc_effect = weather.ffmcEffect();
+        const auto& wsv = weather.wind().speed;
+        const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(as_value(wsv));
+        const auto bui_eff_a = a->buiEffect(as_value(weather.bui()));
+        const auto bui_eff_b = b->buiEffect(as_value(weather.bui()));
+        check_equal(bui_eff_a, bui_eff_b, "bui_eff");
+        auto back_ros_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
+        auto back_ros_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
+        check_equal(back_ros_a, back_ros_b, "back_ros");
+        // whether or not this is crown, this should give the same value
+        // if (is_crown_)
+        {
+          auto sfc_a = a->surfaceFuelConsumption(spread_a);
+          auto sfc_b = b->surfaceFuelConsumption(spread_b);
+          check_equal(sfc_a, sfc_b, "sfc");
+          const auto csi_a = a->criticalSurfaceIntensity(spread_a);
+          const auto csi_b = a->criticalSurfaceIntensity(spread_b);
+          check_equal(csi_a, csi_b, "csi");
+          auto rso_a = FuelType::criticalRos(sfc_a, csi_a);
+          auto rso_b = FuelType::criticalRos(sfc_b, csi_b);
+          check_equal(rso_a, rso_b, "rso");
+          back_ros_a =
+            a->finalRos(spread_a, back_isi, a->crownFractionBurned(back_ros_a, rso_a), back_ros_a);
+          back_ros_b =
+            b->finalRos(spread_b, back_isi, a->crownFractionBurned(back_ros_a, rso_b), back_ros_b);
+          check_equal(back_ros_a, back_ros_b, "back_ros final");
+        }
+      }
       const auto offsets_a = spread_a.offsets();
       const auto offsets_b = spread_b.offsets();
       const auto head_ros = spread_a.headRos();
@@ -543,8 +573,6 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_WIND_SPEED
   );
-  // MathSize finalRos(const SpreadInfo& spread, const ____RoundedValue____& isi, MathSize cfb,
-  // MathSize rss) const MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const
   // check_equal(a.name(), b.name(), "name");
   // check_equal(a.code(), b.code(), "code");
   // return 0;
