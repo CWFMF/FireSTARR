@@ -55,7 +55,7 @@ public:
   [[nodiscard]] static const char* safeName(const FuelType* fuel);
   /**
    * \brief Critical rate of spread (m/min)
-   * \param sfc Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
+   * \param sfc Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    * \param csi Critical Surface Fire Intensity (CSI) (kW/m) [ST-X-3 eq 56]
    * \return Critical rate of spread (m/min)
    */
@@ -157,11 +157,11 @@ public:
   [[nodiscard]] virtual MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
     const = 0;
   /**
-   * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
+   * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    * \param spread SpreadInfo to use
-   * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
+   * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    */
-  [[nodiscard]] virtual MathSize surfaceFuelConsumption(const SpreadInfo& spread) const = 0;
+  [[nodiscard]] virtual MathSize surfaceFuelConsumption(const FwiWeather& weather) const = 0;
   /**
    * \brief Length to Breadth ratio [ST-X-3 eq 79]
    * \param ws Wind Speed (km/h)
@@ -285,7 +285,7 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo&) const override;
+  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error

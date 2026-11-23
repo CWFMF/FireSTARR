@@ -296,8 +296,8 @@ int compare_spread(
         // whether or not this is crown, this should give the same value
         // if (is_crown_)
         {
-          auto sfc_a = a->surfaceFuelConsumption(spread_a);
-          auto sfc_b = b->surfaceFuelConsumption(spread_b);
+          auto sfc_a = a->surfaceFuelConsumption(weather);
+          auto sfc_b = b->surfaceFuelConsumption(weather);
           cmp(r, sfc_a, sfc_b, "sfc");
           const auto csi_a = a->criticalSurfaceIntensity(spread_a);
           const auto csi_b = a->criticalSurfaceIntensity(spread_b);
@@ -584,7 +584,7 @@ int compare_fuel_basic(
       }
     )
   );
-  // MathSize surfaceFuelConsumption(const SpreadInfo& spread) const
+  // MathSize surfaceFuelConsumption(const FwiWeather& weather) const
   cmp_range(
     r,
     "lengthToBreadth()",

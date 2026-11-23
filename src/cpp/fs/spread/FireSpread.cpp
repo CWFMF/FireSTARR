@@ -113,7 +113,7 @@ RoundedValue SpreadInfo::initial(
   }
   else
   {
-    spread.sfc_ = fuel->surfaceFuelConsumption(spread);
+    spread.sfc_ = fuel->surfaceFuelConsumption(weather);
     auto sfc = spread.sfc_;
     auto csi = critical_surface_intensity;
     rso = FuelType::criticalRos(sfc, csi);

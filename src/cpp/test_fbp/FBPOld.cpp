@@ -64,13 +64,13 @@ MathSize FuelOldD1::isfD1(
     spread.slopeFactor() * (ros_multiplier * a()) * pow(1.0 - exp(negB() * isi), c())
   );
 }
-MathSize FuelOldC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldC1::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
 {
-  return calculate_surface_fuel_consumption_c1(spread.weather.ffmc().value);
+  return calculate_surface_fuel_consumption_c1(weather.ffmc().value);
 }
-MathSize FuelOldC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldC2::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
 {
-  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
+  return calculate_surface_fuel_consumption_mixed_or_c2(weather.bui().value);
 }
 MathSize FuelOldC6::finalRos(
   const RoundedValue& foliar_moisture,
@@ -83,14 +83,14 @@ MathSize FuelOldC6::finalRos(
   // using max with 0 is the same as ensuring rsc > rss
   return rss + cfb * max(0.0, rsc - rss);
 }
-MathSize FuelOldC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldC7::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
 {
-  return calculate_surface_fuel_consumption_c7_ffmc(spread.weather.ffmc().value)
-       + calculate_surface_fuel_consumption_c7_bui(spread.weather.bui().value);
+  return calculate_surface_fuel_consumption_c7_ffmc(weather.ffmc().value)
+       + calculate_surface_fuel_consumption_c7_bui(weather.bui().value);
 }
-MathSize FuelOldD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
+MathSize FuelOldD2::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
 {
-  return calculate_surface_fuel_consumption_d2(spread.weather.bui().value);
+  return calculate_surface_fuel_consumption_d2(weather.bui().value);
 }
 MathSize FuelOldD2::calculateRos(const int, const FwiWeather& wx, const RoundedValue& isi)
   const noexcept
