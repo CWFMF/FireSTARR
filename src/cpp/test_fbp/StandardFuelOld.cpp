@@ -34,11 +34,11 @@ MathSize calculate_standard_final_ros(
   return rss;
 }
 MathSize calculate_bui_effect(
-  const LogValue& log_q,
+  const MathConstantSize& log_q,
   const MathConstantSize& bui0,
   const RoundedValue& bui
 ) noexcept
 {
-  return (0 < bui) ? exp(50.0 * as_value(log_q) * ((1.0 / bui) - (1.0 / bui0))) : 1.0;
+  return (0 < bui) ? exp(50.0 * log_q * ((1.0 / bui) - (1.0 / bui0))) : 1.0;
 }
 }

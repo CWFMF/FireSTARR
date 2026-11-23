@@ -61,7 +61,7 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
  */
 [[nodiscard]] MathSize calculate_bui_effect(
-  const LogValue& log_q,
+  const MathConstantSize& log_q,
   const MathConstantSize& bui0,
   const RoundedValue& bui
 ) noexcept;
@@ -207,7 +207,7 @@ public:
    */
   [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const noexcept override
   {
-    return calculate_bui_effect(log_q_, bui0(), bui);
+    return calculate_bui_effect(logQ(), bui0(), bui);
   }
 
 protected:
@@ -261,7 +261,7 @@ public:
   {
     return calculate_standard_rsc(isi, fmc);
   }
-  [[nodiscard]] constexpr MathSize logQ() const noexcept { return log_q_.value; }
+  [[nodiscard]] MathSize logQ() const noexcept { return as_value(log_q_); }
 
 private:
   /**
