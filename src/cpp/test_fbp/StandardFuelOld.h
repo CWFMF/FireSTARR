@@ -30,6 +30,16 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  */
 [[nodiscard]] MathSize calculate_standard_length_to_breadth(const LookupValue& ws) noexcept;
 /**
+ * \brief Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
+ * \param isi Initial Spread Index
+ * \param fmc Foliar Moisture Content
+ * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
+ */
+[[nodiscard]] MathSize calculate_standard_rsc(
+  const RoundedValue& isi,
+  const RoundedValue& fmc
+) noexcept;
+/**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
  * \tparam B Rate of spread parameter b * 10000 [ST-X-3 table 6]
@@ -220,9 +230,7 @@ public:
   [[nodiscard]] MathSize crownRateOfSpread(const RoundedValue& isi, const RoundedValue& fmc)
     const noexcept override
   {
-    // HACK: convert back to double to instantiate as LookupValue
-    return calculate_standard_foliar_moisture_isi(as_value(isi))
-         * calculate_standard_foliar_moisture_fmc(as_value(fmc));
+    return calculate_standard_rsc(isi, fmc);
   }
   [[nodiscard]] constexpr MathSize logQ() const noexcept { return log_q_.value; }
 

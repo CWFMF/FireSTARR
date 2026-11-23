@@ -18,4 +18,10 @@ MathSize calculate_standard_length_to_breadth(const LookupValue& ws_) noexcept
   const auto ws = round_value(ws_);
   return 1.0 + 8.729 * pow(1.0 - exp(-0.030 * ws), 2.155);
 }
+MathSize calculate_standard_rsc(const RoundedValue& isi, const RoundedValue& fmc) noexcept
+{
+  // HACK: convert back to double to instantiate as LookupValue
+  return calculate_standard_foliar_moisture_isi(as_value(isi))
+       * calculate_standard_foliar_moisture_fmc(as_value(fmc));
+}
 }
