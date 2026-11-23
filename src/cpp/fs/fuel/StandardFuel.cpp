@@ -32,6 +32,14 @@ MathSize calculate_standard_final_ros(
 {
   return rss;
 }
+MathSize calculate_bui_effect(
+  const LogValue& log_q,
+  const MathConstantSize& bui0,
+  const RoundedValue& bui
+) noexcept
+{
+  return (0 < bui) ? exp(50.0 * as_value(log_q) * ((1.0 / bui) - (1.0 / bui0))) : 1.0;
+}
 StandardFuel::StandardFuel(
   const FuelCodeSize& code,
   const char* name,
@@ -138,7 +146,7 @@ MathSize StandardFuel::finalRos(
 }
 [[nodiscard]] MathSize StandardFuel::buiEffect(const RoundedValue& bui) const noexcept
 {
-  return (0 < bui) ? exp(50.0 * as_value(log_q_) * ((1.0 / bui) - (1.0 / bui0()))) : 1.0;
+  return calculate_bui_effect(log_q_, bui0(), bui);
 }
 [[nodiscard]] MathSize StandardFuel::bui0() const noexcept { return bui0_; }
 [[nodiscard]] MathSize StandardFuel::cbh() const { return cbh_; }

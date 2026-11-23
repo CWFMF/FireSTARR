@@ -54,6 +54,18 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
   const RoundedValue& rss
 );
 /**
+ * \brief BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
+ * \param log_q Log value of q [ST-X-3 table 7]
+ * \param Bui0 Average Build-up Index for the fuel type [ST-X-3 table 7]
+ * \param bui Build-up Index
+ * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
+ */
+[[nodiscard]] MathSize calculate_bui_effect(
+  const LogValue& log_q,
+  const MathConstantSize& bui0,
+  const RoundedValue& bui
+) noexcept;
+/**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
  * \tparam B Rate of spread parameter b * 10000 [ST-X-3 table 6]
