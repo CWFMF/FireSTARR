@@ -280,9 +280,12 @@ int compare_spread(
         const auto bui_eff_a = a->buiEffect(as_value(weather.bui()));
         const auto bui_eff_b = b->buiEffect(as_value(weather.bui()));
         cmp(r, bui_eff_a, bui_eff_b, "bui_eff");
-        auto back_ros_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
-        auto back_ros_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
+        auto back_ros_a = a->calculateRos(nd, weather, back_isi);
+        auto back_ros_b = b->calculateRos(nd, weather, back_isi);
         cmp(r, back_ros_a, back_ros_b, "back_ros");
+        auto back_ros_bui_eff_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
+        auto back_ros_bui_eff_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
+        cmp(r, back_ros_bui_eff_a, back_ros_bui_eff_b, "back_ros_bui_eff");
         // whether or not this is crown, this should give the same value
         // if (is_crown_)
         {
@@ -301,8 +304,8 @@ int compare_spread(
           auto fm_a = spread_a.foliarMoisture();
           auto fm_b = spread_b.foliarMoisture();
           cmp(r, fm_a, fm_b, "fm");
-          back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_a);
-          back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_b);
+          back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_bui_eff_a);
+          back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_bui_eff_b);
           cmp(r, back_ros_a, back_ros_b, "back_ros final");
         }
       }
