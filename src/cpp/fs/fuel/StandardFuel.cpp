@@ -23,6 +23,15 @@ MathSize calculate_standard_rsc(const RoundedValue& isi, const RoundedValue& fmc
   return calculate_standard_foliar_moisture_isi(as_value(isi))
        * calculate_standard_foliar_moisture_fmc(as_value(fmc));
 }
+MathSize calculate_standard_final_ros(
+  const RoundedValue&,
+  const RoundedValue&,
+  const RoundedValue&,
+  const RoundedValue& rss
+)
+{
+  return rss;
+}
 StandardFuel::StandardFuel(
   const FuelCodeSize& code,
   const char* name,
@@ -119,13 +128,13 @@ MathSize StandardFuel::crownConsumption(const RoundedValue& cfb) const noexcept
   return calculate_standard_length_to_breadth(as_value(ws));
 }
 MathSize StandardFuel::finalRos(
-  const RoundedValue&,
-  const RoundedValue&,
-  const RoundedValue&,
+  const RoundedValue& foliar_moisture,
+  const RoundedValue& isi,
+  const RoundedValue& cfb,
   const RoundedValue& rss
 ) const
 {
-  return rss;
+  return calculate_standard_final_ros(foliar_moisture, isi, cfb, rss);
 }
 [[nodiscard]] MathSize StandardFuel::buiEffect(const RoundedValue& bui) const noexcept
 {

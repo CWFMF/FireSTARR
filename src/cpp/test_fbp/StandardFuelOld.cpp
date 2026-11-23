@@ -24,4 +24,13 @@ MathSize calculate_standard_rsc(const RoundedValue& isi, const RoundedValue& fmc
   return calculate_standard_foliar_moisture_isi(as_value(isi))
        * calculate_standard_foliar_moisture_fmc(as_value(fmc));
 }
+MathSize calculate_standard_final_ros(
+  const RoundedValue&,
+  const RoundedValue&,
+  const RoundedValue&,
+  const RoundedValue& rss
+)
+{
+  return rss;
+}
 }

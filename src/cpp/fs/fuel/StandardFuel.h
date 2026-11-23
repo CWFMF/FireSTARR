@@ -30,6 +30,30 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  */
 [[nodiscard]] MathSize calculate_standard_length_to_breadth(const LookupValue& ws) noexcept;
 /**
+ * \brief Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
+ * \param isi Initial Spread Index
+ * \param fmc Foliar Moisture Content
+ * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
+ */
+[[nodiscard]] MathSize calculate_standard_rsc(
+  const RoundedValue& isi,
+  const RoundedValue& fmc
+) noexcept;
+/**
+ * \brief Final rate of spread (m/min)
+ * \param foliar_moisture Foliar moisture to use
+ * \param isi Initial Spread Index (may differ from wx because of slope)
+ * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
+ * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
+ * \return Final rate of spread (m/min)
+ */
+[[nodiscard]] MathSize calculate_standard_final_ros(
+  const RoundedValue& foliar_moisture,
+  const RoundedValue& isi,
+  const RoundedValue& cfb,
+  const RoundedValue& rss
+);
+/**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
  * \tparam B Rate of spread parameter b * 10000 [ST-X-3 table 6]
