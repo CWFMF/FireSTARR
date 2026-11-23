@@ -122,7 +122,10 @@ RoundedValue SpreadInfo::initial(
     if (spread.is_crown_)
     {
       spread.head_ros_ = fuel->finalRos(
-        spread, isi, fuel->crownFractionBurned(spread.head_ros_, rso), spread.head_ros_
+        spread.foliarMoisture(),
+        isi,
+        fuel->crownFractionBurned(spread.head_ros_, rso),
+        spread.head_ros_
       );
     }
   }
@@ -388,7 +391,9 @@ SpreadInfo::SpreadInfo(
   auto back_ros = fuel->calculateRos(nd, weather, back_isi) * bui_eff;
   if (is_crown_)
   {
-    back_ros = fuel->finalRos(*this, back_isi, fuel->crownFractionBurned(back_ros, rso), back_ros);
+    back_ros = fuel->finalRos(
+      foliarMoisture(), back_isi, fuel->crownFractionBurned(back_ros, rso), back_ros
+    );
   }
   tfc_ = sfc_;
   // don't need to re-evaluate if crown with new head_ros_ because it would only go up if

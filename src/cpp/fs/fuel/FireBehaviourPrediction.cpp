@@ -553,13 +553,13 @@ FuelC6::FuelC6(const FuelCodeSize& code) noexcept
   : FuelPine(code, "C-6", LOG_0_80, 30, 800, 300, 62, 7, 180, 50, 50, &duff::PineSeney)
 { }
 MathSize FuelC6::finalRos(
-  const SpreadInfo& spread,
+  const RoundedValue& foliar_moisture,
   const RoundedValue& isi,
   const RoundedValue& cfb,
   const RoundedValue& rss
-) const noexcept
+) const
 {
-  const auto rsc = crownRateOfSpread(isi, spread.foliarMoisture());
+  const auto rsc = crownRateOfSpread(isi, foliar_moisture);
   // using max with 0 is the same as ensuring rsc > rss
   return rss + cfb * max(0.0, rsc - rss);
 }
@@ -745,7 +745,7 @@ FuelVariable::FuelVariable(
   return compare_by_season(*this, [ws](const FuelType& fuel) { return fuel.lengthToBreadth(ws); });
 }
 [[nodiscard]] MathSize FuelVariable::
-  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&) const
+  finalRos(const RoundedValue&, const RoundedValue&, const RoundedValue&, const RoundedValue&) const
 {
   throw runtime_error("FuelVariable not resolved to specific type");
 }

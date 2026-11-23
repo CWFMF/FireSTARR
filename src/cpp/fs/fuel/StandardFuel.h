@@ -131,15 +131,18 @@ public:
   [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override;
   /**
    * \brief Final rate of spread (m/min)
+   * \param foliar_moisture Foliar moisture to use
+   * \param isi Initial Spread Index (may differ from wx because of slope)
+   * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
-  MathSize finalRos(
-    const SpreadInfo&,
-    const RoundedValue&,
-    const RoundedValue&,
+  [[nodiscard]] MathSize finalRos(
+    const RoundedValue& foliar_moisture,
+    const RoundedValue& isi,
+    const RoundedValue& cfb,
     const RoundedValue& rss
-  ) const noexcept override;
+  ) const override;
   /**
    * \brief BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    * \param bui Build-up Index

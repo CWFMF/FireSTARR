@@ -73,13 +73,13 @@ MathSize FuelOldC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexc
   return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
 }
 MathSize FuelOldC6::finalRos(
-  const SpreadInfo& spread,
+  const RoundedValue& foliar_moisture,
   const RoundedValue& isi,
   const RoundedValue& cfb,
   const RoundedValue& rss
-) const noexcept
+) const
 {
-  const auto rsc = crownRateOfSpread(isi, spread.foliarMoisture());
+  const auto rsc = crownRateOfSpread(isi, foliar_moisture);
   // using max with 0 is the same as ensuring rsc > rss
   return rss + cfb * max(0.0, rsc - rss);
 }

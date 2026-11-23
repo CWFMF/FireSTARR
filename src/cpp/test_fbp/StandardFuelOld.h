@@ -2,6 +2,7 @@
 #ifndef FS_STANDARD_FUEL_OLD_H
 #define FS_STANDARD_FUEL_OLD_H
 #include "../fs/util/LogValue.h"
+#include "fs/unstable.h"
 #include "FuelTypeOld.h"
 namespace fs::fuelold
 {
@@ -152,11 +153,11 @@ public:
    * \return Final rate of spread (m/min)
    */
   MathSize finalRos(
-    const SpreadInfo&,
+    const RoundedValue&,
     const RoundedValue&,
     const RoundedValue&,
     const RoundedValue& rss
-  ) const noexcept override
+  ) const override
   {
     return rss;
   }

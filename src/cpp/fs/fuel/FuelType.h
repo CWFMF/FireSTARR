@@ -170,14 +170,14 @@ public:
   [[nodiscard]] virtual MathSize lengthToBreadth(const RoundedValue& ws) const = 0;
   /**
    * \brief Final rate of spread (m/min)
-   * \param spread SpreadInfo to use
+   * \param foliar_moisture Foliar moisture to use
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
   [[nodiscard]] virtual MathSize finalRos(
-    const SpreadInfo& spread,
+    const RoundedValue& foliar_moisture,
     const RoundedValue& isi,
     const RoundedValue& cfb,
     const RoundedValue& rss
@@ -296,7 +296,7 @@ public:
    * \return Throw a runtime_error
    */
   [[nodiscard]] MathSize
-  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
+  finalRos(const RoundedValue&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
     const override;
   /**
    * \brief Throw a runtime_error

@@ -731,18 +731,18 @@ public:
   { }
   /**
    * \brief Final rate of spread (m/min)
-   * \param spread SpreadInfo to use
+   * \param foliar_moisture Foliar moisture to use
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
   [[nodiscard]] MathSize finalRos(
-    const SpreadInfo& spread,
+    const RoundedValue& foliar_moisture,
     const RoundedValue& isi,
     const RoundedValue& cfb,
     const RoundedValue& rss
-  ) const noexcept override;
+  ) const override;
 };
 /**
  * \brief FBP fuel type C-7.
@@ -1231,16 +1231,8 @@ public:
       return fuel.lengthToBreadth(ws);
     });
   }
-  /**
-   * \brief Final rate of spread (m/min)
-   * \param spread SpreadInfo to use
-   * \param isi Initial Spread Index (may differ from wx because of slope)
-   * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
-   * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
-   * \return Final rate of spread (m/min)
-   */
   [[nodiscard]] MathSize
-  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
+  finalRos(const RoundedValue&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
     const override
   {
     throw runtime_error("FuelVariable not resolved to specific type");

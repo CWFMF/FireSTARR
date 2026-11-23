@@ -113,11 +113,11 @@ MathSize StandardFuel::crownConsumption(const RoundedValue& cfb) const noexcept
   return calculate_standard_length_to_breadth(as_value(ws));
 }
 MathSize StandardFuel::finalRos(
-  const SpreadInfo&,
+  const RoundedValue&,
   const RoundedValue&,
   const RoundedValue&,
   const RoundedValue& rss
-) const noexcept
+) const
 {
   return rss;
 }
