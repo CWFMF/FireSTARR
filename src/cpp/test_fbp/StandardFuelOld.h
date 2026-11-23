@@ -221,7 +221,7 @@ public:
    * \brief Average Build-up Index for the fuel type [ST-X-3 table 7]
    * \return Average Build-up Index for the fuel type [ST-X-3 table 7]
    */
-  [[nodiscard]] static MathSize bui0() noexcept { return Bui0; }
+  [[nodiscard]] MathSize bui0() const noexcept { return Bui0; }
   /**
    * \brief Crown base height (m) [ST-X-3 table 8]
    * \return Crown base height (m) [ST-X-3 table 8]
@@ -236,12 +236,12 @@ public:
    * \brief Rate of spread parameter a [ST-X-3 table 6]
    * \return Rate of spread parameter a [ST-X-3 table 6]
    */
-  [[nodiscard]] static MathSize a() noexcept { return A; }
+  [[nodiscard]] MathSize a() const noexcept { return A; }
   /**
    * \brief Negative of rate of spread parameter b [ST-X-3 table 6]
    * \return Negative of rate of spread parameter b [ST-X-3 table 6]
    */
-  [[nodiscard]] static MathSize negB() noexcept
+  [[nodiscard]] MathSize negB() const noexcept
   {
     // the only places this gets used it gets negated so just store it that way
     return -B / 10000.0;
@@ -250,7 +250,7 @@ public:
    * \brief Rate of spread parameter c [ST-X-3 table 6]
    * \return Rate of spread parameter c [ST-X-3 table 6]
    */
-  [[nodiscard]] static MathSize c() noexcept { return C / 100.0; }
+  [[nodiscard]] MathSize c() const noexcept { return C / 100.0; }
 
 public:
   /**

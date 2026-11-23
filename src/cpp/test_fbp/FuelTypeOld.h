@@ -87,17 +87,17 @@ public:
    * \brief Duff Bulk Density (kg/m^3) [Anderson table 1]
    * \return Duff Bulk Density (kg/m^3) [Anderson table 1]
    */
-  [[nodiscard]] static MathSize bulkDensity() { return BulkDensity / 1000.0; }
+  [[nodiscard]] MathSize bulkDensity() const { return BulkDensity / 1000.0; }
   /**
    * \brief Inorganic Percent (% / 100) [Anderson table 1]
    * \return Inorganic Percent (% / 100) [Anderson table 1]
    */
-  [[nodiscard]] static MathSize inorganicPercent() { return InorganicPercent / 100.0; }
+  [[nodiscard]] MathSize inorganicPercent() const { return InorganicPercent / 100.0; }
   /**
    * \brief DuffDepth Depth of Duff layer (cm) [Anderson table 1]
    * \return DuffDepth Depth of Duff layer (cm) [Anderson table 1]
    */
-  [[nodiscard]] static MathSize duffDepth() { return DuffDepth / 10.0; }
+  [[nodiscard]] MathSize duffDepth() const { return DuffDepth / 10.0; }
   /**
    * \brief Type of duff deeper underground
    * \return Type of duff deeper underground
@@ -112,12 +112,12 @@ public:
    * \brief What fraction of the duff layer should use FFMC to determine moisture
    * \return What fraction of the duff layer should use FFMC to determine moisture
    */
-  [[nodiscard]] static MathSize ffmcRatio() { return 1 - dmcRatio(); }
+  [[nodiscard]] MathSize ffmcRatio() const { return 1 - dmcRatio(); }
   /**
    * \brief What fraction of the duff layer should use DMC to determine moisture
    * \return What fraction of the duff layer should use DMC to determine moisture
    */
-  [[nodiscard]] static MathSize dmcRatio()
+  [[nodiscard]] MathSize dmcRatio() const
   {
     return (duffDepth() - fs::survival::DUFF_FFMC_DEPTH) / duffDepth();
   }

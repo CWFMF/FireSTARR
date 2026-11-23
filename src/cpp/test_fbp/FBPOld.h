@@ -364,26 +364,26 @@ public:
    * \brief Percent Conifer (% / 100)
    * \return Percent Conifer (% / 100)
    */
-  [[nodiscard]] static MathSize ratioConifer() { return PercentMixed / 100.0; }
+  [[nodiscard]] MathSize ratioConifer() const { return PercentMixed / 100.0; }
   /**
    * \brief Percent Deciduous (% / 100)
    * \return Percent Deciduous (% / 100)
    */
-  [[nodiscard]] static MathSize ratioDeciduous() { return 1.0 - (PercentMixed / 100.0); }
+  [[nodiscard]] MathSize ratioDeciduous() const { return 1.0 - (PercentMixed / 100.0); }
 
 protected:
   /**
    * \brief Rate of spread multiplier [ST-X-3 eq 27/28, GLC-X-10 eq 29/30]
    * \return Rate of spread multiplier [ST-X-3 eq 27/28, GLC-X-10 eq 29/30]
    */
-  [[nodiscard]] static MathSize rosMultiplier() { return RosMultiplier / 10.0; }
+  [[nodiscard]] MathSize rosMultiplier() const { return RosMultiplier / 10.0; }
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    */
-  [[nodiscard]] static MathSize isfD1(const SpreadInfo& spread, const RoundedValue& isi) noexcept
+  [[nodiscard]] MathSize isfD1(const SpreadInfo& spread, const RoundedValue& isi) const noexcept
   {
     static const FuelOldD1 F{14};
     return F.isfD1(spread, rosMultiplier(), isi);
@@ -990,22 +990,22 @@ private:
    * \brief Forest Floor Consumption parameter a [ST-X-3 eq 19/21/23]
    * \return Forest Floor Consumption parameter a [ST-X-3 eq 19/21/23]
    */
-  [[nodiscard]] static MathSize ffcA() { return FfcA; }
+  [[nodiscard]] MathSize ffcA() const { return FfcA; }
   /**
    * \brief Forest Floor Consumption parameter b [ST-X-3 eq 19/21/23]
    * \return Forest Floor Consumption parameter b [ST-X-3 eq 19/21/23]
    */
-  [[nodiscard]] static MathSize ffcB() { return FfcB / 10000.0; }
+  [[nodiscard]] MathSize ffcB() const { return FfcB / 10000.0; }
   /**
    * \brief Woody Fuel Consumption parameter a [ST-X-3 eq 20/22/24]
    * \return Woody Fuel Consumption parameter a [ST-X-3 eq 20/22/24]
    */
-  [[nodiscard]] static MathSize wfcA() { return WfcA; }
+  [[nodiscard]] MathSize wfcA() const { return WfcA; }
   /**
    * \brief Woody Fuel Consumption parameter b [ST-X-3 eq 20/22/24]
    * \return Woody Fuel Consumption parameter b [ST-X-3 eq 20/22/24]
    */
-  [[nodiscard]] static MathSize wfcB() { return WfcB / 10000.0; }
+  [[nodiscard]] MathSize wfcB() const { return WfcB / 10000.0; }
 };
 /**
  * \brief FBP fuel type S-1.
