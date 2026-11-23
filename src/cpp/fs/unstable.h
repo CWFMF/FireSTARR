@@ -126,8 +126,8 @@ static constexpr size_t LookupMax{1'000};
 template <size_t N = 1>
 constexpr MathSize round_value(const MathSize value) noexcept
 {
-  constexpr uint64_t base = pow_int<N>(10);
-  const auto i = static_cast<std::uint64_t>(value * base);
+  constexpr std::int64_t base = pow_int<N>(10);
+  const auto i = static_cast<std::int64_t>(value * base);
   const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(base);
   return v;
 }
