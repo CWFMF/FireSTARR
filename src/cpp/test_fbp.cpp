@@ -295,18 +295,14 @@ int compare_spread(
           auto rso_a = FuelType::criticalRos(sfc_a, csi_a);
           auto rso_b = FuelType::criticalRos(sfc_b, csi_b);
           cmp(r, rso_a, rso_b, "rso");
-          back_ros_a = a->finalRos(
-            spread_a.foliarMoisture(),
-            back_isi,
-            a->crownFractionBurned(back_ros_a, rso_a),
-            back_ros_a
-          );
-          back_ros_b = b->finalRos(
-            spread_b.foliarMoisture(),
-            back_isi,
-            a->crownFractionBurned(back_ros_a, rso_b),
-            back_ros_b
-          );
+          auto cfb_a = a->crownFractionBurned(back_ros_a, rso_a);
+          auto cfb_b = b->crownFractionBurned(back_ros_b, rso_b);
+          cmp(r, cfb_a, cfb_b, "cfb");
+          auto fm_a = spread_a.foliarMoisture();
+          auto fm_b = spread_b.foliarMoisture();
+          cmp(r, fm_a, fm_b, "fm");
+          back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_a);
+          back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_b);
           cmp(r, back_ros_a, back_ros_b, "back_ros final");
         }
       }
