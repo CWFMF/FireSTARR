@@ -240,6 +240,11 @@ auto compare_spread(
       const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
       check_equal(spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
       check_equal(
+        a->calculateIsf(spread_a, as_value(weather.isi())),
+        b->calculateIsf(spread_b, as_value(weather.isi())),
+        "calculateIsf"
+      );
+      check_equal(
         a->crownRateOfSpread(as_value(weather.isi()), spread_a.foliarMoisture()),
         b->crownRateOfSpread(as_value(weather.isi()), spread_b.foliarMoisture()),
         "crownRateOfSpread"
@@ -529,7 +534,6 @@ auto compare_fuel_basic(
       );
     }
   );
-  // MathSize calculateIsf(const SpreadInfo& spread, const ____RoundedValue____& isi)
   // MathSize surfaceFuelConsumption(const SpreadInfo& spread) const
   check_range(
     "lengthToBreadth()",
