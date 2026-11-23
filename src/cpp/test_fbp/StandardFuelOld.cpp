@@ -41,4 +41,13 @@ MathSize calculate_bui_effect(
 {
   return (0 < bui) ? exp(50.0 * log_q * ((1.0 / bui) - (1.0 / bui0))) : 1.0;
 }
+MathSize calculate_ros_basic(
+  const MathConstantSize& a,
+  const MathConstantSize& neg_b,
+  const MathConstantSize& c,
+  const RoundedValue& isi
+) noexcept
+{
+  return a * pow(1.0 - exp(neg_b * isi), c);
+}
 }

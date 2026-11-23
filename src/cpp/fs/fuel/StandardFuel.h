@@ -66,6 +66,17 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
   const RoundedValue& bui
 ) noexcept;
 /**
+ * \brief Initial rate of spread (m/min) [ST-X-3 eq 26]
+ * \param isi Initial Spread Index
+ * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
+ */
+[[nodiscard]] MathSize calculate_ros_basic(
+  const MathConstantSize& a,
+  const MathConstantSize& neg_b,
+  const MathConstantSize& c,
+  const RoundedValue& isi
+) noexcept;
+/**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
  * \tparam B Rate of spread parameter b * 10000 [ST-X-3 table 6]

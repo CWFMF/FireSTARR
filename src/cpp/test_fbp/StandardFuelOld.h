@@ -65,6 +65,12 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
   const MathConstantSize& bui0,
   const RoundedValue& bui
 ) noexcept;
+[[nodiscard]] MathSize calculate_ros_basic(
+  const MathConstantSize& a,
+  const MathConstantSize& neg_b,
+  const MathConstantSize& c,
+  const RoundedValue& isi
+) noexcept;
 /**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -147,7 +153,7 @@ public:
    */
   [[nodiscard]] MathSize rosBasic(const RoundedValue& isi) const noexcept
   {
-    return a() * pow(1.0 - exp(negB() * isi), c());
+    return calculate_ros_basic(a(), negB(), c(), isi);
   }
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
