@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 . ./.env
-PLATFORMS="amd64 arm/v5 arm/v7 arm64/v8 i386 ppc64le riscv64 s390x"
+# PLATFORMS="amd64 arm/v5 arm/v7 arm64/v8 i386 ppc64le riscv64 s390x"
+PLATFORMS="arm64/v8"
 # echo PLATFORMS = ${PLATFORMS}
 for p in ${PLATFORMS}
 do

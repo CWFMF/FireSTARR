@@ -136,7 +136,7 @@ protected:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr FuelOldConifer(
+  FuelOldConifer(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -159,12 +159,7 @@ protected:
    * \param log_q Log value of q [ST-X-3 table 7]
    * \param duff Type of duff near the surface and deeper underground
    */
-  constexpr FuelOldConifer(
-    const FuelCodeSize& code,
-    const char* name,
-    const LogValue log_q,
-    const Duff* duff
-  )
+  FuelOldConifer(const FuelCodeSize& code, const char* name, const LogValue log_q, const Duff* duff)
     : FuelOldConifer(code, name, log_q, duff, duff)
   { }
 };
@@ -248,7 +243,7 @@ public:
    * \brief FBP fuel type D-1
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldD1(const FuelCodeSize& code) noexcept
+  explicit FuelOldD1(const FuelCodeSize& code) noexcept
     : FuelOldNonMixed(code, "D-1", false, LOG_0_90, &duff::Peat)
   { }
   /**
@@ -311,7 +306,7 @@ public:
    * \param name Name of the fuel
    * \param log_q Log value of q [ST-X-3 table 7]
    */
-  constexpr FuelOldMixed(const FuelCodeSize& code, const char* name, const LogValue log_q)
+  FuelOldMixed(const FuelCodeSize& code, const char* name, const LogValue log_q)
     : StandardFuelOld<A, B, C, Bui0, 6, 80, BulkDensity, InorganicPercent, DuffDepth>(
         code,
         name,
@@ -369,19 +364,19 @@ public:
    * \brief Percent Conifer (% / 100)
    * \return Percent Conifer (% / 100)
    */
-  [[nodiscard]] static constexpr MathSize ratioConifer() { return PercentMixed / 100.0; }
+  [[nodiscard]] static MathSize ratioConifer() { return PercentMixed / 100.0; }
   /**
    * \brief Percent Deciduous (% / 100)
    * \return Percent Deciduous (% / 100)
    */
-  [[nodiscard]] static constexpr MathSize ratioDeciduous() { return 1.0 - (PercentMixed / 100.0); }
+  [[nodiscard]] static MathSize ratioDeciduous() { return 1.0 - (PercentMixed / 100.0); }
 
 protected:
   /**
    * \brief Rate of spread multiplier [ST-X-3 eq 27/28, GLC-X-10 eq 29/30]
    * \return Rate of spread multiplier [ST-X-3 eq 27/28, GLC-X-10 eq 29/30]
    */
-  [[nodiscard]] static constexpr MathSize rosMultiplier() { return RosMultiplier / 10.0; }
+  [[nodiscard]] static MathSize rosMultiplier() { return RosMultiplier / 10.0; }
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
@@ -420,7 +415,7 @@ public:
    * \param name Name of the fuel
    * \param log_q Log value of q [ST-X-3 table 7]
    */
-  constexpr FuelOldMixedDead(const FuelCodeSize& code, const char* name, const LogValue log_q)
+  FuelOldMixedDead(const FuelCodeSize& code, const char* name, const LogValue log_q)
     : FuelOldMixed<A, B, C, Bui0, RosMultiplier, PercentDeadFir, 61, 15, 75>(code, name, log_q)
   { }
 };
@@ -445,7 +440,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelOldMixedWood(const FuelCodeSize& code, const char* name)
+  FuelOldMixedWood(const FuelCodeSize& code, const char* name)
     : FuelOldMixed<110, 282, 150, 50, RosMultiplier, RatioMixed, 108, 25, 50>(code, name, LOG_0_80)
   { }
   /**
@@ -494,7 +489,7 @@ public:
    * \param name Name of the fuel
    * \param log_q Log value of q [ST-X-3 table 7]
    */
-  constexpr FuelOldGrass(const FuelCodeSize& code, const char* name, const LogValue log_q)
+  FuelOldGrass(const FuelCodeSize& code, const char* name, const LogValue log_q)
     // HACK: grass assumes no duff (total duff depth == ffmc depth => dmc depth is 0)
     : StandardFuelOld<
         A,
@@ -614,7 +609,7 @@ public:
    * \brief FBP fuel type C-1
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC1(const FuelCodeSize& code) noexcept
+  explicit FuelOldC1(const FuelCodeSize& code) noexcept
     : FuelOldConifer(code, "C-1", LOG_0_90, &duff::Reindeer, &duff::Peat)
   { }
   /**
@@ -640,7 +635,7 @@ public:
    * \brief FBP fuel type C-2
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC2(const FuelCodeSize& code) noexcept
+  explicit FuelOldC2(const FuelCodeSize& code) noexcept
     : FuelOldConifer(code, "C-2", LOG_0_70, &duff::SphagnumUpper)
   { }
   /**
@@ -666,7 +661,7 @@ public:
    * \brief FBP fuel type C-3
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC3(const FuelCodeSize& code) noexcept
+  explicit FuelOldC3(const FuelCodeSize& code) noexcept
     : FuelOldJackpine(code, "C-3", LOG_0_75, &duff::FeatherMoss, &duff::PineSeney)
   { }
 };
@@ -686,7 +681,7 @@ public:
    * \brief FBP fuel type C-4
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC4(const FuelCodeSize& code) noexcept
+  explicit FuelOldC4(const FuelCodeSize& code) noexcept
     : FuelOldJackpine(code, "C-4", LOG_0_80, &duff::PineSeney)
   { }
 };
@@ -706,7 +701,7 @@ public:
    * \brief FBP fuel type C-5
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC5(const FuelCodeSize& code) noexcept
+  explicit FuelOldC5(const FuelCodeSize& code) noexcept
     : FuelOldPine(code, "C-5", LOG_0_80, &duff::PineSeney)
   { }
 };
@@ -726,7 +721,7 @@ public:
    * \brief FBP fuel type C-6
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC6(const FuelCodeSize& code) noexcept
+  explicit FuelOldC6(const FuelCodeSize& code) noexcept
     : FuelOldPine(code, "C-6", LOG_0_80, &duff::PineSeney)
   { }
   /**
@@ -760,7 +755,7 @@ public:
    * \brief FBP fuel type C-7
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldC7(const FuelCodeSize& code) noexcept
+  explicit FuelOldC7(const FuelCodeSize& code) noexcept
     : FuelOldConifer(code, "C-7", LOG_0_85, &duff::SprucePine)
   { }
   /**
@@ -787,7 +782,7 @@ public:
    * \brief FBP fuel type D-2
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldD2(const FuelCodeSize& code) noexcept
+  explicit FuelOldD2(const FuelCodeSize& code) noexcept
     : FuelOldNonMixed(code, "D-2", false, LOG_0_90, &duff::Peat)
   { }
   /**
@@ -825,7 +820,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelOldM1(const FuelCodeSize& code, const char* name)
+  FuelOldM1(const FuelCodeSize& code, const char* name)
     : FuelOldMixedWood<10, PercentConifer>(code, name)
   { }
 };
@@ -848,7 +843,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelOldM2(const FuelCodeSize& code, const char* name)
+  FuelOldM2(const FuelCodeSize& code, const char* name)
     : FuelOldMixedWood<2, PercentConifer>(code, name)
   { }
 };
@@ -871,7 +866,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelOldM3(const FuelCodeSize& code, const char* name)
+  FuelOldM3(const FuelCodeSize& code, const char* name)
     : FuelOldMixedDead<120, 572, 140, 50, 10, PercentDeadFir>(code, name, LOG_0_80)
   { }
 };
@@ -894,7 +889,7 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelOldM4(const FuelCodeSize& code, const char* name)
+  FuelOldM4(const FuelCodeSize& code, const char* name)
     : FuelOldMixedDead<100, 404, 148, 50, 2, PercentDeadFir>(code, name, LOG_0_80)
   { }
 };
@@ -914,9 +909,7 @@ public:
    * \brief FBP fuel type O-1a.
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldO1A(const FuelCodeSize& code) noexcept
-    : FuelOldGrass(code, "O-1a", LOG_1_00)
-  { }
+  explicit FuelOldO1A(const FuelCodeSize& code) noexcept : FuelOldGrass(code, "O-1a", LOG_1_00) { }
 };
 /**
  * \brief FBP fuel type O-1b.
@@ -934,9 +927,7 @@ public:
    * \brief FBP fuel type O-1b.
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldO1B(const FuelCodeSize& code) noexcept
-    : FuelOldGrass(code, "O-1b", LOG_1_00)
-  { }
+  explicit FuelOldO1B(const FuelCodeSize& code) noexcept : FuelOldGrass(code, "O-1b", LOG_1_00) { }
 };
 /**
  * \brief A slash fuel type.
@@ -968,7 +959,7 @@ public:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr FuelOldSlash(
+  FuelOldSlash(
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
@@ -999,22 +990,22 @@ private:
    * \brief Forest Floor Consumption parameter a [ST-X-3 eq 19/21/23]
    * \return Forest Floor Consumption parameter a [ST-X-3 eq 19/21/23]
    */
-  [[nodiscard]] static constexpr MathSize ffcA() { return FfcA; }
+  [[nodiscard]] static MathSize ffcA() { return FfcA; }
   /**
    * \brief Forest Floor Consumption parameter b [ST-X-3 eq 19/21/23]
    * \return Forest Floor Consumption parameter b [ST-X-3 eq 19/21/23]
    */
-  [[nodiscard]] static constexpr MathSize ffcB() { return FfcB / 10000.0; }
+  [[nodiscard]] static MathSize ffcB() { return FfcB / 10000.0; }
   /**
    * \brief Woody Fuel Consumption parameter a [ST-X-3 eq 20/22/24]
    * \return Woody Fuel Consumption parameter a [ST-X-3 eq 20/22/24]
    */
-  [[nodiscard]] static constexpr MathSize wfcA() { return WfcA; }
+  [[nodiscard]] static MathSize wfcA() { return WfcA; }
   /**
    * \brief Woody Fuel Consumption parameter b [ST-X-3 eq 20/22/24]
    * \return Woody Fuel Consumption parameter b [ST-X-3 eq 20/22/24]
    */
-  [[nodiscard]] static constexpr MathSize wfcB() { return WfcB / 10000.0; }
+  [[nodiscard]] static MathSize wfcB() { return WfcB / 10000.0; }
 };
 /**
  * \brief FBP fuel type S-1.
@@ -1032,7 +1023,7 @@ public:
    * \brief FBP fuel type S-1
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldS1(const FuelCodeSize& code) noexcept
+  explicit FuelOldS1(const FuelCodeSize& code) noexcept
     : FuelOldSlash(code, "S-1", LOG_0_75, &duff::FeatherMoss, &duff::PineSeney)
   { }
 };
@@ -1052,7 +1043,7 @@ public:
    * \brief FBP fuel type S-2
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldS2(const FuelCodeSize& code) noexcept
+  explicit FuelOldS2(const FuelCodeSize& code) noexcept
     : FuelOldSlash(code, "S-2", LOG_0_75, &duff::FeatherMoss, &duff::WhiteSpruce)
   { }
 };
@@ -1072,7 +1063,7 @@ public:
    * \brief FBP fuel type S-3
    * \param code Code to identify fuel with
    */
-  explicit constexpr FuelOldS3(const FuelCodeSize& code) noexcept
+  explicit FuelOldS3(const FuelCodeSize& code) noexcept
     : FuelOldSlash(code, "S-3", LOG_0_75, &duff::FeatherMoss, &duff::PineSeney)
   { }
 };
@@ -1126,7 +1117,7 @@ public:
    * \param spring Fuel type to use in the spring
    * \param summer Fuel type to use in the summer
    */
-  constexpr FuelOldVariable(
+  FuelOldVariable(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -1319,7 +1310,7 @@ public:
    * \param d1 D-1 fuel to use before green-up
    * \param d2 D-2 fuel to use after green-up
    */
-  constexpr FuelOldD1D2(const FuelCodeSize& code, const FuelOldD1* d1, const FuelOldD2* d2) noexcept
+  FuelOldD1D2(const FuelCodeSize& code, const FuelOldD1* d1, const FuelOldD2* d2) noexcept
     : FuelOldVariable(code, "D-1/D-2", false, d1, d2)
   { }
 };
@@ -1345,7 +1336,7 @@ public:
    * \param m1 M-1 fuel to use before green-up
    * \param m2 M-2 fuel to use after green-up
    */
-  constexpr FuelOldM1M2(
+  FuelOldM1M2(
     const FuelCodeSize& code,
     const char* name,
     const FuelOldM1<PercentConifer>* m1,
@@ -1381,7 +1372,7 @@ public:
    * \param m3 M-3 fuel to use before green-up
    * \param m4 M-4 fuel to use after green-up
    */
-  constexpr FuelOldM3M4(
+  FuelOldM3M4(
     const FuelCodeSize& code,
     const char* name,
     const FuelOldM3<PercentDeadFir>* m3,
@@ -1415,7 +1406,7 @@ public:
    * \param o1a O1-a fuel to use before green-up
    * \param o1b O1-b fuel to use after green-up
    */
-  constexpr FuelOldO1(
+  FuelOldO1(
     const FuelCodeSize& code,
     const char* name,
     const FuelOldO1A* o1a,

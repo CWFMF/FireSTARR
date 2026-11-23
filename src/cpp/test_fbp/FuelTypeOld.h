@@ -32,7 +32,7 @@ public:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr FuelOldBase(
+  FuelOldBase(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -87,37 +87,37 @@ public:
    * \brief Duff Bulk Density (kg/m^3) [Anderson table 1]
    * \return Duff Bulk Density (kg/m^3) [Anderson table 1]
    */
-  [[nodiscard]] static constexpr MathSize bulkDensity() { return BulkDensity / 1000.0; }
+  [[nodiscard]] static MathSize bulkDensity() { return BulkDensity / 1000.0; }
   /**
    * \brief Inorganic Percent (% / 100) [Anderson table 1]
    * \return Inorganic Percent (% / 100) [Anderson table 1]
    */
-  [[nodiscard]] static constexpr MathSize inorganicPercent() { return InorganicPercent / 100.0; }
+  [[nodiscard]] static MathSize inorganicPercent() { return InorganicPercent / 100.0; }
   /**
    * \brief DuffDepth Depth of Duff layer (cm) [Anderson table 1]
    * \return DuffDepth Depth of Duff layer (cm) [Anderson table 1]
    */
-  [[nodiscard]] static constexpr MathSize duffDepth() { return DuffDepth / 10.0; }
+  [[nodiscard]] static MathSize duffDepth() { return DuffDepth / 10.0; }
   /**
    * \brief Type of duff deeper underground
    * \return Type of duff deeper underground
    */
-  [[nodiscard]] constexpr const Duff* duffDmcType() const { return duff_dmc_; }
+  [[nodiscard]] const Duff* duffDmcType() const { return duff_dmc_; }
   /**
    * \brief Type of duff near the surface
    * \return Type of duff near the surface
    */
-  [[nodiscard]] constexpr const Duff* duffFfmcType() const { return duff_ffmc_; }
+  [[nodiscard]] const Duff* duffFfmcType() const { return duff_ffmc_; }
   /**
    * \brief What fraction of the duff layer should use FFMC to determine moisture
    * \return What fraction of the duff layer should use FFMC to determine moisture
    */
-  [[nodiscard]] static constexpr MathSize ffmcRatio() { return 1 - dmcRatio(); }
+  [[nodiscard]] static MathSize ffmcRatio() { return 1 - dmcRatio(); }
   /**
    * \brief What fraction of the duff layer should use DMC to determine moisture
    * \return What fraction of the duff layer should use DMC to determine moisture
    */
-  [[nodiscard]] static constexpr MathSize dmcRatio()
+  [[nodiscard]] static MathSize dmcRatio()
   {
     return (duffDepth() - fs::survival::DUFF_FFMC_DEPTH) / duffDepth();
   }

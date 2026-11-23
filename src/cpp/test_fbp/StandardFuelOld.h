@@ -99,7 +99,7 @@ public:
    * \param duff_ffmc Type of duff near the surface
    * \param duff_dmc Type of duff deeper underground
    */
-  constexpr StandardFuelOld(
+  StandardFuelOld(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -115,7 +115,10 @@ public:
         duff_dmc
       ),
       log_q_(log_q)
-  { }
+  {
+    assert(-negB() < 1);
+    assert(c() < 10 && c() > 1);
+  }
   /**
    * \brief Constructor
    * \param code Code to identify fuel with
@@ -124,7 +127,7 @@ public:
    * \param log_q Log value of q [ST-X-3 table 7]
    * \param duff Type of duff near the surface and deeper underground
    */
-  constexpr StandardFuelOld(
+  StandardFuelOld(
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
@@ -218,7 +221,7 @@ public:
    * \brief Average Build-up Index for the fuel type [ST-X-3 table 7]
    * \return Average Build-up Index for the fuel type [ST-X-3 table 7]
    */
-  [[nodiscard]] static constexpr MathSize bui0() noexcept { return Bui0; }
+  [[nodiscard]] static MathSize bui0() noexcept { return Bui0; }
   /**
    * \brief Crown base height (m) [ST-X-3 table 8]
    * \return Crown base height (m) [ST-X-3 table 8]
@@ -233,12 +236,12 @@ public:
    * \brief Rate of spread parameter a [ST-X-3 table 6]
    * \return Rate of spread parameter a [ST-X-3 table 6]
    */
-  [[nodiscard]] static constexpr MathSize a() noexcept { return A; }
+  [[nodiscard]] static MathSize a() noexcept { return A; }
   /**
    * \brief Negative of rate of spread parameter b [ST-X-3 table 6]
    * \return Negative of rate of spread parameter b [ST-X-3 table 6]
    */
-  [[nodiscard]] static constexpr MathSize negB() noexcept
+  [[nodiscard]] static MathSize negB() noexcept
   {
     // the only places this gets used it gets negated so just store it that way
     return -B / 10000.0;
@@ -247,7 +250,7 @@ public:
    * \brief Rate of spread parameter c [ST-X-3 table 6]
    * \return Rate of spread parameter c [ST-X-3 table 6]
    */
-  [[nodiscard]] static constexpr MathSize c() noexcept { return C / 100.0; }
+  [[nodiscard]] static MathSize c() noexcept { return C / 100.0; }
 
 public:
   /**
@@ -268,8 +271,6 @@ private:
    * \brief Log value of q [ST-X-3 table 7]
    */
   LogValue log_q_;
-  static_assert(-negB() < 1);
-  static_assert(c() < 10 && c() > 1);
 };
 }
 #endif
