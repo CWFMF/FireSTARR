@@ -2,6 +2,8 @@
 #ifndef FS_LOG_H
 #define FS_LOG_H
 #include "../stdafx.h"
+#include <cmath>
+#include <compare>
 #include <concepts>
 #include <cstdlib>
 #include <exception>
@@ -162,34 +164,40 @@ inline void check_equal(const bool lhs, const bool rhs, const char* name) DEBUG_
   );
 }
 template <typename T>
-inline void compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
+inline int compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
 {
-  if (lhs != rhs)
+  if (auto cmp = lhs <=> rhs; 0 != cmp)
   {
     logging::error("Expected {:s} to be {} but got {}", name, rhs, lhs);
+    return is_lt(cmp) ? -1 : 1;
   }
+  return 0;
 }
 template <class T>
   requires HasValue<T>
-inline void compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
+inline int compare_equal(const T lhs, const T rhs, const char* name) DEBUG_NOEXCEPT_OFF
 {
-  compare_equal(as_value(lhs), as_value(rhs), name);
+  return compare_equal(as_value(lhs), as_value(rhs), name);
 }
-inline void compare_equal(const char* lhs, const char* rhs, const char* name) DEBUG_NOEXCEPT_OFF
+inline int compare_equal(const char* lhs, const char* rhs, const char* name) DEBUG_NOEXCEPT_OFF
 {
-  if (0 != strcmp(lhs, rhs))
+  if (auto cmp = strcmp(lhs, rhs); 0 != cmp)
   {
-    logging::error("Expected {:s} to be {:s} but got {:s}", name, rhs, lhs);
+    logging::error("Expected {:s} to be {:s} got {:s}", name, rhs, lhs);
+    return cmp;
   }
+  return 0;
 }
-inline void compare_equal(const bool lhs, const bool rhs, const char* name) DEBUG_NOEXCEPT_OFF
+inline int compare_equal(const bool lhs, const bool rhs, const char* name) DEBUG_NOEXCEPT_OFF
 {
-  if (lhs != rhs)
+  if (auto cmp = lhs <=> rhs; 0 != cmp)
   {
     logging::error(
       "Expected {:s} to be {:s} but got {:s}", name, lhs ? "true" : "false", rhs ? "true" : "false"
     );
+    return is_lt(cmp) ? -1 : 1;
   }
+  return 0;
 }
 template <class V>
 inline void check_equal_verbose(
@@ -201,6 +209,18 @@ inline void check_equal_verbose(
 {
   check_equal(lhs, rhs, name);
   std::ignore = output(log_level, "{:s} matches", name);
+}
+template <class V>
+inline int compare_equal_verbose(
+  const logging::level log_level,
+  const V& lhs,
+  const V& rhs,
+  const char* name
+) DEBUG_NOEXCEPT_OFF
+{
+  auto r = compare_equal(lhs, rhs, name);
+  std::ignore = output(log_level, "{:s} matches", name);
+  return r;
 }
 inline void check_tolerance(
   const MathSize epsilon,
@@ -219,6 +239,28 @@ inline void check_tolerance(
     rhs,
     lhs
   );
+}
+inline int compare_tolerance(
+  const MathSize epsilon,
+  const MathSize lhs,
+  const MathSize rhs,
+  const char* name
+) DEBUG_NOEXCEPT_OFF
+{
+  const auto difference = lhs - rhs;
+  if (abs(difference) >= epsilon)
+  {
+    logging::error(
+      "Difference too big for {:s}: ({:g} > {:g}) for {:g} vs {:g}",
+      name,
+      difference,
+      epsilon,
+      rhs,
+      lhs
+    );
+    return lhs < rhs ? -1 : 1;
+  }
+  return 0;
 }
 }
 #endif

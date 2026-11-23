@@ -3,6 +3,7 @@
 #include <compare>
 #include <future>
 #include <mutex>
+#include <numeric>
 #include "fs/data/RangeIterator.h"
 #include "fs/fuel/FireBehaviourPrediction.h"
 #include "fs/fuel/FuelLookup.h"
@@ -104,11 +105,32 @@ private:
 };
 // check %, so 1 decimal is fine
 static constexpr auto EPSILON = static_cast<MathSize>(1e-1);
-auto check_equal(const auto& lhs, const auto& rhs, const char* name)
+int do_compare_values(const auto& lhs, const auto& rhs, const char* name)
 {
-  logging::check_equal_verbose(logging::level::debug, lhs, rhs, name);
+  return logging::compare_equal_verbose(logging::level::debug, lhs, rhs, name);
 }
-auto compare_fuel_valid(
+int cmp(int& lhs, int rhs)
+{
+  // assign and return first non-zero value
+  lhs = 0 == lhs ? rhs : lhs;
+  return lhs;
+}
+int cmp(int& lhs, const std::partial_ordering& rhs)
+{
+  // keep first non-zero value
+  lhs = 0 == lhs ? (std::is_lt(rhs) ? -1 : 1) : lhs;
+  return lhs;
+}
+int cmp(int& r, const auto& lhs, const auto& rhs, const char* name)
+{
+  return cmp(r, do_compare_values(lhs, rhs, name));
+}
+template <typename... Args>
+int cmp_range(int& lhs, Args... args)
+{
+  return cmp(lhs, compare_range(args...));
+}
+int compare_fuel_valid(
   const string name,
   const FuelType* f_a,
   const FuelType* f_b,
@@ -123,10 +145,11 @@ auto compare_fuel_valid(
   //
   const auto a0 = a.isValid();
   const auto b0 = b.isValid();
-  check_equal(a0, b0, "isValid");
-  check_equal(a.name(), b.name(), "name");
-  check_equal(a.code(), b.code(), "code");
-  return 0;
+  int r{0};
+  cmp(r, a0, b0, "isValid");
+  cmp(r, a.name(), b.name(), "name");
+  cmp(r, a.code(), b.code(), "code");
+  return r;
 }
 // use vectors so FuelCompareOptions can assign any of these directly
 static const auto BUI_RANGE_DEFAULTS = range(0.0, 300.0, 13.0);
@@ -147,7 +170,7 @@ struct FuelCompareOptions
 };
 static const FuelCompareOptions FUEL_COMPARE_DEFAULT{};
 static const FuelCompareOptions FUEL_COMPARE_DECIDUOUS{.bui_values = BUI_RANGE_DEFAULTS};
-auto compare_spread(
+int compare_spread(
   const string name,
   const FuelType* a,
   const FuelType* b,
@@ -222,11 +245,8 @@ auto compare_spread(
     it.begin(),
     it.end(),
     0,
-    [](const int a, const int b) {
-      // keep first non-zero value
-      return 0 == a ? b : a;
-    },
-    [&](const auto& v) {
+    first_non_zero,
+    [&](const auto& v) -> int {
       static const DurationSize TIME{INVALID_TIME};
       // HACK: 0.0 is causing offsets to be generated in grass
       static const MathSize MIN_ROS{1E-6};
@@ -238,13 +258,16 @@ auto compare_spread(
       const auto key = Cell::key(Cell::hashCell(slope, aspect, static_cast<FuelCodeSize>(0)));
       const SpreadInfo spread_a{a, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
       const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
-      check_equal(spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
-      check_equal(
+      int r{0};
+      cmp(r, spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
+      cmp(
+        r,
         a->calculateIsf(spread_a, as_value(weather.isi())),
         b->calculateIsf(spread_b, as_value(weather.isi())),
         "calculateIsf"
       );
-      check_equal(
+      cmp(
+        r,
         a->crownRateOfSpread(as_value(weather.isi()), spread_a.foliarMoisture()),
         b->crownRateOfSpread(as_value(weather.isi()), spread_b.foliarMoisture()),
         "crownRateOfSpread"
@@ -256,22 +279,22 @@ auto compare_spread(
         const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(as_value(wsv));
         const auto bui_eff_a = a->buiEffect(as_value(weather.bui()));
         const auto bui_eff_b = b->buiEffect(as_value(weather.bui()));
-        check_equal(bui_eff_a, bui_eff_b, "bui_eff");
+        cmp(r, bui_eff_a, bui_eff_b, "bui_eff");
         auto back_ros_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
         auto back_ros_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
-        check_equal(back_ros_a, back_ros_b, "back_ros");
+        cmp(r, back_ros_a, back_ros_b, "back_ros");
         // whether or not this is crown, this should give the same value
         // if (is_crown_)
         {
           auto sfc_a = a->surfaceFuelConsumption(spread_a);
           auto sfc_b = b->surfaceFuelConsumption(spread_b);
-          check_equal(sfc_a, sfc_b, "sfc");
+          cmp(r, sfc_a, sfc_b, "sfc");
           const auto csi_a = a->criticalSurfaceIntensity(spread_a);
           const auto csi_b = a->criticalSurfaceIntensity(spread_b);
-          check_equal(csi_a, csi_b, "csi");
+          cmp(r, csi_a, csi_b, "csi");
           auto rso_a = FuelType::criticalRos(sfc_a, csi_a);
           auto rso_b = FuelType::criticalRos(sfc_b, csi_b);
-          check_equal(rso_a, rso_b, "rso");
+          cmp(r, rso_a, rso_b, "rso");
           back_ros_a = a->finalRos(
             spread_a.foliarMoisture(),
             back_isi,
@@ -284,7 +307,7 @@ auto compare_spread(
             a->crownFractionBurned(back_ros_a, rso_b),
             back_ros_b
           );
-          check_equal(back_ros_a, back_ros_b, "back_ros final");
+          cmp(r, back_ros_a, back_ros_b, "back_ros final");
         }
       }
       const auto offsets_a = spread_a.offsets();
@@ -318,16 +341,9 @@ auto compare_spread(
           slope,
           aspect
         );
-        if (offsets_a.size() < offsets_b.size())
-        {
-          logging::error("compare_spread() size == -1");
-          return -1;
-        }
-        if (offsets_a.size() > offsets_b.size())
-        {
-          logging::error("compare_spread() size == 1");
-          return 1;
-        }
+        cmp(r, offsets_a.size(), offsets_b.size(), "compare_spread() size");
+        // return here since no point in comparing if not same number of offsets
+        return r;
       }
       if (show_offsets)
       {
@@ -341,29 +357,12 @@ auto compare_spread(
         {
           show_offset(pt_a);
         }
-        auto cmp_pt = std::partial_ordering::equivalent;
-        // HACK: do these in reverse so the last thing assigned is the result
-        if (auto cmp_sub = pt_a.offset() <=> pt_b.offset(); 0 != cmp_sub)
-        {
-          logging::compare_equal(pt_a.offset().x, pt_b.offset().x, "offset.x");
-          logging::compare_equal(pt_a.offset().y, pt_b.offset().y, "offset.y");
-          cmp_pt = cmp_sub;
-        }
-        if (auto cmp_sub = pt_a.raz() <=> pt_b.raz(); 0 != cmp_sub)
-        {
-          logging::compare_equal(pt_a.raz(), pt_b.raz(), "raz");
-          cmp_pt = cmp_sub;
-        }
-        if (auto cmp_sub = pt_a.ros() <=> pt_b.ros(); 0 != cmp_sub)
-        {
-          logging::compare_equal(pt_a.ros(), pt_b.ros(), "ros");
-          cmp_pt = cmp_sub;
-        }
-        if (auto cmp_sub = pt_a.intensity() <=> pt_b.intensity(); 0 != cmp_sub)
-        {
-          logging::compare_equal(pt_a.intensity(), pt_b.intensity(), "intensity");
-          cmp_pt = cmp_sub;
-        }
+        int cmp_pt{0};
+        cmp(cmp_pt, pt_a.intensity(), pt_b.intensity(), "intensity");
+        cmp(cmp_pt, pt_a.ros(), pt_b.ros(), "ros");
+        cmp(cmp_pt, pt_a.raz(), pt_b.raz(), "raz");
+        cmp(cmp_pt, pt_a.offset().x, pt_b.offset().x, "offset.x");
+        cmp(cmp_pt, pt_a.offset().y, pt_b.offset().y, "offset.y");
         if (auto cmp_overall = pt_a <=> pt_b; 0 != cmp_overall)
         {
           if (!show_offsets)
@@ -383,55 +382,53 @@ auto compare_spread(
             slope,
             aspect
           );
-          logging::compare_equal(
-            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
+          cmp(
+            cmp_pt,
+            spread_a.crownFractionBurned(),
+            spread_b.crownFractionBurned(),
+            "crownFractionBurned"
           );
-          logging::compare_equal(spread_a.maxIntensity(), spread_b.maxIntensity(), "maxIntensity");
-          logging::compare_equal(
-            spread_a.isNotSpreading(), spread_b.isNotSpreading(), "isNotSpreading"
+          cmp(cmp_pt, spread_a.maxIntensity(), spread_b.maxIntensity(), "maxIntensity");
+          cmp(cmp_pt, spread_a.isNotSpreading(), spread_b.isNotSpreading(), "isNotSpreading");
+          cmp(cmp_pt, spread_a.nd(), spread_b.nd(), "nd");
+          cmp(cmp_pt, spread_a.time(), spread_b.time(), "time");
+          cmp(cmp_pt, spread_a.lengthToBreadth(), spread_b.lengthToBreadth(), "lengthToBreadth");
+          cmp(cmp_pt, spread_a.percentSlope(), spread_b.percentSlope(), "percentSlope");
+          cmp(cmp_pt, spread_a.slopeAzimuth(), spread_b.slopeAzimuth(), "slopeAzimuth");
+          cmp(cmp_pt, spread_a.headRos(), spread_b.headRos(), "headRos");
+          cmp(cmp_pt, spread_a.headDirection(), spread_b.headDirection(), "headDirection");
+          cmp(cmp_pt, spread_a.slopeFactor(), spread_b.slopeFactor(), "slopeFactor");
+          cmp(cmp_pt, spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
+          cmp(cmp_pt, spread_a.isInvalid(), spread_b.isInvalid(), "isInvalid");
+          cmp(
+            cmp_pt,
+            spread_a.crownFractionBurned(),
+            spread_b.crownFractionBurned(),
+            "crownFractionBurned"
           );
-          logging::compare_equal(spread_a.nd(), spread_b.nd(), "nd");
-          logging::compare_equal(spread_a.time(), spread_b.time(), "time");
-          logging::compare_equal(
-            spread_a.lengthToBreadth(), spread_b.lengthToBreadth(), "lengthToBreadth"
+          cmp(
+            cmp_pt,
+            spread_a.crownFuelConsumption(),
+            spread_b.crownFuelConsumption(),
+            "crownFuelConsumption"
           );
-          logging::compare_equal(spread_a.percentSlope(), spread_b.percentSlope(), "percentSlope");
-          logging::compare_equal(spread_a.slopeAzimuth(), spread_b.slopeAzimuth(), "slopeAzimuth");
-          logging::compare_equal(spread_a.headRos(), spread_b.headRos(), "headRos");
-          logging::compare_equal(
-            spread_a.headDirection(), spread_b.headDirection(), "headDirection"
-          );
-          logging::compare_equal(spread_a.slopeFactor(), spread_b.slopeFactor(), "slopeFactor");
-          logging::compare_equal(
-            spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture"
-          );
-          logging::compare_equal(spread_a.isInvalid(), spread_b.isInvalid(), "isInvalid");
-          logging::compare_equal(
-            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
-          );
-          logging::compare_equal(
-            spread_a.crownFuelConsumption(), spread_b.crownFuelConsumption(), "crownFuelConsumption"
-          );
-          logging::compare_equal(
-            spread_a.fireDescription(), spread_b.fireDescription(), "fireDescription"
-          );
-          logging::compare_equal(
+          cmp(cmp_pt, spread_a.fireDescription(), spread_b.fireDescription(), "fireDescription");
+          cmp(
+            cmp_pt,
             spread_a.surfaceFuelConsumption(),
             spread_b.surfaceFuelConsumption(),
             "surfaceFuelConsumption"
           );
-          logging::compare_equal(
-            spread_a.totalFuelConsumption(), spread_b.totalFuelConsumption(), "totalFuelConsumption"
+          cmp(
+            cmp_pt,
+            spread_a.totalFuelConsumption(),
+            spread_b.totalFuelConsumption(),
+            "totalFuelConsumption"
           );
-          if (std::weak_ordering::less == cmp_pt)
+          if (0 != cmp_pt)
           {
-            logging::error("compare_spread() pt == -1");
-            return -1;
-          }
-          if (std::weak_ordering::greater == cmp_pt)
-          {
-            logging::error("compare_spread() pt == 1");
-            return 1;
+            logging::error("compare_spread() pt == {}", cmp_pt);
+            return cmp_pt;
           }
         }
       }
@@ -440,11 +437,11 @@ auto compare_spread(
         cout << "]\n";
       }
       logging::verbose("compare_spread() == 0 with {:d} comparisons", count_comparisons);
-      return 0;
+      return r;
     }
   );
 }
-auto compare_fuel_basic(
+int compare_fuel_basic(
   const string name,
   const FuelType* f_a,
   const FuelType* f_b,
@@ -485,20 +482,19 @@ auto compare_fuel_basic(
     n_cfb,
     n_total
   );
-  if (const auto cmp = compare_fuel_valid(name, f_a, f_b, msg.c_str()); 0 != cmp)
-  {
-    return cmp;
-  }
+  int r{0};
+  cmp(r, compare_fuel_valid(name, f_a, f_b, msg.c_str()));
   //
   // FuelType
   //
-  // check_equal(a.isValid(), b.isValid(), "isValid");
-  check_equal(FuelType::safeCode(&a), FuelType::safeCode(&b), "safeCode");
-  check_equal(FuelType::safeName(&a), FuelType::safeName(&b), "safeName");
-  check_equal(a.cfl(), b.cfl(), "cfl");
-  check_equal(a.canCrown(), b.canCrown(), "canCrown");
-  check_equal(a.cbh(), b.cbh(), "cbh");
-  check_range(
+  // cmp(r,a.isValid(), b.isValid(), "isValid");
+  cmp(r, FuelType::safeCode(&a), FuelType::safeCode(&b), "safeCode");
+  cmp(r, FuelType::safeName(&a), FuelType::safeName(&b), "safeName");
+  cmp(r, a.cfl(), b.cfl(), "cfl");
+  cmp(r, a.canCrown(), b.canCrown(), "canCrown");
+  cmp(r, a.cbh(), b.cbh(), "cbh");
+  cmp_range(
+    r,
     "probabilityPeat()",
     "mc_fraction",
     [&](const auto& v) { return a.probabilityPeat(v); },
@@ -507,7 +503,8 @@ auto compare_fuel_basic(
     RANGE_MC_FRACTION
   );
   // ThresholdSize survivalProbability(const FwiWeather& wx) const noexcept
-  check_range(
+  cmp_range(
+    r,
     "buiEffect()",
     "bui",
     [&](const auto& v) { return a.buiEffect(v); },
@@ -515,7 +512,8 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_BUI_EFFECT
   );
-  check_range(
+  cmp_range(
+    r,
     "crownConsumption()",
     "cfb",
     [&](const auto& v) { return a.crownConsumption(v); },
@@ -544,36 +542,42 @@ auto compare_fuel_basic(
     }
     return results;
   }();
-  std::for_each(
+  cmp(
+    r,
+    std::transform_reduce(
 #if !defined(__APPLE__) || !defined(__clang__)
-    // apple clang doesn't support this?
-    std::execution::par_unseq,
+      // apple clang doesn't support this?
+      std::execution::par_unseq,
 #endif
-    it_nds.begin(),
-    it_nds.end(),
-    [&](const auto& v) {
-      auto& [nd_binding, bui, dc] = v;
-      // HACK: avoid 'reference to local binding 'nd' declared in enclosing lambda expression'
-      auto nd = nd_binding;
-      // logging::verbose("dc {:0.100g}", dc);
-      const FwiWeather wx{
-        Weather::Zero(), Ffmc::Zero(), Dmc::Zero(), Dc{dc}, Isi::Zero(), Bui{bui}, Fwi::Zero()
-      };
-      const string msg = logging::should_log(logging::level::verbose)
-                         ? std::format("calculateRos(nd={}, bui={}, dc={})", nd, bui, dc)
-                         : "calculateRos()";
-      check_range(
-        msg.c_str(),
-        "isi",
-        [=, &a](const auto& v) { return a.calculateRos(nd, wx, v); },
-        [=, &b](const auto& v) { return b.calculateRos(nd, wx, v); },
-        EPSILON,
-        RANGE_ISI
-      );
-    }
+      it_nds.begin(),
+      it_nds.end(),
+      0,
+      first_non_zero,
+      [&](const auto& v) {
+        auto& [nd_binding, bui, dc] = v;
+        // HACK: avoid 'reference to local binding 'nd' declared in enclosing lambda expression'
+        auto nd = nd_binding;
+        // logging::verbose("dc {:0.100g}", dc);
+        const FwiWeather wx{
+          Weather::Zero(), Ffmc::Zero(), Dmc::Zero(), Dc{dc}, Isi::Zero(), Bui{bui}, Fwi::Zero()
+        };
+        const string msg = logging::should_log(logging::level::verbose)
+                           ? std::format("calculateRos(nd={}, bui={}, dc={})", nd, bui, dc)
+                           : "calculateRos()";
+        return compare_range(
+          msg.c_str(),
+          "isi",
+          [=, &a](const auto& v) { return a.calculateRos(nd, wx, v); },
+          [=, &b](const auto& v) { return b.calculateRos(nd, wx, v); },
+          EPSILON,
+          RANGE_ISI
+        );
+      }
+    )
   );
   // MathSize surfaceFuelConsumption(const SpreadInfo& spread) const
-  check_range(
+  cmp_range(
+    r,
     "lengthToBreadth()",
     "ws",
     [=, &a](const auto& v) { return a.lengthToBreadth(v); },
@@ -581,11 +585,13 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_WIND_SPEED
   );
-  // check_equal(a.name(), b.name(), "name");
-  // check_equal(a.code(), b.code(), "code");
-  // return 0;
-  return compare_spread(
-    name, static_cast<const FuelType*>(&a), static_cast<const FuelType*>(&b), options
+  // cmp(r,a.name(), b.name(), "name");
+  // cmp(r,a.code(), b.code(), "code");
+  return cmp(
+    r,
+    compare_spread(
+      name, static_cast<const FuelType*>(&a), static_cast<const FuelType*>(&b), options
+    )
   );
 }
 template <class TypeB>
@@ -600,26 +606,31 @@ auto compare_fuel(
   // so we don't need dynamic_cast in call
   const TypeA& a = *dynamic_cast<const TypeA*>(f_a);
   const TypeB& b = *dynamic_cast<const TypeB*>(f_b);
-  if (const auto cmp = compare_fuel_basic(name, f_a, f_b, options); 0 != cmp)
-  {
-    return cmp;
-  }
+  int r{0};
+  cmp(r, compare_fuel_basic(name, f_a, f_b, options));
   //
   // FuelBase
   //
-  check_equal(a.bulkDensity(), b.bulkDensity(), "bulkDensity");
-  check_equal(a.inorganicPercent(), b.inorganicPercent(), "inorganicPercent");
-  check_equal(a.duffDepth(), b.duffDepth(), "duffDepth");
-  testing::compare_duff("duffDmcType", *a.duffDmcType(), *b.duffDmcType(), logging::level::debug);
-  testing::compare_duff(
-    "duffFfmcType", *a.duffFfmcType(), *b.duffFfmcType(), logging::level::debug
+  cmp(r, a.bulkDensity(), b.bulkDensity(), "bulkDensity");
+  cmp(r, a.inorganicPercent(), b.inorganicPercent(), "inorganicPercent");
+  cmp(r, a.duffDepth(), b.duffDepth(), "duffDepth");
+  cmp(
+    r,
+    testing::compare_duff("duffDmcType", *a.duffDmcType(), *b.duffDmcType(), logging::level::debug)
   );
-  check_equal(a.ffmcRatio(), b.ffmcRatio(), "ffmcRatio");
-  check_equal(a.dmcRatio(), b.dmcRatio(), "dmcRatio");
+  cmp(
+    r,
+    testing::compare_duff(
+      "duffFfmcType", *a.duffFfmcType(), *b.duffFfmcType(), logging::level::debug
+    )
+  );
+  cmp(r, a.ffmcRatio(), b.ffmcRatio(), "ffmcRatio");
+  cmp(r, a.dmcRatio(), b.dmcRatio(), "dmcRatio");
   //
   // StandardFuel
   //
-  check_range(
+  cmp_range(
+    r,
     "rosBasic()",
     "isi",
     [=, &a](const auto& v) { return a.rosBasic(v); },
@@ -628,13 +639,13 @@ auto compare_fuel(
     RANGE_ISI
   );
   // MathSize limitIsf(const MathSize mu, const MathSize rsf) const noexcept
-  check_equal(a.bui0(), b.bui0(), "bui0");
-  check_equal(a.a(), b.a(), "a");
-  check_equal(a.negB(), b.negB(), "negB");
-  check_equal(a.c(), b.c(), "c");
+  cmp(r, a.bui0(), b.bui0(), "bui0");
+  cmp(r, a.a(), b.a(), "a");
+  cmp(r, a.negB(), b.negB(), "negB");
+  cmp(r, a.c(), b.c(), "c");
   // fmc) noexcept
-  check_equal(a.logQ(), b.logQ(), "logQ");
-  return 0;
+  cmp(r, a.logQ(), b.logQ(), "logQ");
+  return r;
 }
 template <class TypeB>
 auto compare_fuel_variable(
@@ -944,7 +955,7 @@ int test_fbp(const int argc, const char* const argv[])
   add_test(&compare_fuel_by_index<FuelOldM4<0>>, "M4_00");
   add_test(&compare_fuel_variable_by_index<FuelOldM3M4<100>>, "M3_M4_100");
   add_test(&compare_fuel_variable_by_index_options<FuelOldO1>, "O1", FUEL_COMPARE_GRASS);
-  check_equal(NUMBER_OF_FUELS, i, "Number of fuels");
+  do_compare_values(NUMBER_OF_FUELS, i, "Number of fuels");
   return results.value().get();
 }
 }

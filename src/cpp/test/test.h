@@ -2,12 +2,18 @@
 #ifndef FS_TEST_H
 #define FS_TEST_H
 #include <concepts>
+#include <numeric>
 #include "../fs/log/Log.h"
 #include "../fs/unstable.h"
 namespace fs::testing
 {
+inline int first_non_zero(const int a, const int b)
+{
+  // keep first non-zero value
+  return 0 == a ? b : a;
+}
 template <class T>
-auto check_range(
+int compare_range(
   const char* name_fct,
   const char* name_param,
   const auto fct_a,
@@ -17,17 +23,21 @@ auto check_range(
 )
 {
   logging::debug("Checking {:s}", name_fct);
-  std::for_each(
+  // return first non-zero value
+  return std::transform_reduce(
 #if !defined(__APPLE__) || !defined(__clang__)
     // apple clang doesn't support this?
     std::execution::par_unseq,
 #endif
     it.begin(),
     it.end(),
+    0,
+    first_non_zero,
     [&](const auto& v) {
       const auto msg = std::format("{} ({} = {})", name_fct, name_param, v);
-      logging::check_tolerance(epsilon, fct_a(v), fct_b(v), msg.c_str());
+      const auto r = logging::compare_tolerance(epsilon, fct_a(v), fct_b(v), msg.c_str());
       logging::verbose("{:s}", msg);
+      return r;
     }
   );
 }
