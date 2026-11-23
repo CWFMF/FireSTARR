@@ -275,4 +275,3 @@ jobs:
           cd ${{ github.workspace }}/compare
           . ${{ github.workspace }}/repo/cmp_outputs.sh
           ls -lh *.diff
-          ([[ "$(cat *.diff | wc -l)" -eq "0" ]] && echo "Comparison worked") || echo "Comparison failed"
