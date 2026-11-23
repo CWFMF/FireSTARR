@@ -261,20 +261,36 @@ int compare_spread(
       const FwiWeather weather{Weather::Invalid(), Ffmc{ffmc}, Dmc{dmc}, Dc{dc}};
       ++count_comparisons;
       logging::extensive("aspect {:d}", aspect);
+      const auto info = std::format(
+        "compare_spread() size failed for name: {:s}; ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
+        name.c_str(),
+        ffmc,
+        dmc,
+        dc,
+        nd,
+        slope,
+        aspect
+      );
       // HACK: this constructor ignores fuel part of this
       const auto key = Cell::key(Cell::hashCell(slope, aspect, static_cast<FuelCodeSize>(0)));
       const SpreadInfo spread_a{a, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
       const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
       int r{0};
-      cmp(r, spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
-      cmp(
-        r,
+      auto do_cmp = [&](const auto& lhs, const auto& rhs, const auto& for_value) {
+        const auto s = std::format("{} {}", info, for_value);
+        return cmp(r, lhs, rhs, s.c_str());
+      };
+      auto do_cmp_tolerance = [&](const auto& lhs, const auto& rhs, const auto& for_value) {
+        const auto s = std::format("{} {}", info, for_value);
+        return cmp_tolerance(r, lhs, rhs, s.c_str());
+      };
+      do_cmp(spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
+      do_cmp(
         a->calculateIsf(spread_a, as_value(weather.isi())),
         b->calculateIsf(spread_b, as_value(weather.isi())),
         "calculateIsf"
       );
-      cmp(
-        r,
+      do_cmp(
         a->crownRateOfSpread(as_value(weather.isi()), spread_a.foliarMoisture()),
         b->crownRateOfSpread(as_value(weather.isi()), spread_b.foliarMoisture()),
         "crownRateOfSpread"
@@ -286,37 +302,37 @@ int compare_spread(
         const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(as_value(wsv));
         const auto bui_eff_a = a->buiEffect(as_value(weather.bui()));
         const auto bui_eff_b = b->buiEffect(as_value(weather.bui()));
-        cmp(r, bui_eff_a, bui_eff_b, "bui_eff");
+        do_cmp(bui_eff_a, bui_eff_b, "bui_eff");
         auto back_ros_a = a->calculateRos(nd, weather, back_isi);
         auto back_ros_b = b->calculateRos(nd, weather, back_isi);
-        cmp_tolerance(r, back_ros_a, back_ros_b, "back_ros");
+        do_cmp_tolerance(back_ros_a, back_ros_b, "back_ros");
         auto back_ros_bui_eff_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
         auto back_ros_bui_eff_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
-        cmp_tolerance(r, back_ros_bui_eff_a, back_ros_bui_eff_b, "back_ros_bui_eff");
+        do_cmp_tolerance(back_ros_bui_eff_a, back_ros_bui_eff_b, "back_ros_bui_eff");
         // whether or not this is crown, this should give the same value
         // if (is_crown_)
         {
           auto sfc_a = a->surfaceFuelConsumption(weather);
           auto sfc_b = b->surfaceFuelConsumption(weather);
-          cmp(r, sfc_a, sfc_b, "sfc");
+          do_cmp(sfc_a, sfc_b, "sfc");
           const auto csi_a = a->criticalSurfaceIntensity(spread_a);
           const auto csi_b = a->criticalSurfaceIntensity(spread_b);
-          cmp(r, csi_a, csi_b, "csi");
+          do_cmp(csi_a, csi_b, "csi");
           auto rso_a = FuelType::criticalRos(sfc_a, csi_a);
           auto rso_b = FuelType::criticalRos(sfc_b, csi_b);
-          cmp(r, rso_a, rso_b, "rso");
+          do_cmp(rso_a, rso_b, "rso");
           auto cfb_a = a->crownFractionBurned(back_ros_a, rso_a);
           auto cfb_b = b->crownFractionBurned(back_ros_b, rso_b);
-          cmp(r, cfb_a, cfb_b, "cfb");
+          do_cmp(cfb_a, cfb_b, "cfb");
           auto fm_a = spread_a.foliarMoisture();
           auto fm_b = spread_b.foliarMoisture();
-          cmp(r, fm_a, fm_b, "fm");
+          do_cmp(fm_a, fm_b, "fm");
           const auto rsc_a = a->crownRateOfSpread(as_value(weather.isi()), fm_a);
           const auto rsc_b = b->crownRateOfSpread(as_value(weather.isi()), fm_b);
-          cmp(r, rsc_a, rsc_b, "rsc");
+          do_cmp(rsc_a, rsc_b, "rsc");
           back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_bui_eff_a);
           back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_bui_eff_b);
-          cmp_tolerance(r, back_ros_a, back_ros_b, "back_ros final");
+          do_cmp_tolerance(back_ros_a, back_ros_b, "back_ros final");
         }
       }
       const auto offsets_a = spread_a.offsets();
@@ -350,7 +366,7 @@ int compare_spread(
           slope,
           aspect
         );
-        cmp(r, offsets_a.size(), offsets_b.size(), "compare_spread() size");
+        do_cmp(offsets_a.size(), offsets_b.size(), "compare_spread() size");
         // return here since no point in comparing if not same number of offsets
         return r;
       }
@@ -366,12 +382,14 @@ int compare_spread(
         {
           show_offset(pt_a);
         }
-        int cmp_pt{0};
-        cmp(cmp_pt, pt_a.intensity(), pt_b.intensity(), "intensity");
-        cmp(cmp_pt, pt_a.ros(), pt_b.ros(), "ros");
-        cmp(cmp_pt, pt_a.raz(), pt_b.raz(), "raz");
-        cmp(cmp_pt, pt_a.offset().x, pt_b.offset().x, "offset.x");
-        cmp(cmp_pt, pt_a.offset().y, pt_b.offset().y, "offset.y");
+        // HACK: keep previous value so we can use do_cmp()
+        const auto r_prev = r;
+        r = 0;
+        do_cmp(pt_a.intensity(), pt_b.intensity(), "intensity");
+        do_cmp(pt_a.ros(), pt_b.ros(), "ros");
+        do_cmp(pt_a.raz(), pt_b.raz(), "raz");
+        do_cmp(pt_a.offset().x, pt_b.offset().x, "offset.x");
+        do_cmp(pt_a.offset().y, pt_b.offset().y, "offset.y");
         if (auto cmp_overall = pt_a <=> pt_b; 0 != cmp_overall)
         {
           if (!show_offsets)
@@ -391,54 +409,42 @@ int compare_spread(
             slope,
             aspect
           );
-          cmp(
-            cmp_pt,
-            spread_a.crownFractionBurned(),
-            spread_b.crownFractionBurned(),
-            "crownFractionBurned"
+          do_cmp(
+            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
           );
-          cmp(cmp_pt, spread_a.maxIntensity(), spread_b.maxIntensity(), "maxIntensity");
-          cmp(cmp_pt, spread_a.isNotSpreading(), spread_b.isNotSpreading(), "isNotSpreading");
-          cmp(cmp_pt, spread_a.nd(), spread_b.nd(), "nd");
-          cmp(cmp_pt, spread_a.time(), spread_b.time(), "time");
-          cmp(cmp_pt, spread_a.lengthToBreadth(), spread_b.lengthToBreadth(), "lengthToBreadth");
-          cmp(cmp_pt, spread_a.percentSlope(), spread_b.percentSlope(), "percentSlope");
-          cmp(cmp_pt, spread_a.slopeAzimuth(), spread_b.slopeAzimuth(), "slopeAzimuth");
-          cmp(cmp_pt, spread_a.headRos(), spread_b.headRos(), "headRos");
-          cmp(cmp_pt, spread_a.headDirection(), spread_b.headDirection(), "headDirection");
-          cmp(cmp_pt, spread_a.slopeFactor(), spread_b.slopeFactor(), "slopeFactor");
-          cmp(cmp_pt, spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
-          cmp(cmp_pt, spread_a.isInvalid(), spread_b.isInvalid(), "isInvalid");
-          cmp(
-            cmp_pt,
-            spread_a.crownFractionBurned(),
-            spread_b.crownFractionBurned(),
-            "crownFractionBurned"
+          do_cmp(spread_a.maxIntensity(), spread_b.maxIntensity(), "maxIntensity");
+          do_cmp(spread_a.isNotSpreading(), spread_b.isNotSpreading(), "isNotSpreading");
+          do_cmp(spread_a.nd(), spread_b.nd(), "nd");
+          do_cmp(spread_a.time(), spread_b.time(), "time");
+          do_cmp(spread_a.lengthToBreadth(), spread_b.lengthToBreadth(), "lengthToBreadth");
+          do_cmp(spread_a.percentSlope(), spread_b.percentSlope(), "percentSlope");
+          do_cmp(spread_a.slopeAzimuth(), spread_b.slopeAzimuth(), "slopeAzimuth");
+          do_cmp(spread_a.headRos(), spread_b.headRos(), "headRos");
+          do_cmp(spread_a.headDirection(), spread_b.headDirection(), "headDirection");
+          do_cmp(spread_a.slopeFactor(), spread_b.slopeFactor(), "slopeFactor");
+          do_cmp(spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
+          do_cmp(spread_a.isInvalid(), spread_b.isInvalid(), "isInvalid");
+          do_cmp(
+            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
           );
-          cmp(
-            cmp_pt,
-            spread_a.crownFuelConsumption(),
-            spread_b.crownFuelConsumption(),
-            "crownFuelConsumption"
+          do_cmp(
+            spread_a.crownFuelConsumption(), spread_b.crownFuelConsumption(), "crownFuelConsumption"
           );
-          cmp(cmp_pt, spread_a.fireDescription(), spread_b.fireDescription(), "fireDescription");
-          cmp(
-            cmp_pt,
+          do_cmp(spread_a.fireDescription(), spread_b.fireDescription(), "fireDescription");
+          do_cmp(
             spread_a.surfaceFuelConsumption(),
             spread_b.surfaceFuelConsumption(),
             "surfaceFuelConsumption"
           );
-          cmp(
-            cmp_pt,
-            spread_a.totalFuelConsumption(),
-            spread_b.totalFuelConsumption(),
-            "totalFuelConsumption"
+          do_cmp(
+            spread_a.totalFuelConsumption(), spread_b.totalFuelConsumption(), "totalFuelConsumption"
           );
-          if (0 != cmp_pt)
+          if (0 != r)
           {
-            logging::error("compare_spread() pt == {}", cmp_pt);
-            return cmp_pt;
+            logging::error("compare_spread() pt == {}", r);
+            return r;
           }
+          r = r_prev;
         }
       }
       if (show_offsets)
