@@ -229,7 +229,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 };
 /**
  * \brief A fuel with pine as the base fuel type.
@@ -285,7 +285,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 };
 /**
  * \brief FBP fuel type D-1.
@@ -309,7 +309,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    * \param spread SpreadInfo to use
@@ -372,7 +372,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
@@ -490,7 +490,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 17]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 };
 /**
  * \brief A grass fuel type.
@@ -525,7 +525,7 @@ public:
    * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 pg 21]
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 pg 21]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather&) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather&) const noexcept override;
   /**
    * \brief Grass curing
    * \return Grass curing (or -1 if invalid for this fuel type)
@@ -596,7 +596,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 };
 /**
  * \brief FBP fuel type C-2.
@@ -620,7 +620,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 };
 /**
  * \brief FBP fuel type C-3.
@@ -730,7 +730,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 15]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 };
 /**
  * \brief FBP fuel type D-2.
@@ -755,7 +755,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2)
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
   /**
    * \brief Calculate rate of spread (m/min)
    * \param nd Difference between date and the date of minimum foliar moisture content
@@ -937,7 +937,7 @@ public:
    * \param weather FwiWeather to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const noexcept override;
+  [[nodiscard]] MathSize sfc(const FwiWeather& weather) const noexcept override;
 
 private:
   /**
@@ -1099,7 +1099,7 @@ public:
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather&) const override;
+  [[nodiscard]] MathSize sfc(const FwiWeather&) const override;
   /**
    * \brief Length to Breadth ratio [ST-X-3 eq 79]
    * \param ws Wind Speed (km/h)

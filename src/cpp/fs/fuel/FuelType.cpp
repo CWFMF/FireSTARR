@@ -111,7 +111,7 @@ MathSize InvalidFuel::calculateIsf(const SpreadInfo&, const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::surfaceFuelConsumption(const FwiWeather&) const
+MathSize InvalidFuel::sfc(const FwiWeather&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }

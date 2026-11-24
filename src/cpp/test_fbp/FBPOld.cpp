@@ -64,11 +64,11 @@ MathSize FuelOldD1::isfD1(
     spread.slopeFactor() * (ros_multiplier * a()) * pow(1.0 - exp(negB() * isi), c())
   );
 }
-MathSize FuelOldC1::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
+MathSize FuelOldC1::sfc(const FwiWeather& weather) const noexcept
 {
   return calculate_surface_fuel_consumption_c1(weather.ffmc().value);
 }
-MathSize FuelOldC2::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
+MathSize FuelOldC2::sfc(const FwiWeather& weather) const noexcept
 {
   return calculate_surface_fuel_consumption_mixed_or_c2(weather.bui().value);
 }
@@ -83,12 +83,12 @@ MathSize FuelOldC6::finalRos(
   // using max with 0 is the same as ensuring rsc > rss
   return rss + cfb * max(0.0, rsc - rss);
 }
-MathSize FuelOldC7::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
+MathSize FuelOldC7::sfc(const FwiWeather& weather) const noexcept
 {
   return calculate_surface_fuel_consumption_c7_ffmc(weather.ffmc().value)
        + calculate_surface_fuel_consumption_c7_bui(weather.bui().value);
 }
-MathSize FuelOldD2::surfaceFuelConsumption(const FwiWeather& weather) const noexcept
+MathSize FuelOldD2::sfc(const FwiWeather& weather) const noexcept
 {
   return calculate_surface_fuel_consumption_d2(weather.bui().value);
 }

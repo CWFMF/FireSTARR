@@ -161,7 +161,11 @@ public:
    * \param spread SpreadInfo to use
    * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    */
-  [[nodiscard]] virtual MathSize surfaceFuelConsumption(const FwiWeather& weather) const = 0;
+  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather& weather) const
+  {
+    // enforce same minimum value as R package
+    return max(0.000001, sfc(weather));
+  }
   /**
    * \brief Length to Breadth ratio [ST-X-3 eq 79]
    * \param ws Wind Speed (km/h)
@@ -210,7 +214,13 @@ public:
   [[nodiscard]] virtual MathSize crownRateOfSpread(const RoundedValue& isi, const RoundedValue& fmc)
     const noexcept = 0;
 
-private:
+protected:
+  /**
+   * \brief Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
+   * \param spread SpreadInfo to use
+   * \return Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
+   */
+  [[nodiscard]] virtual MathSize sfc(const FwiWeather& weather) const = 0;
   /**
    * \brief Name of the fuel
    */
@@ -285,7 +295,7 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize surfaceFuelConsumption(const FwiWeather&) const override;
+  [[nodiscard]] MathSize sfc(const FwiWeather&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
