@@ -1,22 +1,21 @@
 # HACK: inherits from other file so don't need more than this?
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.31.6)
 
 set(DIR_SRC .)
 
 set(LIB_NAME fs)
-file(GLOB FILES_CPP ${DIR_SRC}/*.cpp)
-set(FILE_UNSTABLE_CPP ${DIR_SRC}/unstable.cpp)
-add_library(${LIB_NAME} ${FILES_CPP})
+file(GLOB_RECURSE FILES_CPP ${DIR_SRC} *.cpp)
+add_library(${LIB_NAME} OBJECT ${FILES_CPP})
 
 if(NOT WIN32)
-    set_source_files_properties(${FILE_UNSTABLE_CPP} PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS_RELEASE}")
+  # HACK: compile math functions as Release since they have differences between Debug and Release
+  set_source_files_properties(${DIR_SRC}/unstable.cpp PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS_RELEASE}")
 endif()
 
 find_package(GeoTIFF CONFIG REQUIRED)
 find_package(TIFF REQUIRED)
 find_package(PROJ CONFIG REQUIRED)
 
-include_directories(${DIR_SRC})
 include_directories(${GEOTIFF_INCLUDE_DIR})
 target_link_libraries(${LIB_NAME} PRIVATE ${GEOTIFF_LIBRARIES})
 target_link_libraries(${LIB_NAME} PRIVATE TIFF::TIFF)

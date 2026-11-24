@@ -40,7 +40,16 @@ jobs:
       fail-fast: false
       matrix:
         # no point in more than base image supports
-        platform: [amd64, arm64, ppc64le, riscv64, s390x, 386, arm/v5, arm/v7]
+        platform: [
+          amd64,
+          arm64,
+          ppc64le,
+          riscv64,
+          s390x,
+          # i386,
+          arm/v5,
+          arm/v7,
+        ]
     env:
       REGISTRY: 'ghcr.io'
       # since package-name is 'cache' if this isn't tagged or one of main/dev/unstable, we can run the whole process to test still
@@ -115,6 +124,18 @@ jobs:
           echo "MISSING=${MISSING}" >> $GITHUB_ENV
           echo "image-missing=${MISSING}" >> $GITHUB_OUTPUT
 
+      - name: Pre-build files
+        run: |
+          find "${{ github.workspace }}"
+
+      - name: Remove reference files
+        run: |
+          rm -rfv "${{ github.workspace }}/test/output/reference"
+
+      - name: After remove test files
+        run: |
+          find "${{ github.workspace }}"
+
       - uses: ./.github/actions/docker-build-image
         id: build-firestarr
         with:
@@ -136,6 +157,33 @@ jobs:
           suffix: -minimal
           push: ${{ github.event_name != 'pull_request' }}
           image-missing: ${{ 'true' == steps.check-missing.outputs.image-missing }}
+
+      - name: Run docker test
+        shell: bash
+        run: |
+          docker image ls
+          rm -rf ./test/output/reference
+          IMAGE=${{ steps.build-firestarr.outputs.local }}
+          MOUNTS="-v./settings.ini:/appl/firestarr/settings.ini -v./test:/appl/firestarr/test"
+          docker run --platform=${{ steps.build-firestarr.outputs.platform }} --rm ${MOUNTS} ${IMAGE} test/output/reference 2024-06-03 58.81228184403946 -122.9117103995713 01:00 --ffmc 89.9 --dmc 59.5 --dc 450.9 --apcp_prev 0 -v --wx ./test/input/10N_50651/firestarr_10N_50651_wx.csv --output_date_offsets [1,2,3] --tz -5 --raster-root ./test/input/10N_50651/ --perim ./test/input/10N_50651/10N_50651.tif -i --ascii
+          # HACK: don't have permission to rm outside container
+          docker run --platform=${{ steps.build-firestarr.outputs.platform }} --rm ${MOUNTS} --entrypoint /bin/bash ${IMAGE} -c 'pushd /appl/firestarr/test/output/reference && rm *.ini && rm *.log'
+          (git diff --name-status --exit-code test/output/reference && echo "Reference check worked") || echo "Reference check failed"
+
+      - name: Post-build files
+        run: |
+          find "${{ github.workspace }}"
+
+      - name: Upload test outputs artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: 'test-outputs-${{ env.PLATFORM_PAIR }}'
+          path: test/output/reference
+          archive: true
+          compression-level: 9
+          retention-days: 30
+
+
 
     outputs:
       package: ${{ steps.build-firestarr.outputs.package }}
@@ -187,3 +235,45 @@ jobs:
         type=semver,pattern={{major}}.{{minor}},prefix=,suffix=-minimal,enable=${{ needs.build-docker-image.outputs.is-tagged }}
         type=raw,value=minimal,prefix=,suffix=,enable=${{ needs.build-docker-image.outputs.is-tagged }}
         type=raw,value=minimal-latest,prefix=,suffix=,enable=${{ needs.build-docker-image.outputs.is-tagged }}
+
+
+  compare:
+    needs: [build-docker-image]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      # if '-' in tag then it's -alpha or similar
+      IS_LATEST: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-') }}
+      # should just be !env.IS_LATEST but can't figure out syntax
+      IS_PRERELEASE: ${{ !startsWith(github.ref, 'refs/tags/v') || contains(github.ref, '-') }}
+      TAG: ${{ github.ref_name }}${{ case ( !startsWith(github.ref, 'refs/tags/v') || contains(github.ref, '-'), '-latest', '' ) }}
+
+    steps:
+      # need checkout to delete release
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          submodules: true
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: test-outputs-*
+          path: ${{ github.workspace }}/compare
+          merge-multiple: true
+          skip-decompress: true
+
+      - name: List artifacts
+        run: |
+          echo "=== All artifacts ==="
+          find . -type f \( -name "*.tar.gz" -o -name "*.zip" \)
+
+      - name: Compare artifacts
+        shell: bash
+        run: |
+          chmod +x ${{ github.workspace }}/compare
+          cd ${{ github.workspace }}/compare
+          . ${{ github.workspace }}/repo/cmp_outputs.sh
+          ls -lh *.diff

@@ -19,9 +19,6 @@ if(CMAKE_VERBOSE_MAKEFILE)
   )
   set(CLANG_VERBOSE
       -Wshadow # warn the user if a variable declaration shadows one from a parent context
-      -Wconversion # warn on type conversions that may lose data
-      -Wsign-conversion # warn on sign conversions
-      -Wdouble-promotion # warn if float is implicit promoted to double
   )
   set(GCC_VERBOSE
       -Wuseless-cast # warn if you perform a cast to the same type
@@ -70,6 +67,9 @@ set(CLANG_WARNINGS
     -Wnull-dereference # warn if a null dereference is detected
     -Wformat=2 # warn on security issues around functions that format output (ie printf)
     -Wimplicit-fallthrough # warn on statements that fallthrough without an explicit annotation
+    -Wconversion # warn on type conversions that may lose data
+    -Wsign-conversion # warn on sign conversions
+    -Wdouble-promotion # warn if float is implicit promoted to double
 )
 
 set(GCC_WARNINGS
@@ -80,6 +80,7 @@ set(GCC_WARNINGS
     -Wduplicated-branches # warn if if / else branches have duplicated code
     -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
     -Wsuggest-override # warn if an overridden member function is not marked 'override' or 'final'
+    -Wno-psabi # don't warn about abi changes between GCC versions
 )
 
 set(CUDA_WARNINGS

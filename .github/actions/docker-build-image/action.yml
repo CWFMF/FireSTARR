@@ -36,6 +36,12 @@ outputs:
   cached:
     description: "Cached image"
     value: ${{ steps.output.outputs.cached }}
+  local:
+    description: "Local image"
+    value: ${{ steps.output.outputs.local }}
+  platform:
+    description: "Platform"
+    value: ${{ steps.output.outputs.platform }}
 
 runs:
   using: "composite"
@@ -84,7 +90,11 @@ runs:
       run: |
         registry=${{ inputs.registry }}
         repo=${registry}/${GITHUB_REPOSITORY@L}
-        package=${repo}/${{ inputs.package-name }}
+        if [[ "" == "${{ inputs.package-name}}" ]]; then
+          package=${{inputs.target}}
+        else
+          package=${repo}/${{ inputs.package-name }}
+        fi
         registry_cache=${repo}/cache
         cached=${registry_cache}:${{ github.sha }}${{ inputs.suffix }}
         echo "PACKAGE=${package}" >> $GITHUB_ENV
@@ -114,6 +124,7 @@ runs:
         platforms: linux/${{ inputs.platform }}
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ env.PACKAGE }}
+        load: true
         push: ${{ 'true' == inputs.push }}
         outputs: ${{ case( 'true' == inputs.push, 'type=image,push-by-digest=true,name-canonical=true,push=true', '' ) }}
         cache-from: |
@@ -143,9 +154,33 @@ runs:
         if-no-files-found: error
         retention-days: 1
 
+    - name: ${{ inputs.target }} - Build local image
+      id: build-local
+      uses: docker/build-push-action@v7
+      with:
+        context: .
+        file: .docker/Dockerfile
+        target: ${{ inputs.target }}
+        platforms: linux/${{ inputs.platform }}
+        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ inputs.target }}
+        load: true
+        push: false
+        cache-from: |
+          ${{ format( 'type=registry,ref={0}:{1}-{2}', env.REGISTRY_CACHE, env.PLATFORM_PAIR, github.sha ) }}
+          ${{ format( 'type=registry,ref={0}:{1}-{2}', env.REGISTRY_CACHE, env.PLATFORM_PAIR, env.CACHE_REF ) }}
+          ${{ format( 'type=registry,ref={0}:{1}', env.REGISTRY_CACHE, env.PLATFORM_PAIR ) }}
+          ${{ format( 'type=registry,ref={0}', env.REGISTRY_CACHE ) }}
+        cache-to: |
+          ${{ case( 'true' == inputs.push, format( 'type=registry,mode=max,ref={0}:{1}-{2}', env.REGISTRY_CACHE, env.PLATFORM_PAIR, github.sha ), '' ) }}
+          ${{ case( 'true' == inputs.push, format( 'type=registry,mode=max,ref={0}:{1}-{2}', env.REGISTRY_CACHE, env.PLATFORM_PAIR, env.CACHE_REF ), '' ) }}
+          ${{ case( 'true' == inputs.push, format( 'type=registry,mode=max,ref={0}:{1}', env.REGISTRY_CACHE, env.PLATFORM_PAIR), '' ) }}
+
     - name: Set outputs
       id: output
       shell: bash
       run: |
+        echo "local=${{ inputs.target }}" >> $GITHUB_OUTPUT
         echo "package=${{ env.PACKAGE }}" >> $GITHUB_OUTPUT
         echo "cached=${{ env.CACHED }}" >> $GITHUB_OUTPUT
+        echo "platform=linux/${{ inputs.platform }}" >> $GITHUB_OUTPUT

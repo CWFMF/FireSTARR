@@ -1,12 +1,988 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "fs/ArgumentParser.h"
-#include "fs/SimpleFBP.h"
+#include "fs/stdafx.h"
+#include <compare>
+#include <future>
+#include <mutex>
+#include <numeric>
+#include "fs/data/RangeIterator.h"
+#include "fs/fuel/FireBehaviourPrediction.h"
+#include "fs/fuel/FuelLookup.h"
+#include "fs/fuel/FuelType.h"
+#include "fs/log/Log.h"
+#include "fs/sim/ArgumentParser.h"
+#include "fs/spread/FireSpread.h"
+#include "test/test.h"
+#include "test_fbp/FBPOld.h"
+#include "test_fbp/FuelOldLookup.h"
+namespace fs::testing
+{
+// FIX: this was used to compare t
+// o the old template version, but doesn't work now
+//      left for reference for now so idea could be used for more tests
+using fs::fuel::FuelType;
+using fs::fuel::ROSOffset;
+using fs::fuelold::FuelOldLookup;
+using namespace fs::fuelold;
+using fs::fuel::FuelLookup;
+using fs::fuel::FuelType;
+using fs::fuel::FuelVariable;
+using fs::fuel::ROSOffset;
+using fs::fuel::StandardFuel;
+using TestResult = std::future<int>;
+class TestResults
+{
+public:
+  constexpr TestResults() noexcept = default;
+  TestResults(const TestResults& rhs) noexcept = delete;
+  TestResults(TestResults&& rhs) noexcept { add(std::move(rhs)); }
+  TestResults& operator=(const TestResults& rhs) noexcept = delete;
+  TestResults& operator=(TestResults&& rhs) noexcept = delete;
+  void add(std::future<int>&& f) noexcept
+  {
+    scoped_lock lock(mutex_);
+    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
+    results_.push_back(std::move(f));
+  };
+  void add(const auto& fct, auto... args) noexcept
+  {
+    // don't lock this until results are calculated
+    add(std::async(launch::async, fct, args...));
+  };
+  void add(TestResults&& rhs) noexcept
+  {
+    scoped_lock lock(mutex_, rhs.mutex_);
+    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
+    if (rhs.finalized_)
+    {
+      // if finalized then results were cleared
+      logging::check_fatal(
+        !rhs.results_.empty(), "TestResults were finalized but still have results to check"
+      );
+      // keep first non-zero value
+      if (0 == return_value_)
+      {
+        return_value_ = rhs.return_value_;
+      }
+    }
+    else
+    {
+      std::move(rhs.results_.begin(), rhs.results_.end(), results_.end());
+      rhs.finalized_ = true;
+      rhs.results_.clear();
+    }
+  };
+  std::future<int> value() noexcept
+  {
+    // don't lock here since calculate_value() needs the lock there
+    return std::async(launch::async, &TestResults::calculate_value, this);
+  }
+
+private:
+  int calculate_value()
+  {
+    scoped_lock lock(mutex_);
+    if (!finalized_)
+    {
+      for (auto& result : results_)
+      {
+        result.wait();
+        if (auto cmp = result.get(); 0 == return_value_ && 0 != cmp)
+        {
+          // HACK: keep first value to return but need to wait for every future
+          return_value_ = cmp;
+        }
+      }
+      logging::debug("Have {:d} results", results_.size());
+      finalized_ = true;
+      results_.clear();
+    }
+    return return_value_;
+  }
+  mutable mutex mutex_{};
+  std::vector<TestResult> results_{};
+  bool finalized_{false};
+  int return_value_{0};
+};
+// check %, so 1 decimal is fine
+static constexpr auto EPSILON = static_cast<MathSize>(1e-1);
+int do_compare_values(const auto& lhs, const auto& rhs, const char* name)
+{
+  return logging::compare_equal_verbose(logging::level::debug, lhs, rhs, name);
+}
+int cmp(int& lhs, int rhs)
+{
+  // assign and return first non-zero value
+  lhs = 0 == lhs ? rhs : lhs;
+  return lhs;
+}
+int cmp(int& lhs, const std::partial_ordering& rhs)
+{
+  // keep first non-zero value
+  lhs = 0 == lhs ? (std::is_lt(rhs) ? -1 : 1) : lhs;
+  return lhs;
+}
+int cmp(int& r, const auto& lhs, const auto& rhs, const char* name)
+{
+  return cmp(r, do_compare_values(lhs, rhs, name));
+}
+template <typename... Args>
+int cmp_tolerance(int& lhs, Args... args)
+{
+  // FIX: these comparisons should all be exactly equivalent
+  static constexpr auto epsilon_nearly_equal = 1E-12;
+  return cmp(lhs, logging::compare_tolerance(epsilon_nearly_equal, args...));
+}
+template <typename... Args>
+int cmp_range(int& lhs, Args... args)
+{
+  return cmp(lhs, compare_range(args...));
+}
+int compare_fuel_valid(
+  const string name,
+  const FuelType* f_a,
+  const FuelType* f_b,
+  const char* msg = ""
+)
+{
+  const FuelType& a = *f_a;
+  const FuelType& b = *f_b;
+  logging::info("Checking {:s}: {:s}", name, msg);
+  //
+  // FuelType
+  //
+  const auto a0 = a.isValid();
+  const auto b0 = b.isValid();
+  int r{0};
+  cmp(r, a0, b0, "isValid");
+  cmp(r, a.name(), b.name(), "name");
+  cmp(r, a.code(), b.code(), "code");
+  return r;
+}
+// use vectors so FuelCompareOptions can assign any of these directly
+static const auto BUI_RANGE_DEFAULTS = range(0.0, 300.0, 13.0);
+static const auto DC_RANGE_DEFAULTS = range(0.0, 1000.0, 13.0);
+static const vector<MathSize> DC_VALUES_GRASS{0, 10, 50, 100, 400, 499, 500, 501, 1000};
+static const auto RANGE_MC_FRACTION = range(-1, 3, 0.011);
+static const auto RANGE_WIND_SPEED = range(0, 200, 0.07);
+static const auto RANGE_BUI_EFFECT = range(-1, 300, 0.7);
+static const auto RANGE_CFB = range(0, 100, 0.03);
+static const auto RANGE_ISI = range(0, 250, 0.3);
+struct FuelCompareOptions
+{
+  // HACK: can't figure out how to refer to a range so just use vectors
+  // single values for defaults
+  const vector<int> nd_values{80};
+  const vector<MathSize> bui_values{60};
+  const vector<MathSize> dc_values{200};
+};
+static const FuelCompareOptions FUEL_COMPARE_DEFAULT{};
+static const FuelCompareOptions FUEL_COMPARE_DECIDUOUS{.bui_values = BUI_RANGE_DEFAULTS};
+int compare_spread(
+  const string name,
+  const FuelType* a,
+  const FuelType* b,
+  const FuelCompareOptions options = FUEL_COMPARE_DEFAULT
+)
+{
+  static const MathSize CELL_SIZE{100.0};
+  static const vector<SlopeSize> slopes{0, 15, 30};
+  static const vector<AspectSize> aspects{0, 15, 25, 35, 45, 55};
+  // duration is in minutes
+  auto show_offset = [=](const ROSOffset& o) {
+    const auto intensity{o.intensity()};
+    const auto ros{o.ros()};
+    const auto direction{o.raz()};
+    // offsets are in fraction of a cell per minute
+    const auto offset{o.offset()};
+    cout << std::format(
+      " ({:d} kW/m; {:0.100g} m/min @{:03d} == ({:0.100g}, {:0.100g}))\n",
+      intensity,
+      as_value(ros),
+      direction.asDegreesSize(),
+      offset.x * CELL_SIZE,
+      offset.y * CELL_SIZE
+    );
+  };
+  static const auto FFMC_RANGE = range(0.0, 101.0, 1.0);
+  static const auto DMC_SMALL_RANGE = range(0.0, 200.0, 47.0);
+  static const auto DMC_RANGE = range(0.0, 200.0, 7.0);
+  size_t count_comparisons{0};
+  logging::debug(
+    "compare_spread({:s}, {:s}, {:s})", name.c_str(), FuelType::safeName(a), FuelType::safeName(b)
+  );
+  // HACK: use less options for things with nd values (just grass?)
+  const auto dmc_values = options.nd_values.size() > 1 ? DMC_SMALL_RANGE : DMC_RANGE;
+  static auto it = [&]() {
+    vector<std::tuple<int, MathSize, MathSize, MathSize, SlopeSize, AspectSize>> results{};
+    for (auto nd : options.nd_values)
+    {
+      logging::extensive("nd {:d}", nd);
+      for (auto ffmc : FFMC_RANGE)
+      {
+        logging::extensive("ffmc {:0.100g}", ffmc);
+        for (auto dmc : dmc_values)
+        {
+          logging::extensive("dmc {:0.100g}", dmc);
+          // for (auto bui : options.bui_values)
+          {
+            for (auto dc : options.dc_values)
+            // for (auto dc : range(0.0, std::ranges::max(options.dc_values), 17.0))
+            {
+              logging::extensive("dc {:0.100g}", dc);
+              for (auto slope : slopes)
+              {
+                logging::extensive("slope {:d}", slope);
+                for (auto aspect : aspects)
+                {
+                  results.emplace_back(nd, ffmc, dmc, dc, slope, aspect);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return results;
+  }();
+  return std::transform_reduce(
+#if !defined(__APPLE__) || !defined(__clang__)
+    // apple clang doesn't support this?
+    std::execution::par_unseq,
+#endif
+    it.begin(),
+    it.end(),
+    0,
+    first_non_zero,
+    [&](const auto& v) -> int {
+      static const DurationSize TIME{INVALID_TIME};
+      // HACK: 0.0 is causing offsets to be generated in grass
+      static const MathSize MIN_ROS{1E-6};
+      auto& [nd, ffmc, dmc, dc, slope, aspect] = v;
+      const FwiWeather weather{Weather::Invalid(), Ffmc{ffmc}, Dmc{dmc}, Dc{dc}};
+      ++count_comparisons;
+      logging::extensive("aspect {:d}", aspect);
+      const auto info = std::format(
+        "compare_spread() size failed for name: {:s}; ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
+        name.c_str(),
+        ffmc,
+        dmc,
+        dc,
+        nd,
+        slope,
+        aspect
+      );
+      // HACK: this constructor ignores fuel part of this
+      const auto key = Cell::key(Cell::hashCell(slope, aspect, static_cast<FuelCodeSize>(0)));
+      const SpreadInfo spread_a{a, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
+      const SpreadInfo spread_b{b, TIME, MIN_ROS, CELL_SIZE, key, nd, weather, weather};
+      int r{0};
+      auto do_cmp = [&](const auto& lhs, const auto& rhs, const auto& for_value) {
+        const auto s = std::format("{} {}", info, for_value);
+        return cmp(r, lhs, rhs, s.c_str());
+      };
+      auto do_cmp_tolerance = [&](const auto& lhs, const auto& rhs, const auto& for_value) {
+        const auto s = std::format("{} {}", info, for_value);
+        return cmp_tolerance(r, lhs, rhs, s.c_str());
+      };
+      do_cmp(spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
+      do_cmp(
+        a->calculateIsf(spread_a, as_value(weather.isi())),
+        b->calculateIsf(spread_b, as_value(weather.isi())),
+        "calculateIsf"
+      );
+      do_cmp(
+        a->crownRateOfSpread(as_value(weather.isi()), spread_a.foliarMoisture()),
+        b->crownRateOfSpread(as_value(weather.isi()), spread_b.foliarMoisture()),
+        "crownRateOfSpread"
+      );
+      {
+        // HACK: pull section out of SpreadInfo for test
+        const auto ffmc_effect = weather.ffmcEffect();
+        const auto& wsv = weather.wind().speed;
+        const auto back_isi = ffmc_effect * calculate_standard_back_isi_wsv(as_value(wsv));
+        const auto bui_eff_a = a->buiEffect(as_value(weather.bui()));
+        const auto bui_eff_b = b->buiEffect(as_value(weather.bui()));
+        do_cmp(bui_eff_a, bui_eff_b, "bui_eff");
+        auto back_ros_a = a->calculateRos(nd, weather, back_isi);
+        auto back_ros_b = b->calculateRos(nd, weather, back_isi);
+        do_cmp_tolerance(back_ros_a, back_ros_b, "back_ros");
+        auto back_ros_bui_eff_a = a->calculateRos(nd, weather, back_isi) * bui_eff_a;
+        auto back_ros_bui_eff_b = b->calculateRos(nd, weather, back_isi) * bui_eff_b;
+        do_cmp_tolerance(back_ros_bui_eff_a, back_ros_bui_eff_b, "back_ros_bui_eff");
+        // whether or not this is crown, this should give the same value
+        // if (is_crown_)
+        {
+          auto sfc_a = a->surfaceFuelConsumption(weather);
+          auto sfc_b = b->surfaceFuelConsumption(weather);
+          do_cmp(sfc_a, sfc_b, "sfc");
+          const auto csi_a = a->criticalSurfaceIntensity(spread_a);
+          const auto csi_b = a->criticalSurfaceIntensity(spread_b);
+          do_cmp(csi_a, csi_b, "csi");
+          auto rso_a = FuelType::criticalRos(sfc_a, csi_a);
+          auto rso_b = FuelType::criticalRos(sfc_b, csi_b);
+          do_cmp(rso_a, rso_b, "rso");
+          auto cfb_a = a->crownFractionBurned(back_ros_a, rso_a);
+          auto cfb_b = b->crownFractionBurned(back_ros_b, rso_b);
+          do_cmp(cfb_a, cfb_b, "cfb");
+          auto fm_a = spread_a.foliarMoisture();
+          auto fm_b = spread_b.foliarMoisture();
+          do_cmp(fm_a, fm_b, "fm");
+          const auto rsc_a = a->crownRateOfSpread(as_value(weather.isi()), fm_a);
+          const auto rsc_b = b->crownRateOfSpread(as_value(weather.isi()), fm_b);
+          do_cmp(rsc_a, rsc_b, "rsc");
+          back_ros_a = a->finalRos(fm_a, back_isi, cfb_a, back_ros_bui_eff_a);
+          back_ros_b = b->finalRos(fm_b, back_isi, cfb_b, back_ros_bui_eff_b);
+          do_cmp_tolerance(back_ros_a, back_ros_b, "back_ros final");
+        }
+      }
+      const auto offsets_a = spread_a.offsets();
+      const auto offsets_b = spread_b.offsets();
+      const auto head_ros = spread_a.headRos();
+      static constexpr MathSize ROS_MINIMAL{1.0};
+      logging::verbose(
+        "compare_spread() [{:d}] {:s}spreading for ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
+        count_comparisons,
+        spread_a.isNotSpreading() ? "not "
+        : head_ros < ROS_MINIMAL  ? "minimal "
+                                  : "",
+        ffmc,
+        dmc,
+        dc,
+        nd,
+        slope,
+        aspect
+      );
+      const auto show_offsets =
+        logging::should_log(logging::level::verbose) && head_ros >= ROS_MINIMAL;
+      if (offsets_a.size() != offsets_b.size())
+      {
+        logging::error(
+          "compare_spread() size failed for name: {:s}; ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
+          name.c_str(),
+          ffmc,
+          dmc,
+          dc,
+          nd,
+          slope,
+          aspect
+        );
+        do_cmp(offsets_a.size(), offsets_b.size(), "compare_spread() size");
+        // return here since no point in comparing if not same number of offsets
+        return r;
+      }
+      if (show_offsets)
+      {
+        cout << "Offsets are: [";
+      }
+      for (size_t i = 0; i < offsets_a.size(); ++i)
+      {
+        const auto pt_a{offsets_a.at(i)};
+        const auto pt_b{offsets_b.at(i)};
+        if (show_offsets)
+        {
+          show_offset(pt_a);
+        }
+        // HACK: keep previous value so we can use do_cmp()
+        const auto r_prev = r;
+        r = 0;
+        do_cmp(pt_a.intensity(), pt_b.intensity(), "intensity");
+        do_cmp(pt_a.ros(), pt_b.ros(), "ros");
+        do_cmp(pt_a.raz(), pt_b.raz(), "raz");
+        do_cmp(pt_a.offset().x, pt_b.offset().x, "offset.x");
+        do_cmp(pt_a.offset().y, pt_b.offset().y, "offset.y");
+        if (auto cmp_overall = pt_a <=> pt_b; 0 != cmp_overall)
+        {
+          if (!show_offsets)
+          {
+            show_offset(pt_a);
+          }
+          cout << " != ";
+          show_offset(pt_b);
+          cout << "\n";
+          logging::error(
+            "compare_spread() pt failed for name: {:s}; ffmc:{:0.100g}; dmc:{:0.100g}; dc:{:0.100g}; nd:{:d}; slope:{:d}; aspect: {:d}",
+            name.c_str(),
+            ffmc,
+            dmc,
+            dc,
+            nd,
+            slope,
+            aspect
+          );
+          do_cmp(
+            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
+          );
+          do_cmp(spread_a.maxIntensity(), spread_b.maxIntensity(), "maxIntensity");
+          do_cmp(spread_a.isNotSpreading(), spread_b.isNotSpreading(), "isNotSpreading");
+          do_cmp(spread_a.nd(), spread_b.nd(), "nd");
+          do_cmp(spread_a.time(), spread_b.time(), "time");
+          do_cmp(spread_a.lengthToBreadth(), spread_b.lengthToBreadth(), "lengthToBreadth");
+          do_cmp(spread_a.percentSlope(), spread_b.percentSlope(), "percentSlope");
+          do_cmp(spread_a.slopeAzimuth(), spread_b.slopeAzimuth(), "slopeAzimuth");
+          do_cmp(spread_a.headRos(), spread_b.headRos(), "headRos");
+          do_cmp(spread_a.headDirection(), spread_b.headDirection(), "headDirection");
+          do_cmp(spread_a.slopeFactor(), spread_b.slopeFactor(), "slopeFactor");
+          do_cmp(spread_a.foliarMoisture(), spread_b.foliarMoisture(), "foliarMoisture");
+          do_cmp(spread_a.isInvalid(), spread_b.isInvalid(), "isInvalid");
+          do_cmp(
+            spread_a.crownFractionBurned(), spread_b.crownFractionBurned(), "crownFractionBurned"
+          );
+          do_cmp(
+            spread_a.crownFuelConsumption(), spread_b.crownFuelConsumption(), "crownFuelConsumption"
+          );
+          do_cmp(spread_a.fireDescription(), spread_b.fireDescription(), "fireDescription");
+          do_cmp(
+            spread_a.surfaceFuelConsumption(),
+            spread_b.surfaceFuelConsumption(),
+            "surfaceFuelConsumption"
+          );
+          do_cmp(
+            spread_a.totalFuelConsumption(), spread_b.totalFuelConsumption(), "totalFuelConsumption"
+          );
+          if (0 != r)
+          {
+            logging::error("compare_spread() pt == {}", r);
+            return r;
+          }
+          r = r_prev;
+        }
+      }
+      if (show_offsets)
+      {
+        cout << "]\n";
+      }
+      logging::verbose("compare_spread() == 0 with {:d} comparisons", count_comparisons);
+      return r;
+    }
+  );
+}
+int compare_fuel_basic(
+  const string name,
+  const FuelType* f_a,
+  const FuelType* f_b,
+  const FuelCompareOptions options = FUEL_COMPARE_DEFAULT
+)
+{
+  if (nullptr == f_a)
+  {
+    logging::error("Invalid FuelTypeA");
+    return -1;
+  }
+  if (nullptr == f_b)
+  {
+    logging::error("Invalid FuelTypeB");
+    return 1;
+  }
+  const FuelType& a = *f_a;
+  const FuelType& b = *f_b;
+  const auto n_nd = options.nd_values.size();
+  const auto n_bui = options.bui_values.size();
+  const auto n_dc = options.dc_values.size();
+  const auto n_isi = RANGE_ISI.size();
+  static const auto n_mc_fraction = RANGE_MC_FRACTION.size();
+  static const auto n_wind_speed = RANGE_WIND_SPEED.size();
+  static const auto n_bui_effect = RANGE_BUI_EFFECT.size();
+  static const auto n_cfb = RANGE_CFB.size();
+  const auto n_loop = n_nd * n_bui * n_dc * n_isi;
+  const auto n_total = n_loop + n_mc_fraction + n_wind_speed + n_bui_effect + n_cfb;
+  const auto msg = std::format(
+    "(({} nds X {} buis X {} dcs X {} isis) + {} mc_fractions + {} wind_speeds' + {} bui_effects + {} cfbs = {} combinations",
+    n_nd,
+    n_bui,
+    n_dc,
+    n_isi,
+    n_mc_fraction,
+    n_wind_speed,
+    n_bui_effect,
+    n_cfb,
+    n_total
+  );
+  int r{0};
+  cmp(r, compare_fuel_valid(name, f_a, f_b, msg.c_str()));
+  //
+  // FuelType
+  //
+  // cmp(r,a.isValid(), b.isValid(), "isValid");
+  cmp(r, FuelType::safeCode(&a), FuelType::safeCode(&b), "safeCode");
+  cmp(r, FuelType::safeName(&a), FuelType::safeName(&b), "safeName");
+  cmp(r, a.cfl(), b.cfl(), "cfl");
+  cmp(r, a.canCrown(), b.canCrown(), "canCrown");
+  cmp(r, a.cbh(), b.cbh(), "cbh");
+  cmp_range(
+    r,
+    "probabilityPeat()",
+    "mc_fraction",
+    [&](const auto& v) { return a.probabilityPeat(v); },
+    [&](const auto& v) { return b.probabilityPeat(v); },
+    EPSILON,
+    RANGE_MC_FRACTION
+  );
+  // ThresholdSize survivalProbability(const FwiWeather& wx) const noexcept
+  cmp_range(
+    r,
+    "buiEffect()",
+    "bui",
+    [&](const auto& v) { return a.buiEffect(v); },
+    [&](const auto& v) { return b.buiEffect(v); },
+    EPSILON,
+    RANGE_BUI_EFFECT
+  );
+  cmp_range(
+    r,
+    "crownConsumption()",
+    "cfb",
+    [&](const auto& v) { return a.crownConsumption(v); },
+    [&](const auto& v) { return b.crownConsumption(v); },
+    EPSILON,
+    RANGE_CFB
+  );
+  // MathSize calculateRos(int nd, const FwiWeather& wx, const ____RoundedValue____& isi) const
+  // need to check breakpoints
+  // - BUI 80 (D2)
+  // - DC 500 (O1)
+  // FIX: use some weird increments to do less but not always have __0.0
+  static auto it_nds = [&]() {
+    vector<std::tuple<int, MathSize, MathSize>> results{};
+    for (auto nd : options.nd_values)
+    {
+      for (auto bui : options.bui_values)
+      {
+        // logging::verbose("bui {:0.100g}", bui);
+        // for (auto dc : range(0.0, 2000.0, 7.0))
+        for (auto dc : options.dc_values)
+        {
+          results.emplace_back(nd, bui, dc);
+        }
+      }
+    }
+    return results;
+  }();
+  cmp(
+    r,
+    std::transform_reduce(
+#if !defined(__APPLE__) || !defined(__clang__)
+      // apple clang doesn't support this?
+      std::execution::par_unseq,
+#endif
+      it_nds.begin(),
+      it_nds.end(),
+      0,
+      first_non_zero,
+      [&](const auto& v) {
+        auto& [nd_binding, bui, dc] = v;
+        // HACK: avoid 'reference to local binding 'nd' declared in enclosing lambda expression'
+        auto nd = nd_binding;
+        // logging::verbose("dc {:0.100g}", dc);
+        const FwiWeather wx{
+          Weather::Zero(), Ffmc::Zero(), Dmc::Zero(), Dc{dc}, Isi::Zero(), Bui{bui}, Fwi::Zero()
+        };
+        const string msg = logging::should_log(logging::level::verbose)
+                           ? std::format("calculateRos(nd={}, bui={}, dc={})", nd, bui, dc)
+                           : "calculateRos()";
+        return compare_range(
+          msg.c_str(),
+          "isi",
+          [=, &a](const auto& v) { return a.calculateRos(nd, wx, v); },
+          [=, &b](const auto& v) { return b.calculateRos(nd, wx, v); },
+          EPSILON,
+          RANGE_ISI
+        );
+      }
+    )
+  );
+  // MathSize surfaceFuelConsumption(const FwiWeather& weather) const
+  cmp_range(
+    r,
+    "lengthToBreadth()",
+    "ws",
+    [=, &a](const auto& v) { return a.lengthToBreadth(v); },
+    [=, &b](const auto& v) { return b.lengthToBreadth(v); },
+    EPSILON,
+    RANGE_WIND_SPEED
+  );
+  // cmp(r,a.name(), b.name(), "name");
+  // cmp(r,a.code(), b.code(), "code");
+  return cmp(
+    r,
+    compare_spread(
+      name, static_cast<const FuelType*>(&a), static_cast<const FuelType*>(&b), options
+    )
+  );
+}
+template <class TypeB>
+auto compare_fuel(
+  const string name,
+  const FuelType* f_a,
+  const FuelType* f_b,
+  const FuelCompareOptions options = FUEL_COMPARE_DEFAULT
+)
+{
+  using TypeA = StandardFuel;
+  // so we don't need dynamic_cast in call
+  const TypeA& a = *dynamic_cast<const TypeA*>(f_a);
+  const TypeB& b = *dynamic_cast<const TypeB*>(f_b);
+  int r{0};
+  cmp(r, compare_fuel_basic(name, f_a, f_b, options));
+  //
+  // FuelBase
+  //
+  cmp(r, a.bulkDensity(), b.bulkDensity(), "bulkDensity");
+  cmp(r, a.inorganicPercent(), b.inorganicPercent(), "inorganicPercent");
+  cmp(r, a.duffDepth(), b.duffDepth(), "duffDepth");
+  cmp(
+    r,
+    testing::compare_duff("duffDmcType", *a.duffDmcType(), *b.duffDmcType(), logging::level::debug)
+  );
+  cmp(
+    r,
+    testing::compare_duff(
+      "duffFfmcType", *a.duffFfmcType(), *b.duffFfmcType(), logging::level::debug
+    )
+  );
+  cmp(r, a.ffmcRatio(), b.ffmcRatio(), "ffmcRatio");
+  cmp(r, a.dmcRatio(), b.dmcRatio(), "dmcRatio");
+  //
+  // StandardFuel
+  //
+  cmp_range(
+    r,
+    "rosBasic()",
+    "isi",
+    [=, &a](const auto& v) { return a.rosBasic(v); },
+    [=, &b](const auto& v) { return b.rosBasic(v); },
+    EPSILON,
+    RANGE_ISI
+  );
+  // MathSize limitIsf(const MathSize mu, const MathSize rsf) const noexcept
+  cmp(r, a.bui0(), b.bui0(), "bui0");
+  cmp(r, a.a(), b.a(), "a");
+  cmp(r, a.negB(), b.negB(), "negB");
+  cmp(r, a.c(), b.c(), "c");
+  // fmc) noexcept
+  cmp(r, a.logQ(), b.logQ(), "logQ");
+  return r;
+}
+template <class TypeB>
+auto compare_fuel_variable(
+  const string name,
+  const FuelType* f_a,
+  const FuelType* f_b,
+  const FuelCompareOptions options = FUEL_COMPARE_DEFAULT
+)
+{
+  using TypeA = FuelVariable;
+  // so we don't need dynamic_cast in call
+  const TypeA& a = *dynamic_cast<const TypeA*>(f_a);
+  const TypeB& b = *dynamic_cast<const TypeB*>(f_b);
+  assert(a.summer() != a.spring());
+  // FIX: calling functions of FuelVariable should throw, but don't bother checking that
+  if (const auto cmp = compare_fuel_basic(name, f_a->summer(), f_b->summer(), options); 0 != cmp)
+  {
+    return cmp;
+  }
+  return compare_fuel_basic(name, a.spring(), b.spring(), options);
+}
+// static constexpr FuelCompareOptions FUEL_COMPARE_DECIDUOUS{.dc_values = DC_DEFAULT_SINGLE};
+vector<int> find_nd_values()
+{
+  using namespace fs::fuelold;
+  // CHECK: FIX: how are nd values 400+?
+  set<int> nd_ref_values{};
+  set<int> nd_values{};
+  static constexpr MathSize BOUNDS_CANADA_LAT_MIN = 41;
+  static constexpr MathSize BOUNDS_CANADA_LAT_MAX = 84;
+  static constexpr MathSize BOUNDS_CANADA_LON_MIN = -141;
+  static constexpr MathSize BOUNDS_CANADA_LON_MAX = -52;
+  // FIX: use some weird increments to do less but not always have __.0
+  static constexpr MathSize DEGREE_INCREMENT = 0.7;
+  // static constexpr MathSize ELEVATION_CANADA_MAX = 5959;
+  static constexpr MathSize ELEVATION_EARTH_MIN = -418;
+  static constexpr MathSize ELEVATION_EARTH_MAX = 8848;
+  static constexpr MathSize ELEVATION_INCREMENT = 113;
+  // - nd for different latitudes
+  //   - elevation 0
+  // const auto latitudes = range(-90.0, 90.0, DEGREE_INCREMENT);
+  const auto latitudes = range(BOUNDS_CANADA_LAT_MIN, BOUNDS_CANADA_LAT_MAX, DEGREE_INCREMENT);
+  // const auto longitudes = range(-180.0, 180.0, DEGREE_INCREMENT);
+  const auto longitudes = range(BOUNDS_CANADA_LON_MIN, BOUNDS_CANADA_LON_MAX, DEGREE_INCREMENT);
+  const auto elevations = range(ELEVATION_EARTH_MIN, ELEVATION_EARTH_MAX, ELEVATION_INCREMENT);
+  logging::info(
+    "Checking ({:d} latitudes X {:d} longitudes X {:d} elevations) = {:d} combinations",
+    latitudes.size(),
+    longitudes.size(),
+    elevations.size(),
+    latitudes.size() * longitudes.size() * elevations.size()
+  );
+  for (auto latitude : latitudes)
+  {
+    for (auto longitude : longitudes)
+    {
+      for (auto elevation : elevations)
+      {
+        const Point pt{latitude, longitude};
+        const auto nd_ref = calculate_nd_ref_for_point(static_cast<int>(elevation), pt);
+        nd_ref_values.emplace(nd_ref);
+        logging::verbose(
+          "now have {:d} values for nd: {}, {:0.100g} gives nd_ref {:d}",
+          nd_ref_values.size(),
+          pt,
+          elevation,
+          nd_ref
+        );
+      }
+    }
+  }
+  for (int day : range_int(0, 366, 1))
+  {
+    for (auto nd_ref : nd_ref_values)
+    {
+      logging::verbose("jd {:d}", day);
+      // from calculate_nd_for_point(const Day day, const int elevation, const Point& point)
+      const auto nd = static_cast<int>(abs(day - nd_ref));
+      nd_values.emplace(nd);
+    }
+  }
+  auto min_nd = std::numeric_limits<int>::max();
+  auto max_nd = std::numeric_limits<int>::min();
+  for (auto nd : nd_values)
+  {
+    min_nd = min(min_nd, nd);
+    max_nd = max(max_nd, nd);
+  }
+  const bool is_consecutive{static_cast<size_t>(max_nd - min_nd + 1) == nd_values.size()};
+  logging::info(
+    "Have {:d} nd values between {:d} and {:d} that are {:s}",
+    nd_values.size(),
+    min_nd,
+    max_nd,
+    is_consecutive ? "consecutive" : "non-consecutive"
+  );
+  // pick every Nth item
+  vector<int> result{};
+  constexpr auto N = 3;
+  size_t i = 0;
+  for (auto v : nd_values)
+  {
+    if (0 == (i % N))
+    {
+      result.emplace_back(v);
+    }
+    ++i;
+  }
+  return result;
+}
+auto compare_fuel_valid_by_index(const size_t i, const string name, const char* msg = "")
+{
+  return compare_fuel_valid(name, FuelLookup::Fuels[i], FuelOldLookup::Fuels[i], msg);
+}
+template <class TypeB>
+auto compare_fuel_by_index(const size_t i, const string name)
+{
+  return compare_fuel<TypeB>(name, FuelLookup::Fuels[i], FuelOldLookup::Fuels[i]);
+}
+template <class TypeB>
+auto compare_fuel_variable_by_index(const size_t i, const string name)
+{
+  return compare_fuel_variable<TypeB>(name, FuelLookup::Fuels[i], FuelOldLookup::Fuels[i]);
+}
+template <class TypeB>
+auto compare_fuel_by_index_options(
+  const size_t i,
+  const string name,
+  const FuelCompareOptions options
+)
+{
+  // HACK: can't get reference properly when options has default value
+  return compare_fuel<TypeB>(name, FuelLookup::Fuels[i], FuelOldLookup::Fuels[i], options);
+}
+template <class TypeB>
+auto compare_fuel_variable_by_index_options(
+  const size_t i,
+  const string name,
+  const FuelCompareOptions options
+)
+{
+  // HACK: can't get reference properly when options has default value
+  return compare_fuel_variable<TypeB>(name, FuelLookup::Fuels[i], FuelOldLookup::Fuels[i], options);
+}
+int test_fbp(const int argc, const char* const argv[])
+{
+  std::ignore = argc;
+  std::ignore = argv;
+  logging::info("Testing FBP");
+  const auto nd_all_values = find_nd_values();
+  // HACK: initialize here so nd_all_values is set
+  static const FuelCompareOptions FUEL_COMPARE_GRASS{
+    .nd_values = nd_all_values, .dc_values = DC_VALUES_GRASS
+  };
+  // for (size_t i = 0; i < FuelOldLookup::Fuels.size(); ++i)
+  // {
+  //   auto& a = *fuel::Fuels[i];
+  //   auto& b = *dynamic_cast<fs::FuelBase*>(FuelOldLookup::Fuels[i]);
+  //   compare(a.name(), a, b);
+  //   // compare("", *fuel::Fuels[i], *FuelOldLookup::Fuels[i]);
+  // }
+  TestResults results{};
+  // HACK: keep i in here so we don't need to add it incrementing to all calls
+  size_t i = 0;
+  auto add_test = [&](const auto& fct, auto... args) {
+    // HACK: increment i in here so we don't need to add it incrementing to all calls
+    results.add(fct, i++, args...);
+  };
+  add_test(&compare_fuel_valid_by_index, "Non-fuel", "basic test only");
+  add_test(&compare_fuel_valid_by_index, "Invalid", "basic test only");
+  add_test(&compare_fuel_by_index<FuelOldC1>, "C1");
+  add_test(&compare_fuel_by_index<FuelOldC2>, "C2");
+  add_test(&compare_fuel_by_index<FuelOldC3>, "C3");
+  add_test(&compare_fuel_by_index<FuelOldC4>, "C4");
+  add_test(&compare_fuel_by_index<FuelOldC5>, "C5");
+  add_test(&compare_fuel_by_index<FuelOldC6>, "C6");
+  add_test(&compare_fuel_by_index<FuelOldC7>, "C7");
+  add_test(&compare_fuel_by_index_options<FuelOldD1>, "D1", FUEL_COMPARE_DECIDUOUS);
+  add_test(&compare_fuel_by_index_options<FuelOldD2>, "D2", FUEL_COMPARE_DECIDUOUS);
+  add_test(&compare_fuel_by_index_options<FuelOldO1A>, "O1_A", FUEL_COMPARE_GRASS);
+  add_test(&compare_fuel_by_index_options<FuelOldO1B>, "O1_B", FUEL_COMPARE_GRASS);
+  add_test(&compare_fuel_by_index<FuelOldS1>, "S1");
+  add_test(&compare_fuel_by_index<FuelOldS2>, "S2");
+  add_test(&compare_fuel_by_index<FuelOldS3>, "S3");
+  add_test(&compare_fuel_variable_by_index_options<FuelOldD1D2>, "D1_D2", FUEL_COMPARE_DECIDUOUS);
+  add_test(&compare_fuel_by_index<FuelOldM1<5>>, "M1_05");
+  add_test(&compare_fuel_by_index<FuelOldM1<10>>, "M1_10");
+  add_test(&compare_fuel_by_index<FuelOldM1<15>>, "M1_15");
+  add_test(&compare_fuel_by_index<FuelOldM1<20>>, "M1_20");
+  add_test(&compare_fuel_by_index<FuelOldM1<25>>, "M1_25");
+  add_test(&compare_fuel_by_index<FuelOldM1<30>>, "M1_30");
+  add_test(&compare_fuel_by_index<FuelOldM1<35>>, "M1_35");
+  add_test(&compare_fuel_by_index<FuelOldM1<40>>, "M1_40");
+  add_test(&compare_fuel_by_index<FuelOldM1<45>>, "M1_45");
+  add_test(&compare_fuel_by_index<FuelOldM1<50>>, "M1_50");
+  add_test(&compare_fuel_by_index<FuelOldM1<55>>, "M1_55");
+  add_test(&compare_fuel_by_index<FuelOldM1<60>>, "M1_60");
+  add_test(&compare_fuel_by_index<FuelOldM1<65>>, "M1_65");
+  add_test(&compare_fuel_by_index<FuelOldM1<70>>, "M1_70");
+  add_test(&compare_fuel_by_index<FuelOldM1<75>>, "M1_75");
+  add_test(&compare_fuel_by_index<FuelOldM1<80>>, "M1_80");
+  add_test(&compare_fuel_by_index<FuelOldM1<85>>, "M1_85");
+  add_test(&compare_fuel_by_index<FuelOldM1<90>>, "M1_90");
+  add_test(&compare_fuel_by_index<FuelOldM1<95>>, "M1_95");
+  add_test(&compare_fuel_by_index<FuelOldM2<5>>, "M2_05");
+  add_test(&compare_fuel_by_index<FuelOldM2<10>>, "M2_10");
+  add_test(&compare_fuel_by_index<FuelOldM2<15>>, "M2_15");
+  add_test(&compare_fuel_by_index<FuelOldM2<20>>, "M2_20");
+  add_test(&compare_fuel_by_index<FuelOldM2<25>>, "M2_25");
+  add_test(&compare_fuel_by_index<FuelOldM2<30>>, "M2_30");
+  add_test(&compare_fuel_by_index<FuelOldM2<35>>, "M2_35");
+  add_test(&compare_fuel_by_index<FuelOldM2<40>>, "M2_40");
+  add_test(&compare_fuel_by_index<FuelOldM2<45>>, "M2_45");
+  add_test(&compare_fuel_by_index<FuelOldM2<50>>, "M2_50");
+  add_test(&compare_fuel_by_index<FuelOldM2<55>>, "M2_55");
+  add_test(&compare_fuel_by_index<FuelOldM2<60>>, "M2_60");
+  add_test(&compare_fuel_by_index<FuelOldM2<65>>, "M2_65");
+  add_test(&compare_fuel_by_index<FuelOldM2<70>>, "M2_70");
+  add_test(&compare_fuel_by_index<FuelOldM2<75>>, "M2_75");
+  add_test(&compare_fuel_by_index<FuelOldM2<80>>, "M2_80");
+  add_test(&compare_fuel_by_index<FuelOldM2<85>>, "M2_85");
+  add_test(&compare_fuel_by_index<FuelOldM2<90>>, "M2_90");
+  add_test(&compare_fuel_by_index<FuelOldM2<95>>, "M2_95");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<5>>, "M1_M2_05");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<10>>, "M1_M2_10");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<15>>, "M1_M2_15");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<20>>, "M1_M2_20");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<25>>, "M1_M2_25");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<30>>, "M1_M2_30");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<35>>, "M1_M2_35");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<40>>, "M1_M2_40");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<45>>, "M1_M2_45");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<50>>, "M1_M2_50");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<55>>, "M1_M2_55");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<60>>, "M1_M2_60");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<65>>, "M1_M2_65");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<70>>, "M1_M2_70");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<75>>, "M1_M2_75");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<80>>, "M1_M2_80");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<85>>, "M1_M2_85");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<90>>, "M1_M2_90");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<95>>, "M1_M2_95");
+  add_test(&compare_fuel_by_index<FuelOldM3<5>>, "M3_05");
+  add_test(&compare_fuel_by_index<FuelOldM3<10>>, "M3_10");
+  add_test(&compare_fuel_by_index<FuelOldM3<15>>, "M3_15");
+  add_test(&compare_fuel_by_index<FuelOldM3<20>>, "M3_20");
+  add_test(&compare_fuel_by_index<FuelOldM3<25>>, "M3_25");
+  add_test(&compare_fuel_by_index<FuelOldM3<30>>, "M3_30");
+  add_test(&compare_fuel_by_index<FuelOldM3<35>>, "M3_35");
+  add_test(&compare_fuel_by_index<FuelOldM3<40>>, "M3_40");
+  add_test(&compare_fuel_by_index<FuelOldM3<45>>, "M3_45");
+  add_test(&compare_fuel_by_index<FuelOldM3<50>>, "M3_50");
+  add_test(&compare_fuel_by_index<FuelOldM3<55>>, "M3_55");
+  add_test(&compare_fuel_by_index<FuelOldM3<60>>, "M3_60");
+  add_test(&compare_fuel_by_index<FuelOldM3<65>>, "M3_65");
+  add_test(&compare_fuel_by_index<FuelOldM3<70>>, "M3_70");
+  add_test(&compare_fuel_by_index<FuelOldM3<75>>, "M3_75");
+  add_test(&compare_fuel_by_index<FuelOldM3<80>>, "M3_80");
+  add_test(&compare_fuel_by_index<FuelOldM3<85>>, "M3_85");
+  add_test(&compare_fuel_by_index<FuelOldM3<90>>, "M3_90");
+  add_test(&compare_fuel_by_index<FuelOldM3<95>>, "M3_95");
+  add_test(&compare_fuel_by_index<FuelOldM3<100>>, "M3_100");
+  add_test(&compare_fuel_by_index<FuelOldM4<5>>, "M4_05");
+  add_test(&compare_fuel_by_index<FuelOldM4<10>>, "M4_10");
+  add_test(&compare_fuel_by_index<FuelOldM4<15>>, "M4_15");
+  add_test(&compare_fuel_by_index<FuelOldM4<20>>, "M4_20");
+  add_test(&compare_fuel_by_index<FuelOldM4<25>>, "M4_25");
+  add_test(&compare_fuel_by_index<FuelOldM4<30>>, "M4_30");
+  add_test(&compare_fuel_by_index<FuelOldM4<35>>, "M4_35");
+  add_test(&compare_fuel_by_index<FuelOldM4<40>>, "M4_40");
+  add_test(&compare_fuel_by_index<FuelOldM4<45>>, "M4_45");
+  add_test(&compare_fuel_by_index<FuelOldM4<50>>, "M4_50");
+  add_test(&compare_fuel_by_index<FuelOldM4<55>>, "M4_55");
+  add_test(&compare_fuel_by_index<FuelOldM4<60>>, "M4_60");
+  add_test(&compare_fuel_by_index<FuelOldM4<65>>, "M4_65");
+  add_test(&compare_fuel_by_index<FuelOldM4<70>>, "M4_70");
+  add_test(&compare_fuel_by_index<FuelOldM4<75>>, "M4_75");
+  add_test(&compare_fuel_by_index<FuelOldM4<80>>, "M4_80");
+  add_test(&compare_fuel_by_index<FuelOldM4<85>>, "M4_85");
+  add_test(&compare_fuel_by_index<FuelOldM4<90>>, "M4_90");
+  add_test(&compare_fuel_by_index<FuelOldM4<95>>, "M4_95");
+  add_test(&compare_fuel_by_index<FuelOldM4<100>>, "M4_100");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<0>>, "M3_M4_00");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<5>>, "M3_M4_05");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<10>>, "M3_M4_10");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<15>>, "M3_M4_15");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<20>>, "M3_M4_20");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<25>>, "M3_M4_25");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<30>>, "M3_M4_30");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<35>>, "M3_M4_35");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<40>>, "M3_M4_40");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<45>>, "M3_M4_45");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<50>>, "M3_M4_50");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<55>>, "M3_M4_55");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<60>>, "M3_M4_60");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<65>>, "M3_M4_65");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<70>>, "M3_M4_70");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<75>>, "M3_M4_75");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<80>>, "M3_M4_80");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<85>>, "M3_M4_85");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<90>>, "M3_M4_90");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<95>>, "M3_M4_95");
+  add_test(&compare_fuel_by_index<FuelOldM1<0>>, "M1_00");
+  add_test(&compare_fuel_by_index<FuelOldM2<0>>, "M2_00");
+  add_test(&compare_fuel_variable_by_index<FuelOldM1M2<0>>, "M1_M2_00");
+  add_test(&compare_fuel_by_index<FuelOldM3<0>>, "M3_00");
+  add_test(&compare_fuel_by_index<FuelOldM4<0>>, "M4_00");
+  add_test(&compare_fuel_variable_by_index<FuelOldM3M4<100>>, "M3_M4_100");
+  add_test(&compare_fuel_variable_by_index_options<FuelOldO1>, "O1", FUEL_COMPARE_GRASS);
+  do_compare_values(NUMBER_OF_FUELS, i, "Number of fuels");
+  return results.value().get();
+}
+}
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   using namespace fs::settings;
   constexpr auto fct_main = fs::testing::test_fbp;
   static const Usage USAGE_TEST{"Run tests and exit", ""};
   SettingsArgumentParser parser{USAGE_TEST, argc, argv, PositionalArgumentsRequired::NotRequired};
   parser.parse_args();
-  exit(fct_main(argc, argv));
+  const auto result = fct_main(argc, argv);
+  fs::logging::note("Completed all tests and got code {}", result);
+  exit(result);
 }

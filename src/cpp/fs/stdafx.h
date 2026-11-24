@@ -68,7 +68,6 @@ using std::ifstream;
 using std::istringstream;
 using std::launch;
 using std::list;
-using std::lock_guard;
 using std::make_shared;
 using std::make_tuple;
 using std::make_unique;
@@ -84,6 +83,7 @@ using std::ostringstream;
 using std::pair;
 using std::put_time;
 using std::runtime_error;
+using std::scoped_lock;
 using std::set;
 using std::setprecision;
 using std::shared_ptr;
@@ -117,7 +117,7 @@ using YearSize = int;
 /**
  * \brief Difference minimum for MathSizes to be considered the same
  */
-static const MathSize COMPARE_LIMIT = 1.0E-20f;
+static constexpr auto COMPARE_LIMIT = static_cast<MathSize>(1.0E-20);
 /**
  * \brief Size of the hash of a Cell
  */
@@ -180,19 +180,20 @@ using IntensitySize = uint32_t;
 /**
  * \brief Type used for storing locations within cells
  */
-using InnerSize = double;
+using InnerSize = _Float64;
 /**
  * \brief Type used for storing locations in environment
  */
-using XYSize = double;
+using XYSize = _Float64;
 /**
  * \brief Type used for probability thresholds
  */
-using ThresholdSize = double;
+// FIX: not properly differentiated, so have to be the same type right now
+using ThresholdSize = MathSize;
 /**
  * \brief Type used for storing locations within cells
  */
-using DurationSize = double;
+using DurationSize = _Float64;
 constexpr DurationSize INVALID_TIME = -1;
 constexpr auto NO_INTENSITY = static_cast<IntensitySize>(0);
 using ROSSize = MathSize;
@@ -237,7 +238,7 @@ static constexpr FuelCodeSize INVALID_FUEL_CODE = 0;
 /**
  * \brief Number of all possible fuels in simulation
  */
-static constexpr auto NUMBER_OF_FUELS = 141;
+static constexpr size_t NUMBER_OF_FUELS = 141;
 /**
  * \brief Number of hours in a day
  */
@@ -269,7 +270,7 @@ static constexpr int YEAR_HOURS = MAX_DAYS * DAY_HOURS;
 /**
  * \brief Array of results of a function for all possible integer percent slopes
  */
-using SlopeTableArray = array<double, INVALID_SLOPE + 1>;
+using SlopeTableArray = array<_Float64, INVALID_SLOPE + 1>;
 /**
  * \brief Size of an angle in degrees
  */
@@ -277,7 +278,7 @@ using DegreesSize = uint16_t;
 /**
  * \brief Array of results of a function for all possible integer angles in degrees
  */
-using AngleTableArray = array<double, 361>;
+using AngleTableArray = array<_Float64, 361>;
 /**
  * \brief Size to use for representing sub-coordinates for location within a Cell
  */

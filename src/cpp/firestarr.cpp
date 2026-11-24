@@ -5,17 +5,17 @@
  *
  * FireSTARR is a probabilistic fire growth model.
  */
-#include "fs/ArgumentParser.h"
-#include "fs/FWI.h"
-#include "fs/Log.h"
-#include "fs/Model.h"
-#include "fs/Settings.h"
-#include "fs/StartPoint.h"
 #include "fs/stdafx.h"
-#include "fs/Test.h"
-#include "fs/TimeUtil.h"
-#include "fs/Util.h"
-#include "fs/Weather.h"
+#include "fs/log/Log.h"
+#include "fs/sim/ArgumentParser.h"
+#include "fs/sim/Model.h"
+#include "fs/sim/Settings.h"
+#include "fs/sim/StartPoint.h"
+#include "fs/sim/Test.h"
+#include "fs/util/TimeUtil.h"
+#include "fs/util/Util.h"
+#include "fs/wx/FireWeatherIndices.h"
+#include "fs/wx/WeatherIndices.h"
 #include "version.h"
 namespace fs
 {
@@ -40,6 +40,7 @@ using fs::ThresholdSize;
 using fs::Wind;
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   using namespace fs::settings;
   logging::note("FireSTARR {:s}\n", SPECIFIC_REVISION);
   MainArgumentParser parser{argc, argv};
@@ -89,7 +90,7 @@ int main(const int argc, const char* const argv[])
     }
     if (!settings.is_test())
     {
-      const StartPoint start_point(settings.latitude.value(), settings.longitude.value());
+      const StartPoint start_point(as_value(settings.latitude), as_value(settings.longitude));
       // HACK: ISI for yesterday really doesn't matter so just use any wind
       // HACK: it's basically wrong to assign this precip to yesterday's object,
       // but don't want to add another argument right now
@@ -146,6 +147,7 @@ int main(const int argc, const char* const argv[])
 // HACK: keep everything else out of std namepace
 int main(const int argc, const char* const argv[])
 {
+  setfperrors();
   // HACK: want to be able to do tests without changing source files but can't find a nice way
   constexpr auto fct_main = fs::main;
   exit(fct_main(argc, argv));
