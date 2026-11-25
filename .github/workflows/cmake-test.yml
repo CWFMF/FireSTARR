@@ -176,7 +176,7 @@ jobs:
       if: ${{ matrix.variant == 'Release' }}
       uses: actions/upload-artifact@v7
       with:
-        name: 'release-archive'
+        name: release-archive-${{ env.RELEASE_ARCHIVE }}
         path: build/${{ env.RELEASE_ARCHIVE }}${{ env.ARCHIVE_FORMAT }}
         archive: false
         retention-days: 30
@@ -211,7 +211,7 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v8
         with:
-          name: 'release-archive'
+          pattern: release-archive-*
           skip-decompress: true
 
       - name: List artifacts
